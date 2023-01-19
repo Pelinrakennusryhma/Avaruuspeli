@@ -128,8 +128,8 @@ public class Spaceship : MonoBehaviour
 
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
-            rb.AddRelativeForce(Vector3.right * strafe1D * upThrust * Time.fixedDeltaTime);
-            horizontalGlide = strafe1D * upThrust;
+            rb.AddRelativeForce(Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
+            horizontalGlide = strafe1D * strafeThrust;
         }
         else
         {
