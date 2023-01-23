@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Spaceship : MonoBehaviour
@@ -45,11 +44,11 @@ public class Spaceship : MonoBehaviour
     Rigidbody rb;
 
     // Input Values
-    private float thrust1D;
-    private float upDown1D;
-    private float strafe1D;
-    private float roll1D;
-    private Vector2 pitchYaw;
+    public float thrust1D;
+    public float upDown1D;
+    public float strafe1D;
+    public float roll1D;
+    public Vector2 pitchYaw;
 
     void Start()
     {
@@ -137,38 +136,4 @@ public class Spaceship : MonoBehaviour
             horizontalGlide *= leftRightGlideReduction;
         }
     }
-
-    #region Input Methods
-
-    public void OnThrust(InputAction.CallbackContext context)
-    {
-        thrust1D = context.ReadValue<float>();
-    }
-
-    public void OnStrafe(InputAction.CallbackContext context)
-    {
-        strafe1D = context.ReadValue<float>();
-    }
-
-    public void OnUpDown(InputAction.CallbackContext context)
-    {
-        upDown1D = context.ReadValue<float>();
-    }
-
-    public void OnRoll(InputAction.CallbackContext context)
-    {
-        roll1D = context.ReadValue<float>();
-    }
-
-    public void OnPitchYaw(InputAction.CallbackContext context)
-    {
-        pitchYaw = context.ReadValue<Vector2>();
-    }
-
-    public void OnBoost(InputAction.CallbackContext context)
-    {
-        boosting = context.performed;
-    }
-
-    #endregion
 }
