@@ -1497,6 +1497,7 @@ GameObject:
   - component: {fileID: 1736298349}
   - component: {fileID: 1736298352}
   - component: {fileID: 1736298354}
+  - component: {fileID: 1736298355}
   - component: {fileID: 1736298351}
   - component: {fileID: 1736298353}
   m_Layer: 0
@@ -1538,7 +1539,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!114 &1736298352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1599,6 +1600,20 @@ MonoBehaviour:
   - {fileID: 1154766611}
   - {fileID: 1007267183}
   boosting: 0
+--- !u!114 &1736298355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736298348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca4df1de112c2c4695ed21b9031d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionDrag: 100
+  collisionAngularDrag: 100
 --- !u!4 &1786709837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6441939964868624093, guid: 9d85be729271b8742a4dcc7a9924d254,
