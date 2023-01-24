@@ -6,44 +6,47 @@ public class SpaceshipCollision : MonoBehaviour
 {
     private Rigidbody rb;
     private bool collided = false;
-    private float collisionTimer = 1f;
-    private float originalDrag;
+    [SerializeField]
+    private float dragDuration = 1f;
+    [SerializeField]
+    private float velocityThreshold = 1000f;
+    private float collisionTimer;
     private float originalAngularDrag;
     [SerializeField]
-    private float collisionDrag = 100f;
-    [SerializeField]
     private float collisionAngularDrag = 100f;
+
+    private float currentSpeed;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        originalDrag = rb.drag;
         originalAngularDrag = rb.angularDrag;
+        collisionTimer = dragDuration;
     }
 
     private void FixedUpdate()
     {
+        currentSpeed = rb.velocity.sqrMagnitude;
         if (collided)
         {
             if(collisionTimer > 0f)
             {
-                //rb.drag = collisionDrag;
-                //rb.angularDrag = collisionAngularDrag;     
+                rb.angularDrag = collisionAngularDrag;
                 collisionTimer -= Time.fixedDeltaTime;
             } else
             {
-                //rb.drag = originalDrag;
-                //rb.angularDrag = originalAngularDrag;
-                rb.constraints = RigidbodyConstraints.None;
+                rb.angularDrag = originalAngularDrag;
                 collided = false;
-                collisionTimer = 1f;
+                collisionTimer = dragDuration;
             }
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        collided = true;
-        Debug.Log("Collided");
+        if(currentSpeed > velocityThreshold)
+        {
+            collided = true;
+            //Debug.Log("Collided: " + currentSpeed);
+        }
     }
 }

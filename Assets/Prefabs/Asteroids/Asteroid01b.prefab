@@ -46,10 +46,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &3245305357272621984
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2808967213598596065}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cb4b5c048a03b054586268361b904b3c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4

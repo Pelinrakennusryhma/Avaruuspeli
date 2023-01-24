@@ -764,6 +764,7 @@ MonoBehaviour:
   - {fileID: 2808967213598596065, guid: b57d4834a5458a041a58fc415630d443, type: 3}
   - {fileID: 2808967213598596065, guid: d18f9d7abcd635d45a666b894e0b78bd, type: 3}
   - {fileID: 2808967213598596065, guid: a8d68e8ee60033d42b497a37aec94b63, type: 3}
+  - {fileID: 2808967213598596065, guid: 13af253007a815e4dbe5939bb6cde76f, type: 3}
   asteroidParent: {fileID: 1328904159}
   amountOfAsteroids: 1500
   sizeCurve:
@@ -1604,8 +1605,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca4df1de112c2c4695ed21b9031d275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionDrag: 100
-  collisionAngularDrag: 100
+  dragDuration: 0.5
+  velocityTreshold: 1000
+  collisionAngularDrag: 10
 --- !u!64 &1736298356
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1613,7 +1615,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736298348}
-  m_Material: {fileID: 13400000, guid: 9187942db749707419eca3bfabb073ff, type: 2}
+  m_Material: {fileID: 13400000, guid: 33ade193acc5f8149a9ca87d5340f174, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
