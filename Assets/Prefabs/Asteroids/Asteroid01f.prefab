@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3292312063102353755}
   - component: {fileID: 3042776511792703150}
-  - component: {fileID: 3042776511792703149}
+  - component: {fileID: 3154864237057064787}
   m_Layer: 0
   m_Name: Asteroid01f
   m_TagString: Untagged
@@ -50,8 +50,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!135 &3042776511792703149
-SphereCollider:
+--- !u!64 &3154864237057064787
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,9 +60,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.4
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6501646322212705205, guid: cdb424643e99d554ba94e150ce46801a, type: 3}
 --- !u!1001 &1188793366358506455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78,12 +79,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cdb424643e99d554ba94e150ce46801a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cdb424643e99d554ba94e150ce46801a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cdb424643e99d554ba94e150ce46801a,
         type: 3}
