@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Spaceship : MonoBehaviour
+public class SpaceshipMovement : MonoBehaviour
 {
-    [Header("=== Ship Movement Settings ===")]
     [SerializeField]
     private float yawTorque = 500f;
     [SerializeField]
@@ -25,17 +24,7 @@ public class Spaceship : MonoBehaviour
     [SerializeField, Range(0.001f, 0.999f)]
     private float leftRightGlideReduction = 0.111f;
 
-    [Header("=== Boost Settings ===")]
-    [SerializeField]
-    private float maxBoostAmount = 2f;
-    [SerializeField]
-    private float boostDeprecationRate = 0.25f;
-    [SerializeField]
-    private float boostRechargeRate = 0.5f;
-    [SerializeField]
-    private float boostMultiplier = 5f;
-    public bool boosting = false;
-    public float currentBoostAmount;
+    public float boostMultiplier = 1f;
 
     private float glide = 0f;
     private float verticalGlide = 0f;
@@ -52,33 +41,12 @@ public class Spaceship : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        currentBoostAmount = maxBoostAmount;
+        rb = GetComponent<Rigidbody>();    
     }
 
     void FixedUpdate()
     {
-        HandleBoosting();
         HandleMovement();
-    }
-
-    void HandleBoosting()
-    {
-        if(boosting && currentBoostAmount > 0f)
-        {
-            currentBoostAmount -= boostDeprecationRate;
-            if(currentBoostAmount <= 0f)
-            {
-                boosting = false;
-            }
-        }
-        else
-        {
-            if(currentBoostAmount < maxBoostAmount)
-            {
-                currentBoostAmount += boostRechargeRate;
-            }
-        }
     }
 
     void HandleMovement()
@@ -93,16 +61,7 @@ public class Spaceship : MonoBehaviour
         // Thrust
         if(thrust1D > 0.1f || thrust1D < -0.1f)
         {
-            float currentThrust;
-
-            if (boosting)
-            {
-                currentThrust = thrust * boostMultiplier;
-            } else
-            {
-                currentThrust = thrust;
-            }
-
+            float currentThrust = thrust * boostMultiplier;
 
             rb.AddRelativeForce(Vector3.forward * thrust1D * currentThrust * Time.deltaTime);
             glide = thrust;
