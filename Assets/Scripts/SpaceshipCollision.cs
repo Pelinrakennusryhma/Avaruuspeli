@@ -26,13 +26,14 @@ public class SpaceshipCollision : MonoBehaviour
         {
             if(collisionTimer > 0f)
             {
-                rb.drag = collisionDrag;
-                rb.angularDrag = collisionAngularDrag;
+                //rb.drag = collisionDrag;
+                //rb.angularDrag = collisionAngularDrag;     
                 collisionTimer -= Time.fixedDeltaTime;
             } else
             {
-                rb.drag = originalDrag;
-                rb.angularDrag = originalAngularDrag;
+                //rb.drag = originalDrag;
+                //rb.angularDrag = originalAngularDrag;
+                rb.constraints = RigidbodyConstraints.None;
                 collided = false;
                 collisionTimer = 1f;
             }
@@ -41,7 +42,8 @@ public class SpaceshipCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         collided = true;
-        Debug.Log("collided");
+        Debug.Log("Collided");
     }
 }
