@@ -1669,8 +1669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1a793be01945947853ef9a1ee884a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserForce: 15
-  laserLifetime: 3
+  laserForce: 100
+  laserLifetime: 10
   laserBoltPrefab: {fileID: 2414808534942050348, guid: 78f5702a80361434e9f8a671d57da8f6,
     type: 3}
   laserOrigins:
