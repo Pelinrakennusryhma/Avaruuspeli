@@ -5,16 +5,18 @@ using UnityEngine;
 public class LaserBolt : MonoBehaviour
 {
     Rigidbody rb;
+    GameObject shooterShip;
     float force;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(float shootForce, float lifetime, Vector3 shooterVelocity)
+    public void Init(float shootForce, float lifetime, GameObject _shooterShip, Vector3 shooterVelocity)
     {
         force = shootForce;
         rb.velocity = shooterVelocity;
+        shooterShip = _shooterShip;
         StartCoroutine(DestroySelf(lifetime));
 
     }
@@ -25,13 +27,16 @@ public class LaserBolt : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
         rb.AddRelativeForce(Vector3.forward * force * Time.fixedDeltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject != shooterShip)
+        {
+            Debug.Log("Laser hit: " + other.gameObject.name);
+        }
     }
 }
