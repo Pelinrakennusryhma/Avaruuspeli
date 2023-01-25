@@ -270,8 +270,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 3.3999174, z: -8.582578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.74, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -939,6 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spaceshipMovement: {fileID: 0}
   spaceshipBoost: {fileID: 0}
+  spaceshipShoot: {fileID: 0}
 --- !u!4 &1004082103
 Transform:
   m_ObjectHideFlags: 0
@@ -1077,6 +1078,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 70107d8e-af73-4229-98fe-e9f0ba5fce43
     m_ActionName: ShipControls/Boost[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1004082102}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c74a653d-0081-4e5e-a38d-07cc6a3bbbcc
+    m_ActionName: ShipControls/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 678490488}
+        m_TargetAssemblyTypeName: GUI_Spaceship, Assembly-CSharp
+        m_MethodName: OnToggleCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 493f7797-6482-4a68-beed-9c7007e95c97
+    m_ActionName: ShipControls/ToggleCursor[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ShipControls
@@ -1265,8 +1298,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078490510}
-  m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 3.3999174, z: -8.582578}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.74, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1309,14 +1342,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234565403}
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 2.74, z: -6.84}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.74, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1736298349}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1328904159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1537,7 @@ GameObject:
   - component: {fileID: 1736298352}
   - component: {fileID: 1736298354}
   - component: {fileID: 1736298355}
+  - component: {fileID: 1736298357}
   - component: {fileID: 1736298351}
   - component: {fileID: 1736298356}
   m_Layer: 0
@@ -1527,6 +1561,7 @@ Transform:
   m_Children:
   - {fileID: 858691442}
   - {fileID: 1234565404}
+  - {fileID: 1865384825}
   m_Father: {fileID: 1004082103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1606,7 +1641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragDuration: 0.5
-  velocityTreshold: 1000
+  velocityThreshold: 1000
   collisionAngularDrag: 10
 --- !u!64 &1736298356
 MeshCollider:
@@ -1622,12 +1657,63 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: -9138435994659785759, guid: b0c664e8bd6fc224480c82979406445b, type: 3}
+--- !u!114 &1736298357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736298348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1a793be01945947853ef9a1ee884a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserForce: 15
+  laserLifetime: 3
+  laserBoltPrefab: {fileID: 2414808534942050348, guid: 78f5702a80361434e9f8a671d57da8f6,
+    type: 3}
+  laserOrigins:
+  - {fileID: 1865384825}
+  shootInterval: 0.25
+  shooting: 0
 --- !u!4 &1786709837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6441939964868624093, guid: 9d85be729271b8742a4dcc7a9924d254,
     type: 3}
   m_PrefabInstance: {fileID: 1344279181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1865384824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1865384825}
+  m_Layer: 0
+  m_Name: LaserOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1865384825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865384824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.26, z: 5.61}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1736298349}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2059581300
 GameObject:
   m_ObjectHideFlags: 0

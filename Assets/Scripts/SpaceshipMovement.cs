@@ -56,20 +56,20 @@ public class SpaceshipMovement : MonoBehaviour
         // Roll
         rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque * Time.deltaTime);
         // Pitch
-        rb.AddRelativeTorque(mass * Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.deltaTime);
+        rb.AddRelativeTorque(mass * Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.fixedDeltaTime);
         // Yaw
-        rb.AddRelativeTorque(mass * Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Time.deltaTime);
+        rb.AddRelativeTorque(mass * Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Time.fixedDeltaTime);
 
         // Thrust
         if(thrust1D > 0.1f || thrust1D < -0.1f)
         {
             float currentThrust = thrust * boostMultiplier;
 
-            rb.AddRelativeForce(mass * Vector3.forward * thrust1D * currentThrust * Time.deltaTime);
+            rb.AddRelativeForce(mass * Vector3.forward * thrust1D * currentThrust * Time.fixedDeltaTime);
             glide = thrust;
         } else
         {
-            rb.AddRelativeForce(mass * Vector3.forward * glide * Time.deltaTime);
+            rb.AddRelativeForce(mass * Vector3.forward * glide * Time.fixedDeltaTime);
             glide *= thrustGlideReduction;
         }
 

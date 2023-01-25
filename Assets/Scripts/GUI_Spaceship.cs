@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
 
-public class UIControls : MonoBehaviour
+public class GUI_Spaceship : MonoBehaviour
 {
     public InputActionAsset inputActionAsset;
     public TMP_Text helpText;
     void Start()
     {
-        PrintControls();
+        ShowControls();
     }
 
-    void PrintControls()
+    void ShowControls()
     {
         Dictionary<string, string> bindings = new Dictionary<string, string>();
 
@@ -43,5 +43,16 @@ public class UIControls : MonoBehaviour
         }
 
         helpText.text = textToShow;
+    }
+
+    public void OnToggleCursor()
+    {
+        if (Cursor.lockState == CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        } else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

@@ -7,11 +7,13 @@ public class PlayerControls : MonoBehaviour
 {
     public SpaceshipMovement spaceshipMovement;
     public SpaceshipBoost spaceshipBoost;
+    public SpaceshipShoot spaceshipShoot;
 
     void Start()
     {
         spaceshipMovement = GetComponentInChildren<SpaceshipMovement>();
         spaceshipBoost = GetComponentInChildren<SpaceshipBoost>();
+        spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
     }
 
     public void OnThrust(InputAction.CallbackContext context)
@@ -42,5 +44,10 @@ public class PlayerControls : MonoBehaviour
     public void OnBoost(InputAction.CallbackContext context)
     {
         spaceshipBoost.boosting = context.performed;
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        spaceshipShoot.shooting = context.performed;
     }
 }
