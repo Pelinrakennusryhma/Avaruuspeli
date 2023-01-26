@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpaceshipMovement))]
-public class SpaceshipBoost : MonoBehaviour
+public class SpaceshipBoost : UITrackable
 {
     private SpaceshipMovement spaceshipMovement;
 
@@ -20,6 +20,22 @@ public class SpaceshipBoost : MonoBehaviour
 
     public bool boosting = false;
     private float currentBoostAmount;
+
+    public override int MaxValue
+    {
+        get
+        {
+            return (int)maxBoostAmount;
+        }
+    }
+
+    public override int CurrentValue
+    {
+        get
+        {
+            return (int)currentBoostAmount;
+        }
+    }
 
     void Start()
     {

@@ -11,14 +11,13 @@ public class StatusBar : MonoBehaviour
     [SerializeField]
     Image bar;
     [SerializeField]
-    TMP_Text text; 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    TMP_Text text;
+    [SerializeField]
+    Color fullColor;
+    [SerializeField]
+    Color emptyColor;
 
-    // Update is called once per frame
+
     void Update()
     {
         UpdateText();
@@ -32,6 +31,8 @@ public class StatusBar : MonoBehaviour
 
     void UpdateBar()
     {
-        bar.fillAmount = (float)trackedScript.CurrentValue / (float)trackedScript.MaxValue;
+        float ratio = (float)trackedScript.CurrentValue / (float)trackedScript.MaxValue;
+        bar.fillAmount = ratio;
+        bar.color = Color.Lerp(emptyColor, fullColor, ratio);
     }
 }
