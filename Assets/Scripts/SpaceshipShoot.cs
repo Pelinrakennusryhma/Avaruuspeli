@@ -14,6 +14,8 @@ public class SpaceshipShoot : MonoBehaviour
     private Transform[] laserOrigins;
     [SerializeField]
     float shootInterval = 3f;
+    [SerializeField]
+    Transform laserParent;
     public bool shooting = false;
 
     float nextShot = 0f;
@@ -46,7 +48,7 @@ public class SpaceshipShoot : MonoBehaviour
     void Shoot()
     {
         //Debug.Log("pew" + Time.time);
-        GameObject laserBoltObject = Instantiate(laserBoltPrefab, laserOrigins[0].position, laserOrigins[0].rotation);
+        GameObject laserBoltObject = Instantiate(laserBoltPrefab, laserOrigins[0].position, laserOrigins[0].rotation, laserParent);
         LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
         laserBolt.Init(laserForce, laserLifetime, gameObject, rb.velocity);
     }
