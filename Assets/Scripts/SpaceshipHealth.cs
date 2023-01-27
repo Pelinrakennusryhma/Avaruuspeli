@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpaceshipHealth : UITrackable
 {
@@ -8,6 +9,8 @@ public class SpaceshipHealth : UITrackable
     int maxHealth = 100;
     [SerializeField]
     int currentHealth = 100;
+
+    public UnityEvent shipHealthChangedEvent;
 
     public override int MaxValue
     {
@@ -30,22 +33,34 @@ public class SpaceshipHealth : UITrackable
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int value)
+    public void DecreaseHealth(int value)
     {
         SetHealth(currentHealth - value);
     }
 
+    public void IncreaseHealth(int value)
+    {
+        SetHealth(currentHealth + value);
+    }
+
     void SetHealth(int newValue)
     {
+        int cachedCurrentHealth = currentHealth;
+
         if(newValue <= 0)
         {
             currentHealth = 0;
             Debug.Log("Dead");
         } else if(newValue > maxHealth) {
-            currentHealth = newValue;
+            currentHealth = maxHealth;
         } else
         {
             currentHealth = newValue;
+        }
+
+        if(currentHealth != cachedCurrentHealth)
+        {
+            shipHealthChangedEvent.Invoke();
         }
     }
 
@@ -53,7 +68,22 @@ public class SpaceshipHealth : UITrackable
     {
         if (Input.GetKeyUp(KeyCode.Alpha0))
         {
-            TakeDamage(5);
+            IncreaseHealth(5);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha9))
+        {
+            DecreaseHealth(5);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha7))
+        {
+            IncreaseHealth(100);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha8))
+        {
+            DecreaseHealth(100);
         }
     }
 }
