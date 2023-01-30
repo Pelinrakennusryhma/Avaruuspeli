@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(SpaceshipHealth))]
 public class SpaceshipHealthEffects : MonoBehaviour
@@ -10,13 +11,17 @@ public class SpaceshipHealthEffects : MonoBehaviour
     [SerializeField]
     Transform healthEffectsParent;
     [SerializeField]
-    List<GameObject> disabledEffects = new List<GameObject>();
+    List<VisualEffect> disabledEffects = new List<VisualEffect>();
     [SerializeField]
-    List<GameObject> enabledEffects = new List<GameObject>();
+    List<VisualEffect> enabledEffects = new List<VisualEffect>();
     [SerializeField]
     List<float> effectThresholds = new List<float>();
     [SerializeField]
     int currentThreshold;
+    [SerializeField]
+    GameObject explosionEffectPrefab;
+
+    Color originalEffectColor;
 
     SpaceshipHealth spaceshipHealth;
 
@@ -32,7 +37,14 @@ public class SpaceshipHealthEffects : MonoBehaviour
     void OnShipHealthChanged()
     {
         Debug.Log(GetHealthRatio());
-        CalculateThreshold();
+        if(spaceshipHealth.CurrentValue > 0)
+        {
+            CalculateThreshold();
+        } else
+        {
+            PlayExplosion();
+        }
+
     }
 
     float GetHealthRatio()
@@ -44,7 +56,7 @@ public class SpaceshipHealthEffects : MonoBehaviour
     {
         for (int i = 0; i < healthEffectsParent.childCount; i++)
         {
-            disabledEffects.Add(healthEffectsParent.GetChild(i).gameObject);
+            disabledEffects.Add(healthEffectsParent.GetChild(i).GetComponent<VisualEffect>());
         }
 
         // clamp the max health effects to match the actual effect gameObjects
@@ -52,6 +64,9 @@ public class SpaceshipHealthEffects : MonoBehaviour
         {
             maxHealthEffects = disabledEffects.Count;
         }
+
+        // original effect color from the first effect
+        originalEffectColor = disabledEffects[0].GetVector4("Color");
     }
 
     void CreateThresholds()
@@ -119,17 +134,38 @@ public class SpaceshipHealthEffects : MonoBehaviour
 
     void EnableEffect()
     {
-        GameObject effect = disabledEffects[Random.Range(0, disabledEffects.Count)];
+        VisualEffect effect = disabledEffects[Random.Range(0, disabledEffects.Count)];
         disabledEffects.Remove(effect);
         enabledEffects.Add(effect);
-        effect.SetActive(true);
+        DarkenColor(effect);
+        effect.gameObject.SetActive(true);
     }
 
     void DisableEffect()
     {
-        GameObject effect = enabledEffects[Random.Range(0, enabledEffects.Count)];
+        VisualEffect effect = enabledEffects[Random.Range(0, enabledEffects.Count)];
         enabledEffects.Remove(effect);
         disabledEffects.Add(effect);
-        effect.SetActive(false);
+        ResetColor(effect);
+        effect.gameObject.SetActive(false);
+    }
+
+    void DarkenColor(VisualEffect effect)
+    {
+        float darkenAmount = GetHealthRatio();
+        Color darkenedColor = Color.Lerp(Color.black, originalEffectColor, darkenAmount);
+
+        effect.SetVector4("Color", darkenedColor);
+    }
+
+    void ResetColor(VisualEffect effect)
+    {
+        effect.SetVector4("Color", originalEffectColor);
+    }
+
+    void PlayExplosion()
+    {
+        Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+        this.gameObject.SetActive(false);
     }
 }
