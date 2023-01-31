@@ -166,6 +166,6 @@ public class SpaceshipHealthEffects : MonoBehaviour
     void PlayExplosion()
     {
         Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-        this.gameObject.SetActive(false);
+        GameEvents.instance.CallEventPlayerDied();
     }
 }
