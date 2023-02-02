@@ -35,6 +35,11 @@ public class PickUpFunctionality : MonoBehaviour
 
             for (int i = 0; i < PickUppableObjectsInTriggerArea.Count; i++)
             {
+                if (PickUppableObjectsInTriggerArea[i] == null)
+                {
+                    return;
+                }
+
                 float distance = (transform.position - PickUppableObjectsInTriggerArea[i].transform.position).magnitude;
 
                 if (distance <= distanceToClosest)
