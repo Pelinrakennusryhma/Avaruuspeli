@@ -7,6 +7,7 @@ public class LaserBolt : MonoBehaviour
     GameObject shooterShip;
     float force = 0f;
     ParticleSystem explosionEffect;
+    bool hasHit = false;
 
     public void Init(float shootForce, float lifetime, GameObject _shooterShip, Vector3 shooterVelocity)
     {
@@ -25,13 +26,18 @@ public class LaserBolt : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * force;
+        if (!hasHit)
+        {
+            transform.position += transform.forward * Time.deltaTime * force;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject != shooterShip)
         {
+            hasHit = true;
             Debug.Log("Laser hit: " + other.gameObject.name);
             explosionEffect.Play();
             float destroyDelay = explosionEffect.main.duration + 0.1f;

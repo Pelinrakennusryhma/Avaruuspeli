@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SpaceshipHealth : UITrackable
 {
@@ -10,8 +9,7 @@ public class SpaceshipHealth : UITrackable
     [SerializeField]
     int currentHealth = 100;
 
-    public UnityEvent shipHealthChangedEvent;
-
+    SpaceshipEvents spaceshipEvents;
     public override int MaxValue
     {
         get
@@ -30,6 +28,7 @@ public class SpaceshipHealth : UITrackable
 
     void Awake()
     {
+        spaceshipEvents = GetComponent<SpaceshipEvents>();
         currentHealth = maxHealth;
     }
 
@@ -45,12 +44,15 @@ public class SpaceshipHealth : UITrackable
 
     void SetHealth(int newValue)
     {
-        int cachedCurrentHealth = currentHealth;
+        if(currentHealth != newValue)
+        {
+            spaceshipEvents.CallEventSpaceshipHealthChanged();
+        }
 
         if(newValue <= 0)
         {
             currentHealth = 0;
-            Debug.Log("Dead");
+            spaceshipEvents.CallEventSpaceshipDied();
         } else if(newValue > maxHealth) {
             currentHealth = maxHealth;
         } else
@@ -58,10 +60,6 @@ public class SpaceshipHealth : UITrackable
             currentHealth = newValue;
         }
 
-        if(currentHealth != cachedCurrentHealth)
-        {
-            shipHealthChangedEvent.Invoke();
-        }
     }
 
     private void Update()

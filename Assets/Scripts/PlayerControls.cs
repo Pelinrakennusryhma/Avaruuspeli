@@ -8,19 +8,22 @@ public class PlayerControls : MonoBehaviour
     public SpaceshipMovement spaceshipMovement;
     public SpaceshipBoost spaceshipBoost;
     public SpaceshipShoot spaceshipShoot;
+    public SpaceshipEvents spaceshipEvents;
 
-    void Start()
+    void Awake()
     {
         spaceshipMovement = GetComponentInChildren<SpaceshipMovement>();
         spaceshipBoost = GetComponentInChildren<SpaceshipBoost>();
         spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
+        spaceshipEvents = GetComponentInChildren<SpaceshipEvents>();
 
-        GameEvents.instance.EventPlayerDied.AddListener(DisableControls);
+        spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
     }
 
-    void DisableControls()
+    void OnDeath()
     {
-        enabled = false;
+        gameObject.SetActive(false);
+        GameEvents.instance.CallEventPlayerSpaceshipDied();
     }
 
     public void OnThrust(InputAction.CallbackContext context)

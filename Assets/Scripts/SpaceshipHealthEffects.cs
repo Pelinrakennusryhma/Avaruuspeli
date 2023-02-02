@@ -24,11 +24,14 @@ public class SpaceshipHealthEffects : MonoBehaviour
     Color originalEffectColor;
 
     SpaceshipHealth spaceshipHealth;
+    SpaceshipEvents spaceshipEvents;
 
     void Awake()
     {
         spaceshipHealth = GetComponent<SpaceshipHealth>();
-        spaceshipHealth.shipHealthChangedEvent.AddListener(OnShipHealthChanged);
+        spaceshipEvents = GetComponent<SpaceshipEvents>();
+        spaceshipEvents.EventSpaceshipHealthChanged.AddListener(OnShipHealthChanged);
+        spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
         GetHealthEffects();
         CreateThresholds();
         CalculateThreshold();
@@ -36,15 +39,15 @@ public class SpaceshipHealthEffects : MonoBehaviour
 
     void OnShipHealthChanged()
     {
-        Debug.Log(GetHealthRatio());
         if(spaceshipHealth.CurrentValue > 0)
         {
             CalculateThreshold();
-        } else
-        {
-            PlayExplosion();
         }
+    }
 
+    void OnDeath()
+    {
+        Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
     }
 
     float GetHealthRatio()
@@ -161,11 +164,5 @@ public class SpaceshipHealthEffects : MonoBehaviour
     void ResetColor(VisualEffect effect)
     {
         effect.SetVector4("Color", originalEffectColor);
-    }
-
-    void PlayExplosion()
-    {
-        Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-        GameEvents.instance.CallEventPlayerDied();
     }
 }
