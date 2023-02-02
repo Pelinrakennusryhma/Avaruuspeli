@@ -103,13 +103,12 @@ public class SpaceshipHealthEffects : MonoBehaviour
                 }
             }
         }
-        Debug.Log("newThreshold: " + newThreshold);
+
         SetEffects(newThreshold);
     }
 
     void SetEffects(int newThreshold)
     {
-        Debug.Log(newThreshold + " " + currentThreshold);
         if(newThreshold > currentThreshold)
         {
             int difference = newThreshold - currentThreshold;

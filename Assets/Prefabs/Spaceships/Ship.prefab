@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921865848298174}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShipGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921865941276146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921865952098898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921865962600679}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CockpitCamera
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921866287742385}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraTargets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,6 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921867126456993}
+  - component: {fileID: 1875421651843936565}
   - component: {fileID: 1134921867126457020}
   - component: {fileID: 1134921867126457023}
   - component: {fileID: 1134921867126457017}
@@ -189,7 +190,7 @@ GameObject:
   - component: {fileID: 1134921867126457013}
   - component: {fileID: 1134921867126456995}
   - component: {fileID: 1134921867126457016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,6 +215,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1875421651843936565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134921867126456992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8a0311a2be5324da48df3f29774ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1134921867126457020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +362,9 @@ MonoBehaviour:
   EventSpaceshipDied:
     m_PersistentCalls:
       m_Calls: []
+  EventSpaceshipCollided:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1134921867126456995
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -388,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921867257646773}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LaserOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134921867884066000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindCamera
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -448,10 +464,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -595,6 +621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c79ca74354b08b943b844d6906570996,
         type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c79ca74354b08b943b844d6906570996,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -613,10 +644,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -698,10 +739,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -788,6 +839,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoostEffect (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6441939964868624092, guid: a03a084c68707bb4eaf4e06b9054823d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6441939964868624093, guid: a03a084c68707bb4eaf4e06b9054823d,
         type: 3}
       propertyPath: m_RootOrder
@@ -843,6 +899,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7738239183200119185, guid: a03a084c68707bb4eaf4e06b9054823d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03a084c68707bb4eaf4e06b9054823d, type: 3}
 --- !u!1 &6243769368352836980 stripped
@@ -864,10 +925,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -949,10 +1020,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -1034,10 +1115,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -1124,6 +1215,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EngineEffect (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6441939964868624092, guid: 9d85be729271b8742a4dcc7a9924d254,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6441939964868624093, guid: 9d85be729271b8742a4dcc7a9924d254,
         type: 3}
       propertyPath: m_RootOrder
@@ -1179,6 +1275,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6441939964929180708, guid: 9d85be729271b8742a4dcc7a9924d254,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d85be729271b8742a4dcc7a9924d254, type: 3}
 --- !u!4 &6243769366821364124 stripped
@@ -1198,6 +1299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BoostEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441939964868624092, guid: a03a084c68707bb4eaf4e06b9054823d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6441939964868624093, guid: a03a084c68707bb4eaf4e06b9054823d,
         type: 3}
@@ -1254,6 +1360,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7738239183200119185, guid: a03a084c68707bb4eaf4e06b9054823d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03a084c68707bb4eaf4e06b9054823d, type: 3}
 --- !u!1 &6243769367070747506 stripped
@@ -1275,10 +1386,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1134921865952098898}
     m_Modifications:
+    - target: {fileID: 6183704110242181820, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
       propertyPath: m_Name
       value: SmokeEffect (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6183704111460117987, guid: aa0c253fef4cfa3408a3d90133606693,
         type: 3}
@@ -1395,6 +1516,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EngineEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6441939964868624092, guid: 9d85be729271b8742a4dcc7a9924d254,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6441939964868624093, guid: 9d85be729271b8742a4dcc7a9924d254,
         type: 3}
       propertyPath: m_RootOrder
@@ -1449,6 +1575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441939964929180708, guid: 9d85be729271b8742a4dcc7a9924d254,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d85be729271b8742a4dcc7a9924d254, type: 3}

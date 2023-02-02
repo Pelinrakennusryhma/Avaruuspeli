@@ -7,6 +7,7 @@ public class SpaceshipEvents : MonoBehaviour
 {
     public UnityEvent EventSpaceshipHealthChanged;
     public UnityEvent EventSpaceshipDied;
+    public UnityEvent<float> EventSpaceshipCollided;
 
     public void CallEventSpaceshipHealthChanged()
     {
@@ -16,5 +17,10 @@ public class SpaceshipEvents : MonoBehaviour
     public void CallEventSpaceshipDied()
     {
         EventSpaceshipDied.Invoke();
+    }
+
+    public void CallEventSpaceshipCollided(float magnitude)
+    {
+        EventSpaceshipCollided.Invoke(magnitude);
     }
 }

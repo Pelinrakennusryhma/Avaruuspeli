@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4997274102441097919}
   - component: {fileID: 7055535037416613101}
   - component: {fileID: 6814511727521243776}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LaserBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 199629485222976651}
   - component: {fileID: 900899207707869065}
   - component: {fileID: 5672961830704112324}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4941,7 +4941,7 @@ GameObject:
   - component: {fileID: 8347532712462491954}
   - component: {fileID: 7113783323044593378}
   - component: {fileID: 6585680016892984698}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

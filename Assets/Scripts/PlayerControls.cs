@@ -3,24 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerControls : ActorSpaceship
 {
-    public SpaceshipMovement spaceshipMovement;
-    public SpaceshipBoost spaceshipBoost;
-    public SpaceshipShoot spaceshipShoot;
-    public SpaceshipEvents spaceshipEvents;
-
-    void Awake()
-    {
-        spaceshipMovement = GetComponentInChildren<SpaceshipMovement>();
-        spaceshipBoost = GetComponentInChildren<SpaceshipBoost>();
-        spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
-        spaceshipEvents = GetComponentInChildren<SpaceshipEvents>();
-
-        spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
-    }
-
-    void OnDeath()
+    protected override void OnDeath()
     {
         gameObject.SetActive(false);
         GameEvents.instance.CallEventPlayerSpaceshipDied();

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class LaserBolt : MonoBehaviour
 {
-    GameObject shooterShip;
-    float force = 0f;
+    GameObject _shooterShip;
+    float _damage = 0f;
+    float _speed = 0f;
     ParticleSystem explosionEffect;
     bool hasHit = false;
 
-    public void Init(float shootForce, float lifetime, GameObject _shooterShip, Vector3 shooterVelocity)
+    public void Init(float speed, float damage, float lifetime, GameObject shooterShip, Vector3 shooterVelocity)
     {
-        force = shootForce;
-        shooterShip = _shooterShip;
+        _damage = damage;
+        _speed = speed;
+        _shooterShip = shooterShip;
         explosionEffect = GetComponentInChildren<ParticleSystem>();
         StartCoroutine(DestroySelf(lifetime));
 
@@ -28,20 +30,25 @@ public class LaserBolt : MonoBehaviour
     {
         if (!hasHit)
         {
-            transform.position += transform.forward * Time.deltaTime * force;
+            transform.position += transform.forward * Time.deltaTime * _speed;
         }
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject != shooterShip)
+        if(other.gameObject != _shooterShip)
         {
             hasHit = true;
-            Debug.Log("Laser hit: " + other.gameObject.name);
             explosionEffect.Play();
             float destroyDelay = explosionEffect.main.duration + 0.1f;
             StartCoroutine(DestroySelf(destroyDelay));
+
+            if(other.gameObject.layer == LayerMask.NameToLayer("Damageable"))
+            {
+                IDamageable damageable = other.GetComponent<IDamageable>();
+                damageable.Damage(_damage);
+            }
         }
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class SpaceshipShoot : MonoBehaviour
 {
     [SerializeField]
-    float laserForce = 100f;
+    float laserForce = 250f;
+    [SerializeField]
+    float laserDamage = 10f;
     [SerializeField]
     float laserLifetime = 3f;
     [SerializeField]
@@ -50,6 +52,6 @@ public class SpaceshipShoot : MonoBehaviour
         //Debug.Log("pew" + Time.time);
         GameObject laserBoltObject = Instantiate(laserBoltPrefab, laserOrigins[0].position, laserOrigins[0].rotation, laserParent);
         LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
-        laserBolt.Init(laserForce, laserLifetime, gameObject, rb.velocity);
+        laserBolt.Init(laserForce, laserDamage, laserLifetime, gameObject, rb.velocity);
     }
 }
