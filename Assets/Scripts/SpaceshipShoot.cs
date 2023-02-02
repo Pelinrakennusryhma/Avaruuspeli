@@ -20,28 +20,29 @@ public class SpaceshipShoot : MonoBehaviour
     Transform laserParent;
     public bool shooting = false;
 
-    float nextShot = 0f;
-    float shootTimer = 0f;
+    float cooldown;
 
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        cooldown = shootInterval;
     }
 
     private void Update()
     {
-        shootTimer += Time.deltaTime;
+        cooldown -= Time.deltaTime;
     }
 
     void FixedUpdate()
     {
         if (shooting)
         {
-            if(shootTimer > nextShot)
+            if(cooldown <= 0)
             {
-                nextShot = Time.time + shootInterval;
+                cooldown = shootInterval;
                 Shoot();
             }
         }
