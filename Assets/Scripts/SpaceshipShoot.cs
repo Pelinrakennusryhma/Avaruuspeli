@@ -22,10 +22,10 @@ public class SpaceshipShoot : MonoBehaviour
     float shootInterval = 3f;
     [SerializeField]
     Transform laserParent;
-    public bool shooting = false;
 
+    public bool shooting = false;
     float cooldown;
-    public Material coloredMaterial;
+    Material coloredMaterial;
 
     void Start()
     {
@@ -56,12 +56,6 @@ public class SpaceshipShoot : MonoBehaviour
         coloredMaterial = new Material(material);
         coloredMaterial.color = color;
         coloredMaterial.SetColor("_EmissionColor", color);
-        //material
-        //MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
-        //meshRenderer.material.color = color;
-        //meshRenderer.material.SetColor("_EmissionColor", color);
-
-        //explosionEffect.GetComponent<ParticleSystemRenderer>().material = meshRenderer.material;
     }
 
     void Shoot()

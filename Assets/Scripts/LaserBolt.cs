@@ -23,7 +23,7 @@ public class LaserBolt : MonoBehaviour
     IEnumerator DestroySelf(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -37,14 +37,8 @@ public class LaserBolt : MonoBehaviour
 
     void SetMaterial(Material material)
     {
-        MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
-        meshRenderer.material = material;
-        //meshRenderer.material.color = color;
-        //meshRenderer.material.SetColor("_EmissionColor", color);
-
+        GetComponentInChildren<MeshRenderer>().material = material;
         explosionEffect.GetComponent<ParticleSystemRenderer>().material = material;
-        //ParticleSystem.MainModule explosionSettings = explosionEffect.main;
-        //explosionSettings.startColor = new ParticleSystem.MinMaxGradient(color);
     }
 
     private void OnTriggerEnter(Collider other)
