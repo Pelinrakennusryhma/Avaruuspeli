@@ -11,6 +11,7 @@ public class Options : MonoBehaviour
     public Toggle InvertToggle;
     public Scrollbar SensitivityScrollbar;
 
+
     public void OnGameStarted()
     {
         // GEt from player prefs

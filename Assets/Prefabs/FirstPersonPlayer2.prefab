@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 3942892927281607811}
   - component: {fileID: 4609879616504838933}
   - component: {fileID: 6853676080382508068}
+  - component: {fileID: 1298778936921135841}
+  - component: {fileID: 7805499554035894097}
   m_Layer: 0
   m_Name: FirstPersonPlayer2
   m_TagString: Untagged
@@ -118,6 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CentreOfGravity: {fileID: 0}
+  CenterOfGravity: {fileID: 0}
+  Parent: {fileID: 0}
+  xzUnadjustedVelocity: {x: 0, y: 0, z: 0}
+  CurrentRelativeYVelo: 0
   UseRealGravity: 0
   RealisticGravityJumpForce: 5
   UnrealisticGravityJumpForce: 5
@@ -133,6 +139,214 @@ MonoBehaviour:
   CrouchingCapsuleCollider: {fileID: 0}
   Rigidbody: {fileID: 0}
   CrouchingCameraLocalPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1298778936921135841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942892927281607820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: fa9e827e0250e5a42a981f1757dfc6e8,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4d46d8e1-3b05-42d9-a2bc-730c15c6fe62
+    m_ActionName: ShipControls/Thrust[/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2106dcd5-89f0-47d7-b7b6-5a8364b913c1
+    m_ActionName: ShipControls/Strafe[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b82fb4be-721a-4c0e-b9ee-b1ede2a90ef2
+    m_ActionName: ShipControls/UpDown[/Keyboard/ctrl,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb8c31ba-4fd2-4c92-a2a7-488862e4fac0
+    m_ActionName: ShipControls/Roll[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4472a4e4-3180-4998-9063-f17a9a2a551c
+    m_ActionName: ShipControls/PitchYaw[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 70107d8e-af73-4229-98fe-e9f0ba5fce43
+    m_ActionName: ShipControls/Boost[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c74a653d-0081-4e5e-a38d-07cc6a3bbbcc
+    m_ActionName: ShipControls/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66c4e638-5214-4497-a4dc-78e9907df26f
+    m_ActionName: ShipControls/ChangeCamera[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 627fb73c-dfc7-4d48-a19e-d4af82f6cc41
+    m_ActionName: ShipControls/ToggleCursor[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnVertical
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 2ff9fff2-a34a-44ec-92c2-837e8d137149
+    m_ActionName: FirstPersonControls/Vertical[/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnHorizontal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: cb15299a-6d88-4b83-8fff-ba3fe708ed7e
+    m_ActionName: FirstPersonControls/Horizontal[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnRunDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 2095824e-a66a-4636-82e7-50e503421f73
+    m_ActionName: FirstPersonControls/Run[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnCrouchDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 0fc7efa5-9162-4221-b37e-a4bc5ab7e68d
+    m_ActionName: FirstPersonControls/Crouch[/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnJumpPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: b172b0d8-4180-4359-abaa-d65aa33f5ad5
+    m_ActionName: FirstPersonControls/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnFire1Pressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 7ac9ef14-6fcd-46f3-9e94-8e430b23e07b
+    m_ActionName: FirstPersonControls/Fire1[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnOptions
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 302a2d89-a81c-4028-a556-dcacfdbea1d3
+    m_ActionName: FirstPersonControls/Options[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnMouseMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: e7eadb95-2ffc-4006-91d2-121c06cd47be
+    m_ActionName: FirstPersonControls/Look[/Mouse/delta]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: FirstPersonControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &7805499554035894097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942892927281607820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7fb33eaefe8164e866392fd0da7657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerController: {fileID: 0}
 --- !u!1 &3942892927911336746
 GameObject:
   m_ObjectHideFlags: 0

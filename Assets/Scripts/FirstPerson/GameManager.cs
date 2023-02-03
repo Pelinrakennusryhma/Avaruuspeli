@@ -47,22 +47,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnPausePressed()
+    {
+        if (IsPaused)
+        {
+            OnUnpause();
+        }
+
+        else
+        {
+            OnPause();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)
-            || Input.GetKeyDown(KeyCode.O))
-        {
-            if (IsPaused) 
-            {
-                OnUnpause();
-            }
+        //if (Input.GetKeyDown(KeyCode.Escape)
+        //    || Input.GetKeyDown(KeyCode.O))
+        //{
+        //    if (IsPaused) 
+        //    {
+        //        OnUnpause();
+        //    }
 
-            else
-            {
-                OnPause();
-            }
-        }
+        //    else
+        //    {
+        //        OnPause();
+        //    }
+        //}
     }
 
     public void OnPause()

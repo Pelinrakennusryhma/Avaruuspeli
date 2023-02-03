@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 {
@@ -54,8 +55,15 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
     private Vector3 cameraOriginalLocalPosition;
 
+    private float originalTimeStep;
+
+    private FirstPersonPlayerControls Controls;
     void Awake()
     {
+        Controls = GetComponent<FirstPersonPlayerControls>();
+        originalTimeStep = Time.fixedDeltaTime;
+        Time.fixedDeltaTime = 0.00833333f;
+
         CenterOfGravity = FindObjectOfType<CenterOfGravity>();
         UseRealGravity = false;
 
@@ -73,6 +81,11 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        Time.fixedDeltaTime = originalTimeStep;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -81,6 +94,74 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
             return;
         }
 
+        //Vector2 mouseInput = ReactToInputWithOldInputSystem();
+        Vector2 mouseInput = ReactToInputWithNewInputSystem();
+
+        float xRot;
+
+        MoveHead(mouseInput, out xRot);
+
+
+
+        if (isCrouching)
+        {
+            Camera.transform.localPosition = Vector3.Lerp(Camera.transform.localPosition,
+                                                          CrouchingCameraLocalPosition,
+                                                          9f * Time.deltaTime);
+        }
+
+        else
+        {
+            Camera.transform.localPosition = Vector3.Lerp(Camera.transform.localPosition,
+                                                          cameraOriginalLocalPosition,
+                                                          12f * Time.deltaTime);
+        }
+
+        //MoveBody(movement);
+    }
+
+    private Vector2 ReactToInputWithNewInputSystem()
+    {
+        movement = new Vector3(Controls.Horizontal,
+                               0, Controls.Vertical);
+
+        Vector2 mouseInput = new Vector2(Controls.MouseDeltaX * 0.025f,
+                                         Controls.MouseDeltaY * 0.025f);
+
+        if (Controls.RunDown)
+        {
+            isRunning = true;
+        }
+
+        else
+        {
+            isRunning = false;
+        }
+
+        if (Controls.CrouchDown)
+        {
+            isCrouchingButtonDown = true;
+
+            //Debug.Log("Crouching " + Time.time);
+        }
+
+        else
+        {
+            isCrouchingButtonDown = false;
+
+            //Debug.Log("Not crouhing " + Time.time);
+        }
+
+        if (Controls.JumpDownPressed)
+        {
+            SpaceWasPressedDuringLastUpdate = true;
+        }
+
+        return mouseInput;
+    }
+
+    private Vector2 ReactToInputWithOldInputSystem()
+    {
         movement = new Vector3(Input.GetAxisRaw("Horizontal"),
                                0, Input.GetAxisRaw("Vertical"));
 
@@ -111,30 +192,12 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
             //Debug.Log("Not crouhing " + Time.time);
         }
 
-        float xRot;
-
-        MoveHead(mouseInput, out xRot);
-
         if (Input.GetButtonDown("Jump"))
         {
             SpaceWasPressedDuringLastUpdate = true;
         }
 
-        if (isCrouching)
-        {
-            Camera.transform.localPosition = Vector3.Lerp(Camera.transform.localPosition,
-                                                          CrouchingCameraLocalPosition,
-                                                          9f * Time.deltaTime);
-        }
-
-        else
-        {
-            Camera.transform.localPosition = Vector3.Lerp(Camera.transform.localPosition,
-                                                          cameraOriginalLocalPosition,
-                                                          12f * Time.deltaTime);
-        }
-
-        //MoveBody(movement);
+        return mouseInput;
     }
 
     private void FixedUpdate()
@@ -248,11 +311,13 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         jumpTimer -= Time.deltaTime;
 
+
         // Check if can jump
         bool tryingToStandUp = false;
 
         if (isCrouchingButtonDown
-            && isGrounded)
+            && isGrounded
+            && CurrentRelativeYVelo <= 0)
         {
             isCrouching = true;
             CrouchingCapsuleCollider.enabled = true;
@@ -285,6 +350,12 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
             CrouchingCapsuleCollider.enabled = false;
             StandingCapsuleCollider.enabled = true;
             //Debug.Log("Trying to stand up ");
+        }
+
+        if (jumpTimer >= 0
+            || CurrentRelativeYVelo > 0)
+        {
+            isGrounded = false;
         }
 
 
