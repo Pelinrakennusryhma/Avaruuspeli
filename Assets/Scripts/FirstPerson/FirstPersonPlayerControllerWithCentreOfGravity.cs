@@ -5,6 +5,7 @@ using UnityEngine;
 public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 {
     public GameObject CentreOfGravity;
+    public CenterOfGravity CenterOfGravity;
     public GameObject Parent;
 
     public Vector3 xzUnadjustedVelocity;
@@ -55,6 +56,9 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
     void Awake()
     {
+        CenterOfGravity = FindObjectOfType<CenterOfGravity>();
+        UseRealGravity = false;
+
         if (UseRealGravity)
         {
             Rigidbody.useGravity = true;
@@ -172,12 +176,8 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
     private void MoveBody(Vector3 movement)
     {
-        Vector3 towardsCenterOfGravity = CentreOfGravity.transform.position - transform.position;
+        Vector3 towardsCenterOfGravity = CenterOfGravity.gameObject.transform.position - transform.position;
 
-        //Debug.Log("Towards center of gravity x " + towardsCenterOfGravity.x + " y " + towardsCenterOfGravity.y + " z " + towardsCenterOfGravity.z);
-
-
-        //Debug.Log("Movement is x " + movement.x + " z " + movement.z);
         groundedExtraTime -= Time.deltaTime;
 
         bool isGrounded = false;
@@ -186,12 +186,6 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         Vector3 point1 = StandingCapsuleCollider.transform.position + Rigidbody.transform.up * (StandingCapsuleCollider.height / 2);
         Vector3 point2 = StandingCapsuleCollider.transform.position + -Rigidbody.transform.up * (StandingCapsuleCollider.height / 2);
-
-        //hits = Physics.CapsuleCast(point1,
-        //                           point2,
-        //                           CapsuleCollider.radius,
-        //                           Vector3.down * 10.0f,
-        //                           out hit);
 
         hits = Physics.Raycast(Rigidbody.transform.position,
                                -Rigidbody.transform.up,
@@ -203,7 +197,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         if (hits && hit.distance <= 1.001f)
         {
             isGrounded = true;
-            groundedExtraTime = 0.2f;
+            groundedExtraTime = 0.4f;
         }
 
         else
@@ -227,12 +221,11 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
                 && angle != 0.0f)
             {
                 isOnASlope = true;
-                groundedExtraTime = 0.2f;
+                groundedExtraTime = 0.4f;
                 slopeNormal = hit.normal;
             }
         }
 
-        //Debug.Log("Is on a slope " + isOnASlope + " " + Time.time);
 
         if (groundedExtraTime >= 0.0f)
         {
@@ -243,8 +236,6 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         {
             isGrounded = true;
             Rigidbody.useGravity = false;
-            // Snap to slope
-
         }
 
         else
@@ -266,7 +257,6 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
             isCrouching = true;
             CrouchingCapsuleCollider.enabled = true;
             StandingCapsuleCollider.enabled = false;
-            //Debug.Log("Crcouhing "  + Time.time);
         }
 
         else
@@ -275,7 +265,6 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
             {
                 tryingToStandUp = true;
             }
-            //Debug.Log("Not crouching " + Time.time);
         }
 
         bool canStandUp = true;
@@ -302,18 +291,9 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         if (isGrounded && !SpaceWasPressedDuringLastUpdate)
         {
             Rigidbody.velocity = towardsCenterOfGravity.normalized * 200.0f * Time.deltaTime;
-            //Debug.Log("Adjusting to planet surface " + Time.time);
         }
 
         Vector3 forward = Rigidbody.transform.forward;
-
-        //Rigidbody.transform.LookAt(forward, -towardsCenterOfGravity.normalized);
-        //Rigidbody.transform.tra
-        //Rigidbody.transform.up = -towardsCenterOfGravity.normalized;
-        //Rigidbody.transform.forward = forward;
-
-        //Rigidbody.transform.rotation = Quaternion.FromToRotation(Rigidbody.transform.up, slopeNormal) * Rigidbody.transform.rotation;
-        //Rigidbody.transform.up = slopeNormal;
 
         if (isGrounded
             && SpaceWasPressedDuringLastUpdate
@@ -340,28 +320,19 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
             if (!isGrounded
                 && !UseRealGravity)
             {
-
-                //Debug.Log("Not grounded " + Time.time);
                 if (CurrentRelativeYVelo >= 0)
                 {
-                    Rigidbody.velocity = -towardsCenterOfGravity.normalized * (CurrentRelativeYVelo - UnrealisticGravityAscendingGravity * Time.deltaTime);
+                    Rigidbody.velocity = -towardsCenterOfGravity.normalized * (CurrentRelativeYVelo - UnrealisticGravityAscendingGravity * Time.deltaTime * CenterOfGravity.GravityMultiplier);
 
-                    CurrentRelativeYVelo -= UnrealisticGravityAscendingGravity * Time.deltaTime;
-                    //Rigidbody.velocity = new Vector3(Rigidbody.velocity.x,
-                    //                     Rigidbody.velocity.y - UnrealisticGravityAscendingGravity * Time.deltaTime,
-                    //                     Rigidbody.velocity.z);
+                    CurrentRelativeYVelo -= UnrealisticGravityAscendingGravity * Time.deltaTime * CenterOfGravity.GravityMultiplier;
+
                 }
 
                 else
                 {
-                    //Rigidbody.velocity = new Vector3(Rigidbody.velocity.x,
-                    //Rigidbody.velocity.y - UnrealisticGravityDescendingGravity * Time.deltaTime,
-                    //Rigidbody.velocity.z);
+                    Rigidbody.velocity = -towardsCenterOfGravity.normalized * (CurrentRelativeYVelo - UnrealisticGravityDescendingGravity * Time.deltaTime * CenterOfGravity.GravityMultiplier);
 
-
-                    Rigidbody.velocity = -towardsCenterOfGravity.normalized * (CurrentRelativeYVelo - UnrealisticGravityDescendingGravity * Time.deltaTime);
-
-                    CurrentRelativeYVelo -= UnrealisticGravityDescendingGravity * Time.deltaTime;
+                    CurrentRelativeYVelo -= UnrealisticGravityDescendingGravity * Time.deltaTime * CenterOfGravity.GravityMultiplier;
                 }
             }
         }
@@ -369,20 +340,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         if (isOnASlope
             && jumpTimer <= 0)
         {
-            //Debug.Log("On aslope, but not jumping " + Time.time);
 
-
-            //Vector3 pos1 = transform.position + Vector3.up * CapsuleCollider.height;
-            //Vector3 pos2 = transform.position + Vector3.down * CapsuleCollider.height;
-
-            //hits = Physics.CapsuleCast(pos1, pos2, CapsuleCollider.radius, Vector3.down, out hit);
-
-            //if (hits) 
-            //{
-            //    transform.position = new Vector3(transform.position.x,
-            //                                     hit.point.y + (CapsuleCollider.height / 2) + CapsuleCollider.radius,
-            //                                     transform.position.z);
-            //}
         }
 
         Vector3 clampedVelo = DoHorizontalMovements(movement, 
@@ -394,66 +352,16 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         Vector3 velo = clampedVelo;
 
-        //if (isOnASlope)
-        //{
-        //    Quaternion slopeRotation = Quaternion.FromToRotation(-towardsCenterOfGravity.normalized, slopeNormal);
-        //    velo = slopeRotation * velo;
-        //    velo = Vector3.ClampMagnitude(velo, MaxRunSpeed);
-        //}
+
 
         SpaceWasPressedDuringLastUpdate = false;
         // How about air control?
 
         Vector3 fwd = Parent.transform.forward;
         Vector3 up = -towardsCenterOfGravity.normalized;
-        //Rigidbody.transform.rotation = Quaternion.LookRotation(Rigidbody.transform.forward, slopeNormal);        
-        //Rigidbody.transform.forward = fwd;
-        //Parent.transform.up = up;
-        // Rigidbody.transform.up = up;
 
-        //Rigidbody.transform.up = up;
         Rigidbody.transform.rotation = Quaternion.FromToRotation(Rigidbody.transform.up, up) * Rigidbody.transform.rotation;
 
-       // Debug.Log("slope normal x "+ slopeNormal.x + " y " + slopeNormal.y + " z " + slopeNormal.z);
-
-
-
-        return;
-
-        //Vector3 xzVelo = new Vector3(Rigidbody.velocity.x, 0, Rigidbody.velocity.z);
-
-
-        // Rigidbody.velocity = Rigidbody.transform.forward * clampedVelo.x * 100.0f + Rigidbody.transform.right * clampedVelo.z * 100;
-
-        float yVelo;
-
-        if ((isGrounded
-            || isOnASlope)
-            && !SpaceWasPressedDuringLastUpdate
-            && jumpTimer <= 0)
-        {
-            yVelo = 0;
-        }
-
-        else
-        {
-            yVelo = Rigidbody.velocity.y;
-        }
-
-        yVelo = 0;
-
-        velo = new Vector3(clampedVelo.x, yVelo, clampedVelo.z);
-
-        if (isOnASlope)
-        {
-            Quaternion slopeRotation = Quaternion.FromToRotation(Vector3.up, slopeNormal);
-            velo = slopeRotation * velo;
-            velo = Vector3.ClampMagnitude(velo, MaxRunSpeed);
-        }
-
-
-        Rigidbody.velocity = velo;
-        Rigidbody.transform.up = -towardsCenterOfGravity.normalized;
 
     }
 
