@@ -286,6 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 356708442}
   - component: {fileID: 356708443}
+  - component: {fileID: 356708444}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -325,6 +326,20 @@ MonoBehaviour:
   spaceshipBoost: {fileID: 0}
   spaceshipShoot: {fileID: 0}
   spaceshipEvents: {fileID: 0}
+--- !u!114 &356708444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356708441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 655503919}
 --- !u!1 &362396634
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +884,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0.05
+--- !u!1 &655503919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1134921867126456992, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+    type: 3}
+  m_PrefabInstance: {fileID: 1134921866668445132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &660727200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1718,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1134921866668445132}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 655503919}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3c6410b987c384fa6a957c34a5de15, type: 3}
@@ -1709,7 +1730,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1134921866668445132}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 655503919}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60de53a704bf04244beeb96d57482820, type: 3}
@@ -2267,6 +2288,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.a
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.b
+      value: 0.7224088
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
         type: 3}
