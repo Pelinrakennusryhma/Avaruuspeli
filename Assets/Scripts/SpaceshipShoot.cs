@@ -5,6 +5,10 @@ using UnityEngine;
 public class SpaceshipShoot : MonoBehaviour
 {
     [SerializeField]
+    Color color = Color.green;
+    [SerializeField]
+    Material material;
+    [SerializeField]
     float laserForce = 250f;
     [SerializeField]
     float laserDamage = 10f;
@@ -21,14 +25,13 @@ public class SpaceshipShoot : MonoBehaviour
     public bool shooting = false;
 
     float cooldown;
+    public Material coloredMaterial;
 
-    Rigidbody rb;
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
         cooldown = shootInterval;
+
+        ColorMaterial();
     }
 
     private void Update()
@@ -48,11 +51,23 @@ public class SpaceshipShoot : MonoBehaviour
         }
     }
 
+    void ColorMaterial()
+    {
+        coloredMaterial = new Material(material);
+        coloredMaterial.color = color;
+        coloredMaterial.SetColor("_EmissionColor", color);
+        //material
+        //MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
+        //meshRenderer.material.color = color;
+        //meshRenderer.material.SetColor("_EmissionColor", color);
+
+        //explosionEffect.GetComponent<ParticleSystemRenderer>().material = meshRenderer.material;
+    }
+
     void Shoot()
     {
-        //Debug.Log("pew" + Time.time);
         GameObject laserBoltObject = Instantiate(laserBoltPrefab, laserOrigins[0].position, laserOrigins[0].rotation, laserParent);
         LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
-        laserBolt.Init(laserForce, laserDamage, laserLifetime, gameObject, rb.velocity);
+        laserBolt.Init(laserForce, coloredMaterial, laserDamage, laserLifetime, gameObject);
     }
 }

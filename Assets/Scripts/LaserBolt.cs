@@ -10,14 +10,14 @@ public class LaserBolt : MonoBehaviour
     ParticleSystem explosionEffect;
     bool hasHit = false;
 
-    public void Init(float speed, float damage, float lifetime, GameObject shooterShip, Vector3 shooterVelocity)
+    public void Init(float speed, Material material, float damage, float lifetime, GameObject shooterShip)
     {
         _damage = damage;
         _speed = speed;
         _shooterShip = shooterShip;
         explosionEffect = GetComponentInChildren<ParticleSystem>();
+        SetMaterial(material);
         StartCoroutine(DestroySelf(lifetime));
-
     }
 
     IEnumerator DestroySelf(float delay)
@@ -33,6 +33,18 @@ public class LaserBolt : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * _speed;
         }
 
+    }
+
+    void SetMaterial(Material material)
+    {
+        MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
+        meshRenderer.material = material;
+        //meshRenderer.material.color = color;
+        //meshRenderer.material.SetColor("_EmissionColor", color);
+
+        explosionEffect.GetComponent<ParticleSystemRenderer>().material = material;
+        //ParticleSystem.MainModule explosionSettings = explosionEffect.main;
+        //explosionSettings.startColor = new ParticleSystem.MinMaxGradient(color);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -281,7 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1a793be01945947853ef9a1ee884a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 0.9483515, g: 1, b: 0, a: 1}
+  material: {fileID: 2100000, guid: 8b18357e5a5b04449905924ee8bdc312, type: 2}
   laserForce: 250
+  laserDamage: 10
   laserLifetime: 10
   laserBoltPrefab: {fileID: 2414808534942050348, guid: 78f5702a80361434e9f8a671d57da8f6,
     type: 3}
