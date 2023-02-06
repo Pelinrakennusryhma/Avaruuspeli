@@ -18,6 +18,16 @@ public class FirstPersonPlayerControls : MonoBehaviour
     public bool Fire1Down;
     public bool OptionsDown;
     public bool InteractDown;
+    public bool Alpha1Down;
+    public bool Alpha2Down;
+    public bool Alpha3Down;
+    public bool Alpha4Down;
+    public bool Alpha5Down;
+    public bool Alpha6Down;
+    public bool Alpha7Down;
+    public bool Alpha8Down;
+    public bool Alpha9Down;
+    public bool Alpha0Down;
 
     private PlayerInput playerInput;
 
@@ -99,6 +109,173 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //Debug.Log("Pressed RUN");
     }
 
+    public void OnAlpha1Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+           Alpha1Down = true;
+        }
+
+        else
+        {
+            Alpha1Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
+    public void OnAlpha2Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha2Down = true;
+        }
+
+        else
+        {
+            Alpha2Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
+    public void OnAlpha3Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha3Down = true;
+        }
+
+        else
+        {
+            Alpha3Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
+    public void OnAlpha4Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha4Down = true;
+        }
+
+        else
+        {
+            Alpha4Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
+    public void OnAlpha5Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha5Down = true;
+        }
+
+        else
+        {
+            Alpha5Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
+    public void OnAlpha6Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha6Down = true;
+        }
+
+        else
+        {
+            Alpha6Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
+    public void OnAlpha7Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha7Down = true;
+        }
+
+        else
+        {
+            Alpha7Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+    public void OnAlpha8Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha8Down = true;
+        }
+
+        else
+        {
+            Alpha8Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+    public void OnAlpha9Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha9Down = true;
+        }
+
+        else
+        {
+            Alpha9Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+    public void OnAlpha0Down(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            Alpha0Down = true;
+        }
+
+        else
+        {
+            Alpha0Down = false;
+        }
+
+        //Debug.Log("Pressed RUN");
+    }
+
     public void OnFire1Pressed(InputAction.CallbackContext value)
     {
         float valueFloat = value.ReadValue<float>();
@@ -161,7 +338,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
     public void ClearControls()
     {
         //RunDown = false;
-        Fire1Down = false;
+        //Fire1Down = false;
         OptionsDown = false;
         InteractDown = false;
         //CrouchDown = false;

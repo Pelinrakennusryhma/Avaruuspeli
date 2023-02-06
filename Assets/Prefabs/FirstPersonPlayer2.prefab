@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 6853676080382508068}
   - component: {fileID: 1298778936921135841}
   - component: {fileID: 7805499554035894097}
+  - component: {fileID: 8258911447371213847}
   m_Layer: 0
   m_Name: FirstPersonPlayer2
   m_TagString: Untagged
@@ -69,6 +70,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9204578105021437998}
+  - {fileID: 7236337498646694074}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -121,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CentreOfGravity: {fileID: 0}
   CenterOfGravity: {fileID: 0}
-  Parent: {fileID: 0}
+  Parent: {fileID: 312126478458068014}
   xzUnadjustedVelocity: {x: 0, y: 0, z: 0}
   CurrentRelativeYVelo: 0
   UseRealGravity: 0
@@ -134,10 +136,10 @@ MonoBehaviour:
   MaxCrouchSpeed: 2.5
   AccelerationWalk: 48
   AccelerationRun: 96
-  Camera: {fileID: 0}
-  StandingCapsuleCollider: {fileID: 0}
-  CrouchingCapsuleCollider: {fileID: 0}
-  Rigidbody: {fileID: 0}
+  Camera: {fileID: 3942892927911336744}
+  StandingCapsuleCollider: {fileID: 3942892928164607873}
+  CrouchingCapsuleCollider: {fileID: 5548499453181210130}
+  Rigidbody: {fileID: 3942892927281607811}
   CrouchingCameraLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1298778936921135841
 MonoBehaviour:
@@ -331,10 +333,10 @@ MonoBehaviour:
     m_ActionName: FirstPersonControls/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7805499554035894097}
+      - m_Target: {fileID: 3942892927281607820}
         m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
         m_MethodName: OnInteractPressed
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -345,6 +347,166 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 06a2e8fe-a24f-4eb0-a1ab-4a73184ac3ca
     m_ActionName: FirstPersonControls/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha1Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: da15171a-7a5b-464f-af07-db161d2b41c3
+    m_ActionName: FirstPersonControls/KeyAlpha1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha2Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 50d74f43-ddc2-4e80-bfb4-9a913a2e9921
+    m_ActionName: FirstPersonControls/KeyAlpha2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha3Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: b68a0876-31fa-4b6c-9ca8-1c6ef10982a0
+    m_ActionName: FirstPersonControls/KeyAlpha3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha4Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: f0cadbc8-e2fc-4f33-8264-7eaaccf21413
+    m_ActionName: FirstPersonControls/KeyAlpha4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha5Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 61ab03c0-3cd5-4ca9-b488-d437e99497cf
+    m_ActionName: FirstPersonControls/KeyAlpha5[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha6Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 0054d608-2319-4e14-b8a1-9290cfaaa6cf
+    m_ActionName: FirstPersonControls/KeyAlpha6[/Keyboard/6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha7Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: af6585ea-ae6d-450e-817c-8afdaa16247c
+    m_ActionName: FirstPersonControls/KeyAlpha7[/Keyboard/7]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha8Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 3232600a-445b-4d38-8d3b-b3d4bed88ff4
+    m_ActionName: FirstPersonControls/KeyAlpha8[/Keyboard/8]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha9Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 33077761-3b32-46ee-9d0e-e43ce042f950
+    m_ActionName: FirstPersonControls/KeyAlpha9[/Keyboard/9]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha0Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 8f0eba5e-d444-4ac4-8268-44cbfaf8a0a1
+    m_ActionName: FirstPersonControls/KeyAlpha0[/Keyboard/0]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -373,6 +535,28 @@ MonoBehaviour:
   Fire1Down: 0
   OptionsDown: 0
   InteractDown: 0
+  Alpha1Down: 0
+  Alpha2Down: 0
+  Alpha3Down: 0
+  Alpha4Down: 0
+  Alpha5Down: 0
+  Alpha6Down: 0
+  Alpha7Down: 0
+  Alpha8Down: 0
+  Alpha9Down: 0
+  Alpha0Down: 0
+--- !u!114 &8258911447371213847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942892927281607820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9bf9567ac23e94aaa3e47502905257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3942892927911336746
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +590,7 @@ Transform:
   m_Children:
   - {fileID: 4609879616849031747}
   - {fileID: 4609879615366353884}
+  - {fileID: 5972059264935249423}
   m_Father: {fileID: 9204578105021437998}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -847,7 +1032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4609879615366353884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1916,7 +2101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4609879616849031747
 Transform:
   m_ObjectHideFlags: 0
@@ -2056,8 +2241,8 @@ RectTransform:
   m_Father: {fileID: 4609879616086996566}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2197,3 +2382,153 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &4609879615582050336
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3942892927911336745}
+    m_Modifications:
+    - target: {fileID: 6404259448009383996, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_Name
+      value: Hands
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbdc21e274ace784babdea2cbb9b1011, type: 3}
+--- !u!4 &5972059264935249423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+    type: 3}
+  m_PrefabInstance: {fileID: 4609879615582050336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8685098619623047886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3942892927281607821}
+    m_Modifications:
+    - target: {fileID: 1533993836276416222, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_Name
+      value: ResourceGatherer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c694e4e0e45d07409f13b04372558d9, type: 3}
+--- !u!4 &7236337498646694074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8685098619623047886}
+  m_PrefabAsset: {fileID: 0}

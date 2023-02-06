@@ -1541,6 +1541,7 @@ Transform:
   m_Children:
   - {fileID: 450519690}
   - {fileID: 2024273337}
+  - {fileID: 2033245799271479320}
   m_Father: {fileID: 670593431869252676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1740,6 +1741,7 @@ GameObject:
   - component: {fileID: 106327004}
   - component: {fileID: 972932736}
   - component: {fileID: 972932737}
+  - component: {fileID: 2865674597268817195}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -1763,6 +1765,7 @@ Transform:
   - {fileID: 670593430604572489}
   - {fileID: 2123416390287722000}
   - {fileID: 96209362}
+  - {fileID: 6847423581827128324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2034,6 +2037,166 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 06a2e8fe-a24f-4eb0-a1ab-4a73184ac3ca
     m_ActionName: FirstPersonControls/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha1Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: da15171a-7a5b-464f-af07-db161d2b41c3
+    m_ActionName: FirstPersonControls/KeyAlpha1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha2Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 50d74f43-ddc2-4e80-bfb4-9a913a2e9921
+    m_ActionName: FirstPersonControls/KeyAlpha2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha3Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: b68a0876-31fa-4b6c-9ca8-1c6ef10982a0
+    m_ActionName: FirstPersonControls/KeyAlpha3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha4Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: f0cadbc8-e2fc-4f33-8264-7eaaccf21413
+    m_ActionName: FirstPersonControls/KeyAlpha4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha5Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 61ab03c0-3cd5-4ca9-b488-d437e99497cf
+    m_ActionName: FirstPersonControls/KeyAlpha5[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha6Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 0054d608-2319-4e14-b8a1-9290cfaaa6cf
+    m_ActionName: FirstPersonControls/KeyAlpha6[/Keyboard/6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha7Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: af6585ea-ae6d-450e-817c-8afdaa16247c
+    m_ActionName: FirstPersonControls/KeyAlpha7[/Keyboard/7]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha8Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 3232600a-445b-4d38-8d3b-b3d4bed88ff4
+    m_ActionName: FirstPersonControls/KeyAlpha8[/Keyboard/8]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha9Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 33077761-3b32-46ee-9d0e-e43ce042f950
+    m_ActionName: FirstPersonControls/KeyAlpha9[/Keyboard/9]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972932737}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnAlpha0Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 8f0eba5e-d444-4ac4-8268-44cbfaf8a0a1
+    m_ActionName: FirstPersonControls/KeyAlpha0[/Keyboard/0]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -2062,6 +2225,28 @@ MonoBehaviour:
   Fire1Down: 0
   OptionsDown: 0
   InteractDown: 0
+  Alpha1Down: 0
+  Alpha2Down: 0
+  Alpha3Down: 0
+  Alpha4Down: 0
+  Alpha5Down: 0
+  Alpha6Down: 0
+  Alpha7Down: 0
+  Alpha8Down: 0
+  Alpha9Down: 0
+  Alpha0Down: 0
+--- !u!114 &2865674597268817195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670593431869252677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9bf9567ac23e94aaa3e47502905257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7977820082886293467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,3 +2345,173 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &4894822115095778928
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 670593431869252676}
+    m_Modifications:
+    - target: {fileID: 1533993836276416222, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_Name
+      value: ResourceGatherer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c694e4e0e45d07409f13b04372558d9, type: 3}
+--- !u!4 &6847423581827128324 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2083769905390471796, guid: 4c694e4e0e45d07409f13b04372558d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4894822115095778928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8155767260196070967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 670593430317812704}
+    m_Modifications:
+    - target: {fileID: 428732463315856060, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e0ba43c0e828c94cbde73e887af839a, type: 2}
+    - target: {fileID: 1997703681199616593, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219469782634111160, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0beb69713702a0843be4e252025372a9, type: 2}
+    - target: {fileID: 6404259448009383996, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_Name
+      value: Hands
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521932962622661635, guid: bbdc21e274ace784babdea2cbb9b1011,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbdc21e274ace784babdea2cbb9b1011, type: 3}
+--- !u!4 &2033245799271479320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7861192941822205487, guid: bbdc21e274ace784babdea2cbb9b1011,
+    type: 3}
+  m_PrefabInstance: {fileID: 8155767260196070967}
+  m_PrefabAsset: {fileID: 0}
