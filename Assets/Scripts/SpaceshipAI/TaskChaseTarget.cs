@@ -14,16 +14,12 @@ public class TaskChaseTarget : Node
 
     public override NodeState Evaluate()
     {
-        // chase target
         GameObject target = (GameObject)GetData("target");
-        if (target)
+        if(target != null)
         {
             Debug.Log("Chasing");
-        } else
-        {
-            Debug.Log("No target to chase");
         }
-        
+
 
         state = NodeState.RUNNING;
         return state;

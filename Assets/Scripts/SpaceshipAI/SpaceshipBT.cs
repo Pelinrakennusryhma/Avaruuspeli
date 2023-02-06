@@ -6,7 +6,7 @@ using BehaviorTree;
 
 public class SpaceshipBT : BTree
 {
-    public static float detectTargetRange = 10f;
+    public static float detectTargetRange = 20f;
     [SerializeField]
     List<GameObject> targets;
 
@@ -23,14 +23,11 @@ public class SpaceshipBT : BTree
         Node root = new Selector(new List<Node>
         {
             new Sequence(new List<Node>
-            {
-                new CheckTargetInShootingRange(shipTransform),
-                new TaskShoot(spaceshipShoot)
-            }),
-            new Sequence(new List<Node>
-            {
+            {               
                 new CheckForTarget(shipTransform, targets),
                 new TaskChaseTarget(shipTransform),
+                new CheckTargetInShootingRange(shipTransform),
+                new TaskShoot(spaceshipShoot),
             }),
             new TaskPatrol()
         });

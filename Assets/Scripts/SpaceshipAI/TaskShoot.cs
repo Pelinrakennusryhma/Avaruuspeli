@@ -14,8 +14,12 @@ public class TaskShoot : Node
 
     public override NodeState Evaluate()
     {
-        bool shouldShoot = (bool)GetData("shouldShoot");
-        _spaceshipShoot.shooting = shouldShoot;
+        object obj = GetData("shouldShoot");
+
+        bool shouldShoot = (bool)obj;
+
+       _spaceshipShoot.shooting = shouldShoot;
+
 
         state = NodeState.RUNNING;
         return state;

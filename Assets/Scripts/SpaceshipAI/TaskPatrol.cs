@@ -24,7 +24,7 @@ public class TaskPatrol : Node
         } else
         {
             // movement logic
-            Debug.Log("next");
+            Debug.Log("patrolling");
             _waitCounter = 0f;
             _waiting = true;
         }

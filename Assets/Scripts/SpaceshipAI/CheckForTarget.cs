@@ -16,12 +16,24 @@ public class CheckForTarget : Node
 
     public override NodeState Evaluate()
     {
-        GameObject t = (GameObject)GetData("target");
-        if(t == null)
+        object t = GetData("target");
+        GameObject tGO = (GameObject)t;
+
+        if(tGO != null)
         {
-            foreach (GameObject possibleTarget in _possibleTargets)
+            Debug.Log("tGOparent: " + tGO.transform.parent.gameObject.activeSelf);
+        }
+
+        List<GameObject> activeTargets = _possibleTargets.FindAll(t => t.transform.parent.gameObject.activeSelf == true);
+
+        // no target, try to find a new one
+        if (t == null) 
+        {
+            
+            Debug.Log("count: " + activeTargets.Count);
+
+            foreach (GameObject possibleTarget in activeTargets)
             {
-                //Debug.Log(Vector3.Distance(_transform.position, possibleTarget.transform.position));
                 if(Vector3.Distance(_transform.position, possibleTarget.transform.position) < SpaceshipBT.detectTargetRange)
                 {
                     parent.parent.SetData("target", possibleTarget);
@@ -33,16 +45,20 @@ public class CheckForTarget : Node
             }
             state = NodeState.FAILURE;
             return state;
-
-        } else if (Vector3.Distance(_transform.position, t.transform.position) > SpaceshipBT.detectTargetRange)
+        // no active targets or target fled too far
+        }
+        else if (activeTargets.Count <= 0 || Vector3.Distance(_transform.position, tGO.transform.position) > SpaceshipBT.detectTargetRange)
         {
             ClearData("target");
             Debug.Log("cleared target");
-            state = NodeState.FAILURE;
+            state = NodeState.RUNNING;
+            return state;
+        // target found
+        } else
+        {
+            state = NodeState.SUCCESS;
             return state;
         }
 
-        state = NodeState.SUCCESS;
-        return state;
     }
 }
