@@ -4107,6 +4107,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
+      value: 06a2e8fe-a24f-4eb0-a1ab-4a73184ac3ca
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
+      value: FirstPersonControls/Interact[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4609879617386194534}
+    - target: {fileID: 1298778936921135841, guid: 2479f92c3421e974da60d9674156c299,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3942892927281607820, guid: 2479f92c3421e974da60d9674156c299,
         type: 3}
       propertyPath: m_Name
@@ -4260,28 +4295,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4609879617386194533}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4609879617386194535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4609879617386194534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7fb33eaefe8164e866392fd0da7657, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerController: {fileID: 0}
-  Horizontal: 0
-  Vertical: 0
-  MouseDeltaX: 0
-  MouseDeltaY: 0
-  JumpDownPressed: 0
-  CrouchDown: 0
-  RunDown: 0
-  Fire1Down: 0
-  OptionsDown: 0
 --- !u!1001 &6391952613331848347
 PrefabInstance:
   m_ObjectHideFlags: 0

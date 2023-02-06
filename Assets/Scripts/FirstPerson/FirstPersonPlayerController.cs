@@ -46,8 +46,12 @@ public class FirstPersonPlayerController : MonoBehaviour
 
     private Vector3 cameraOriginalLocalPosition;
 
+    private FirstPersonPlayerControls Controls;
+
     void Awake()
     {
+        Controls = GetComponent<FirstPersonPlayerControls>();
+
         if (UseRealGravity)
         {
             Rigidbody.useGravity = true;
@@ -70,13 +74,19 @@ public class FirstPersonPlayerController : MonoBehaviour
             return;
         }
 
-        movement = new Vector3(Input.GetAxisRaw("Horizontal"),
-                               0, Input.GetAxisRaw("Vertical"));
+        //movement = new Vector3(Input.GetAxisRaw("Horizontal"),
+        //                       0, Input.GetAxisRaw("Vertical"));
 
-        Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"),
-                                         Input.GetAxisRaw("Mouse Y"));
+        //Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"),
+        //                                 Input.GetAxisRaw("Mouse Y"));
 
-        if (Input.GetButton("Run"))
+        movement = new Vector3(Controls.Horizontal, 0, Controls.Vertical);
+
+        Vector2 mouseInput = new Vector2(Controls.MouseDeltaX * 0.025f,
+                                         Controls.MouseDeltaY * 0.025f);
+
+
+        if (Controls.RunDown)
         {
             isRunning = true;
         }
@@ -86,7 +96,7 @@ public class FirstPersonPlayerController : MonoBehaviour
             isRunning = false;
         }
 
-        if (Input.GetButton("Crouch"))
+        if (Controls.CrouchDown)
         {
             isCrouchingButtonDown = true;
 
@@ -100,14 +110,43 @@ public class FirstPersonPlayerController : MonoBehaviour
             //Debug.Log("Not crouhing " + Time.time);
         }
 
+        if (Controls.JumpDownPressed)
+        {
+            SpaceWasPressedDuringLastUpdate = true;
+        }
+
+        //if (Input.GetButton("Run"))
+        //{
+        //    isRunning = true;
+        //}
+
+        //else
+        //{
+        //    isRunning = false;
+        //}
+
+        //if (Input.GetButton("Crouch"))
+        //{
+        //    isCrouchingButtonDown = true;
+
+        //    //Debug.Log("Crouching " + Time.time);
+        //}
+
+        //else
+        //{
+        //    isCrouchingButtonDown = false;
+
+        //    //Debug.Log("Not crouhing " + Time.time);
+        //}
+
         float xRot;
 
         MoveHead(mouseInput, out xRot);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            SpaceWasPressedDuringLastUpdate = true;
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    SpaceWasPressedDuringLastUpdate = true;
+        //}
 
         if (isCrouching)
         {

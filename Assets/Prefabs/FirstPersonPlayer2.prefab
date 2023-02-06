@@ -329,6 +329,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: e7eadb95-2ffc-4006-91d2-121c06cd47be
     m_ActionName: FirstPersonControls/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7805499554035894097}
+        m_TargetAssemblyTypeName: FirstPersonPlayerControls, Assembly-CSharp
+        m_MethodName: OnInteractPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 06a2e8fe-a24f-4eb0-a1ab-4a73184ac3ca
+    m_ActionName: FirstPersonControls/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -347,6 +363,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 0}
+  Horizontal: 0
+  Vertical: 0
+  MouseDeltaX: 0
+  MouseDeltaY: 0
+  JumpDownPressed: 0
+  CrouchDown: 0
+  RunDown: 0
+  Fire1Down: 0
+  OptionsDown: 0
+  InteractDown: 0
 --- !u!1 &3942892927911336746
 GameObject:
   m_ObjectHideFlags: 0

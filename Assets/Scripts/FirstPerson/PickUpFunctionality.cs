@@ -13,10 +13,12 @@ public class PickUpFunctionality : MonoBehaviour
 
     public float LaunchForce;
 
+    private FirstPersonPlayerControls Controls;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Controls = GetComponent<FirstPersonPlayerControls>();
     }
 
     // Update is called once per frame
@@ -27,7 +29,7 @@ public class PickUpFunctionality : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.E)
+        if (Controls.InteractDown
             && CurrentlyHoldingObject == null)
         {
             PickUppableObject closestObject = null;
@@ -61,7 +63,7 @@ public class PickUpFunctionality : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("Fire1")
+        if (Controls.Fire1Down
             && CurrentlyHoldingObject != null )
         {
             LaunchForce = Random.Range(10.0f, 20.0f);

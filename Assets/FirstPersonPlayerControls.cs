@@ -17,6 +17,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
     public bool RunDown;
     public bool Fire1Down;
     public bool OptionsDown;
+    public bool InteractDown;
 
     private PlayerInput playerInput;
 
@@ -114,6 +115,22 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //Debug.Log("On fire 1 pressed");
     }
 
+    public void OnInteractPressed(InputAction.CallbackContext value)
+    {
+        float valueFloat = value.ReadValue<float>();
+
+        if (valueFloat > 0)
+        {
+            InteractDown = true;
+        }
+
+        else
+        {
+            InteractDown = false;
+        }
+        //Debug.Log("On fire 1 pressed");
+    }
+
     public void OnOptions(InputAction.CallbackContext value)
     {
         float valueFloat = value.ReadValue<float>();
@@ -144,8 +161,9 @@ public class FirstPersonPlayerControls : MonoBehaviour
     public void ClearControls()
     {
         //RunDown = false;
-        //Fire1Down = false;
+        Fire1Down = false;
         OptionsDown = false;
+        InteractDown = false;
         //CrouchDown = false;
         JumpDownPressed = false;
     }
