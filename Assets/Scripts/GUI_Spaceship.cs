@@ -4,14 +4,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GUI_Spaceship : MonoBehaviour
 {
-    public InputActionAsset inputActionAsset;
-    public TMP_Text helpText;
+    [SerializeField]
+    private InputActionAsset inputActionAsset;
+    [SerializeField]
+    private TMP_Text helpText;
+    [SerializeField]
+    Button restartButton;
     void Start()
     {
+        GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
         ShowControls();
+    }
+
+    void OnPlayerSpaceshipDeath()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void OnRestartClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void ShowControls()

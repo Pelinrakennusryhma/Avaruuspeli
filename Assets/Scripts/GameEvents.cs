@@ -12,9 +12,9 @@ public class GameEvents : MonoBehaviour
         instance = this;
     }
 
-    public UnityEvent EventPlayerDied;
-    public void CallEventPlayerDied()
+    public UnityEvent EventPlayerSpaceshipDied;
+    public void CallEventPlayerSpaceshipDied()
     {
-        EventPlayerDied.Invoke();
+        EventPlayerSpaceshipDied.Invoke();
     }
 }

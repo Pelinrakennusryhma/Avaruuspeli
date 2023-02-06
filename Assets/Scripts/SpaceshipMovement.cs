@@ -65,6 +65,12 @@ public class SpaceshipMovement : MonoBehaviour
         {
             float currentThrust = thrust * boostMultiplier;
 
+            // disable boost when going backwards
+            if (thrust1D < -0.1f)
+            {
+                currentThrust = thrust;
+            }
+
             rb.AddRelativeForce(mass * Vector3.forward * thrust1D * currentThrust * Time.fixedDeltaTime);
             glide = thrust;
         } else

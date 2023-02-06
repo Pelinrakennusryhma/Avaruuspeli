@@ -3,24 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerControls : ActorSpaceship
 {
-    public SpaceshipMovement spaceshipMovement;
-    public SpaceshipBoost spaceshipBoost;
-    public SpaceshipShoot spaceshipShoot;
-
-    void Start()
+    protected override void OnDeath()
     {
-        spaceshipMovement = GetComponentInChildren<SpaceshipMovement>();
-        spaceshipBoost = GetComponentInChildren<SpaceshipBoost>();
-        spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
-
-        GameEvents.instance.EventPlayerDied.AddListener(DisableControls);
-    }
-
-    void DisableControls()
-    {
-        enabled = false;
+        gameObject.SetActive(false);
+        GameEvents.instance.CallEventPlayerSpaceshipDied();
     }
 
     public void OnThrust(InputAction.CallbackContext context)

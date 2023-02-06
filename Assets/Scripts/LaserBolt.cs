@@ -4,38 +4,57 @@ using UnityEngine;
 
 public class LaserBolt : MonoBehaviour
 {
-    GameObject shooterShip;
-    float force = 0f;
+    GameObject _shooterShip;
+    float _damage = 0f;
+    float _speed = 0f;
     ParticleSystem explosionEffect;
+    bool hasHit = false;
 
-    public void Init(float shootForce, float lifetime, GameObject _shooterShip, Vector3 shooterVelocity)
+    public void Init(float speed, Material material, float damage, float lifetime, GameObject shooterShip)
     {
-        force = shootForce;
-        shooterShip = _shooterShip;
+        _damage = damage;
+        _speed = speed;
+        _shooterShip = shooterShip;
         explosionEffect = GetComponentInChildren<ParticleSystem>();
+        SetMaterial(material);
         StartCoroutine(DestroySelf(lifetime));
-
     }
 
     IEnumerator DestroySelf(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     private void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * force;
+        if (!hasHit)
+        {
+            transform.position += transform.forward * Time.deltaTime * _speed;
+        }
+
+    }
+
+    void SetMaterial(Material material)
+    {
+        GetComponentInChildren<MeshRenderer>().material = material;
+        explosionEffect.GetComponent<ParticleSystemRenderer>().material = material;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject != shooterShip)
+        if(other.gameObject != _shooterShip)
         {
-            Debug.Log("Laser hit: " + other.gameObject.name);
+            hasHit = true;
             explosionEffect.Play();
             float destroyDelay = explosionEffect.main.duration + 0.1f;
             StartCoroutine(DestroySelf(destroyDelay));
+
+            if(other.gameObject.layer == LayerMask.NameToLayer("Damageable"))
+            {
+                IDamageable damageable = other.GetComponent<IDamageable>();
+                damageable.Damage(_damage);
+            }
         }
     }
 }

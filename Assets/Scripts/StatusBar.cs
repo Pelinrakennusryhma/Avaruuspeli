@@ -16,6 +16,8 @@ public class StatusBar : MonoBehaviour
     Color fullColor;
     [SerializeField]
     Color emptyColor;
+    [SerializeField]
+    float lerpSpeed = 10f;
 
 
     void Update()
@@ -32,7 +34,8 @@ public class StatusBar : MonoBehaviour
     void UpdateBar()
     {
         float ratio = (float)trackedScript.CurrentValue / (float)trackedScript.MaxValue;
-        bar.fillAmount = ratio;
+        float lerpedAmount = Mathf.Lerp(bar.fillAmount, ratio, Time.deltaTime * lerpSpeed);
+        bar.fillAmount = lerpedAmount;
         bar.color = Color.Lerp(emptyColor, fullColor, ratio);
     }
 }
