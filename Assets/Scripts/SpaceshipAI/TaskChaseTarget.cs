@@ -5,11 +5,12 @@ using UnityEngine;
 using BehaviorTree;
 public class TaskChaseTarget : Node
 {
-    private Transform _transform;
+    //private Transform _transform;
+    EnemyControls _enemyControls;
 
-    public TaskChaseTarget(Transform transform)
+    public TaskChaseTarget(EnemyControls enemyControls)
     {
-        _transform = transform;
+        _enemyControls = enemyControls;
     }
 
     public override NodeState Evaluate()
@@ -17,7 +18,10 @@ public class TaskChaseTarget : Node
         GameObject target = (GameObject)GetData("target");
         if(target != null)
         {
-            Debug.Log("Chasing");
+            _enemyControls.MoveTowards(target.transform.position, 40f);
+        } else
+        {
+            _enemyControls.Stop();
         }
 
 

@@ -6,21 +6,17 @@ using BehaviorTree;
 
 public class TaskPatrol : Node
 {
-    private float _waitTime = 5f;
+    private float _waitTime = 0.1f;
     private float _waitCounter = 0f;
     private bool _waiting = true;
 
-    Transform shipTransform;
+    Transform _targetTransform;
     EnemyControls _enemyControls;
 
-    Vector3 destination;
-
-    public TaskPatrol(EnemyControls enemyControls) 
+    public TaskPatrol(EnemyControls enemyControls, Transform targetTransform) 
     {
+        _targetTransform = targetTransform;
         _enemyControls = enemyControls;
-        shipTransform = enemyControls.transform.GetChild(0);
-        destination = shipTransform.position + shipTransform.forward * 50f;
-        Debug.DrawLine(shipTransform.position, destination, Color.blue, 10f);
     }
 
     public override NodeState Evaluate()
@@ -34,13 +30,14 @@ public class TaskPatrol : Node
             }
         } else
         {
+            Debug.Log("idling");
             // movement logic
-            if (_enemyControls.MoveTowards(destination))
-            {
-                Debug.Log("destination reached");
-                _waitCounter = 0f;
-                _waiting = true;
-            }
+            //if (_enemyControls.MoveTowards(_targetTransform.position))
+            //{
+            //    Debug.Log("destination reached");
+            //    _waitCounter = 0f;
+            //    _waiting = true;
+            //}
 
         }
 
