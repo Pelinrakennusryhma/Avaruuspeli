@@ -29,9 +29,6 @@ public class CheckForTarget : Node
         // no target, try to find a new one
         if (t == null) 
         {
-            
-            Debug.Log("count: " + activeTargets.Count);
-
             foreach (GameObject possibleTarget in activeTargets)
             {
                 if(Vector3.Distance(_transform.position, possibleTarget.transform.position) < SpaceshipBT.detectTargetRange)

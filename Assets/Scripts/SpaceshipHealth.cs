@@ -62,26 +62,26 @@ public class SpaceshipHealth : UITrackable
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Alpha0))
-        {
-            IncreaseHealth(5);
-        }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Alpha0))
+    //    {
+    //        IncreaseHealth(5);
+    //    }
 
-        if (Input.GetKeyUp(KeyCode.Alpha9))
-        {
-            DecreaseHealth(5);
-        }
+    //    if (Input.GetKeyUp(KeyCode.Alpha9))
+    //    {
+    //        DecreaseHealth(5);
+    //    }
 
-        if (Input.GetKeyUp(KeyCode.Alpha7))
-        {
-            IncreaseHealth(100);
-        }
+    //    if (Input.GetKeyUp(KeyCode.Alpha7))
+    //    {
+    //        IncreaseHealth(100);
+    //    }
 
-        if (Input.GetKeyUp(KeyCode.Alpha8))
-        {
-            DecreaseHealth(100);
-        }
-    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha8))
+    //    {
+    //        DecreaseHealth(100);
+    //    }
+    //}
 }

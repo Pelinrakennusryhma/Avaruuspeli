@@ -10,13 +10,14 @@ public class SpaceshipBT : BTree
     [SerializeField]
     List<GameObject> targets;
 
-    SpaceshipShoot spaceshipShoot;
+    EnemyControls enemyControls;
     Transform shipTransform;
 
     private void Awake()
     {
-        spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
-        shipTransform = spaceshipShoot.transform;
+        enemyControls = GetComponent<EnemyControls>();
+        shipTransform = transform.GetChild(0);
+
     }
     protected override Node SetupTree()
     {
@@ -27,9 +28,9 @@ public class SpaceshipBT : BTree
                 new CheckForTarget(shipTransform, targets),
                 new TaskChaseTarget(shipTransform),
                 new CheckTargetInShootingRange(shipTransform),
-                new TaskShoot(spaceshipShoot),
+                new TaskShoot(enemyControls),
             }),
-            new TaskPatrol()
+            new TaskPatrol(enemyControls)
         });
 
         return root;
