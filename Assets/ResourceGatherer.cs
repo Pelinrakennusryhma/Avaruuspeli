@@ -34,7 +34,7 @@ public class ResourceGatherer : MonoBehaviour
     {
         if (other.gameObject.layer == 6) 
         {
-            Debug.Log("Collect " + Time.time);
+            //Debug.Log("Collect " + Time.time);
             GatherableObject gatherable = other.GetComponent<GatherableObject>();
 
             if (gatherable != null)
@@ -44,7 +44,7 @@ public class ResourceGatherer : MonoBehaviour
 
             else
             {
-                Debug.Log("Null gatherable " + Time.time);
+                //Debug.Log("Null gatherable " + Time.time);
             }
 
             DestroyableRock rock = other.GetComponent<DestroyableRock>();
@@ -53,7 +53,7 @@ public class ResourceGatherer : MonoBehaviour
             {
                 Rock = rock;
                 RockCollider = other;
-                Debug.Log("DEstroyable rock set");
+                //Debug.Log("DEstroyable rock set");
             }
             //gameObject.SetActive(false);
         }
@@ -65,7 +65,7 @@ public class ResourceGatherer : MonoBehaviour
         {
             Rock = null;
             RockCollider = null;
-            Debug.Log("DestroyableRock cleared");
+            //Debug.Log("DestroyableRock cleared");
         }
     }
 
@@ -83,7 +83,7 @@ public class ResourceGatherer : MonoBehaviour
             Hands.SetTool(Tool);
         }
 
-        Debug.Log("Tool is " + Tool.ToString());
+        //Debug.Log("Tool is " + Tool.ToString());
 
         if (Rock != null)
         {
@@ -92,7 +92,7 @@ public class ResourceGatherer : MonoBehaviour
             bool hittingRock = Physics.Raycast(Camera.transform.position, 
                                                Camera.transform.forward,
                                                out hitInfo,
-                                               2.0f,
+                                               4.0f,
                                                PickUppableLayerMask);
 
             //Debug.Log("hitinfo " + hitInfo.collider);
@@ -115,12 +115,12 @@ public class ResourceGatherer : MonoBehaviour
             {
                 if (Tool == ToolType.Blowtorch)
                 {
-                    Rock.ReduceHealth(0.3f * Time.deltaTime);
+                    Rock.ReduceHealth(0.3f * Time.deltaTime, Tool);
                 }
 
                 else if (Tool == ToolType.Drill)
                 {
-                    Rock.ReduceHealth(Time.deltaTime);
+                    Rock.ReduceHealth(Time.deltaTime, Tool);
                 } 
             }
         }
