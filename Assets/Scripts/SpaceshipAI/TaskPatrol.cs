@@ -6,23 +6,28 @@ using BehaviorTree;
 
 public class TaskPatrol : Node
 {
-    private float _waitTime = 0.1f;
+    private float _waitTime = 3f;
     private float _waitCounter = 0f;
     private bool _waiting = true;
+    private float _patrolArea = 0f;
 
-    Transform _targetTransform;
     EnemyControls _enemyControls;
+    Vector3 startPos;
+    Vector3 destination = Vector3.zero;
+    bool needsNewDestination = true;
 
-    public TaskPatrol(EnemyControls enemyControls, Transform targetTransform) 
+    public TaskPatrol(EnemyControls enemyControls, float patrolArea) 
     {
-        _targetTransform = targetTransform;
         _enemyControls = enemyControls;
+        startPos = enemyControls.transform.position;
+        _patrolArea = patrolArea;
     }
 
     public override NodeState Evaluate()
     {
         if (_waiting)
         {
+            Debug.Log("waiting");
             _waitCounter += Time.deltaTime;
             if(_waitCounter >= _waitTime)
             {
@@ -30,39 +35,28 @@ public class TaskPatrol : Node
             }
         } else
         {
-            Debug.Log("idling");
-            // movement logic
-            //if (_enemyControls.MoveTowards(_targetTransform.position))
-            //{
-            //    Debug.Log("destination reached");
-            //    _waitCounter = 0f;
-            //    _waiting = true;
-            //}
+            if(needsNewDestination)
+            {
+                Debug.Log("new destination");
+                destination = GetNewPatrolPosition();
+                needsNewDestination = false;
+            }
 
+            if (_enemyControls.MoveTowards(destination, 50f, false))
+            {
+                Debug.Log("reached destination");
+                needsNewDestination = true;
+                _waitCounter = 0f;
+                _waiting = true;
+            }
         }
 
-        state = NodeState.RUNNING;
+        state = NodeState.SUCCESS;
         return state;
     }
 
-    //void MoveTowards(Vector3 position)
-    //{
-    //    _enemyControls.OnThrust(1f);
-    //}
-
-    //void Stop()
-    //{
-    //    //Debug.Log("stop");
-    //    _enemyControls.OnThrust(0f);
-    //}
-
-    //bool ReachedDestination()
-    //{
-    //    if(Vector3.Distance(shipTransform.position, destination) < 0.1f)
-    //    {
-    //        //Debug.Log("reached destination" + Vector3.Distance(shipTransform.position, destination));
-    //        return true;
-    //    }
-    //    return false;
-    //}
+    Vector3 GetNewPatrolPosition()
+    {
+        return startPos + Random.insideUnitSphere * _patrolArea;
+    }
 }

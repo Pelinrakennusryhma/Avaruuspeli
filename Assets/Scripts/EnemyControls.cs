@@ -25,7 +25,7 @@ public class EnemyControls : ActorSpaceship
     }
 
     // returns true when destination is reached
-    public bool MoveTowards(Vector3 destination, float minDistance)
+    public bool MoveTowards(Vector3 destination, float minDistance, bool useBoost = true)
     {
 
         Vector3 destinationRelative = shipTransform.InverseTransformPoint(destination);
@@ -33,7 +33,6 @@ public class EnemyControls : ActorSpaceship
         Vector2 rotationNormal = (Vector2)destinationRelative.normalized;
         float dotProduct = Vector3.Dot(shipTransform.forward, (destination - shipTransform.position).normalized);
         Vector3 targetDir = destination - shipTransform.position;
-        float angle = Vector3.Angle(targetDir, shipTransform.forward);
 
         // rolling
         if(destinationNormal.x > rollThreshold)
@@ -79,17 +78,27 @@ public class EnemyControls : ActorSpaceship
         }
 
         //boost
-        float boostThreshold = minDistance * 2;
-        if(destinationRelative.z > boostThreshold)
+        if (useBoost)
         {
-            OnBoost(true);
-        } else
-        {
-            OnBoost(false);
+            float boostThreshold = minDistance * 2;
+            if (destinationRelative.z > boostThreshold)
+            {
+                OnBoost(true);
+            }
+            else
+            {
+                OnBoost(false);
+            }
         }
 
-        return false;
-
+        // destination reached
+        if (Vector3.Distance(shipTransform.position, destination) < minDistance)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     public void Stop()

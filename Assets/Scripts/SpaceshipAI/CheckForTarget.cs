@@ -19,11 +19,6 @@ public class CheckForTarget : Node
         object t = GetData("target");
         GameObject tGO = (GameObject)t;
 
-        if(tGO != null)
-        {
-            Debug.Log("tGOparent: " + tGO.transform.parent.gameObject.activeSelf);
-        }
-
         List<GameObject> activeTargets = _possibleTargets.FindAll(t => t.transform.parent.gameObject.activeSelf == true);
 
         // no target, try to find a new one

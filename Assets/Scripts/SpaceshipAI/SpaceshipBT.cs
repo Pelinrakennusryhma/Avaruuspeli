@@ -18,7 +18,7 @@ public class SpaceshipBT : BTree
     [SerializeField]
     List<GameObject> targets;
     [SerializeField]
-    Transform devTargetTransform;
+    float patrolArea = 1000f;
 
     EnemyControls enemyControls;
     Transform shipTransform;
@@ -44,7 +44,7 @@ public class SpaceshipBT : BTree
                         new CheckTargetInShootingRange(shipTransform),
                         new TaskShoot(enemyControls),
                     }),
-                    new TaskPatrol(enemyControls, devTargetTransform)
+                    new TaskPatrol(enemyControls, patrolArea)
                 });
                 break;
             case Stance.Passive:
@@ -55,7 +55,7 @@ public class SpaceshipBT : BTree
                         // add passive logic
                         new CheckForTarget(shipTransform, targets),
                     }),
-                    new TaskPatrol(enemyControls, devTargetTransform)
+                    new TaskPatrol(enemyControls, patrolArea)
                 });
                 break;
             default:

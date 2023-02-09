@@ -23,8 +23,11 @@ namespace DevTools
 
         void RotateWithObject()
         {
-            Vector3 newRotation = new Vector3(shipTransform.eulerAngles.x, shipTransform.eulerAngles.y, shipTransform.eulerAngles.z);
-            transform.eulerAngles = newRotation;
+            if(shipTransform != null)
+            {
+                Vector3 newRotation = new Vector3(shipTransform.eulerAngles.x, shipTransform.eulerAngles.y, shipTransform.eulerAngles.z);
+                transform.eulerAngles = newRotation;
+            }
         }
 
         void CheckInput()

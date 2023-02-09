@@ -338,10 +338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stance: 0
+  stance: 1
   targets:
   - {fileID: 2083572697}
-  devTargetTransform: {fileID: 1229879335}
+  patrolArea: 1000
 --- !u!1 &362396634
 GameObject:
   m_ObjectHideFlags: 0
