@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stance: 0
   targets:
   - {fileID: 2083572697}
   devTargetTransform: {fileID: 1229879335}
@@ -2026,8 +2027,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCams:
-  - {fileID: 517175594}
   - {fileID: 1078490510}
+  - {fileID: 517175594}
   currentCameraID: 0
 --- !u!1 &2024424596
 GameObject:

@@ -4,8 +4,16 @@ using UnityEngine;
 
 using BehaviorTree;
 
+public enum Stance
+{
+    Aggressive,
+    Passive
+}
+
 public class SpaceshipBT : BTree
 {
+    [SerializeField]
+    Stance stance;
     public static float detectTargetRange = 120f;
     [SerializeField]
     List<GameObject> targets;
@@ -23,17 +31,36 @@ public class SpaceshipBT : BTree
     }
     protected override Node SetupTree()
     {
-        Node root = new Selector(new List<Node>
+        Node root = null;
+        switch (stance)
         {
-            new Sequence(new List<Node>
-            {               
-                new CheckForTarget(shipTransform, targets),
-                new TaskChaseTarget(enemyControls),
-                new CheckTargetInShootingRange(shipTransform),
-                new TaskShoot(enemyControls),
-            }),
-            new TaskPatrol(enemyControls, devTargetTransform)
-        });
+            case Stance.Aggressive:
+                root = new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForTarget(shipTransform, targets),
+                        new TaskChaseTarget(enemyControls),
+                        new CheckTargetInShootingRange(shipTransform),
+                        new TaskShoot(enemyControls),
+                    }),
+                    new TaskPatrol(enemyControls, devTargetTransform)
+                });
+                break;
+            case Stance.Passive:
+                root = new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        // add passive logic
+                        new CheckForTarget(shipTransform, targets),
+                    }),
+                    new TaskPatrol(enemyControls, devTargetTransform)
+                });
+                break;
+            default:
+                break;
+        }
 
         return root;
     }

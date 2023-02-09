@@ -7,8 +7,8 @@ public class EnemyControls : ActorSpaceship
     Transform shipTransform;
     float breakThreshold = 8f;
     float rotationDotThreshold = 0.999f;
-    float angleThreshold = 3f;
     float rollThreshold = 0.1f;
+
     void Start()
     {
         shipTransform = transform.GetChild(0).GetComponent<Transform>();
@@ -76,6 +76,16 @@ public class EnemyControls : ActorSpaceship
         } else
         {
             OnThrust(0f);
+        }
+
+        //boost
+        float boostThreshold = minDistance * 2;
+        if(destinationRelative.z > boostThreshold)
+        {
+            OnBoost(true);
+        } else
+        {
+            OnBoost(false);
         }
 
         return false;
