@@ -8,6 +8,7 @@ public class EnemyControls : ActorSpaceship
     float breakThreshold = 8f;
     float rotationDotThreshold = 0.999f;
     float angleThreshold = 3f;
+    float rollThreshold = 0.1f;
     void Start()
     {
         shipTransform = transform.GetChild(0).GetComponent<Transform>();
@@ -35,8 +36,16 @@ public class EnemyControls : ActorSpaceship
         float angle = Vector3.Angle(targetDir, shipTransform.forward);
 
         // rolling
-
-        Debug.Log(destinationNormal);
+        if(destinationNormal.x > rollThreshold)
+        {
+            OnRoll(1f);
+        } else if (destinationNormal.x < -rollThreshold)
+        {
+            OnRoll(-1f);
+        } else
+        {
+            OnRoll(0f);
+        }
 
         // rotation
         float turnSpeedFactor = 1f;
