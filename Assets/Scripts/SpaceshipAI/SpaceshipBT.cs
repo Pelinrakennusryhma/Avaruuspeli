@@ -7,7 +7,8 @@ using BehaviorTree;
 public enum Stance
 {
     Aggressive,
-    Passive
+    Passive,
+    Travel
 }
 
 public class SpaceshipBT : BTree
@@ -56,6 +57,22 @@ public class SpaceshipBT : BTree
                         new CheckForTarget(shipTransform, targets),
                     }),
                     new TaskPatrol(enemyControls, patrolArea)
+                });
+                break;
+            case Stance.Travel:
+                root = new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        // defend self or something?
+                        new CheckForTarget(shipTransform, targets),
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForObstacle(shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
+                    new TaskMoveToPosition(enemyControls, shipTransform)
                 });
                 break;
             default:
