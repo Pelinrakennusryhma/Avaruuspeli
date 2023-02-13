@@ -18,7 +18,7 @@ public class TaskChaseTarget : Node
         GameObject target = (GameObject)GetData("target");
         if(target != null)
         {
-            _enemyControls.MoveTowards(target.transform.position, 50f);
+            _enemyControls.MoveToPosition(target.transform.position, 50f);
         } else
         {
             _enemyControls.Stop();

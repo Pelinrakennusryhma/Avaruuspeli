@@ -23,7 +23,8 @@ public class TaskMoveToPosition : Node
         }
         else
         {
-            if (_enemyControls.MoveTowards(_destination, 50f, false))
+            Debug.Log("moving");
+            if (_enemyControls.MoveToPosition(_destination, 50f, false))
             {
                 Debug.Log("reached destination");
                 _waiting = true;

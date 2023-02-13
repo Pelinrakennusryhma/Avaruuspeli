@@ -42,7 +42,7 @@ public class TaskPatrol : Node
                 needsNewDestination = false;
             }
 
-            if (_enemyControls.MoveTowards(destination, 50f, false))
+            if (_enemyControls.MoveToPosition(destination, 50f, true))
             {
                 Debug.Log("reached destination");
                 needsNewDestination = true;

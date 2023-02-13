@@ -22,27 +22,42 @@ public class TaskAvoidObstacle : Node
 
     public override NodeState Evaluate()
     {
-        object data = GetData("avoidPosition");
-        Vector3 avoidPosition = (Vector3)data;
-        Vector3 hitRelative = _shipTransform.InverseTransformPoint(avoidPosition);
-        Vector3 moveTo = new Vector3(
-            avoidPosition.x + hitRelative.x,
-            avoidPosition.y + hitRelative.y,
-            avoidPosition.z);
-        //Debug.Log(avoidPosition);
+        object data = GetData("obstacle");
+        RaycastHit hitData = (RaycastHit)data;
+        _enemyControls.Avoid(hitData.collider);
 
-        _avoidCounter += Time.deltaTime;
-        if (_avoidCounter >= _avoidTime)
-        {
-            Debug.Log("no longer avoiding");
-            _avoiding = false;
-            state = NodeState.FAILURE;
-        } else
-        {
-            _enemyControls.MoveTowards(moveTo, 5f, false);
-            Debug.Log("avoiding");
-            state = NodeState.SUCCESS;
-        }
+        state = NodeState.RUNNING;
+        return state;
+        //object data = GetData("avoidHit");
+        //RaycastHit avoidPosition = (RaycastHit)data;
+        //Vector3 hitRelative = _shipTransform.InverseTransformPoint(avoidPosition.point);
+
+        //Vector3 moveTowards = new Vector3(-hitRelative.x * 2f, -hitRelative.y * 2f, hitRelative.z);
+
+        //_enemyControls.MoveTowards(moveTowards);
+
+
+
+
+        //Debug.Log(avoidPosition);
+        //Debug.Log(hitRelative);
+        //Debug.Log(moveTowards);
+
+
+
+        //_avoidCounter += Time.deltaTime;
+        //if (_avoidCounter >= _avoidTime)
+        //{
+        //    Debug.Log("no longer avoiding");
+        //    _avoiding = false;
+        //}
+        //else
+        //{
+        //    //Debug.DrawRay(_shipTransform.position, avoidPosition, Color.magenta);
+        //    //Debug.DrawRay(_shipTransform.position, moveTowards, Color.cyan);
+        //    _enemyControls.MoveTowards(moveTowards, false);
+        //    Debug.Log("avoiding");
+        //}
 
 
 
@@ -63,7 +78,5 @@ public class TaskAvoidObstacle : Node
         //    state = NodeState.FAILURE;
 
         //}
-
-        return state;
     }
 }

@@ -54,7 +54,7 @@ public class SpaceshipMovement : MonoBehaviour
     void HandleMovement()
     {
         // Roll
-        rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque * Time.deltaTime);
+        rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque * Time.fixedDeltaTime);
         // Pitch
         rb.AddRelativeTorque(mass * Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.fixedDeltaTime);
         // Yaw

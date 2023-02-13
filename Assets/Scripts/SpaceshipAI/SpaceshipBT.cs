@@ -69,7 +69,7 @@ public class SpaceshipBT : BTree
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckForObstacle(shipTransform),
+                        new CheckForObstacle(enemyControls, shipTransform),
                         new TaskAvoidObstacle(enemyControls, shipTransform)
                     }),
                     new TaskMoveToPosition(enemyControls, shipTransform)
