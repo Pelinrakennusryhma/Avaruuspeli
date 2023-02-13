@@ -24,7 +24,7 @@ public class SpawnablePickups : MonoBehaviour
         SilverParent.SetActive(false);
         CopperParent.SetActive(false);
 
-        int spawn = Random.Range(0,5);
+        int spawn = Random.Range(1,5);
 
         //SpawnDices();
 

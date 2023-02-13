@@ -8,12 +8,12 @@ public class GatherableObject : MonoBehaviour
 
     public float OffsetFromGround = 0.2f;
 
-    private float LerpTime;
-    private float PickupTime;
-    private bool HasBeenPickedUp = false;
-    private Vector3 PickUpStartPos;
-    private Rigidbody Rigidbody;
-    private Collider MainCollider;
+    protected float LerpTime;
+    protected float PickupTime;
+    protected bool HasBeenPickedUp = false;
+    protected Vector3 PickUpStartPos;
+    protected Rigidbody Rigidbody;
+    protected Collider MainCollider;
 
     private void Awake()
     {

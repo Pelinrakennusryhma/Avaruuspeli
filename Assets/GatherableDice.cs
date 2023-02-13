@@ -5,7 +5,6 @@ using UnityEngine;
 public class GatherableDice : GatherableObject
 {
     public BoxCollider BoxCollider;
-    public Rigidbody Rigidbody;
 
     private Vector3 RandomRot;
 

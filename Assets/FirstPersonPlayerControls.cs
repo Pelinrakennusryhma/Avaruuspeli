@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonPlayerControls : MonoBehaviour
 {
+    public Canvas UICanvas;
+
     public FirstPersonPlayerControllerWithCentreOfGravity PlayerController;
 
     public float Horizontal;
@@ -36,6 +38,8 @@ public class FirstPersonPlayerControls : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         //playerInput.SwitchCurrentActionMap("FirstPersonControls");
         //Debug.Log("Current action map is " + playerInput.currentActionMap.ToString());
+        UICanvas.gameObject.SetActive(true);
+        
     }
 
     public void OnHorizontal(InputAction.CallbackContext value)

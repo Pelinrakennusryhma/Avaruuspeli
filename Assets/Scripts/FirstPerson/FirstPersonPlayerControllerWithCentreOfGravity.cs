@@ -60,6 +60,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
     private FirstPersonPlayerControls Controls;
     void Awake()
     {
+
         Controls = GetComponent<FirstPersonPlayerControls>();
         originalTimeStep = Time.fixedDeltaTime;
         Time.fixedDeltaTime = 0.00833333f;
@@ -78,7 +79,8 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         }
 
         cameraOriginalLocalPosition = Camera.transform.localPosition;
-
+        yRot = 35.0f;
+        Camera.transform.localRotation = Quaternion.Euler(yRot, 0, 0);
     }
 
     private void OnDestroy()
