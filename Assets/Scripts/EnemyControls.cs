@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyControls : ActorSpaceship
 {
     Transform shipTransform;
+    Rigidbody rb;
     float breakThreshold = 8f;
     float rotationDotThreshold = 0.999f;
     float minRollThreshold = 0.05f;
@@ -13,6 +14,7 @@ public class EnemyControls : ActorSpaceship
     void Start()
     {
         shipTransform = transform.GetChild(0).GetComponent<Transform>();
+        rb = shipTransform.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -33,7 +35,6 @@ public class EnemyControls : ActorSpaceship
         Vector3 destinationNormal = destinationRelative.normalized;
         Vector2 rotationNormal = (Vector2)destinationRelative.normalized;
         float dotProduct = Vector3.Dot(shipTransform.forward, (destination - shipTransform.position).normalized);
-        Vector3 targetDir = destination - shipTransform.position;
 
         // rolling
 
@@ -110,20 +111,35 @@ public class EnemyControls : ActorSpaceship
         }
     }
 
-    public void Avoid(Collider obstacle)
+    public void Avoid(Collider obstacle, float brakeDistanceSpeedThreshold = 0.8f)
     {
-        Vector3 relativeNormal = shipTransform.InverseTransformPoint(obstacle.transform.position).normalized;
+
+        Vector3 closestHit = obstacle.ClosestPoint(shipTransform.position);
+
+        float distance = Vector3.Distance(shipTransform.position, closestHit);
+        float speed = rb.velocity.magnitude;
+        float ratio = distance / speed;
+
+        if(ratio < brakeDistanceSpeedThreshold)
+        {
+            OnThrust(-1f);
+            OnBoost(false);
+            Debug.Log("braking: " + ratio);
+        } else
+        {
+            OnThrust(1f);
+        }
+
+        Vector3 relativeNormal = shipTransform.InverseTransformPoint(closestHit).normalized;
         
-        //Debug.Log(relativeNormal);
         float moveX = -relativeNormal.x;
         float moveY = -relativeNormal.y;
+
         OnPitchYaw(new Vector2(moveX, moveY));
 
-        //Vector3 closestHit = obstacle.ClosestPoint(shipTransform.position);
-        //float distance = Vector3.Distance(closestHit, shipTransform.position);
-        //Debug.Log("distance: " + distance);
-
-        float rollThreshold = (minRollThreshold + maxRollThreshold) / 2;
+        // multiply the movement so it actually has an effect
+        OnStrafe(Mathf.Clamp(moveX * 1000, -1f, 1f));
+        OnUpDown(Mathf.Clamp(moveY * 1000, -1f, 1f));
 
         if (relativeNormal.y < -minRollThreshold)
         {
@@ -133,96 +149,6 @@ public class EnemyControls : ActorSpaceship
             OnRoll(-moveX);
         }
 
-    }
-
-    public void MoveSmoothly(Vector3 destination)
-    {
-
-        float smoothAmount = 0.01f;
-        //float thrust1DSmoothed = Mathf.Lerp(destination.x, spaceshipMovement.thrust1D, smoothAmount);
-        //float upDown1DSmoothed = Mathf.Lerp(destination.x, spaceshipMovement.thrust1D, smoothAmount);
-        //float strafe1DSmoothed;
-        //float roll1DSmoothed = Mathf.Lerp(destination.x, spaceshipMovement.thrust1D, smoothAmount);
-
-        Vector2 pitchYawSmoothed = Vector2.Lerp(destination, spaceshipMovement.pitchYaw, smoothAmount);
-
-        float rollDirection = 0f;
-        if (destination.x < minRollThreshold)
-        {
-            rollDirection = 0.1f;
-        }
-        else if (destination.x > -minRollThreshold)
-        {
-            rollDirection = -0.1f;
-        }
-
-        float rollSmoothed = Mathf.Lerp(rollDirection, spaceshipMovement.roll1D, smoothAmount);
-
-        //OnRoll(rollSmoothed);
-        OnPitchYaw(pitchYawSmoothed);
-
-    }
-
-    public void MoveTowards(Vector3 delta, bool stopBoost = true)
-    {
-        OnBoost(!stopBoost);
-
-        // rolling
-        float rollTarget = 0f;
-        if (delta.x < maxRollThreshold)
-        {
-            //rollTarget = Mathf.Lerp(spaceshipMovement.roll1D, 1f, 0.1f);
-            rollTarget = 0.1f;
-        }
-        else if (delta.x > -maxRollThreshold)
-        {
-            //rollTarget = Mathf.Lerp(spaceshipMovement.roll1D, -1f, 0.1f);
-            rollTarget = -0.1f;
-        } else
-        {
-            rollTarget = 0f;
-        }
-
-        //if(delta.y < 0)
-        //{
-        //    rollTarget = -rollTarget;
-        //}
-        
-        //OnRoll(rollTarget);
-
-        // rotation
-        OnPitchYaw(delta);
-
-
-        //float distance = Vector3.Distance
-
-        // movement
-        //if (destination.z > breakThreshold * 2)
-        //{
-        //    OnThrust(1f);
-        //}
-        //else if (destination.z < breakThreshold)
-        //{
-        //    OnThrust(-1f);
-        //}
-        //else
-        //{
-        //    OnThrust(0f);
-        //}
-
-        ////boost
-        //if (useBoost)
-        //{
-        //    float boostThreshold = minDistance * 2;
-        //    if (destinationRelative.z > boostThreshold)
-        //    {
-        //        OnBoost(true);
-        //    }
-        //    else
-        //    {
-        //        OnBoost(false);
-        //    }
-        //}
     }
 
     public void Stop()

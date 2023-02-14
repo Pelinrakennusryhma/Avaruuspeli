@@ -56,6 +56,11 @@ public class SpaceshipBT : BTree
                         // add passive logic
                         new CheckForTarget(shipTransform, targets),
                     }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
                     new TaskPatrol(enemyControls, patrolArea)
                 });
                 break;
