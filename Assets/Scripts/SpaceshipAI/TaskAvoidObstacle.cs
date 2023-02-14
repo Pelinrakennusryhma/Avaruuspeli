@@ -5,20 +5,12 @@ using UnityEngine;
 using BehaviorTree;
 public class TaskAvoidObstacle : Node
 {
-
-    Transform _shipTransform;
     EnemyControls _enemyControls;
-    float _rayLength;
-    float _avoidTime = 5f;
-    float _avoidCounter = 0f;
-    bool _avoiding = true;
     float disableBoostDistance = 30f;
 
-    public TaskAvoidObstacle(EnemyControls enemyControls, Transform shipTransform, float rayLength = 50f)
+    public TaskAvoidObstacle(EnemyControls enemyControls, Transform shipTransform)
     {
         _enemyControls = enemyControls;
-        _shipTransform = shipTransform;
-        _rayLength = rayLength;
     }
 
     public override NodeState Evaluate()

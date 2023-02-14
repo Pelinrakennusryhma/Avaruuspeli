@@ -45,6 +45,11 @@ public class SpaceshipBT : BTree
                         new CheckTargetInShootingRange(shipTransform),
                         new TaskShoot(enemyControls),
                     }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
                     new TaskPatrol(enemyControls, patrolArea)
                 });
                 break;

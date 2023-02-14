@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stance: 1
+  stance: 0
   targets:
   - {fileID: 2083572697}
   patrolArea: 800
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   - {fileID: 2808967213598596065, guid: a8d68e8ee60033d42b497a37aec94b63, type: 3}
   - {fileID: 2808967213598596065, guid: 13af253007a815e4dbe5939bb6cde76f, type: 3}
   asteroidParent: {fileID: 1328904159}
-  amountOfAsteroids: 7500
+  amountOfAsteroids: 1000
   sizeCurve:
     serializedVersion: 2
     m_Curve:
@@ -1780,7 +1780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1229879335
 Transform:
   m_ObjectHideFlags: 0
@@ -2957,6 +2957,16 @@ PrefabInstance:
         type: 3}
       propertyPath: boostMultiplier
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186624082347931033, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186624082347931033, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae6be1c296fe214daef5e7a4f3ad938, type: 3}
