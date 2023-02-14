@@ -25,6 +25,8 @@ public class ResourcePickUpPrompt : MonoBehaviour
         textMeshPro.gameObject.SetActive(true);
 
 
+
+
         switch (resourceType)
         {
             case ResourceInventory.ResourceType.None:
@@ -49,9 +51,15 @@ public class ResourcePickUpPrompt : MonoBehaviour
                 textMeshPro.text = "Iron: " + amount.ToString();
                 break;
 
+            case ResourceInventory.ResourceType.Diamond:
+                textMeshPro.text = "Diamonds: " + amount.ToString();
+                break;
+
             default:
                 break;
-        }
+        }        
+        
+        //Debug.Log("resource type is " + resourceType.ToString());
     }
 
     public void Update()

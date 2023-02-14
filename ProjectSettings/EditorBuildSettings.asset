@@ -10,10 +10,10 @@ EditorBuildSettings:
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Asteroids/Asteroid1.unity
-    guid: 14e418bd1a2402645a017c4ad9566f92
+    guid: e3fbb521efafb304ab253364bfc0e3bb
   - enabled: 1
     path: Assets/Scenes/Asteroids/Asteroid2.unity
-    guid: e3fbb521efafb304ab253364bfc0e3bb
+    guid: 14e418bd1a2402645a017c4ad9566f92
   - enabled: 1
     path: Assets/Scenes/Asteroids/Asteroid3.unity
     guid: 5fddb44a3eff0f74b9d56aee3fb06224
@@ -29,4 +29,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Asteroids/Asteroid7.unity
     guid: 26da75a661f7fa141b9428b78ebcff2d
+  - enabled: 1
+    path: Assets/Scenes/Asteroids/Asteroid8.unity
+    guid: 07642df8125a6c24a8ff0006afd84245
+  - enabled: 1
+    path: Assets/Scenes/Asteroids/Asteroid9.unity
+    guid: d6f9d44e551599a4ca6a9982c0432e40
+  - enabled: 1
+    path: Assets/Scenes/Asteroids/Asteroid10.unity
+    guid: c1bd778e8517338448a7955fce01ed3b
+  - enabled: 1
+    path: Assets/Scenes/Asteroids/Asteroid11.unity
+    guid: 5cd329d86cde2774787205e89f9afad5
+  - enabled: 1
+    path: Assets/Scenes/Asteroids/Asteroid12.unity
+    guid: 9de11b6bd13c724459cbbf888912aacd
+  - enabled: 1
+    path: Assets/Scenes/Asteroids/AsteroidLauncher.unity
+    guid: 8fbdbc4789f59a947b5545af47b1005e
   m_configObjects: {}

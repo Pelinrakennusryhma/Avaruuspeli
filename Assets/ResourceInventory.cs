@@ -11,7 +11,8 @@ public class ResourceInventory : MonoBehaviour
         Gold = 2,
         Silver = 3,
         Copper = 4,
-        Iron = 5
+        Iron = 5,
+        Diamond = 6
     }
 
     public static ResourceInventory Instance;
@@ -21,6 +22,7 @@ public class ResourceInventory : MonoBehaviour
     public static int AmountOfSilver;
     public static int AmountOfCopper;
     public static int AmountOfIron;
+    public static int AmountOfDiamonds;
 
     // Start is called before the first frame update
     void Awake()
@@ -38,34 +40,41 @@ public class ResourceInventory : MonoBehaviour
         {
             AmountOfTestDice++;
             amount = AmountOfTestDice;
-            Debug.Log("Amount of test dice " + AmountOfTestDice);
+            //Debug.Log("Amount of test dice " + AmountOfTestDice);
         }
 
         else if (collectedResourceType == ResourceType.Gold)
         {
             AmountOfGold++;
             amount = AmountOfGold;
-            Debug.Log("Amount of gold " + AmountOfGold);
+            //Debug.Log("Amount of gold " + AmountOfGold);
         }
 
         else if(collectedResourceType == ResourceType.Silver)
         {
             AmountOfSilver++;
             amount = AmountOfSilver;
-            Debug.Log("Amount of silver " + AmountOfSilver);
+            //Debug.Log("Amount of silver " + AmountOfSilver);
         }
 
         else if (collectedResourceType == ResourceType.Copper)
         {
             AmountOfCopper++;
             amount = AmountOfCopper;
-            Debug.Log("Amount of copper " + AmountOfCopper);
+            //Debug.Log("Amount of copper " + AmountOfCopper);
         }
         else if (collectedResourceType == ResourceType.Iron)
         {
             AmountOfIron++;
             amount = AmountOfIron;
-            Debug.Log("Amount of iron " + AmountOfIron);
+            //Debug.Log("Amount of iron " + AmountOfIron);
+        }
+
+        else if (collectedResourceType == ResourceType.Diamond)
+        {
+            AmountOfDiamonds++;
+            amount = AmountOfDiamonds;
+            //Debug.Log("Amount of diamonds " + AmountOfDiamonds);
         }
 
         ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, amount);

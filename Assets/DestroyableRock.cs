@@ -60,7 +60,7 @@ public class DestroyableRock : MonoBehaviour
             DeathParticles.Play(true);
             Explosion.Play();
 
-            Pickups.Spawn();
+            Pickups.Spawn(AsteroidLauncher.ResourceType);
 
             for (int i = 0; i < RubblePieces.Length; i++)
             {

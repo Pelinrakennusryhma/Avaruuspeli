@@ -9,22 +9,69 @@ public class SpawnablePickups : MonoBehaviour
     public GatherableSilver[] SilverPieces;
     public GatherableCopper[] CopperPieces;
     public GatherableIron[] IronPieces;
+    public GatherbaleDiamond[] Diamonds;
 
     public GameObject DiceParent;
     public GameObject GoldParent;
     public GameObject IronParent;
     public GameObject SilverParent;
     public GameObject CopperParent;
+    public GameObject DiamondParent;
 
-    public void Spawn()
+    public void Spawn(ResourceInventory.ResourceType resourceType)
     {
         DiceParent.SetActive(false);
         GoldParent.SetActive(false);
         IronParent.SetActive(false);
         SilverParent.SetActive(false);
         CopperParent.SetActive(false);
+        DiamondParent.SetActive(false);
 
-        int spawn = Random.Range(1,5);
+
+        switch (resourceType)
+        {
+            case ResourceInventory.ResourceType.None:
+                break;
+
+            case ResourceInventory.ResourceType.TestDice:
+                SpawnDices();
+                break;
+
+            case ResourceInventory.ResourceType.Gold:
+                SpawnGold();
+                break;
+
+            case ResourceInventory.ResourceType.Silver:
+                SpawnSilver();
+                break;
+
+            case ResourceInventory.ResourceType.Copper:
+                SpawnCopper();
+                break;
+
+            case ResourceInventory.ResourceType.Iron:
+                SpawnIron();
+                break;
+
+            case ResourceInventory.ResourceType.Diamond:
+                SpawnDiamonds();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void SpawnRandom()
+    {
+        DiceParent.SetActive(false);
+        GoldParent.SetActive(false);
+        IronParent.SetActive(false);
+        SilverParent.SetActive(false);
+        CopperParent.SetActive(false);
+        DiamondParent.SetActive(false);
+
+        int spawn = Random.Range(1,6);
 
         //SpawnDices();
 
@@ -52,6 +99,81 @@ public class SpawnablePickups : MonoBehaviour
         {
             SpawnSilver();
         }
+
+        else if (spawn == 5)
+        {
+            SpawnDiamonds();
+        }
+    }
+
+    private void SpawnDiamonds()
+    {
+        DiamondParent.SetActive(true);
+        
+        for (int i = 0; i < Diamonds.Length; i++)
+        {
+            Diamonds[i].gameObject.SetActive(false);
+        }
+
+        int amount = 0;
+
+        amount = DecideAmount(amount);
+
+        int spawned = 0;
+
+        while (true)
+        {
+
+            for (int i = 0; i < Diamonds.Length; i++)
+            {
+                int rand = Random.Range(0, Diamonds.Length);
+
+                if (rand == 0
+                    && spawned < amount
+                    && !Diamonds[i].gameObject.activeSelf)
+                {
+                    Diamonds[i].gameObject.SetActive(true);
+                    Diamonds[i].OnSpawn();
+                    spawned++;
+                }
+            }
+
+            if (spawned >= amount)
+            {
+                break;
+            }
+
+        }
+
+        //for (int i = 0; i < Diamonds.Length; i++)
+        //{
+        //    Diamonds[i].OnSpawn();
+        //}
+    }
+
+    private static int DecideAmount(int amount)
+    {
+        if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Scarce)
+        {
+            amount = 2;
+        }
+
+        else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Medium)
+        {
+            amount = 4;
+        }
+
+        else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.High)
+        {
+            amount = 6;
+        }
+
+        else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Highest)
+        {
+            amount = 7;
+        }
+
+        return amount;
     }
 
     private void SpawnSilver()
@@ -60,8 +182,42 @@ public class SpawnablePickups : MonoBehaviour
 
         for (int i = 0; i < SilverPieces.Length; i++)
         {
-            SilverPieces[i].OnSpawn();
+            SilverPieces[i].gameObject.SetActive(false);
         }
+
+        int amount = 0;
+
+        amount = DecideAmount(amount);
+
+        int spawned = 0;
+
+        while (true)
+        {
+
+            for (int i = 0; i < SilverPieces.Length; i++)
+            {
+                int rand = Random.Range(0, SilverPieces.Length);
+
+                if (rand == 0
+                    && spawned < amount
+                    && !SilverPieces[i].gameObject.activeSelf)
+                {
+                    SilverPieces[i].gameObject.SetActive(true);
+                    SilverPieces[i].OnSpawn();
+                    spawned++;
+                }
+            }
+
+            if (spawned >= amount)
+            {
+                break;
+            }
+
+        }
+        //for (int i = 0; i < SilverPieces.Length; i++)
+        //{
+        //    SilverPieces[i].OnSpawn();
+        //}
     }
 
     private void SpawnCopper()
@@ -70,8 +226,43 @@ public class SpawnablePickups : MonoBehaviour
 
         for (int i = 0; i < CopperPieces.Length; i++)
         {
-            CopperPieces[i].OnSpawn();
+            CopperPieces[i].gameObject.SetActive(false);
         }
+
+        int amount = 0;
+
+        amount = DecideAmount(amount);
+
+        int spawned = 0;
+
+        while (true)
+        {
+
+            for (int i = 0; i < CopperPieces.Length; i++)
+            {
+                int rand = Random.Range(0, CopperPieces.Length);
+
+                if (rand == 0
+                    && spawned < amount
+                    && !CopperPieces[i].gameObject.activeSelf)
+                {
+                    CopperPieces[i].gameObject.SetActive(true);
+                    CopperPieces[i].OnSpawn();
+                    spawned++;
+                }
+            }
+
+            if (spawned >= amount)
+            {
+                break;
+            }
+
+        }
+
+        //for (int i = 0; i < CopperPieces.Length; i++)
+        //{
+        //    CopperPieces[i].OnSpawn();
+        //}
     }
 
     private void SpawnIron()
@@ -80,8 +271,43 @@ public class SpawnablePickups : MonoBehaviour
 
         for (int i = 0; i < IronPieces.Length; i++)
         {
-            IronPieces[i].OnSpawn();
+            IronPieces[i].gameObject.SetActive(false);
         }
+
+        int amount = 0;
+
+        amount = DecideAmount(amount);
+
+        int spawned = 0;
+
+        while (true)
+        {
+
+            for (int i = 0; i < IronPieces.Length; i++)
+            {
+                int rand = Random.Range(0, IronPieces.Length);
+
+                if (rand == 0
+                    && spawned < amount
+                    && !IronPieces[i].gameObject.activeSelf)
+                {
+                    IronPieces[i].gameObject.SetActive(true);
+                    IronPieces[i].OnSpawn();
+                    spawned++;
+                }
+            }
+
+            if (spawned >= amount)
+            {
+                break;
+            }
+
+        }
+
+        //for (int i = 0; i < IronPieces.Length; i++)
+        //{
+        //    IronPieces[i].OnSpawn();
+        //}
     }
 
     private void SpawnGold()
@@ -90,8 +316,43 @@ public class SpawnablePickups : MonoBehaviour
 
         for (int i = 0; i < GoldPieces.Length; i++)
         {
-            GoldPieces[i].OnSpawn();
+            GoldPieces[i].gameObject.SetActive(false);
         }
+
+        int amount = 0;
+
+        amount = DecideAmount(amount);
+
+        int spawned = 0;
+
+        while (true)
+        {
+
+            for (int i = 0; i < GoldPieces.Length; i++)
+            {
+                int rand = Random.Range(0, GoldPieces.Length);
+
+                if (rand == 0
+                    && spawned < amount
+                    && !GoldPieces[i].gameObject.activeSelf)
+                {
+                    GoldPieces[i].gameObject.SetActive(true);
+                    GoldPieces[i].OnSpawn();
+                    spawned++;
+                }
+            }
+
+            if (spawned >= amount)
+            {
+                break;
+            }
+
+        }
+
+        //for (int i = 0; i < GoldPieces.Length; i++)
+        //{
+        //    GoldPieces[i].OnSpawn();
+        //}
     }
 
     private void SpawnDices()

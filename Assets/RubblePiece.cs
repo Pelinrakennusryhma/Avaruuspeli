@@ -37,6 +37,14 @@ public class RubblePiece : MonoBehaviour
         }
     }
 
+    public void FixedUpdate()
+    {
+        //if (CenterOfGravity.Instance != null)
+        //{
+        //    Rigidbody.velocity += (CenterOfGravity.Instance.transform.position - transform.position).normalized * 122.4f * Time.deltaTime;
+        //}
+    }
+
     public void Update()
     {
         if (HasBeenSpawned)
