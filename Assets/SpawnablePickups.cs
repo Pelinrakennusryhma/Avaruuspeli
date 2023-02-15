@@ -18,7 +18,16 @@ public class SpawnablePickups : MonoBehaviour
     public GameObject CopperParent;
     public GameObject DiamondParent;
 
-    public void Spawn(ResourceInventory.ResourceType resourceType)
+    public ResourceInventory.ResourceType ResourceType;
+    public int Amount;
+
+    public int Setup(ResourceInventory.ResourceType resourceType)
+    {
+        ResourceType = resourceType;
+        return Amount = DecideAmount();
+    }
+
+    public void Spawn()
     {
         DiceParent.SetActive(false);
         GoldParent.SetActive(false);
@@ -27,8 +36,7 @@ public class SpawnablePickups : MonoBehaviour
         CopperParent.SetActive(false);
         DiamondParent.SetActive(false);
 
-
-        switch (resourceType)
+        switch (ResourceType)
         {
             case ResourceInventory.ResourceType.None:
                 break;
@@ -115,9 +123,9 @@ public class SpawnablePickups : MonoBehaviour
             Diamonds[i].gameObject.SetActive(false);
         }
 
-        int amount = 0;
+        int amount = Amount;
 
-        amount = DecideAmount(amount);
+        //amount = DecideAmount(amount);
 
         int spawned = 0;
 
@@ -151,26 +159,28 @@ public class SpawnablePickups : MonoBehaviour
         //}
     }
 
-    private static int DecideAmount(int amount)
+    private static int DecideAmount()
     {
+        int amount = 0;
+
         if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Scarce)
         {
-            amount = 2;
+            amount = Random.Range(1, 3);
         }
 
         else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Medium)
         {
-            amount = 4;
+            amount = Random.Range(3, 5);
         }
 
         else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.High)
         {
-            amount = 6;
+            amount = Random.Range(5, 7);
         }
 
         else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Highest)
         {
-            amount = 7;
+            amount = Random.Range(6, 8);
         }
 
         return amount;
@@ -185,9 +195,9 @@ public class SpawnablePickups : MonoBehaviour
             SilverPieces[i].gameObject.SetActive(false);
         }
 
-        int amount = 0;
 
-        amount = DecideAmount(amount);
+        int amount = Amount;
+        //amount = DecideAmount(amount);
 
         int spawned = 0;
 
@@ -229,9 +239,9 @@ public class SpawnablePickups : MonoBehaviour
             CopperPieces[i].gameObject.SetActive(false);
         }
 
-        int amount = 0;
+        int amount = Amount;
 
-        amount = DecideAmount(amount);
+        //amount = DecideAmount(amount);
 
         int spawned = 0;
 
@@ -274,9 +284,8 @@ public class SpawnablePickups : MonoBehaviour
             IronPieces[i].gameObject.SetActive(false);
         }
 
-        int amount = 0;
-
-        amount = DecideAmount(amount);
+        int amount = Amount;
+        //amount = DecideAmount(amount);
 
         int spawned = 0;
 
@@ -319,9 +328,8 @@ public class SpawnablePickups : MonoBehaviour
             GoldPieces[i].gameObject.SetActive(false);
         }
 
-        int amount = 0;
-
-        amount = DecideAmount(amount);
+        int amount = Amount;
+        //amount = DecideAmount(amount);
 
         int spawned = 0;
 

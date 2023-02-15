@@ -9,6 +9,12 @@ public class AsteroidSurface : MonoBehaviour
     private void Awake()
     {
 
+        if (AsteroidLauncher.ResourceType == ResourceInventory.ResourceType.None)
+        {
+            AsteroidLauncher.Setup(false);
+            //Debug.Log("Had to setup asteroid launcher");
+        }
+
         for (int i = 0; i < Rocks.Length; i++)
         {
             Rocks[i].gameObject.SetActive(false);
@@ -25,13 +31,16 @@ public class AsteroidSurface : MonoBehaviour
                 case AsteroidLauncher.MineralDensity.None:
                     break;
                 case AsteroidLauncher.MineralDensity.Scarce:
-                    toSpawn = 1;
+                    //toSpawn = 1;
+                    toSpawn = Random.Range(1, 3);
                     break;
                 case AsteroidLauncher.MineralDensity.Medium:
-                    toSpawn = 3;
+                    //toSpawn = 3;
+                    toSpawn = Random.Range(3, 5);
                     break;
                 case AsteroidLauncher.MineralDensity.High:
-                    toSpawn = 5;
+                    //toSpawn = 5;
+                    toSpawn = Random.Range(5, 7);
                     break;
                 case AsteroidLauncher.MineralDensity.Highest:
                     toSpawn = 7;
@@ -48,16 +57,20 @@ public class AsteroidSurface : MonoBehaviour
                 case AsteroidLauncher.MineralDensity.None:
                     break;
                 case AsteroidLauncher.MineralDensity.Scarce:
-                    toSpawn = 3;
+                    //toSpawn = 3;
+                    toSpawn = Random.Range(2, 6);
                     break;
                 case AsteroidLauncher.MineralDensity.Medium:
-                    toSpawn = 8;
+                    //toSpawn = 8;
+                    toSpawn = Random.Range(6, 9);
                     break;
                 case AsteroidLauncher.MineralDensity.High:
-                    toSpawn = 10;
+                    //toSpawn = 10;
+                    toSpawn = Random.Range(9, 13);
                     break;
                 case AsteroidLauncher.MineralDensity.Highest:
-                    toSpawn = 14;
+                    //toSpawn = 14;
+                    toSpawn = Random.Range(12, 15);
                     break;
                 default:
                     break;
@@ -89,7 +102,35 @@ public class AsteroidSurface : MonoBehaviour
 
         }
 
-        Debug.Log("Amount of rocks to spawn " + toSpawn);
+        //Debug.Log("Amount of rocks to spawn " + toSpawn);
 
+    }
+
+    public void CompareCollider(Collider collider,
+                                out ResourceInventory.ResourceType resourceType,
+                                out int amount)
+    {
+        resourceType = ResourceInventory.ResourceType.None;
+        amount = 0;
+
+        if (collider == null)
+        {
+            resourceType = ResourceInventory.ResourceType.None;
+            amount = 0;
+            //Debug.Log("Null collider");
+            return;
+        }
+
+        for (int i = 0; i < Rocks.Length; i++)
+        {
+            if (collider.gameObject
+                == Rocks[i].gameObject)
+            {
+                Debug.Log("Found a matching collider " + Rocks[i].gameObject.name + " resource type is " + Rocks[i].ResourceType + " amount is " + Rocks[i].ResourceAmount);
+                resourceType = Rocks[i].ResourceType;
+                amount = Rocks[i].ResourceAmount;
+                break;
+            }
+        }
     }
 }

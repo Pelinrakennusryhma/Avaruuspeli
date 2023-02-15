@@ -33,7 +33,7 @@ public class RubblePiece : MonoBehaviour
         {
             Rigidbody.useGravity = false;
             //Rigidbody.velocity = (CenterOfGravity.Instance.transform.position - transform.position) * 10.0f;
-            Rigidbody.velocity = -(rockCenter - transform.position).normalized * Random.Range(3.5f, 8.09f);
+            Rigidbody.velocity = -(rockCenter - transform.position).normalized * Random.Range(8.5f, 12.09f);
         }
     }
 

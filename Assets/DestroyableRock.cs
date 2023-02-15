@@ -5,6 +5,9 @@ using UnityEngine.VFX;
 
 public class DestroyableRock : MonoBehaviour
 {
+    public ResourceInventory.ResourceType ResourceType;
+    public int ResourceAmount;
+
     public float Health;
 
     public GameObject Graphics;
@@ -37,8 +40,19 @@ public class DestroyableRock : MonoBehaviour
         RubblePieces = GetComponentsInChildren<RubblePiece>(true);
         DeathParticles.Stop(true);
         Explosion = GetComponentInChildren<VisualEffect>(true);
-        Explosion.playRate = 3.0f;
+        Explosion.playRate = 1.5f;
         Explosion.Stop();
+
+        // Here could be a random chance?
+
+        if (AsteroidLauncher.ResourceType == ResourceInventory.ResourceType.None)
+        {
+            AsteroidLauncher.Setup(false);
+            //Debug.Log("Had to setup asteroid launcher");
+        }
+
+        ResourceType = AsteroidLauncher.ResourceType;
+        ResourceAmount = Pickups.Setup(AsteroidLauncher.ResourceType);
     }
 
     public void ReduceHealth(float amount, 
@@ -60,7 +74,7 @@ public class DestroyableRock : MonoBehaviour
             DeathParticles.Play(true);
             Explosion.Play();
 
-            Pickups.Spawn(AsteroidLauncher.ResourceType);
+            Pickups.Spawn();
 
             for (int i = 0; i < RubblePieces.Length; i++)
             {

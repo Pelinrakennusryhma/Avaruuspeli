@@ -45,20 +45,36 @@ public class AsteroidLauncher : MonoBehaviour
 
     public void Awake()
     {
-        LaunchAsteroidScene(AsteroidType.RandomShuffledList, 
-                            ResourceInventory.ResourceType.Iron, 
-                            MineralDensity.Highest);
+        Setup(true);
+    }
 
+    public static void Setup(bool launchScene)
+    {
+        LaunchAsteroidScene(AsteroidType.RandomShuffledList,
+                            ResourceInventory.ResourceType.Diamond,
+                            MineralDensity.Highest,
+                            launchScene);
+
+        //AsteroidLauncher.LaunchAsteroidScene(AsteroidType.RandomShuffledList,
+        //                                     ResourceInventory.ResourceType.Diamond,
+        //                                     MineralDensity.Highest,
+        //                                     launchScene);
     }
 
 
     public static void LaunchAsteroidScene(AsteroidType asteroidType,
                                            ResourceInventory.ResourceType resourceType,
-                                           MineralDensity spawnAmount)
+                                           MineralDensity spawnAmount,
+                                           bool launchScene)
     {
         CurrentAsteroid = asteroidType;
         SpawnablesAmount = spawnAmount;
         ResourceType = resourceType;
+
+        if (!launchScene)
+        {
+            return;
+        }
 
         switch (CurrentAsteroid)
         {
@@ -148,7 +164,7 @@ public class AsteroidLauncher : MonoBehaviour
 
         rando = ChooseWithNumber(rando, sceneNumber);
 
-        LaunchAsteroidScene(rando, resourceType, spawnAmount);
+        LaunchAsteroidScene(rando, resourceType, spawnAmount, true);
 
         if (RunningIndex + 1 >= Order.Length)
         {
@@ -246,7 +262,7 @@ public class AsteroidLauncher : MonoBehaviour
 
         rando = ChooseWithNumber(rando, rand);
 
-        LaunchAsteroidScene(rando, resourceType, spawnAmount);
+        LaunchAsteroidScene(rando, resourceType, spawnAmount, true);
     }
 
     private static AsteroidType ChooseWithNumber(AsteroidType rando, int rand)
