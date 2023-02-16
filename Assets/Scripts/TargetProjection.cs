@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TargetProjection : MonoBehaviour
 {
-    [SerializeField]
-    SpriteRenderer sprite;
+    Vector3 projectedPos;
+    public Vector3 ProjectedPosition
+    {
+        get { return projectedPos; }
+        private set { projectedPos = value; }
+    }
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -15,13 +19,13 @@ public class TargetProjection : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        CalculatePosition(10f);
+        ProjectedPosition = GetPosition(10f);
     }
 
-    public void CalculatePosition(float projectileSpeed)
+    public Vector3 GetPosition(float projectileSpeed)
     {
-        sprite.transform.position = transform.position + (rb.velocity * projectileSpeed * Time.deltaTime);
+        return transform.position + (rb.velocity * projectileSpeed * Time.deltaTime);
     }
 }

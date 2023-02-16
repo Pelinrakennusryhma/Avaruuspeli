@@ -5,10 +5,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
+    protected override void Awake()
+    {
+        faction = Faction.PLAYER;
+        base.Awake();
+    }
+
     protected override void OnDeath()
     {
+        base.OnDeath();
         gameObject.SetActive(false);
-        GameEvents.instance.CallEventPlayerSpaceshipDied();
     }
 
     public void OnThrust(InputAction.CallbackContext context)

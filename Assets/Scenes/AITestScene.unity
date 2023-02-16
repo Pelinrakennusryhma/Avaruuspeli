@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stance: 0
+  stance: 2
   targets:
   - {fileID: 2083572697}
   patrolArea: 800
@@ -1243,7 +1243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &754047031
 MonoBehaviour:
   m_ObjectHideFlags: 0

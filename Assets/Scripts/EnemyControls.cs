@@ -11,19 +11,22 @@ public class EnemyControls : ActorSpaceship
     float minRollThreshold = 0.05f;
     float maxRollThreshold = 0.5f;
 
-    void Start()
+    protected override void Awake()
+    {
+        faction = Faction.ENEMY;
+        base.Awake();
+    }
+
+    protected override void Start()
     {
         shipTransform = transform.GetChild(0).GetComponent<Transform>();
         rb = shipTransform.GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        
+        base.Start();
     }
 
     protected override void OnDeath()
     {
+        base.OnDeath();
         Destroy(gameObject);
     }
 
@@ -35,6 +38,12 @@ public class EnemyControls : ActorSpaceship
         Vector3 destinationNormal = destinationRelative.normalized;
         Vector2 rotationNormal = (Vector2)destinationRelative.normalized;
         float dotProduct = Vector3.Dot(shipTransform.forward, (destination - shipTransform.position).normalized);
+
+        // duct tape fix in case destination is exactly behind us (0, 0, -1), very unlikely to happen in normal use
+        if (destinationNormal.z < -rotationDotThreshold)
+        {
+            destinationNormal.x = Random.Range(-1f, 1f);
+        }
 
         // rolling
 
@@ -124,7 +133,7 @@ public class EnemyControls : ActorSpaceship
         {
             OnThrust(-1f);
             OnBoost(false);
-            Debug.Log("braking: " + ratio);
+            //Debug.Log("braking: " + ratio);
         } else
         {
             OnThrust(1f);

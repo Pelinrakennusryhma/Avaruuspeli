@@ -72,11 +72,11 @@ public class SpaceshipBT : BTree
             case Stance.Travel:
                 root = new Selector(new List<Node>
                 {
-                    new Sequence(new List<Node>
-                    {
-                        // defend self or something?
-                        new CheckForTarget(shipTransform, targets),
-                    }),
+                    //new Sequence(new List<Node>
+                    //{
+                    //    // defend self or something?
+                    //    new CheckForTarget(shipTransform, targets),
+                    //}),
                     new Sequence(new List<Node>
                     {
                         new CheckForObstacle(enemyControls, shipTransform),
