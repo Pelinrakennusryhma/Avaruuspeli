@@ -1541,21 +1541,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6487110169266559452, guid: 2479f92c3421e974da60d9674156c299,
-        type: 3}
-      propertyPath: m_text
-      value: Rock contains diamonds
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800543062165833302, guid: 2479f92c3421e974da60d9674156c299,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800543062165833302, guid: 2479f92c3421e974da60d9674156c299,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -132
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2479f92c3421e974da60d9674156c299, type: 3}
 --- !u!1001 &5218802291905749463

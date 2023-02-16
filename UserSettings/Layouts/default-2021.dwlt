@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 22
+  controlID: 100
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 454
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 23
+  controlID: 76
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 24
+  controlID: 77
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -268,8 +268,8 @@ MonoBehaviour:
     y: 0
     width: 1103
     height: 561
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
@@ -337,7 +337,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: asteroidlau
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -351,7 +351,7 @@ MonoBehaviour:
     m_Folders:
     - Assets/Scenes/Asteroids
     m_Globs: []
-    m_OriginalText: 
+    m_OriginalText: asteroidlau
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
@@ -361,10 +361,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 199}
-    m_SelectedIDs: 50770000
-    m_LastClickedID: 30544
-    m_ExpandedIDs: 00000000787300007a730000887500008a750000947500000476000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: b0b60000
+    m_LastClickedID: 46768
+    m_ExpandedIDs: 000000004cb600004eb6000050b6000078b6000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -392,7 +392,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000787300007a730000
+    m_ExpandedIDs: 000000004cb600004eb6000050b60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -522,9 +522,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 52770000
+      m_SelectedIDs: 0a0f0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 80badbff1ef0dbff4644dcff8879dcff307adcff347adcff507adcff68b2dcff0401ddffac01ddffbe01ddff8207ddffa408deffd420deffd820defff420deff0c59deff9686defffed6deffa0f2deff742bdfff862bdfff4a31dfffb86edffffaa6dfff78aae0ff52c2e0ff56e6e0ff1cece0ff4eafe1ff52afe1ff6cafe1ffaee7e1ff123efdff749efeff0efbffff76c70800
+      m_ExpandedIDs: cc77ffff98c9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.19330534, y: 0.09270924, z: -0.017530624, w: -0.97672313}
     speed: 2
-    m_Value: {x: -0.19328049, y: 0.09269732, z: -0.01752837, w: -0.97659755}
+    m_Value: {x: -0.19330534, y: 0.09270924, z: -0.017530624, w: -0.97672313}
   m_Size:
     m_Target: 17.767982
     speed: 2
