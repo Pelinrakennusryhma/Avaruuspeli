@@ -15,7 +15,7 @@ public class SpaceshipBT : BTree
 {
     [SerializeField]
     Stance stance;
-    public static float detectTargetRange = 120f;
+    public static float detectTargetRange = 500f;
     [SerializeField]
     List<GameObject> targets;
     [SerializeField]

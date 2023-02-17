@@ -8,6 +8,8 @@ public class CheckForObstacle : Node
     Transform _shipTransform;
     EnemyControls _enemyControls;
     Rigidbody _rb;
+    LayerMask mask;
+    string avoidLayer = "Obstacle";
     float _minRayLength = 50f;
     float _maxRayLength = 150f;
     float _rayLength = 50f;
@@ -34,6 +36,7 @@ public class CheckForObstacle : Node
         hitTimer = hitCooldown;
         rayRadius = Mathf.Max(shipHeight, shipWidth) + 4f;
         Debug.Log("rayRadius: " + rayRadius);
+        mask = LayerMask.GetMask(avoidLayer);
     }
 
     //private void OnDrawGizmos()
@@ -75,7 +78,7 @@ public class CheckForObstacle : Node
 
         RaycastHit hit;
 
-        if(Physics.SphereCast(_shipTransform.position, rayRadius, _shipTransform.forward, out hit, _rayLength))
+        if(Physics.SphereCast(_shipTransform.position, rayRadius, _shipTransform.forward, out hit, _rayLength, mask))
         {
             Debug.Log("hit");
             parent.SetData("obstacle", hit);

@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 2808967213598596065, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
@@ -411,10 +411,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843b66883b62c3444ad318c076d3f8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 0
   spaceshipMovement: {fileID: 0}
   spaceshipBoost: {fileID: 0}
   spaceshipShoot: {fileID: 0}
   spaceshipEvents: {fileID: 0}
+  targetProjection: {fileID: 0}
 --- !u!114 &356708444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1402,6 +1404,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bc31495e505e94ab6db4c89fff646a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EventSpaceshipDied:
+    m_PersistentCalls:
+      m_Calls: []
+  EventSpaceshipSpawned:
+    m_PersistentCalls:
+      m_Calls: []
   EventPlayerSpaceshipDied:
     m_PersistentCalls:
       m_Calls: []
@@ -1450,10 +1458,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e9547aee170468b4fdd2ea921ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 0
   spaceshipMovement: {fileID: 0}
   spaceshipBoost: {fileID: 0}
   spaceshipShoot: {fileID: 0}
   spaceshipEvents: {fileID: 0}
+  targetProjection: {fileID: 0}
 --- !u!4 &1004082103
 Transform:
   m_ObjectHideFlags: 0
@@ -1900,7 +1910,7 @@ PrefabInstance:
     - target: {fileID: 2808967213598596065, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
@@ -2215,7 +2225,7 @@ PrefabInstance:
     - target: {fileID: 2808967213598596065, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}

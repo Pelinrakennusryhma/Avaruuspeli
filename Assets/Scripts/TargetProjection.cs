@@ -12,20 +12,17 @@ public class TargetProjection : MonoBehaviour
     }
 
     Rigidbody rb;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public Vector3 GetPosition(float projectileSpeed, Vector3 shooterPosition)
     {
-        ProjectedPosition = GetPosition(10f);
-    }
-
-    public Vector3 GetPosition(float projectileSpeed)
-    {
-        return transform.position + (rb.velocity * projectileSpeed * Time.deltaTime);
+        float distance = Vector3.Distance(shooterPosition, transform.position);
+        float factor = distance / projectileSpeed;
+        Debug.Log("dist: " + distance + "factor: " + factor);
+        return transform.position + (rb.velocity * factor);
     }
 }

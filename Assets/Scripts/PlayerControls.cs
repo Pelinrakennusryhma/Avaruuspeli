@@ -51,4 +51,19 @@ public class PlayerControls : ActorSpaceship
     {
         spaceshipShoot.shooting = context.performed;
     }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (Time.timeScale > 0.5f)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+        }
+    }
 }
