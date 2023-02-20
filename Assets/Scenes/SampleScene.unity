@@ -508,7 +508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356708441}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -39.2, y: -2.4699821, z: 73.5}
+  m_LocalPosition: {x: 54, y: -2.4699821, z: 477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stance: 2
+  stance: 0
   targets:
   - {fileID: 655503919}
   patrolArea: 1000
@@ -2041,6 +2041,50 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e7eadb95-2ffc-4006-91d2-121c06cd47be
     m_ActionName: FirstPersonControls/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69c46ab1-83be-4ff4-9d7b-ef769f7c6010
+    m_ActionName: ShipControls/Pause[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da15171a-7a5b-464f-af07-db161d2b41c3
+    m_ActionName: FirstPersonControls/KeyAlpha1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50d74f43-ddc2-4e80-bfb4-9a913a2e9921
+    m_ActionName: FirstPersonControls/KeyAlpha2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b68a0876-31fa-4b6c-9ca8-1c6ef10982a0
+    m_ActionName: FirstPersonControls/KeyAlpha3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f0cadbc8-e2fc-4f33-8264-7eaaccf21413
+    m_ActionName: FirstPersonControls/KeyAlpha4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 61ab03c0-3cd5-4ca9-b488-d437e99497cf
+    m_ActionName: FirstPersonControls/KeyAlpha5[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0054d608-2319-4e14-b8a1-9290cfaaa6cf
+    m_ActionName: FirstPersonControls/KeyAlpha6[/Keyboard/6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: af6585ea-ae6d-450e-817c-8afdaa16247c
+    m_ActionName: FirstPersonControls/KeyAlpha7[/Keyboard/7]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3232600a-445b-4d38-8d3b-b3d4bed88ff4
+    m_ActionName: FirstPersonControls/KeyAlpha8[/Keyboard/8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 33077761-3b32-46ee-9d0e-e43ce042f950
+    m_ActionName: FirstPersonControls/KeyAlpha9[/Keyboard/9]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f0eba5e-d444-4ac4-8268-44cbfaf8a0a1
+    m_ActionName: FirstPersonControls/KeyAlpha0[/Keyboard/0]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ShipControls
@@ -2841,6 +2885,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae6be1c296fe214daef5e7a4f3ad938, type: 3}
 --- !u!1001 &1134921866668445132
@@ -2908,6 +2957,21 @@ PrefabInstance:
     - target: {fileID: 1134921867126456993, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: color.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
