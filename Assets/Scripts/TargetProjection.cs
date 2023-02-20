@@ -22,7 +22,7 @@ public class TargetProjection : MonoBehaviour
     {
         float distance = Vector3.Distance(shooterPosition, transform.position);
         float factor = distance / projectileSpeed;
-        Debug.Log("dist: " + distance + "factor: " + factor);
+        //Debug.Log("dist: " + distance + "factor: " + factor);
         return transform.position + (rb.velocity * factor);
     }
 }
