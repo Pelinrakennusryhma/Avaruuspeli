@@ -9,7 +9,7 @@ public class SpaceshipShoot : MonoBehaviour
     [SerializeField]
     Material material;
     [SerializeField]
-    float laserForce = 250f;
+    public float laserSpeed = 250f;
     [SerializeField]
     float laserDamage = 10f;
     [SerializeField]
@@ -62,6 +62,6 @@ public class SpaceshipShoot : MonoBehaviour
     {
         GameObject laserBoltObject = Instantiate(laserBoltPrefab, laserOrigins[0].position, laserOrigins[0].rotation, laserParent);
         LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
-        laserBolt.Init(laserForce, coloredMaterial, laserDamage, laserLifetime, gameObject);
+        laserBolt.Init(laserSpeed, coloredMaterial, laserDamage, laserLifetime, gameObject);
     }
 }

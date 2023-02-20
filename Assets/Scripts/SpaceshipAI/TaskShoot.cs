@@ -6,16 +6,20 @@ using BehaviorTree;
 
 public class TaskShoot : Node
 {
-    private SpaceshipShoot _spaceshipShoot;
-    public TaskShoot(SpaceshipShoot spaceshipShoot)
+    private EnemyControls _enemyControls;
+    public TaskShoot(EnemyControls enemyControls)
     {
-        _spaceshipShoot = spaceshipShoot;
+        _enemyControls = enemyControls;
     }
 
     public override NodeState Evaluate()
     {
-        bool shouldShoot = (bool)GetData("shouldShoot");
-        _spaceshipShoot.shooting = shouldShoot;
+        object obj = GetData("shouldShoot");
+
+        bool shouldShoot = (bool)obj;
+
+        _enemyControls.OnShoot(shouldShoot);
+
 
         state = NodeState.RUNNING;
         return state;

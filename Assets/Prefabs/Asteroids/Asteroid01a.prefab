@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3292312063102353755}
   - component: {fileID: 3042776511792703150}
   - component: {fileID: 2055500083415306863}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Asteroid01a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Graphics
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e0555aabb8db544bac0dc1d50d4f9c5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0555aabb8db544bac0dc1d50d4f9c5, type: 3}

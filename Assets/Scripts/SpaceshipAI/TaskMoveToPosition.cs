@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
-
-public class TaskPatrol : Node
+public class TaskMoveToPosition : Node
 {
-    private float _waitTime = 3f;
+    EnemyControls _enemyControls;
+    List<Vector3> _destinations = new List<Vector3>();
+    private float _waitTime = 2f;
     private float _waitCounter = 0f;
     private bool _waiting = true;
-    private float _patrolArea = 0f;
-
-    EnemyControls _enemyControls;
-    Vector3 startPos;
-    Vector3 destination = Vector3.zero;
     bool needsNewDestination = true;
+    int destinationId = 0;
+    Vector3 destination;
 
-    public TaskPatrol(EnemyControls enemyControls, float patrolArea) 
+    public TaskMoveToPosition(EnemyControls enemyControls, Transform shipTransform)
     {
         _enemyControls = enemyControls;
-        startPos = enemyControls.transform.position;
-        _patrolArea = patrolArea;
+
+        _destinations.Add(shipTransform.position);
+        _destinations.Add(shipTransform.position + shipTransform.forward * 200);
+
     }
 
     public override NodeState Evaluate()
@@ -29,16 +29,17 @@ public class TaskPatrol : Node
         {
             Debug.Log("waiting");
             _waitCounter += Time.deltaTime;
-            if(_waitCounter >= _waitTime)
+            if (_waitCounter >= _waitTime)
             {
                 _waiting = false;
             }
-        } else
+        }
+        else
         {
-            if(needsNewDestination)
+            if (needsNewDestination)
             {
                 Debug.Log("new destination");
-                destination = GetNewPatrolPosition();
+                GetNextDestination();
                 needsNewDestination = false;
             }
 
@@ -55,8 +56,15 @@ public class TaskPatrol : Node
         return state;
     }
 
-    Vector3 GetNewPatrolPosition()
+    void GetNextDestination()
     {
-        return startPos + Random.insideUnitSphere * _patrolArea;
+        if(destinationId == _destinations.Count - 1)
+        {
+            destinationId = 0;
+        } else
+        {
+            destinationId++;
+        }
+        destination = _destinations[destinationId];
     }
 }

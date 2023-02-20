@@ -4,36 +4,90 @@ using UnityEngine;
 
 using BehaviorTree;
 
+public enum Stance
+{
+    Aggressive,
+    Passive,
+    Travel
+}
+
 public class SpaceshipBT : BTree
 {
-    public static float detectTargetRange = 10f;
+    [SerializeField]
+    Stance stance;
+    public static float detectTargetRange = 500f;
     [SerializeField]
     List<GameObject> targets;
+    [SerializeField]
+    float patrolArea = 1000f;
 
-    SpaceshipShoot spaceshipShoot;
+    EnemyControls enemyControls;
     Transform shipTransform;
 
     private void Awake()
     {
-        spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
-        shipTransform = spaceshipShoot.transform;
+        enemyControls = GetComponent<EnemyControls>();
+        shipTransform = transform.GetChild(0);
+
     }
     protected override Node SetupTree()
     {
-        Node root = new Selector(new List<Node>
+        Node root = null;
+        switch (stance)
         {
-            new Sequence(new List<Node>
-            {
-                new CheckTargetInShootingRange(shipTransform),
-                new TaskShoot(spaceshipShoot)
-            }),
-            new Sequence(new List<Node>
-            {
-                new CheckForTarget(shipTransform, targets),
-                new TaskChaseTarget(shipTransform),
-            }),
-            new TaskPatrol()
-        });
+            case Stance.Aggressive:
+                root = new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForTarget(shipTransform, targets),
+                        new TaskChaseTarget(enemyControls),
+                        new CheckTargetInShootingRange(shipTransform),
+                        new TaskShoot(enemyControls),
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
+                    new TaskPatrol(enemyControls, patrolArea)
+                });
+                break;
+            case Stance.Passive:
+                root = new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        // add passive logic
+                        new CheckForTarget(shipTransform, targets),
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
+                    new TaskPatrol(enemyControls, patrolArea)
+                });
+                break;
+            case Stance.Travel:
+                root = new Selector(new List<Node>
+                {
+                    //new Sequence(new List<Node>
+                    //{
+                    //    // defend self or something?
+                    //    new CheckForTarget(shipTransform, targets),
+                    //}),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
+                    new TaskMoveToPosition(enemyControls, shipTransform)
+                });
+                break;
+            default:
+                break;
+        }
 
         return root;
     }

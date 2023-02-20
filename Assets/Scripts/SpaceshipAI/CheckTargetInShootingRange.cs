@@ -15,30 +15,31 @@ public class CheckTargetInShootingRange : Node
 
     public override NodeState Evaluate()
     {
-        // check if should fire
-
         object t = GetData("target");
-        if (t == null)
+
+        if(t == null)
         {
             parent.parent.SetData("shouldShoot", false);
-            state = NodeState.FAILURE;
+            state = NodeState.RUNNING;
             return state;
         }
 
         GameObject target = (GameObject)t;
 
         Vector3 heading = target.transform.position - _transform.position;
-        float dot = Vector3.Dot(heading, _transform.forward);
+        float dot = Vector3.Dot(heading.normalized, _transform.forward);
 
-        if (dot > 0.8f)
+        if (dot > 0.95f)
         {
-            parent.parent.SetData("shouldShoot", true);
             state = NodeState.SUCCESS;
-            return state;
+            parent.parent.SetData("shouldShoot", true);
+        } 
+        else
+        {
+            parent.parent.SetData("shouldShoot", false);
         }
 
-        parent.parent.SetData("shouldShoot", false);
-        state = NodeState.FAILURE;
+        state = NodeState.SUCCESS;
         return state;
     }
 }

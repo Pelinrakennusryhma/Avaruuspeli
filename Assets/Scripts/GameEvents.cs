@@ -12,9 +12,24 @@ public class GameEvents : MonoBehaviour
         instance = this;
     }
 
+    public UnityEvent<ActorSpaceship> EventSpaceshipDied;
+    public UnityEvent<ActorSpaceship> EventSpaceshipSpawned;
     public UnityEvent EventPlayerSpaceshipDied;
-    public void CallEventPlayerSpaceshipDied()
+    //public void CallEventPlayerSpaceshipDied()
+    //{
+    //    EventPlayerSpaceshipDied.Invoke();
+    //}
+
+    public void CallEventSpaceshipSpawned(ActorSpaceship ship)
     {
-        EventPlayerSpaceshipDied.Invoke();
+        EventSpaceshipSpawned.Invoke(ship);
+    }
+    public void CallEventSpaceshipDied(ActorSpaceship ship)
+    {
+        EventSpaceshipDied.Invoke(ship);
+        if(ship is PlayerControls)
+        {
+            EventPlayerSpaceshipDied.Invoke();
+        }
     }
 }
