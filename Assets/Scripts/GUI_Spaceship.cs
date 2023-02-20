@@ -55,9 +55,19 @@ public class GUI_Spaceship : MonoBehaviour
 
         string textToShow = "";
 
+        int i = 0;
+
         foreach (KeyValuePair<string, string> bindData in bindings)
         {
-            textToShow += $"{bindData.Key}{bindData.Value}\n";
+            // NOTE: WE don't want to show first person controls right now.
+            // A more robust solution would be fine here.
+            if (i < 9)
+            {
+                textToShow += $"{bindData.Key}{bindData.Value}\n";
+            }
+
+            i++;
+
         }
 
         helpText.text = textToShow;
