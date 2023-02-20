@@ -22,7 +22,7 @@ public class UITargetProjections : MonoBehaviour
 
     void OnEventSpaceshipSpawned(ActorSpaceship ship)
     {
-        if(ship.faction == Faction.ENEMY)
+        if(ship.faction == FactionEnum.ENEMY)
         {
             AddActor(ship);
         }

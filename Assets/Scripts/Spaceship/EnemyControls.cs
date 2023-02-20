@@ -13,7 +13,7 @@ public class EnemyControls : ActorSpaceship
 
     protected override void Awake()
     {
-        faction = Faction.ENEMY;
+        faction = FactionEnum.ENEMY;
         base.Awake();
     }
 

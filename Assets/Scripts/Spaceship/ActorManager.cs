@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Faction
+public enum FactionEnum
 {
     PLAYER,
     ENEMY,
@@ -29,7 +29,7 @@ public class ActorManager : MonoBehaviour
         actors.Remove(ship);
     }
 
-    public List<ActorSpaceship> GetActors(Faction excludeFaction)
+    public List<ActorSpaceship> GetActors(FactionEnum excludeFaction)
     {
         List<ActorSpaceship> actorsToReturn = new List<ActorSpaceship>();
         foreach (ActorSpaceship actor in actors)

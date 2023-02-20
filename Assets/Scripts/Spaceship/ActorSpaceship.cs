@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ActorSpaceship : MonoBehaviour
 {
-    public Faction faction;
+    public FactionEnum faction;
     public SpaceshipMovement spaceshipMovement;
     public SpaceshipBoost spaceshipBoost;
     public SpaceshipShoot spaceshipShoot;

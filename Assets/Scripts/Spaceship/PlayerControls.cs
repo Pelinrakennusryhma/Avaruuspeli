@@ -7,7 +7,7 @@ public class PlayerControls : ActorSpaceship
 {
     protected override void Awake()
     {
-        faction = Faction.PLAYER;
+        faction = FactionEnum.PLAYER;
         base.Awake();
     }
 
