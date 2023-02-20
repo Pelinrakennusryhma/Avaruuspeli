@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Faction
-{
-    PLAYER,
-    ENEMY
-}
-
 public abstract class ActorSpaceship : MonoBehaviour
 {
     public Faction faction;

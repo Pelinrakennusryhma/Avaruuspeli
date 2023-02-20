@@ -32,6 +32,11 @@ public class SpaceshipShoot : MonoBehaviour
         cooldown = shootInterval;
 
         ColorMaterial();
+
+        if(laserParent == null)
+        {
+            laserParent = GameObject.FindGameObjectWithTag("ProjectileParent").transform;
+        }
     }
 
     private void Update()

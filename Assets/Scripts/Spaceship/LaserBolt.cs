@@ -9,21 +9,41 @@ public class LaserBolt : MonoBehaviour
     float _speed = 0f;
     ParticleSystem explosionEffect;
     bool hasHit = false;
+    float _increasedColSize = 4f;
+    float _increaseColSizeDelay = 0.5f;
+    BoxCollider col;
 
-    public void Init(float speed, Material material, float damage, float lifetime, GameObject shooterShip)
+    private void Awake()
+    {
+        explosionEffect = GetComponentInChildren<ParticleSystem>();
+        col = GetComponent<BoxCollider>();
+    }
+
+    public void Init(float speed, Material material, float damage, float lifetime, GameObject shooterShip, bool increaseColSize=true)
     {
         _damage = damage;
         _speed = speed;
         _shooterShip = shooterShip;
-        explosionEffect = GetComponentInChildren<ParticleSystem>();
+        
         SetMaterial(material);
         StartCoroutine(DestroySelf(lifetime));
+
+        if (increaseColSize)
+        {
+            StartCoroutine(IncreaseSize(_increaseColSizeDelay));
+        }
     }
 
     IEnumerator DestroySelf(float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
+    }
+
+    IEnumerator IncreaseSize(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        col.size = new Vector3(_increasedColSize, _increasedColSize, col.size.z);
     }
 
     private void Update()

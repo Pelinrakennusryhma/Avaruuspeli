@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Faction
+{
+    PLAYER,
+    ENEMY,
+    FRIENDLY,
+}
+
 public class ActorManager : MonoBehaviour 
 {
     public static List<ActorSpaceship> actors = new List<ActorSpaceship>();
