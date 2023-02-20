@@ -10,6 +10,10 @@ public class MotherShipOnWorldMapController : MonoBehaviour
 
     public static MotherShipOnWorldMapController Instance;
 
+    public WorldMapClickDetector CurrentTargetClickableObject;
+
+    public bool IsOnCurrentClickableObject;
+
     public void Awake()
     {
         if (Instance != null)
@@ -44,8 +48,8 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 Debug.LogWarning("Set Ship to galaxy scale");
                 break;
             case WorldMapMouseController.ZoomLevel.StarSystem:
-                transform.localScale = new Vector3(0.025f, 0.025f, 0.025f);
-                localPosY = 0f;
+                transform.localScale = new Vector3(0.015f, 0.015f, 0.015f);
+                localPosY = 0.05f;
                 Debug.LogWarning("Set Ship to star system scale");
                 break;
             default:
@@ -87,5 +91,60 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public void MoveToStarSystemPos()
     {
         transform.position = new Vector3(CurrentStarSystemPos.x, 0, CurrentStarSystemPos.z);
+    }
+
+    public void SetCurrentTargetClickableObject(WorldMapClickDetector clickableObject)
+    {
+        CurrentTargetClickableObject = clickableObject;
+    }
+
+    public void Update()
+    {
+        if (CurrentTargetClickableObject != null)
+        {
+            Vector3 toDestinationNormalized = CurrentTargetClickableObject.transform.position -transform.position;
+
+            toDestinationNormalized = new Vector3(toDestinationNormalized.x, 0, toDestinationNormalized.z);
+
+            Vector3 targetPos = Vector3.Lerp(transform.position, CurrentTargetClickableObject.transform.position, Time.deltaTime * 5.0f);
+            transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
+
+            Vector3 toTarget2D = CurrentTargetClickableObject.transform.position - transform.position;
+            toTarget2D = new Vector3(toTarget2D.x, 0, toTarget2D.z);
+
+            if ((toTarget2D.magnitude <= 1.0f
+                && WorldMapMouseController.Instance.CurrentZoomLevel
+                == WorldMapMouseController.ZoomLevel.Universe)
+                ||
+                (toTarget2D.magnitude <= 0.2f
+                && WorldMapMouseController.Instance.CurrentZoomLevel
+                == WorldMapMouseController.ZoomLevel.Galaxy)
+                ||
+                (toTarget2D.magnitude <= 0.1f
+                && WorldMapMouseController.Instance.CurrentZoomLevel
+                == WorldMapMouseController.ZoomLevel.StarSystem))
+            {
+                IsOnCurrentClickableObject = true;
+            }
+
+            else
+            {
+                if (toDestinationNormalized != Vector3.zero)
+                {
+                    transform.rotation = Quaternion.LookRotation(-toDestinationNormalized, Vector3.up);
+                }
+            }
+
+        }
+
+        else
+        {
+            IsOnCurrentClickableObject = false;
+        }
+
+        if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.StarSystem)
+        {
+            transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
+        }
     }
 }

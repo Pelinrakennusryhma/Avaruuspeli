@@ -8,6 +8,8 @@ public class UniverseController : MonoBehaviour
 
     public GalaxyOnWorldMap[] AllGalaxies;
 
+    public Material LineRendererMat;
+
     public void Awake()
     {
         if (Instance == null)
@@ -58,6 +60,17 @@ public class UniverseController : MonoBehaviour
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
             AllGalaxies[i].gameObject.SetActive(false);
+            AllGalaxies[i].SetLineRenderersInactive();
+            Debug.LogError("Iterating galaxies " + i);
+        }
+    }
+
+    public void HideGalaxyLineRenderers()
+    {
+        for (int i = 0; i < AllGalaxies.Length; i++)
+        {
+            AllGalaxies[i].SetLineRenderersInactive();
+            Debug.LogError("Iterating galaxies " + i);
         }
     }
 
@@ -66,6 +79,9 @@ public class UniverseController : MonoBehaviour
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
             AllGalaxies[i].gameObject.SetActive(true);
+            AllGalaxies[i].DrawLinesBetweenGalaxies(this);
         }
+
+        Debug.Log("SHOW GALAXIES");
     }
 }

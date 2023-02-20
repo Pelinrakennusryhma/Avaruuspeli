@@ -277,6 +277,7 @@ public class WorldMapMouseController : MonoBehaviour
         if (CurrentZoomLevel == ZoomLevel.Universe)
         {
             ZoomOutButton.HideButton();
+            UniverseController.Instance.ShowGalaxies();
         }
 
         else
@@ -314,7 +315,7 @@ public class WorldMapMouseController : MonoBehaviour
                 Camera.main.transform.position = CurrentGalaxyPos;
                 CurrentZoomLevel = ZoomLevel.Galaxy;
                 SetZoomOrigin(CurrentGalaxyPos);
-                CurrentStarSystem.OnZoomOutToStarSystem();
+                CurrentStarSystem.OnZoomOutToStarSystems();
                 origin = CurrentGalaxyPos;
                 break;
 
@@ -325,6 +326,7 @@ public class WorldMapMouseController : MonoBehaviour
         if (CurrentZoomLevel == ZoomLevel.Universe)
         {
             ZoomOutButton.HideButton();
+            UniverseController.Instance.ShowGalaxies();
         }
 
         else

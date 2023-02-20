@@ -22,50 +22,61 @@ public class WorldMapClickDetector : MonoBehaviour
     {
         Debug.Log("Clicked an object of type " + type);
 
-        WorldMapMouseController.ZoomLevel zoom = WorldMapMouseController.ZoomLevel.None;
 
-        switch (type)
+        if (MotherShipOnWorldMapController.Instance.IsOnCurrentClickableObject
+            && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
+            == this) 
         {
-            case ClickableObjectType.None:
-                zoom = WorldMapMouseController.ZoomLevel.None;
-                break;
+            WorldMapMouseController.ZoomLevel zoom = WorldMapMouseController.ZoomLevel.None;
 
-            case ClickableObjectType.Galaxy:
-                zoom = WorldMapMouseController.ZoomLevel.Galaxy;
-                MotherShipOnWorldMapController.Instance.SetPosOnUniverse(transform.position);
-                break;
+            switch (type)
+            {
+                case ClickableObjectType.None:
+                    zoom = WorldMapMouseController.ZoomLevel.None;
+                    break;
 
-            case ClickableObjectType.StarSystem:
-                zoom = WorldMapMouseController.ZoomLevel.StarSystem;
-                MotherShipOnWorldMapController.Instance.SetPosOnCurrentGalaxy(transform.position);
-                break;
+                case ClickableObjectType.Galaxy:
+                    zoom = WorldMapMouseController.ZoomLevel.Galaxy;
+                    MotherShipOnWorldMapController.Instance.SetPosOnUniverse(transform.position);
+                    break;
 
-            case ClickableObjectType.Planet:
-                zoom = WorldMapMouseController.ZoomLevel.None;
-                MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
-                MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
-                break;
+                case ClickableObjectType.StarSystem:
+                    zoom = WorldMapMouseController.ZoomLevel.StarSystem;
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentGalaxy(transform.position);
+                    break;
 
-            case ClickableObjectType.Star:
-                zoom = WorldMapMouseController.ZoomLevel.None;
-                MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
-                MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
-                break;
+                case ClickableObjectType.Planet:
+                    zoom = WorldMapMouseController.ZoomLevel.None;
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
+                    MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+                    break;
 
-            default:
-                break;
+                case ClickableObjectType.Star:
+                    zoom = WorldMapMouseController.ZoomLevel.None;
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
+                    MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
+            WorldMapMouseController.Instance.ZoomIn(transform.position,
+                                                    zoom,
+                                                    WorldMapMouseController.Instance.CurrentGalaxy,
+                                                    WorldMapMouseController.Instance.CurrentStarSystem);        
+            
+            if (OnObjectClicked != null)
+            {
+                OnObjectClicked(type);
+            }
         }
 
-
-
-        WorldMapMouseController.Instance.ZoomIn(transform.position, 
-                                                zoom,
-                                                WorldMapMouseController.Instance.CurrentGalaxy,
-                                                WorldMapMouseController.Instance.CurrentStarSystem);
-
-        if (OnObjectClicked != null)
+        else
         {
-            OnObjectClicked(type);
+            MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(this);
         }
     }
 }

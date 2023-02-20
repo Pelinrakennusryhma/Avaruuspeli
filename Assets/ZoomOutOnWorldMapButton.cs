@@ -30,11 +30,13 @@ public class ZoomOutOnWorldMapButton : MonoBehaviour
         if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.Galaxy)
         {
             MotherShipOnWorldMapController.Instance.MoveToGalaxyPos();
+            MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(null);
         }
 
         else if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.Universe)
         {
             MotherShipOnWorldMapController.Instance.MoveToUniversePos();
+            MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(null);
         }
     }
 
