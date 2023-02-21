@@ -17,8 +17,6 @@ public class SpaceshipBT : BTree
     Stance stance;
     public static float detectTargetRange = 500f;
     [SerializeField]
-    List<GameObject> targets;
-    [SerializeField]
     float patrolArea = 1000f;
 
     EnemyControls enemyControls;
@@ -42,7 +40,7 @@ public class SpaceshipBT : BTree
                 {
                     new Sequence(new List<Node>
                     {
-                        new CheckForTarget(shipTransform, targets),
+                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
                         new TaskChaseTarget(enemyControls, shipTransform, spaceshipShoot.laserSpeed),
                         new CheckTargetInShootingRange(shipTransform),
                         new TaskShoot(enemyControls),
@@ -61,7 +59,7 @@ public class SpaceshipBT : BTree
                     new Sequence(new List<Node>
                     {
                         // add passive logic
-                        new CheckForTarget(shipTransform, targets),
+                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
                     }),
                     new Sequence(new List<Node>
                     {

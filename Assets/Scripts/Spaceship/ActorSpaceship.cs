@@ -4,20 +4,20 @@ using UnityEngine;
 
 public abstract class ActorSpaceship : MonoBehaviour
 {
-    public FactionEnum faction;
+    public Faction faction;
+    public GameObject ship;
     public SpaceshipMovement spaceshipMovement;
     public SpaceshipBoost spaceshipBoost;
     public SpaceshipShoot spaceshipShoot;
     public SpaceshipEvents spaceshipEvents;
-    public TargetProjection targetProjection;
 
     virtual protected void Awake()
     {
-        spaceshipMovement = GetComponentInChildren<SpaceshipMovement>();
-        spaceshipBoost = GetComponentInChildren<SpaceshipBoost>();
-        spaceshipShoot = GetComponentInChildren<SpaceshipShoot>();
-        spaceshipEvents = GetComponentInChildren<SpaceshipEvents>();
-        targetProjection = GetComponentInChildren<TargetProjection>();
+        ship = transform.GetChild(0).gameObject;
+        spaceshipMovement = ship.GetComponent<SpaceshipMovement>();
+        spaceshipBoost = ship.GetComponent<SpaceshipBoost>();
+        spaceshipShoot = ship.GetComponent<SpaceshipShoot>();
+        spaceshipEvents = ship.GetComponent<SpaceshipEvents>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
     }
@@ -29,7 +29,7 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     virtual protected void OnDeath()
     {
-        Debug.Log("spaceship died: " + transform.name + " faction: " + faction);
+        Debug.Log("spaceship died: " + transform.name + " faction: " + faction.factionName);
         GameEvents.instance.CallEventSpaceshipDied(this);
     }
 }

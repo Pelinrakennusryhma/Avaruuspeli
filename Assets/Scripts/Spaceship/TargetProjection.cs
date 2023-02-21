@@ -16,8 +16,8 @@ public class TargetProjection : MonoBehaviour
     public Vector3 GetPosition(float projectileSpeed, Vector3 shooterPosition)
     {
         Vector3 predictedPos = PredictedPosition(transform.position, shooterPosition, rb.velocity, projectileSpeed);
-        //Debug.DrawLine(shooterPosition, predictedPos, Color.yellow, 0.1f);
-        //Debug.DrawLine(transform.position, predictedPos, Color.cyan, 0.1f);
+        Debug.DrawLine(shooterPosition, predictedPos, Color.yellow, 0.1f);
+        Debug.DrawLine(transform.position, predictedPos, Color.cyan, 0.1f);
         return predictedPos;
     }
 

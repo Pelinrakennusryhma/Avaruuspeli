@@ -5,12 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
-    protected override void Awake()
-    {
-        faction = FactionEnum.PLAYER;
-        base.Awake();
-    }
-
     protected override void OnDeath()
     {
         base.OnDeath();

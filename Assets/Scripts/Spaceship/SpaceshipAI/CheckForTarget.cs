@@ -6,9 +6,9 @@ using BehaviorTree;
 public class CheckForTarget : Node
 {
     private Transform _transform;
-    private List<GameObject> _possibleTargets;
+    private List<ActorSpaceship> _possibleTargets;
 
-    public CheckForTarget(Transform transform, List<GameObject> possibleTargets)
+    public CheckForTarget(Transform transform, List<ActorSpaceship> possibleTargets)
     {
         _transform = transform;
         _possibleTargets = possibleTargets;
@@ -16,19 +16,20 @@ public class CheckForTarget : Node
 
     public override NodeState Evaluate()
     {
+        Debug.Log("_possibleTargets: " + _possibleTargets.Count);
         object t = GetData("target");
         GameObject tGO = (GameObject)t;
 
-        List<GameObject> activeTargets = _possibleTargets.FindAll(t => t.transform.parent.gameObject.activeSelf == true);
 
         // no target, try to find a new one
         if (t == null) 
         {
-            foreach (GameObject possibleTarget in activeTargets)
+            foreach (ActorSpaceship possibleTarget in _possibleTargets)
             {
-                if(Vector3.Distance(_transform.position, possibleTarget.transform.position) < SpaceshipBT.detectTargetRange)
+                if(Vector3.Distance(_transform.position, possibleTarget.ship.transform.position) < SpaceshipBT.detectTargetRange)
                 {
-                    parent.parent.SetData("target", possibleTarget);
+                    Debug.Log("possibleTarget: " + possibleTarget);
+                    parent.parent.SetData("target", possibleTarget.gameObject);
                     Debug.Log("found target");
                     state = NodeState.SUCCESS;
                     return state;
@@ -39,7 +40,7 @@ public class CheckForTarget : Node
             return state;
         // no active targets or target fled too far
         }
-        else if (activeTargets.Count <= 0 || Vector3.Distance(_transform.position, tGO.transform.position) > SpaceshipBT.detectTargetRange)
+        else if (_possibleTargets.Count <= 0 || Vector3.Distance(_transform.position, tGO.transform.position) > SpaceshipBT.detectTargetRange)
         {
             ClearData("target");
             Debug.Log("cleared target");

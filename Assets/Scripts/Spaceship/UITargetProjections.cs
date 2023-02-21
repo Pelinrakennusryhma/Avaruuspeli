@@ -11,6 +11,8 @@ public class UITargetProjections : MonoBehaviour
     GameObject targetProjectionPrefab;
     [SerializeField]
     Transform playerShip;
+    [SerializeField] 
+    Faction playerFaction;
 
     Canvas canvas;
 
@@ -22,14 +24,14 @@ public class UITargetProjections : MonoBehaviour
 
     void OnEventSpaceshipSpawned(ActorSpaceship ship)
     {
-        if(ship.faction == FactionEnum.ENEMY)
+        if(playerFaction.hostileFactions.Contains(ship.faction))
         {
-            AddActor(ship);
+            AddSprite(ship);
         }
     }
 
 
-    void AddActor(ActorSpaceship ship)
+    void AddSprite(ActorSpaceship ship)
     {
         GameObject sprite = Instantiate(
             targetProjectionPrefab,

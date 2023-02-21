@@ -35,7 +35,6 @@ public class CheckForObstacle : Node
 
         hitTimer = hitCooldown;
         rayRadius = Mathf.Max(shipHeight, shipWidth) + 4f;
-        Debug.Log("rayRadius: " + rayRadius);
         mask = LayerMask.GetMask(avoidLayer);
     }
 

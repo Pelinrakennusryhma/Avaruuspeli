@@ -11,15 +11,9 @@ public class EnemyControls : ActorSpaceship
     float minRollThreshold = 0.05f;
     float maxRollThreshold = 0.5f;
 
-    protected override void Awake()
-    {
-        faction = FactionEnum.ENEMY;
-        base.Awake();
-    }
-
     protected override void Start()
     {
-        shipTransform = transform.GetChild(0).GetComponent<Transform>();
+        shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
         base.Start();
     }

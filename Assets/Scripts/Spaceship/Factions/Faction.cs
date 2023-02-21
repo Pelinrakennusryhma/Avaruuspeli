@@ -8,5 +8,6 @@ public class Faction : ScriptableObject
     public string factionName;
     public Color hullColor;
     public Color laserColor;
-    public List<Faction> enemies = new List<Faction>();
+    public List<Faction> hostileFactions = new List<Faction>();
+    public List<ActorSpaceship> hostileActors = new List<ActorSpaceship>();
 }

@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacdff187b4bbc845901f4d3dfce1fd7, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  factionName: 
-  enemies: []
+  factionName: Player
+  hullColor: {r: 0.6415094, g: 0.19063723, b: 0.6056063, a: 1}
+  laserColor: {r: 0, g: 1, b: 0, a: 1}
+  hostileFactions:
+  - {fileID: 11400000, guid: 65d9ba8b11e8005449d65b3ada7d9a16, type: 2}
+  hostileActors: []

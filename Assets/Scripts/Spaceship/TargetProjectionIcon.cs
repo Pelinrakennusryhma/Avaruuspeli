@@ -55,9 +55,10 @@ public class TargetProjectionIcon : MonoBehaviour
         if (Vector3.Dot(Camera.main.transform.forward, heading) > 0)
         {
             // Target projection is in front of the camera
-            transform.position = Camera.main.WorldToScreenPoint(projectionPos);
-        }
-        
+            Vector3 pos = Camera.main.WorldToScreenPoint(projectionPos);
+            pos.z = 0f;
+            transform.position = pos; 
+        }      
     }
 
     //Vector2 GetPosOnCanvas()
