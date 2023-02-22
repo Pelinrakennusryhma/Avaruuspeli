@@ -14,7 +14,6 @@ public class ActorManager : MonoBehaviour
 {
     [SerializeField]
     List<Faction> factions;
-    //public static Dictionary<Faction, List<ActorSpaceship>> actors = new Dictionary<Faction, List<ActorSpaceship>>();
 
 
     private void Awake()
@@ -28,7 +27,6 @@ public class ActorManager : MonoBehaviour
     {
         foreach (Faction faction in factions)
         {
-            //actors.Add(faction, new List<ActorSpaceship>());
             faction.hostileActors.Clear();
         }
     }
@@ -41,6 +39,15 @@ public class ActorManager : MonoBehaviour
             {
                 Debug.Log("added: " + ship.faction);
                 faction.hostileActors.Add(ship);
+
+                // shuffle the target list for randomness
+                for (int i = 0; i < faction.hostileActors.Count; i++)
+                {
+                    ActorSpaceship temp = faction.hostileActors[i];
+                    int randomIndex = Random.Range(i, faction.hostileActors.Count);
+                    faction.hostileActors[i] = faction.hostileActors[randomIndex];
+                    faction.hostileActors[randomIndex] = temp;
+                }
             }
         }
     }
@@ -55,18 +62,4 @@ public class ActorManager : MonoBehaviour
             }
         }
     }
-
-    //public static List<ActorSpaceship> GetFactionEnemies(Faction faction)
-    //{
-    //    List<ActorSpaceship> result = new List<ActorSpaceship>();
-    //    foreach (Faction enemyFaction in faction.hostileFactions)
-    //    {
-    //        if (actors.ContainsKey(enemyFaction))
-    //        {
-    //            result.Concat(actors[enemyFaction]);
-    //        }
-    //    }
-
-    //    return result;
-    //}
 }

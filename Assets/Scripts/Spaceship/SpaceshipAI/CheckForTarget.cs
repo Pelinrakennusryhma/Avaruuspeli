@@ -22,25 +22,46 @@ public class CheckForTarget : Node
 
 
         // no target, try to find a new one
-        if (t == null) 
+        if (t == null || tGO == null) 
         {
+            List<ActorSpaceship> targetsInRange = new List<ActorSpaceship>();
             foreach (ActorSpaceship possibleTarget in _possibleTargets)
             {
                 if(Vector3.Distance(_transform.position, possibleTarget.ship.transform.position) < SpaceshipBT.detectTargetRange)
                 {
+                    targetsInRange.Add(possibleTarget);
                     Debug.Log("possibleTarget: " + possibleTarget);
                     parent.parent.SetData("target", possibleTarget.gameObject);
                     Debug.Log("found target");
                     state = NodeState.SUCCESS;
                     return state;
-       
+
                 }
             }
+            //if(targetsInRange.Count > 0)
+            //{
+            //    ActorSpaceship closestTarget = targetsInRange[0];
+            //    float shortestDistance = Vector3.Distance(closestTarget.ship.transform.position, _transform.position);
+            //    foreach (ActorSpaceship targetInRange in targetsInRange)
+            //    {
+            //        float distance = Vector3.Distance(targetInRange.ship.transform.position, _transform.position);
+            //        if(distance < shortestDistance)
+            //        {
+            //            closestTarget = targetInRange;
+            //            shortestDistance = distance;
+            //        }
+            //    }
+            //    Debug.Log("closestTarget: " + closestTarget);
+            //    parent.parent.SetData("target", closestTarget.gameObject);
+            //    Debug.Log("found target");
+            //    state = NodeState.SUCCESS;
+            //    return state;
+            //}
             state = NodeState.FAILURE;
             return state;
         // no active targets or target fled too far
         }
-        else if (_possibleTargets.Count <= 0 || Vector3.Distance(_transform.position, tGO.transform.position) > SpaceshipBT.detectTargetRange)
+        else if ((tGO != null && Vector3.Distance(_transform.position, tGO.transform.position) > SpaceshipBT.detectTargetRange))
         {
             ClearData("target");
             Debug.Log("cleared target");

@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bacdff187b4bbc845901f4d3dfce1fd7, type: 3}
-  m_Name: Enemy
+  m_Name: Neutral
   m_EditorClassIdentifier: 
-  factionName: Enemy
-  hullColor: {r: 0.1504539, g: 0.1981132, b: 0.1504539, a: 1}
-  laserColor: {r: 1, g: 0, b: 0, a: 1}
+  factionName: Neutral
+  hullColor: {r: 0.19215684, g: 0.6431373, b: 0.64313716, a: 1}
+  laserColor: {r: 1, g: 1, b: 0, a: 1}
   hostileFactions:
-  - {fileID: 11400000, guid: cb8267798c3a1424999cd6c9b1bc2f04, type: 2}
-  - {fileID: 11400000, guid: 1e35ab714d178b045964210ea9b84f2d, type: 2}
+  - {fileID: 11400000, guid: 65d9ba8b11e8005449d65b3ada7d9a16, type: 2}
   hostileActors: []
