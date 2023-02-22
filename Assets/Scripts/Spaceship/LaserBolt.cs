@@ -5,6 +5,10 @@ using UnityEngine;
 public class LaserBolt : MonoBehaviour
 {
     GameObject _shooterShip;
+    public GameObject source
+    {
+        get { return _shooterShip; }
+    }
     float _damage = 0f;
     float _speed = 0f;
     ParticleSystem explosionEffect;
@@ -73,7 +77,7 @@ public class LaserBolt : MonoBehaviour
             if(other.gameObject.layer == LayerMask.NameToLayer("Damageable"))
             {
                 IDamageable damageable = other.GetComponent<IDamageable>();
-                damageable.Damage(_damage);
+                damageable.Damage(_damage, source);
             }
         }
     }

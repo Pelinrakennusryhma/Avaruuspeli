@@ -29,8 +29,19 @@ public class Spaceship : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(float damage)
+    public void Damage(float damage, GameObject source)
     {
         spaceshipHealth.DecreaseHealth((int)damage);
+
+        if(source != null)
+        {
+            ActorSpaceship sourceActor = source.transform.GetComponentInParent<ActorSpaceship>();
+
+            // flash projection icon when hit by player(faction)
+            if (sourceActor != null && sourceActor.faction.factionName == "Player")
+            {
+                spaceshipEvents.CallEventSpaceshipHitByPlayer();
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@ public class TargetProjectionIcon : MonoBehaviour
         _targetProjection = ship.GetComponentInChildren<TargetProjection>();
         SpaceshipShoot spaceshipShoot = ship.GetComponentInChildren<SpaceshipShoot>();
         projectileSpeed = spaceshipShoot.laserSpeed;
-        _spaceshipEvents.EventSpaceshipHealthChanged.AddListener(OnShipHealthChanged);
+        _spaceshipEvents.EventSpaceshipHitByPlayer.AddListener(OnShipHitByPlayer);
         _spaceshipEvents.EventSpaceshipDied.AddListener(OnShipDied);
     }
 
@@ -36,7 +36,7 @@ public class TargetProjectionIcon : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnShipHealthChanged()
+    void OnShipHitByPlayer()
     {
         StartCoroutine(FlashColor());
     }

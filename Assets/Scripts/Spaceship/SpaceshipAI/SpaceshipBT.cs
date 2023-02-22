@@ -40,15 +40,15 @@ public class SpaceshipBT : BTree
                 {
                     new Sequence(new List<Node>
                     {
-                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
-                        new TaskChaseTarget(enemyControls, shipTransform, spaceshipShoot.laserSpeed),
-                        new CheckTargetInShootingRange(shipTransform),
-                        new TaskShoot(enemyControls),
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckForObstacle(enemyControls, shipTransform),
-                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                        new CheckTargetInShootingRange(shipTransform),
+                        new TaskShoot(enemyControls),
+                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
+                        new TaskChaseTarget(enemyControls, shipTransform, spaceshipShoot.laserSpeed),
                     }),
                     new TaskPatrol(enemyControls, patrolArea)
                 });
@@ -58,13 +58,13 @@ public class SpaceshipBT : BTree
                 {
                     new Sequence(new List<Node>
                     {
-                        // add passive logic
-                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckForObstacle(enemyControls, shipTransform),
-                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                        // add passive logic
+                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
                     }),
                     new TaskPatrol(enemyControls, patrolArea)
                 });
