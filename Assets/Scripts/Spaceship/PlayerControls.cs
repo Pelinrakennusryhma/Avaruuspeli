@@ -8,7 +8,7 @@ public class PlayerControls : ActorSpaceship
     protected override void OnDeath()
     {
         base.OnDeath();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public void OnThrust(InputAction.CallbackContext context)
