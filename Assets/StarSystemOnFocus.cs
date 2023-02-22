@@ -58,11 +58,11 @@ public class StarSystemOnFocus : MonoBehaviour
 
     public void SetToBigScale()
     {
-        Debug.Log("Set star system to big scale");
+        //Debug.Log("Set star system to big scale");
     }
 
     public void SetToSmallScale()
     {
-        Debug.Log("Set star system to small scale");
+        //Debug.Log("Set star system to small scale");
     }
 }

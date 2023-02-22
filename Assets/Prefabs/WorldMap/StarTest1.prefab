@@ -131,6 +131,10 @@ MonoBehaviour:
   StarSystemCollider: {fileID: 5264263592886863778}
   Children: {fileID: 9035045606073741703}
   StarSystemOnFocus: {fileID: 8140908165002344861}
+  OwnerGalaxy: {fileID: 0}
+  LinesBetweenStarSystems: []
+  LinesHaveBeenCreated: 0
+  AsteroidFields: []
 --- !u!1 &6279975050984199377
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +239,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4806405826934613613}
     m_Modifications:
+    - target: {fileID: 1791166057667584420, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791166057667584420, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791166057667584420, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5448442547160360519, guid: 181445b4bb28fac45bc3eab8424d73ae,
         type: 3}
       propertyPath: type

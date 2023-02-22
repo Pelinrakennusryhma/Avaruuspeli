@@ -8,6 +8,8 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public Vector3 CurrentGalaxyPos;
     public Vector3 CurrentStarSystemPos;
 
+    public Vector3 CurrentAsteroidFieldPos;
+
     public static MotherShipOnWorldMapController Instance;
 
     public WorldMapClickDetector CurrentTargetClickableObject;
@@ -23,9 +25,14 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         Instance = this;
     }
 
+    public void Start()
+    {
+        WorldMapCamera.Instance.SetToUniverseOffset(transform.position);
+    }
+
     public void OnTriggered(Collider other)
     {
-        Debug.LogError("Other is " + other.gameObject.name);
+        //Debug.LogError("Other is " + other.gameObject.name);
     }
 
     public void OnZoom(WorldMapMouseController.ZoomLevel newZoomLevel,
@@ -39,16 +46,20 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 break;
             case WorldMapMouseController.ZoomLevel.Universe:
                 transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+                WorldMapCamera.Instance.SetToUniverseOffset(transform.position);
                 localPosY = 0f;
                 Debug.LogWarning("Set Ship to universe scale");
+
                 break;
             case WorldMapMouseController.ZoomLevel.Galaxy:
                 transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                WorldMapCamera.Instance.SetToGalaxyOffset(transform.position);
                 localPosY = 0f;
                 Debug.LogWarning("Set Ship to galaxy scale");
                 break;
             case WorldMapMouseController.ZoomLevel.StarSystem:
                 transform.localScale = new Vector3(0.015f, 0.015f, 0.015f);
+                WorldMapCamera.Instance.SetToStarSystemOffset(transform.position);
                 localPosY = 0.05f;
                 Debug.LogWarning("Set Ship to star system scale");
                 break;
@@ -78,6 +89,11 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         //transform.position = new Vector3(currentStar.x, 0, currentStar.z);
     }
 
+    public void SetPosOnAsteroidField(Vector3 targetAsteroidFieldPos)
+    {
+        CurrentAsteroidFieldPos = targetAsteroidFieldPos;
+    }
+
     public void MoveToUniversePos()
     {
         transform.position = new Vector3(CurrentUniversePos.x, 0, CurrentUniversePos.z);
@@ -93,30 +109,52 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         transform.position = new Vector3(CurrentStarSystemPos.x, 0, CurrentStarSystemPos.z);
     }
 
+    public void MoveToCurrentAsteroidFieldPos()
+    {
+        transform.position = new Vector3(CurrentAsteroidFieldPos.x, 0, CurrentAsteroidFieldPos.z);
+    }
+
     public void SetCurrentTargetClickableObject(WorldMapClickDetector clickableObject)
     {
         CurrentTargetClickableObject = clickableObject;
+    }
+
+    public void SetCurrentTargetClickableObjectAndPosOnAsteroidField(WorldMapClickDetector clickableObject,
+                                                                     Vector3 pos)
+    {
+        CurrentTargetClickableObject = clickableObject;
+        CurrentAsteroidFieldPos = new Vector3(pos.x, 0, pos.z);
+        Debug.LogError("Set the pos for asteroid field " + Time.time);
+
     }
 
     public void Update()
     {
         if (CurrentTargetClickableObject != null)
         {
-            Vector3 toDestinationNormalized = CurrentTargetClickableObject.transform.position -transform.position;
+            Vector3 destination = CurrentTargetClickableObject.transform.position;
+            
+            if (CurrentTargetClickableObject.type == WorldMapClickDetector.ClickableObjectType.AsteroidField)
+            {
+                destination = CurrentAsteroidFieldPos;
+                //Debug.Log("DESTINATION IS ASTEROID FIELD " + Time.time);
+            }
+
+            Vector3 toDestinationNormalized = destination -transform.position;
 
             toDestinationNormalized = new Vector3(toDestinationNormalized.x, 0, toDestinationNormalized.z);
 
-            Vector3 targetPos = Vector3.Lerp(transform.position, CurrentTargetClickableObject.transform.position, Time.deltaTime * 5.0f);
+            Vector3 targetPos = Vector3.Lerp(transform.position, destination, Time.deltaTime * 5.0f);
             transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
 
-            Vector3 toTarget2D = CurrentTargetClickableObject.transform.position - transform.position;
+            Vector3 toTarget2D = destination - transform.position;
             toTarget2D = new Vector3(toTarget2D.x, 0, toTarget2D.z);
 
             if ((toTarget2D.magnitude <= 1.0f
                 && WorldMapMouseController.Instance.CurrentZoomLevel
                 == WorldMapMouseController.ZoomLevel.Universe)
                 ||
-                (toTarget2D.magnitude <= 0.2f
+                (toTarget2D.magnitude <= 0.15f
                 && WorldMapMouseController.Instance.CurrentZoomLevel
                 == WorldMapMouseController.ZoomLevel.Galaxy)
                 ||
@@ -125,6 +163,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 == WorldMapMouseController.ZoomLevel.StarSystem))
             {
                 IsOnCurrentClickableObject = true;
+                //Debug.Log("IS ON CURRENT CLICKABLE OBJECT");
             }
 
             else
@@ -145,6 +184,38 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.StarSystem)
         {
             transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
+        }
+    }
+
+    public bool CheckIfAsteroidFieldPositionIsWithinTolerance()
+    {
+        Vector3 yZeroedPos = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 yZeroedAsteroidFieldPos = new Vector3(CurrentAsteroidFieldPos.x, 0, CurrentAsteroidFieldPos.z);
+        
+        if ((yZeroedPos - yZeroedAsteroidFieldPos).magnitude <= 0.1f)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CheckIfPlanetOrStarPositionIsWithnTolerance()
+    {
+        Vector3 yZeroedPos = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 yZeroedAsteroidFieldPos = new Vector3(CurrentStarSystemPos.x, 0, CurrentStarSystemPos.z);
+
+        if ((yZeroedPos - yZeroedAsteroidFieldPos).magnitude <= 0.03f)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
         }
     }
 }

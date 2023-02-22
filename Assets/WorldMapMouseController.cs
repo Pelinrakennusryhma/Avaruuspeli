@@ -30,6 +30,8 @@ public class WorldMapMouseController : MonoBehaviour
 
     public ZoomOutOnWorldMapButton ZoomOutButton;
 
+    public static RaycastHit[] Hits;
+
     public void Awake()
     {
         if (Instance == null)
@@ -45,6 +47,11 @@ public class WorldMapMouseController : MonoBehaviour
         CurrentZoomLevel = ZoomLevel.Universe;
         ZoomOutButton.Init();
         ZoomOutButton.HideButton();
+
+    }
+    public void Start()
+    {
+        GameManager.Instance.OnEnterWorldMap();  
     }
 
     public void ChangeZoomLevel(ZoomLevel newZoomLevel,
@@ -63,7 +70,105 @@ public class WorldMapMouseController : MonoBehaviour
         MoveScreen();
 
 
+        // filter out asteroid fields properly
+
+        bool hitSomethingOtherThanAsteroidField = false;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
+
+        //DoSingleHit(ray);
+        DoMultiHit(ray);
+    }
+
+    private static void DoMultiHit(Ray ray)
+    {
+        Hits = Physics.RaycastAll(ray,
+                                  10000.0f);
+
+        // Try to find other than asteroid field.
+        // If no other is found, try to detect if asteroid field hit falls between acceptable radius?
+
+        bool hitSomethingOtherThanAsteroidField = false;
+
+
+        WorldMapClickDetector detector1 = null;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            for (int i = 0; i < Hits.Length; i++) 
+            {
+
+                WorldMapClickDetector detector = Hits[i].collider.GetComponent<WorldMapClickDetector>();
+
+                if (detector != null
+                    && detector.type != WorldMapClickDetector.ClickableObjectType.AsteroidField)
+                {                
+                    detector1 = detector;
+                    detector.OnClick();
+                    hitSomethingOtherThanAsteroidField = true;
+                    break;
+                }
+
+                //Debug.Log("Clicked an object that a raycast hits " + Time.time);
+            }
+        }
+
+        if (hitSomethingOtherThanAsteroidField)
+        {
+            //Debug.LogWarning("We hit other than asteroid field " + detector1.gameObject.name);
+        }
+
+        else if(Input.GetMouseButtonDown(0))
+        {
+            for (int i = 0; i < Hits.Length; i++)
+            {
+                WorldMapClickDetector detector = Hits[i].collider.GetComponent<WorldMapClickDetector>();
+
+                if (detector != null
+                    && detector.type == WorldMapClickDetector.ClickableObjectType.AsteroidField)
+                {
+                    // Get asteroid field component and compare reference point distance
+
+                    bool canClickAsteroidField = false;
+
+                    AsteroidFieldOnWorldMap asteroidField = detector.GetComponent<AsteroidFieldOnWorldMap>();
+
+                    Vector3 yZeroedHitPoint = new Vector3(Hits[i].point.x, 0, Hits[i].point.z);
+                    Vector3 yZeroedOriginPos = new Vector3(asteroidField.transform.position.x, 0, asteroidField.transform.position.z);
+
+                    Vector3 yZeroedReferenceObjectPos = asteroidField.ReferenceObject.transform.position;
+                    yZeroedReferenceObjectPos = new Vector3(yZeroedReferenceObjectPos.x, 0, yZeroedReferenceObjectPos.z);
+
+                    float distanceToClick = (yZeroedOriginPos - yZeroedHitPoint).magnitude;
+                    float distanceToReferenceObjectPos = (yZeroedOriginPos - yZeroedReferenceObjectPos).magnitude;
+
+                    Debug.Log("Magnitude to click pos is " + distanceToClick + " magnitude to reference object pos is " + distanceToReferenceObjectPos);
+
+                    if ((distanceToClick -distanceToReferenceObjectPos) >= -0.1f
+                        && (distanceToClick - distanceToReferenceObjectPos) <= 0.2f)
+                    {
+                        canClickAsteroidField = true;
+                        Debug.LogError("FALLS WITHIN TOLERANCE");
+                    }
+
+                    if (canClickAsteroidField) 
+                    {
+                        Vector3 hitPoint = new Vector3(Hits[i].point.x, 0, Hits[i].point.z);
+                        MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObjectAndPosOnAsteroidField(detector, hitPoint);
+                        detector.OnClick();
+                        Debug.LogWarning("We CLICKED ASTEROID FIELD");
+                        break;
+                    }
+                }
+
+                //Debug.Log("Clicked an object that a raycast hits " + Time.time);
+            }
+        }
+
+    }
+
+    private static void DoSingleHit(Ray ray)
+    {
         RaycastHit hit;
 
         if (Physics.Raycast(ray,
@@ -264,7 +369,7 @@ public class WorldMapMouseController : MonoBehaviour
                 break;
 
             case ZoomLevel.StarSystem:
-                scale = 0.01f; // Maybe too small
+                scale = 0.02f; // Maybe too small
                 break;
 
             default:

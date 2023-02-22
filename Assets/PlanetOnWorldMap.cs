@@ -29,6 +29,8 @@ public class PlanetOnWorldMap : MonoBehaviour
 
         float radius = (CenterStar.transform.position - transform.position).magnitude;
 
+        LineRenderer.material = UniverseController.Instance.PlanetOrbitMaterial;
+
         //DrawPolygon(360, radius, CenterStar.transform.position, 0.01f, 0.01f);
         DrawCircle(CenterStar.gameObject, radius, 0.005f);
         Debug.Log("Should draw orbit " + gameObject.name);

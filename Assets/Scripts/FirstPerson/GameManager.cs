@@ -11,23 +11,40 @@ public class GameManager : MonoBehaviour
     public float NormalTimeScale;
     public Options OptionsScreen;
 
+    public bool IsOnWorldMap;
 
+    public Scene ActiveStackedScene;
+
+    public int FramesPassedTillLoadScenes;
+    public bool WaitingForSceneLoad;
+
+    public Camera TransitionalCamera;
 
     public void Awake()
     {
+
         if (Instance == null)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             Instance = this;
+            transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
             OptionsScreen = FindObjectOfType<Options>(true);
-            OptionsScreen.gameObject.SetActive(false);
-            OptionsScreen.OnGameStarted();
+
+            if (OptionsScreen != null) 
+            {
+                OptionsScreen.gameObject.SetActive(false);
+                OptionsScreen.OnGameStarted();
+            }
+            
             SceneManager.sceneLoaded -= OnSceneLoaded;
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;        
+            
+            TransitionalCamera.gameObject.SetActive(false);
+
         }
 
         else
@@ -63,6 +80,30 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOnWorldMap
+            && Input.GetKeyDown(KeyCode.M))
+        {
+            GoBackToWorldMap();
+        }
+
+        if (WaitingForSceneLoad
+            && FramesPassedTillLoadScenes >= 0)
+        {
+            FramesPassedTillLoadScenes++;
+
+            if (FramesPassedTillLoadScenes >= 2
+                && !IsOnWorldMap)
+            {
+                ActivateStackedScene();
+            }
+
+            else if(FramesPassedTillLoadScenes >= 2
+                    && IsOnWorldMap)
+            {
+                GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
+            }
+        }
+
         //if (Input.GetKeyDown(KeyCode.Escape)
         //    || Input.GetKeyDown(KeyCode.O))
         //{
@@ -111,5 +152,122 @@ public class GameManager : MonoBehaviour
     public void SetMouseInvert(bool invert)
     {
 
+    }
+
+
+
+
+
+    /////////////////////////
+    /// WIP
+
+    //public void GoBackToWorldMap()
+    //{
+    //    IsOnWorldMap = true;
+
+    //    if (WorldMapScene.Instance != null)
+    //    {
+    //        WorldMapScene.Instance.gameObject.SetActive(true);
+    //    }
+
+    //    else
+    //    {
+    //        SceneManager.LoadScene("WorldMap");
+    //    }
+
+
+
+
+    //    Debug.Log("Going back to world map");
+    //}
+    //public void EnterAsteroidField()
+    //{
+    //    Debug.LogError("ENTER ASTEROID FIELD");
+
+    //    IsOnWorldMap = false;
+    //    WorldMapScene.Instance.gameObject.SetActive(false);
+    //    SceneManager.LoadScene("SampleScene");
+    //}
+
+    //public void EnterPlanet()
+    //{
+    //    Debug.LogError("ENTER PLANET");
+    //    WorldMapScene.Instance.gameObject.SetActive(false);
+    //    SceneManager.LoadScene("PlanetTestLauncher");
+    //    IsOnWorldMap = false;
+    //}
+
+    //WIP
+
+    public void GoBackToWorldMap()
+    {
+        GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
+
+        if (WorldMapScene.Instance != null)
+        {        
+            SceneManager.UnloadSceneAsync(ActiveStackedScene);
+            WorldMapScene.Instance.gameObject.SetActive(true);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("WorldMap"));
+        }
+
+        else
+        {
+            SceneManager.LoadScene("WorldMap");
+        }
+
+
+
+        IsOnWorldMap = true;
+        WaitingForSceneLoad = true;
+        FramesPassedTillLoadScenes = 0;
+
+        Debug.Log("Going back to world map");
+    }
+    public void EnterAsteroidField()
+    {
+        Debug.LogError("ENTER ASTEROID FIELD");
+
+        StackAndLoadAndLaunchScene("SampleScene", 1);
+    }
+
+    public void EnterPlanet()
+    {
+        Debug.LogError("ENTER PLANET");
+
+        StackAndLoadAndLaunchScene("PlanetTestLauncher", 2);
+    }
+
+    public void StackAndLoadAndLaunchScene(string sceneName,
+                                           int buildIndex)
+    {
+        GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
+        WorldMapScene.Instance.gameObject.SetActive(false);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        ActiveStackedScene = SceneManager.GetSceneByBuildIndex(buildIndex);
+        //ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
+        FramesPassedTillLoadScenes = 0;
+        WaitingForSceneLoad = true;
+        IsOnWorldMap = false;
+    }
+
+    public void ActivateStackedScene()
+    {
+
+        WaitingForSceneLoad = false;
+        FramesPassedTillLoadScenes = -1;
+        SceneManager.SetActiveScene(ActiveStackedScene);
+        GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
+    }
+
+    public void SetSceneWaitingForNextFrame()
+    {
+
+    }
+
+    // WIP ENDED
+
+    public void OnEnterWorldMap()
+    {
+        IsOnWorldMap = true;
     }
 }

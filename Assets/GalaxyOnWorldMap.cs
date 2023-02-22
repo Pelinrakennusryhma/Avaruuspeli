@@ -17,7 +17,19 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
     public UniverseController UniverseController;
 
+    private bool HasBeenInitted;
+
     public void Awake()
+    {
+        if (!HasBeenInitted) 
+        {
+            Init();
+        }
+
+        HideStarsAndShowGalaxy();
+    }
+
+    private void Init()
     {
         ClickDetector = GetComponent<WorldMapClickDetector>();
         ClickDetector.OnObjectClicked -= OnGalaxyClicked;
@@ -25,12 +37,23 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
         StarSystems = GetComponentsInChildren<StarOnWorldMap>(true);
 
-        HideStarsAndShowGalaxy();
 
     }
 
     public void DrawLinesBetweenGalaxies(UniverseController universe)
     {
+        if (universe == null)
+        {
+            universe = FindObjectOfType<UniverseController>(true);
+            universe.Init();
+        }
+
+
+        if (!HasBeenInitted)
+        {
+            Init();
+        }
+
         UniverseController = universe;
 
         if (!LinesHaveBeenCreated)
@@ -66,6 +89,8 @@ public class GalaxyOnWorldMap : MonoBehaviour
             LinesToOtherGalaxies[i].SetPosition(0, startPoint);
             LinesToOtherGalaxies[i].SetPosition(1, endPoint);
         }
+
+        //Debug.LogError("Drawing lines between galaxies");
     }
 
     public void OnGalaxyClicked(WorldMapClickDetector.ClickableObjectType type)
@@ -93,7 +118,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
         GalaxyMesh.enabled = false;
 
         
-        Debug.LogError("Show stars");
+        //Debug.LogError("Show stars");
     }
 
     public void HideStarsAndShowGalaxy()
@@ -106,6 +131,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
         GalaxyCollider.enabled = true;
         GalaxyMesh.enabled = true;
+        DrawLinesBetweenGalaxies(UniverseController.Instance);
     }
 
     public void HideOtherStars(StarOnWorldMap toNotHide)

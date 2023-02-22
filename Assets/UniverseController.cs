@@ -9,8 +9,21 @@ public class UniverseController : MonoBehaviour
     public GalaxyOnWorldMap[] AllGalaxies;
 
     public Material LineRendererMat;
+    public Material PlanetOrbitMaterial;
+
+    public bool HasBeenInitted;
 
     public void Awake()
+    {
+        if (!HasBeenInitted) 
+        {
+            Init();
+        }
+
+        ShowGalaxies();
+    }
+
+    public void Init()
     {
         if (Instance == null)
         {
@@ -28,7 +41,7 @@ public class UniverseController : MonoBehaviour
         }
 
         AllGalaxies = GetComponentsInChildren<GalaxyOnWorldMap>(true);
-        ShowGalaxies();
+        HasBeenInitted = true;
     }
 
     public bool TryLoadUniverse()
@@ -57,31 +70,46 @@ public class UniverseController : MonoBehaviour
 
     public void HideGalaxies()
     {
+        if (!HasBeenInitted)
+        {
+            Init();
+        }
+
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
             AllGalaxies[i].gameObject.SetActive(false);
             AllGalaxies[i].SetLineRenderersInactive();
-            Debug.LogError("Iterating galaxies " + i);
+            //Debug.LogError("Iterating galaxies " + i);
         }
     }
 
     public void HideGalaxyLineRenderers()
     {
+        if (!HasBeenInitted)
+        {
+            Init();
+        }
+
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
             AllGalaxies[i].SetLineRenderersInactive();
-            Debug.LogError("Iterating galaxies " + i);
+            //Debug.LogError("Iterating galaxies " + i);
         }
     }
 
     public void ShowGalaxies()
     {
+        if (!HasBeenInitted)
+        {
+            Init();
+        }
+
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
             AllGalaxies[i].gameObject.SetActive(true);
             AllGalaxies[i].DrawLinesBetweenGalaxies(this);
         }
 
-        Debug.Log("SHOW GALAXIES");
+       // Debug.Log("SHOW GALAXIES");
     }
 }

@@ -10,7 +10,8 @@ public class WorldMapClickDetector : MonoBehaviour
         Galaxy = 1,
         StarSystem = 2,
         Planet = 3,
-        Star = 4
+        Star = 4,
+        AsteroidField = 5
     }
 
     public ClickableObjectType type;
@@ -22,6 +23,7 @@ public class WorldMapClickDetector : MonoBehaviour
     {
         Debug.Log("Clicked an object of type " + type);
 
+        Vector3 mousePos = new Vector3(0, -10000, 0);
 
         if (MotherShipOnWorldMapController.Instance.IsOnCurrentClickableObject
             && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
@@ -48,13 +50,38 @@ public class WorldMapClickDetector : MonoBehaviour
                 case ClickableObjectType.Planet:
                     zoom = WorldMapMouseController.ZoomLevel.None;
                     MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
-                    MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+                    //MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+
+                    if (MotherShipOnWorldMapController.Instance.CheckIfPlanetOrStarPositionIsWithnTolerance()) 
+                    {
+                        GameManager.Instance.EnterPlanet();
+                        Debug.LogError("CLICKED PLANET");
+                    }
+
                     break;
 
                 case ClickableObjectType.Star:
                     zoom = WorldMapMouseController.ZoomLevel.None;
                     MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
-                    MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+                    //MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+
+
+
+
+                    break;
+
+                case ClickableObjectType.AsteroidField:
+                    zoom = WorldMapMouseController.ZoomLevel.None;
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(MotherShipOnWorldMapController.Instance.CurrentAsteroidFieldPos);
+                    //MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
+
+                    if (MotherShipOnWorldMapController.Instance.CheckIfAsteroidFieldPositionIsWithinTolerance()) 
+                    {
+                        GameManager.Instance.EnterAsteroidField();
+                        Debug.LogError("CLICKED ASTEROID FIELD");
+                    }
+                        //Debug.Log("WE SHOULD MOVE TO ASTEROID FIELD POS");
                     break;
 
                 default:
@@ -76,6 +103,10 @@ public class WorldMapClickDetector : MonoBehaviour
 
         else
         {
+            if (mousePos.y >= -1000.0f)
+            {
+                Debug.Log("REACT TO MOUSE BEING");
+            }
             MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(this);
         }
     }

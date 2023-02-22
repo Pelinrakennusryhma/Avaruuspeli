@@ -20,6 +20,8 @@ public class StarOnWorldMap : MonoBehaviour
 
     public bool LinesHaveBeenCreated;
 
+    public AsteroidFieldOnWorldMap[] AsteroidFields;
+
     public void Awake()
     {
         ClickDetector = GetComponent<WorldMapClickDetector>();
@@ -27,6 +29,7 @@ public class StarOnWorldMap : MonoBehaviour
         ClickDetector.OnObjectClicked -= OnStarClicked;
         ClickDetector.OnObjectClicked += OnStarClicked;
         Children.SetActive(false);
+        AsteroidFields = GetComponentsInChildren<AsteroidFieldOnWorldMap>(true);
     }
 
     public void OnStarClicked(WorldMapClickDetector.ClickableObjectType type)
@@ -44,6 +47,11 @@ public class StarOnWorldMap : MonoBehaviour
         WorldMapMouseController.Instance.CurrentGalaxy.HideOtherStars(WorldMapMouseController.Instance.CurrentStarSystem);
         StarSystemOnFocus.OnBecomeFocused();
         OwnerGalaxy.HideStarLineRenderers();
+
+        for (int i  = 0; i < AsteroidFields.Length; i++)
+        {
+            AsteroidFields[i].SpawnRocks();
+        }
     }
 
     public void OnZoomOutToStarSystems()
