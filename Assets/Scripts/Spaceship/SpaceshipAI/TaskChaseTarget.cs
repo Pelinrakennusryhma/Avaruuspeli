@@ -26,7 +26,7 @@ public class TaskChaseTarget : Node
             TargetProjection tp = target.GetComponentInChildren<TargetProjection>();
             Vector3 pos = tp.GetPosition(_projectileSpeed, _shipTransform.position);
             parent.SetData("shootTargetPos", pos);
-            _enemyControls.MoveToPosition(pos, 50f);
+            _enemyControls.MoveToPosition(pos, 100f);
         } else
         {
             ClearData("shootTargetPos");

@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3c6410b987c384fa6a957c34a5de15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 500
+  currentHealth: 500
 --- !u!114 &1134921867126457012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +367,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   EventSpaceshipCollided:
+    m_PersistentCalls:
+      m_Calls: []
+  EventSpaceshipHitByPlayer:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &1134921867126456995

@@ -22,12 +22,14 @@ public class SpaceshipBT : BTree
     EnemyControls enemyControls;
     Transform shipTransform;
     SpaceshipShoot spaceshipShoot;
+    SpaceshipEvents spaceshipEvents;
 
     private void Awake()
     {
         enemyControls = GetComponent<EnemyControls>();
         shipTransform = transform.GetChild(0);
         spaceshipShoot = shipTransform.GetComponent<SpaceshipShoot>();
+        spaceshipEvents = shipTransform.GetComponent<SpaceshipEvents>();
 
     }
     protected override Node SetupTree()
@@ -42,6 +44,11 @@ public class SpaceshipBT : BTree
                     {
                         new CheckForObstacle(enemyControls, shipTransform),
                         new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForHit(spaceshipEvents),
+                        new TaskEvadeAttacker(enemyControls)
                     }),
                     new Sequence(new List<Node>
                     {
