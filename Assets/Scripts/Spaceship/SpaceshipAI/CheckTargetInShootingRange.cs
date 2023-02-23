@@ -31,7 +31,6 @@ public class CheckTargetInShootingRange : Node
 
         if (dot > 0.95f)
         {
-            state = NodeState.SUCCESS;
             parent.parent.SetData("shouldShoot", true);
         } 
         else
@@ -39,7 +38,7 @@ public class CheckTargetInShootingRange : Node
             parent.parent.SetData("shouldShoot", false);
         }
 
-        state = NodeState.SUCCESS;
+        state = NodeState.RUNNING;
         return state;
     }
 }

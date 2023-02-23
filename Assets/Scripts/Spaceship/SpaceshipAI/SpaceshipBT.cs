@@ -42,6 +42,11 @@ public class SpaceshipBT : BTree
                 {
                     new Sequence(new List<Node>
                     {
+                        new CheckTargetInShootingRange(shipTransform),
+                        new TaskShoot(enemyControls),
+                    }),
+                    new Sequence(new List<Node>
+                    {
                         new CheckForObstacle(enemyControls, shipTransform),
                         new TaskAvoidObstacle(enemyControls, shipTransform)
                     }),
@@ -52,8 +57,6 @@ public class SpaceshipBT : BTree
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckTargetInShootingRange(shipTransform),
-                        new TaskShoot(enemyControls),
                         new CheckForTarget(shipTransform, enemyControls.faction.hostileActors),
                         new TaskChaseTarget(enemyControls, shipTransform, spaceshipShoot.laserSpeed),
                     }),
