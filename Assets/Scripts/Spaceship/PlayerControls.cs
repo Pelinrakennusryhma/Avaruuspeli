@@ -60,4 +60,12 @@ public class PlayerControls : ActorSpaceship
             }
         }
     }
+
+    public void OnLand(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameEvents.instance.CallEventPlayerTriedLanding();
+        }
+    }
 }

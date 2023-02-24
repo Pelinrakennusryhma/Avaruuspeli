@@ -377,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
         type: 3}
@@ -403,7 +403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &176608662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598488f2f67f4d14db48d900c7367066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stance: 2
+  stance: 0
   patrolArea: 800
 --- !u!1 &362396634
 GameObject:
@@ -1161,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &529045723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,7 +1406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &631184769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,7 +1651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &668066260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,7 +1923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &846648251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2573,7 +2573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1341848927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2990,7 +2990,7 @@ PrefabInstance:
     - target: {fileID: 2808967213598596065, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
@@ -3000,17 +3000,17 @@ PrefabInstance:
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 11
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 11
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 11
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3292312063102353755, guid: eaf31bff117285e4b8a542f9a1b553be,
         type: 3}
@@ -3254,7 +3254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1950945790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3504,8 +3504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCams:
-  - {fileID: 517175594}
   - {fileID: 1078490510}
+  - {fileID: 517175594}
   currentCameraID: 0
 --- !u!1001 &2018813202
 PrefabInstance:

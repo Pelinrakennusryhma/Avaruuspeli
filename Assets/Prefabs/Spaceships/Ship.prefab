@@ -250,7 +250,7 @@ MonoBehaviour:
   thrustGlideReduction: 0.2
   upDownGlideReduction: 0.2
   leftRightGlideReduction: 0.2
-  boostMultiplier: 1
+  speedMultiplier: 1
   thrust1D: 0
   upDown1D: 0
   strafe1D: 0
@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3c6410b987c384fa6a957c34a5de15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  currentHealth: 500
+  maxHealth: 200
+  currentHealth: 200
 --- !u!114 &1134921867126457012
 MonoBehaviour:
   m_ObjectHideFlags: 0

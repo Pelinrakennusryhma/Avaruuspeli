@@ -15,6 +15,10 @@ public class GameEvents : MonoBehaviour
     public UnityEvent<ActorSpaceship> EventSpaceshipDied;
     public UnityEvent<ActorSpaceship> EventSpaceshipSpawned;
     public UnityEvent EventPlayerSpaceshipDied;
+    public UnityEvent<string> EventPlayerEnteredPromptTrigger;
+    public UnityEvent EventPlayerExitedPromptTrigger;
+    public UnityEvent EventEnemiesKilled;
+    public UnityEvent EventPlayerTriedLanding;
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -31,5 +35,26 @@ public class GameEvents : MonoBehaviour
         {
             EventPlayerSpaceshipDied.Invoke();
         }
+    }
+
+    public void CallEventPlayerEnteredPromptTrigger(string promptText)
+    {
+        EventPlayerEnteredPromptTrigger.Invoke(promptText);
+    }
+
+    public void CallEventPlayerExitedPromptTrigger()
+    {
+        EventPlayerExitedPromptTrigger.Invoke();
+    }
+
+    public void CallEventEnemiesKilled()
+    {
+        Debug.Log("enemies killed!");
+        EventEnemiesKilled.Invoke();
+    }
+
+    public void CallEventPlayerTriedLanding()
+    {
+        EventPlayerTriedLanding.Invoke();
     }
 }

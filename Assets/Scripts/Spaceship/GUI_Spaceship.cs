@@ -15,10 +15,28 @@ public class GUI_Spaceship : MonoBehaviour
     private TMP_Text helpText;
     [SerializeField]
     Button restartButton;
+    [SerializeField]
+    TMP_Text promptText;
+    public string landKey = "";
     void Start()
     {
+        promptText.text = "";
+        GameEvents.instance.EventPlayerEnteredPromptTrigger.AddListener(OnPromptTriggerEnter);
+        GameEvents.instance.EventPlayerExitedPromptTrigger.AddListener(OnPromptTriggerExit);
         GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
         ShowControls();
+    }
+
+    void OnPromptTriggerEnter(string text)
+    {
+        promptText.gameObject.SetActive(true);
+        promptText.text = text.Replace("%landKey%", landKey);
+    }
+
+    void OnPromptTriggerExit()
+    {
+        promptText.gameObject.SetActive(false);
+        promptText.text = "";
     }
 
     void OnPlayerSpaceshipDeath()
@@ -49,6 +67,11 @@ public class GUI_Spaceship : MonoBehaviour
                 } else
                 {
                     bindings[action] = button;
+                }
+
+                if (action.StartsWith("Land"))
+                {
+                    landKey = button;
                 }
             }
         }

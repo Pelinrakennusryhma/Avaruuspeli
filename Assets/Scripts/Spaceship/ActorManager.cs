@@ -14,10 +14,12 @@ public class ActorManager : MonoBehaviour
 {
     [SerializeField]
     List<Faction> factions;
+    Faction playerFaction;
 
 
     private void Awake()
     {
+        playerFaction = factions.Find(f => f.factionName == "Player");
         GameEvents.instance.EventSpaceshipSpawned.AddListener(OnEventSpaceshipSpawned);
         GameEvents.instance.EventSpaceshipDied.AddListener(OnEventSpaceshipDied);
         InitFactions();  
@@ -60,6 +62,16 @@ public class ActorManager : MonoBehaviour
             {
                 faction.hostileActors.Remove(ship);
             }
+        }
+
+        CheckIfSceneCleared();
+    }
+
+    void CheckIfSceneCleared()
+    {
+        if(playerFaction.hostileActors.Count <= 0)
+        {
+            GameEvents.instance.CallEventEnemiesKilled();
         }
     }
 }

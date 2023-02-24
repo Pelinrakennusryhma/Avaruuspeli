@@ -7,11 +7,13 @@ public class CheckForTarget : Node
 {
     private Transform _transform;
     private List<ActorSpaceship> _possibleTargets;
+    private float _detectTargetRange;
 
-    public CheckForTarget(Transform transform, List<ActorSpaceship> possibleTargets)
+    public CheckForTarget(Transform transform, List<ActorSpaceship> possibleTargets, float detectTargetRange)
     {
         _transform = transform;
         _possibleTargets = possibleTargets;
+        _detectTargetRange = detectTargetRange;
     }
 
     public override NodeState Evaluate()
@@ -27,7 +29,7 @@ public class CheckForTarget : Node
             List<ActorSpaceship> targetsInRange = new List<ActorSpaceship>();
             foreach (ActorSpaceship possibleTarget in _possibleTargets)
             {
-                if(Vector3.Distance(_transform.position, possibleTarget.ship.transform.position) < SpaceshipBT.detectTargetRange)
+                if(Vector3.Distance(_transform.position, possibleTarget.ship.transform.position) < _detectTargetRange)
                 {
                     targetsInRange.Add(possibleTarget);
                     Debug.Log("possibleTarget: " + possibleTarget);
@@ -61,7 +63,7 @@ public class CheckForTarget : Node
             return state;
         // no active targets or target fled too far
         }
-        else if ((tGO != null && Vector3.Distance(_transform.position, tGO.transform.position) > SpaceshipBT.detectTargetRange))
+        else if ((tGO != null && Vector3.Distance(_transform.position, tGO.transform.position) > _detectTargetRange))
         {
             ClearData("target");
             Debug.Log("cleared target");
