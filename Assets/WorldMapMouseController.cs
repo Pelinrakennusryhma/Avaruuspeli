@@ -64,15 +64,7 @@ public class WorldMapMouseController : MonoBehaviour
 
     void Update()
     {
-
-
-
         MoveScreen();
-
-
-        // filter out asteroid fields properly
-
-        bool hitSomethingOtherThanAsteroidField = false;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
 
@@ -142,13 +134,13 @@ public class WorldMapMouseController : MonoBehaviour
                     float distanceToClick = (yZeroedOriginPos - yZeroedHitPoint).magnitude;
                     float distanceToReferenceObjectPos = (yZeroedOriginPos - yZeroedReferenceObjectPos).magnitude;
 
-                    Debug.Log("Magnitude to click pos is " + distanceToClick + " magnitude to reference object pos is " + distanceToReferenceObjectPos);
+                    //Debug.Log("Magnitude to click pos is " + distanceToClick + " magnitude to reference object pos is " + distanceToReferenceObjectPos);
 
                     if ((distanceToClick -distanceToReferenceObjectPos) >= -0.1f
                         && (distanceToClick - distanceToReferenceObjectPos) <= 0.2f)
                     {
                         canClickAsteroidField = true;
-                        Debug.LogError("FALLS WITHIN TOLERANCE");
+                        //Debug.LogError("FALLS WITHIN TOLERANCE");
                     }
 
                     if (canClickAsteroidField) 
@@ -156,7 +148,7 @@ public class WorldMapMouseController : MonoBehaviour
                         Vector3 hitPoint = new Vector3(Hits[i].point.x, 0, Hits[i].point.z);
                         MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObjectAndPosOnAsteroidField(detector, hitPoint);
                         detector.OnClick();
-                        Debug.LogWarning("We CLICKED ASTEROID FIELD");
+                        //Debug.LogWarning("We CLICKED ASTEROID FIELD");
                         break;
                     }
                 }
@@ -273,17 +265,17 @@ public class WorldMapMouseController : MonoBehaviour
                 break;
 
             case ZoomLevel.Universe:
-                zoomScale = 1000.0f;
+                zoomScale = 1500.0f;
                 cameraSpeed = 100.0f * Time.deltaTime;
                 break;
 
             case ZoomLevel.Galaxy:
-                zoomScale = 100.0f;
+                zoomScale = 150.0f;
                 cameraSpeed = 10.0f * Time.deltaTime;
                 break;
 
             case ZoomLevel.StarSystem:
-                zoomScale = 10.0f;
+                zoomScale = 15.0f;
                 cameraSpeed = 1.0f * Time.deltaTime;
                 break;
 
@@ -345,7 +337,7 @@ public class WorldMapMouseController : MonoBehaviour
     {
         if (newZoomLevel == ZoomLevel.None)
         {
-            Debug.LogError("Don't zoom in anymore");
+            //Debug.LogError("Don't zoom in anymore");
             return;
         }
 

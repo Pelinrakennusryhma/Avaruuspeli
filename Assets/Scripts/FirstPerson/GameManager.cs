@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public Camera TransitionalCamera;
 
+    public SaverLoader SaverLoader;
+
     public void Awake()
     {
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;        
             
             TransitionalCamera.gameObject.SetActive(false);
+            SaverLoader = GetComponentInChildren<SaverLoader>(true);
 
         }
 

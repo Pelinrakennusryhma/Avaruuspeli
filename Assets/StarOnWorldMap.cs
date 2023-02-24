@@ -34,7 +34,7 @@ public class StarOnWorldMap : MonoBehaviour
 
     public void OnStarClicked(WorldMapClickDetector.ClickableObjectType type)
     {
-        Debug.Log("Clicked star");
+        //Debug.Log("Clicked star");
         //WorldMapMouseController.Instance.SetZoomOrigin(transform.position);
         WorldMapMouseController.Instance.ZoomIn(transform.position,
                                                 WorldMapMouseController.ZoomLevel.StarSystem,
@@ -63,7 +63,7 @@ public class StarOnWorldMap : MonoBehaviour
         WorldMapMouseController.Instance.CurrentGalaxy.ShowStars();
         StarSystemOnFocus.OnBecomeUnfocused();
 
-        Debug.Log("On zoom out on star");
+        //Debug.Log("On zoom out on star");
     }
 
     public void DrawLinesBetweenStars(GalaxyOnWorldMap galaxy)
@@ -89,8 +89,8 @@ public class StarOnWorldMap : MonoBehaviour
             LinesBetweenStarSystems[i].enabled = true;
             LinesBetweenStarSystems[i].loop = false;
             LinesBetweenStarSystems[i].useWorldSpace = true;
-            LinesBetweenStarSystems[i].startWidth = 0.04f;
-            LinesBetweenStarSystems[i].endWidth = 0.04f;
+            LinesBetweenStarSystems[i].startWidth = 0.02f;
+            LinesBetweenStarSystems[i].endWidth = 0.02f;
             LinesBetweenStarSystems[i].material = UniverseController.Instance.LineRendererMat;
         }
 

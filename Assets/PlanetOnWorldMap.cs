@@ -33,12 +33,12 @@ public class PlanetOnWorldMap : MonoBehaviour
 
         //DrawPolygon(360, radius, CenterStar.transform.position, 0.01f, 0.01f);
         DrawCircle(CenterStar.gameObject, radius, 0.005f);
-        Debug.Log("Should draw orbit " + gameObject.name);
+        //Debug.Log("Should draw orbit " + gameObject.name);
     }
 
     public void HideOrbit()
     {
-        Debug.Log("Should hide orbit " + gameObject.name);
+        //Debug.Log("Should hide orbit " + gameObject.name);
     }
 
     // https://www.codinblack.com/how-to-draw-lines-circles-or-anything-else-using-linerenderer/

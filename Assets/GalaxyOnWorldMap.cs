@@ -19,24 +19,30 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
     private bool HasBeenInitted;
 
-    public void Awake()
+    public bool HasBeenGenerated;
+
+    public GameObject StarSystemPrefab;
+
+    public GameObject[] PlaceHolderStarSystems;
+
+    public void Start()
     {
-        if (!HasBeenInitted) 
+        if (!HasBeenInitted)
         {
-            Init();
+            //Init();
         }
 
-        HideStarsAndShowGalaxy();
+        //HideStarsAndShowGalaxy();
     }
 
-    private void Init()
+    public void Init()
     {
         ClickDetector = GetComponent<WorldMapClickDetector>();
         ClickDetector.OnObjectClicked -= OnGalaxyClicked;
         ClickDetector.OnObjectClicked += OnGalaxyClicked;
 
-        StarSystems = GetComponentsInChildren<StarOnWorldMap>(true);
-
+        HasBeenInitted = true;        
+        
 
     }
 
@@ -108,6 +114,13 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
     public void ShowStars()
     {
+        Debug.LogError("Now would be a good time to init stars");
+
+        if (!HasBeenGenerated)
+        {
+            GenerateGalaxy();
+        }
+
         for (int i = 0; i < StarSystems.Length; i++) 
         {
             StarSystems[i].gameObject.SetActive(true);
@@ -157,7 +170,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
             LinesToOtherGalaxies[i].gameObject.SetActive(false);
         }
 
-        Debug.LogError("Setting line renderers inactive. Array length is " + LinesToOtherGalaxies.Length);
+        //Debug.LogError("Setting line renderers inactive. Array length is " + LinesToOtherGalaxies.Length);
     }
 
     public void HideStarLineRenderers()
@@ -166,5 +179,59 @@ public class GalaxyOnWorldMap : MonoBehaviour
         {
             StarSystems[i].HideLinesBetweenStars();
         }
+    }
+
+    public void GenerateGalaxy()
+    {
+        if (!HasBeenInitted)
+        {
+            Init();
+        }
+
+        bool successfulLoad = GameManager.Instance.SaverLoader.LoadGalaxy();
+
+        for (int i = 0; i < PlaceHolderStarSystems.Length; i++)
+        {
+            DestroyImmediate(PlaceHolderStarSystems[i].gameObject);
+        }
+
+        if (!successfulLoad) 
+        {
+            int amountOfStars = Random.Range(6, 13);
+            //amountOfStars = 12;
+            float distance = 0.0f;
+
+            int segments = Random.Range(0, 361);
+
+            for (int i = 0; i < amountOfStars; i++)
+            {
+
+                //Vector3 pos = transform.position + Vector3.forward * distance;
+
+                GameObject objectOriginal = StarSystemPrefab;
+                GameObject star = Instantiate(objectOriginal, transform.position, Quaternion.identity, transform);
+                star.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                //star.transform.position = pos;
+
+
+                //float rad = Mathf.Deg2Rad * (360f / segments);
+                float rad = Mathf.Deg2Rad * Random.Range(0, 360.0f);
+                float radius = distance;
+                star.transform.position = transform.position + new Vector3(Mathf.Sin(rad) * radius, 0, Mathf.Cos(rad) * radius);
+
+                distance += Random.Range(2.0f, 3.0f);
+                segments += Random.Range(90, 125);
+                //Debug.Log("Spawned a star " + i);
+            }
+
+            GameManager.Instance.SaverLoader.SaveGalaxy();
+
+        }
+
+        StarSystems = GetComponentsInChildren<StarOnWorldMap>(true);
+
+       // Debug.LogError("NOW WOULD BE A GOOD TIME AND PLACE TO GENERATE A GALAXY");
+
+        HasBeenGenerated = true;
     }
 }

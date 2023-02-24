@@ -28,7 +28,7 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
 
     public void OnAsteroidFieldClicked(WorldMapClickDetector.ClickableObjectType objectType)
     {
-        Debug.LogError("Clicked an asteroid field collider");
+        //Debug.LogError("Clicked an asteroid field collider");
     }
 
     public void SpawnRocks()

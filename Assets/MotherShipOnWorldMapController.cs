@@ -23,6 +23,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
             Debug.LogError("We got two instances of mothership. This is not good and should be fixed probably");
         }
         Instance = this;
+        SetMaterialsToAlwaysRenderOnTop();
     }
 
     public void Start()
@@ -48,20 +49,20 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
                 WorldMapCamera.Instance.SetToUniverseOffset(transform.position);
                 localPosY = 0f;
-                Debug.LogWarning("Set Ship to universe scale");
+                //Debug.LogWarning("Set Ship to universe scale");
 
                 break;
             case WorldMapMouseController.ZoomLevel.Galaxy:
                 transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 WorldMapCamera.Instance.SetToGalaxyOffset(transform.position);
                 localPosY = 0f;
-                Debug.LogWarning("Set Ship to galaxy scale");
+                //Debug.LogWarning("Set Ship to galaxy scale");
                 break;
             case WorldMapMouseController.ZoomLevel.StarSystem:
                 transform.localScale = new Vector3(0.015f, 0.015f, 0.015f);
                 WorldMapCamera.Instance.SetToStarSystemOffset(transform.position);
                 localPosY = 0.05f;
-                Debug.LogWarning("Set Ship to star system scale");
+                //Debug.LogWarning("Set Ship to star system scale");
                 break;
             default:
                 break;
@@ -124,7 +125,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     {
         CurrentTargetClickableObject = clickableObject;
         CurrentAsteroidFieldPos = new Vector3(pos.x, 0, pos.z);
-        Debug.LogError("Set the pos for asteroid field " + Time.time);
+        //Debug.LogError("Set the pos for asteroid field " + Time.time);
 
     }
 
@@ -217,5 +218,33 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void SetMaterialsToAlwaysRenderOnTop()
+    {
+        //MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        //Material[] allMaterials = meshRenderer.materials;
+
+        ////for (int i = 0; i < allMaterials.Length; i++) 
+        ////{
+        ////    allMaterials[i].renderQueue = 4000;
+        ////    allMaterials[i].SetFloat("_Ztest", 1.0f);
+        ////    //allMaterials[i].
+        ////    //allMaterials[i].
+        ////    Debug.Log("Material on mothership is " + allMaterials[i].name);
+        ////}
+
+        //for (int i = 0; i < GetComponent<MeshRenderer>().materials.Length; i++)
+        //{
+        //    GetComponent<MeshRenderer>().materials[i].renderQueue = 2051;
+        //    GetComponent<MeshRenderer>().materials[i].SetFloat("_Ztest", 0.0f);
+        //    //allMaterials[i].
+        //    //allMaterials[i].
+        //    Debug.Log("Material on mothership is " + GetComponent<MeshRenderer>().materials[i].name + " render queue is " + GetComponent<MeshRenderer>().materials[i].renderQueue);
+        //}
+
+
+
+        //Debug.LogError("WE WANT TO RENDER MOTHERSHIP ON TOP OF EVERYTHING, BUT CURRENTLY HAVEN'T FOUND A WAY TO DO THIS. MAYBE SETUP TWO CAMERAS?");
     }
 }
