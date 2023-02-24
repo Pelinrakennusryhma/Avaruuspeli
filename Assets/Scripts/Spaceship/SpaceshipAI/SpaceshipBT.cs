@@ -53,7 +53,7 @@ public class SpaceshipBT : BTree
                     new Sequence(new List<Node>
                     {
                         new CheckForHit(spaceshipEvents),
-                        new TaskEvadeAttacker(enemyControls)
+                        new TaskEvadeAttacker(enemyControls, shipTransform)
                     }),
                     new Sequence(new List<Node>
                     {

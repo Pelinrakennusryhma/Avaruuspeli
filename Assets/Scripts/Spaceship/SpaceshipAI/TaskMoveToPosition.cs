@@ -19,7 +19,7 @@ public class TaskMoveToPosition : Node
         _enemyControls = enemyControls;
 
         _destinations.Add(shipTransform.position);
-        _destinations.Add(shipTransform.position + shipTransform.forward * 200);
+        _destinations.Add(shipTransform.position + shipTransform.forward * 500);
 
     }
 

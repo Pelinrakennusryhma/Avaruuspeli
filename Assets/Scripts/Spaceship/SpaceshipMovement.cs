@@ -24,7 +24,7 @@ public class SpaceshipMovement : MonoBehaviour
     [SerializeField, Range(0.001f, 0.999f)]
     private float leftRightGlideReduction = 0.111f;
 
-    public float boostMultiplier = 1f;
+    public float speedMultiplier = 1f;
 
     private float glide = 0f;
     private float verticalGlide = 0f;
@@ -53,17 +53,18 @@ public class SpaceshipMovement : MonoBehaviour
 
     void HandleMovement()
     {
+        Debug.Log(Time.fixedDeltaTime);
         // Roll
-        rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque * Time.fixedDeltaTime);
+        rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque);
         // Pitch
-        rb.AddRelativeTorque(mass * Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.fixedDeltaTime);
+        rb.AddRelativeTorque(mass * Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque);
         // Yaw
-        rb.AddRelativeTorque(mass * Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Time.fixedDeltaTime);
+        rb.AddRelativeTorque(mass * Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque);
 
         // Thrust
         if(thrust1D > 0.1f || thrust1D < -0.1f)
         {
-            float currentThrust = thrust * boostMultiplier;
+            float currentThrust = thrust * speedMultiplier;
 
             // disable boost when going backwards
             if (thrust1D < -0.1f)
@@ -71,22 +72,22 @@ public class SpaceshipMovement : MonoBehaviour
                 currentThrust = thrust;
             }
 
-            rb.AddRelativeForce(mass * Vector3.forward * thrust1D * currentThrust * Time.fixedDeltaTime);
+            rb.AddRelativeForce(mass * Vector3.forward * thrust1D * currentThrust);
             glide = thrust;
         } else
         {
-            rb.AddRelativeForce(mass * Vector3.forward * glide * Time.fixedDeltaTime);
+            rb.AddRelativeForce(mass * Vector3.forward * glide);
             glide *= thrustGlideReduction;
         }
 
         // Up/Down
         if(upDown1D > 0.1f || upDown1D < -0.1f)
         {
-            rb.AddRelativeForce(mass * Vector3.up * upDown1D * upThrust * Time.fixedDeltaTime);
+            rb.AddRelativeForce(mass * Vector3.up * upDown1D * upThrust);
             verticalGlide = upDown1D * upThrust;
         } else
         {
-            rb.AddRelativeForce(mass * Vector3.up * verticalGlide * Time.fixedDeltaTime);
+            rb.AddRelativeForce(mass * Vector3.up * verticalGlide);
             verticalGlide *= upDownGlideReduction;
         }
 
@@ -94,12 +95,12 @@ public class SpaceshipMovement : MonoBehaviour
 
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
-            rb.AddRelativeForce(mass * Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
+            rb.AddRelativeForce(mass * Vector3.right * strafe1D * strafeThrust);
             horizontalGlide = strafe1D * strafeThrust;
         }
         else
         {
-            rb.AddRelativeForce(mass * Vector3.right * horizontalGlide * Time.fixedDeltaTime);
+            rb.AddRelativeForce(mass * Vector3.right * horizontalGlide);
             horizontalGlide *= leftRightGlideReduction;
         }
     }
