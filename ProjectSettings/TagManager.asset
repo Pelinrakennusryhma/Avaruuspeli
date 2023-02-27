@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PickUpTrigger
+  - CatalogItem
+  - InfoPanel
   layers:
   - Default
   - TransparentFX
@@ -12,12 +13,12 @@ TagManager:
   - 
   - Water
   - UI
-  - PickUppable
+  - ContextMenu
   - 
   - 
   - 
-  - Damageable
-  - Obstacle
+  - 
+  - 
   - 
   - 
   - 
