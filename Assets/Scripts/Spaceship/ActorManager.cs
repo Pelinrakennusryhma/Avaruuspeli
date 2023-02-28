@@ -12,6 +12,10 @@ public enum FactionEnum
 
 public class ActorManager : MonoBehaviour 
 {
+    public bool SceneCleared
+    {
+        get { return CheckIfSceneCleared(); }
+    }
     [SerializeField]
     List<Faction> factions;
     Faction playerFaction;
@@ -64,14 +68,19 @@ public class ActorManager : MonoBehaviour
             }
         }
 
-        CheckIfSceneCleared();
-    }
-
-    void CheckIfSceneCleared()
-    {
-        if(playerFaction.hostileActors.Count <= 0)
+        if (SceneCleared)
         {
             GameEvents.instance.CallEventEnemiesKilled();
         }
     }
+
+    bool CheckIfSceneCleared()
+    {
+        if(playerFaction.hostileActors.Count <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

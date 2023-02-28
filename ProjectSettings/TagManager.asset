@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickUpTrigger
   - ProjectileParent
+  - PlayerShip
   layers:
   - Default
   - TransparentFX

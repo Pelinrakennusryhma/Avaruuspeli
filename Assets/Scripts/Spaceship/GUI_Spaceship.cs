@@ -24,6 +24,7 @@ public class GUI_Spaceship : MonoBehaviour
         GameEvents.instance.EventPlayerEnteredPromptTrigger.AddListener(OnPromptTriggerEnter);
         GameEvents.instance.EventPlayerExitedPromptTrigger.AddListener(OnPromptTriggerExit);
         GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
+        GameEvents.instance.EventPlayerLanded.AddListener(OnPlayerLanded);
         ShowControls();
     }
 
@@ -34,6 +35,12 @@ public class GUI_Spaceship : MonoBehaviour
     }
 
     void OnPromptTriggerExit()
+    {
+        promptText.gameObject.SetActive(false);
+        promptText.text = "";
+    }
+
+    void OnPlayerLanded()
     {
         promptText.gameObject.SetActive(false);
         promptText.text = "";

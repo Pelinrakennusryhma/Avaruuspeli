@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Asteroids/AsteroidLauncher.unity
     guid: 8fbdbc4789f59a947b5545af47b1005e
+  - enabled: 1
+    path: Assets/Scenes/Asteroid1_test.unity
+    guid: 0816817e40ed03946ad1391eed05293f
   m_configObjects: {}

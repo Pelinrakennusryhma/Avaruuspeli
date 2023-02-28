@@ -19,6 +19,8 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventPlayerExitedPromptTrigger;
     public UnityEvent EventEnemiesKilled;
     public UnityEvent EventPlayerTriedLanding;
+    public UnityEvent EventPlayerLanded;
+    public UnityEvent EventPlayerLeftAsteroid;
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -56,5 +58,15 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerTriedLanding()
     {
         EventPlayerTriedLanding.Invoke();
+    }
+
+    public void CallEventPlayerLanded()
+    {
+        EventPlayerLanded.Invoke();
+    }
+
+    public void CallEventPlayerLeftAstroid()
+    {
+        EventPlayerLeftAsteroid.Invoke();
     }
 }

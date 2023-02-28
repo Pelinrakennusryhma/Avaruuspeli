@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AsteroidSpawner : MonoBehaviour
 {
+    [SerializeField]
+    string mineableScene;
     [SerializeField]
     private GameObject[] asteroidPrefabs;
     [SerializeField]
@@ -22,6 +25,8 @@ public class AsteroidSpawner : MonoBehaviour
 
     void SpawnAsteroids()
     {
+        //SceneManager.LoadScene(mineableScene, LoadSceneMode.Additive);
+
         for (int i = 0; i < amountOfAsteroids; i++)
         {
             GameObject asteroidToSpawn = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];

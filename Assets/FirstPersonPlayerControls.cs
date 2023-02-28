@@ -39,7 +39,12 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //playerInput.SwitchCurrentActionMap("FirstPersonControls");
         //Debug.Log("Current action map is " + playerInput.currentActionMap.ToString());
         UICanvas.gameObject.SetActive(true);
-        
+        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+    }
+
+    void OnLeaveAsteroid()
+    {
+        gameObject.SetActive(false);
     }
 
     public void OnHorizontal(InputAction.CallbackContext value)

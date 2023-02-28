@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
+        Debug.Log("awake?");
         if (Instance == null)
         {
             Cursor.visible = false;
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLeaveAsteroidSurface()
     {
-        SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene("SampleScene");
+        GameEvents.instance.CallEventPlayerLeftAstroid();
     }
 }
