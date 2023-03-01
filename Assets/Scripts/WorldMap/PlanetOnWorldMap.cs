@@ -4,22 +4,79 @@ using UnityEngine;
 
 public class PlanetOnWorldMap : MonoBehaviour
 {
+    public PlanetData PlanetData;
+
+    public StarSystemOnFocus ParentStarSystem;
+
     public CenterStarOnWorldMap CenterStar;
 
     public LineRenderer LineRenderer;
 
-    public void Init(CenterStarOnWorldMap centerStar)
+    public WorldMapClickDetector ClickDetector;
+
+    public void Init(CenterStarOnWorldMap centerStar,
+                     StarSystemOnFocus parentStarSystem)
     {
         CenterStar = centerStar;
+        ParentStarSystem = parentStarSystem;
+
+        ClickDetector = GetComponent<WorldMapClickDetector>();
+        ClickDetector.OnObjectClicked -= OnPlanetClicked;
+        ClickDetector.OnObjectClicked += OnPlanetClicked;
     }
 
-    public void SetInitialStartingPosition()
+    public void OnPlanetClicked(WorldMapClickDetector.ClickableObjectType type)
     {
-        float radius = (CenterStar.transform.position - transform.position).magnitude;
-        transform.position = CenterStar.transform.position;
+        GameManager.Instance.CurrentPlanet = this;
+        GameManager.Instance.CurrentPlanetData = PlanetData;
 
-        transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
-        transform.position = CenterStar.transform.position + -transform.forward * radius;
+        //Debug.Log("Planet listens to a click now");
+    }
+
+    public void SetPlanetData(PlanetData data)
+    {
+        PlanetData = data;
+    }
+
+    public void SetInitialStartingPosition(bool setInitialStartingPos)
+    {
+        if (setInitialStartingPos)
+        {
+            float radius = (CenterStar.transform.position - transform.position).magnitude;
+            transform.position = CenterStar.transform.position;
+
+            transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
+            transform.position = CenterStar.transform.position + -transform.forward * radius;
+
+            PlanetData.SetPosRotAndScale(transform.position,
+                                         transform.rotation,
+                                         transform.localScale);  
+            
+            GameManager.Instance.SaverLoader.SavePlanet(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                                        ParentStarSystem.StarSystemData.ID,
+                                                        PlanetData);
+
+        }
+
+        else
+        {
+            transform.position = PlanetData.GetPos();
+            transform.rotation = PlanetData.GetRot();
+            transform.localScale = PlanetData.GetLocalScale();
+
+            //Debug.Log("We are loading and all that jazz");
+            //float radius = (CenterStar.transform.position - transform.position).magnitude;
+            //transform.position = CenterStar.transform.position;
+
+            //transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
+            //transform.position = CenterStar.transform.position + -transform.forward * radius;
+
+            //PlanetData.SetPosRotAndScale(transform.position,
+            //                             transform.rotation,
+            //                             transform.localScale);
+        }
+
+
     }
 
     public void DrawOrbit()

@@ -52,10 +52,10 @@ public class WorldMapClickDetector : MonoBehaviour
                     MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
                     //MotherShipOnWorldMapController.Instance.MoveToStarSystemPos();
 
-                    if (MotherShipOnWorldMapController.Instance.CheckIfPlanetOrStarPositionIsWithnTolerance()) 
+                    if (MotherShipOnWorldMapController.Instance.CheckIfPlanetOrStarPositionIsWithinTolerance()) 
                     {
                         GameManager.Instance.EnterPlanet();
-                        Debug.LogError("CLICKED PLANET");
+                        //Debug.LogError("CLICKED PLANET");
                     }
 
                     break;
@@ -79,7 +79,7 @@ public class WorldMapClickDetector : MonoBehaviour
                     if (MotherShipOnWorldMapController.Instance.CheckIfAsteroidFieldPositionIsWithinTolerance()) 
                     {
                         GameManager.Instance.EnterAsteroidField();
-                        Debug.LogError("CLICKED ASTEROID FIELD");
+                        //Debug.LogError("CLICKED ASTEROID FIELD");
                     }
                         //Debug.Log("WE SHOULD MOVE TO ASTEROID FIELD POS");
                     break;
@@ -107,6 +107,10 @@ public class WorldMapClickDetector : MonoBehaviour
             {
                 Debug.Log("REACT TO MOUSE BEING");
             }
+            MotherShipOnWorldMapController.Instance.FuelSystem.EvaluateNeededFuel(new Vector3(transform.position.x, 
+                                                                                  0, 
+                                                                                  transform.position.z));
+
             MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(this);
         }
     }

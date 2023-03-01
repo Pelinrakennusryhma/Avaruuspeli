@@ -344,6 +344,8 @@ public class WorldMapMouseController : MonoBehaviour
         CurrentGalaxy = currentGalaxy;
         CurrentStarSystem = currentStar;
 
+
+
         CurrentZoomLevel = newZoomLevel;
 
         float scale = 1.0f;
@@ -434,6 +436,6 @@ public class WorldMapMouseController : MonoBehaviour
 
         MotherShipController.OnZoom(CurrentZoomLevel, origin);
 
-        Debug.Log("Should zoom out");
+        //Debug.Log("Should zoom out");
     }
 }

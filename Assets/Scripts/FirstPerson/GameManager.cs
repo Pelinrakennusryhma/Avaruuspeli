@@ -22,9 +22,30 @@ public class GameManager : MonoBehaviour
 
     public SaverLoader SaverLoader;
 
+    public GalaxyOnWorldMap CurrentGalaxy;
+    public StarSystemOnFocus CurrentStarSystem;
+    public PlanetOnWorldMap CurrentPlanet;
+    public AsteroidFieldOnWorldMap CurrentAsteroidField;
+
+
+    public GalaxyData CurrentGalaxyData;
+    public StarSystemData CurrentStarSystemData;
+    public PlanetData CurrentPlanetData;
+    public AsteroidFieldData CurrentAsteroidFieldData;
+
+    public enum TypeOfScene
+    {
+        None = 0,
+        WorldMap = 1,
+        Planet = 2,
+        AsteroidField = 3
+    }
+
+    public TypeOfScene IncomingSceneType;
+
     public void Awake()
     {
-
+        IncomingSceneType = TypeOfScene.None;
         if (Instance == null)
         {
             //Cursor.visible = false;
@@ -204,6 +225,9 @@ public class GameManager : MonoBehaviour
 
     public void GoBackToWorldMap()
     {
+
+        IncomingSceneType = TypeOfScene.WorldMap;
+
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
 
         if (WorldMapScene.Instance != null)
@@ -223,20 +247,23 @@ public class GameManager : MonoBehaviour
         IsOnWorldMap = true;
         WaitingForSceneLoad = true;
         FramesPassedTillLoadScenes = 0;
+        IncomingSceneType = TypeOfScene.None;
 
         Debug.Log("Going back to world map");
     }
     public void EnterAsteroidField()
     {
-        Debug.LogError("ENTER ASTEROID FIELD");
+        Debug.LogWarning("ENTER ASTEROID FIELD");
 
+        IncomingSceneType = TypeOfScene.AsteroidField;
         StackAndLoadAndLaunchScene("SampleScene", 1);
     }
 
     public void EnterPlanet()
     {
-        Debug.LogError("ENTER PLANET");
+        Debug.LogWarning("ENTER PLANET");
 
+        IncomingSceneType = TypeOfScene.Planet;
         StackAndLoadAndLaunchScene("PlanetTestLauncher", 2);
     }
 
@@ -255,11 +282,26 @@ public class GameManager : MonoBehaviour
 
     public void ActivateStackedScene()
     {
-
+        Debug.Log("We are activating incoming scne of type " + IncomingSceneType.ToString());
         WaitingForSceneLoad = false;
         FramesPassedTillLoadScenes = -1;
         SceneManager.SetActiveScene(ActiveStackedScene);
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
+
+        if (IncomingSceneType == TypeOfScene.Planet)
+        {
+            PlanetLauncher planetLauncher = FindObjectOfType<PlanetLauncher>();
+            planetLauncher.LaunchPlanet(CurrentGalaxy.GalaxyData,
+                                        CurrentStarSystem.StarSystemData,
+                                        CurrentPlanet.PlanetData);
+        }
+
+        else if (IncomingSceneType == TypeOfScene.AsteroidField)
+        {
+            Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
+        }
+
+        IncomingSceneType = TypeOfScene.None;
     }
 
     public void SetSceneWaitingForNextFrame()
@@ -272,5 +314,6 @@ public class GameManager : MonoBehaviour
     public void OnEnterWorldMap()
     {
         IsOnWorldMap = true;
+        IncomingSceneType = TypeOfScene.None;
     }
 }

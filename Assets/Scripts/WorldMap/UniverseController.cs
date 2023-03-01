@@ -19,8 +19,12 @@ public class UniverseController : MonoBehaviour
 
     public bool HasBeenGenerated;
 
+    public List<StarSystemData> StarSystems = new List<StarSystemData>();
+
     public void Start()
     {
+
+
         if (!HasBeenInitted) 
         {
             Init();
@@ -49,10 +53,16 @@ public class UniverseController : MonoBehaviour
             }
         }
 
+        else
+        {
+            GenerateUniverseFromSaveFile();
+            Debug.LogWarning("Do not generate a new universe. We have a valid save file");
+        }
+
         AllGalaxies = GetComponentsInChildren<GalaxyOnWorldMap>(true);
         HasBeenInitted = true;
 
-        Debug.LogError("Initting universe");
+        //Debug.LogError("Initting universe");
     }
 
     public bool TryLoadUniverse()
@@ -127,6 +137,7 @@ public class UniverseController : MonoBehaviour
             DestroyImmediate(PlaceHolderGalaxies[i].gameObject);
         }
 
+
         int amountOfGalaxies = Random.Range(10, 10);
         //amountOfStars = 12;
         float distance = 0.0f;
@@ -153,21 +164,83 @@ public class UniverseController : MonoBehaviour
             //Debug.Log("Spawned a star " + i);
         }
 
-        GameManager.Instance.SaverLoader.SaveUniverse();
 
         AllGalaxies = GetComponentsInChildren<GalaxyOnWorldMap>(true);
         
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
-            AllGalaxies[i].Init();
+            GalaxyData galaxyData = new GalaxyData();
+            galaxyData.ID = i + 1;
+            galaxyData.SetPosRotAndScale(AllGalaxies[i].transform.position,
+                                         AllGalaxies[i].transform.rotation,
+                                         AllGalaxies[i].transform.localScale);
+
+            AllGalaxies[i].Init(galaxyData);
         }
+
+        List<GalaxyData> allGalaxies = new List<GalaxyData>();
+
+        for (int i = 0; i < AllGalaxies.Length; i++)
+        {
+            allGalaxies.Add(AllGalaxies[i].GalaxyData);
+        }
+
+        GameManager.Instance.SaverLoader.SaveUniverse(allGalaxies);
 
         //StarSystems = GetComponentsInChildren<StarOnWorldMap>(true);
 
-        Debug.LogError("NOW WOULD BE A GOOD TIME AND PLACE TO GENERATE A GALAXY");
+        //Debug.LogError("NOW WOULD BE A GOOD TIME AND PLACE TO GENERATE A GALAXY");
 
         HasBeenGenerated = true;
 
         Debug.Log("Generating new universe");
+    }
+
+    public void GenerateUniverseFromSaveFile()
+    {
+        for (int i = 0; i < PlaceHolderGalaxies.Length; i++)
+        {
+            DestroyImmediate(PlaceHolderGalaxies[i].gameObject);
+        }
+
+        //Debug.LogWarning("We are here trying to recreate a previous universe");
+
+        List<GalaxyData> savedGalaxies = GameManager.Instance.SaverLoader.GetSavedGalaxyDatas();
+        int amountOfGalaxies = savedGalaxies.Count;
+
+        for (int i = 0; i < savedGalaxies.Count; i++)
+        {
+            //Vector3 pos = transform.position + Vector3.forward * distance;
+
+            GameObject objectOriginal = GalaxyPrefab;
+
+            GameObject galaxy = Instantiate(objectOriginal, 
+                                            transform.position, 
+                                            Quaternion.identity, 
+                                            transform);
+
+            galaxy.transform.localScale = savedGalaxies[i].GetLocalScale();
+
+            galaxy.transform.position = savedGalaxies[i].GetPos();
+            galaxy.transform.rotation = savedGalaxies[i].GetRot();
+        }
+
+        AllGalaxies = GetComponentsInChildren<GalaxyOnWorldMap>(true);
+
+        if (savedGalaxies.Count != AllGalaxies.Length)
+        {
+            Debug.LogError("We have different length for two arrays, that should be the same");
+        }
+
+        for (int i = 0; i < AllGalaxies.Length; i++)
+        {
+
+
+            GalaxyData galaxyData = savedGalaxies[i];
+
+            AllGalaxies[i].Init(galaxyData);
+        }
+
+        HasBeenGenerated = true;
     }
 }

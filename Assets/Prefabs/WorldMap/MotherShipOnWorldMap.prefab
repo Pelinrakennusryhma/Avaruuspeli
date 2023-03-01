@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 616607656443822536}
   - component: {fileID: 3416638015937590530}
   - component: {fileID: 4062728985959563431}
-  m_Layer: 0
+  - component: {fileID: 6789565820884117789}
+  m_Layer: 6
   m_Name: MotherShipOnWorldMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,11 +65,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7441739254985032485, guid: bffe39685c39b8b4bb4b2390b3e9f3ff, type: 3}
-  - {fileID: 5149823617281568338, guid: bffe39685c39b8b4bb4b2390b3e9f3ff, type: 3}
-  - {fileID: -3487412200620010061, guid: bffe39685c39b8b4bb4b2390b3e9f3ff, type: 3}
-  - {fileID: 5734121984430095898, guid: bffe39685c39b8b4bb4b2390b3e9f3ff, type: 3}
-  - {fileID: 6628970981105586780, guid: bffe39685c39b8b4bb4b2390b3e9f3ff, type: 3}
+  - {fileID: 2100000, guid: 0a0313ea9db4d54448295f0b50f45fec, type: 2}
+  - {fileID: 2100000, guid: cac7f1f820f33314ebd64ebbd98b112b, type: 2}
+  - {fileID: 2100000, guid: 813bc36c9fd737145a44069048c72b36, type: 2}
+  - {fileID: 2100000, guid: 1bbff57f1383094449fca032f772e51e, type: 2}
+  - {fileID: 2100000, guid: b26634ba2b587c1489ecea39dc559d3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,6 +103,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ada8b53855f5547b46001b1c9b3488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentUniversePos: {x: 0, y: 0, z: 0}
+  CurrentGalaxyPos: {x: 0, y: 0, z: 0}
+  CurrentStarSystemPos: {x: 0, y: 0, z: 0}
+  CurrentAsteroidFieldPos: {x: 0, y: 0, z: 0}
+  CurrentTargetClickableObject: {fileID: 0}
+  IsOnCurrentClickableObject: 0
+--- !u!114 &6789565820884117789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3777018551037170903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c64d2c131cdf849b124794c9c09a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UniverseFuel: 100000
+  GalaxyFuel: 100000
+  MotherShipController: {fileID: 4062728985959563431}
 --- !u!1 &3960216850388150226
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +169,7 @@ GameObject:
   - component: {fileID: 5426698359749872240}
   - component: {fileID: 6231065131349890096}
   - component: {fileID: 557225051}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

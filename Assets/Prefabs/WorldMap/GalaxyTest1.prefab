@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3698726895724081307
 Transform:
   m_ObjectHideFlags: 0
@@ -229,6 +229,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6a4763a69f857488df3c1170f449a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GalaxyData:
+    posX: 0
+    posY: 0
+    posZ: 0
+    rotX: 0
+    rotY: 0
+    rotZ: 0
+    rotW: 0
+    localScaleX: 0
+    localScaleY: 0
+    localScaleZ: 0
+    Name: GALAXY
+    ID: -1
+    Test1: 1000
+    Test2: 1000
+    Test: 0
+    StarSystems: []
   ClickDetector: {fileID: 0}
   StarSystems: []
   GalaxyMesh: {fileID: 6268700290656387615}

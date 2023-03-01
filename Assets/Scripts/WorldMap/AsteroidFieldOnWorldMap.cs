@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class AsteroidFieldOnWorldMap : MonoBehaviour
 {
+    public AsteroidFieldData AsteroidFieldData;
+
+    public StarSystemOnFocus ParentStarSystem;
+
+
     public WorldMapClickDetector WorldMapClickDetector;
 
     public GameObject ReferenceObject;
@@ -26,8 +31,17 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
 
     }
 
+    public void SetAsteroidFieldData(AsteroidFieldData data,
+                                     StarSystemOnFocus parentStarSystem)
+    {
+        AsteroidFieldData = data;
+        ParentStarSystem = parentStarSystem;
+    }
+
     public void OnAsteroidFieldClicked(WorldMapClickDetector.ClickableObjectType objectType)
     {
+        GameManager.Instance.CurrentAsteroidField = this;
+        GameManager.Instance.CurrentAsteroidFieldData = AsteroidFieldData;
         //Debug.LogError("Clicked an asteroid field collider");
     }
 
@@ -40,7 +54,7 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
 
         RocksHaveBeenSpawned = true;
 
-        Debug.LogError("SPAWN ROCKS " + Time.time);
+        //Debug.LogError("SPAWN ROCKS " + Time.time);
     }
 
     public void DoTheInstantation()

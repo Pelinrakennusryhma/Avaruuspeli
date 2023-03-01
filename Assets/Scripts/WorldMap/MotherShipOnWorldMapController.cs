@@ -16,6 +16,8 @@ public class MotherShipOnWorldMapController : MonoBehaviour
 
     public bool IsOnCurrentClickableObject;
 
+    public MotherShipFuelSystem FuelSystem;
+
     public void Awake()
     {
         if (Instance != null)
@@ -23,6 +25,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
             Debug.LogError("We got two instances of mothership. This is not good and should be fixed probably");
         }
         Instance = this;
+        FuelSystem = GetComponent<MotherShipFuelSystem>();
         SetMaterialsToAlwaysRenderOnTop();
     }
 
@@ -204,7 +207,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         }
     }
 
-    public bool CheckIfPlanetOrStarPositionIsWithnTolerance()
+    public bool CheckIfPlanetOrStarPositionIsWithinTolerance()
     {
         Vector3 yZeroedPos = new Vector3(transform.position.x, 0, transform.position.z);
         Vector3 yZeroedAsteroidFieldPos = new Vector3(CurrentStarSystemPos.x, 0, CurrentStarSystemPos.z);
