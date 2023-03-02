@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,35 @@ public class CMCameraManager : MonoBehaviour
     private GameObject[] vCams;
     [SerializeField]
     private int currentCameraID = 0;
+    private int cachedShipCamID;
 
+    void Awake()
+    {
+        GameEvents.instance.EventPlayerLanded.AddListener(OnPlayerLanded);
+        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+    }
     void Start()
     {
+        SetActiveCamera();
+    }
+
+    void OnPlayerLanded()
+    {
+        cachedShipCamID = currentCameraID;
+        currentCameraID = 2;
+        SetActiveCamera();
+    }
+
+    void OnPlayerLeftAsteroid()
+    {
+        currentCameraID = cachedShipCamID;
         SetActiveCamera();
     }
 
     public void OnChangeCamera()
     {
         currentCameraID++;
-        if(currentCameraID >= vCams.Length)
+        if(currentCameraID > 1)
         {
             currentCameraID = 0;
         }

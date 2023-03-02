@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("awake?");
         if (Instance == null)
         {
             Cursor.visible = false;

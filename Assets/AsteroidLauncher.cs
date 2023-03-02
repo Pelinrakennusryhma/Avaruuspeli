@@ -87,7 +87,7 @@ public class AsteroidLauncher : MonoBehaviour
                 break;
 
             case AsteroidType.Asteroid01a:
-                SceneManager.LoadScene("Asteroid1");
+                SceneManager.LoadScene("Asteroid1", LoadSceneMode.Additive);
                 break;
 
             case AsteroidType.Asteroid01b:

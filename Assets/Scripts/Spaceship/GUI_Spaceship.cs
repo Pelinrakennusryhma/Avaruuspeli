@@ -17,14 +17,17 @@ public class GUI_Spaceship : MonoBehaviour
     Button restartButton;
     [SerializeField]
     TMP_Text promptText;
+    [SerializeField]
+    GameObject spaceshipHUD;
     public string landKey = "";
-    void Start()
+    void Awake()
     {
         promptText.text = "";
         GameEvents.instance.EventPlayerEnteredPromptTrigger.AddListener(OnPromptTriggerEnter);
         GameEvents.instance.EventPlayerExitedPromptTrigger.AddListener(OnPromptTriggerExit);
         GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
         GameEvents.instance.EventPlayerLanded.AddListener(OnPlayerLanded);
+        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
         ShowControls();
     }
 
@@ -44,6 +47,13 @@ public class GUI_Spaceship : MonoBehaviour
     {
         promptText.gameObject.SetActive(false);
         promptText.text = "";
+
+        spaceshipHUD.SetActive(false);
+    }
+
+    void OnPlayerLeftAsteroid()
+    {
+        spaceshipHUD.SetActive(true);
     }
 
     void OnPlayerSpaceshipDeath()
