@@ -39,7 +39,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //playerInput.SwitchCurrentActionMap("FirstPersonControls");
         //Debug.Log("Current action map is " + playerInput.currentActionMap.ToString());
         UICanvas.gameObject.SetActive(true);
-        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
     }
 
     void OnLeaveAsteroid()
@@ -337,6 +337,14 @@ public class FirstPersonPlayerControls : MonoBehaviour
         }
 
         //Debug.Log("On options pressed");
+    }
+
+    public void OnLeave(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameEvents.Instance.CallEventPlayerTriedLeaving();
+        }
     }
 
     public void LateUpdate()

@@ -13,7 +13,13 @@ public class PlayerModeController : MonoBehaviour
             playerShip = GameObject.FindGameObjectWithTag("PlayerShip");
         }
 
-        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+        GameEvents.Instance.EventPlayerLanded.AddListener(OnLand);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+    }
+
+    void OnLand(MineableAsteroidTrigger asteroid)
+    {
+        
     }
 
     void OnLeaveAsteroid()

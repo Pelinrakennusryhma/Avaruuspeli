@@ -13,15 +13,15 @@ public class CMCameraManager : MonoBehaviour
 
     void Awake()
     {
-        GameEvents.instance.EventPlayerLanded.AddListener(OnPlayerLanded);
-        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+        GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
     }
     void Start()
     {
         SetActiveCamera();
     }
 
-    void OnPlayerLanded()
+    void OnPlayerLanded(MineableAsteroidTrigger asteroid)
     {
         cachedShipCamID = currentCameraID;
         currentCameraID = 2;

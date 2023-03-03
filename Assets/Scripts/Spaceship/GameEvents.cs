@@ -5,11 +5,17 @@ using UnityEngine.Events;
 
 public class GameEvents : MonoBehaviour
 {
-    public static GameEvents instance;
+    public static GameEvents Instance { get; private set; }
 
     private void Awake()
     {
-        instance = this;
+        if(Instance != null && Instance != this)
+        {
+            Destroy(this);
+        } else
+        {
+            Instance = this;
+        }
     }
 
     public UnityEvent<ActorSpaceship> EventSpaceshipDied;
@@ -19,7 +25,8 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventPlayerExitedPromptTrigger;
     public UnityEvent EventEnemiesKilled;
     public UnityEvent EventPlayerTriedLanding;
-    public UnityEvent EventPlayerLanded;
+    public UnityEvent<MineableAsteroidTrigger> EventPlayerLanded;
+    public UnityEvent EventPlayerTriedLeaving;
     public UnityEvent EventPlayerLeftAsteroid;
     //public void CallEventPlayerSpaceshipDied()
     //{
@@ -60,9 +67,14 @@ public class GameEvents : MonoBehaviour
         EventPlayerTriedLanding.Invoke();
     }
 
-    public void CallEventPlayerLanded()
+    public void CallEventPlayerLanded(MineableAsteroidTrigger asteroid)
     {
-        EventPlayerLanded.Invoke();
+        EventPlayerLanded.Invoke(asteroid);
+    }
+    
+    public void CallEventPlayerTriedLeaving()
+    {
+        EventPlayerTriedLeaving.Invoke();
     }
 
     public void CallEventPlayerLeftAstroid()

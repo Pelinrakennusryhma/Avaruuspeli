@@ -67,6 +67,7 @@ public class DestroyableRock : MonoBehaviour
         if(Health <= 0.0f)
         {
             //Debug.Log("Rock destroyed. Spawn shit");
+            Invoke("DisableSelf", 15f);
             Graphics.SetActive(false);
             Rubble.SetActive(true);
             Spawnables.SetActive(true);
@@ -105,5 +106,10 @@ public class DestroyableRock : MonoBehaviour
                                                                                 Random.Range(-severity, severity), 
                                                                                 Random.Range(-severity, severity))), 
                                                                     2.9f * Time.deltaTime);
+    }
+
+    private void DisableSelf()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -491,6 +491,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Leave",
+                    "type": "Button",
+                    "id": "69b18dad-63a5-4e42-8540-a4b6637d50bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -744,6 +753,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "KeyAlpha0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0110988-aa62-43f6-a73e-bd07d4582e3a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Leave",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

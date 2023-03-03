@@ -19,22 +19,22 @@ public class GUI_Spaceship : MonoBehaviour
     TMP_Text promptText;
     [SerializeField]
     GameObject spaceshipHUD;
-    public string landKey = "";
+
     void Awake()
     {
         promptText.text = "";
-        GameEvents.instance.EventPlayerEnteredPromptTrigger.AddListener(OnPromptTriggerEnter);
-        GameEvents.instance.EventPlayerExitedPromptTrigger.AddListener(OnPromptTriggerExit);
-        GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
-        GameEvents.instance.EventPlayerLanded.AddListener(OnPlayerLanded);
-        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+        GameEvents.Instance.EventPlayerEnteredPromptTrigger.AddListener(OnPromptTriggerEnter);
+        GameEvents.Instance.EventPlayerExitedPromptTrigger.AddListener(OnPromptTriggerExit);
+        GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
+        GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
         ShowControls();
     }
 
     void OnPromptTriggerEnter(string text)
     {
         promptText.gameObject.SetActive(true);
-        promptText.text = text.Replace("%landKey%", landKey);
+        promptText.text = text.Replace("%landKey%", Globals.Instance.landKey);
     }
 
     void OnPromptTriggerExit()
@@ -43,7 +43,7 @@ public class GUI_Spaceship : MonoBehaviour
         promptText.text = "";
     }
 
-    void OnPlayerLanded()
+    void OnPlayerLanded(MineableAsteroidTrigger asteroid)
     {
         promptText.gameObject.SetActive(false);
         promptText.text = "";
@@ -88,7 +88,7 @@ public class GUI_Spaceship : MonoBehaviour
 
                 if (action.StartsWith("Land"))
                 {
-                    landKey = button;
+                    Globals.Instance.landKey = button;
                 }
             }
         }

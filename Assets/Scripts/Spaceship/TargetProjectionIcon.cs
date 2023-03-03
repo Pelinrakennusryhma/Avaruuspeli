@@ -29,7 +29,7 @@ public class TargetProjectionIcon : MonoBehaviour
         projectileSpeed = spaceshipShoot.laserSpeed;
         _spaceshipEvents.EventSpaceshipHitByPlayer.AddListener(OnShipHitByPlayer);
         _spaceshipEvents.EventSpaceshipDied.AddListener(OnShipDied);
-        GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerDied);
+        GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerDied);
     }
 
     void OnShipDied()

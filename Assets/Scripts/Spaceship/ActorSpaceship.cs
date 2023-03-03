@@ -24,12 +24,12 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     virtual protected void Start()
     {
-        GameEvents.instance.CallEventSpaceshipSpawned(this);
+        GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
     virtual protected void OnDeath()
     {
         Debug.Log("spaceship died: " + transform.name + " faction: " + faction.factionName);
-        GameEvents.instance.CallEventSpaceshipDied(this);
+        GameEvents.Instance.CallEventSpaceshipDied(this);
     }
 }

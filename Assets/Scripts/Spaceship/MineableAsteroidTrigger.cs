@@ -7,10 +7,8 @@ public class MineableAsteroidTrigger : MonoBehaviour
 {
     [SerializeField]
     GameObject firstPersonControls;
-    [SerializeField]
-    GameObject shipOnAsteroid;
-    [SerializeField]
-    GameObject shipControls;
+    [field: SerializeField]
+    public Transform ShipPosition { get; private set; }
     [SerializeField]
     ActorManager actorManager;
     string successText = "Press %landKey% to land on the asteroid";
@@ -20,9 +18,9 @@ public class MineableAsteroidTrigger : MonoBehaviour
 
     private void Awake()
     {
-        GameEvents.instance.EventEnemiesKilled.AddListener(OnEnemiesKilled);
-        GameEvents.instance.EventPlayerTriedLanding.AddListener(OnLandingAttempt);
-        GameEvents.instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+        GameEvents.Instance.EventEnemiesKilled.AddListener(OnEnemiesKilled);
+        GameEvents.Instance.EventPlayerTriedLanding.AddListener(OnLandingAttempt);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
     }
 
     void OnLandingAttempt()
@@ -36,15 +34,15 @@ public class MineableAsteroidTrigger : MonoBehaviour
 
     void Land()
     {
-        GameEvents.instance.CallEventPlayerLanded();
-        shipControls.SetActive(false);
+        GameEvents.Instance.CallEventPlayerLanded(this);
         firstPersonControls.SetActive(true);
-        shipOnAsteroid.SetActive(true);
     }
 
     void OnLeaveAsteroid()
     {
-        shipOnAsteroid.SetActive(false);
+
+        GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
+
     }
 
     void OnEnemiesKilled()
@@ -52,7 +50,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
         currentText = successText;
         if (playerInTriggerArea)
         {
-            GameEvents.instance.CallEventPlayerEnteredPromptTrigger(currentText);
+            GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -67,7 +65,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
             {
                 currentText = failureText;
             }
-            GameEvents.instance.CallEventPlayerEnteredPromptTrigger(currentText);
+            GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
         }
     }
 
@@ -76,7 +74,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
         if (other.CompareTag("PlayerShip"))
         {
             playerInTriggerArea = false;
-            GameEvents.instance.CallEventPlayerExitedPromptTrigger();
+            GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
         }
     }
 }

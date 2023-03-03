@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be0c20c4697ac742882ccedea5c5d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResourceType: 0
+  ResourceAmount: 0
   Health: 0
   Graphics: {fileID: 1820843978135339966}
   Rubble: {fileID: 485537549234804137}

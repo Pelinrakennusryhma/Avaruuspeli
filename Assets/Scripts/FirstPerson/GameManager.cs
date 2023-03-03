@@ -116,6 +116,6 @@ public class GameManager : MonoBehaviour
     public void OnLeaveAsteroidSurface()
     {
         //SceneManager.LoadScene("SampleScene");
-        GameEvents.instance.CallEventPlayerLeftAstroid();
+        GameEvents.Instance.CallEventPlayerLeftAstroid();
     }
 }

@@ -104,4 +104,14 @@ public class SpaceshipMovement : MonoBehaviour
             horizontalGlide *= leftRightGlideReduction;
         }
     }
+
+    public void Freeze()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void UnFreeze()
+    {
+        rb.constraints = RigidbodyConstraints.None;
+    }
 }

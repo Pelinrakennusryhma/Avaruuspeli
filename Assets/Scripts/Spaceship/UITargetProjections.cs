@@ -19,7 +19,7 @@ public class UITargetProjections : MonoBehaviour
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
-        GameEvents.instance.EventSpaceshipSpawned.AddListener(OnEventSpaceshipSpawned);
+        GameEvents.Instance.EventSpaceshipSpawned.AddListener(OnEventSpaceshipSpawned);
     }
 
     void OnEventSpaceshipSpawned(ActorSpaceship ship)

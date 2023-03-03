@@ -24,8 +24,8 @@ public class ActorManager : MonoBehaviour
     private void Awake()
     {
         playerFaction = factions.Find(f => f.factionName == "Player");
-        GameEvents.instance.EventSpaceshipSpawned.AddListener(OnEventSpaceshipSpawned);
-        GameEvents.instance.EventSpaceshipDied.AddListener(OnEventSpaceshipDied);
+        GameEvents.Instance.EventSpaceshipSpawned.AddListener(OnEventSpaceshipSpawned);
+        GameEvents.Instance.EventSpaceshipDied.AddListener(OnEventSpaceshipDied);
         InitFactions();  
     }
 
@@ -70,7 +70,7 @@ public class ActorManager : MonoBehaviour
 
         if (SceneCleared)
         {
-            GameEvents.instance.CallEventEnemiesKilled();
+            GameEvents.Instance.CallEventEnemiesKilled();
         }
     }
 
