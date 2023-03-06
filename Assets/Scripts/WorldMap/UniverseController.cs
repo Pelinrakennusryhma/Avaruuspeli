@@ -166,7 +166,7 @@ public class UniverseController : MonoBehaviour
 
 
         AllGalaxies = GetComponentsInChildren<GalaxyOnWorldMap>(true);
-        
+
         for (int i = 0; i < AllGalaxies.Length; i++)
         {
             GalaxyData galaxyData = new GalaxyData();
@@ -177,6 +177,76 @@ public class UniverseController : MonoBehaviour
 
             AllGalaxies[i].Init(galaxyData);
         }
+
+        Debug.Log("DECIDE HERE HOW WORMHOLES SHOULD BE SPAWNED?");
+
+        int maximumAmountOfWormholePairs = amountOfGalaxies / 2;
+
+        int amountOfWormholePairs = Random.Range(2, maximumAmountOfWormholePairs); 
+
+        List<GalaxyOnWorldMap> galaxiesWithoutWormholes = new List<GalaxyOnWorldMap>();
+
+        for(int i = 0; i< AllGalaxies.Length; i++)
+        {
+            galaxiesWithoutWormholes.Add(AllGalaxies[i]);
+        }
+
+        for (int i = 0; i < amountOfWormholePairs; i++)
+        {                 
+            Debug.LogWarning("Iterating wormhole pairs");
+       
+
+
+            int rando1 = Random.Range(0, galaxiesWithoutWormholes.Count);
+            int rando2;
+
+            while(true)
+            {
+                bool foundUnique = false;
+
+                rando2 = Random.Range(0, galaxiesWithoutWormholes.Count);
+
+                if (rando2 != rando1)
+                {
+                    foundUnique = true;
+                }
+
+                if (foundUnique)
+                {                
+                    break;
+                }
+
+            }
+
+            GalaxyOnWorldMap galaxy1 = galaxiesWithoutWormholes[rando1];
+            GalaxyOnWorldMap galaxy2 = galaxiesWithoutWormholes[rando2];
+
+            WormholeData data1 = new WormholeData();
+            WormholeData data2 = new WormholeData();
+
+            data1.ID = 1;
+            data1.GalaxyId = galaxy1.GalaxyData.ID;
+
+
+            data2.ID = 2;
+            data2.GalaxyId = galaxy2.GalaxyData.ID;
+           
+            
+            data1.PairWormhole = data2;
+            data1.PairWormholeGalaxyID = data2.GalaxyId;            
+            data2.PairWormhole = data1;
+            data2.PairWormholeGalaxyID = data1.GalaxyId; 
+
+            galaxy1.GalaxyData.WormholeData = data1;
+            galaxy2.GalaxyData.WormholeData= data2;
+
+            galaxiesWithoutWormholes.Remove(galaxy1);
+            galaxiesWithoutWormholes.Remove(galaxy2);
+
+            Debug.Log("Rando1 is " + rando1 + " rando2 is " + rando2);
+        }
+
+
 
         List<GalaxyData> allGalaxies = new List<GalaxyData>();
 
@@ -204,6 +274,9 @@ public class UniverseController : MonoBehaviour
         }
 
         //Debug.LogWarning("We are here trying to recreate a previous universe");
+
+
+        //Debug.LogWarning("MAKE SURE WORMHOLES ARE LOADED TOO!");
 
         List<GalaxyData> savedGalaxies = GameManager.Instance.SaverLoader.GetSavedGalaxyDatas();
         int amountOfGalaxies = savedGalaxies.Count;

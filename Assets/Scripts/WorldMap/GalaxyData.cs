@@ -22,6 +22,7 @@ public class GalaxyData : UniverseData
     public UniverseEnum Test;
 
     public List<StarSystemData> StarSystems = new List<StarSystemData>();
+    public WormholeData WormholeData;
 
     public static List<StarSystemData> ConvertArrayToList(StarSystemData[] data)
     {

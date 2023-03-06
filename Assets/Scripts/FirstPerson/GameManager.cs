@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Camera TransitionalCamera;
 
     public SaverLoader SaverLoader;
+    public Helpers Helpers;
 
     public GalaxyOnWorldMap CurrentGalaxy;
     public StarSystemOnFocus CurrentStarSystem;
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
             
             TransitionalCamera.gameObject.SetActive(false);
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
-
+            Helpers = GetComponentInChildren<Helpers>(true);
         }
 
         else
@@ -86,6 +87,8 @@ public class GameManager : MonoBehaviour
             OptionsScreen.gameObject.SetActive(false);
             OptionsScreen.OnGameStarted();
         }
+
+        Helpers.RefreshReferenceToGraphicsRaycasterAndEventSystem();
     }
 
     public void OnPausePressed()

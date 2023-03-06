@@ -355,7 +355,7 @@ public class StarSystemOnFocus : MonoBehaviour
                                        planet.transform.rotation,
                                        planet.transform.localScale);
 
-                Debug.LogWarning("Pos and rot is not saved at correct pos");
+                //Debug.LogWarning("Pos and rot is not saved at correct pos");
 
                 data.Orbit = orbit;
                 data.PlanetGraphics = planetGraphicsType;

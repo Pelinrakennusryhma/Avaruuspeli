@@ -79,6 +79,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public void SetPosOnUniverse(Vector3 universePos)
     {
         CurrentUniversePos = universePos;
+        //Debug.Log("Setting the position on universe");
     }
 
     public void SetPosOnCurrentGalaxy(Vector3 currentGalaxyPos)
@@ -90,6 +91,8 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public void SetPosOnCurrentStarSystem(Vector3 currentStarPos)
     {
         CurrentStarSystemPos = currentStarPos;
+
+        //Debug.Log("Setting the position on current star system");
         //transform.position = new Vector3(currentStar.x, 0, currentStar.z);
     }
 
@@ -121,6 +124,12 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public void SetCurrentTargetClickableObject(WorldMapClickDetector clickableObject)
     {
         CurrentTargetClickableObject = clickableObject;
+        IsOnCurrentClickableObject = false;
+        
+        if (clickableObject != null) 
+        {
+            //Debug.Log("Setting the current target clickable object " + clickableObject.gameObject.name);
+        }
     }
 
     public void SetCurrentTargetClickableObjectAndPosOnAsteroidField(WorldMapClickDetector clickableObject,
@@ -128,6 +137,12 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     {
         CurrentTargetClickableObject = clickableObject;
         CurrentAsteroidFieldPos = new Vector3(pos.x, 0, pos.z);
+        //IsOnCurrentClickableObject = false;
+
+        if (clickableObject != null)
+        {
+            //Debug.Log("Setting the current target clickable object " + clickableObject.gameObject.name);
+        }
         //Debug.LogError("Set the pos for asteroid field " + Time.time);
 
     }
@@ -154,15 +169,16 @@ public class MotherShipOnWorldMapController : MonoBehaviour
             Vector3 toTarget2D = destination - transform.position;
             toTarget2D = new Vector3(toTarget2D.x, 0, toTarget2D.z);
 
-            if ((toTarget2D.magnitude <= 1.0f
+
+            if ((toTarget2D.magnitude <= 30.0f
                 && WorldMapMouseController.Instance.CurrentZoomLevel
                 == WorldMapMouseController.ZoomLevel.Universe)
                 ||
-                (toTarget2D.magnitude <= 0.15f
+                (toTarget2D.magnitude <= 0.6f
                 && WorldMapMouseController.Instance.CurrentZoomLevel
                 == WorldMapMouseController.ZoomLevel.Galaxy)
                 ||
-                (toTarget2D.magnitude <= 0.1f
+                (toTarget2D.magnitude <= 0.4f
                 && WorldMapMouseController.Instance.CurrentZoomLevel
                 == WorldMapMouseController.ZoomLevel.StarSystem))
             {
@@ -221,6 +237,85 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void TeleportFromWormhole(WormholeOnWorldMap wormhole)
+    {
+        //Debug.LogWarning("Should teleport from wormhole right about now. Start galaxy is " + wormhole.WormholeData.GalaxyId + " end galaxy is " + wormhole.WormholeData.PairWormholeGalaxyID);
+
+        for (int i = 0; i < UniverseController.Instance.AllGalaxies.Length; i++)
+        {
+            if (UniverseController.Instance.AllGalaxies[i].GalaxyData.ID == wormhole.WormholeData.PairWormholeGalaxyID)
+            {
+                //Debug.LogError("We found the correct galaxy to teleport to. Implement logic for actually doing the teleportation");
+
+                // Set positions and camera and all to new pos
+                // Maybe an animation would be nice here?
+
+                WorldMapMouseController.Instance.ZoomOut();
+
+                GameManager.Instance.CurrentGalaxy = UniverseController.Instance.AllGalaxies[i];
+
+                SetPosOnUniverse(UniverseController.Instance.AllGalaxies[i].transform.position);
+                Instance.SetPosOnCurrentGalaxy(UniverseController.Instance.AllGalaxies[i].Wormhole.transform.position);
+                Instance.MoveToGalaxyPos();
+                Instance.SetCurrentTargetClickableObject(null);
+
+                UniverseController.Instance.AllGalaxies[i].OnGalaxyClicked(WorldMapClickDetector.ClickableObjectType.Wormhole);
+
+                transform.position = UniverseController.Instance.AllGalaxies[i].Wormhole.transform.position;
+                SetPosOnCurrentGalaxy(UniverseController.Instance.AllGalaxies[i].Wormhole.transform.position);
+                MotherShipOnWorldMapController.Instance.FuelSystem.OnTeleportStarted();
+                FuelSystem.previousKnownZoomLevel = WorldMapMouseController.ZoomLevel.Galaxy;
+
+
+
+
+
+
+                OnArrivalToNewTeleportPosition();
+                break;
+            }
+        }
+    }
+
+    public void OnArrivalToNewTeleportPosition()
+    {
+        float distanceToClosestStar = 10000000000.0f;
+        StarOnWorldMap closestStar = null;
+        int eye = 0;
+        bool hasFuelToGoAnywhere = false;
+
+        for (int i = 0; i < GameManager.Instance.CurrentGalaxy.StarSystems.Length; i++)
+        {
+            Vector3 toSystem = GameManager.Instance.CurrentGalaxy.StarSystems[i].transform.position - transform.position;
+            toSystem = new Vector3(toSystem.x, 0, toSystem.z);
+            float distanceToSystem = toSystem.magnitude;
+
+            if (distanceToClosestStar <= distanceToSystem)
+            {
+                closestStar = GameManager.Instance.CurrentGalaxy.StarSystems[i];
+                distanceToClosestStar = distanceToSystem;
+                eye = i;
+            }
+
+            if (FuelSystem.EvaluateNeededFuel(GameManager.Instance.CurrentGalaxy.StarSystems[i].transform.position))
+            {
+                hasFuelToGoAnywhere = true;
+            }
+        }
+
+        if (!hasFuelToGoAnywhere)
+        {
+            Instance.SetPosOnCurrentGalaxy(GameManager.Instance.CurrentGalaxy.StarSystems[eye].transform.position);
+            CurrentTargetClickableObject = GameManager.Instance.CurrentGalaxy.StarSystems[eye].GetComponent<WorldMapClickDetector>();
+            //Instance.SetPosOnCurrentGalaxy(GameManager.Instance.CurrentGalaxy.StarSystems[eye].transform.position);
+            //Instance.MoveToGalaxyPos();
+            //closestStar.OnStarClicked(WorldMapClickDetector.ClickableObjectType.StarSystem);
+            //Debug.Log("We don't have enough fuel to go anywhere after wormhole");
+        }
+
+        //Debug.LogError("CHECK IF WE HAVE ENOUGH FUEL TO ANYWHERE. OTHERWISE DO SOMETHING, BECAUSE THE GAME WOULD GET STUCK");
     }
 
     public void SetMaterialsToAlwaysRenderOnTop()

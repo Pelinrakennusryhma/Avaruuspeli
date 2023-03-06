@@ -44,9 +44,21 @@ public class StarOnWorldMap : MonoBehaviour
         StarSystemMesh.enabled = false;
         StarSystemCollider.enabled = false;
         Children.SetActive(true);
+
+        if (WorldMapMouseController.Instance.CurrentStarSystem == null)
+        {
+            Debug.Log("Null current star system");
+        }
+
+        if (WorldMapMouseController.Instance.CurrentGalaxy == null)
+        {
+            Debug.Log("Null galaxy");
+        }
+
         WorldMapMouseController.Instance.CurrentGalaxy.HideOtherStars(WorldMapMouseController.Instance.CurrentStarSystem);
         StarSystemOnFocus.OnBecomeFocused();
         OwnerGalaxy.HideStarLineRenderers();
+        OwnerGalaxy.HideWormhole();
 
         for (int i  = 0; i < AsteroidFields.Length; i++)
         {
@@ -74,7 +86,7 @@ public class StarOnWorldMap : MonoBehaviour
         {
             //Create lines
 
-            for (int i = 0; i < OwnerGalaxy.StarSystems.Length; i++)
+            for (int i = 0; i < OwnerGalaxy.StarSystems.Length + 1; i++)
             {
                 GameObject newObject = new GameObject();
                 newObject.transform.parent = gameObject.transform;
@@ -103,6 +115,21 @@ public class StarOnWorldMap : MonoBehaviour
             LinesBetweenStarSystems[i].SetPosition(0, startPoint);
             LinesBetweenStarSystems[i].SetPosition(1, endPoint);
         }
+
+        // Draw lines to worm hole too
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].enabled = true;
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].loop = false;
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].useWorldSpace = true;
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].startWidth = 0.02f;
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].endWidth = 0.02f;
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].material = UniverseController.Instance.LineRendererMat;
+
+        startPoint = transform.position;
+        Vector3 endPos = OwnerGalaxy.Wormhole.transform.position;
+
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].SetPosition(0, startPoint);
+        LinesBetweenStarSystems[LinesBetweenStarSystems.Length - 1].SetPosition(1, endPos);
+
     }
 
     public void HideLinesBetweenStars()

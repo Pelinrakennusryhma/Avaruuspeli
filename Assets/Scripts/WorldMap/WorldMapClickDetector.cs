@@ -11,7 +11,8 @@ public class WorldMapClickDetector : MonoBehaviour
         StarSystem = 2,
         Planet = 3,
         Star = 4,
-        AsteroidField = 5
+        AsteroidField = 5,
+        Wormhole = 6
     }
 
     public ClickableObjectType type;
@@ -21,14 +22,22 @@ public class WorldMapClickDetector : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Clicked an object of type " + type);
+        //Debug.Log("Clicked an object of type " + type);
 
         Vector3 mousePos = new Vector3(0, -10000, 0);
+
+        if (GameManager.Instance.Helpers.CheckIfUIisHit())
+        {
+            //Debug.Log("we clicked, but hit UI at the same time. return");
+            return;
+        }
 
         if (MotherShipOnWorldMapController.Instance.IsOnCurrentClickableObject
             && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
             == this) 
         {
+            //Debug.Log("Clickity");
+
             WorldMapMouseController.ZoomLevel zoom = WorldMapMouseController.ZoomLevel.None;
 
             switch (type)
@@ -45,6 +54,11 @@ public class WorldMapClickDetector : MonoBehaviour
                 case ClickableObjectType.StarSystem:
                     zoom = WorldMapMouseController.ZoomLevel.StarSystem;
                     MotherShipOnWorldMapController.Instance.SetPosOnCurrentGalaxy(transform.position);
+                    break;
+
+                case ClickableObjectType.Wormhole:
+                    
+                    //Debug.LogError("Clicked a wormhole");
                     break;
 
                 case ClickableObjectType.Planet:
@@ -107,11 +121,20 @@ public class WorldMapClickDetector : MonoBehaviour
             {
                 Debug.Log("REACT TO MOUSE BEING");
             }
-            MotherShipOnWorldMapController.Instance.FuelSystem.EvaluateNeededFuel(new Vector3(transform.position.x, 
-                                                                                  0, 
-                                                                                  transform.position.z));
 
-            MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(this);
+            bool hasEnoughFuelForTravel = MotherShipOnWorldMapController.Instance.FuelSystem.EvaluateNeededFuel(new Vector3(transform.position.x, 
+                                                                                                                0, 
+                                                                                                                transform.position.z));
+
+            if (hasEnoughFuelForTravel) 
+            {
+                MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(this);
+            }
+
+            else
+            {
+                Debug.LogError("Not enough fuel. Don't travel to destination.");
+            }
         }
     }
 }

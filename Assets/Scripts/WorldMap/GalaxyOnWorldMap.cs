@@ -27,6 +27,8 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
     public GameObject[] PlaceHolderStarSystems;
 
+    public WormholeOnWorldMap Wormhole;
+
     public void Start()
     {
         if (!HasBeenInitted)
@@ -43,6 +45,10 @@ public class GalaxyOnWorldMap : MonoBehaviour
         ClickDetector = GetComponent<WorldMapClickDetector>();
         ClickDetector.OnObjectClicked -= OnGalaxyClicked;
         ClickDetector.OnObjectClicked += OnGalaxyClicked;
+
+        Wormhole.WormholeData = data.WormholeData;
+
+        HideWormhole();
 
         HasBeenInitted = true;        
         
@@ -113,7 +119,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
                                                 WorldMapMouseController.ZoomLevel.Galaxy,
                                                 this, 
                                                 null);
-        Debug.Log("Clicked a galaxy");
+        //Debug.Log("Clicked a galaxy");
 
 
         GameManager.Instance.CurrentGalaxy = this;
@@ -139,6 +145,8 @@ public class GalaxyOnWorldMap : MonoBehaviour
             StarSystems[i].DrawLinesBetweenStars(this);
         }
 
+        ShowWormhole();
+
         GalaxyCollider.enabled = false;
         GalaxyMesh.enabled = false;
 
@@ -154,6 +162,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
             StarSystems[i].HideLinesBetweenStars();
         }
 
+        HideWormhole();
         GalaxyCollider.enabled = true;
         GalaxyMesh.enabled = true;
         DrawLinesBetweenGalaxies(UniverseController.Instance);
@@ -192,6 +201,26 @@ public class GalaxyOnWorldMap : MonoBehaviour
         {
             StarSystems[i].HideLinesBetweenStars();
         }
+    }
+
+    public void ShowWormhole()
+    {
+        if (GalaxyData.WormholeData != null
+            && GalaxyData.WormholeData.ID > 0) 
+        {
+            Wormhole.gameObject.SetActive(true);
+            //Debug.LogWarning("This galaxy has a wormhole");
+        }
+
+        else
+        {
+            //Debug.LogError("This galaxy doesn't have a wormhole");
+        }
+    }
+
+    public void HideWormhole()
+    {
+        Wormhole.gameObject.SetActive(false);
     }
 
     public void GenerateGalaxy()
@@ -244,39 +273,89 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
         int segments = Random.Range(0, 361);
 
-        for (int i = 0; i < amountOfStars; i++)
+        Debug.Log("DECIDE HERE WHERE WORMHOLES SHOULD BE PLACED?");
+
+        int wormholeIteration = -1;
+        int addWormhole = 0;
+
+        if (GalaxyData.WormholeData != null
+            && GalaxyData.WormholeData.ID > 0)
+        {
+            addWormhole = 1;
+            
+            if (amountOfStars >= 10) 
+            {
+                wormholeIteration = Random.Range(3, amountOfStars - 4);
+            }
+
+            else
+            {
+                wormholeIteration = Random.Range(3, amountOfStars - 2);
+            }
+            Debug.LogWarning("THIS GALAXY HAS A WROMHOLE. SET POSITION FOR ONE");
+        }
+
+
+
+        for (int i = 0; i < amountOfStars + addWormhole; i++)
         {
 
-            //Vector3 pos = transform.position + Vector3.forward * distance;
+            if (addWormhole >= 0
+                && i == wormholeIteration)
+            {
+                //float rad = Mathf.Deg2Rad * (360f / segments);
+                distance += 2.0f;
+                float rad = Mathf.Deg2Rad * Random.Range(0, 360.0f);
+                float radius = distance;
+                Wormhole.transform.position = transform.position + new Vector3(Mathf.Sin(rad) * radius, 0, Mathf.Cos(rad) * radius);
 
-            GameObject objectOriginal = StarSystemPrefab;
-            GameObject star = Instantiate(objectOriginal, transform.position, Quaternion.identity, transform);
-            star.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-            //star.transform.position = pos;
+                distance += Random.Range(4.0f, 5.0f);
+                segments += Random.Range(90, 125);
+
+                Wormhole = GetComponentInChildren<WormholeOnWorldMap>(true);
+
+                Wormhole.WormholeData = GalaxyData.WormholeData;
+                Wormhole.WormholeData.SetPosRotAndScale(Wormhole.transform.position,
+                                                        Wormhole.transform.rotation,
+                                                        Wormhole.transform.localScale);
+
+                GalaxyData.WormholeData = Wormhole.WormholeData;
+                //GameManager.Instance.SaverLoader.SaveGalaxy();
+                Debug.LogError("Now would be the time to decide wormhole place");
+            }
+
+            else
+            {
+                //Vector3 pos = transform.position + Vector3.forward * distance;
+
+                GameObject objectOriginal = StarSystemPrefab;
+                GameObject star = Instantiate(objectOriginal, transform.position, Quaternion.identity, transform);
+                star.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                //star.transform.position = pos;
 
 
-            //float rad = Mathf.Deg2Rad * (360f / segments);
-            float rad = Mathf.Deg2Rad * Random.Range(0, 360.0f);
-            float radius = distance;
-            star.transform.position = transform.position + new Vector3(Mathf.Sin(rad) * radius, 0, Mathf.Cos(rad) * radius);
+                //float rad = Mathf.Deg2Rad * (360f / segments);
+                float rad = Mathf.Deg2Rad * Random.Range(0, 360.0f);
+                float radius = distance;
+                star.transform.position = transform.position + new Vector3(Mathf.Sin(rad) * radius, 0, Mathf.Cos(rad) * radius);
 
-            distance += Random.Range(2.0f, 3.0f);
-            segments += Random.Range(90, 125);
-            //Debug.Log("Spawned a star " + i);
+                distance += Random.Range(2.0f, 3.0f);
+                segments += Random.Range(90, 125);
+                //Debug.Log("Spawned a star " + i);
 
-            StarSystemOnFocus starSystem = star.GetComponentInChildren<StarSystemOnFocus>(true);
-            StarSystemData starSystemData = new StarSystemData();
-            starSystemData.ID = i + 1;
-            starSystemData.SetPosRotAndScale(starSystem.transform.position,
-                                             starSystem.transform.rotation,
-                                             star.transform.localScale);
+                StarSystemOnFocus starSystem = star.GetComponentInChildren<StarSystemOnFocus>(true);
+                StarSystemData starSystemData = new StarSystemData();
+                starSystemData.ID = i + 1;
+                starSystemData.SetPosRotAndScale(starSystem.transform.position,
+                                                 starSystem.transform.rotation,
+                                                 star.transform.localScale);
 
-            Debug.Log("star system saved pos is x " + starSystemData.posX + " y " + starSystemData.posY + " z " + starSystemData.posZ);
+                //Debug.Log("star system saved pos is x " + starSystemData.posX + " y " + starSystemData.posY + " z " + starSystemData.posZ);
 
-            //Debug.LogError("Should have set pos rot and scale");
-            starSystem.Initialize(starSystemData, this);
+                //Debug.LogError("Should have set pos rot and scale");
+                starSystem.Initialize(starSystemData, this);
 
-
+            }
             //GalaxyData.StarSystems.Add(starSystemData);
 
             //Debug.Log("INITIALIZING WITHIN GALAXY");
@@ -303,6 +382,17 @@ public class GalaxyOnWorldMap : MonoBehaviour
         }
 
         //Debug.LogError("Data count is " + data.Count);
+
+        if (GalaxyData.WormholeData != null
+            && GalaxyData.WormholeData.ID > 0)
+        {
+            Wormhole = GetComponentInChildren<WormholeOnWorldMap>(true);
+            Wormhole.transform.position = GalaxyData.WormholeData.GetPos();
+            Wormhole.transform.rotation = GalaxyData.WormholeData.GetRot();
+            Wormhole.transform.localScale = GalaxyData.WormholeData.GetLocalScale();
+
+            //Debug.LogError("WE HAVE A SAVED WORMHOLE!!!!!!");          
+        }
 
         for (int i = 0; i < data.StarSystems.Count; i++)
         {

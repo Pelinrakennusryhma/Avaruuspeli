@@ -124,20 +124,20 @@ public class SaverLoader : MonoBehaviour
                                StarSystemData data)
     {
 
-        Debug.LogWarning("Caliing save star system with star system id " + starsystemId + " planets lenght is " + planets.Count);
+        //Debug.LogWarning("Caliing save star system with star system id " + starsystemId + " planets lenght is " + planets.Count);
         bool found = false;
 
         for (int i = 0; i < SaveData.Galaxies.Count; i++)
         {
             if (SaveData.Galaxies[i].ID == galaxyId)
             {
-                Debug.Log("Iterating through the found galaxy");
+               // Debug.Log("Iterating through the found galaxy");
 
                 int foundJ = -1;
 
                 for (int j = 0; j < SaveData.Galaxies[i].StarSystems.Count; j++)
                 {
-                    Debug.Log("Iterating star system. Now at id " + SaveData.Galaxies[i].StarSystems[j].ID + " searching for " + starsystemId + " star systems lenght is " + SaveData.Galaxies[i].StarSystems.Count);
+                    //Debug.Log("Iterating star system. Now at id " + SaveData.Galaxies[i].StarSystems[j].ID + " searching for " + starsystemId + " star systems lenght is " + SaveData.Galaxies[i].StarSystems.Count);
 
                     if (SaveData.Galaxies[i].StarSystems[j].ID == starsystemId)
                     {
@@ -146,7 +146,7 @@ public class SaverLoader : MonoBehaviour
 
                         if (found)
                         {
-                            Debug.LogError("Found the j with star system id " + starsystemId);
+                            //Debug.LogError("Found the j with star system id " + starsystemId);
 
                         }
                         //break;
@@ -177,14 +177,14 @@ public class SaverLoader : MonoBehaviour
                     && foundJ >= 0)
                 {                    
                     SaveData.Galaxies[i].StarSystems[foundJ] = starSystemData;
-                    Debug.LogError("Putting star system to previously found pos");
+                    //Debug.LogError("Putting star system to previously found pos");
 
                 }
 
                 else
                 {
                     SaveData.Galaxies[i].StarSystems.Add(starSystemData);
-                    Debug.LogError("Putting star system to new pos");
+                    //Debug.LogError("Putting star system to new pos");
                 }
             }
 
@@ -196,12 +196,12 @@ public class SaverLoader : MonoBehaviour
 
         if (found)
         {
-            Debug.Log("Found a star system");
+            //Debug.Log("Found a star system");
         }
 
         else
         {
-            Debug.Log("Didn't find a star system");
+            //Debug.Log("Didn't find a star system");
         }
 
         WriteToFile();
@@ -230,7 +230,7 @@ public class SaverLoader : MonoBehaviour
                             {
                                 foundAPlanetToReplace = true;
                                 foundK = k;
-                                Debug.Log("Found a planet to replace");
+                                //Debug.Log("Found a planet to replace");
                                 break;
                             }
                         }
