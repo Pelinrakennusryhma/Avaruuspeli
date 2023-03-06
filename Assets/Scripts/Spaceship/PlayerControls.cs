@@ -5,33 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
-    [SerializeField]
-    PlayerInput playerInput;
-    protected override void Awake()
-    {
-        base.Awake();
-        playerInput = GetComponent<PlayerInput>();
-        GameEvents.Instance.EventPlayerLanded.AddListener(OnLand);
-        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
-    }
-
-    void OnLand(MineableAsteroidTrigger asteroid)
-    {
-        Transform landPos = asteroid.ShipPosition;
-        ship.transform.position = landPos.position;
-        ship.transform.rotation = landPos.rotation;
-        spaceshipMovement.Freeze();
-        playerInput.actions.FindActionMap("ShipControls").Disable();
-        playerInput.actions.FindActionMap("FirstPersonControls").Enable();
-    }
-
-    void OnLeaveAsteroid()
-    {
-        spaceshipMovement.UnFreeze();
-        playerInput.actions.FindActionMap("FirstPersonControls").Disable();
-        playerInput.actions.FindActionMap("ShipControls").Enable();
-
-    }
     protected override void OnDeath()
     {
         base.OnDeath();

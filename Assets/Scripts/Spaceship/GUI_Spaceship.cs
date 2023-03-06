@@ -28,6 +28,10 @@ public class GUI_Spaceship : MonoBehaviour
         GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
         GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+    }
+
+    private void Start()
+    {
         ShowControls();
     }
 

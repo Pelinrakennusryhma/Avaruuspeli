@@ -5,10 +5,10 @@ using static AsteroidLauncher;
 
 public class MineableAsteroidTrigger : MonoBehaviour
 {
-    [SerializeField]
-    GameObject firstPersonControls;
     [field: SerializeField]
     public Transform ShipPosition { get; private set; }
+    [field: SerializeField]
+    public Transform CharacterPosition { get; private set; }
     [SerializeField]
     ActorManager actorManager;
     string successText = "Press %landKey% to land on the asteroid";
@@ -35,14 +35,11 @@ public class MineableAsteroidTrigger : MonoBehaviour
     void Land()
     {
         GameEvents.Instance.CallEventPlayerLanded(this);
-        firstPersonControls.SetActive(true);
     }
 
     void OnLeaveAsteroid()
     {
-
         GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
-
     }
 
     void OnEnemiesKilled()

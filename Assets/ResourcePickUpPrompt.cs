@@ -18,6 +18,11 @@ public class ResourcePickUpPrompt : MonoBehaviour
         textMeshPro.gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        textMeshPro.gameObject.SetActive(false);
+    }
+
     public void ShowResource(ResourceInventory.ResourceType resourceType,
                              int amount)
     {
