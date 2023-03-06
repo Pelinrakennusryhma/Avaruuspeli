@@ -319,4 +319,10 @@ public class GameManager : MonoBehaviour
         IsOnWorldMap = true;
         IncomingSceneType = TypeOfScene.None;
     }
+
+    public void OnLeaveAsteroidSurface()
+    {
+        GoBackToWorldMap();
+        Debug.Log("Ready to leave asteroid surface");
+    }
 }
