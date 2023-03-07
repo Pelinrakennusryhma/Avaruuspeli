@@ -117,14 +117,14 @@ public class GUI_Spaceship : MonoBehaviour
         helpText.text = textToShow;
     }
 
-    public void OnToggleCursor()
-    {
-        if (Cursor.lockState == CursorLockMode.None)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        } else
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-    }
+    //public void OnToggleCursor()
+    //{
+    //    if (Cursor.lockState == CursorLockMode.None)
+    //    {
+    //        Cursor.lockState = CursorLockMode.Locked;
+    //    } else
+    //    {
+    //        Cursor.lockState = CursorLockMode.None;
+    //    }
+    //}
 }

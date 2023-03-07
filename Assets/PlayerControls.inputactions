@@ -78,15 +78,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleCursor",
-                    "type": "Button",
-                    "id": "627fb73c-dfc7-4d48-a19e-d4af82f6cc41",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "69c46ab1-83be-4ff4-9d7b-ef769f7c6010",
@@ -279,17 +270,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChangeCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a4bf6a08-1b1e-4a49-808d-80ece6629cf9",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleCursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class TargetProjection : MonoBehaviour
 {
-    Vector3 projectedPos;
-
+    [SerializeField]
+    GameObject targetPrefab;
+    GameObject targetObject;
     Rigidbody rb;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        if(targetPrefab != null)
+        {
+            targetObject = Instantiate(targetPrefab, transform);
+        }
     }
 
     public Vector3 GetPosition(float projectileSpeed, Vector3 shooterPosition)
@@ -18,6 +25,14 @@ public class TargetProjection : MonoBehaviour
         Vector3 predictedPos = PredictedPosition(transform.position, shooterPosition, rb.velocity, projectileSpeed);
         Debug.DrawLine(shooterPosition, predictedPos, Color.yellow, 0.1f);
         Debug.DrawLine(transform.position, predictedPos, Color.cyan, 0.1f);
+
+        Debug.Log("?!?!");
+        if(targetObject != null)
+        {
+            Debug.Log("???" + predictedPos);
+            targetObject.transform.position = predictedPos;
+        }
+
         return predictedPos;
     }
 

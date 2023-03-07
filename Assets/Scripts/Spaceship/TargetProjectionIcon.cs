@@ -56,36 +56,39 @@ public class TargetProjectionIcon : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 projectionPos = _targetProjection.GetPosition(projectileSpeed, _targetter.position);
-        Vector3 heading = projectionPos - Camera.main.transform.position;
-        if (Vector3.Dot(Camera.main.transform.forward, heading) > 0)
-        {
-            // Target projection is in front of the camera
-            Vector3 pos = Camera.main.WorldToScreenPoint(projectionPos);
-            pos.z = 0f;
-            transform.position = pos; 
-        }      
+        UpdateDrawPosition();
     }
 
-    //Vector2 GetPosOnCanvas()
-    //{
-    //    Vector2 temp = Camera.main.WorldToViewportPoint(_targetProjection.GetPosition(projectileSpeed));
+    void UpdateDrawPosition()
+    {
+        Vector3 projectionPos = _targetProjection.GetPosition(projectileSpeed, _targetter.position);
 
-    //    //Calculate position considering our percentage, using our canvas size
-    //    //So if canvas size is (1100,500), and percentage is (0.5,0.5), current value will be (550,250)
-    //    temp.x *= _canvas.renderingDisplaySize.x;
-    //    temp.y *= _canvas.renderingDisplaySize.y;
+        Vector3 pos = Camera.main.WorldToScreenPoint(projectionPos);
+        //Debug.Log("pos.z: " + pos.z);
+        //pos.z = 0f;
+        if (pos.z > 0)
+        {
+            Debug.Log("posOnScreen: " + pos + "screen: " + Screen.width + "x" + Screen.height);
+            // Target projection is in front of the camera
 
-    //    //The result is ready, but, t$$anonymous$$s result is correct if canvas recttransform pivot is 0,0 - left lower corner.
-    //    //But in reality its middle (0.5,0.5) by default, so we remove the amount considering cavnas rectransform pivot.
-    //    //We could multiply with constant 0.5, but we will actually read the value, so if custom rect transform is passed(with custom pivot) , 
-    //    //returned value will still be correct.
 
-    //    //RectTransform rect = _canvas.GetComponent<RectTransform>();
 
-    //    //temp.x -= _canvas.renderingDisplaySize.x * rect.pivot.x;
-    //    //temp.y -= _canvas.renderingDisplaySize.y * rect.pivot.y;
+        }
+        else
+        {
+            // draw on the edge of the screen somehow
+            //Vector3 pos = Camera.main.WorldToScreenPoint(projectionPos);
+            //pos.z = 0f;
+            //transform.position = pos;
+            Debug.Log("posOffScreen: " + pos);
+            pos.x = -pos.x;
+            pos.y = -pos.y;
 
-    //    return temp;
-    //}
+
+        }
+        pos.x = Mathf.Clamp(pos.x, 0, Screen.width);
+        pos.y = Mathf.Clamp(pos.y, 0, Screen.height);
+        transform.position = pos;
+        Debug.Log("finalPos: " + pos);
+    }
 }
