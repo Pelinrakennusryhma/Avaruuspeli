@@ -49,6 +49,8 @@ MonoBehaviour:
   needBoxIndicator: 1
   needArrowIndicator: 1
   needDistanceText: 1
+  needDescriptionText: 0
+  customSprite: {fileID: 0}
   indicator: {fileID: 0}
 --- !u!114 &2966049604555633469
 MonoBehaviour:

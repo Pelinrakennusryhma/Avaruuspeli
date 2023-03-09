@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Attach this script to all the target game objects in the scene.
@@ -17,6 +18,12 @@ public class Target : MonoBehaviour
 
     [Tooltip("Select if distance text is required for this target")]
     [SerializeField] private bool needDistanceText = true;
+
+    [Tooltip("Optional description text to show above the indicator")]
+    public string descriptionText;
+
+    [Tooltip("Optional sprite to use instead of the default circle")]
+    public Sprite customSprite;
 
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.

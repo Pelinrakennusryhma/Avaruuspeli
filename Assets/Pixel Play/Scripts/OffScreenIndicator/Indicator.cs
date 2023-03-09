@@ -9,7 +9,9 @@ public class Indicator : MonoBehaviour
 {
     [SerializeField] private IndicatorType indicatorType;
     private Image indicatorImage;
-    private TMP_Text distanceText;
+    private Sprite defaultSprite;
+    [SerializeField] private TMP_Text distanceText;
+    [SerializeField] private TMP_Text descriptionText;
 
     /// <summary>
     /// Gets if the game object is active in hierarchy.
@@ -33,10 +35,42 @@ public class Indicator : MonoBehaviour
         }
     }
 
+    public void SetSourceImage(Sprite sprite)
+    {
+        if(indicatorType == IndicatorType.BOX)
+        {
+            indicatorImage.sprite = sprite;
+        }
+    }
+
+    public void SetDefaultImage()
+    {
+        if (indicatorType == IndicatorType.BOX)
+        {
+            indicatorImage.sprite = defaultSprite;
+        }
+    }
+
+    public void SetDescription(string text)
+    {
+        if(indicatorType == IndicatorType.BOX)
+        {
+            descriptionText.text = text;
+        } else
+        {
+            descriptionText.text = "";
+        }
+        
+    }
+
     void Awake()
     {
         indicatorImage = transform.GetComponent<Image>();
-        distanceText = transform.GetComponentInChildren<TMP_Text>();
+        defaultSprite = indicatorImage.sprite;
+        if(distanceText == null)
+        {
+            distanceText = transform.GetComponentInChildren<TMP_Text>();
+        }    
     }
 
     /// <summary>
@@ -64,6 +98,7 @@ public class Indicator : MonoBehaviour
     public void SetTextRotation(Quaternion rotation)
     {
         distanceText.rectTransform.rotation = rotation;
+        descriptionText.rectTransform.rotation = rotation;
     }
 
     /// <summary>
