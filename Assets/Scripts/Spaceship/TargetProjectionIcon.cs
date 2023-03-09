@@ -8,33 +8,31 @@ public class TargetProjectionIcon : MonoBehaviour
     SpaceshipEvents _spaceshipEvents;
     Image icon;
     Color originalColor;
-    float projectileSpeed;
-    TargetProjection _targetProjection;
+    TargetProjection targetProjection;
     Canvas _canvas;
-    Transform _targetter;
-    // Start is called before the first frame update
-    void Start()
-    {
-        icon = GetComponent<Image>();
-        originalColor = icon.color;
-    }
+    SpaceshipShoot targetterShoot;
+    Target targetScript;
 
-    public void Init(ActorSpaceship ship, Canvas canvas, Transform targetter)
+    //void Start()
+    //{
+    //    icon = GetComponent<Image>();
+    //    originalColor = icon.color;
+    //}
+
+    private void Awake()
     {
-        _canvas = canvas;
-        _spaceshipEvents = ship.GetComponentInChildren<SpaceshipEvents>();
-        _targetter = targetter;
-        _targetProjection = ship.GetComponentInChildren<TargetProjection>();
-        SpaceshipShoot spaceshipShoot = ship.GetComponentInChildren<SpaceshipShoot>();
-        projectileSpeed = spaceshipShoot.laserSpeed;
-        _spaceshipEvents.EventSpaceshipHitByPlayer.AddListener(OnShipHitByPlayer);
-        _spaceshipEvents.EventSpaceshipDied.AddListener(OnShipDied);
         GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerDied);
     }
 
-    void OnShipDied()
+    public void Init(GameObject targetter)
     {
-        Destroy(gameObject);
+        targetScript = GetComponent<Target>();
+        originalColor = targetScript.TargetColor;
+        targetterShoot = targetter.GetComponent<SpaceshipShoot>();
+
+        targetProjection = GetComponentInParent<TargetProjection>();
+        SpaceshipEvents events = targetProjection.GetComponent<SpaceshipEvents>();
+        events.EventSpaceshipHitByPlayer.AddListener(OnShipHitByPlayer);
     }
 
     void OnPlayerDied()
@@ -45,50 +43,19 @@ public class TargetProjectionIcon : MonoBehaviour
     void OnShipHitByPlayer()
     {
         StartCoroutine(FlashColor());
+        Debug.Log("hit by player");
     }
 
     IEnumerator FlashColor()
     {
-        icon.color = Color.red;
+        targetScript.SetColor(Color.red);
         yield return new WaitForSeconds(0.15f);
-        icon.color = originalColor;
+        targetScript.SetColor(originalColor);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        UpdateDrawPosition();
-    }
-
-    void UpdateDrawPosition()
-    {
-        Vector3 projectionPos = _targetProjection.GetPosition(projectileSpeed, _targetter.position);
-
-        Vector3 pos = Camera.main.WorldToScreenPoint(projectionPos);
-        //Debug.Log("pos.z: " + pos.z);
-        //pos.z = 0f;
-        if (pos.z > 0)
-        {
-            Debug.Log("posOnScreen: " + pos + "screen: " + Screen.width + "x" + Screen.height);
-            // Target projection is in front of the camera
-
-
-
-        }
-        else
-        {
-            // draw on the edge of the screen somehow
-            //Vector3 pos = Camera.main.WorldToScreenPoint(projectionPos);
-            //pos.z = 0f;
-            //transform.position = pos;
-            Debug.Log("posOffScreen: " + pos);
-            pos.x = -pos.x;
-            pos.y = -pos.y;
-
-
-        }
-        pos.x = Mathf.Clamp(pos.x, 0, Screen.width);
-        pos.y = Mathf.Clamp(pos.y, 0, Screen.height);
-        transform.position = pos;
-        Debug.Log("finalPos: " + pos);
+        Debug.Log(targetterShoot);
+        transform.position = targetProjection.GetPosition(targetterShoot.laserSpeed, targetterShoot.transform.position);
     }
 }

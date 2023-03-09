@@ -8,9 +8,9 @@ public class UITargetProjections : MonoBehaviour
     [SerializeField]
     ActorManager actorManager;
     [SerializeField]
-    GameObject targetProjectionPrefab;
+    GameObject targetObjectPrefab;
     [SerializeField]
-    Transform playerShip;
+    GameObject playerShip;
     [SerializeField] 
     Faction playerFaction;
 
@@ -22,23 +22,30 @@ public class UITargetProjections : MonoBehaviour
         GameEvents.Instance.EventSpaceshipSpawned.AddListener(OnEventSpaceshipSpawned);
     }
 
-    void OnEventSpaceshipSpawned(ActorSpaceship ship)
+    void OnEventSpaceshipSpawned(ActorSpaceship actor)
     {
-        if(playerFaction.hostileFactions.Contains(ship.faction))
+        if(playerFaction.hostileFactions.Contains(actor.faction))
         {
-            AddSprite(ship);
+            AddIndicator(actor);
         }
     }
 
 
-    void AddSprite(ActorSpaceship ship)
+    void AddIndicator(ActorSpaceship actor)
     {
-        GameObject sprite = Instantiate(
-            targetProjectionPrefab,
-            Vector2.zero,
-            Quaternion.identity,
-            transform);
-
-        sprite.GetComponent<TargetProjectionIcon>().Init(ship, canvas, playerShip.transform);
+        GameObject targetObject = Instantiate(targetObjectPrefab, actor.ship.transform);
+        TargetProjectionIcon tpIcon = targetObject.GetComponent<TargetProjectionIcon>();
+        tpIcon.Init(playerShip);
     }
+
+    //void AddSprite(ActorSpaceship ship)
+    //{
+    //    GameObject sprite = Instantiate(
+    //        targetProjectionPrefab,
+    //        Vector2.zero,
+    //        Quaternion.identity,
+    //        transform);
+
+    //    sprite.GetComponent<TargetProjectionIcon>().Init(ship, canvas, playerShip.transform);
+    //}
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8194922484165046805}
   - component: {fileID: 8544613032549563138}
+  - component: {fileID: 2966049604555633469}
   m_Layer: 0
   m_Name: TargetObject
   m_TagString: Untagged
@@ -49,3 +50,15 @@ MonoBehaviour:
   needArrowIndicator: 1
   needDistanceText: 1
   indicator: {fileID: 0}
+--- !u!114 &2966049604555633469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445849859529224481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c47064233375444b3ffd5a55a04d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

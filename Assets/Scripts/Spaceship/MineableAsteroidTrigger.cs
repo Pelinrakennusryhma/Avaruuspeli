@@ -11,16 +11,20 @@ public class MineableAsteroidTrigger : MonoBehaviour
     public Transform CharacterPosition { get; private set; }
     [SerializeField]
     ActorManager actorManager;
+    [SerializeField]
+    Target targetScript;
     string successText = "Press %landKey% to land on the asteroid";
     string failureText = "Clear the area of hostiles before landing on the asteroid.";
     string currentText;
     bool playerInTriggerArea = false;
+
 
     private void Awake()
     {
         GameEvents.Instance.EventEnemiesKilled.AddListener(OnEnemiesKilled);
         GameEvents.Instance.EventPlayerTriedLanding.AddListener(OnLandingAttempt);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+        GameEvents.Instance.EventToggleIndicators.AddListener(OnToggleIndicators);
     }
 
     void OnLandingAttempt()
@@ -50,6 +54,12 @@ public class MineableAsteroidTrigger : MonoBehaviour
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
         }
     }
+
+    void OnToggleIndicators(bool showIndicator)
+    {
+        targetScript.enabled = showIndicator;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerShip"))

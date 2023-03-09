@@ -36,6 +36,11 @@ public class Target : MonoBehaviour
         }
     }
 
+    public void SetColor(Color color)
+    {
+        targetColor = color;
+    }
+
     /// <summary>
     /// Gets if box indicator is required for the target.
     /// </summary>

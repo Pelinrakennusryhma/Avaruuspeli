@@ -2448,6 +2448,9 @@ MonoBehaviour:
   EventPlayerLeftAsteroid:
     m_PersistentCalls:
       m_Calls: []
+  EventToggleIndicators:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &910284773
 Transform:
   m_ObjectHideFlags: 0
@@ -2907,6 +2910,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 69b18dad-63a5-4e42-8540-a4b6637d50bb
     m_ActionName: FirstPersonControls/Leave[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1004082102}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnShowIndicators
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d7a5097e-38f9-4150-94c6-8efee28b0e6a
+    m_ActionName: ShipControls/ShowIndicators[/Keyboard/alt]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ShipControls
@@ -2999,7 +3018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1083374689
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3033,9 +3052,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorManager: {fileID: 754047033}
-  targetProjectionPrefab: {fileID: 2051147573978868333, guid: f12ac81426eb34847b656f60b09bcc63,
+  targetObjectPrefab: {fileID: 8445849859529224481, guid: ded4ad2e0197e8043978e2d086252100,
     type: 3}
-  playerShip: {fileID: 1736298349}
+  playerShip: {fileID: 655503919}
   playerFaction: {fileID: 11400000, guid: cb8267798c3a1424999cd6c9b1bc2f04, type: 2}
 --- !u!1001 &1085742368
 PrefabInstance:
@@ -3431,6 +3450,7 @@ GameObject:
   - component: {fileID: 1412551089}
   - component: {fileID: 1412551088}
   - component: {fileID: 1412551087}
+  - component: {fileID: 1412551090}
   m_Layer: 0
   m_Name: MineableAsteroid
   m_TagString: Untagged
@@ -3466,6 +3486,7 @@ MonoBehaviour:
   <ShipPosition>k__BackingField: {fileID: 510578710}
   <CharacterPosition>k__BackingField: {fileID: 252813887}
   actorManager: {fileID: 754047033}
+  targetScript: {fileID: 1412551090}
 --- !u!4 &1412551089
 Transform:
   m_ObjectHideFlags: 0
@@ -3499,6 +3520,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412551090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412551086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 1, b: 1, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 1
+  indicator: {fileID: 0}
 --- !u!1 &1413916885
 GameObject:
   m_ObjectHideFlags: 0
@@ -4228,7 +4266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5060,7 +5098,7 @@ PrefabInstance:
     - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
         type: 3}
       propertyPath: laserDamage
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
         type: 3}
@@ -6234,6 +6272,7 @@ MonoBehaviour:
   <ShipPosition>k__BackingField: {fileID: 0}
   <CharacterPosition>k__BackingField: {fileID: 0}
   actorManager: {fileID: 754047033}
+  targetScript: {fileID: 0}
 --- !u!64 &3372909837232550930
 MeshCollider:
   m_ObjectHideFlags: 0

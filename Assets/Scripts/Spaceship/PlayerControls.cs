@@ -68,4 +68,15 @@ public class PlayerControls : ActorSpaceship
             GameEvents.Instance.CallEventPlayerTriedLanding();
         }
     }
+
+    public void OnShowIndicators(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameEvents.Instance.CallEventToggleIndicators(true);
+        } else if (context.canceled)
+        {
+            GameEvents.Instance.CallEventToggleIndicators(false);
+        }
+    }
 }
