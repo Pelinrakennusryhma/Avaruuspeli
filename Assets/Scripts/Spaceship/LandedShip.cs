@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LandedShip : MonoBehaviour
 {
+    [SerializeField]
+    MineableAsteroidTrigger asteroid;
     string promptText = "Press %landKey% to leave the asteroid.";
     bool playerInTriggerArea = false;
 
@@ -17,7 +19,7 @@ public class LandedShip : MonoBehaviour
         if (playerInTriggerArea)
         {
             GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
-            GameEvents.Instance.CallEventPlayerLeftAstroid();
+            GameEvents.Instance.CallEventPlayerLeftAstroid(asteroid);
         }
     }
 

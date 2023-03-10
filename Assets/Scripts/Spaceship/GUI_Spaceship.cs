@@ -55,7 +55,7 @@ public class GUI_Spaceship : MonoBehaviour
         spaceshipHUD.SetActive(false);
     }
 
-    void OnPlayerLeftAsteroid()
+    void OnPlayerLeftAsteroid(MineableAsteroidTrigger asteroid)
     {
         spaceshipHUD.SetActive(true);
     }

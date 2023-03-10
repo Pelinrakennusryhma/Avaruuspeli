@@ -21,10 +21,14 @@ public class SpawnablePickups : MonoBehaviour
     public ResourceInventory.ResourceType ResourceType;
     public int Amount;
 
-    public int Setup(ResourceInventory.ResourceType resourceType)
+    [SerializeField]
+    CenterOfGravity _centerOfGravity;
+
+    public int Setup(ResourceInventory.ResourceType resourceType, AsteroidLauncher.MineralDensity mineralDensity, CenterOfGravity centerOfGravity)
     {
         ResourceType = resourceType;
-        return Amount = DecideAmount();
+        _centerOfGravity = centerOfGravity;
+        return Amount = DecideAmount(mineralDensity);
     }
 
     public void Spawn()
@@ -141,7 +145,7 @@ public class SpawnablePickups : MonoBehaviour
                     && !Diamonds[i].gameObject.activeSelf)
                 {
                     Diamonds[i].gameObject.SetActive(true);
-                    Diamonds[i].OnSpawn();
+                    Diamonds[i].OnSpawn(_centerOfGravity);
                     spawned++;
                 }
             }
@@ -159,28 +163,28 @@ public class SpawnablePickups : MonoBehaviour
         //}
     }
 
-    private static int DecideAmount()
+    private static int DecideAmount(AsteroidLauncher.MineralDensity mineralDensity)
     {
         int amount = 0;
 
-        if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Scarce)
+        switch (mineralDensity)
         {
-            amount = Random.Range(1, 3);
-        }
-
-        else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Medium)
-        {
-            amount = Random.Range(3, 5);
-        }
-
-        else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.High)
-        {
-            amount = Random.Range(5, 7);
-        }
-
-        else if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Highest)
-        {
-            amount = Random.Range(6, 8);
+            case AsteroidLauncher.MineralDensity.None:
+                break;
+            case AsteroidLauncher.MineralDensity.Scarce:
+                amount = Random.Range(1, 3);
+                break;
+            case AsteroidLauncher.MineralDensity.Medium:
+                amount = Random.Range(3, 5);
+                break;
+            case AsteroidLauncher.MineralDensity.High:
+                amount = Random.Range(5, 7);
+                break;
+            case AsteroidLauncher.MineralDensity.Highest:
+                amount = Random.Range(6, 8);
+                break;
+            default:
+                break;
         }
 
         return amount;
@@ -213,7 +217,7 @@ public class SpawnablePickups : MonoBehaviour
                     && !SilverPieces[i].gameObject.activeSelf)
                 {
                     SilverPieces[i].gameObject.SetActive(true);
-                    SilverPieces[i].OnSpawn();
+                    SilverPieces[i].OnSpawn(_centerOfGravity);
                     spawned++;
                 }
             }
@@ -257,7 +261,7 @@ public class SpawnablePickups : MonoBehaviour
                     && !CopperPieces[i].gameObject.activeSelf)
                 {
                     CopperPieces[i].gameObject.SetActive(true);
-                    CopperPieces[i].OnSpawn();
+                    CopperPieces[i].OnSpawn(_centerOfGravity);
                     spawned++;
                 }
             }
@@ -301,7 +305,7 @@ public class SpawnablePickups : MonoBehaviour
                     && !IronPieces[i].gameObject.activeSelf)
                 {
                     IronPieces[i].gameObject.SetActive(true);
-                    IronPieces[i].OnSpawn();
+                    IronPieces[i].OnSpawn(_centerOfGravity);
                     spawned++;
                 }
             }
@@ -345,7 +349,7 @@ public class SpawnablePickups : MonoBehaviour
                     && !GoldPieces[i].gameObject.activeSelf)
                 {
                     GoldPieces[i].gameObject.SetActive(true);
-                    GoldPieces[i].OnSpawn();
+                    GoldPieces[i].OnSpawn(_centerOfGravity);
                     spawned++;
                 }
             }
@@ -369,7 +373,7 @@ public class SpawnablePickups : MonoBehaviour
 
         for (int i = 0; i < Dices.Length; i++)
         {
-            Dices[i].OnSpawn();
+            Dices[i].OnSpawn(_centerOfGravity);
         }
     }
 }

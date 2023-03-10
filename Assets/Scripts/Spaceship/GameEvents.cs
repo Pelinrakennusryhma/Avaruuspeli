@@ -27,7 +27,7 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventPlayerTriedLanding;
     public UnityEvent<MineableAsteroidTrigger> EventPlayerLanded;
     public UnityEvent EventPlayerTriedLeaving;
-    public UnityEvent EventPlayerLeftAsteroid;
+    public UnityEvent<MineableAsteroidTrigger> EventPlayerLeftAsteroid;
     public UnityEvent<bool> EventToggleIndicators;
     //public void CallEventPlayerSpaceshipDied()
     //{
@@ -78,9 +78,9 @@ public class GameEvents : MonoBehaviour
         EventPlayerTriedLeaving.Invoke();
     }
 
-    public void CallEventPlayerLeftAstroid()
+    public void CallEventPlayerLeftAstroid(MineableAsteroidTrigger asteroid)
     {
-        EventPlayerLeftAsteroid.Invoke();
+        EventPlayerLeftAsteroid.Invoke(asteroid);
     }
 
     public void CallEventToggleIndicators(bool showIndicators)

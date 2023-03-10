@@ -8,6 +8,9 @@ public class GatherableDice : GatherableObject
 
     private Vector3 RandomRot;
 
+    [SerializeField]
+    CenterOfGravity centerOfGravity;
+
     private void Awake()
     {
         OffsetFromGround = 0.2f;
@@ -23,7 +26,7 @@ public class GatherableDice : GatherableObject
         //SnapToGround();
     }
 
-    public override void OnSpawn()
+    public override void OnSpawn(CenterOfGravity centerOfGravity)
     {
         SnapToGround();
     }

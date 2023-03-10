@@ -28,7 +28,7 @@ public class CMCameraManager : MonoBehaviour
         SetActiveCamera();
     }
 
-    void OnPlayerLeftAsteroid()
+    void OnPlayerLeftAsteroid(MineableAsteroidTrigger asteroid)
     {
         currentCameraID = cachedShipCamID;
         SetActiveCamera();

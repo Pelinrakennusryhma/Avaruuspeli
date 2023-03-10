@@ -10,6 +10,8 @@ public class RubblePiece : MonoBehaviour
     private bool HasBeenSpawned;
     private float DeathTimer;
 
+    private CenterOfGravity centerOfGravity;
+
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -23,7 +25,7 @@ public class RubblePiece : MonoBehaviour
         HasBeenSpawned = true;
         DeathTimer = Random.Range(3.0f, 5.0f);
 
-        if (CenterOfGravity.Instance == null)
+        if (centerOfGravity == null)
         {
             Rigidbody.useGravity = true;
             Rigidbody.velocity = -(rockCenter - transform.position).normalized * Random.Range(10.5f, 16.09f);

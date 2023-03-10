@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 {
-    public GameObject CentreOfGravity;
+    //public GameObject CentreOfGravity;
     public CenterOfGravity CenterOfGravity;
     public GameObject Parent;
 
@@ -65,7 +65,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         originalTimeStep = Time.fixedDeltaTime;
         Time.fixedDeltaTime = 0.00833333f;
 
-        CenterOfGravity = FindObjectOfType<CenterOfGravity>();
+        //CenterOfGravity = FindObjectOfType<CenterOfGravity>();
         UseRealGravity = false;
 
         if (UseRealGravity)

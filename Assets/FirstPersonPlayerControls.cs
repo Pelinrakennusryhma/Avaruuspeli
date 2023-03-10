@@ -42,7 +42,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
     }
 
-    void OnLeaveAsteroid()
+    void OnLeaveAsteroid(MineableAsteroidTrigger asteroid)
     {
         gameObject.SetActive(false);
     }

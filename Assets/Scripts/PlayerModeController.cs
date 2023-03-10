@@ -9,6 +9,8 @@ public class PlayerModeController : MonoBehaviour
     PlayerControls playerControls;
     [SerializeField]
     GameObject firstPersonControls;
+    [SerializeField] private FirstPersonPlayerControllerWithCentreOfGravity fpsGravity;
+
     PlayerInput playerInput;
     void Awake()
     {
@@ -18,6 +20,7 @@ public class PlayerModeController : MonoBehaviour
 
     private void Start()
     {
+        fpsGravity = firstPersonControls.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
         playerInput = playerControls.GetComponent<PlayerInput>();
     }
 
@@ -29,14 +32,16 @@ public class PlayerModeController : MonoBehaviour
         playerControls.spaceshipMovement.Freeze();
         playerInput.actions.FindActionMap("ShipControls").Disable();
 
+        fpsGravity.CenterOfGravity = asteroid.CenterOfGravity;
         firstPersonControls.transform.position = asteroid.CharacterPosition.position;
         firstPersonControls.transform.rotation = asteroid.CharacterPosition.rotation;
         firstPersonControls.gameObject.SetActive(true);
         playerInput.actions.FindActionMap("FirstPersonControls").Enable();
     }
 
-    void OnLeaveAsteroid()
+    void OnLeaveAsteroid(MineableAsteroidTrigger asteroid)
     {
+        fpsGravity.CenterOfGravity = null;
         firstPersonControls.gameObject.SetActive(false);
         playerControls.spaceshipMovement.UnFreeze();
         playerInput.actions.FindActionMap("FirstPersonControls").Disable();

@@ -39,6 +39,7 @@ public class ResourceHUD : MonoBehaviour
 
     void Scan()
     {
+        Debug.Log("scanning..");
         // Ignore pickup trigger and character collider layers
         int layerMask = 1 << 3;
         layerMask |= (1 << 2);

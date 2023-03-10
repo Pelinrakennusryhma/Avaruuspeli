@@ -14,6 +14,7 @@ public class GatherableObject : MonoBehaviour
     protected Vector3 PickUpStartPos;
     protected Rigidbody Rigidbody;
     protected Collider MainCollider;
+    protected CenterOfGravity _centerOfGravity;
 
     private void Awake()
     {
@@ -51,8 +52,9 @@ public class GatherableObject : MonoBehaviour
         }
     }
 
-    public virtual void OnSpawn()
+    public virtual void OnSpawn(CenterOfGravity centerOfGravity)
     {
+        _centerOfGravity = centerOfGravity;
         SnapToGround();
     }
 
@@ -61,11 +63,11 @@ public class GatherableObject : MonoBehaviour
         //BoxCollider.isTrigger = false;
 
 
-        if (CenterOfGravity.Instance != null)
+        if (_centerOfGravity != null)
         {
             //Debug.LogError("FIX THE SNAPPING TO GROUND. THIS DOESN'T WORK");
 
-            Vector3 offset = (CenterOfGravity.Instance.transform.position - transform.position).normalized * 30.0f;
+            Vector3 offset = (_centerOfGravity.transform.position - transform.position).normalized * 30.0f;
             transform.position += -offset;
 
             //Debug.DrawRay(transform.position, -offset, Color.red, 10000f);
@@ -80,7 +82,7 @@ public class GatherableObject : MonoBehaviour
             {
                 //Debug.Log("Hit " + hitInfos[i].collider.gameObject.name);
 
-                if (hitInfos[i].collider.gameObject == CenterOfGravity.Instance.gameObject)
+                if (hitInfos[i].collider.gameObject == _centerOfGravity.gameObject)
                 {
                     transform.position = hitInfos[i].point + -offset.normalized * OffsetFromGround;
                     //Debug.Log("Snapped to " + hitInfos[i].collider.gameObject.name);

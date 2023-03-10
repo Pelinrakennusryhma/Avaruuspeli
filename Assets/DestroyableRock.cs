@@ -45,14 +45,25 @@ public class DestroyableRock : MonoBehaviour
 
         // Here could be a random chance?
 
-        if (AsteroidLauncher.ResourceType == ResourceInventory.ResourceType.None)
-        {
-            AsteroidLauncher.Setup(false);
-            //Debug.Log("Had to setup asteroid launcher");
-        }
+        //if (AsteroidLauncher.ResourceType == ResourceInventory.ResourceType.None)
+        //{
+        //    AsteroidLauncher.Setup(false);
+        //    //Debug.Log("Had to setup asteroid launcher");
+        //}
 
-        ResourceType = AsteroidLauncher.ResourceType;
-        ResourceAmount = Pickups.Setup(AsteroidLauncher.ResourceType);
+        //ResourceType = AsteroidLauncher.ResourceType;
+        //ResourceAmount = Pickups.Setup(AsteroidLauncher.ResourceType);
+    }
+
+    public void Init(ResourceInventory.ResourceType resourceType, AsteroidLauncher.MineralDensity mineralDensity, CenterOfGravity centerOfGravity)
+    {
+        ResourceType = resourceType;
+        Pickups.Setup(resourceType, mineralDensity, centerOfGravity);
+
+        if(mineralDensity != AsteroidLauncher.MineralDensity.None)
+        {
+            ResourceAmount = 1;
+        }
     }
 
     public void ReduceHealth(float amount, 
