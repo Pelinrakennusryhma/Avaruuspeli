@@ -27,7 +27,27 @@ public class PlanetData : UniverseData
         Placeholder7 = 7,
         Placeholder8 = 8,
         Placeholder9 = 9,
-        Placeholder10 = 10
+        Placeholder10 = 10,
+        Placeholder11 = 11,
+        Placeholder12 = 12,
+        Placeholder13 = 13,
+        Placeholder14 = 14,
+        Placeholder15 = 15,
+        Placeholder16 = 16,
+        Placeholder17 = 17,
+        Placeholder18 = 18,
+        Placeholder19 = 19,
+        Placeholder20 = 20,
+        Placeholder21 = 21,
+        Placeholder22 = 22,
+        Placeholder23 = 23,
+        Placeholder24 = 24,
+        Placeholder25 = 25,
+        Placeholder26 = 26,
+        Placeholder27 = 27,
+        Placeholder28 = 28,
+        Placeholder29 = 29,
+        Placeholder30 = 30
     }
 
 

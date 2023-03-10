@@ -143,7 +143,7 @@ public class WorldMapMouseController : MonoBehaviour
                         //Debug.LogError("FALLS WITHIN TOLERANCE");
                     }
 
-                    if (canClickAsteroidField) 
+                    if (canClickAsteroidField && !GameManager.Instance.Helpers.CheckIfUIisHit()) 
                     {
                         Vector3 hitPoint = new Vector3(Hits[i].point.x, 0, Hits[i].point.z);
                         MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObjectAndPosOnAsteroidField(detector, hitPoint);

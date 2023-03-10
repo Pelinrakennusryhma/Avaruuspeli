@@ -193,7 +193,7 @@ public class UniverseController : MonoBehaviour
 
         for (int i = 0; i < amountOfWormholePairs; i++)
         {                 
-            Debug.LogWarning("Iterating wormhole pairs");
+            //Debug.LogWarning("Iterating wormhole pairs");
        
 
 
@@ -243,7 +243,7 @@ public class UniverseController : MonoBehaviour
             galaxiesWithoutWormholes.Remove(galaxy1);
             galaxiesWithoutWormholes.Remove(galaxy2);
 
-            Debug.Log("Rando1 is " + rando1 + " rando2 is " + rando2);
+            //Debug.Log("Rando1 is " + rando1 + " rando2 is " + rando2);
         }
 
 

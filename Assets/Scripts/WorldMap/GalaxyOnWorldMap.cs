@@ -273,7 +273,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
         int segments = Random.Range(0, 361);
 
-        Debug.Log("DECIDE HERE WHERE WORMHOLES SHOULD BE PLACED?");
+        //Debug.Log("DECIDE HERE WHERE WORMHOLES SHOULD BE PLACED?");
 
         int wormholeIteration = -1;
         int addWormhole = 0;
@@ -292,7 +292,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
             {
                 wormholeIteration = Random.Range(3, amountOfStars - 2);
             }
-            Debug.LogWarning("THIS GALAXY HAS A WROMHOLE. SET POSITION FOR ONE");
+            //Debug.LogWarning("THIS GALAXY HAS A WROMHOLE. SET POSITION FOR ONE");
         }
 
 
@@ -321,7 +321,7 @@ public class GalaxyOnWorldMap : MonoBehaviour
 
                 GalaxyData.WormholeData = Wormhole.WormholeData;
                 //GameManager.Instance.SaverLoader.SaveGalaxy();
-                Debug.LogError("Now would be the time to decide wormhole place");
+                //Debug.LogError("Now would be the time to decide wormhole place");
             }
 
             else

@@ -33,6 +33,28 @@ public class StarSystemOnFocus : MonoBehaviour
     public GameObject Planet9Original;
     public GameObject Planet10Original;
 
+    public GameObject Planet11Original;
+    public GameObject Planet12Original;
+    public GameObject Planet13Original;
+    public GameObject Planet14Original;
+    public GameObject Planet15Original;
+    public GameObject Planet16Original;
+    public GameObject Planet17Original;
+    public GameObject Planet18Original;
+    public GameObject Planet19Original;
+    public GameObject Planet20Original;
+
+    public GameObject Planet21Original;
+    public GameObject Planet22Original;
+    public GameObject Planet23Original;
+    public GameObject Planet24Original;
+    public GameObject Planet25Original;
+    public GameObject Planet26Original;
+    public GameObject Planet27Original;
+    public GameObject Planet28Original;
+    public GameObject Planet29Original;
+    public GameObject Planet30Original;
+
     public GameObject AsteroidFieldOriginal;
 
 
@@ -189,18 +211,49 @@ public class StarSystemOnFocus : MonoBehaviour
 
         int amountOfIterationsSinceAsteroidSpawn = 0;
 
+        List<int> freePlanets = new List<int>();
+
+
+        for (int i = 0; i < 30; i++)
+        {
+            freePlanets.Add(i + 1);
+            //Debug.Log("We have free planet " + freePlanets[i]);
+
+        }
+
+        //Debug.Log("Free planets count is " + freePlanets.Count);
+
         for (int i = 0; i < amountOfOrbits; i++)
         {
             int randomPlanet;
+            bool spawnPlanet = false;
 
             if (amountOfIterationsSinceAsteroidSpawn >= 4) 
             {
                  randomPlanet = Random.Range(0, 11);
+
+                if (randomPlanet == 0)
+                {
+                    spawnPlanet = false;
+                }
+
+                else
+                {
+                    spawnPlanet = true;
+                }
             }
 
             else
             {
-                randomPlanet = Random.Range(1, 11);
+                spawnPlanet = true;
+                randomPlanet = Random.Range(1, 31);
+            }
+
+            if (spawnPlanet) 
+            {
+                int randomIndex = Random.Range(0, freePlanets.Count);
+                randomPlanet = freePlanets[randomIndex];
+                freePlanets.RemoveAt(randomIndex);
             }
 
             if (randomPlanet == 0)
@@ -251,6 +304,8 @@ public class StarSystemOnFocus : MonoBehaviour
             bool isAsteroidField = false;
 
             PlanetData.PlanetGraphicsType planetGraphicsType = PlanetData.PlanetGraphicsType.None;
+
+            bool hasARing = false;
 
             if (randomPlanet == 1)
             {
@@ -303,15 +358,160 @@ public class StarSystemOnFocus : MonoBehaviour
 
             else if (randomPlanet == 9)
             {
+                hasARing = true;
                 objectOriginal = Planet9Original;
                 planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder9;
             }
 
             else if (randomPlanet == 10)
             {
+                hasARing = true;
                 objectOriginal = Planet10Original;
                 planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder10;
             }
+
+            else if (randomPlanet == 11)
+            {
+                hasARing = true;
+                objectOriginal = Planet11Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder11;
+            }
+
+            else if (randomPlanet == 12)
+            {
+                hasARing = false;
+                objectOriginal = Planet12Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder12;
+            }
+
+            else if (randomPlanet == 13)
+            {
+                hasARing = false;
+                objectOriginal = Planet13Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder13;
+            }
+
+            else if (randomPlanet == 14)
+            {
+                hasARing = false;
+                objectOriginal = Planet14Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder14;
+            }
+
+            else if (randomPlanet == 15)
+            {
+                hasARing = false;
+                objectOriginal = Planet15Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder15;
+            }
+
+            else if (randomPlanet == 16)
+            {
+                hasARing = false;
+                objectOriginal = Planet16Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder16;
+            }
+
+            else if (randomPlanet == 17)
+            {
+                hasARing = false;
+                objectOriginal = Planet17Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder17;
+            }
+
+            else if (randomPlanet == 18)
+            {
+                hasARing = false;
+                objectOriginal = Planet18Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder18;
+            }
+
+            else if (randomPlanet == 19)
+            {
+                hasARing = false;
+                objectOriginal = Planet19Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder19;
+            }
+
+            else if (randomPlanet == 20)
+            {
+                hasARing = false;
+                objectOriginal = Planet20Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder20;
+            }
+
+            else if (randomPlanet == 21)
+            {
+                hasARing = true;
+                objectOriginal = Planet21Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder21;
+            }
+
+            else if (randomPlanet == 22)
+            {
+                hasARing = true;
+                objectOriginal = Planet22Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder22;
+            }
+
+            else if (randomPlanet == 23)
+            {
+                hasARing = false;
+                objectOriginal = Planet23Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder23;
+            }
+
+            else if (randomPlanet == 24)
+            {
+                hasARing = false;
+                objectOriginal = Planet24Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder24;
+            }
+
+            else if (randomPlanet == 25)
+            {
+                hasARing = false;
+                objectOriginal = Planet25Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder25;
+            }
+
+            else if (randomPlanet == 26)
+            {
+                hasARing = false;
+                objectOriginal = Planet26Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder26;
+            }
+
+            else if (randomPlanet == 27)
+            {
+                hasARing = false;
+                objectOriginal = Planet27Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder27;
+            }
+
+            else if (randomPlanet == 28)
+            {
+                hasARing = false;
+                objectOriginal = Planet28Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder28;
+            }
+
+            else if (randomPlanet == 29)
+            {
+                hasARing = false;
+                objectOriginal = Planet29Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder29;
+            }
+
+            else if (randomPlanet == 30)
+            {
+                hasARing = false;
+                objectOriginal = Planet30Original;
+                planetGraphicsType = PlanetData.PlanetGraphicsType.Placeholder30;
+            }
+
+
+
 
             else
             {
@@ -324,9 +524,7 @@ public class StarSystemOnFocus : MonoBehaviour
             bool aBigPlanet = false;
 
             if (!isAsteroidField) 
-            {
-                planet.transform.position = transform.position + -planet.transform.forward * orbit;
-
+            {                
                 float randomScale = 1.0f;
 
                 if (i > 2) 
@@ -339,6 +537,23 @@ public class StarSystemOnFocus : MonoBehaviour
                     }
 
                 }
+
+                if (hasARing)
+                {
+                    if (aBigPlanet)
+                    {
+                        orbit += 0.25f;
+                    }
+
+                    else
+                    {
+                        orbit += 0.1f;
+                    }
+                }
+
+                planet.transform.position = transform.position + -planet.transform.forward * orbit;
+
+
 
 
                 // Can't use bigger scales until the ship is rendered on top of everything!
@@ -387,11 +602,22 @@ public class StarSystemOnFocus : MonoBehaviour
             if (!aBigPlanet) 
             {
                 orbit += Random.Range(0.25f, 0.4f);
+
+                if (hasARing)
+                {
+                    orbit += 0.1f;
+                }
             }
 
             else
             {
                 orbit += 0.4f;
+
+                if (hasARing)
+                {
+                    orbit += 0.2f;
+                }
+
             }
             //Debug.Log("Instantiated a planet " + objectOriginal.name);
         }
@@ -413,7 +639,7 @@ public class StarSystemOnFocus : MonoBehaviour
         if (hasBeenLoaded 
             && data != null)
         {
-            RegenerateStarSystemFromdata(data);
+            RegenerateStarSystemFromData(data);
         }
 
         //Debug.Log("Trying to load star system. Success: " + hasBeenLoaded);
@@ -421,7 +647,7 @@ public class StarSystemOnFocus : MonoBehaviour
         return hasBeenLoaded;
     }
 
-    public void RegenerateStarSystemFromdata(StarSystemData data)
+    public void RegenerateStarSystemFromData(StarSystemData data)
     {
 
         StarSystemData = data;
@@ -485,6 +711,67 @@ public class StarSystemOnFocus : MonoBehaviour
                     break;
                 case PlanetData.PlanetGraphicsType.Placeholder10:
                     objectOriginal = Planet10Original;
+                    break;
+
+                case PlanetData.PlanetGraphicsType.Placeholder11:
+                    objectOriginal = Planet11Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder12:
+                    objectOriginal = Planet12Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder13:
+                    objectOriginal = Planet13Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder14:
+                    objectOriginal = Planet14Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder15:
+                    objectOriginal = Planet15Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder16:
+                    objectOriginal = Planet16Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder17:
+                    objectOriginal = Planet17Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder18:
+                    objectOriginal = Planet18Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder19:
+                    objectOriginal = Planet19Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder20:
+                    objectOriginal = Planet20Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder21:
+                    objectOriginal = Planet21Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder22:
+                    objectOriginal = Planet22Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder23:
+                    objectOriginal = Planet23Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder24:
+                    objectOriginal = Planet24Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder25:
+                    objectOriginal = Planet25Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder26:
+                    objectOriginal = Planet26Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder27:
+                    objectOriginal = Planet27Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder28:
+                    objectOriginal = Planet28Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder29:
+                    objectOriginal = Planet29Original;
+                    break;
+                case PlanetData.PlanetGraphicsType.Placeholder30:
+                    objectOriginal = Planet30Original;
                     break;
                 default:
                     break;

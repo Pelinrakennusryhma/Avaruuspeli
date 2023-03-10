@@ -209,6 +209,11 @@ public class MotherShipOnWorldMapController : MonoBehaviour
 
     public bool CheckIfAsteroidFieldPositionIsWithinTolerance()
     {
+        if (GameManager.Instance.Helpers.CheckIfUIisHit())
+        {
+            Debug.LogError("UI is hit, not withing tolerance");
+        }
+
         Vector3 yZeroedPos = new Vector3(transform.position.x, 0, transform.position.z);
         Vector3 yZeroedAsteroidFieldPos = new Vector3(CurrentAsteroidFieldPos.x, 0, CurrentAsteroidFieldPos.z);
         

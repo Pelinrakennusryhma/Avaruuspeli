@@ -8,9 +8,11 @@ public class WormholeOnWorldMap : MonoBehaviour
 
     public WormholeData WormholeData;
 
+
     public void Awake()
     {
         ClickDetector = GetComponent<WorldMapClickDetector>();
+
         ClickDetector.OnObjectClicked -= OnWormholeClicked;
         ClickDetector.OnObjectClicked += OnWormholeClicked;
     }

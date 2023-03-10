@@ -49,7 +49,9 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
     {
         if (!RocksHaveBeenSpawned)
         {
-            DoTheInstantation();
+            DoTheInstantation(-0.01f, -0.01f, 0.01f, 0.01f);
+            DoTheInstantation(4.25f, -0.005f, -0.001f, - 4.25f);
+            DoTheInstantation(-2.25f, 0.005f, 0.001f, 2.25f);
         }
 
         RocksHaveBeenSpawned = true;
@@ -57,11 +59,28 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
         //Debug.LogError("SPAWN ROCKS " + Time.time);
     }
 
-    public void DoTheInstantation()
+    public void DoTheInstantation(float toAddMin,
+                                  float minusRadius,
+                                  float plusRadius,
+                                  float toAddMax)
     {
         float radius = (transform.position - ReferenceObject.transform.position).magnitude;
 
-        GameObject[] rocks = new GameObject[36];
+        //Debug.Log("Rock radius is " + radius );
+
+        int amountOfRocks = 36;
+
+        if (radius >= 4.5f)
+        {
+            amountOfRocks = 72;
+        }
+
+        else if (radius > 3.0f)
+        {
+            amountOfRocks = 48;
+        }
+
+        GameObject[] rocks = new GameObject[amountOfRocks];
 
         for (int i = 0; i < rocks.Length; i++)
         {
@@ -114,8 +133,16 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
             //rocks[i].transform.Rotate(Vector3.up, i * 10);
             //rocks[i].transform.position = -rocks[i].transform.forward * radius;
 
-            float rad = Mathf.Deg2Rad * (i * 360f / 36);
+            radius += Random.Range(minusRadius, plusRadius);
+
+            float rad = Mathf.Deg2Rad * (i * 360f / ((float) amountOfRocks + Random.Range(toAddMin, toAddMax)));
             rocks[i].transform.position = transform.position + new Vector3(Mathf.Sin(rad) * radius, 0, Mathf.Cos(rad) * radius);
+            Vector3 randomRot = new Vector3(Random.Range(0f, 0f),
+                                            Random.Range(-1.0f, 1.0f),
+                                            Random.Range(0f, 0f));
+
+            float amount = Random.Range(0, 180);
+            rocks[i].transform.Rotate(randomRot, amount, Space.World);
 
             //Debug.Log("Instantiated");
         }
