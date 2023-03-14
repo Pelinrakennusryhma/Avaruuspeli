@@ -20,11 +20,11 @@ public class MineableAsteroidTrigger : MonoBehaviour
     [SerializeField]
     Transform rockPositionsParent;
     [SerializeField]
-    int amountOfRocks = 1;
+    int amountOfRocks;
 
     [SerializeField]
     ResourceInventory.ResourceType resourceType;
-    string successText = "Press %landKey% to land on the asteroid";
+    string successText = "Press %landKey% to land on the asteroid.";
     string failureText = "Clear the area of hostiles before landing on the asteroid.";
     string currentText;
     bool playerInTriggerArea = false;

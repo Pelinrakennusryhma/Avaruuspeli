@@ -10,6 +10,7 @@ public class SpawnablePickups : MonoBehaviour
     public GatherableCopper[] CopperPieces;
     public GatherableIron[] IronPieces;
     public GatherbaleDiamond[] Diamonds;
+    [SerializeField] List<GameObject> gatherablePrefabs;
 
     public GameObject DiceParent;
     public GameObject GoldParent;
@@ -29,6 +30,43 @@ public class SpawnablePickups : MonoBehaviour
         ResourceType = resourceType;
         _centerOfGravity = centerOfGravity;
         return Amount = DecideAmount(mineralDensity);
+    }
+
+    GameObject GetResourcePrefab()
+    {
+        switch (ResourceType)
+        {
+            case ResourceInventory.ResourceType.None:
+                return null;
+            case ResourceInventory.ResourceType.TestDice:
+                return gatherablePrefabs[0];
+            case ResourceInventory.ResourceType.Gold:
+                return gatherablePrefabs[1];
+            case ResourceInventory.ResourceType.Silver:
+                return gatherablePrefabs[2];
+            case ResourceInventory.ResourceType.Copper:
+                return gatherablePrefabs[3];
+            case ResourceInventory.ResourceType.Iron:
+                return gatherablePrefabs[4];
+            case ResourceInventory.ResourceType.Diamond:
+                return gatherablePrefabs[5];
+            default:
+                return null;
+        }
+    }
+
+    public void Decorate(GameObject rock)
+    {
+        for (int i = 0; i < Amount; i++)
+        {
+            MeshFilter meshFilter = rock.GetComponentInChildren<MeshFilter>();
+            Vector3[] allVerts = meshFilter.mesh.vertices;
+            Vector3 randomVert = allVerts[Random.Range(0, allVerts.Length)];
+            Vector3 spawnPos = meshFilter.transform.TransformPoint(randomVert);
+            GameObject decoration = Instantiate(GetResourcePrefab(), spawnPos, Random.rotation, meshFilter.transform);
+            GatherableObject gatherableScript = decoration.GetComponent<GatherableObject>();
+            gatherableScript.enabled = false;
+        }
     }
 
     public void Spawn()

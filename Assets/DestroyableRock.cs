@@ -58,12 +58,8 @@ public class DestroyableRock : MonoBehaviour
     public void Init(ResourceInventory.ResourceType resourceType, AsteroidLauncher.MineralDensity mineralDensity, CenterOfGravity centerOfGravity)
     {
         ResourceType = resourceType;
-        Pickups.Setup(resourceType, mineralDensity, centerOfGravity);
-
-        if(mineralDensity != AsteroidLauncher.MineralDensity.None)
-        {
-            ResourceAmount = 1;
-        }
+        ResourceAmount = Pickups.Setup(resourceType, mineralDensity, centerOfGravity);
+        Pickups.Decorate(gameObject);
     }
 
     public void ReduceHealth(float amount, 
