@@ -24,6 +24,14 @@ public class ResourceInventory : MonoBehaviour
     public static int AmountOfIron;
     public static int AmountOfDiamonds;
 
+    public static int AmountOfGoldSinceLastInventoryLaunch;
+    public static int AmountOfSilverSinceLastInventoryLaunch;
+    public static int AmountOfCopperSinceLastInventoryLaunch;
+    public static int AmountOfIronSinceLastInventoryLaunch;
+    public static int AmountOfDiamondsSinceLastInventoryLaunch;
+
+    public ShowHideInventory ShowHideInventory;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,6 +41,8 @@ public class ResourceInventory : MonoBehaviour
     public void CollectResource(ResourceType collectedResourceType)
     {
         //Debug.Log("Collected " + collectedResourceType.ToString());
+
+        //ShowHideInventory.ShowInventory();
 
         int amount = 0;
 
@@ -47,6 +57,8 @@ public class ResourceInventory : MonoBehaviour
         {
             AmountOfGold++;
             amount = AmountOfGold;
+            AmountOfGoldSinceLastInventoryLaunch++;
+            //ShowHideInventory.Inventory.AddItem(1, 1);
             //Debug.Log("Amount of gold " + AmountOfGold);
         }
 
@@ -54,6 +66,7 @@ public class ResourceInventory : MonoBehaviour
         {
             AmountOfSilver++;
             amount = AmountOfSilver;
+            AmountOfSilverSinceLastInventoryLaunch++;
             //Debug.Log("Amount of silver " + AmountOfSilver);
         }
 
@@ -61,12 +74,14 @@ public class ResourceInventory : MonoBehaviour
         {
             AmountOfCopper++;
             amount = AmountOfCopper;
+            AmountOfCopperSinceLastInventoryLaunch++;
             //Debug.Log("Amount of copper " + AmountOfCopper);
         }
         else if (collectedResourceType == ResourceType.Iron)
         {
             AmountOfIron++;
             amount = AmountOfIron;
+            AmountOfIronSinceLastInventoryLaunch++;
             //Debug.Log("Amount of iron " + AmountOfIron);
         }
 
@@ -74,9 +89,50 @@ public class ResourceInventory : MonoBehaviour
         {
             AmountOfDiamonds++;
             amount = AmountOfDiamonds;
+            AmountOfDiamondsSinceLastInventoryLaunch++;
             //Debug.Log("Amount of diamonds " + AmountOfDiamonds);
         }
 
         ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, amount);
+
+        //ShowHideInventory.HideInventory();
+    }
+
+    // Update is called once per frame
+    public void UnloadGatheredItems(Inventory inventory)
+    {
+        if (AmountOfGoldSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(1, AmountOfGoldSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfSilverSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(8, AmountOfSilverSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfCopperSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(9, AmountOfCopperSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfIronSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(0, AmountOfIronSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfDiamondsSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(10, AmountOfDiamondsSinceLastInventoryLaunch);
+        }
+
+        AmountOfGoldSinceLastInventoryLaunch = 0;
+        AmountOfSilverSinceLastInventoryLaunch = 0;
+        AmountOfCopperSinceLastInventoryLaunch = 0;
+        AmountOfIronSinceLastInventoryLaunch = 0;
+        AmountOfDiamondsSinceLastInventoryLaunch = 0;
+
+
+
     }
 }

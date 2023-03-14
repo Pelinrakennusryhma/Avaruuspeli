@@ -87,12 +87,12 @@ public class DestroyableRock : MonoBehaviour
     {
         float severity = 1.0f;
 
-        if (tool == ResourceGatherer.ToolType.Blowtorch)
+        if (tool == ResourceGatherer.ToolType.BasicDrill)
         {
             severity = 1.4f;
         }
 
-        else if (tool == ResourceGatherer.ToolType.Drill)
+        else if (tool == ResourceGatherer.ToolType.AdvancedDrill)
         {
             severity = 4.0f;
         }

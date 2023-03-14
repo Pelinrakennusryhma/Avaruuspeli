@@ -18,10 +18,12 @@ public class PlayerHands : MonoBehaviour
         {
             case ResourceGatherer.ToolType.None:
                 break;
-            case ResourceGatherer.ToolType.Blowtorch:
+            case ResourceGatherer.ToolType.BasicDrill:
+                //Debug.Log("We are here 1");
                 BlowTorch.SetActive(true);
                 break;
-            case ResourceGatherer.ToolType.Drill:
+            case ResourceGatherer.ToolType.AdvancedDrill:
+                //Debug.Log("We are here 2");
                 Drill.SetActive(true);
                 break;
             default:

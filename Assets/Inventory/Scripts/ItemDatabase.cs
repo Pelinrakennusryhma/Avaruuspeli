@@ -37,7 +37,10 @@ public class ItemDatabase : MonoBehaviour
              new Item(4, "Advanced Drill", 20, "Drill", false, ""),
              new Item(5, "Spacesuit", 5, "Spacesuit", false, ""),
              new Item(6, "Ship Laser", 60, "ShipWeapon", false, ""),
-             new Item(7, "Ship Gun", 40, "ShipWeapon", false, "")
+             new Item(7, "Ship Gun", 40, "ShipWeapon", false, ""),
+             new Item(8, "Silver", 50, "Resource", true, "Tämä on hopeaa"),
+             new Item(9, "Copper", 10, "Resource", true, "Tämä on kuparia"),
+             new Item(10, "Diamond", 1000, "Resource", true, "Tämä on timanttia"),
         };
     }
 }

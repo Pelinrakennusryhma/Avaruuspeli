@@ -113,7 +113,9 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
                 {
                     Destroy(go);
                 }
-                GameObject.Find("Canvas").GetComponent<CanvasScript>().InfoAboutItem(itemToAdd);
+
+                FindObjectOfType<CanvasScript>().InfoAboutItem(itemToAdd);
+                //GameObject.Find("Canvas").GetComponent<CanvasScript>().InfoAboutItem(itemToAdd);
                 Object prefab = Resources.Load("Prefabs/ItemInfoPanel");
                 GameObject newItem = Instantiate(prefab, canvas.transform) as GameObject;
                 newItem.name = itemToAdd.id.ToString();

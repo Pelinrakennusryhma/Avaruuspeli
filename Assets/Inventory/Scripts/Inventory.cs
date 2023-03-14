@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
     //Antaa pelaajalle itemin. Jos pelaajalla ei ole ennestään sitä, lisää uuden rivin inventoryyn. Jos pelaajalla on jo inventoryssa se ja tavara on stackattava, lisää määrään lisää.
     public void AddItem(int id, int amount)
     {
+
         Item item = CheckForItem(id);
         itemToAdd = itemDatabase.GetItem(id);
         if (item == null)
@@ -30,11 +31,13 @@ public class Inventory : MonoBehaviour
             GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
             newItem.name = itemToAdd.id.ToString();
             newItem.GetComponent<ItemScript>().AddItem(amount);
+
         }
         else if(item.stackable)
         {
-            GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id).GetComponent<ItemScript>().AddItem(amount);
+            GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id).GetComponentInChildren<ItemScript>(true).AddItem(amount);
         }
+
     }
 
     //Poistaa pelaajalta itemin. Jos pelaajalla on jo ennestään sitä enemmän kuin poistettava määrä, poistaa määrästä. Jos pelaajalla on saman verran tai vähemmän kuin poistettava määrä, poistaa rivin inventorysta.

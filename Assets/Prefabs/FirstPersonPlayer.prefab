@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 2024273339}
   - component: {fileID: 2024273338}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PickUpCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2451,6 +2451,10 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 8f0eba5e-d444-4ac4-8268-44cbfaf8a0a1
     m_ActionName: FirstPersonControls/KeyAlpha0[/Keyboard/0]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69c46ab1-83be-4ff4-9d7b-ef769f7c6010
+    m_ActionName: ShipControls/Pause[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -2502,6 +2506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9bf9567ac23e94aaa3e47502905257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowHideInventory: {fileID: 0}
 --- !u!114 &4892981637633448491
 MonoBehaviour:
   m_ObjectHideFlags: 0

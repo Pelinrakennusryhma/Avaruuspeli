@@ -14,7 +14,8 @@ public class ItemInfo : MonoBehaviour
     private Item infoAbout;
     void Start()
     {
-        infoAbout = GameObject.Find("Canvas").GetComponent<CanvasScript>().infoAbout;
+        //infoAbout = GameObject.Find("Canvas").GetComponent<CanvasScript>().infoAbout;
+        infoAbout = FindObjectOfType<CanvasScript>().infoAbout;
         Item item = infoAbout;
         itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
         itemName.text = infoAbout.name;

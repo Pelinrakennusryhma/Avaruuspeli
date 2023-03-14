@@ -69,7 +69,8 @@ public class FirstPersonPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.IsPaused)
+        if (GameManager.Instance.IsPaused
+            || Time.timeScale <= 0)
         {
             return;
         }
@@ -172,6 +173,8 @@ public class FirstPersonPlayerController : MonoBehaviour
 
     private void MoveHead(Vector2 mouseInput, out float xRot)
     {
+
+
         float mouseSensitivity = Options.MouseSensitivity;
         //Debug.Log("Mouse sensitivity is " + mouseSensitivity);
         xRot = mouseInput.x;

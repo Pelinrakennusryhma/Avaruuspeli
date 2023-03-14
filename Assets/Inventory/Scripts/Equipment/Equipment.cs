@@ -17,6 +17,12 @@ public class Equipment : MonoBehaviour
     //Tavaroitten unequip ja equip. Kutsutaan ContextMenu.cs kautta.
     public void UnequipDrill()
     {
+        if (ResourceGatherer.Instance != null) 
+        {
+            ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.None;
+            ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.None);
+        }
+
         if (equippedDrill != null)
         {
             inventory.AddItem(equippedDrill.id, 1);
@@ -38,7 +44,27 @@ public class Equipment : MonoBehaviour
         UnequipDrill();
         equippedDrill = item;
         drillImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedDrill.name);
+
+        Debug.Log("Equipping drill. Item id is " + item.id);
+        
+        if (ResourceGatherer.Instance != null) 
+        {
+            if (item.id == 2)
+            {
+                ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.BasicDrill;
+                ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.BasicDrill);
+            }   
+            
+            else if (item.id == 4)     
+            {
+                ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.AdvancedDrill;
+                ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.AdvancedDrill);
+        
+            }
+        }
+   
     }
+
     public void EquipSpacesuit(Item item)
     {
         UnequipSpacesuit();
