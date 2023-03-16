@@ -23,7 +23,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
     int amountOfRocks;
 
     [SerializeField]
-    ResourceInventory.ResourceType resourceType;
+    Item resourceType;
     string successText = "Press %landKey% to land on the asteroid.";
     string failureText = "Clear the area of hostiles before landing on the asteroid.";
     string currentText;
@@ -53,7 +53,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
             Debug.Log("spawnPos: " + spawnPos);
             GameObject rock = Instantiate(mineableRockPrefabs[0], spawnPos, Random.rotation, transform);
             DestroyableRock destroyableRock = rock.GetComponent<DestroyableRock>();
-            destroyableRock.Init(resourceType, MineralDensity.Highest, CenterOfGravity);
+            destroyableRock.Init(resourceType, CenterOfGravity);
         }
 
         //int maxAmount = Mathf.Min(amountOfRocks, rockPositionsParent.childCount);

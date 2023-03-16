@@ -7,6 +7,6 @@ public class GatherableCopper : GatherableObject
     public void Awake()
     {
         OffsetFromGround = -0.2f;
-        ResourceType = ResourceInventory.ResourceType.Copper;
+        //ResourceType = ResourceInventory.ResourceType.Copper;
     }
 }

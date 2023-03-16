@@ -7,6 +7,6 @@ public class GatherbaleDiamond : GatherableObject
     public void Awake()
     {
         OffsetFromGround = -0.2f;
-        ResourceType = ResourceInventory.ResourceType.Diamond;
+        //ResourceType = ResourceInventory.ResourceType.Diamond;
     }
 }

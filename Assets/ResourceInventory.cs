@@ -4,25 +4,9 @@ using UnityEngine;
 
 public class ResourceInventory : MonoBehaviour
 {
-    public enum ResourceType
-    {
-        None = 0,
-        TestDice = 1,
-        Gold = 2,
-        Silver = 3,
-        Copper = 4,
-        Iron = 5,
-        Diamond = 6
-    }
-
     public static ResourceInventory Instance;
 
-    public static int AmountOfTestDice;
-    public static int AmountOfGold;
-    public static int AmountOfSilver;
-    public static int AmountOfCopper;
-    public static int AmountOfIron;
-    public static int AmountOfDiamonds;
+    Dictionary<Item, int> inventory = new Dictionary<Item, int>();
 
     // Start is called before the first frame update
     void Awake()
@@ -30,53 +14,22 @@ public class ResourceInventory : MonoBehaviour
         Instance = this; 
     }
 
-    public void CollectResource(ResourceType collectedResourceType)
+    public void CollectResource(Item collectedResourceType, int amount = 1)
     {
         //Debug.Log("Collected " + collectedResourceType.ToString());
 
-        int amount = 0;
+        int totalAmount;
 
-        if (collectedResourceType == ResourceType.TestDice)
+        if (inventory.ContainsKey(collectedResourceType))
         {
-            AmountOfTestDice++;
-            amount = AmountOfTestDice;
-            //Debug.Log("Amount of test dice " + AmountOfTestDice);
+            totalAmount = amount + inventory[collectedResourceType];
+            inventory[collectedResourceType] = totalAmount;
+        } else
+        {
+            inventory.Add(collectedResourceType, amount);
+            totalAmount = amount;
         }
 
-        else if (collectedResourceType == ResourceType.Gold)
-        {
-            AmountOfGold++;
-            amount = AmountOfGold;
-            //Debug.Log("Amount of gold " + AmountOfGold);
-        }
-
-        else if(collectedResourceType == ResourceType.Silver)
-        {
-            AmountOfSilver++;
-            amount = AmountOfSilver;
-            //Debug.Log("Amount of silver " + AmountOfSilver);
-        }
-
-        else if (collectedResourceType == ResourceType.Copper)
-        {
-            AmountOfCopper++;
-            amount = AmountOfCopper;
-            //Debug.Log("Amount of copper " + AmountOfCopper);
-        }
-        else if (collectedResourceType == ResourceType.Iron)
-        {
-            AmountOfIron++;
-            amount = AmountOfIron;
-            //Debug.Log("Amount of iron " + AmountOfIron);
-        }
-
-        else if (collectedResourceType == ResourceType.Diamond)
-        {
-            AmountOfDiamonds++;
-            amount = AmountOfDiamonds;
-            //Debug.Log("Amount of diamonds " + AmountOfDiamonds);
-        }
-
-        ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, amount);
+        ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, totalAmount);
     }
 }

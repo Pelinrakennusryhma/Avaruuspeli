@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GatherableObject : MonoBehaviour
 {
-    public ResourceInventory.ResourceType ResourceType;
+    public Item ResourceType { get; private set; }
 
     public float OffsetFromGround = 0.2f;
 
@@ -12,13 +12,17 @@ public class GatherableObject : MonoBehaviour
     protected float PickupTime;
     protected bool HasBeenPickedUp = false;
     protected Vector3 PickUpStartPos;
-    protected Rigidbody Rigidbody;
+    protected Rigidbody rb;
     protected Collider MainCollider;
     protected CenterOfGravity _centerOfGravity;
+    MeshCollider meshCollider;
+    Vector3 targetPosition;
+    bool hasCollidedWithAsteroid = false;
 
     private void Awake()
     {
-       // Rigidbody = GetComponent<Rigidbody>();
+       rb = GetComponent<Rigidbody>();
+       meshCollider = GetComponent<MeshCollider>();
        // Collider mainCollider = GetComponent<Collider>();
     }
 
@@ -52,10 +56,31 @@ public class GatherableObject : MonoBehaviour
         }
     }
 
+    public void Init(Item resourceType)
+    {
+        ResourceType = resourceType;
+    }
+
     public virtual void OnSpawn(CenterOfGravity centerOfGravity)
     {
         _centerOfGravity = centerOfGravity;
         SnapToGround();
+    }
+
+    public virtual void Activate(CenterOfGravity centerOfGravity)
+    {
+        _centerOfGravity = centerOfGravity;
+        MeshCollider asteroidCollider = centerOfGravity.GetComponent<MeshCollider>();
+        targetPosition = CalculateTargetPos(asteroidCollider);
+        meshCollider.enabled = true;
+    }
+
+    Vector3 CalculateTargetPos(MeshCollider asteroidCollider)
+    {
+        Vector3 pos = asteroidCollider.ClosestPoint(transform.position);
+        Vector3 dirNormal = (transform.position - asteroidCollider.transform.position).normalized;
+        pos += (dirNormal * transform.localScale.x);
+        return pos;
     }
 
     public virtual void SnapToGround()
@@ -137,6 +162,9 @@ public class GatherableObject : MonoBehaviour
                 HasBeenPickedUp = false;
                 gameObject.SetActive(false);
             }
+        } else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 3f);
         }
     }
 }

@@ -53,7 +53,6 @@ public class SpaceshipMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        Debug.Log(Time.fixedDeltaTime);
         // Roll
         rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque);
         // Pitch

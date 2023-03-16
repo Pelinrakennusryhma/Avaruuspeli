@@ -15,7 +15,7 @@ public class GatherableDice : GatherableObject
     {
         OffsetFromGround = 0.2f;
         BoxCollider = GetComponent<BoxCollider>();
-        Rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         RandomRot = new Vector3(Random.Range(-90.0f, 90.0f), 
                                 Random.Range(-90.0f, 90.0f), 
                                 Random.Range(-90.0f, 90.0f));

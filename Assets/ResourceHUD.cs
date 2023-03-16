@@ -66,14 +66,14 @@ public class ResourceHUD : MonoBehaviour
         }
     }
 
-    void ShowHUD(ResourceInventory.ResourceType resource, int amount)
+    void ShowHUD(Item resource, int amount)
     {
         if (HUDText != null
             && amount > 0
-            && resource != ResourceInventory.ResourceType.None)
+            && resource != null)
         {
             HUDText.gameObject.SetActive(true);
-            HUDText.text = "Rock contains " + resource.ToString();
+            HUDText.text = "Rock contains " + resource.plural;
 
             Vector3 currentScale = HUDText.transform.localScale;
 

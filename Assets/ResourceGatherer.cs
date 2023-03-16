@@ -37,7 +37,7 @@ public class ResourceGatherer : MonoBehaviour
             //Debug.Log("Collect " + Time.time);
             GatherableObject gatherable = other.GetComponent<GatherableObject>();
 
-            if (gatherable != null)
+            if (gatherable != null && gatherable.enabled)
             {
                 gatherable.OnPickUp();
             }

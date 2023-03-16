@@ -18,7 +18,6 @@ public class SpaceshipColor : MonoBehaviour
     void ColorHull(Color color)
     {
         MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
-        Debug.Log("color: " + color);
         meshRenderer.material.color = color;
     }
 }

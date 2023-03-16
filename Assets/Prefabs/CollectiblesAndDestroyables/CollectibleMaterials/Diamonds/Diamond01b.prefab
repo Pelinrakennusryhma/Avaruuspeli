@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 863421825865401915}
   - component: {fileID: 896714327451214286}
   - component: {fileID: 811349372408030400}
-  - component: {fileID: 6967211902099050795}
+  - component: {fileID: 1011479188593391287}
   m_Layer: 6
   m_Name: Diamond01b
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49730085967010945}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.55, z: 3.54}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.22, y: 0.22, z: 0.22}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,7 +47,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
@@ -60,12 +60,12 @@ MeshCollider:
   m_GameObject: {fileID: 49730085967010945}
   m_Material: {fileID: 13400000, guid: cb4b5c048a03b054586268361b904b3c, type: 2}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7763868518355740298, guid: 08e7efc324b8de74ca64f104122ed164, type: 3}
---- !u!114 &6967211902099050795
+--- !u!114 &1011479188593391287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 49730085967010945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a842621b3d25f43b23ae12232b214b, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f77162a786c2344b209ca8cdd41810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceType: 6
   OffsetFromGround: 0.2
 --- !u!1001 &4713464384269769375
 PrefabInstance:

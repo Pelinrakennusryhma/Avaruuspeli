@@ -23,46 +23,47 @@ public class ResourcePickUpPrompt : MonoBehaviour
         textMeshPro.gameObject.SetActive(false);
     }
 
-    public void ShowResource(ResourceInventory.ResourceType resourceType,
+    public void ShowResource(Item resourceType,
                              int amount)
     {
         HideTimer = 3.0f;
         textMeshPro.gameObject.SetActive(true);
 
+        string resourceName = amount > 1 ? resourceType.plural : resourceType.itemName;
+        textMeshPro.text = $"{resourceName}: {amount}";
 
 
+        //switch (resourceType)
+        //{
+        //    case ResourceInventory.ResourceType.None:
+        //        break;
+        //    case ResourceInventory.ResourceType.TestDice:
+        //        textMeshPro.text = "Dice: " + amount.ToString();
+        //        break;
 
-        switch (resourceType)
-        {
-            case ResourceInventory.ResourceType.None:
-                break;
-            case ResourceInventory.ResourceType.TestDice:
-                textMeshPro.text = "Dice: " + amount.ToString();
-                break;
+        //    case ResourceInventory.ResourceType.Gold:
+        //        textMeshPro.text = "Gold: " + amount.ToString();
+        //        break;
 
-            case ResourceInventory.ResourceType.Gold:
-                textMeshPro.text = "Gold: " + amount.ToString();
-                break;
+        //    case ResourceInventory.ResourceType.Silver:
+        //        textMeshPro.text = "Silver: " + amount.ToString();
+        //        break;
 
-            case ResourceInventory.ResourceType.Silver:
-                textMeshPro.text = "Silver: " + amount.ToString();
-                break;
+        //    case ResourceInventory.ResourceType.Copper:
+        //        textMeshPro.text = "Copper: " + amount.ToString();
+        //        break;
 
-            case ResourceInventory.ResourceType.Copper:
-                textMeshPro.text = "Copper: " + amount.ToString();
-                break;
+        //    case ResourceInventory.ResourceType.Iron:
+        //        textMeshPro.text = "Iron: " + amount.ToString();
+        //        break;
 
-            case ResourceInventory.ResourceType.Iron:
-                textMeshPro.text = "Iron: " + amount.ToString();
-                break;
+        //    case ResourceInventory.ResourceType.Diamond:
+        //        textMeshPro.text = "Diamonds: " + amount.ToString();
+        //        break;
 
-            case ResourceInventory.ResourceType.Diamond:
-                textMeshPro.text = "Diamonds: " + amount.ToString();
-                break;
-
-            default:
-                break;
-        }        
+        //    default:
+        //        break;
+        //}        
         
         //Debug.Log("resource type is " + resourceType.ToString());
     }

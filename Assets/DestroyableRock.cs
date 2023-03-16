@@ -5,8 +5,14 @@ using UnityEngine.VFX;
 
 public class DestroyableRock : MonoBehaviour
 {
-    public ResourceInventory.ResourceType ResourceType;
-    public int ResourceAmount;
+    [field: SerializeField]
+    public Item ResourceType { get; private set; }
+    [SerializeField]
+    int minResourceAmount;
+    [SerializeField]
+    int maxResourceAmount;
+    [field: SerializeField]
+    public int ResourceAmount { get; private set; }
 
     public float Health;
 
@@ -25,6 +31,10 @@ public class DestroyableRock : MonoBehaviour
     public VisualEffect Explosion;
 
     public Vector3 OriginalGraphicsLocalPosition;
+
+    private List<GatherableObject> spawnedResources = new List<GatherableObject>();
+    CenterOfGravity _centerOfGravity;
+    MeshFilter meshFilter;
     // Start is called before the first frame update
 
     public void Awake()
@@ -42,6 +52,7 @@ public class DestroyableRock : MonoBehaviour
         Explosion = GetComponentInChildren<VisualEffect>(true);
         Explosion.playRate = 1.5f;
         Explosion.Stop();
+        meshFilter = GetComponentInChildren<MeshFilter>();
 
         // Here could be a random chance?
 
@@ -55,11 +66,46 @@ public class DestroyableRock : MonoBehaviour
         //ResourceAmount = Pickups.Setup(AsteroidLauncher.ResourceType);
     }
 
-    public void Init(ResourceInventory.ResourceType resourceType, AsteroidLauncher.MineralDensity mineralDensity, CenterOfGravity centerOfGravity)
+    public void Init(Item resourceType, CenterOfGravity centerOfGravity)
     {
+        _centerOfGravity = centerOfGravity;
         ResourceType = resourceType;
-        ResourceAmount = Pickups.Setup(resourceType, mineralDensity, centerOfGravity);
-        Pickups.Decorate(gameObject);
+        ResourceAmount = Random.Range(minResourceAmount, maxResourceAmount + 1);
+        //ResourceAmount = Pickups.Setup(resourceType, mineralDensity, centerOfGravity);
+        //Pickups.Decorate(gameObject);
+        SpawnResources();
+    }
+
+    void SpawnResources()
+    {
+        for (int i = 0; i < ResourceAmount; i++)
+        {
+            int numVariants = ResourceType.itemPrefabVariants.Length;
+            GameObject resourceVariant = ResourceType.itemPrefabVariants[Random.Range(0, numVariants)];
+            Vector3 spawnPos = FindVertexOnMesh();
+            GameObject spawnedResource = Instantiate(resourceVariant, spawnPos, Random.rotation, Graphics.transform);
+            GatherableObject gatherableObject = spawnedResource.GetComponent<GatherableObject>();
+            gatherableObject.Init(ResourceType);
+            gatherableObject.enabled = false;
+            spawnedResources.Add(gatherableObject);
+        }
+    }
+
+    Vector3 FindVertexOnMesh()
+    {
+        Vector3[] allVerts = meshFilter.mesh.vertices;
+        Vector3 randomVert = allVerts[Random.Range(0, allVerts.Length)];
+        return meshFilter.transform.TransformPoint(randomVert);
+    }
+
+    void EnableResources()
+    {
+        foreach (GatherableObject gatherable in spawnedResources)
+        {
+            gatherable.transform.parent = transform;
+            gatherable.enabled = true;
+            gatherable.Activate(_centerOfGravity);
+        }
     }
 
     public void ReduceHealth(float amount, 
@@ -77,12 +123,13 @@ public class DestroyableRock : MonoBehaviour
             Invoke("DestroySelf", 15f);
             Graphics.SetActive(false);
             Rubble.SetActive(true);
-            Spawnables.SetActive(true);
+            EnableResources();
+            //Spawnables.SetActive(true);
             OwnCollider.enabled = false;
             DeathParticles.Play(true);
             Explosion.Play();
 
-            Pickups.Spawn();
+            //Pickups.Spawn();
 
             for (int i = 0; i < RubblePieces.Length; i++)
             {

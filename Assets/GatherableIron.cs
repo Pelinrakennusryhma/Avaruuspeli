@@ -7,6 +7,6 @@ public class GatherableIron : GatherableObject
     public void Awake()
     {
         OffsetFromGround = -0.2f;
-        ResourceType = ResourceInventory.ResourceType.Iron;
+        //ResourceType = ResourceInventory.ResourceType.Iron;
     }
 }

@@ -7,6 +7,6 @@ public class GatherableGold : GatherableObject
     public void Awake()
     {
         OffsetFromGround = -0.2f;
-        ResourceType = ResourceInventory.ResourceType.Gold;
+        //ResourceType = ResourceInventory.ResourceType.Gold;
     }
 }
