@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1275676351861359399}
   - component: {fileID: 1602900621448275154}
   - component: {fileID: 842375899933039636}
-  - component: {fileID: 6564446977777694654}
+  - component: {fileID: -8580328895375558559}
   m_Layer: 6
   m_Name: Copper01c
   m_TagString: Untagged
@@ -47,7 +47,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
@@ -65,7 +65,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5547674970011133657, guid: 3f6daaad795f3be488e7f089de6dd536, type: 3}
---- !u!114 &6564446977777694654
+--- !u!114 &-8580328895375558559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1945498201635183005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30ac5d06c62f0c043be3d77cc43d3fca, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f77162a786c2344b209ca8cdd41810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceType: 4
   OffsetFromGround: 0.2
 --- !u!1 &8652722485215518170
 GameObject:

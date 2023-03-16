@@ -42,7 +42,17 @@ public class MineableAsteroidTrigger : MonoBehaviour
     private void Start()
     {
         meshFilter = GetComponentInChildren<MeshFilter>();
+        SetupTargetScript();
         SpawnRocks();
+    }
+
+    void SetupTargetScript()
+    {
+        Target targetScript = GetComponent<Target>();
+        if(targetScript != null)
+        {
+            targetScript.descriptionText = $"Asteroid ({resourceType.plural})";
+        }
     }
 
     private void SpawnRocks()
@@ -50,8 +60,8 @@ public class MineableAsteroidTrigger : MonoBehaviour
         for (int i = 0; i < amountOfRocks; i++)
         {
             Vector3 spawnPos = FindVertexOnMesh();
-            Debug.Log("spawnPos: " + spawnPos);
-            GameObject rock = Instantiate(mineableRockPrefabs[0], spawnPos, Random.rotation, transform);
+            GameObject rockPrefab = mineableRockPrefabs[Random.Range(0, mineableRockPrefabs.Length)];
+            GameObject rock = Instantiate(rockPrefab, spawnPos, Random.rotation, transform);
             DestroyableRock destroyableRock = rock.GetComponent<DestroyableRock>();
             destroyableRock.Init(resourceType, CenterOfGravity);
         }

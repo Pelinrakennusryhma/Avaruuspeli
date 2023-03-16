@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ResourceType>k__BackingField: {fileID: 0}
-  minResourceAmount: 4
-  maxResourceAmount: 4
+  minResourceAmount: 2
+  maxResourceAmount: 8
   <ResourceAmount>k__BackingField: 0
   Health: 0
   Graphics: {fileID: 1820843978135339966}
