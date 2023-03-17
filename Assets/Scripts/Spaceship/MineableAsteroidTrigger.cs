@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static AsteroidLauncher;
 
 public class MineableAsteroidTrigger : MonoBehaviour
 {
@@ -18,8 +17,6 @@ public class MineableAsteroidTrigger : MonoBehaviour
     [SerializeField]
     GameObject[] mineableRockPrefabs;
     [SerializeField]
-    Transform rockPositionsParent;
-    [SerializeField]
     int amountOfRocks;
 
     [SerializeField]
@@ -29,6 +26,9 @@ public class MineableAsteroidTrigger : MonoBehaviour
     string currentText;
     bool playerInTriggerArea = false;
     MeshFilter meshFilter;
+    List<GameObject> spawnedRocks = new List<GameObject>();
+    float minSpawnRange = 2f;
+    int allowedSearches = 5;
 
 
     private void Awake()
@@ -43,7 +43,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
     {
         meshFilter = GetComponentInChildren<MeshFilter>();
         SetupTargetScript();
-        SpawnRocks();
+        SpawnRocks(amountOfRocks);
     }
 
     void SetupTargetScript()
@@ -55,26 +55,46 @@ public class MineableAsteroidTrigger : MonoBehaviour
         }
     }
 
-    private void SpawnRocks()
+    private void SpawnRocks(int amount)
     {
-        for (int i = 0; i < amountOfRocks; i++)
+        for (int i = 0; i < amount; i++)
         {
-            Vector3 spawnPos = FindVertexOnMesh();
-            GameObject rockPrefab = mineableRockPrefabs[Random.Range(0, mineableRockPrefabs.Length)];
-            GameObject rock = Instantiate(rockPrefab, spawnPos, Random.rotation, transform);
-            DestroyableRock destroyableRock = rock.GetComponent<DestroyableRock>();
-            destroyableRock.Init(resourceType, CenterOfGravity);
+            int searchCount = allowedSearches;
+
+            // Keep searching to our limit.
+            while (searchCount-- > 0)
+            {
+                // Choose a random position.
+                Vector3 spawnPos = FindVertexOnMesh();
+
+                // Is the position is empty?
+                if (IsPositionEmpty(spawnPos))
+                {
+                    // Yes, so add to the list.
+                    GameObject rockPrefab = mineableRockPrefabs[Random.Range(0, mineableRockPrefabs.Length)];
+                    GameObject rock = Instantiate(rockPrefab, spawnPos, Random.rotation, transform);
+                    spawnedRocks.Add(rock);
+                    DestroyableRock destroyableRock = rock.GetComponent<DestroyableRock>();
+                    destroyableRock.Init(resourceType, CenterOfGravity);
+
+                    break;
+                }
+            }
+
+
+        }
+    }
+
+    private bool IsPositionEmpty(Vector3 position)
+    {
+        // This will increase in time as we get more items.
+        foreach (GameObject existingRock in spawnedRocks)
+        {
+            if (Vector3.Distance(position, existingRock.transform.position) < minSpawnRange)
+                return false;
         }
 
-        //int maxAmount = Mathf.Min(amountOfRocks, rockPositionsParent.childCount);
-        //for (int i = 0; i < maxAmount; i++)
-        //{
-        //    int rockId = 0;
-        //    Transform spawnPos = rockPositionsParent.GetChild(i);
-        //    GameObject rock = Instantiate(mineableRockPrefabs[rockId], spawnPos.position, spawnPos.rotation, transform);
-        //    DestroyableRock destroyableRock = rock.GetComponent<DestroyableRock>();
-        //    destroyableRock.Init(resourceType, MineralDensity.Highest, CenterOfGravity);
-        //}
+        return true;
     }
 
     Vector3 FindVertexOnMesh()

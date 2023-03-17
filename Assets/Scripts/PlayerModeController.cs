@@ -33,9 +33,8 @@ public class PlayerModeController : MonoBehaviour
         playerInput.actions.FindActionMap("ShipControls").Disable();
 
         fpsGravity.CenterOfGravity = asteroid.CenterOfGravity;
-        firstPersonControls.transform.position = asteroid.CharacterPosition.position;
-        firstPersonControls.transform.rotation = asteroid.CharacterPosition.rotation;
-        firstPersonControls.gameObject.SetActive(true);
+        firstPersonControls.transform.SetPositionAndRotation(asteroid.CharacterPosition.position, asteroid.CharacterPosition.rotation);
+        firstPersonControls.SetActive(true);
         playerInput.actions.FindActionMap("FirstPersonControls").Enable();
     }
 

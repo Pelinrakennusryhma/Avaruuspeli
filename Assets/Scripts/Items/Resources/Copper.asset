@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Copper
   m_EditorClassIdentifier: 
   id: 0
-  itemName: Diamond
-  plural: Diamonds
-  value: 1000
-  description: Valuable diamond.
-  itemPrefab: {fileID: 6461999672915167094, guid: 6394e3e51b06bd241b097b29c6c00043,
+  itemName: Copper
+  plural: Copper
+  value: 200
+  description: Copper ore.
+  itemPrefab: {fileID: 6481246586380655480, guid: 712798441937f5240a5bccce6983e5f4,
     type: 3}
   itemPrefabVariants:
-  - {fileID: 49730085967010945, guid: 9aa0d4bd634cd42498335cdbe58440b1, type: 3}
-  - {fileID: 7356950005017624887, guid: 41661cf9a577550469215bd4e21144a5, type: 3}
-  - {fileID: 8798596605988558400, guid: d84c45d342c60344cb3a7fc87e86c866, type: 3}
-  - {fileID: 4843846868792224709, guid: 8695e6c72af304847882b62517206fc3, type: 3}
-  - {fileID: 4130283384215808055, guid: 681600888da1bc44992f5ba715beff83, type: 3}
-  - {fileID: 8941917039107780826, guid: aad7f68915bf6e542a1a2a0e3cb92997, type: 3}
+  - {fileID: 2394676295458325450, guid: f9e7b1190539de64d987feaec14e442d, type: 3}
+  - {fileID: 1945498201635183005, guid: 2c4a15d03730e014981ed27b7b3292f5, type: 3}
+  - {fileID: 6624736451327454340, guid: 9ac5de38ffd2aea49ba1945ab72e5cf9, type: 3}
+  - {fileID: 8864810828011692868, guid: bad1d2b17059edb44a4770f573fa9cbb, type: 3}
+  - {fileID: 22110733633274555, guid: 5cbf38183645f534eb53944543cd3774, type: 3}
+  - {fileID: 2369830778835212608, guid: f83ee7b117b823144914bc390e17b67f, type: 3}
   itemIcon: {fileID: 0}
