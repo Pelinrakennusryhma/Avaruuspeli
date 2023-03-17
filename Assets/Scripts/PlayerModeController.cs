@@ -9,7 +9,7 @@ public class PlayerModeController : MonoBehaviour
     PlayerControls playerControls;
     [SerializeField]
     GameObject firstPersonControls;
-    [SerializeField] private FirstPersonPlayerControllerWithCentreOfGravity fpsGravity;
+    [SerializeField] private FirstPersonPlayerControllerWithCentreOfGravity fpGravity;
 
     PlayerInput playerInput;
     void Awake()
@@ -20,28 +20,36 @@ public class PlayerModeController : MonoBehaviour
 
     private void Start()
     {
-        fpsGravity = firstPersonControls.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
+        fpGravity = firstPersonControls.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
         playerInput = playerControls.GetComponent<PlayerInput>();
     }
 
     void OnLand(MineableAsteroidTrigger asteroid)
     {
-        Transform landPos = asteroid.ShipPosition;
-        playerControls.ship.transform.position = landPos.position;
-        playerControls.ship.transform.rotation = landPos.rotation;
+        Transform landPos = asteroid.shipPosition;
+        Transform ship = playerControls.ship.transform;
+        asteroid.shipPosition.position = ship.position;
+        //playerControls.ship.transform.position = landPos.position;
+        //playerControls.ship.transform.rotation = landPos.rotation;
         playerControls.spaceshipMovement.Freeze();
         playerInput.actions.FindActionMap("ShipControls").Disable();
 
-        fpsGravity.CenterOfGravity = asteroid.CenterOfGravity;
-        firstPersonControls.transform.SetPositionAndRotation(asteroid.CharacterPosition.position, asteroid.CharacterPosition.rotation);
+        fpGravity.CenterOfGravity = asteroid.CenterOfGravity;
+        Vector3 posOverShip = ship.position + (ship.forward * 5f);
+        firstPersonControls.transform.position = posOverShip;
+        fpGravity.LookAt(asteroid.transform.position);
+        //Debug.Log("rot: " + firstPersonControls.transform.rotation);
+        //firstPersonControls.transform.LookAt(asteroid.transform.position, firstPersonControls.transform.up);
+        //Debug.Log("rot2: " + firstPersonControls.transform.rotation);
+        //firstPersonControls.transform.SetPositionAndRotation(asteroid.CharacterPosition.position, asteroid.CharacterPosition.rotation);
         firstPersonControls.SetActive(true);
         playerInput.actions.FindActionMap("FirstPersonControls").Enable();
     }
 
     void OnLeaveAsteroid(MineableAsteroidTrigger asteroid)
     {
-        fpsGravity.CenterOfGravity = null;
-        firstPersonControls.gameObject.SetActive(false);
+        fpGravity.CenterOfGravity = null;
+        firstPersonControls.SetActive(false);
         playerControls.spaceshipMovement.UnFreeze();
         playerInput.actions.FindActionMap("FirstPersonControls").Disable();
         playerInput.actions.FindActionMap("ShipControls").Enable();

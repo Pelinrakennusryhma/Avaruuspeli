@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MineableAsteroidTrigger : MonoBehaviour
 {
-    [field: SerializeField]
-    public Transform ShipPosition { get; private set; }
+    public Transform shipPosition;
     [field: SerializeField]
     public Transform CharacterPosition { get; private set; }
     [SerializeField]

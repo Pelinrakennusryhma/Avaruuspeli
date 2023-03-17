@@ -12,6 +12,7 @@ public class LandedShip : MonoBehaviour
     private void Awake()
     {
         GameEvents.Instance.EventPlayerTriedLeaving.AddListener(OnTryLeaving);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeave);
     }
 
     private void OnTryLeaving()
@@ -20,6 +21,14 @@ public class LandedShip : MonoBehaviour
         {
             GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
             GameEvents.Instance.CallEventPlayerLeftAstroid(asteroid);
+        }
+    }
+
+    private void OnLeave(MineableAsteroidTrigger asteroidLeft)
+    {
+        if(asteroidLeft == asteroid)
+        {
+            playerInTriggerArea = false;
         }
     }
 
