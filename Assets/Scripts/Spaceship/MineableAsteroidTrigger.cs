@@ -13,6 +13,8 @@ public class MineableAsteroidTrigger : MonoBehaviour
     Target targetScript;
     [field: SerializeField]
     public CenterOfGravity CenterOfGravity { get; private set; }
+    [field: SerializeField]
+    public MeshCollider Collider { get; private set; }
     [SerializeField]
     GameObject[] mineableRockPrefabs;
     [SerializeField]

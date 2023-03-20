@@ -237,7 +237,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5.5
+  m_Radius: 13
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3598516067148384310
 MonoBehaviour:
@@ -333,11 +333,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9db721dc7208c4db06a03527e59afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ShipPosition>k__BackingField: {fileID: 3598516067148384311}
+  shipPosition: {fileID: 3598516067148384311}
   <CharacterPosition>k__BackingField: {fileID: 3598516066891151902}
   actorManager: {fileID: 0}
   targetScript: {fileID: 3598516068117989779}
   <CenterOfGravity>k__BackingField: {fileID: 4226378008265798551}
+  <Collider>k__BackingField: {fileID: 2747624618989052410}
   mineableRockPrefabs:
   - {fileID: 5872755971548701943, guid: 7b5f8a2f1fe43fe4caca86f942977cc0, type: 3}
   - {fileID: 6744202258613619182, guid: e7db0a41bb0a8fc4c8daa8a772dac65e, type: 3}
@@ -346,7 +347,6 @@ MonoBehaviour:
   - {fileID: 942706152690395097, guid: 9609830277e9d874f89f424e26da38e3, type: 3}
   - {fileID: 4014386883488903879, guid: 7a89a9e8af90eeb478eba04f96c76505, type: 3}
   - {fileID: 6229408421115198240, guid: 5639e31c86e52a64fa8d761d17e517fc, type: 3}
-  rockPositionsParent: {fileID: 3598516068380678889}
   amountOfRocks: 5
   resourceType: {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}
 --- !u!135 &3598516068117989774

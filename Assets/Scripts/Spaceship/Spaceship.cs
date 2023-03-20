@@ -16,7 +16,11 @@ public class Spaceship : MonoBehaviour, IDamageable
 
     private void OnCollisionEnter(Collision collision)
     {
-        spaceshipEvents.CallEventSpaceshipCollided(collision.relativeVelocity.magnitude);
+        // Avoid collision with first person character, mostly when landing/leaving asteroid
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            spaceshipEvents.CallEventSpaceshipCollided(collision.relativeVelocity.magnitude);
+        }     
     }
 
     private void OnCollision(float magnitude)

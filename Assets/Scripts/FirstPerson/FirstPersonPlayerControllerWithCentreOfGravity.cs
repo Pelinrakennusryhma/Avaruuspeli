@@ -88,11 +88,18 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         Time.fixedDeltaTime = originalTimeStep;
     }
 
+    private void OnEnable()
+    {
+        Time.fixedDeltaTime = 0.00833333f;
+    }
+
     private void OnDisable()
     {
         Debug.Log("disabling fp");
         Time.fixedDeltaTime = originalTimeStep;
-        yRot = 0f;
+        Rigidbody.transform.rotation = Quaternion.identity;
+        Parent.transform.localRotation = Quaternion.identity;
+        Camera.transform.localRotation = Quaternion.identity;
     }
 
     // Update is called once per frame
@@ -246,15 +253,22 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         Parent.transform.localRotation = Quaternion.Slerp(previousRot, Parent.transform.localRotation, 0.9f);
     }
 
-    public void LookAt(Vector3 position)
+    public void LookAt(Vector3 position, Transform shipTransform)
     {
-        Quaternion camRot = Camera.transform.rotation;
-        Camera.transform.LookAt(position, Camera.transform.up);
-        Camera.transform.localRotation = Quaternion.Euler(Camera.transform.localRotation.x, camRot.y, camRot.z);
+        //Quaternion camRot = Camera.transform.rotation;
+        //Camera.transform.LookAt(position, Camera.transform.up);
+        //Camera.transform.localRotation = Quaternion.Euler(Camera.transform.localRotation.x, camRot.y, camRot.z);
 
-        Quaternion parentRot = Parent.transform.rotation;
-        Parent.transform.LookAt(position, Parent.transform.up);
-        Parent.transform.localRotation = Quaternion.Euler(parentRot.x, Parent.transform.localRotation.y, parentRot.z);
+        //Quaternion parentRot = Parent.transform.rotation;
+        //Parent.transform.LookAt(position, Parent.transform.up);
+        //Parent.transform.localRotation = Quaternion.Euler(parentRot.x, Parent.transform.localRotation.y, parentRot.z);
+        yRot = 35.0f;
+        Camera.transform.localRotation = Quaternion.Euler(yRot, 0, 0);
+
+        //Rigidbody.transform.rotation = shipTransform.rotation;
+        //Vector3 towardsCenterOfGravity = CenterOfGravity.gameObject.transform.position - transform.position;
+        //Vector3 up = -towardsCenterOfGravity.normalized;
+        //Rigidbody.transform.rotation = Quaternion.FromToRotation(Rigidbody.transform.up, up) * Rigidbody.transform.rotation;
     }
 
     private void MoveBody(Vector3 movement)

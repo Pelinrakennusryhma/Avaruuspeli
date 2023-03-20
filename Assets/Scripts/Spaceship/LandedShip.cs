@@ -8,6 +8,8 @@ public class LandedShip : MonoBehaviour
     MineableAsteroidTrigger asteroid;
     string promptText = "Press %landKey% to leave the asteroid.";
     bool playerInTriggerArea = false;
+    bool playerFacingShip = false;
+    FirstPersonPlayerControllerWithCentreOfGravity fpControls;
 
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class LandedShip : MonoBehaviour
 
     private void OnTryLeaving()
     {
-        if (playerInTriggerArea)
+        if (playerInTriggerArea && playerFacingShip)
         {
             GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
             GameEvents.Instance.CallEventPlayerLeftAstroid(asteroid);
@@ -36,9 +38,14 @@ public class LandedShip : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if(fpControls == null)
+            {
+                fpControls = other.transform.parent.parent.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
+                Debug.Log(fpControls.ToString());
+            }
+
             Debug.Log("enter");
-            playerInTriggerArea = true;
-            GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(promptText);
+            playerInTriggerArea = true;         
         }
     }
 
@@ -49,6 +56,30 @@ public class LandedShip : MonoBehaviour
             Debug.Log("exit");
             playerInTriggerArea = false;
             GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
+        }
+    }
+
+    private void Update()
+    {
+        if (playerInTriggerArea)
+        {
+            // this should never happen but just in case hierarchy changes or something
+            if(fpControls == null)
+            {
+                fpControls = FindObjectOfType<FirstPersonPlayerControllerWithCentreOfGravity>();
+            }
+            Vector3 fpShipDir = (transform.position - fpControls.Camera.transform.position).normalized;
+            float dotProduct = Vector3.Dot(fpShipDir, fpControls.Camera.transform.forward);
+
+            if(dotProduct > 0.85f)
+            {
+                playerFacingShip = true;
+                GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(promptText);
+            } else
+            {
+                playerFacingShip = false;
+                GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
+            }
         }
     }
 }
