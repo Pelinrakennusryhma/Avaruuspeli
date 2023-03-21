@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public SaverLoader SaverLoader;
     public Helpers Helpers;
+    public InventoryController InventoryController;
 
     public GalaxyOnWorldMap CurrentGalaxy;
     public StarSystemOnFocus CurrentStarSystem;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
         IncomingSceneType = TypeOfScene.None;
         if (Instance == null)
         {
+
+
             //Cursor.visible = false;
             //Cursor.lockState = CursorLockMode.Locked;
 
@@ -70,11 +73,15 @@ public class GameManager : MonoBehaviour
             TransitionalCamera.gameObject.SetActive(false);
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
             Helpers = GetComponentInChildren<Helpers>(true);
+            InventoryController = GetComponentInChildren<InventoryController>(true);
+
+            Debug.Log("Don't destroy game manager");
         }
 
         else
         {
             Destroy(gameObject);
+            Debug.Log("Destroyed game manager");
         }
     }
 
@@ -128,6 +135,26 @@ public class GameManager : MonoBehaviour
                     && IsOnWorldMap)
             {
                 GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
+            }
+        }
+
+
+        else if (!WaitingForSceneLoad)
+        {
+            if (!IsPaused) 
+            {
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    if (InventoryController.ShowingInventory) 
+                    {
+                        InventoryController.OnInventoryHide();
+                    }
+
+                    else
+                    {
+                        InventoryController.OnInventoryShow();
+                    }
+                }
             }
         }
 

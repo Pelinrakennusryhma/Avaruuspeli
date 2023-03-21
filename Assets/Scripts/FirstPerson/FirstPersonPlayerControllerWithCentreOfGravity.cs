@@ -91,7 +91,8 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.IsPaused)
+        if (GameManager.Instance.IsPaused
+            || Time.timeScale <= 0)
         {
             return;
         }

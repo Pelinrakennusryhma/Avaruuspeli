@@ -126,7 +126,7 @@ public class AsteroidSurface : MonoBehaviour
             if (collider.gameObject
                 == Rocks[i].gameObject)
             {
-                Debug.Log("Found a matching collider " + Rocks[i].gameObject.name + " resource type is " + Rocks[i].ResourceType + " amount is " + Rocks[i].ResourceAmount);
+                //Debug.Log("Found a matching collider " + Rocks[i].gameObject.name + " resource type is " + Rocks[i].ResourceType + " amount is " + Rocks[i].ResourceAmount);
                 resourceType = Rocks[i].ResourceType;
                 amount = Rocks[i].ResourceAmount;
                 break;

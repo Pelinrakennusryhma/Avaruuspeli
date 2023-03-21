@@ -7,10 +7,12 @@ public class ResourceGatherer : MonoBehaviour
     public enum ToolType
     {
         None = 0,
-        Blowtorch = 1,
-        Drill = 2
+        BasicDrill = 1,
+        AdvancedDrill = 2
     }
 
+    public static ResourceGatherer Instance;
+         
     public ToolType Tool;
     public DestroyableRock Rock;
     public Collider RockCollider;
@@ -22,10 +24,22 @@ public class ResourceGatherer : MonoBehaviour
 
     public void Awake()
     {
+        Instance = this; 
         Camera = transform.parent.GetComponentInChildren<Camera>();
-        Tool = ToolType.Blowtorch;
+        Tool = ToolType.None;
         Controls = transform.parent.GetComponent<FirstPersonPlayerControls>();
         Hands = transform.parent.GetComponentInChildren<PlayerHands>();
+
+    }
+
+    public void Start()
+    {
+        // Check if inventory has one equipped
+
+        //ShowHideInventory.Instance.e
+        Tool = GameManager.Instance.InventoryController.GetCurrentEquippedTool();
+
+        Debug.Log("Setting tool to " + Tool.ToString());
         Hands.SetTool(Tool);
     }
 
@@ -71,15 +85,20 @@ public class ResourceGatherer : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale <= 0)
+        {
+            return;
+        }
+
         if (Controls.Alpha1Down)
         {
-            Tool = ToolType.Blowtorch;
+            Tool = ToolType.BasicDrill;
             Hands.SetTool(Tool);
         }
 
         else if (Controls.Alpha2Down)
         {
-            Tool = ToolType.Drill;
+            Tool = ToolType.AdvancedDrill;
             Hands.SetTool(Tool);
         }
 
@@ -113,12 +132,12 @@ public class ResourceGatherer : MonoBehaviour
             if (Controls.Fire1Down
                 && hittingRock) 
             {
-                if (Tool == ToolType.Blowtorch)
+                if (Tool == ToolType.BasicDrill)
                 {
                     Rock.ReduceHealth(0.3f * Time.deltaTime, Tool);
                 }
 
-                else if (Tool == ToolType.Drill)
+                else if (Tool == ToolType.AdvancedDrill)
                 {
                     Rock.ReduceHealth(Time.deltaTime, Tool);
                 } 

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PickUpTrigger
+  - CatalogItem
+  - InfoPanel
   layers:
   - Default
   - TransparentFX
