@@ -16,6 +16,8 @@ public class GUI_Spaceship : MonoBehaviour
     [SerializeField]
     Button restartButton;
     [SerializeField]
+    Button quitButton;
+    [SerializeField]
     TMP_Text promptText;
     [SerializeField]
     GameObject spaceshipHUD;
@@ -64,11 +66,18 @@ public class GUI_Spaceship : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         restartButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
     }
 
     public void OnRestartClicked()
     {
+        GameManager.Instance.OnUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnQuitClicked()
+    {
+        Application.Quit();
     }
 
     void ShowControls()

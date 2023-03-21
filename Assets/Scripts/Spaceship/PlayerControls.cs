@@ -9,6 +9,7 @@ public class PlayerControls : ActorSpaceship
     {
         base.OnDeath();
         Destroy(gameObject);
+        Cursor.visible = true;
     }
 
     public void OnThrust(InputAction.CallbackContext context)
@@ -77,6 +78,17 @@ public class PlayerControls : ActorSpaceship
         } else if (context.canceled)
         {
             GameEvents.Instance.CallEventToggleIndicators(false);
+        }
+    }
+
+    public void OnOptions(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPausePressed();
+            }
         }
     }
 }

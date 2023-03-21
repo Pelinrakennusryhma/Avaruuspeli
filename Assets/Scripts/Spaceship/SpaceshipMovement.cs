@@ -44,6 +44,7 @@ public class SpaceshipMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mass = rb.mass;
+        //rb.inertiaTensor = rb.inertiaTensor;
     }
 
     void FixedUpdate()
