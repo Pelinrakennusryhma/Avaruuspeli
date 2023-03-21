@@ -177,8 +177,8 @@ public class GameManager : MonoBehaviour
     {
         OptionsScreen.OnBecomeVisible();
         OptionsScreen.gameObject.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
 
         IsPaused = true;
         NormalTimeScale = Time.timeScale;
@@ -190,8 +190,8 @@ public class GameManager : MonoBehaviour
     {
         OptionsScreen.OnBecomeHidden();
         OptionsScreen.gameObject.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         IsPaused = false;
         Time.timeScale = NormalTimeScale;
@@ -294,7 +294,20 @@ public class GameManager : MonoBehaviour
         Debug.LogWarning("ENTER PLANET");
 
         IncomingSceneType = TypeOfScene.Planet;
-        StackAndLoadAndLaunchScene("PlanetTestLauncher", 2);
+
+        int rando = Random.Range(0, 2);
+
+        if (rando == 0)
+        {
+            StackAndLoadAndLaunchScene("Maapallo 1", 3);
+        }
+
+        else
+        {
+            StackAndLoadAndLaunchScene("Marssi", 4);
+        }
+
+        //StackAndLoadAndLaunchScene("PlanetTestLauncher", 2);
     }
 
     public void StackAndLoadAndLaunchScene(string sceneName,
@@ -320,10 +333,11 @@ public class GameManager : MonoBehaviour
 
         if (IncomingSceneType == TypeOfScene.Planet)
         {
-            PlanetLauncher planetLauncher = FindObjectOfType<PlanetLauncher>();
-            planetLauncher.LaunchPlanet(CurrentGalaxy.GalaxyData,
-                                        CurrentStarSystem.StarSystemData,
-                                        CurrentPlanet.PlanetData);
+            Debug.Log("Here should be logic for launching a certain planet type");
+            //PlanetLauncher planetLauncher = FindObjectOfType<PlanetLauncher>();
+            //planetLauncher.LaunchPlanet(CurrentGalaxy.GalaxyData,
+            //                            CurrentStarSystem.StarSystemData,
+            //                            CurrentPlanet.PlanetData);
         }
 
         else if (IncomingSceneType == TypeOfScene.AsteroidField)
