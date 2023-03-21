@@ -14,7 +14,7 @@ public class ShowHideInventory : MonoBehaviour
     public static ShowHideInventory Instance;
 
 
-    public void Awake()
+    public void Start()
     {
         Instance = this;
         ShowInventory(); // Inventory needs to be active to work

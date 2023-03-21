@@ -18,7 +18,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     private ShopItemScript shopItemScript;
     private GameObject shopItemGO;
 
-    void Awake()
+    void Start()
     {
         try
         {
