@@ -11,16 +11,22 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TextMeshProUGUI itemAmount;
     [SerializeField] private TextMeshProUGUI itemValue;
     [SerializeField] private TextMeshProUGUI itemWeight;
-    private GameObject canvas;
-    private GameObject contextMenu;
+    //private GameObject canvas;
+    //private GameObject contextMenu;
     public int currentItemAmount = 0;
     public double currentItemWeight = 0;
     public Item itemToAdd;
-    private ContextMenu contextMenuScript;
+
+    public CanvasScript CanvasScript;
+    public ContextMenu contextMenuScript;
     private ShopItemScript shopItemScript;
     private GameObject shopItemGO;
 
-    void Awake()
+    public void Awake()
+    {
+        Setup();
+    }
+    public void Setup()
     {
         try
         {
@@ -36,9 +42,12 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
             shopItemScript = shopItemGO.GetComponent<ShopItemScript>();
         }
 
-        canvas = GameObject.Find("Canvas");
-        contextMenu = GameObject.Find("ContextMenu");
-        contextMenuScript = contextMenu.GetComponent<ContextMenu>();
+        CanvasScript = FindObjectOfType<CanvasScript>();
+
+        //canvas = GameObject.Find("Canvas");
+        //contextMenu = GameObject.Find("ContextMenu");
+        //contextMenuScript = contextMenu.GetComponent<ContextMenu>();
+        contextMenuScript = FindObjectOfType<ContextMenu>();
         //Itemin lisättäessä asettaa tiedot Inventory-skriptistä haettujen tietojen mukaan
         itemToAdd = GameObject.Find("InventoryPanel").GetComponent<Inventory>().itemToAdd;
         Item item = itemToAdd;
@@ -122,7 +131,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
                 }
                 FindObjectOfType<CanvasScript>().InfoAboutItem(itemToAdd);
                 Object prefab = Resources.Load("Prefabs/ItemInfoPanel");
-                GameObject newItem = Instantiate(prefab, canvas.transform) as GameObject;
+                GameObject newItem = Instantiate(prefab, CanvasScript.transform) as GameObject;
                 newItem.name = itemToAdd.id.ToString();
                 Vector3 mouseLocation = Input.mousePosition;
                 newItem.transform.position = mouseLocation;

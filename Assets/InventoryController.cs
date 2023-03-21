@@ -54,7 +54,7 @@ public class InventoryController : MonoBehaviour
 
         if (ResourceInventory.Instance != null)
         {
-            ResourceInventory.Instance.UnloadGatheredItems(Inventory);
+            //ResourceInventory.Instance.UnloadGatheredItems(Inventory);
         }
 
         Debug.Log("Show inventory");

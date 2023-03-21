@@ -50,8 +50,48 @@ public class ResourceGatherer : MonoBehaviour
         {
             //Debug.Log("Collect " + Time.time);
             GatherableObject gatherable = other.GetComponent<GatherableObject>();
+            bool hasRoomInInventory = false;
 
-            if (gatherable != null)
+            if (gatherable != null) 
+            {
+
+                ResourceInventory.ResourceType itemType = gatherable.ResourceType;
+
+                Item item = null;
+
+                switch (itemType)
+                {
+                    case ResourceInventory.ResourceType.None:
+                        break;
+                    case ResourceInventory.ResourceType.TestDice:
+                        break;
+                    case ResourceInventory.ResourceType.Gold:
+                        item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(1);
+                        break;
+                    case ResourceInventory.ResourceType.Silver:
+                        item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(8);
+                        break;
+                    case ResourceInventory.ResourceType.Copper:
+                        item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(9);
+                        break;
+                    case ResourceInventory.ResourceType.Iron:
+                        item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(0);
+                        break;
+                    case ResourceInventory.ResourceType.Diamond:
+                        item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(10);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (item != null) 
+                {
+                    hasRoomInInventory = GameManager.Instance.InventoryController.Inventory.CheckIfWeHaveRoomForItem(item);
+                }
+            }
+
+            if (gatherable != null
+                && hasRoomInInventory)
             {
                 gatherable.OnPickUp();
             }

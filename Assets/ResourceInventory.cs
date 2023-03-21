@@ -44,6 +44,8 @@ public class ResourceInventory : MonoBehaviour
 
         //ShowHideInventory.ShowInventory();
 
+        GameManager.Instance.InventoryController.OnInventoryShow();
+
         int amount = 0;
 
         if (collectedResourceType == ResourceType.TestDice)
@@ -58,6 +60,7 @@ public class ResourceInventory : MonoBehaviour
             AmountOfGold++;
             amount = AmountOfGold;
             AmountOfGoldSinceLastInventoryLaunch++;
+            GameManager.Instance.InventoryController.Inventory.AddItem(1, 1);
             //ShowHideInventory.Inventory.AddItem(1, 1);
             //Debug.Log("Amount of gold " + AmountOfGold);
         }
@@ -67,6 +70,7 @@ public class ResourceInventory : MonoBehaviour
             AmountOfSilver++;
             amount = AmountOfSilver;
             AmountOfSilverSinceLastInventoryLaunch++;
+            GameManager.Instance.InventoryController.Inventory.AddItem(8, 1);
             //Debug.Log("Amount of silver " + AmountOfSilver);
         }
 
@@ -75,6 +79,7 @@ public class ResourceInventory : MonoBehaviour
             AmountOfCopper++;
             amount = AmountOfCopper;
             AmountOfCopperSinceLastInventoryLaunch++;
+            GameManager.Instance.InventoryController.Inventory.AddItem(9, 1);
             //Debug.Log("Amount of copper " + AmountOfCopper);
         }
         else if (collectedResourceType == ResourceType.Iron)
@@ -82,6 +87,7 @@ public class ResourceInventory : MonoBehaviour
             AmountOfIron++;
             amount = AmountOfIron;
             AmountOfIronSinceLastInventoryLaunch++;
+            GameManager.Instance.InventoryController.Inventory.AddItem(0, 1);
             //Debug.Log("Amount of iron " + AmountOfIron);
         }
 
@@ -90,11 +96,14 @@ public class ResourceInventory : MonoBehaviour
             AmountOfDiamonds++;
             amount = AmountOfDiamonds;
             AmountOfDiamondsSinceLastInventoryLaunch++;
+            GameManager.Instance.InventoryController.Inventory.AddItem(10, 1);
             //Debug.Log("Amount of diamonds " + AmountOfDiamonds);
         }
 
         ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, amount);
 
+
+        GameManager.Instance.InventoryController.OnInventoryHide();
         //ShowHideInventory.HideInventory();
     }
 

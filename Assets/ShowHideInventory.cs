@@ -32,6 +32,8 @@ public class ShowHideInventory : MonoBehaviour
         // Equip whichever drill is equipped
         CanvasScript.ShowEquipment();
         ShowingInventory = true;
+
+
     }
 
     public void HideInventory()

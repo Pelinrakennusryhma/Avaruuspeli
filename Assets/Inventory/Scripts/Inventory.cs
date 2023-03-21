@@ -16,6 +16,8 @@ public class Inventory : MonoBehaviour
     public double maxWeight;
     public double currentWeight = 0;
 
+    public GameObject ScrollviewLayout;
+
     private void Start()
     {
         UpdateWeight();
@@ -37,12 +39,24 @@ public class Inventory : MonoBehaviour
             Object prefab = Resources.Load("Prefabs/item");
             GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
             newItem.name = itemToAdd.id.ToString();
+            //newItem.GetComponent<ItemScript>().Setup();
             newItem.GetComponent<ItemScript>().AddItem(amount);
             currentWeight += itemToAdd.weight * amount;
             UpdateWeight();
+            Debug.LogError("ADDED ITEM");
         }
         else if(item.stackable)
         {
+            //ItemScript[] allItems = layout.GetComponentsInChildren<ItemScript>(true);
+
+            //for (int i = 0; i < allItems.Length; i++)
+            //{
+            //    if (allItems[i].itemToAdd.id == id)
+            //    {
+            //        allItems[i].AddItem(amount);
+            //    }
+            //}
+
             GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id).GetComponent<ItemScript>().AddItem(amount);
             currentWeight += item.weight * amount;
             UpdateWeight();
@@ -132,4 +146,21 @@ public class Inventory : MonoBehaviour
         Object prefab = Resources.Load("Prefabs/item");
         GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
     }
+
+    public bool CheckIfWeHaveRoomForItem(Item item)
+    {
+        if (item.weight + currentWeight > maxWeight)
+        {
+            Debug.Log("No room for item in inventory");
+            return false;
+        }
+
+        else
+        {
+            Debug.Log("We HAVE ROOM for item in inventory");
+            return true;
+        }
+    }
+
+
 }

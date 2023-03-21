@@ -40,7 +40,7 @@ public class ItemDatabase : MonoBehaviour
              new Item(7, "Ship Gun", 40, 1.0, "ShipWeapon", false, ""),
              new Item(8, "Silver", 50, 1.0, "Resource", true, "Tämä on hopeaa"),
              new Item(9, "Copper", 10, 0.5, "Resource", true, "Tämä on kuparia"),
-             new Item(10, "Diamond", 1000, 1.0, "Resource", true, "Tämä on timanttia")
+             new Item(10, "Diamond", 1000, 200.0, "Resource", true, "Tämä on timanttia")
         };
     }
 }
