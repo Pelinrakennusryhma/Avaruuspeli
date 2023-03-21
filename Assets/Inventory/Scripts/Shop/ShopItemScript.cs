@@ -59,11 +59,16 @@ public class ShopItemScript : MonoBehaviour
     //Kaupan Buy nappi.
     public void ButtonBuy()
     {
-        double price = item.value * int.Parse(buyAmount.text);
-        if (canvasScript.money >= price)
+        double buyingAmount = int.Parse(buyAmount.text);
+        if ((buyingAmount * item.weight) + inventory.currentWeight <= inventory.maxWeight)
         {
-            inventory.AddItem(item.id, int.Parse(buyAmount.text));
-            canvasScript.money -= price;
+            double price = item.value * buyingAmount;
+            if (canvasScript.money >= price)
+            {
+                inventory.AddItem(item.id, int.Parse(buyAmount.text));
+                canvasScript.money -= price;
+            }
         }
+
     }
 }

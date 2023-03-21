@@ -10,15 +10,17 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemAmount;
     [SerializeField] private TextMeshProUGUI itemValue;
+    [SerializeField] private TextMeshProUGUI itemWeight;
     private GameObject canvas;
     private GameObject contextMenu;
     public int currentItemAmount = 0;
+    public double currentItemWeight = 0;
     public Item itemToAdd;
     private ContextMenu contextMenuScript;
     private ShopItemScript shopItemScript;
     private GameObject shopItemGO;
 
-    void Start()
+    void Awake()
     {
         try
         {
@@ -44,6 +46,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         itemName.text = itemToAdd.name;
         itemAmount.text = currentItemAmount.ToString();
         itemValue.text = item.value.ToString();
+        itemWeight.text = item.weight.ToString();
     }
 
     public void UpdateShopAmount()
@@ -61,6 +64,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     public void UpdateAmount()
     {
         itemAmount.text = currentItemAmount.ToString();
+        itemWeight.text = currentItemWeight.ToString();
         try
         {
             shopItemGO = GameObject.Find("ShopPanel/" + itemToAdd.id);
@@ -84,6 +88,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     {
 
         currentItemAmount += amount;
+        currentItemWeight += itemToAdd.weight * amount;
         UpdateAmount();
     }
 
@@ -91,6 +96,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     public void RemoveItem(int amount)
     {
         currentItemAmount -= amount;
+        currentItemWeight -= itemToAdd.weight * amount;
         UpdateAmount();
     }
 
@@ -99,6 +105,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            Debug.Log(itemToAdd);
             contextMenuScript.ShowOptions(itemToAdd.type);
             contextMenuScript.SetPositionToMouse();
             contextMenuScript.itemID = itemToAdd.id;
@@ -113,9 +120,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
                 {
                     Destroy(go);
                 }
-
                 FindObjectOfType<CanvasScript>().InfoAboutItem(itemToAdd);
-                //GameObject.Find("Canvas").GetComponent<CanvasScript>().InfoAboutItem(itemToAdd);
                 Object prefab = Resources.Load("Prefabs/ItemInfoPanel");
                 GameObject newItem = Instantiate(prefab, canvas.transform) as GameObject;
                 newItem.name = itemToAdd.id.ToString();

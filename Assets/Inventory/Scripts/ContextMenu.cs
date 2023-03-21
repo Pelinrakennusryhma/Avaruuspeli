@@ -151,7 +151,7 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Discard' vaihtoehto
     public void DiscardItem()
     {
-        inventory.RemoveItem(itemID, 99999);
+        inventory.RemoveItem(itemID, 999999999);
         HideMenu();
     }
 
