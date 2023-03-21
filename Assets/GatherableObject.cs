@@ -17,7 +17,6 @@ public class GatherableObject : MonoBehaviour
     protected CenterOfGravity _centerOfGravity;
     MeshCollider meshCollider;
     Vector3 targetPosition;
-    bool hasCollidedWithAsteroid = false;
 
     private void Awake()
     {

@@ -22,7 +22,6 @@ public class PlayerModeController : MonoBehaviour
 
     private void Start()
     {
-        fpGravity = firstPersonControls.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
         playerInput = playerControls.GetComponent<PlayerInput>();
     }
 

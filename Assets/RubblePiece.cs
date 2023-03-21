@@ -10,15 +10,13 @@ public class RubblePiece : MonoBehaviour
     private bool HasBeenSpawned;
     private float DeathTimer;
 
-    private CenterOfGravity centerOfGravity;
-
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
         HasBeenSpawned = false;
     }
 
-    public void Spawn(Vector3 rockCenter)
+    public void Spawn(Vector3 rockCenter, CenterOfGravity centerOfGravity)
     {
         //Debug.Log("Spawn rubble piece");
 

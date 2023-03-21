@@ -41,7 +41,6 @@ public class LandedShip : MonoBehaviour
             if(fpControls == null)
             {
                 fpControls = other.transform.parent.parent.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
-                Debug.Log(fpControls.ToString());
             }
 
             Debug.Log("enter");

@@ -6,7 +6,7 @@ using UnityEngine.VFX;
 public class DestroyableRock : MonoBehaviour
 {
     [field: SerializeField]
-    public Item ResourceType { get; private set; }
+    public Resource ResourceType { get; private set; }
     [SerializeField]
     int minResourceAmount;
     [SerializeField]
@@ -66,7 +66,7 @@ public class DestroyableRock : MonoBehaviour
         //ResourceAmount = Pickups.Setup(AsteroidLauncher.ResourceType);
     }
 
-    public void Init(Item resourceType, CenterOfGravity centerOfGravity)
+    public void Init(Resource resourceType, CenterOfGravity centerOfGravity)
     {
         _centerOfGravity = centerOfGravity;
         ResourceType = resourceType;
@@ -80,8 +80,8 @@ public class DestroyableRock : MonoBehaviour
     {
         for (int i = 0; i < ResourceAmount; i++)
         {
-            int numVariants = ResourceType.itemPrefabVariants.Length;
-            GameObject resourceVariant = ResourceType.itemPrefabVariants[Random.Range(0, numVariants)];
+
+            GameObject resourceVariant = GetResourceToSpawn(ResourceType);
             Vector3 spawnPos = FindVertexOnMesh();
             GameObject spawnedResource = Instantiate(resourceVariant, spawnPos, Random.rotation, Graphics.transform);
             GatherableObject gatherableObject = spawnedResource.GetComponent<GatherableObject>();
@@ -89,6 +89,21 @@ public class DestroyableRock : MonoBehaviour
             gatherableObject.enabled = false;
             spawnedResources.Add(gatherableObject);
         }
+    }
+
+    GameObject GetResourceToSpawn(Resource resourceType)
+    {
+        Resource resourceToSpawn = resourceType;
+        if (ResourceType.rare != null)
+        {
+            float randomValue = Random.value;
+            if (randomValue < ResourceType.rareChance)
+            {
+                resourceToSpawn = resourceType.rare;
+            }
+        }
+        int numVariants = resourceToSpawn.itemPrefabVariants.Length;
+        return resourceToSpawn.itemPrefabVariants[Random.Range(0, numVariants)];
     }
 
     Vector3 FindVertexOnMesh()
@@ -133,7 +148,7 @@ public class DestroyableRock : MonoBehaviour
 
             for (int i = 0; i < RubblePieces.Length; i++)
             {
-                RubblePieces[i].Spawn(transform.position);
+                RubblePieces[i].Spawn(transform.position, _centerOfGravity);
             }
         }
     }

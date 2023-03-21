@@ -7,25 +7,25 @@ public class MineableAsteroidTrigger : MonoBehaviour
     public Transform shipPosition;
     [field: SerializeField]
     public Transform CharacterPosition { get; private set; }
-    [SerializeField]
-    ActorManager actorManager;
+    ActorManager _actorManager;
     [SerializeField]
     Target targetScript;
     [field: SerializeField]
     public CenterOfGravity CenterOfGravity { get; private set; }
     [field: SerializeField]
     public MeshCollider Collider { get; private set; }
+    [field: SerializeField]
+    public SphereCollider TriggerCollider { get; private set; }
     [SerializeField]
     GameObject[] mineableRockPrefabs;
-    [SerializeField]
-    int amountOfRocks;
 
     [SerializeField]
-    Item resourceType;
+    Resource _resourceType;
     string successText = "Press %landKey% to land on the asteroid.";
     string failureText = "Clear the area of hostiles before landing on the asteroid.";
     string currentText;
     bool playerInTriggerArea = false;
+    [SerializeField]
     MeshFilter meshFilter;
     List<GameObject> spawnedRocks = new List<GameObject>();
     float minSpawnRange = 2f;
@@ -40,11 +40,22 @@ public class MineableAsteroidTrigger : MonoBehaviour
         GameEvents.Instance.EventToggleIndicators.AddListener(OnToggleIndicators);
     }
 
-    private void Start()
+    public void Init(GameObject asteroidPrefab, float scale, MineableRockDensity mineableRockDensity, Resource resourceType, ActorManager actorManager)
     {
-        meshFilter = GetComponentInChildren<MeshFilter>();
+        _actorManager = actorManager;
+        GameObject asteroid = Instantiate(asteroidPrefab, transform);
+        Collider = asteroid.GetComponent<MeshCollider>();
+        meshFilter = asteroid.GetComponentInChildren<MeshFilter>();
+        CenterOfGravity = asteroid.AddComponent<CenterOfGravity>();
+        CenterOfGravity.enabled = false;
+        Collider.transform.localScale *= scale;
+        float colSize = Collider.bounds.size.magnitude;
+        TriggerCollider.radius = colSize;
+
+        int amountOfRocks = GetRockAmount(mineableRockDensity);
+        _resourceType = resourceType;
+        SpawnRocks(amountOfRocks, resourceType);
         SetupTargetScript();
-        SpawnRocks(amountOfRocks);
     }
 
     void SetupTargetScript()
@@ -52,11 +63,11 @@ public class MineableAsteroidTrigger : MonoBehaviour
         Target targetScript = GetComponent<Target>();
         if(targetScript != null)
         {
-            targetScript.descriptionText = $"Asteroid ({resourceType.plural})";
+            targetScript.descriptionText = $"Asteroid ({_resourceType.plural})";
         }
     }
 
-    private void SpawnRocks(int amount)
+    private void SpawnRocks(int amount, Resource resourceType)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -107,7 +118,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
 
     void OnLandingAttempt()
     {
-        if (playerInTriggerArea && actorManager.SceneCleared)
+        if (playerInTriggerArea && _actorManager.SceneCleared)
         {
             //LaunchAsteroidScene(AsteroidType.Asteroid01a, ResourceInventory.ResourceType.Iron, MineralDensity.Medium, true);
             Land();
@@ -148,7 +159,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
         if (other.CompareTag("PlayerShip"))
         {
             playerInTriggerArea = true;
-            if (actorManager.SceneCleared)
+            if (_actorManager.SceneCleared)
             {
                 currentText = successText;
             } else
@@ -157,6 +168,22 @@ public class MineableAsteroidTrigger : MonoBehaviour
             }
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
         }
+        // TODO: destroy overlapping asteroids somehow
+        //else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        //{
+        //    MineableAsteroidTrigger mineableAsteroid = other.transform.parent.GetComponent<MineableAsteroidTrigger>();
+        //    if (mineableAsteroid != null)
+        //    {
+        //        if(mineableAsteroid != this)
+        //        {
+        //            Destroy(other.transform.parent.gameObject);
+        //        }
+        //    } 
+        //    else
+        //    {
+        //        Destroy(other.gameObject);
+        //    }
+        //}
     }
 
     private void OnTriggerExit(Collider other)
@@ -167,4 +194,20 @@ public class MineableAsteroidTrigger : MonoBehaviour
             GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
         }
     }
+
+    private int GetRockAmount(MineableRockDensity density)
+    {
+        switch (density)
+        {
+            case MineableRockDensity.Scarce:
+                return Random.Range(1, 2);
+            case MineableRockDensity.Medium:
+                return Random.Range(3, 6);
+            case MineableRockDensity.High:
+                return Random.Range(7, 9);
+            default:
+                return 0;
+        }
+    }
+
 }

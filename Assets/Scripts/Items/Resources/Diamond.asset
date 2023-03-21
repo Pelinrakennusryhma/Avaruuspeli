@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194759ecc76fa964d92f9c8f238c26c4, type: 3}
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
   m_Name: Diamond
   m_EditorClassIdentifier: 
   id: 0
   itemName: Diamond
   plural: Diamonds
   value: 1000
-  description: Valuable diamond.
+  description: A valuable diamond.
   itemPrefab: {fileID: 6461999672915167094, guid: 6394e3e51b06bd241b097b29c6c00043,
     type: 3}
   itemPrefabVariants:
@@ -27,3 +27,5 @@ MonoBehaviour:
   - {fileID: 4130283384215808055, guid: 681600888da1bc44992f5ba715beff83, type: 3}
   - {fileID: 8941917039107780826, guid: aad7f68915bf6e542a1a2a0e3cb92997, type: 3}
   itemIcon: {fileID: 0}
+  rare: {fileID: 0}
+  rareChance: 0
