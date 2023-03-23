@@ -8,6 +8,14 @@ public class ResourceInventory : MonoBehaviour
 
     Dictionary<Item, int> inventory = new Dictionary<Item, int>();
 
+    public static int AmountOfGoldSinceLastInventoryLaunch;
+    public static int AmountOfSilverSinceLastInventoryLaunch;
+    public static int AmountOfCopperSinceLastInventoryLaunch;
+    public static int AmountOfIronSinceLastInventoryLaunch;
+    public static int AmountOfDiamondsSinceLastInventoryLaunch;
+
+    public ShowHideInventory ShowHideInventory;
+
     // Start is called before the first frame update
     void Awake()
     {

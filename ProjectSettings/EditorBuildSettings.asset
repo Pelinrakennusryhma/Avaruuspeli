@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/WorldMap.unity
+    guid: 21225d7e912bd184ea07277064d0c1d7
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/PlanetTestLauncher.unity
+    guid: 9e32b00dd5bffff4ab83de5c82fb0fc8
+  - enabled: 1
     path: Assets/Scenes/Asteroids/Asteroid1.unity
     guid: e3fbb521efafb304ab253364bfc0e3bb
   - enabled: 0
@@ -47,10 +53,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Asteroids/AsteroidLauncher.unity
     guid: 8fbdbc4789f59a947b5545af47b1005e
-  - enabled: 0
-    path: Assets/Scenes/Asteroid1_test.unity
-    guid: 0816817e40ed03946ad1391eed05293f
   - enabled: 1
-    path: Assets/Scenes/MineableAsteroidScene.unity
-    guid: 06d0f986ba3a5874792bf209738675a1
+    path: Assets/Scenes/PlanetTest1.unity
+    guid: 8ca35ad60b708fc4c999da470ddfb657
   m_configObjects: {}

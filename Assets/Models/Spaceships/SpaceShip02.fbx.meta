@@ -3,7 +3,32 @@ guid: bffe39685c39b8b4bb4b2390b3e9f3ff
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship02Black
+    second: {fileID: 2100000, guid: b26634ba2b587c1489ecea39dc559d3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship02DarkGrey
+    second: {fileID: 2100000, guid: 813bc36c9fd737145a44069048c72b36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship02Texture
+    second: {fileID: 2100000, guid: cac7f1f820f33314ebd64ebbd98b112b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship02White
+    second: {fileID: 2100000, guid: 0a0313ea9db4d54448295f0b50f45fec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ship02Window
+    second: {fileID: 2100000, guid: 1bbff57f1383094449fca032f772e51e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

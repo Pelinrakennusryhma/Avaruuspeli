@@ -7,6 +7,8 @@ TagManager:
   - PickUpTrigger
   - ProjectileParent
   - PlayerShip
+  - CatalogItem
+  - InfoPanel
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - Damageable
   - Obstacle
-  - 
+  - Overlay
   - 
   - 
   - 
