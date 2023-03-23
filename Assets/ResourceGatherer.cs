@@ -135,7 +135,7 @@ public class ResourceGatherer : MonoBehaviour
                 && hittingRock) 
             {
                 DestroyableRock hitRock = hitInfo.collider.GetComponent<DestroyableRock>();
-                if (Tool == ToolType.Blowtorch)
+                if (Tool == ToolType.BasicDrill)
                 {
                     hitRock.ReduceHealth(0.3f * Time.deltaTime, Tool);
                 }

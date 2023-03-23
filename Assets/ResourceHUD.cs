@@ -66,7 +66,7 @@ public class ResourceHUD : MonoBehaviour
         }
     }
 
-    void ShowHUD(Item resource, int amount)
+    void ShowHUD(Resource resource, int amount)
     {
         if (HUDText != null
             && amount > 0

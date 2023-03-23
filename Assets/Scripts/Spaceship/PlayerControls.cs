@@ -87,6 +87,7 @@ public class PlayerControls : ActorSpaceship
         {
             if (GameManager.Instance != null)
             {
+                Debug.Log("?!!");
                 GameManager.Instance.OnPausePressed();
             }
         }

@@ -23,7 +23,7 @@ public class ResourcePickUpPrompt : MonoBehaviour
         textMeshPro.gameObject.SetActive(false);
     }
 
-    public void ShowResource(Item resourceType,
+    public void ShowResource(Resource resourceType,
                              int amount)
     {
         HideTimer = 3.0f;

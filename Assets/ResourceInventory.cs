@@ -6,7 +6,7 @@ public class ResourceInventory : MonoBehaviour
 {
     public static ResourceInventory Instance;
 
-    Dictionary<Item, int> inventory = new Dictionary<Item, int>();
+    Dictionary<Resource, int> inventory = new Dictionary<Resource, int>();
 
     public static int AmountOfGoldSinceLastInventoryLaunch;
     public static int AmountOfSilverSinceLastInventoryLaunch;
@@ -22,7 +22,7 @@ public class ResourceInventory : MonoBehaviour
         Instance = this; 
     }
 
-    public void CollectResource(Item collectedResourceType, int amount = 1)
+    public void CollectResource(Resource collectedResourceType, int amount = 1)
     {
         //Debug.Log("Collected " + collectedResourceType.ToString());
 
@@ -39,5 +39,38 @@ public class ResourceInventory : MonoBehaviour
         }
 
         ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, totalAmount);
+    }
+    public void UnloadGatheredItems(Inventory inventory)
+    {
+        if (AmountOfGoldSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(1, AmountOfGoldSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfSilverSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(8, AmountOfSilverSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfCopperSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(9, AmountOfCopperSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfIronSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(0, AmountOfIronSinceLastInventoryLaunch);
+        }
+
+        if (AmountOfDiamondsSinceLastInventoryLaunch > 0)
+        {
+            inventory.AddItem(10, AmountOfDiamondsSinceLastInventoryLaunch);
+        }
+
+        AmountOfGoldSinceLastInventoryLaunch = 0;
+        AmountOfSilverSinceLastInventoryLaunch = 0;
+        AmountOfCopperSinceLastInventoryLaunch = 0;
+        AmountOfIronSinceLastInventoryLaunch = 0;
+        AmountOfDiamondsSinceLastInventoryLaunch = 0;
     }
 }

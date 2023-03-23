@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GatherableObject : MonoBehaviour
 {
-    public Item ResourceType { get; private set; }
+    public Resource ResourceType { get; private set; }
 
     public float OffsetFromGround = 0.2f;
 
@@ -55,7 +55,7 @@ public class GatherableObject : MonoBehaviour
         }
     }
 
-    public void Init(Item resourceType)
+    public void Init(Resource resourceType)
     {
         ResourceType = resourceType;
     }
