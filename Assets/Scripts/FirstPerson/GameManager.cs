@@ -59,8 +59,6 @@ public class GameManager : MonoBehaviour
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
-            OptionsScreen = FindObjectOfType<Options>(true);
-
             if (OptionsScreen != null) 
             {
                 OptionsScreen.gameObject.SetActive(false);
