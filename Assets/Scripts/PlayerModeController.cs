@@ -23,7 +23,7 @@ public class PlayerModeController : MonoBehaviour
     private void Start()
     {
         playerInput = playerControls.GetComponent<PlayerInput>();
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void OnLand(MineableAsteroidTrigger asteroid)
