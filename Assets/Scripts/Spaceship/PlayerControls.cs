@@ -47,21 +47,6 @@ public class PlayerControls : ActorSpaceship
         spaceshipShoot.shooting = context.performed;
     }
 
-    public void OnPause(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (Time.timeScale > 0.5f)
-            {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
-        }
-    }
-
     public void OnLand(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -78,18 +63,6 @@ public class PlayerControls : ActorSpaceship
         } else if (context.canceled)
         {
             GameEvents.Instance.CallEventToggleIndicators(false);
-        }
-    }
-
-    public void OnOptions(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (GameManager.Instance != null)
-            {
-                Debug.Log("?!!");
-                GameManager.Instance.OnPausePressed();
-            }
         }
     }
 }

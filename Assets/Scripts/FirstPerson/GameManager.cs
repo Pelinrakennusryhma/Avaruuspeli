@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -35,6 +36,9 @@ public class GameManager : MonoBehaviour
     public PlanetData CurrentPlanetData;
     public AsteroidFieldData CurrentAsteroidFieldData;
 
+    private bool inventoryToggleQueued = false;
+    private CursorLockMode cachedCursorLockMode = CursorLockMode.None;
+
     public enum TypeOfScene
     {
         None = 0,
@@ -58,8 +62,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
-
-            OptionsScreen = FindObjectOfType<Options>(true);
 
             if (OptionsScreen != null) 
             {
@@ -99,7 +101,7 @@ public class GameManager : MonoBehaviour
         Helpers.RefreshReferenceToGraphicsRaycasterAndEventSystem();
     }
 
-    public void OnPausePressed()
+    public void OnOptionsPressed()
     {
         if (IsPaused)
         {
@@ -109,6 +111,14 @@ public class GameManager : MonoBehaviour
         else
         {
             OnPause();
+        }
+    }
+
+    public void OnInventoryPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            inventoryToggleQueued = true;
         }
     }
 
@@ -144,8 +154,9 @@ public class GameManager : MonoBehaviour
         {
             if (!IsPaused) 
             {
-                if (Input.GetKeyDown(KeyCode.I))
+                if (inventoryToggleQueued)
                 {
+                    inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {
                         InventoryController.OnInventoryHide();
@@ -174,12 +185,12 @@ public class GameManager : MonoBehaviour
         //}
     }
 
-    public void OnPause()
+    void OnPause()
     {
+        cachedCursorLockMode = Cursor.lockState;
+        Cursor.lockState = CursorLockMode.None;
         OptionsScreen.OnBecomeVisible();
         OptionsScreen.gameObject.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
 
         IsPaused = true;
         NormalTimeScale = Time.timeScale;
@@ -187,12 +198,11 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Should pause");
     }
 
-    public void OnUnpause()
+    void OnUnpause()
     {
+        Cursor.lockState = cachedCursorLockMode;
         OptionsScreen.OnBecomeHidden();
         OptionsScreen.gameObject.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
 
         IsPaused = false;
         Time.timeScale = NormalTimeScale;

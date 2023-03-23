@@ -14,7 +14,6 @@ public class Options : MonoBehaviour
     public void OnGameStarted()
     {
         // GEt from player prefs
-        Debug.Log("?!?1231");
         if (PlayerPrefs.HasKey("Sensitivity"))
         {
             MouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");

@@ -13,6 +13,8 @@ public class InventoryController : MonoBehaviour
 
     public bool ShowingInventory;
 
+    CursorLockMode cachedCursorLockMode = CursorLockMode.None;
+
     public void Awake()
     {
         //Item item;
@@ -23,6 +25,8 @@ public class InventoryController : MonoBehaviour
 
     public void OnInventoryShow()
     {
+        cachedCursorLockMode = Cursor.lockState;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         ShowingInventory = true;
         CanvasObject.SetActive(true);
@@ -62,6 +66,7 @@ public class InventoryController : MonoBehaviour
 
     public void OnInventoryHide()
     {
+        Cursor.lockState = cachedCursorLockMode;
         Time.timeScale = 1.0f;
         ShowingInventory = false;
         CanvasObject.SetActive(false);

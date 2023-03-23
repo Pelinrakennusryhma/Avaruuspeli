@@ -71,7 +71,6 @@ public class GUI_Spaceship : MonoBehaviour
 
     public void OnRestartClicked()
     {
-        GameManager.Instance.OnUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

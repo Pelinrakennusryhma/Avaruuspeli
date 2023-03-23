@@ -317,27 +317,27 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //Debug.Log("On fire 1 pressed");
     }
 
-    public void OnOptions(InputAction.CallbackContext value)
-    {
-        float valueFloat = value.ReadValue<float>();
+    //public void OnOptions(InputAction.CallbackContext value)
+    //{
+    //    float valueFloat = value.ReadValue<float>();
 
-        if (valueFloat > 0)
-        {
-            OptionsDown = true;
-        }
+    //    if (valueFloat > 0)
+    //    {
+    //        OptionsDown = true;
+    //    }
 
-        else
-        {
-            OptionsDown = false;
-        }
+    //    else
+    //    {
+    //        OptionsDown = false;
+    //    }
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.OnPausePressed();
-        }
+    //    if (GameManager.Instance != null)
+    //    {
+    //        GameManager.Instance.OnPausePressed();
+    //    }
 
-        //Debug.Log("On options pressed");
-    }
+    //    //Debug.Log("On options pressed");
+    //}
 
     public void OnLeave(InputAction.CallbackContext context)
     {
