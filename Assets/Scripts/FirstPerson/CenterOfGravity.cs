@@ -6,13 +6,10 @@ public class CenterOfGravity : MonoBehaviour
 {
     public float GravityMultiplier = 1.0f;
 
-    public static CenterOfGravity Instance;
-
     public Collider Collider;
 
-    public void Awake()
+    public void Start()
     {
-        Instance = this;
         Collider = GetComponent<Collider>();
     }
 

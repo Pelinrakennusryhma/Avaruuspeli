@@ -5,8 +5,6 @@ using UnityEngine;
 public class SpaceshipShoot : MonoBehaviour
 {
     [SerializeField]
-    Color color = Color.green;
-    [SerializeField]
     Material material;
     [SerializeField]
     public float laserSpeed = 250f;
@@ -32,6 +30,11 @@ public class SpaceshipShoot : MonoBehaviour
         cooldown = shootInterval;
 
         ColorMaterial();
+
+        if(laserParent == null)
+        {
+            laserParent = GameObject.FindGameObjectWithTag("ProjectileParent").transform;
+        }
     }
 
     private void Update()
@@ -53,9 +56,18 @@ public class SpaceshipShoot : MonoBehaviour
 
     void ColorMaterial()
     {
+        Color laserColor;
+        ActorSpaceship actor = GetComponentInParent<ActorSpaceship>();
+        if(actor != null)
+        {
+            laserColor = actor.faction.laserColor;
+        } else
+        {
+            laserColor = Color.green;
+        }
         coloredMaterial = new Material(material);
-        coloredMaterial.color = color;
-        coloredMaterial.SetColor("_EmissionColor", color);
+        coloredMaterial.color = laserColor;
+        coloredMaterial.SetColor("_EmissionColor", laserColor);
     }
 
     void Shoot()

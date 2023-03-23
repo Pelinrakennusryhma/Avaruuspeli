@@ -16,14 +16,14 @@ public class RubblePiece : MonoBehaviour
         HasBeenSpawned = false;
     }
 
-    public void Spawn(Vector3 rockCenter)
+    public void Spawn(Vector3 rockCenter, CenterOfGravity centerOfGravity)
     {
         //Debug.Log("Spawn rubble piece");
 
         HasBeenSpawned = true;
         DeathTimer = Random.Range(3.0f, 5.0f);
 
-        if (CenterOfGravity.Instance == null)
+        if (centerOfGravity == null)
         {
             Rigidbody.useGravity = true;
             Rigidbody.velocity = -(rockCenter - transform.position).normalized * Random.Range(10.5f, 16.09f);

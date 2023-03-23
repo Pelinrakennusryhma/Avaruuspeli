@@ -68,10 +68,10 @@ public class SpaceshipBoost : UITrackable
 
         if (boosting)
         {
-            spaceshipMovement.boostMultiplier = boostMultiplier;
+            spaceshipMovement.speedMultiplier = boostMultiplier;
         } else
         {
-            spaceshipMovement.boostMultiplier = 1f;
+            spaceshipMovement.speedMultiplier = 1f;
         }
 
         ToggleEffects(boosting);

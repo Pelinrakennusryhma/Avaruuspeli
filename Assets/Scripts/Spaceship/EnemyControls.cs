@@ -11,15 +11,9 @@ public class EnemyControls : ActorSpaceship
     float minRollThreshold = 0.05f;
     float maxRollThreshold = 0.5f;
 
-    protected override void Awake()
-    {
-        faction = Faction.ENEMY;
-        base.Awake();
-    }
-
     protected override void Start()
     {
-        shipTransform = transform.GetChild(0).GetComponent<Transform>();
+        shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
         base.Start();
     }
@@ -73,7 +67,7 @@ public class EnemyControls : ActorSpaceship
             // when targetting precisely enough, gradually slow down the rotation
             if(dotProduct < 0.9)
             {
-                turnSpeedFactor = Mathf.Lerp(0.1f, 1f, 1 - dotProduct);
+                turnSpeedFactor = Mathf.Lerp(0.05f, 1f, 1 - dotProduct);
             }
 
             OnPitchYaw(rotationNormal * turnSpeedFactor);
@@ -93,7 +87,7 @@ public class EnemyControls : ActorSpaceship
             OnThrust(-1f);
         } else
         {
-            OnThrust(0f);
+            OnThrust(0.5f);
         }
 
         //boost

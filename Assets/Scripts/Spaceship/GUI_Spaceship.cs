@@ -15,21 +15,69 @@ public class GUI_Spaceship : MonoBehaviour
     private TMP_Text helpText;
     [SerializeField]
     Button restartButton;
-    void Start()
+    [SerializeField]
+    Button quitButton;
+    [SerializeField]
+    TMP_Text promptText;
+    [SerializeField]
+    GameObject spaceshipHUD;
+
+    void Awake()
     {
-        GameEvents.instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
+        promptText.text = "";
+        GameEvents.Instance.EventPlayerEnteredPromptTrigger.AddListener(OnPromptTriggerEnter);
+        GameEvents.Instance.EventPlayerExitedPromptTrigger.AddListener(OnPromptTriggerExit);
+        GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
+        GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+    }
+
+    private void Start()
+    {
         ShowControls();
+    }
+
+    void OnPromptTriggerEnter(string text)
+    {
+        promptText.gameObject.SetActive(true);
+        promptText.text = text.Replace("%landKey%", Globals.Instance.landKey);
+    }
+
+    void OnPromptTriggerExit()
+    {
+        promptText.gameObject.SetActive(false);
+        promptText.text = "";
+    }
+
+    void OnPlayerLanded(MineableAsteroidTrigger asteroid)
+    {
+        promptText.gameObject.SetActive(false);
+        promptText.text = "";
+
+        spaceshipHUD.SetActive(false);
+    }
+
+    void OnPlayerLeftAsteroid(MineableAsteroidTrigger asteroid)
+    {
+        spaceshipHUD.SetActive(true);
     }
 
     void OnPlayerSpaceshipDeath()
     {
         Cursor.lockState = CursorLockMode.None;
         restartButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
     }
 
     public void OnRestartClicked()
     {
+        GameManager.Instance.OnUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnQuitClicked()
+    {
+        Application.Quit();
     }
 
     void ShowControls()
@@ -50,6 +98,11 @@ public class GUI_Spaceship : MonoBehaviour
                 {
                     bindings[action] = button;
                 }
+
+                if (action.StartsWith("Land"))
+                {
+                    Globals.Instance.landKey = button;
+                }
             }
         }
 
@@ -61,7 +114,7 @@ public class GUI_Spaceship : MonoBehaviour
         {
             // NOTE: WE don't want to show first person controls right now.
             // A more robust solution would be fine here.
-            if (i < 9)
+            if (i < 11)
             {
                 textToShow += $"{bindData.Key}{bindData.Value}\n";
             }
@@ -73,14 +126,14 @@ public class GUI_Spaceship : MonoBehaviour
         helpText.text = textToShow;
     }
 
-    public void OnToggleCursor()
-    {
-        if (Cursor.lockState == CursorLockMode.None)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        } else
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-    }
+    //public void OnToggleCursor()
+    //{
+    //    if (Cursor.lockState == CursorLockMode.None)
+    //    {
+    //        Cursor.lockState = CursorLockMode.Locked;
+    //    } else
+    //    {
+    //        Cursor.lockState = CursorLockMode.None;
+    //    }
+    //}
 }

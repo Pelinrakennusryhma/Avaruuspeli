@@ -78,21 +78,30 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleCursor",
-                    "type": "Button",
-                    "id": "627fb73c-dfc7-4d48-a19e-d4af82f6cc41",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "69c46ab1-83be-4ff4-9d7b-ef769f7c6010",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Land",
+                    "type": "Button",
+                    "id": "be0ab472-e498-4666-9087-ab00709b2456",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowIndicators",
+                    "type": "PassThrough",
+                    "id": "d7a5097e-38f9-4150-94c6-8efee28b0e6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -275,23 +284,34 @@
                 },
                 {
                     "name": "",
-                    "id": "a4bf6a08-1b1e-4a49-808d-80ece6629cf9",
-                    "path": "<Keyboard>/tab",
+                    "id": "f7d8c766-e75a-46e2-99af-ba2a64f1491f",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleCursor",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f7d8c766-e75a-46e2-99af-ba2a64f1491f",
-                    "path": "<Keyboard>/p",
+                    "id": "17e28deb-dd65-4020-90e6-c46395bc2864",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "Land",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "365dd450-0582-4a3b-82e7-75410df619ca",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowIndicators",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -471,6 +491,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Leave",
+                    "type": "Button",
+                    "id": "69b18dad-63a5-4e42-8540-a4b6637d50bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -724,6 +753,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "KeyAlpha0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0110988-aa62-43f6-a73e-bd07d4582e3a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Leave",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

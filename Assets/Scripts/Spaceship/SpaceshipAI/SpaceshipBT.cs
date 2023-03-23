@@ -15,19 +15,22 @@ public class SpaceshipBT : BTree
 {
     [SerializeField]
     Stance stance;
-    public static float detectTargetRange = 500f;
     [SerializeField]
-    List<GameObject> targets;
+    float detectTargetRange = 500f;
     [SerializeField]
     float patrolArea = 1000f;
 
     EnemyControls enemyControls;
     Transform shipTransform;
+    SpaceshipShoot spaceshipShoot;
+    SpaceshipEvents spaceshipEvents;
 
     private void Awake()
     {
         enemyControls = GetComponent<EnemyControls>();
         shipTransform = transform.GetChild(0);
+        spaceshipShoot = shipTransform.GetComponent<SpaceshipShoot>();
+        spaceshipEvents = shipTransform.GetComponent<SpaceshipEvents>();
 
     }
     protected override Node SetupTree()
@@ -40,8 +43,6 @@ public class SpaceshipBT : BTree
                 {
                     new Sequence(new List<Node>
                     {
-                        new CheckForTarget(shipTransform, targets),
-                        new TaskChaseTarget(enemyControls),
                         new CheckTargetInShootingRange(shipTransform),
                         new TaskShoot(enemyControls),
                     }),
@@ -49,6 +50,16 @@ public class SpaceshipBT : BTree
                     {
                         new CheckForObstacle(enemyControls, shipTransform),
                         new TaskAvoidObstacle(enemyControls, shipTransform)
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForHit(spaceshipEvents),
+                        new TaskEvadeAttacker(enemyControls, shipTransform)
+                    }),
+                    new Sequence(new List<Node>
+                    {
+                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors, detectTargetRange),
+                        new TaskChaseTarget(enemyControls, shipTransform, spaceshipShoot.laserSpeed),
                     }),
                     new TaskPatrol(enemyControls, patrolArea)
                 });
@@ -58,13 +69,13 @@ public class SpaceshipBT : BTree
                 {
                     new Sequence(new List<Node>
                     {
-                        // add passive logic
-                        new CheckForTarget(shipTransform, targets),
+                        new CheckForObstacle(enemyControls, shipTransform),
+                        new TaskAvoidObstacle(enemyControls, shipTransform)
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckForObstacle(enemyControls, shipTransform),
-                        new TaskAvoidObstacle(enemyControls, shipTransform)
+                        // add passive logic
+                        new CheckForTarget(shipTransform, enemyControls.faction.hostileActors, detectTargetRange),
                     }),
                     new TaskPatrol(enemyControls, patrolArea)
                 });

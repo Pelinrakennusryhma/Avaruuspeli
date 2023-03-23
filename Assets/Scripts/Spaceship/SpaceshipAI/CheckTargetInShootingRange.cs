@@ -15,7 +15,7 @@ public class CheckTargetInShootingRange : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData("target");
+        object t = GetData("shootTargetPos");
 
         if(t == null)
         {
@@ -24,14 +24,13 @@ public class CheckTargetInShootingRange : Node
             return state;
         }
 
-        GameObject target = (GameObject)t;
+        Vector3 targetPos = (Vector3)t;
 
-        Vector3 heading = target.transform.position - _transform.position;
+        Vector3 heading = targetPos - _transform.position;
         float dot = Vector3.Dot(heading.normalized, _transform.forward);
 
         if (dot > 0.95f)
         {
-            state = NodeState.SUCCESS;
             parent.parent.SetData("shouldShoot", true);
         } 
         else
@@ -39,7 +38,7 @@ public class CheckTargetInShootingRange : Node
             parent.parent.SetData("shouldShoot", false);
         }
 
-        state = NodeState.SUCCESS;
+        state = NodeState.RUNNING;
         return state;
     }
 }

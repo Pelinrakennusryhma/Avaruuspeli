@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
         {
             OptionsScreen.gameObject.SetActive(false);
             OptionsScreen.OnGameStarted();
+            OptionsScreen.OnBecomeHidden();
         }
 
         Helpers.RefreshReferenceToGraphicsRaycasterAndEventSystem();

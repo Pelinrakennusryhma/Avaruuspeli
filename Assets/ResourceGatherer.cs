@@ -14,8 +14,8 @@ public class ResourceGatherer : MonoBehaviour
     public static ResourceGatherer Instance;
          
     public ToolType Tool;
-    public DestroyableRock Rock;
-    public Collider RockCollider;
+    public List<DestroyableRock> Rocks;
+    public List<Collider> RockColliders;
     public FirstPersonPlayerControls Controls;
     public Camera Camera;
     public LayerMask PickUppableLayerMask;
@@ -51,7 +51,7 @@ public class ResourceGatherer : MonoBehaviour
             //Debug.Log("Collect " + Time.time);
             GatherableObject gatherable = other.GetComponent<GatherableObject>();
 
-            if (gatherable != null)
+            if (gatherable != null && gatherable.enabled)
             {
                 gatherable.OnPickUp();
             }
@@ -65,8 +65,8 @@ public class ResourceGatherer : MonoBehaviour
 
             if (rock != null)
             {
-                Rock = rock;
-                RockCollider = other;
+                Rocks.Add(rock);
+                RockColliders.Add(other);
                 //Debug.Log("DEstroyable rock set");
             }
             //gameObject.SetActive(false);
@@ -75,10 +75,11 @@ public class ResourceGatherer : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<DestroyableRock>())
+        DestroyableRock otherRock = other.GetComponent<DestroyableRock>();
+        if(otherRock != null)
         {
-            Rock = null;
-            RockCollider = null;
+            Rocks.Remove(otherRock);
+            RockColliders.Remove(other);
             //Debug.Log("DestroyableRock cleared");
         }
     }
@@ -104,7 +105,7 @@ public class ResourceGatherer : MonoBehaviour
 
         //Debug.Log("Tool is " + Tool.ToString());
 
-        if (Rock != null)
+        if (Rocks.Count > 0)
         {
             // Chec if we are hitting rock with a raycast
             RaycastHit hitInfo;
@@ -116,8 +117,9 @@ public class ResourceGatherer : MonoBehaviour
 
             //Debug.Log("hitinfo " + hitInfo.collider);
 
-            if (hitInfo.collider != null
-                && hitInfo.collider.gameObject == Rock.gameObject)
+
+            if (hitInfo.collider != null && RockColliders.Contains(hitInfo.collider))
+            //&& hitInfo.collider.gameObject == Rock.gameObject)
             {
                 hittingRock = true;
                 //Debug.Log("Hitting rock " + Time.time);
@@ -132,14 +134,15 @@ public class ResourceGatherer : MonoBehaviour
             if (Controls.Fire1Down
                 && hittingRock) 
             {
+                DestroyableRock hitRock = hitInfo.collider.GetComponent<DestroyableRock>();
                 if (Tool == ToolType.BasicDrill)
                 {
-                    Rock.ReduceHealth(0.3f * Time.deltaTime, Tool);
+                    hitRock.ReduceHealth(0.3f * Time.deltaTime, Tool);
                 }
 
                 else if (Tool == ToolType.AdvancedDrill)
                 {
-                    Rock.ReduceHealth(Time.deltaTime, Tool);
+                    hitRock.ReduceHealth(Time.deltaTime, Tool);
                 } 
             }
         }
