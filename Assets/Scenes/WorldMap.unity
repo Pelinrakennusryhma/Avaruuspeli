@@ -2716,7 +2716,6 @@ GameObject:
   - component: {fileID: 1409681574}
   - component: {fileID: 1409681573}
   - component: {fileID: 1409681575}
-  - component: {fileID: 1409681576}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2946,23 +2945,15 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9b8097f7-4b89-4f54-b4a4-581a3d7f767e
     m_ActionName: ShipControls/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae046845-1c3b-43b0-a8c9-53e81991721e
+    m_ActionName: FirstPersonControls/Inventory[/Keyboard/i]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: UIControls
+  m_DefaultActionMap: WorldMapControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1409681576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409681572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06bdbed995a8364ba4e24b581a365b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1424561377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5578843320735299861, guid: 64a828875e281ce4ea934261fe5b0466,
