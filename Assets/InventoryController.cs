@@ -12,10 +12,9 @@ public class InventoryController : MonoBehaviour
     public Equipment Equipment;
 
     public bool ShowingInventory;
-
     public bool IsInShoppingArea;
 
- 
+    CursorLockMode cachedCursorLockMode = CursorLockMode.None;
 
     public void Awake()
     {
@@ -27,6 +26,8 @@ public class InventoryController : MonoBehaviour
 
     public void OnInventoryShow()
     {
+        cachedCursorLockMode = Cursor.lockState;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
         ShowingInventory = true;
         CanvasObject.SetActive(true);
@@ -34,7 +35,6 @@ public class InventoryController : MonoBehaviour
 
         CanvasScript.HideItemCatalog();
         CanvasScript.ShowEquipment();
-        CanvasScript.HideShop();
 
         if (ResourceGatherer.Instance != null) 
         {
@@ -59,7 +59,7 @@ public class InventoryController : MonoBehaviour
 
         if (ResourceInventory.Instance != null)
         {
-            //ResourceInventory.Instance.UnloadGatheredItems(Inventory);
+            ResourceInventory.Instance.UnloadGatheredItems(Inventory);
         }
 
         Debug.Log("Show inventory");
@@ -67,6 +67,7 @@ public class InventoryController : MonoBehaviour
 
     public void OnInventoryHide()
     {
+        Cursor.lockState = cachedCursorLockMode;
         Time.timeScale = 1.0f;
         ShowingInventory = false;
         CanvasObject.SetActive(false);

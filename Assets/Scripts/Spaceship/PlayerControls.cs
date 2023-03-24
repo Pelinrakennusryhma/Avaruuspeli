@@ -5,16 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
-    protected override void Awake()
-    {
-        faction = Faction.PLAYER;
-        base.Awake();
-    }
-
     protected override void OnDeath()
     {
         base.OnDeath();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        Cursor.visible = true;
     }
 
     public void OnThrust(InputAction.CallbackContext context)
@@ -52,18 +47,22 @@ public class PlayerControls : ActorSpaceship
         spaceshipShoot.shooting = context.performed;
     }
 
-    public void OnPause(InputAction.CallbackContext context)
+    public void OnLand(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (Time.timeScale > 0.5f)
-            {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
+            GameEvents.Instance.CallEventPlayerTriedLanding();
+        }
+    }
+
+    public void OnShowIndicators(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameEvents.Instance.CallEventToggleIndicators(true);
+        } else if (context.canceled)
+        {
+            GameEvents.Instance.CallEventToggleIndicators(false);
         }
     }
 }

@@ -78,18 +78,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleCursor",
+                    "name": "Options",
                     "type": "Button",
-                    "id": "627fb73c-dfc7-4d48-a19e-d4af82f6cc41",
+                    "id": "69c46ab1-83be-4ff4-9d7b-ef769f7c6010",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Land",
                     "type": "Button",
-                    "id": "69c46ab1-83be-4ff4-9d7b-ef769f7c6010",
+                    "id": "be0ab472-e498-4666-9087-ab00709b2456",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowIndicators",
+                    "type": "PassThrough",
+                    "id": "d7a5097e-38f9-4150-94c6-8efee28b0e6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "9b8097f7-4b89-4f54-b4a4-581a3d7f767e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -275,23 +293,45 @@
                 },
                 {
                     "name": "",
-                    "id": "a4bf6a08-1b1e-4a49-808d-80ece6629cf9",
-                    "path": "<Keyboard>/tab",
+                    "id": "f7d8c766-e75a-46e2-99af-ba2a64f1491f",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleCursor",
+                    "action": "Options",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f7d8c766-e75a-46e2-99af-ba2a64f1491f",
-                    "path": "<Keyboard>/p",
+                    "id": "17e28deb-dd65-4020-90e6-c46395bc2864",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "Land",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "365dd450-0582-4a3b-82e7-75410df619ca",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowIndicators",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06a5c6e2-2a77-4e14-acef-f29358aaa16c",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -471,6 +511,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Leave",
+                    "type": "Button",
+                    "id": "69b18dad-63a5-4e42-8540-a4b6637d50bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "ae046845-1c3b-43b0-a8c9-53e81991721e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -724,6 +782,76 @@
                     "processors": "",
                     "groups": "",
                     "action": "KeyAlpha0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0110988-aa62-43f6-a73e-bd07d4582e3a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Leave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d4937df-40a3-4e60-b087-8a6751e3051b",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "WorldMapControls",
+            "id": "b1fa003b-64dd-4cf8-83ff-092c8b5de155",
+            "actions": [
+                {
+                    "name": "Options",
+                    "type": "Button",
+                    "id": "04ca90a0-68fe-47b7-849f-147e4db33ec4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "73a9d680-bb2e-4233-ae3e-37d9ee54d87f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d19a4141-ad1c-4bb4-9f9b-568c4abc5a1a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Options",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f39551e2-3db0-45d5-b31c-8ba1dbc3e261",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

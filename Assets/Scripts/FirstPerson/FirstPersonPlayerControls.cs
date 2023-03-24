@@ -39,7 +39,12 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //playerInput.SwitchCurrentActionMap("FirstPersonControls");
         //Debug.Log("Current action map is " + playerInput.currentActionMap.ToString());
         UICanvas.gameObject.SetActive(true);
-        
+        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+    }
+
+    void OnLeaveAsteroid(MineableAsteroidTrigger asteroid)
+    {
+        gameObject.SetActive(false);
     }
 
     public void OnHorizontal(InputAction.CallbackContext value)
@@ -312,26 +317,34 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //Debug.Log("On fire 1 pressed");
     }
 
-    public void OnOptions(InputAction.CallbackContext value)
+    //public void OnOptions(InputAction.CallbackContext value)
+    //{
+    //    float valueFloat = value.ReadValue<float>();
+
+    //    if (valueFloat > 0)
+    //    {
+    //        OptionsDown = true;
+    //    }
+
+    //    else
+    //    {
+    //        OptionsDown = false;
+    //    }
+
+    //    if (GameManager.Instance != null)
+    //    {
+    //        GameManager.Instance.OnPausePressed();
+    //    }
+
+    //    //Debug.Log("On options pressed");
+    //}
+
+    public void OnLeave(InputAction.CallbackContext context)
     {
-        float valueFloat = value.ReadValue<float>();
-
-        if (valueFloat > 0)
+        if (context.performed)
         {
-            OptionsDown = true;
+            GameEvents.Instance.CallEventPlayerTriedLeaving();
         }
-
-        else
-        {
-            OptionsDown = false;
-        }
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.OnPausePressed();
-        }
-
-        //Debug.Log("On options pressed");
     }
 
     public void LateUpdate()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GatherableObject : MonoBehaviour
 {
-    public ResourceInventory.ResourceType ResourceType;
+    public Resource ResourceType { get; private set; }
 
     public float OffsetFromGround = 0.2f;
 
@@ -12,12 +12,16 @@ public class GatherableObject : MonoBehaviour
     protected float PickupTime;
     protected bool HasBeenPickedUp = false;
     protected Vector3 PickUpStartPos;
-    protected Rigidbody Rigidbody;
+    protected Rigidbody rb;
     protected Collider MainCollider;
+    protected CenterOfGravity _centerOfGravity;
+    MeshCollider meshCollider;
+    Vector3 targetPosition;
 
     private void Awake()
     {
-       // Rigidbody = GetComponent<Rigidbody>();
+       rb = GetComponent<Rigidbody>();
+       meshCollider = GetComponent<MeshCollider>();
        // Collider mainCollider = GetComponent<Collider>();
     }
 
@@ -51,9 +55,31 @@ public class GatherableObject : MonoBehaviour
         }
     }
 
-    public virtual void OnSpawn()
+    public void Init(Resource resourceType)
     {
+        ResourceType = resourceType;
+    }
+
+    public virtual void OnSpawn(CenterOfGravity centerOfGravity)
+    {
+        _centerOfGravity = centerOfGravity;
         SnapToGround();
+    }
+
+    public virtual void Activate(CenterOfGravity centerOfGravity)
+    {
+        _centerOfGravity = centerOfGravity;
+        MeshCollider asteroidCollider = centerOfGravity.GetComponent<MeshCollider>();
+        targetPosition = CalculateTargetPos(asteroidCollider);
+        meshCollider.enabled = true;
+    }
+
+    Vector3 CalculateTargetPos(MeshCollider asteroidCollider)
+    {
+        Vector3 pos = asteroidCollider.ClosestPoint(transform.position);
+        Vector3 dirNormal = (transform.position - asteroidCollider.transform.position).normalized;
+        pos += (dirNormal * transform.localScale.x);
+        return pos;
     }
 
     public virtual void SnapToGround()
@@ -61,11 +87,11 @@ public class GatherableObject : MonoBehaviour
         //BoxCollider.isTrigger = false;
 
 
-        if (CenterOfGravity.Instance != null)
+        if (_centerOfGravity != null)
         {
             //Debug.LogError("FIX THE SNAPPING TO GROUND. THIS DOESN'T WORK");
 
-            Vector3 offset = (CenterOfGravity.Instance.transform.position - transform.position).normalized * 30.0f;
+            Vector3 offset = (_centerOfGravity.transform.position - transform.position).normalized * 30.0f;
             transform.position += -offset;
 
             //Debug.DrawRay(transform.position, -offset, Color.red, 10000f);
@@ -80,7 +106,7 @@ public class GatherableObject : MonoBehaviour
             {
                 //Debug.Log("Hit " + hitInfos[i].collider.gameObject.name);
 
-                if (hitInfos[i].collider.gameObject == CenterOfGravity.Instance.gameObject)
+                if (hitInfos[i].collider.gameObject == _centerOfGravity.gameObject)
                 {
                     transform.position = hitInfos[i].point + -offset.normalized * OffsetFromGround;
                     //Debug.Log("Snapped to " + hitInfos[i].collider.gameObject.name);
@@ -135,6 +161,9 @@ public class GatherableObject : MonoBehaviour
                 HasBeenPickedUp = false;
                 gameObject.SetActive(false);
             }
+        } else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 3f);
         }
     }
 }

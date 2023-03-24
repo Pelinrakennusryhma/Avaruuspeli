@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
+  m_Name: Diamond
+  m_EditorClassIdentifier: 
+  id: 0
+  itemName: Diamond
+  plural: Diamonds
+  value: 1000
+  description: A valuable diamond.
+  itemPrefab: {fileID: 6461999672915167094, guid: 6394e3e51b06bd241b097b29c6c00043,
+    type: 3}
+  itemPrefabVariants:
+  - {fileID: 49730085967010945, guid: 9aa0d4bd634cd42498335cdbe58440b1, type: 3}
+  - {fileID: 7356950005017624887, guid: 41661cf9a577550469215bd4e21144a5, type: 3}
+  - {fileID: 8798596605988558400, guid: d84c45d342c60344cb3a7fc87e86c866, type: 3}
+  - {fileID: 4843846868792224709, guid: 8695e6c72af304847882b62517206fc3, type: 3}
+  - {fileID: 4130283384215808055, guid: 681600888da1bc44992f5ba715beff83, type: 3}
+  - {fileID: 8941917039107780826, guid: aad7f68915bf6e542a1a2a0e3cb92997, type: 3}
+  itemIcon: {fileID: 0}
+  rare: {fileID: 0}
+  rareChance: 0

@@ -5,25 +5,9 @@ using TMPro;
 
 public class ResourceInventory : MonoBehaviour
 {
-    public enum ResourceType
-    {
-        None = 0,
-        TestDice = 1,
-        Gold = 2,
-        Silver = 3,
-        Copper = 4,
-        Iron = 5,
-        Diamond = 6
-    }
-
     public static ResourceInventory Instance;
 
-    public static int AmountOfTestDice;
-    public static int AmountOfGold;
-    public static int AmountOfSilver;
-    public static int AmountOfCopper;
-    public static int AmountOfIron;
-    public static int AmountOfDiamonds;
+    Dictionary<Resource, int> inventory = new Dictionary<Resource, int>();
 
     public static int AmountOfGoldSinceLastInventoryLaunch;
     public static int AmountOfSilverSinceLastInventoryLaunch;
@@ -34,6 +18,7 @@ public class ResourceInventory : MonoBehaviour
     public ShowHideInventory ShowHideInventory;
 
     public TextMeshProUGUI ShoppingPrompt;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -41,76 +26,24 @@ public class ResourceInventory : MonoBehaviour
         ShoppingPrompt.gameObject.SetActive(false);
     }
 
-    public void CollectResource(ResourceType collectedResourceType)
+    public void CollectResource(Resource collectedResourceType, int amount = 1)
     {
         //Debug.Log("Collected " + collectedResourceType.ToString());
 
-        //ShowHideInventory.ShowInventory();
+        int totalAmount;
 
-        GameManager.Instance.InventoryController.OnInventoryShow();
-
-        int amount = 0;
-
-        if (collectedResourceType == ResourceType.TestDice)
+        if (inventory.ContainsKey(collectedResourceType))
         {
-            AmountOfTestDice++;
-            amount = AmountOfTestDice;
-            //Debug.Log("Amount of test dice " + AmountOfTestDice);
+            totalAmount = amount + inventory[collectedResourceType];
+            inventory[collectedResourceType] = totalAmount;
+        } else
+        {
+            inventory.Add(collectedResourceType, amount);
+            totalAmount = amount;
         }
 
-        else if (collectedResourceType == ResourceType.Gold)
-        {
-            AmountOfGold++;
-            amount = AmountOfGold;
-            AmountOfGoldSinceLastInventoryLaunch++;
-            GameManager.Instance.InventoryController.Inventory.AddItem(1, 1);
-            //ShowHideInventory.Inventory.AddItem(1, 1);
-            //Debug.Log("Amount of gold " + AmountOfGold);
-        }
-
-        else if(collectedResourceType == ResourceType.Silver)
-        {
-            AmountOfSilver++;
-            amount = AmountOfSilver;
-            AmountOfSilverSinceLastInventoryLaunch++;
-            GameManager.Instance.InventoryController.Inventory.AddItem(8, 1);
-            //Debug.Log("Amount of silver " + AmountOfSilver);
-        }
-
-        else if (collectedResourceType == ResourceType.Copper)
-        {
-            AmountOfCopper++;
-            amount = AmountOfCopper;
-            AmountOfCopperSinceLastInventoryLaunch++;
-            GameManager.Instance.InventoryController.Inventory.AddItem(9, 1);
-            //Debug.Log("Amount of copper " + AmountOfCopper);
-        }
-        else if (collectedResourceType == ResourceType.Iron)
-        {
-            AmountOfIron++;
-            amount = AmountOfIron;
-            AmountOfIronSinceLastInventoryLaunch++;
-            GameManager.Instance.InventoryController.Inventory.AddItem(0, 1);
-            //Debug.Log("Amount of iron " + AmountOfIron);
-        }
-
-        else if (collectedResourceType == ResourceType.Diamond)
-        {
-            AmountOfDiamonds++;
-            amount = AmountOfDiamonds;
-            AmountOfDiamondsSinceLastInventoryLaunch++;
-            GameManager.Instance.InventoryController.Inventory.AddItem(10, 1);
-            //Debug.Log("Amount of diamonds " + AmountOfDiamonds);
-        }
-
-        ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, amount);
-
-
-        GameManager.Instance.InventoryController.OnInventoryHide();
-        //ShowHideInventory.HideInventory();
+        ResourcePickUpPrompt.Instance.ShowResource(collectedResourceType, totalAmount);
     }
-
-    // Update is called once per frame
     public void UnloadGatheredItems(Inventory inventory)
     {
         if (AmountOfGoldSinceLastInventoryLaunch > 0)
