@@ -37,7 +37,10 @@ public class GameManager : MonoBehaviour
     public AsteroidFieldData CurrentAsteroidFieldData;
 
     private bool inventoryToggleQueued = false;
+
     private CursorLockMode cachedCursorLockMode = CursorLockMode.None;
+
+    public TypeOfScene CurrentSceneType;
 
     public enum TypeOfScene
     {
@@ -77,13 +80,15 @@ public class GameManager : MonoBehaviour
             Helpers = GetComponentInChildren<Helpers>(true);
             InventoryController = GetComponentInChildren<InventoryController>(true);
 
-            Debug.Log("Don't destroy game manager");
+            CurrentSceneType = TypeOfScene.WorldMap;
+
+            //Debug.Log("Don't destroy game manager");
         }
 
         else
         {
             Destroy(gameObject);
-            Debug.Log("Destroyed game manager");
+            Debug.LogWarning("Destroyed game manager");
         }
     }
 
@@ -101,16 +106,20 @@ public class GameManager : MonoBehaviour
         Helpers.RefreshReferenceToGraphicsRaycasterAndEventSystem();
     }
 
-    public void OnOptionsPressed()
+    public void OnOptionsPressed(InputAction.CallbackContext context)
     {
-        if (IsPaused)
+        if (context.performed
+            && CurrentSceneType != TypeOfScene.WorldMap) 
         {
-            OnUnpause();
-        }
+            if (IsPaused)
+            {
+                OnUnpause();
+            }
 
-        else
-        {
-            OnPause();
+            else
+            {
+                OnPause();
+            }
         }
     }
 
@@ -156,6 +165,8 @@ public class GameManager : MonoBehaviour
             {
                 if (inventoryToggleQueued)
                 {
+                    Debug.LogWarning("Should launch inveneotry");
+
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {
@@ -189,8 +200,16 @@ public class GameManager : MonoBehaviour
     {
         cachedCursorLockMode = Cursor.lockState;
         Cursor.lockState = CursorLockMode.None;
-        OptionsScreen.OnBecomeVisible();
-        OptionsScreen.gameObject.SetActive(true);
+
+        if (OptionsScreen != null) 
+        {
+            OptionsScreen.OnBecomeVisible();
+            OptionsScreen.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("No options screen found. Surely one will be added eventually with full functionality");
+        }
 
         IsPaused = true;
         NormalTimeScale = Time.timeScale;
@@ -201,8 +220,12 @@ public class GameManager : MonoBehaviour
     void OnUnpause()
     {
         Cursor.lockState = cachedCursorLockMode;
-        OptionsScreen.OnBecomeHidden();
-        OptionsScreen.gameObject.SetActive(false);
+
+        if (OptionsScreen != null) 
+        {
+            OptionsScreen.OnBecomeHidden();
+            OptionsScreen.gameObject.SetActive(false);
+        }
 
         IsPaused = false;
         Time.timeScale = NormalTimeScale;
@@ -288,6 +311,7 @@ public class GameManager : MonoBehaviour
         IsOnWorldMap = true;
         WaitingForSceneLoad = true;
         FramesPassedTillLoadScenes = 0;
+        CurrentSceneType = IncomingSceneType;
         IncomingSceneType = TypeOfScene.None;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -338,7 +362,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateStackedScene()
     {
-        Debug.Log("We are activating incoming scne of type " + IncomingSceneType.ToString());
+        Debug.Log("We are activating incoming scene of type " + IncomingSceneType.ToString());
         WaitingForSceneLoad = false;
         FramesPassedTillLoadScenes = -1;
         SceneManager.SetActiveScene(ActiveStackedScene);
@@ -358,6 +382,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
         }
 
+        CurrentSceneType = IncomingSceneType;
         IncomingSceneType = TypeOfScene.None;
     }
 

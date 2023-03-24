@@ -34,6 +34,7 @@ public class InventoryController : MonoBehaviour
         AttachToMainCamera();
 
         CanvasScript.HideItemCatalog();
+        CanvasScript.HideShop();
         CanvasScript.ShowEquipment();
 
         if (ResourceGatherer.Instance != null) 
@@ -146,7 +147,7 @@ public class InventoryController : MonoBehaviour
     public void OnEnterShop()
     {
         OnInventoryShow();
-        CanvasScript.HideEquipment();
+        CanvasScript.ShowEquipment();
         CanvasScript.HideItemCatalog();
         CanvasScript.ShowShop();
         ResourceInventory.Instance.OnStartShopping();

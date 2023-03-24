@@ -39,7 +39,16 @@ public class FirstPersonPlayerControls : MonoBehaviour
         //playerInput.SwitchCurrentActionMap("FirstPersonControls");
         //Debug.Log("Current action map is " + playerInput.currentActionMap.ToString());
         UICanvas.gameObject.SetActive(true);
-        GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+
+        if (GameManager.Instance.CurrentSceneType == GameManager.TypeOfScene.AsteroidField) 
+        {
+            GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+        }
+
+        else
+        {
+            Debug.LogWarning("We have a corresponding event for leaving an asteroid, but not one for planets or other future scenes");
+        }
     }
 
     void OnLeaveAsteroid(MineableAsteroidTrigger asteroid)

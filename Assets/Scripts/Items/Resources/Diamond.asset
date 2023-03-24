@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
   m_Name: Diamond
   m_EditorClassIdentifier: 
-  id: 0
+  id: 10
   itemName: Diamond
   plural: Diamonds
   value: 1000

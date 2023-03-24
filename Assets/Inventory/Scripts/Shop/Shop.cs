@@ -15,6 +15,12 @@ public class Shop : MonoBehaviour
     {
         NewItem(0);
         NewItem(1);
+        NewItem(2);
+        NewItem(3);
+        NewItem(4);
+        NewItem(5);
+        NewItem(6);
+        NewItem(7);
         NewItem(8);
         NewItem(9);
         NewItem(10);

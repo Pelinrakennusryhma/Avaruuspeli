@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
             newItem.GetComponent<ItemScript>().AddItem(amount);
             currentWeight += itemToAdd.weight * amount;
             UpdateWeight();
-            Debug.LogError("ADDED ITEM");
+            //Debug.LogError("ADDED ITEM");
         }
         else if(item.stackable)
         {

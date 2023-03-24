@@ -23,12 +23,16 @@ public class ResourceInventory : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        ShoppingPrompt.gameObject.SetActive(false);
+        
+        if (ShoppingPrompt != null) 
+        {
+            ShoppingPrompt.gameObject.SetActive(false);
+        }
     }
 
     public void CollectResource(Resource collectedResourceType, int amount = 1)
     {
-        //Debug.Log("Collected " + collectedResourceType.ToString());
+        Debug.Log("Collected " + collectedResourceType.ToString());
 
         int totalAmount;
 
@@ -46,6 +50,21 @@ public class ResourceInventory : MonoBehaviour
     }
     public void UnloadGatheredItems(Inventory inventory)
     {
+        foreach (var kvp in this.inventory)
+        {
+            if (kvp.Key.id == 9)
+            {
+                inventory.AddItem(9, kvp.Value);
+                Debug.Log("Added copper");
+            }
+
+            else if (kvp.Key.id == 10)
+            {
+                inventory.AddItem(10, kvp.Value);
+                Debug.Log("Added diamond");
+            }
+        }
+
         if (AmountOfGoldSinceLastInventoryLaunch > 0)
         {
             inventory.AddItem(1, AmountOfGoldSinceLastInventoryLaunch);

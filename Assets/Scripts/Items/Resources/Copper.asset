@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
   m_Name: Copper
   m_EditorClassIdentifier: 
-  id: 0
+  id: 9
   itemName: Copper
   plural: Copper
   value: 150
