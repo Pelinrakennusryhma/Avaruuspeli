@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum MineableRockDensity
 {
@@ -19,6 +16,10 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private GameObject asteroidParent;
     [SerializeField]
+    private BoxCollider asteroidArea;
+    [SerializeField]
+    private BoxCollider reachableArea;
+    [SerializeField]
     private int amountOfAsteroids = 500;
     [SerializeField]
     private int amountOfMineables = 1;
@@ -27,33 +28,38 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private AnimationCurve mineableCurve;
     [SerializeField]
-    private float spawnArea = 1500f;
-    [SerializeField]
     private ActorManager actorManager;
     [SerializeField]
     MineableRockDensity mineableRockDensity;
     [SerializeField]
     Resource resourceType;
+
+    float reach = 3000;
+
     // Start is called before the first frame update
     void Start()
     {
-        SpawnAsteroids();
+        SpawnNonMineableAsteroids();
         SpawnMineableAsteroids();
     }
 
-    void SpawnAsteroids()
+    void SpawnNonMineableAsteroids()
     {
-        //SceneManager.LoadScene(mineableScene, LoadSceneMode.Additive);
-
         for (int i = 0; i < amountOfAsteroids; i++)
         {
             GameObject asteroidToSpawn = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
 
 
-            Vector3 spawnPos = Random.insideUnitSphere * spawnArea;
+            Vector3 spawnPos = GetPositionInSpawnArea(asteroidArea.bounds);
             Quaternion spawnRot = Random.rotation;
 
             GameObject asteroid = Instantiate(asteroidToSpawn, spawnPos, spawnRot, asteroidParent.transform);
+            float distanceFromOrigo = Vector3.Distance(Vector3.zero, spawnPos);
+            if (distanceFromOrigo > reach * 1.5f)
+            {
+                Destroy(asteroid.GetComponent<Rigidbody>());
+                Destroy(asteroid.GetComponent<MeshCollider>());
+            }
 
             float randomValue = Random.Range(0f, 1f);
             float scale = sizeCurve.Evaluate(randomValue);
@@ -63,9 +69,10 @@ public class AsteroidSpawner : MonoBehaviour
 
     void SpawnMineableAsteroids()
     {
+        reachableArea.size = new Vector3(reach, reachableArea.size.y, reachableArea.size.z);
         for (int i = 0; i < amountOfMineables; i++)
         {
-            Vector3 spawnPos = Random.insideUnitSphere * spawnArea;
+            Vector3 spawnPos = GetPositionInSpawnArea(reachableArea.bounds);
             Quaternion spawnRot = Random.rotation;
             GameObject mineable = Instantiate(mineableAsteroidPrefab, spawnPos, spawnRot, asteroidParent.transform);
             MineableAsteroidTrigger mineableScript = mineable.GetComponent<MineableAsteroidTrigger>();
@@ -74,5 +81,14 @@ public class AsteroidSpawner : MonoBehaviour
             float scale = mineableCurve.Evaluate(randomValue);
             mineableScript.Init(asteroidModel, scale, mineableRockDensity, resourceType, actorManager);
         }
+    }
+
+    Vector3 GetPositionInSpawnArea(Bounds bounds)
+    {
+            return new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                Random.Range(bounds.min.y, bounds.max.y),
+                Random.Range(bounds.min.z, bounds.max.z)
+            );
     }
 }

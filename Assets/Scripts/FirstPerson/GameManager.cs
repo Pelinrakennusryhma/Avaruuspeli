@@ -297,7 +297,7 @@ public class GameManager : MonoBehaviour
         Debug.LogWarning("ENTER ASTEROID FIELD");
 
         IncomingSceneType = TypeOfScene.AsteroidField;
-        StackAndLoadAndLaunchScene("SampleScene", 1);
+        StackAndLoadAndLaunchScene("MineableAsteroidScene", 5);
     }
 
     public void EnterPlanet()
