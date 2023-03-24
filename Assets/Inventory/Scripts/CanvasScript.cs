@@ -10,7 +10,7 @@ public class CanvasScript : MonoBehaviour
     public Item infoAbout;
     public ContextMenu contextMenu;
     //Pelaajan rahat
-    public double money = 0;
+    public double money = 10000;
 
     public void InfoAboutItem(Item item)
     {

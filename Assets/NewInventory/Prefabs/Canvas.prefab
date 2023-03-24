@@ -254,6 +254,7 @@ MonoBehaviour:
   itemDatabase: {fileID: 1228472343426842106}
   maxWeight: 1000
   currentWeight: 0
+  ScrollviewLayout: {fileID: 0}
 --- !u!114 &1228472341630199682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12215,7 +12216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3938352542613222691
 RectTransform:
   m_ObjectHideFlags: 0

@@ -21,10 +21,11 @@ public class SpawnablePickups : MonoBehaviour
     public ResourceInventory.ResourceType ResourceType;
     public int Amount;
 
-    public int Setup(ResourceInventory.ResourceType resourceType)
+    public int Setup(ResourceInventory.ResourceType resourceType,
+                     int forceAmount )
     {
         ResourceType = resourceType;
-        return Amount = DecideAmount();
+        return Amount = DecideAmount(forceAmount);
     }
 
     public void Spawn()
@@ -159,9 +160,15 @@ public class SpawnablePickups : MonoBehaviour
         //}
     }
 
-    private static int DecideAmount()
+    private static int DecideAmount(int forceAmount = -1)
     {
         int amount = 0;
+
+        if (forceAmount >= 0) 
+        {
+            amount = forceAmount;
+            return amount;
+        }
 
         if (AsteroidLauncher.SpawnablesAmount == AsteroidLauncher.MineralDensity.Scarce)
         {

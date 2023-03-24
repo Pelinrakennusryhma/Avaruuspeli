@@ -373,6 +373,7 @@ MonoBehaviour:
   Inventory: {fileID: 8377526991832108713}
   Equipment: {fileID: 8377526991233260967}
   ShowingInventory: 0
+  IsInShoppingArea: 0
 --- !u!1 &5479704163686736514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938352542613222690, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d101c09d62ac8458504377ce36e535, type: 3}

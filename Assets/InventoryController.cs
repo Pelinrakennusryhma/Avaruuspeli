@@ -13,6 +13,10 @@ public class InventoryController : MonoBehaviour
 
     public bool ShowingInventory;
 
+    public bool IsInShoppingArea;
+
+ 
+
     public void Awake()
     {
         //Item item;
@@ -30,6 +34,7 @@ public class InventoryController : MonoBehaviour
 
         CanvasScript.HideItemCatalog();
         CanvasScript.ShowEquipment();
+        CanvasScript.HideShop();
 
         if (ResourceGatherer.Instance != null) 
         {
@@ -103,5 +108,53 @@ public class InventoryController : MonoBehaviour
         }
 
         return currentTool;
+    }
+
+    public void OnEnterShoppingArea()
+    {
+        IsInShoppingArea = true;
+        ResourceInventory.Instance.OnEnterShoppingArea();
+    }
+
+    public void OnExitShoppingArea()
+    {
+        IsInShoppingArea = false;
+        ResourceInventory.Instance.OnExitShoppingArea();
+    }
+
+    public void Update()
+    {
+        if (IsInShoppingArea)
+        {
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                if (!ShowingInventory)
+                {
+                    OnEnterShop();
+                }
+
+                else
+                {
+                    OnExitShop();
+                }
+
+            }
+        }
+    }
+
+    public void OnEnterShop()
+    {
+        OnInventoryShow();
+        CanvasScript.HideEquipment();
+        CanvasScript.HideItemCatalog();
+        CanvasScript.ShowShop();
+        ResourceInventory.Instance.OnStartShopping();
+    }
+
+    public void OnExitShop()
+    {
+        OnInventoryHide();
+        CanvasScript.HideShop();
+        ResourceInventory.Instance.OnEnterShoppingArea();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ResourceInventory : MonoBehaviour
 {
@@ -32,10 +33,12 @@ public class ResourceInventory : MonoBehaviour
 
     public ShowHideInventory ShowHideInventory;
 
+    public TextMeshProUGUI ShoppingPrompt;
     // Start is called before the first frame update
     void Awake()
     {
-        Instance = this; 
+        Instance = this;
+        ShoppingPrompt.gameObject.SetActive(false);
     }
 
     public void CollectResource(ResourceType collectedResourceType)
@@ -143,5 +146,21 @@ public class ResourceInventory : MonoBehaviour
 
 
 
+    }
+
+    public void OnEnterShoppingArea()
+    {
+        ShoppingPrompt.gameObject.SetActive(true);
+        ShoppingPrompt.text = "PRESS E TO SHOP";
+    }
+
+    public void OnStartShopping()
+    {
+        ShoppingPrompt.text = "PRESS E TO EXIT SHOP";
+    }
+
+    public void OnExitShoppingArea()
+    {
+        ShoppingPrompt.gameObject.SetActive(false);
     }
 }

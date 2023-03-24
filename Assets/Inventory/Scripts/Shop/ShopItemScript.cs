@@ -20,7 +20,7 @@ public class ShopItemScript : MonoBehaviour
     {
         inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
         shop = GameObject.Find("ShopPanel").GetComponent<Shop>();
-        canvasScript = GameObject.Find("Canvas").GetComponent<CanvasScript>();
+        canvasScript = FindObjectOfType<CanvasScript>();
         item = shop.itemToAdd;
         itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
         itemName.text = item.name;
@@ -36,6 +36,11 @@ public class ShopItemScript : MonoBehaviour
         else
         {
             itemAmount.text = "Owned: 0";
+        }
+
+        if (canvasScript == null)
+        {
+            Debug.LogError("Null canvas");
         }
 
     }

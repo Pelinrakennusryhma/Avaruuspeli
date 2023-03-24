@@ -15,6 +15,9 @@ public class Shop : MonoBehaviour
     {
         NewItem(0);
         NewItem(1);
+        NewItem(8);
+        NewItem(9);
+        NewItem(10);
     }
 
     void Update()
