@@ -4925,6 +4925,236 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceshipSceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].time
+      value: 0.92379576
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[0].value
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].value
+      value: 2.549641
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[2].value
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[0].inSlope
+      value: 0.86560357
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].inSlope
+      value: 2.7884998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[2].inSlope
+      value: 12.4712105
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].time
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].time
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[0].outSlope
+      value: 0.86560357
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].outSlope
+      value: 2.7884998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[2].outSlope
+      value: 12.4712105
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[3].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78358454
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[0].inSlope
+      value: 1.1111112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].inSlope
+      value: -0.00596542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].inSlope
+      value: -0.004394727
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[3].inSlope
+      value: 1.1111112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableSizeCurve.m_Curve.Array.data[2].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[0].outSlope
+      value: 1.1111112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].outSlope
+      value: -0.00596542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].outSlope
+      value: -0.004394727
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[3].outSlope
+      value: 1.1111112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].outWeight
+      value: 0.077765346
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].outWeight
+      value: 0.21111798
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
+        type: 3}
+      propertyPath: mineableDistanceCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dac59e95555769b4ab675d8977c8e94d, type: 3}
 --- !u!1001 &7152063362579412987

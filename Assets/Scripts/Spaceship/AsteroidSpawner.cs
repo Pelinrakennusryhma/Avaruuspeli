@@ -26,7 +26,9 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private AnimationCurve sizeCurve;
     [SerializeField]
-    private AnimationCurve mineableCurve;
+    private AnimationCurve mineableSizeCurve;
+    [SerializeField]
+    private AnimationCurve mineableDistanceCurve;
     [SerializeField]
     private ActorManager actorManager;
     [SerializeField]
@@ -72,23 +74,32 @@ public class AsteroidSpawner : MonoBehaviour
         reachableArea.size = new Vector3(reach, reachableArea.size.y, reachableArea.size.z);
         for (int i = 0; i < amountOfMineables; i++)
         {
-            Vector3 spawnPos = GetPositionInSpawnArea(reachableArea.bounds);
+            Vector3 spawnPos = GetPositionInSpawnArea(reachableArea.bounds, true);
             Quaternion spawnRot = Random.rotation;
             GameObject mineable = Instantiate(mineableAsteroidPrefab, spawnPos, spawnRot, asteroidParent.transform);
             MineableAsteroidTrigger mineableScript = mineable.GetComponent<MineableAsteroidTrigger>();
             GameObject asteroidModel = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
             float randomValue = Random.Range(0f, 1f);
-            float scale = mineableCurve.Evaluate(randomValue);
+            float scale = mineableSizeCurve.Evaluate(randomValue);
             mineableScript.Init(asteroidModel, scale, mineableRockDensity, resourceType, actorManager);
         }
     }
 
-    Vector3 GetPositionInSpawnArea(Bounds bounds)
+    Vector3 GetPositionInSpawnArea(Bounds bounds, bool useCurve=false)
     {
+        if (useCurve)
+        {
+            float x = Mathf.Lerp(bounds.min.x, bounds.max.x, mineableDistanceCurve.Evaluate(Random.value));
+            float y = Mathf.Lerp(bounds.min.y, bounds.max.y, mineableDistanceCurve.Evaluate(Random.value));
+            float z = Mathf.Lerp(bounds.min.z, bounds.max.z, mineableDistanceCurve.Evaluate(Random.value));
+            return new Vector3(x, y, z);
+        } else
+        {
             return new Vector3(
                 Random.Range(bounds.min.x, bounds.max.x),
                 Random.Range(bounds.min.y, bounds.max.y),
                 Random.Range(bounds.min.z, bounds.max.z)
-            );
+                );
+        }
     }
 }
