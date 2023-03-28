@@ -193,6 +193,8 @@ MonoBehaviour:
   asteroidPOIPrefab: {fileID: 5694329005874326872, guid: fa876dfe80769c447a379c0aeee56d1c,
     type: 3}
   starSystem: {fileID: 6049776469781103335}
+  allPOISceneData:
+  - {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4, type: 2}
 --- !u!1001 &686109095850921730
 PrefabInstance:
   m_ObjectHideFlags: 0

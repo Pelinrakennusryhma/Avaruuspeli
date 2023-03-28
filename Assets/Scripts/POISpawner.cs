@@ -8,6 +8,8 @@ public class POISpawner : MonoBehaviour
     GameObject asteroidPOIPrefab;
     [SerializeField]
     StarSystemOnFocus starSystem;
+    [SerializeField]
+    POISceneData[] allPOISceneData;
 
     List<Transform> possibleSpawnPoints;
     // Start is called before the first frame update
@@ -20,7 +22,9 @@ public class POISpawner : MonoBehaviour
     void SpawnPOIs()
     {
         Vector3 pos = GetPosition();
-        Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
+        GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
+        PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
+        pointOfInterest.Init(GetSceneData());
     }
 
     void GetPossibleSpawnPoints()
@@ -48,5 +52,11 @@ public class POISpawner : MonoBehaviour
         Vector3 spawnPoint = randomAsteroid.position;
         possibleSpawnPoints.Remove(randomAsteroid);
         return spawnPoint;
+    }
+
+    POISceneData GetSceneData()
+    {
+        int index = Random.Range(0, allPOISceneData.Length);
+        return allPOISceneData[index];
     }
 }

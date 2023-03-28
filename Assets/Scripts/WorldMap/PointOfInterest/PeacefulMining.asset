@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e181801185371fd4ba3851a97fa1548d, type: 3}
+  m_Name: PeacefulMining
+  m_EditorClassIdentifier: 
+  <SceneName>k__BackingField: Peaceful Mining
+  descriptionTemplate: A secluded part of the asteroid belt.
+  <SceneToLoad>k__BackingField: MineableAsteroidScene
+  <NumEnemies>k__BackingField: 0
+  <NumAsteroids>k__BackingField: 1000
+  <NumMineables>k__BackingField: 5
+  mineableResources:
+  - {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}

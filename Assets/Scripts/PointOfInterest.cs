@@ -54,10 +54,15 @@ public class PointOfInterest : MonoBehaviour
         CheckIfMothershipInVicinity();
     }
 
+    public void Init(POISceneData data)
+    {
+        description.text = data.GetDescription();
+        title.text = data.SceneName;
+    }
+
     void CheckIfMothershipInVicinity()
     {
         float distance = (MotherShipOnWorldMapController.Instance.transform.position - transform.position).sqrMagnitude;
-        Debug.Log(distance);
         if(distance < 0.003)
         {
             EnableInfoPanel();
