@@ -12,7 +12,8 @@ public class WorldMapClickDetector : MonoBehaviour
         Planet = 3,
         Star = 4,
         AsteroidField = 5,
-        Wormhole = 6
+        Wormhole = 6,
+        POI = 7,
     }
 
     public ClickableObjectType type;
@@ -96,6 +97,15 @@ public class WorldMapClickDetector : MonoBehaviour
                         //Debug.LogError("CLICKED ASTEROID FIELD");
                     }
                         //Debug.Log("WE SHOULD MOVE TO ASTEROID FIELD POS");
+                    break;
+                case ClickableObjectType.POI:
+                    zoom = WorldMapMouseController.ZoomLevel.None;
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
+
+                    if (MotherShipOnWorldMapController.Instance.CheckIfPOIPositionIsWithinTolerance())
+                    {
+                        Debug.Log("Could load POI Scene");
+                    }
                     break;
 
                 default:

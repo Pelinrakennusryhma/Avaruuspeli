@@ -8,7 +8,7 @@ public class PointOfInterest : MonoBehaviour
     [SerializeField]
     GameObject[] models;
     [SerializeField]
-    float modelSpawnArea = 2f;
+    float modelSpawnArea = 0.1f;
     [SerializeField]
     float modelSize = 0.5f;
     [SerializeField]
@@ -23,14 +23,57 @@ public class PointOfInterest : MonoBehaviour
     TMP_Text title;
     [SerializeField]
     TMP_Text description;
-
+    [SerializeField]
+    GameObject iconBig;
+    [SerializeField]
+    GameObject infoPanel;
+    [SerializeField]
+    WorldMapClickDetector worldMapClickDetector;
     int modelAmount = 3;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        worldMapClickDetector.OnObjectClicked -= OnAsteroidFieldClicked;
+        worldMapClickDetector.OnObjectClicked += OnAsteroidFieldClicked;
+    }
+
     void Start()
     {
         CreateGraphics();
         ApplyIcon();
     }
+    void Update()
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        screenPos.x -= Screen.width / 2;
+        screenPos.y -= Screen.height / 2;
+        screenPos += UIItemOffset;
+
+        uiComponents.localPosition = screenPos;
+
+        CheckIfMothershipInVicinity();
+    }
+
+    void CheckIfMothershipInVicinity()
+    {
+        float distance = (MotherShipOnWorldMapController.Instance.transform.position - transform.position).sqrMagnitude;
+        Debug.Log(distance);
+        if(distance < 0.003)
+        {
+            EnableInfoPanel();
+        } else
+        {
+            DisableInfoPanel();
+        }
+    }
+
+    public void OnAsteroidFieldClicked(WorldMapClickDetector.ClickableObjectType objectType)
+    {
+        GameManager.Instance.currentPOI = this;
+        //GameManager.Instance.CurrentAsteroidFieldData = AsteroidFieldData;
+        Debug.LogError("Clicked POI");
+    }
+
     void CreateGraphics()
     {
         for (int i = 0; i < modelAmount; i++)
@@ -38,8 +81,14 @@ public class PointOfInterest : MonoBehaviour
             Vector3 spawnPos = Random.insideUnitSphere * modelSpawnArea + transform.position;
             spawnPos.y = transform.position.y;
             GameObject model = models[Random.Range(0, models.Length)];
-            GameObject spawnedModel = Instantiate(model, spawnPos, Random.rotation, transform);
+            GameObject spawnedModel = Instantiate(model, spawnPos, Quaternion.identity, transform);
             spawnedModel.transform.localScale *= modelSize;
+
+            // Flatten for world map
+            spawnedModel.transform.localScale = new Vector3(
+                spawnedModel.transform.localScale.x,
+                spawnedModel.transform.localScale.y / 10f,
+                spawnedModel.transform.localScale.z);
         }
     }
 
@@ -51,19 +100,15 @@ public class PointOfInterest : MonoBehaviour
         }
     }
 
-    void Update()
+    void EnableInfoPanel()
     {
-        //Vector3 screenPos = Camera.main.transform.InverseTransformPoint(transform.position);
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        screenPos.x -= Screen.width / 2;
-        screenPos.y -= Screen.height / 2;
-        screenPos += UIItemOffset;
+        iconBig.SetActive(false);
+        infoPanel.SetActive(true);
+    }
 
-        uiComponents.localPosition = screenPos;
-        //for (int i = 0; i < infoCanvas.transform.childCount; i++)
-        //{
-        //    Transform child = infoCanvas.transform.GetChild(i);
-        //    child.localPosition = screenPos;
-        //}
+    void DisableInfoPanel()
+    {
+        iconBig.SetActive(true);
+        infoPanel.SetActive(false);
     }
 }

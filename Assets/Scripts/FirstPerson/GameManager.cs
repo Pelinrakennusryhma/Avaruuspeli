@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public StarSystemOnFocus CurrentStarSystem;
     public PlanetOnWorldMap CurrentPlanet;
     public AsteroidFieldOnWorldMap CurrentAsteroidField;
+    public PointOfInterest currentPOI;
 
 
     public GalaxyData CurrentGalaxyData;

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5770079905922237426}
   - component: {fileID: 327877903198769303}
   - component: {fileID: 4494659351240923506}
-  - component: {fileID: 1476728375623736350}
   m_Layer: 0
   m_Name: AsteroidField2
   m_TagString: Untagged
@@ -119,6 +118,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007b54f02959f164fb483d1f8f1f1f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AsteroidFieldData:
+    posX: 0
+    posY: 0
+    posZ: 0
+    rotX: 0
+    rotY: 0
+    rotZ: 0
+    rotW: 0
+    localScaleX: 0
+    localScaleY: 0
+    localScaleZ: 0
+    Name: ASTEROID FIELD
+    ID: -1
+    Test1: 10
+    Test2: 12
+    Test: 0
+    Orbit: 0
+    ReferenceObjectPosX: 0
+    ReferenceObjectPosY: 0
+    ReferenceObjectPosZ: 0
+  ParentStarSystem: {fileID: 0}
   WorldMapClickDetector: {fileID: 0}
   ReferenceObject: {fileID: 5889320630960455902}
   Asteroid01aOriginal: {fileID: 5889320630960455902}
@@ -129,19 +149,6 @@ MonoBehaviour:
   Asteroid01fOriginal: {fileID: 2826297441104663196}
   Asteroid01gOriginal: {fileID: 1641420623337018775}
   RocksHaveBeenSpawned: 0
---- !u!114 &1476728375623736350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712137932058324565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf0d3a97971cdd48a1bed97612d7a28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 5
 --- !u!1001 &126789358838663549
 PrefabInstance:
   m_ObjectHideFlags: 0

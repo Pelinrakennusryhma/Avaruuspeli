@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7845042064148235349}
   - component: {fileID: 6049776469781103335}
+  - component: {fileID: 780446539110083931}
   m_Layer: 0
   m_Name: StarSystem
   m_TagString: Untagged
@@ -177,6 +178,21 @@ MonoBehaviour:
     type: 3}
   AsteroidFieldOriginal: {fileID: 2712137932058324565, guid: 9f2b3f7dbb0a4e147b691ba02df7a0c6,
     type: 3}
+--- !u!114 &780446539110083931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804272086259976957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f149c28002fec41b5f630c860acc59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidPOIPrefab: {fileID: 5694329005874326872, guid: fa876dfe80769c447a379c0aeee56d1c,
+    type: 3}
+  starSystem: {fileID: 6049776469781103335}
 --- !u!1001 &686109095850921730
 PrefabInstance:
   m_ObjectHideFlags: 0
