@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
             Helpers = GetComponentInChildren<Helpers>(true);
             InventoryController = GetComponentInChildren<InventoryController>(true);
+            InventoryController.Init();
 
             CurrentSceneType = TypeOfScene.WorldMap;
 

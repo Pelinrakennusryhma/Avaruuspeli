@@ -23,6 +23,7 @@ public class ShowHideInventory : MonoBehaviour
         Inventory.AddItem(4, 1);
         Inventory.AddItem(5, 1);
         HideInventory();
+        Debug.Log("Showhideinventory start called");
     }
 
     public void ShowInventory()

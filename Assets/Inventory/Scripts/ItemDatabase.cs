@@ -6,6 +6,11 @@ public class ItemDatabase : MonoBehaviour
 {
     public List<Item> items = new List<Item>();
 
+    public void OnInit()
+    {
+        BuildDatabase();
+    }
+
     private void Awake()
     {
         BuildDatabase();

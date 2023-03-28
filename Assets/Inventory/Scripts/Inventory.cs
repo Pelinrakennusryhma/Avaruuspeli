@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Inventory : MonoBehaviour
     public double currentWeight = 0;
 
     public GameObject ScrollviewLayout;
+    public List<ItemScript> ItemScripts = new List<ItemScript>();
 
     private void Start()
     {
@@ -37,10 +39,22 @@ public class Inventory : MonoBehaviour
         {
             playerItems.Add(itemToAdd);
             Object prefab = Resources.Load("Prefabs/item");
+            if (prefab == null)
+            {
+                Debug.LogError("Null prefab");
+            }
+
+            if (layout == null)
+            {
+                Debug.LogError("Null layoout");
+            }
+
             GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
             newItem.name = itemToAdd.id.ToString();
             //newItem.GetComponent<ItemScript>().Setup();
-            newItem.GetComponent<ItemScript>().AddItem(amount);
+            ItemScript itemScript = newItem.GetComponent<ItemScript>();
+            itemScript.AddItem(amount);
+            ItemScripts.Add(itemScript);
             currentWeight += itemToAdd.weight * amount;
             UpdateWeight();
             //Debug.LogError("ADDED ITEM");
@@ -73,6 +87,7 @@ public class Inventory : MonoBehaviour
             ItemScript itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id.ToString()).GetComponent<ItemScript>();
             if (itemScript.currentItemAmount <= amount)
             {
+                ItemScripts.Remove(itemScript);
                 playerItems.Remove(item);
                 currentWeight -= item.weight * itemScript.currentItemAmount;
                 itemScript.currentItemAmount = 0;
@@ -82,6 +97,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
+                ItemScripts.Remove(itemScript);
                 itemScript.RemoveItem(amount);
                 currentWeight -= item.weight * amount;
                 UpdateWeight();
@@ -97,7 +113,144 @@ public class Inventory : MonoBehaviour
 
     public void SortByWeight()
     {
+        SortByName(false);
 
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " weight is " + ItemScripts[i].currentItemWeight);
+        }
+
+        ItemScripts = ItemScripts.OrderBy(x => x.currentItemWeight).ToList();
+        //playerItems = playerItems.OrderBy(x => x.weight).ToList();
+
+        SwapListToDescendingOrder();
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " weight is " + +ItemScripts[i].currentItemWeight);
+        }
+
+        ResortItemsForInventoryView();
+        Debug.Log("Sorting items by weight");
+    }
+
+    public void SortByValue()
+    {
+        SortByName(false);
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " value is " + ItemScripts[i].currentTotalValue);
+        }
+
+        ItemScripts = ItemScripts.OrderBy(x => x.currentTotalValue).ToList();
+
+        SwapListToDescendingOrder();
+
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " value is " + +ItemScripts[i].currentTotalValue);
+        }
+
+        ResortItemsForInventoryView();
+        Debug.Log("Sorting items by value");
+    }
+
+    public void SortByAmount()
+    {
+        SortByName(false);
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " amount is " + ItemScripts[i].currentItemAmount);
+        }
+
+        ItemScripts = ItemScripts.OrderBy(x => x.currentItemAmount).ToList();
+
+        SwapListToDescendingOrder();
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " amount is " + +ItemScripts[i].currentItemAmount);
+        }
+
+
+        ResortItemsForInventoryView();
+        Debug.Log("Sorting items by amount");
+    }
+
+    public void SortByName(bool resortItems = true)
+    {
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
+        }
+
+        ItemScripts = ItemScripts.OrderBy(x => x.itemToAdd.name).ToList();
+        //playerItems = playerItems.OrderBy(x => x.weight).ToList();
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
+        }
+
+        Debug.Log("Sorting items by name");
+        
+        if (resortItems) 
+        {
+            ResortItemsForInventoryView();
+        }
+    }
+
+    public void SwapListToDescendingOrder()
+    {
+        List<ItemScript> descending = new List<ItemScript>();
+
+        for (int i = ItemScripts.Count - 1; i >= 0; i--)
+        {
+            descending.Add(ItemScripts[i]);
+        }
+
+        ItemScripts = descending;
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            Debug.Log(ItemScripts[i].itemToAdd.name);
+        }
+    }
+
+    // This is a hackish solution. Probably should refactor instead of doing this!
+    public void ResortItemsForInventoryView()
+    {
+
+        List<int> ids = new List<int>();
+        List<int> amounts = new List<int>();
+
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            ids.Add(ItemScripts[i].itemToAdd.id);
+            amounts.Add(ItemScripts[i].currentItemAmount);
+        }
+
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    RemoveItem(ItemScripts[i].itemToAdd.id, ItemScripts[i].currentItemAmount);
+        //}
+
+        //ItemScripts = new List<ItemScript>();
+
+        for (int i = 0; i < ids.Count; i++)
+        {
+            RemoveItem(ids[i], amounts[i]);
+        }
+
+        for (int i = 0; i < ids.Count; i++)
+        {
+            AddItem(ids[i], amounts[i]);
+        }
+
+        Debug.LogError("Sohuld resort items for inventory view. Not yet functionality for that implemented");
     }
 
     //Testausta varten. Poistettava myöhemmin.

@@ -15,12 +15,13 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     //private GameObject contextMenu;
     public int currentItemAmount = 0;
     public double currentItemWeight = 0;
+    public float currentTotalValue = 0;
+
     public Item itemToAdd;
 
     public CanvasScript CanvasScript;
     public ContextMenu contextMenuScript;
     private ShopItemScript shopItemScript;
-    private GameObject shopItemGO;
 
     public void Awake()
     {
@@ -28,20 +29,6 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     }
     public void Setup()
     {
-        try
-        {
-            shopItemGO = GameObject.Find("ShopPanel/" + itemToAdd.id);
-        }
-        catch
-        {
-            shopItemGO = null;
-        }
-
-        if(shopItemGO != null)
-        {
-            shopItemScript = shopItemGO.GetComponent<ShopItemScript>();
-        }
-
         CanvasScript = FindObjectOfType<CanvasScript>();
 
         //canvas = GameObject.Find("Canvas");
@@ -56,40 +43,58 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         itemAmount.text = currentItemAmount.ToString();
         itemValue.text = item.value.ToString();
         itemWeight.text = item.weight.ToString();
+
+        ShopItemScript[] allShopItems = GameManager.Instance.InventoryController.Shop.ShopItems;
+
+        for (int i = 0; i < allShopItems.Length; i++)
+        {
+            if (allShopItems[i].ID == itemToAdd.id)
+            {
+                shopItemScript = allShopItems[i];
+
+            }
+        }
     }
 
     public void UpdateShopAmount()
     {
-        try
-        {
-            shopItemScript.UpdateAmount(currentItemAmount);
-        }
-        catch
-        {
+        Debug.Log("Updating shop amount");
+        shopItemScript.UpdateAmount(currentItemAmount);
 
-        }
     }
     //Päivittää inventoryssa näkyvän määrän
     public void UpdateAmount()
     {
         itemAmount.text = currentItemAmount.ToString();
         itemWeight.text = currentItemWeight.ToString();
-        try
+        currentTotalValue = currentItemAmount * itemToAdd.value;
+        itemValue.text = currentTotalValue.ToString();
+
+        //try
+        //{
+        //    shopItemGO = GameObject.Find("ShopPanel/" + itemToAdd.id);
+        //}
+        //catch
+        //{
+        //    shopItemGO = null;
+        //}
+
+
+        if (shopItemScript == null)
         {
-            shopItemGO = GameObject.Find("ShopPanel/" + itemToAdd.id);
+            ShopItemScript[] allShopItems = GameManager.Instance.InventoryController.Shop.ShopItems;
+
+            for (int i = 0; i < allShopItems.Length; i++)
+            {
+                if (allShopItems[i].ID == itemToAdd.id)
+                {
+                    shopItemScript = allShopItems[i];
+
+                }
+            }
         }
-        catch
-        {
-            shopItemGO = null;
-        }
-        if (shopItemGO != null)
-        {
-            shopItemScript = shopItemGO.GetComponent<ShopItemScript>();
-        }
-        if (shopItemScript != null)
-        {
-            UpdateShopAmount();
-        }
+
+        UpdateShopAmount();      
     }
 
     //Lisää nykyiseen määrään 'amount'. Päivittää määrän.

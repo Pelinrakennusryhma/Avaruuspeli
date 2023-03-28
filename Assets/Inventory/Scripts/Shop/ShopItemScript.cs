@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShopItemScript : MonoBehaviour
 {
+    public int ID;
     [SerializeField] private UnityEngine.UI.Image itemImage;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemAmount;
@@ -13,15 +14,18 @@ public class ShopItemScript : MonoBehaviour
     [SerializeField] private TMP_InputField sellAmount;
     public Inventory inventory;
     public Item item;
-    public Shop shop;
+    public ShopNumberTwo shop;
     public CanvasScript canvasScript;
     private int playerItemAmount;
-    void Awake()
+    public void Setup(Item item, 
+                      Inventory inventory,
+                      ShopNumberTwo shop)
     {
-        inventory = GameObject.Find("InventoryPanel").GetComponent<Inventory>();
-        shop = GameObject.Find("ShopPanel").GetComponent<Shop>();
+        this.inventory = inventory;
+        this.shop = shop;
         canvasScript = FindObjectOfType<CanvasScript>();
-        item = shop.itemToAdd;
+        this.item = item;
+        ID = item.id;
         itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
         itemName.text = item.name;
         itemPrice.text = item.value.ToString("0.00") + "€";
@@ -50,6 +54,7 @@ public class ShopItemScript : MonoBehaviour
     {
         playerItemAmount = currentItemAmount;
         itemAmount.text = "Owned: " + playerItemAmount.ToString();
+        Debug.Log("Updating amount " + Time.time);
     }
 
     //Kaupan Sell nappi.
@@ -60,12 +65,26 @@ public class ShopItemScript : MonoBehaviour
             canvasScript.money += item.value * int.Parse(sellAmount.text);
             inventory.RemoveItem(item.id, int.Parse(sellAmount.text));
         }
+
+        Debug.Log("Sell " + Time.time);
     }
     //Kaupan Buy nappi.
     public void ButtonBuy()
     {
+        bool alreadyHasSingletonItem = false;
+
+        if (!item.stackable
+            && inventory.CheckForItem(item.id) != null) 
+        {
+            alreadyHasSingletonItem = true;
+        }
+
+        Debug.Log("Buy " + Time.time + " item id " + item.name + " already has singleton item " + alreadyHasSingletonItem);
+
+
         double buyingAmount = int.Parse(buyAmount.text);
-        if ((buyingAmount * item.weight) + inventory.currentWeight <= inventory.maxWeight)
+        if ((buyingAmount * item.weight) + inventory.currentWeight <= inventory.maxWeight
+            && !alreadyHasSingletonItem)
         {
             double price = item.value * buyingAmount;
             if (canvasScript.money >= price)
@@ -74,6 +93,7 @@ public class ShopItemScript : MonoBehaviour
                 canvasScript.money -= price;
             }
         }
+
 
     }
 }

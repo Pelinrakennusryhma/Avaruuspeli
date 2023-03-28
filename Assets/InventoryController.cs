@@ -10,18 +10,27 @@ public class InventoryController : MonoBehaviour
 
     public Inventory Inventory;
     public Equipment Equipment;
+    public ShopNumberTwo Shop;
 
     public bool ShowingInventory;
     public bool IsInShoppingArea;
 
     CursorLockMode cachedCursorLockMode = CursorLockMode.None;
 
-    public void Awake()
+    public void Init()
     {
         //Item item;
         //item = CanvasScript.contextMenu.itemDatabase.GetItem(2);
         ////Inventory.RemoveItem(item.id, 1);
         //Equipment.EquipDrill(item);
+        //Shop.Init();
+        OnInventoryShow();
+        Shop.Init();
+        Inventory.AddItem(2, 1);
+        Inventory.AddItem(3, 1);
+        Inventory.AddItem(4, 1);
+        Inventory.AddItem(5, 1);
+        OnInventoryHide();
     }
 
     public void OnInventoryShow()
