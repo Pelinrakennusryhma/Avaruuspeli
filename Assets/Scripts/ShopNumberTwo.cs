@@ -88,9 +88,43 @@ public class ShopNumberTwo : MonoBehaviour
         }
 
         newItem.name = itemToAdd.id.ToString();
-        newItem.GetComponentInChildren<ShopItemScript>(true).Setup(itemToAdd, 
-                                                                   GameManager.Instance.InventoryController.Inventory,
-                                                                   this);
+        int amount = 0;
+        ItemScript itemScript = GameManager.Instance.InventoryController.Inventory.GetItemScript(itemToAdd.id);
+
+        for (int i = 0; i < GameManager.Instance.InventoryController.Inventory.ItemScripts.Count; i++)
+        {
+            Debug.Log("Item script is " + GameManager.Instance.InventoryController.Inventory.ItemScripts[i].name);
+        }
+
+        if (itemScript != null)
+        {
+            amount = itemScript.currentItemAmount;
+            Debug.LogError("Amount is not zero " + amount);
+        }
+
+        else
+        {
+            Debug.LogWarning("Amount is zero " + amount);
+        }
+
+        ShopItemScript shopItem = newItem.GetComponentInChildren<ShopItemScript>(true);
+        shopItem.Setup(itemToAdd,
+                       GameManager.Instance.InventoryController.Inventory,
+                       1.0f,
+                       true);
+        shopItem.UpdateAmount(amount);
         LastObjectAdded = newItem;
+    }
+
+    public void UpdateShopAmount(int id, int newAmount)
+    {
+        for (int i = 0; i < ShopItems.Length; i++)
+        {
+            if (ShopItems[i].item.id == id)
+            {
+                ShopItems[i].UpdateAmount(newAmount);
+                break;
+            }
+        }
     }
 }

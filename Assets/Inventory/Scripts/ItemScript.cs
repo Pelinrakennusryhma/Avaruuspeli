@@ -23,10 +23,13 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     public ContextMenu contextMenuScript;
     private ShopItemScript shopItemScript;
 
+
+
     public void Awake()
     {
         Setup();
     }
+
     public void Setup()
     {
         CanvasScript = FindObjectOfType<CanvasScript>();
@@ -59,7 +62,9 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     public void UpdateShopAmount()
     {
         Debug.Log("Updating shop amount");
-        shopItemScript.UpdateAmount(currentItemAmount);
+
+ 
+        //shopItemScript.UpdateAmount(currentItemAmount);
 
     }
     //Päivittää inventoryssa näkyvän määrän
@@ -80,27 +85,27 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         //}
 
 
-        if (shopItemScript == null)
-        {
-            ShopItemScript[] allShopItems = GameManager.Instance.InventoryController.Shop.ShopItems;
+        //if (shopItemScript == null)
+        //{
+        //    ShopItemScript[] allShopItems = GameManager.Instance.InventoryController.Shop.ShopItems;
 
-            for (int i = 0; i < allShopItems.Length; i++)
-            {
-                if (allShopItems[i].ID == itemToAdd.id)
-                {
-                    shopItemScript = allShopItems[i];
+        //    for (int i = 0; i < allShopItems.Length; i++)
+        //    {
+        //        if (allShopItems[i].ID == itemToAdd.id)
+        //        {
+        //            shopItemScript = allShopItems[i];
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
-        UpdateShopAmount();      
+        //UpdateShopAmount();      
     }
 
     //Lisää nykyiseen määrään 'amount'. Päivittää määrän.
-    public void AddItem(int amount)
+    public void AddItem(int amount, Item item)
     {
-
+        itemToAdd = item;
         currentItemAmount += amount;
         currentItemWeight += itemToAdd.weight * amount;
         UpdateAmount();

@@ -7,10 +7,17 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] private GameObject itemCatalogPanel;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject equipmentPanel;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private ShopHeadsUp headsUpShop;
     public Item infoAbout;
     public ContextMenu contextMenu;
     //Pelaajan rahat
     public double money = 10000;
+
+    public void Awake()
+    {
+        headsUpShop.gameObject.SetActive(false);
+    }
 
     public void InfoAboutItem(Item item)
     {
@@ -42,5 +49,23 @@ public class CanvasScript : MonoBehaviour
     public void HideEquipment()
     {
         equipmentPanel.SetActive(false);
+    }
+
+    public void ShowHeadsUpShop()
+    {
+        HideEquipment();
+        HideShop();
+        HideItemCatalog();
+        inventoryPanel.SetActive(false);
+        headsUpShop.gameObject.SetActive(true);
+        headsUpShop.Init();
+        headsUpShop.StartShopping();
+    }
+
+    public void HideHeadsUpShop()
+    {
+        inventoryPanel.SetActive(true);
+        ShowEquipment();
+        headsUpShop.gameObject.SetActive(false);
     }
 }

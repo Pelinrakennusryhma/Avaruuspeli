@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
             newItem.name = itemToAdd.id.ToString();
             //newItem.GetComponent<ItemScript>().Setup();
             ItemScript itemScript = newItem.GetComponent<ItemScript>();
-            itemScript.AddItem(amount);
+            itemScript.AddItem(amount, itemToAdd);
             ItemScripts.Add(itemScript);
             currentWeight += itemToAdd.weight * amount;
             UpdateWeight();
@@ -71,7 +71,10 @@ public class Inventory : MonoBehaviour
             //    }
             //}
 
-            GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id).GetComponent<ItemScript>().AddItem(amount);
+            //GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id).GetComponent<ItemScript>().AddItem(amount);
+
+            GetItemScript(id).AddItem(amount, item);
+
             currentWeight += item.weight * amount;
             UpdateWeight();
         }
@@ -84,15 +87,23 @@ public class Inventory : MonoBehaviour
         Item item = CheckForItem(id);
         if(item != null)
         {
-            ItemScript itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id.ToString()).GetComponent<ItemScript>();
+            //ItemScript itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id.ToString()).GetComponent<ItemScript>();
+            ItemScript itemScript = GetItemScript(id);
+
+            if (itemScript == null)
+            {
+                Debug.LogError("Item script is null. Returning");
+                return;
+            }
+
             if (itemScript.currentItemAmount <= amount)
             {
                 ItemScripts.Remove(itemScript);
                 playerItems.Remove(item);
                 currentWeight -= item.weight * itemScript.currentItemAmount;
                 itemScript.currentItemAmount = 0;
-                itemScript.UpdateShopAmount();
-                Destroy(GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id.ToString()));
+               // itemScript.UpdateShopAmount();
+                Destroy(itemScript.gameObject);
                 UpdateWeight();
             }
             else
@@ -250,7 +261,7 @@ public class Inventory : MonoBehaviour
             AddItem(ids[i], amounts[i]);
         }
 
-        Debug.LogError("Sohuld resort items for inventory view. Not yet functionality for that implemented");
+        //Debug.LogError("Sohuld resort items for inventory view. Not yet functionality for that implemented");
     }
 
     //Testausta varten. Poistettava myöhemmin.
@@ -315,5 +326,40 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public ItemScript GetItemScript(int id)
+    {
+        ItemScript itemScript = null;
 
+        for (int i = 0; i < ItemScripts.Count; i++)
+        {
+            if (ItemScripts[i].itemToAdd.id == id)
+            {
+                itemScript = ItemScripts[i];
+            }
+        }
+
+        return itemScript;
+    }
+
+    public void OnItemSold(int id, 
+                           int newAmount,
+                           int sellAmount)
+    {
+        RemoveItem(id, sellAmount);
+
+        Debug.Log("Item id " + id + " SOLD. New amount is " + newAmount + " sell amount is " + sellAmount);
+        Debug.LogError("Update total value accordingly");
+
+        // update inventory amount
+    } 
+
+    public void OnItemBought(int id, 
+                             int newAmount,
+                             int buyAmount)
+    {
+        AddItem(id, buyAmount);
+        Debug.Log("Item id " + id + " BOUGHT. New amount is " + newAmount + " buy amount is " + buyAmount);
+        Debug.LogError("Update total value accordingly");
+        // update inventory amount
+    }
 }

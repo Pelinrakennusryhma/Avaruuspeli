@@ -11,6 +11,7 @@ public class InventoryController : MonoBehaviour
     public Inventory Inventory;
     public Equipment Equipment;
     public ShopNumberTwo Shop;
+    public ShopHeadsUp ShopHeadsUp;
 
     public bool ShowingInventory;
     public bool IsInShoppingArea;
@@ -25,11 +26,21 @@ public class InventoryController : MonoBehaviour
         //Equipment.EquipDrill(item);
         //Shop.Init();
         OnInventoryShow();
-        Shop.Init();
+
         Inventory.AddItem(2, 1);
         Inventory.AddItem(3, 1);
         Inventory.AddItem(4, 1);
         Inventory.AddItem(5, 1);
+
+        Inventory.AddItem(6, 1);
+        Inventory.AddItem(7, 1);
+        Inventory.AddItem(8, 1);
+        Inventory.AddItem(9, 1);
+        Inventory.AddItem(10, 1);
+
+        Shop.Init();
+        ShopHeadsUp.Init();
+
         OnInventoryHide();
     }
 
@@ -155,6 +166,7 @@ public class InventoryController : MonoBehaviour
 
     public void OnEnterShop()
     {
+        Shop.Init();
         OnInventoryShow();
         CanvasScript.ShowEquipment();
         CanvasScript.HideItemCatalog();
