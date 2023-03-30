@@ -36,6 +36,7 @@ public class PointOfInterest : MonoBehaviour
     [field: SerializeField]
     public POISceneData Data { get; private set; }
 
+    private POISpawner _spawner;
     private Target targetScript;
 
     private void Awake()
@@ -75,8 +76,9 @@ public class PointOfInterest : MonoBehaviour
         CheckIfMothershipInVicinity();
     }
 
-    public void Init(POISceneData data)
+    public void Init(POISceneData data, POISpawner spawner)
     {
+        _spawner = spawner;
         Data = data;
         description.text = data.GetDescription();
         title.text = data.Title;
@@ -99,6 +101,7 @@ public class PointOfInterest : MonoBehaviour
     {
         GameManager.Instance.currentPOI = null;
         //GameManager.Instance.CurrentAsteroidFieldData = AsteroidFieldData;
+        _spawner.RemovePOI(this);
         Destroy(gameObject);
     }
 

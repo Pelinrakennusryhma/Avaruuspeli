@@ -195,6 +195,10 @@ MonoBehaviour:
   starSystem: {fileID: 6049776469781103335}
   allPOISceneData:
   - {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4, type: 2}
+  minPOIs: 1
+  maxPOIs: 3
+  minSpawnDelay: 5
+  maxSpawnDelay: 10
 --- !u!1001 &686109095850921730
 PrefabInstance:
   m_ObjectHideFlags: 0

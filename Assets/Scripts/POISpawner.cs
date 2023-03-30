@@ -11,23 +11,57 @@ public class POISpawner : MonoBehaviour
     [SerializeField]
     POISceneData[] allPOISceneData;
 
+    // Variables for spawning new POIs
+    [SerializeField]
+    int minPois = 1;
+    [SerializeField]
+    int maxPois = 3;
+    [SerializeField] int maxAllowedPois;
+    [SerializeField]
+    float minSpawnDelay = 10f;
+    [SerializeField]
+    float maxSpawnDelay = 30f;
+    private List<PointOfInterest> activePOIs = new List<PointOfInterest>();
+    float nextSpawnTime = 10f;
+    float spawnTimer = 0f;
+
     List<Transform> possibleSpawnPoints;
-    // Start is called before the first frame update
+
     void Start()
     {
+        maxAllowedPois = Random.Range(minPois, maxPois + 1);
         GetPossibleSpawnPoints();
-        SpawnPOIs();
     }
 
-    void SpawnPOIs()
+    private void OnEnable()
     {
-        for (int i = 0; i < 2; i++)
+        spawnTimer = 0f;
+        nextSpawnTime = GetSpawnTime();
+    }
+
+    private void Update()
+    {
+        spawnTimer += Time.deltaTime;
+        if(spawnTimer > nextSpawnTime && activePOIs.Count < maxAllowedPois)
         {
-            Vector3 pos = GetPosition();
-            GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
-            PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
-            pointOfInterest.Init(GetSceneData());
+            SpawnPOI();
+            nextSpawnTime = GetSpawnTime();
+            spawnTimer = 0f;
         }
+    }
+
+    float GetSpawnTime()
+    {
+        return Random.Range(minSpawnDelay, maxSpawnDelay);
+    }
+
+    void SpawnPOI()
+    {
+        Vector3 pos = GetPosition();
+        GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
+        PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
+        activePOIs.Add(pointOfInterest);
+        pointOfInterest.Init(GetSceneData(), this);
     }
 
     void GetPossibleSpawnPoints()
@@ -61,5 +95,10 @@ public class POISpawner : MonoBehaviour
     {
         int index = Random.Range(0, allPOISceneData.Length);
         return allPOISceneData[index];
+    }
+
+    public void RemovePOI(PointOfInterest POI) 
+    { 
+        activePOIs.Remove(POI);
     }
 }
