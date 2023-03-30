@@ -16,7 +16,7 @@ public class POISpawner : MonoBehaviour
     int minPois = 1;
     [SerializeField]
     int maxPois = 3;
-    [SerializeField] int maxAllowedPois;
+    int maxAllowedPois;
     [SerializeField]
     float minSpawnDelay = 10f;
     [SerializeField]

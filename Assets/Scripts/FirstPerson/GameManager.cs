@@ -116,12 +116,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnInventoryPressed(InputAction.CallbackContext context)
+    public void OnInventoryPressed()
     {
-        if (context.performed)
-        {
-            inventoryToggleQueued = true;
-        }
+        inventoryToggleQueued = true;
     }
 
     // Update is called once per frame
