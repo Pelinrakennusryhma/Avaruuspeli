@@ -104,7 +104,8 @@ public class WorldMapClickDetector : MonoBehaviour
 
                     if (MotherShipOnWorldMapController.Instance.CheckIfPOIPositionIsWithinTolerance())
                     {
-                        Debug.Log("Could load POI Scene");
+                        GameManager.Instance.EnterPOI();
+                        Debug.Log("load poi");
                     }
                     break;
 

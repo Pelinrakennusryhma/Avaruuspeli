@@ -22,6 +22,9 @@ public class Target : MonoBehaviour
     [Tooltip("Optional description text to show above the indicator")]
     public string descriptionText;
 
+    [Tooltip("Select if description text should be shown with arrow indicator")]
+    [SerializeField] private bool needDescriptionOnArrow = false;
+
     [Tooltip("Optional sprite to use instead of the default circle")]
     public Sprite customSprite;
 
@@ -78,6 +81,14 @@ public class Target : MonoBehaviour
         get
         {
             return needDistanceText;
+        }
+    }
+
+    public bool NeedDescriptionOnArrow
+    {
+        get
+        {
+            return needDescriptionOnArrow;
         }
     }
 

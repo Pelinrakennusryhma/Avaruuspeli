@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e181801185371fd4ba3851a97fa1548d, type: 3}
   m_Name: PeacefulMining
   m_EditorClassIdentifier: 
-  <SceneName>k__BackingField: Peaceful Mining
+  <Title>k__BackingField: Peaceful Mining
   descriptionTemplate: A secluded part of the asteroid belt.
   <SceneToLoad>k__BackingField: MineableAsteroidScene
   <NumEnemies>k__BackingField: 0

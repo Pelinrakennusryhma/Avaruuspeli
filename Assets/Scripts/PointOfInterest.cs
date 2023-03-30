@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PointOfInterest : MonoBehaviour
@@ -29,12 +30,20 @@ public class PointOfInterest : MonoBehaviour
     GameObject infoPanel;
     [SerializeField]
     WorldMapClickDetector worldMapClickDetector;
+    [SerializeField]
+    Canvas canvas;
     int modelAmount = 3;
+    [field: SerializeField]
+    public POISceneData Data { get; private set; }
+
+    private Target targetScript;
 
     private void Awake()
     {
-        worldMapClickDetector.OnObjectClicked -= OnAsteroidFieldClicked;
-        worldMapClickDetector.OnObjectClicked += OnAsteroidFieldClicked;
+        targetScript = GetComponent<Target>();
+        targetScript.descriptionText = Icon;
+        worldMapClickDetector.OnObjectClicked -= OnPOIClicked;
+        worldMapClickDetector.OnObjectClicked += OnPOIClicked;
     }
 
     void Start()
@@ -44,20 +53,33 @@ public class PointOfInterest : MonoBehaviour
     }
     void Update()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        screenPos.x -= Screen.width / 2;
-        screenPos.y -= Screen.height / 2;
-        screenPos += UIItemOffset;
+        //Vector3 offsetPos = transform.position + UIItemOffset;
+        //Vector3 screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        //Vector2 canvasPos;
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(uiComponents, screenPoint, null, out canvasPos);
 
-        uiComponents.localPosition = screenPos;
+        ////screenPos.x -= Screen.width / 2;
+        ////screenPos.y -= Screen.height / 2;
+        ////screenPos += UIItemOffset;
+
+        //uiComponents.localPosition = canvasPos;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        //Debug.Log("screenPos: " + screenPos);
+        //screenPos.x -= Screen.width / 2;
+        //screenPos.y -= Screen.height / 2;
+        //screenPos -= canvas.transform.position;
+
+        screenPos += UIItemOffset;
+        uiComponents.position = screenPos;
 
         CheckIfMothershipInVicinity();
     }
 
     public void Init(POISceneData data)
     {
+        Data = data;
         description.text = data.GetDescription();
-        title.text = data.SceneName;
+        title.text = data.Title;
     }
 
     void CheckIfMothershipInVicinity()
@@ -66,17 +88,18 @@ public class PointOfInterest : MonoBehaviour
         if(distance < 0.003)
         {
             EnableInfoPanel();
+            GameManager.Instance.currentPOI = this;
         } else
         {
             DisableInfoPanel();
         }
     }
 
-    public void OnAsteroidFieldClicked(WorldMapClickDetector.ClickableObjectType objectType)
+    public void OnPOIClicked(WorldMapClickDetector.ClickableObjectType objectType)
     {
-        GameManager.Instance.currentPOI = this;
+        GameManager.Instance.currentPOI = null;
         //GameManager.Instance.CurrentAsteroidFieldData = AsteroidFieldData;
-        Debug.LogError("Clicked POI");
+        Destroy(gameObject);
     }
 
     void CreateGraphics()

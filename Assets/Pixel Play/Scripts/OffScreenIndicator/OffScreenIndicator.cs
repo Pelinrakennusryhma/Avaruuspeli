@@ -58,6 +58,12 @@ public class OffScreenIndicator : MonoBehaviour
                 OffScreenIndicatorCore.GetArrowIndicatorPositionAndAngle(ref screenPosition, ref angle, screenCentre, screenBounds);
                 indicator = GetIndicator(ref target.indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
                 indicator.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Sets the rotation for the arrow indicator.
+
+                if (target.NeedDescriptionOnArrow)
+                {
+                    Debug.Log("set desc on arrow");
+                    indicator.SetDescription(target.descriptionText);
+                }
             }
             if(indicator)
             {

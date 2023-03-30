@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public abstract class POISceneData : ScriptableObject
 {
     [field: SerializeField]
-    public string SceneName { get; private set; }
+    public string Title { get; private set; }
     [SerializeField]
     [TextArea(5, 1)]
     protected string descriptionTemplate;

@@ -21,10 +21,13 @@ public class POISpawner : MonoBehaviour
 
     void SpawnPOIs()
     {
-        Vector3 pos = GetPosition();
-        GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
-        PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
-        pointOfInterest.Init(GetSceneData());
+        for (int i = 0; i < 2; i++)
+        {
+            Vector3 pos = GetPosition();
+            GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
+            PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
+            pointOfInterest.Init(GetSceneData());
+        }
     }
 
     void GetPossibleSpawnPoints()

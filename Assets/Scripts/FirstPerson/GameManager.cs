@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
         None = 0,
         WorldMap = 1,
         Planet = 2,
-        AsteroidField = 3
+        AsteroidField = 3,
+        POI
     }
 
     public TypeOfScene IncomingSceneType;
@@ -267,7 +268,7 @@ public class GameManager : MonoBehaviour
 
     public void GoBackToWorldMap()
     {
-
+        Cursor.lockState = CursorLockMode.None;
         IncomingSceneType = TypeOfScene.WorldMap;
 
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
@@ -301,6 +302,15 @@ public class GameManager : MonoBehaviour
         StackAndLoadAndLaunchScene("MineableAsteroidScene", 5);
     }
 
+    public void EnterPOI()
+    {
+        IncomingSceneType = TypeOfScene.POI;
+        Debug.Log("currentPOI: " + currentPOI);
+        Debug.Log("Data: " + currentPOI.Data);
+        Debug.Log("SceneToLoad: " + currentPOI.Data.SceneToLoad);
+        StackAndLoadAndLaunchScene(currentPOI.Data.SceneToLoad);
+    }
+
     public void EnterPlanet()
     {
         Debug.LogWarning("ENTER PLANET");
@@ -310,12 +320,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void StackAndLoadAndLaunchScene(string sceneName,
-                                           int buildIndex)
+                                           int buildIndex = 0)
     {
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
         WorldMapScene.Instance.gameObject.SetActive(false);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
         ActiveStackedScene = SceneManager.GetSceneByBuildIndex(buildIndex);
+        ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
         //ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
         FramesPassedTillLoadScenes = 0;
         WaitingForSceneLoad = true;
@@ -341,6 +352,10 @@ public class GameManager : MonoBehaviour
         else if (IncomingSceneType == TypeOfScene.AsteroidField)
         {
             Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
+        }
+        else if(IncomingSceneType == TypeOfScene.POI)
+        {
+
         }
 
         IncomingSceneType = TypeOfScene.None;
