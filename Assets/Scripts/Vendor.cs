@@ -23,6 +23,9 @@ public class Vendor
     public float[] BuyMultipliers;
     public float[] SellMultipliers;
 
+    public int GalaxyID;
+    public int StarSystemID;
+    public int PlanetID;
 
     public void InitializeVendor()
     {
@@ -62,5 +65,14 @@ public class Vendor
     public float GetBuyMultiplier(int itemId)
     {
         return BuyMultipliers[itemId];
+    }
+
+    public static Vendor GetVendor(int galaxyID, 
+                                   int starSystemID, 
+                                   int planetID)
+    {
+        Debug.LogError("Getting vendor. Implementation doesn't exist yet. galaxy is " + galaxyID + " star system is " + starSystemID + " planet is " + planetID);
+
+        return null;
     }
 }

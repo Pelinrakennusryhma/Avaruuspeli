@@ -18,6 +18,7 @@ public class InventoryController : MonoBehaviour
 
     CursorLockMode cachedCursorLockMode = CursorLockMode.None;
 
+    public float Money = 10000.0f;
     public void Init()
     {
         //Item item;
@@ -25,6 +26,7 @@ public class InventoryController : MonoBehaviour
         ////Inventory.RemoveItem(item.id, 1);
         //Equipment.EquipDrill(item);
         //Shop.Init();
+        Money = 10000.0f;
         OnInventoryShow();
 
         Inventory.AddItem(2, 1);
@@ -83,7 +85,7 @@ public class InventoryController : MonoBehaviour
             ResourceInventory.Instance.UnloadGatheredItems(Inventory);
         }
 
-        Debug.Log("Show inventory");
+        //Debug.Log("Show inventory");
     }
 
     public void OnInventoryHide()
@@ -93,7 +95,7 @@ public class InventoryController : MonoBehaviour
         ShowingInventory = false;
         CanvasObject.SetActive(false);
         DetachFromMainCamera();
-        Debug.Log("Hide inventory");
+        //Debug.Log("Hide inventory");
     }
 
     public void AttachToMainCamera()
@@ -172,12 +174,24 @@ public class InventoryController : MonoBehaviour
         CanvasScript.HideItemCatalog();
         CanvasScript.ShowShop();
         ResourceInventory.Instance.OnStartShopping();
+
+        bool useHeadsUpShop = true;
+
+        if (useHeadsUpShop)
+        {
+            ShopHeadsUp.SetVendor(GameManager.Instance.CurrentPlanet.Vendor);
+            CanvasScript.HideEquipment();
+            CanvasScript.HideItemCatalog();
+            CanvasScript.HideShop();
+            CanvasScript.ShowHeadsUpShop();
+        }
     }
 
     public void OnExitShop()
     {
         OnInventoryHide();
         CanvasScript.HideShop();
+        CanvasScript.HideHeadsUpShop();
         ResourceInventory.Instance.OnEnterShoppingArea();
     }
 }

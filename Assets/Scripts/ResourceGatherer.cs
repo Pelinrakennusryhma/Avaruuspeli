@@ -39,7 +39,7 @@ public class ResourceGatherer : MonoBehaviour
         //ShowHideInventory.Instance.e
         Tool = GameManager.Instance.InventoryController.GetCurrentEquippedTool();
 
-        Debug.Log("Setting tool to " + Tool.ToString());
+        //Debug.Log("Setting tool to " + Tool.ToString());
         Hands.SetTool(Tool);
     }
 

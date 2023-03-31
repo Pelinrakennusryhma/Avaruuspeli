@@ -372,7 +372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5ce0c2852eb1744b97f08e7e22e35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CentreOfGravity: {fileID: 0}
   CenterOfGravity: {fileID: 0}
   Parent: {fileID: 312126478458068014}
   xzUnadjustedVelocity: {x: 0, y: 0, z: 0}
@@ -450,10 +449,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 66c4e638-5214-4497-a4dc-78e9907df26f
     m_ActionName: ShipControls/ChangeCamera[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 627fb73c-dfc7-4d48-a19e-d4af82f6cc41
-    m_ActionName: ShipControls/ToggleCursor[/Keyboard/tab]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7805499554035894097}
@@ -762,6 +757,34 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 69c46ab1-83be-4ff4-9d7b-ef769f7c6010
     m_ActionName: ShipControls/Pause[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be0ab472-e498-4666-9087-ab00709b2456
+    m_ActionName: ShipControls/Land[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d7a5097e-38f9-4150-94c6-8efee28b0e6a
+    m_ActionName: ShipControls/ShowIndicators[/Keyboard/alt]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9b8097f7-4b89-4f54-b4a4-581a3d7f767e
+    m_ActionName: ShipControls/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69b18dad-63a5-4e42-8540-a4b6637d50bb
+    m_ActionName: FirstPersonControls/Leave[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae046845-1c3b-43b0-a8c9-53e81991721e
+    m_ActionName: FirstPersonControls/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 04ca90a0-68fe-47b7-849f-147e4db33ec4
+    m_ActionName: WorldMapControls/Options[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 73a9d680-bb2e-4233-ae3e-37d9ee54d87f
+    m_ActionName: WorldMapControls/Inventory[/Keyboard/i]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -2915,7 +2938,7 @@ PrefabInstance:
     - target: {fileID: 7032921621972260748, guid: 57dbc12352ebfec458a85b29e979f442,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -132
+      value: 169
       objectReference: {fileID: 0}
     - target: {fileID: 7349678064751822854, guid: 57dbc12352ebfec458a85b29e979f442,
         type: 3}

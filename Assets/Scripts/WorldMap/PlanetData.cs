@@ -66,4 +66,5 @@ public class PlanetData : UniverseData
     public PlanetEnum1 Test;
     public PlanetGraphicsType PlanetGraphics;
     public float Orbit;
+
 }

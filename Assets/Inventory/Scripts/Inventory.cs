@@ -73,10 +73,15 @@ public class Inventory : MonoBehaviour
 
             //GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id).GetComponent<ItemScript>().AddItem(amount);
 
-            GetItemScript(id).AddItem(amount, item);
+            ItemScript itemScript = GetItemScript(id);
 
-            currentWeight += item.weight * amount;
-            UpdateWeight();
+            //if (itemScript != null) 
+            //{
+                itemScript.AddItem(amount, item);
+
+                currentWeight += item.weight * amount;
+                UpdateWeight();
+            //}
         }
     }
 
@@ -93,7 +98,7 @@ public class Inventory : MonoBehaviour
             if (itemScript == null)
             {
                 Debug.LogError("Item script is null. Returning");
-                return;
+                //return;
             }
 
             if (itemScript.currentItemAmount <= amount)
@@ -108,11 +113,18 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                ItemScripts.Remove(itemScript);
+                //ItemScripts.Remove(itemScript);
+
+
                 itemScript.RemoveItem(amount);
                 currentWeight -= item.weight * amount;
                 UpdateWeight();
             }
+        }
+
+        else
+        {
+            Debug.LogError("Item is null");
         }
 
     }
@@ -126,20 +138,20 @@ public class Inventory : MonoBehaviour
     {
         SortByName(false);
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " weight is " + ItemScripts[i].currentItemWeight);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " weight is " + ItemScripts[i].currentItemWeight);
+        //}
 
         ItemScripts = ItemScripts.OrderBy(x => x.currentItemWeight).ToList();
         //playerItems = playerItems.OrderBy(x => x.weight).ToList();
 
         SwapListToDescendingOrder();
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " weight is " + +ItemScripts[i].currentItemWeight);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " weight is " + +ItemScripts[i].currentItemWeight);
+        //}
 
         ResortItemsForInventoryView();
         Debug.Log("Sorting items by weight");
@@ -149,20 +161,20 @@ public class Inventory : MonoBehaviour
     {
         SortByName(false);
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " value is " + ItemScripts[i].currentTotalValue);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " value is " + ItemScripts[i].currentTotalValue);
+        //}
 
         ItemScripts = ItemScripts.OrderBy(x => x.currentTotalValue).ToList();
 
         SwapListToDescendingOrder();
 
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " value is " + +ItemScripts[i].currentTotalValue);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " value is " + +ItemScripts[i].currentTotalValue);
+        //}
 
         ResortItemsForInventoryView();
         Debug.Log("Sorting items by value");
@@ -172,19 +184,19 @@ public class Inventory : MonoBehaviour
     {
         SortByName(false);
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " amount is " + ItemScripts[i].currentItemAmount);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " amount is " + ItemScripts[i].currentItemAmount);
+        //}
 
         ItemScripts = ItemScripts.OrderBy(x => x.currentItemAmount).ToList();
 
         SwapListToDescendingOrder();
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " amount is " + +ItemScripts[i].currentItemAmount);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name + " amount is " + +ItemScripts[i].currentItemAmount);
+        //}
 
 
         ResortItemsForInventoryView();
@@ -193,18 +205,18 @@ public class Inventory : MonoBehaviour
 
     public void SortByName(bool resortItems = true)
     {
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
+        //}
 
         ItemScripts = ItemScripts.OrderBy(x => x.itemToAdd.name).ToList();
         //playerItems = playerItems.OrderBy(x => x.weight).ToList();
 
-        for (int i = 0; i < ItemScripts.Count; i++)
-        {
-            Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
-        }
+        //for (int i = 0; i < ItemScripts.Count; i++)
+        //{
+        //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
+        //}
 
         Debug.Log("Sorting items by name");
         
@@ -311,19 +323,56 @@ public class Inventory : MonoBehaviour
         GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
     }
 
-    public bool CheckIfWeHaveRoomForItem(Item item)
+    public bool CheckIfWeHaveRoomForItem(Item item, int itemAmount)
     {
-        if (item.weight + currentWeight > maxWeight)
+        float wouldBeWeight = ((float)item.weight * itemAmount)  + (float)currentWeight;
+
+        if (wouldBeWeight > maxWeight)
         {
-            Debug.Log("No room for item in inventory");
+
+            Debug.Log("No room for item in inventory " + " itemweight is " + item.weight * itemAmount + " would be weight is "+wouldBeWeight + " max weight is " + maxWeight);
             return false;
         }
 
         else
         {
-            Debug.Log("We HAVE ROOM for item in inventory");
+            Debug.Log("We HAVE ROOM for item in inventory. Would be weight is " + wouldBeWeight + " current weight is " + currentWeight);
             return true;
         }
+    }
+
+    public bool TryToBuyItemWithMoney(float moneyRequired,
+                                      bool substractAmount)
+    {
+        Debug.LogError("Money required to buy is " + moneyRequired);
+
+        if (GameManager.Instance.InventoryController.Money >= moneyRequired)
+        {
+            if (substractAmount) 
+            {
+                GameManager.Instance.InventoryController.Money -= moneyRequired;
+                Debug.LogError("New amount of money is " + GameManager.Instance.InventoryController.Money);
+            }
+
+            return true;
+        }
+        
+        else
+        {
+            return false;
+        }
+    }
+
+    public void AddMoney(float moneyToAdd)
+    {
+        GameManager.Instance.InventoryController.Money += moneyToAdd;
+    }
+
+    public void UpdateWeight(float weightToAdd)
+    {
+       // currentWeight += weightToAdd;
+
+        Debug.Log("Current weight is " + currentWeight + " weight to add is " + weightToAdd);
     }
 
     public ItemScript GetItemScript(int id)
@@ -341,14 +390,14 @@ public class Inventory : MonoBehaviour
         return itemScript;
     }
 
-    public void OnItemSold(int id, 
-                           int newAmount,
+    public void OnItemSold(int id,
                            int sellAmount)
-    {
+    { 
         RemoveItem(id, sellAmount);
 
-        Debug.Log("Item id " + id + " SOLD. New amount is " + newAmount + " sell amount is " + sellAmount);
-        Debug.LogError("Update total value accordingly");
+
+
+        Debug.Log("Item id " + id + " SOLD. Sell amount is " + sellAmount);
 
         // update inventory amount
     } 

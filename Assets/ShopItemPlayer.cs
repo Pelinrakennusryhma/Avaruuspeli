@@ -13,15 +13,22 @@ public class ShopItemPlayer : MonoBehaviour
 
     public void OnButtonPressed()
     {
+
+
         int sellAmount = Mathf.Clamp(int.Parse(ShopItemScript.sellAmount.text), 0, ShopItemScript.ItemAmount + 1);
-        GameManager.Instance.InventoryController.ShopHeadsUp.UpdateShopAmount(true, 
-                                                                              ShopItemScript.ID, 
+        GameManager.Instance.InventoryController.ShopHeadsUp.UpdateShopAmount(true,
+                                                                              ShopItemScript.ID,
                                                                               666,
                                                                               sellAmount);
 
         GameManager.Instance.InventoryController.Inventory.OnItemSold(ShopItemScript.ID,
-                                                                      ShopItemScript.ItemAmount + sellAmount,
                                                                       sellAmount);
+
+        GameManager.Instance.InventoryController.Inventory.AddMoney(ShopItemScript.adjustedPrice * sellAmount);
+
+        GameManager.Instance.InventoryController.ShopHeadsUp.OnSuccesfullBuy();
+
         Debug.Log("Sell amount is " + sellAmount);
+        
     }
 }

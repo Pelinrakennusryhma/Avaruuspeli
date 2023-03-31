@@ -67,5 +67,6 @@ public class CanvasScript : MonoBehaviour
         inventoryPanel.SetActive(true);
         ShowEquipment();
         headsUpShop.gameObject.SetActive(false);
+        headsUpShop.FinishShopping();
     }
 }

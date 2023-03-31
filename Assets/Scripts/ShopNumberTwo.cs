@@ -50,6 +50,7 @@ public class ShopNumberTwo : MonoBehaviour
         NewItem(8);
         NewItem(9);
         NewItem(10);
+        NewItem(10);
 
         ShopItems = GetComponentsInChildren<ShopItemScript>();
     }
@@ -91,20 +92,20 @@ public class ShopNumberTwo : MonoBehaviour
         int amount = 0;
         ItemScript itemScript = GameManager.Instance.InventoryController.Inventory.GetItemScript(itemToAdd.id);
 
-        for (int i = 0; i < GameManager.Instance.InventoryController.Inventory.ItemScripts.Count; i++)
-        {
-            Debug.Log("Item script is " + GameManager.Instance.InventoryController.Inventory.ItemScripts[i].name);
-        }
+        //for (int i = 0; i < GameManager.Instance.InventoryController.Inventory.ItemScripts.Count; i++)
+        //{
+        //    Debug.Log("Item script is " + GameManager.Instance.InventoryController.Inventory.ItemScripts[i].name);
+        //}
 
         if (itemScript != null)
         {
             amount = itemScript.currentItemAmount;
-            Debug.LogError("Amount is not zero " + amount);
+            //Debug.LogError("Amount is not zero " + amount);
         }
 
         else
         {
-            Debug.LogWarning("Amount is zero " + amount);
+            //Debug.LogWarning("Amount is zero " + amount);
         }
 
         ShopItemScript shopItem = newItem.GetComponentInChildren<ShopItemScript>(true);

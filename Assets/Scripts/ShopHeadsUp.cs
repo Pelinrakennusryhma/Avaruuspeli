@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopHeadsUp : MonoBehaviour
 {
@@ -19,6 +20,13 @@ public class ShopHeadsUp : MonoBehaviour
 
     public Vendor CurrentVendor;
 
+    public TextMeshProUGUI PlayerMoney;
+    public TextMeshProUGUI WeightDisplay;
+    public TextMeshProUGUI InfoText;
+
+    public Scrollbar PlayerScrollBar;
+    public Scrollbar VendorScrollBar;
+
     public void Init()
     {
         PlayerShopItems = new List<ShopItemScript>();
@@ -27,24 +35,53 @@ public class ShopHeadsUp : MonoBehaviour
         Debug.Log("Initializing heads up shop");
     }
 
+    public void SetVendor(Vendor vendor)
+    {
+        //CurrentVendor = vendor;
+        Debug.Log("Setting vendor for heads up shop");
+    }
+
     public void StartShopping()
     {
         Init();
-        CurrentVendor = new Vendor();
+
+        CurrentVendor = new Vendor();        
         CurrentVendor.InitializeVendor();
 
         AddPlayerItems();
         AddVendorItems();
+        PlayerScrollBar.value = 1.0f;
+        VendorScrollBar.value = 1.0f;
+
+        InfoText.text = "";
+
         Debug.Log("Start shopping " + Time.time);
+    }
+
+    public void FinishShopping()
+    {
+        for (int i = 0; i < PlayerShopItems.Count; i++)
+        {
+            Destroy(PlayerShopItems[i].gameObject);
+        }
+
+        PlayerShopItems.Clear();
+
+        for (int i = 0; i < VendorShopItems.Count; i++)
+        {
+            Destroy(VendorShopItems[i].gameObject);
+        }
+
+        VendorShopItems.Clear();
     }
 
     public void AddPlayerItems()
     {
         // DEstryo any previously shown items
-        for (int i = 0; i < PlayerShopItems.Count; i++)
-        {
-            Destroy(PlayerShopItems[i].gameObject);
-        }
+        //for (int i = 0; i < PlayerShopItems.Count; i++)
+        //{
+        //    Destroy(PlayerShopItems[i].gameObject);
+        //}
 
         PlayerShopItems = new List<ShopItemScript>();
 
@@ -72,10 +109,10 @@ public class ShopHeadsUp : MonoBehaviour
 
     public void AddVendorItems()
     {
-        for (int i = 0; i < VendorShopItems.Count; i++)
-        {
-            Destroy(VendorShopItems[i].gameObject);
-        }
+        //for (int i = 0; i < VendorShopItems.Count; i++)
+        //{
+        //    Destroy(VendorShopItems[i].gameObject);
+        //}
 
         VendorShopItems = new List<ShopItemScript>();
 
@@ -275,5 +312,35 @@ public class ShopHeadsUp : MonoBehaviour
 
         //}
         Debug.Log("Should refresh inventory");
+    }
+
+    public void UpdateMoney()
+    {
+
+    }
+
+    public void UpdateWeight()
+    {
+
+    }
+
+    public void PlayerIsOutOfMoneyToBuyItem()
+    {
+        InfoText.text = "You don't have enough money to buy this";
+    }
+
+    public void PlayerIsOutOfRoomToBuyItem()
+    {
+        InfoText.text = "You don't have enough room in inventory to buy this";
+    }
+
+    public void PlayerIsTryingToBuyMultipleSingletonItems()
+    {
+        InfoText.text = "You already have this item. One is enough.";
+    }
+
+    public void OnSuccesfullBuy()
+    {
+        InfoText.text = "";
     }
 }

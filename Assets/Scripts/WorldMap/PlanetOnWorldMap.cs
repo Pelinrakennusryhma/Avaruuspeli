@@ -14,6 +14,8 @@ public class PlanetOnWorldMap : MonoBehaviour
 
     public WorldMapClickDetector ClickDetector;
 
+    public Vendor Vendor;
+
     public void Init(CenterStarOnWorldMap centerStar,
                      StarSystemOnFocus parentStarSystem)
     {
@@ -29,6 +31,7 @@ public class PlanetOnWorldMap : MonoBehaviour
     {
         GameManager.Instance.CurrentPlanet = this;
         GameManager.Instance.CurrentPlanetData = PlanetData;
+        SetVendor();
 
         //Debug.Log("Planet listens to a click now");
     }
@@ -145,5 +148,28 @@ public class PlanetOnWorldMap : MonoBehaviour
         }
 
         LineRenderer.SetPositions(points);
+    }
+
+    public void SetVendor()
+    {
+        if (ParentStarSystem == null)
+        {
+            Debug.LogError("Null parent star system");
+        }
+
+        else if (ParentStarSystem.ParentGalaxy == null)
+        {
+            Debug.LogError("Null parent galaxy");
+        }
+
+
+        if (PlanetData == null)
+        {
+            Debug.LogError("Null planet data");
+        }
+
+        Vendor = Vendor.GetVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                  ParentStarSystem.StarSystemData.ID,
+                                  PlanetData.ID);
     }
 }

@@ -90,6 +90,8 @@ public class ShopItemScript : MonoBehaviour
             //shopHeadsUp.UpdateShopAmount(IsPlayerItem, ID, currentItemAmount);
         }
 
+        //GameManager.Instance.InventoryController.Shop.UpdateShopAmount(ID, currentItemAmount);
+
         //if (playerItemAmount == 0) 
         //{
         //    itemAmount.text = "hahaha";
@@ -109,11 +111,22 @@ public class ShopItemScript : MonoBehaviour
         {
             canvasScript.money += item.value * int.Parse(sellAmount.text);
             inventory.RemoveItem(item.id, int.Parse(sellAmount.text));        
+            
             Debug.Log("Sell " + Time.time);
         }
 
-        //UpdateAmount(ItemAmount -= int.Parse(sellAmount.text));
+        int amount = 0;
+        ItemScript itemScript = GameManager.Instance.InventoryController.Inventory.GetItemScript(item.id);
 
+        if (itemScript != null)
+        {
+            amount = itemScript.currentItemAmount;
+        }
+
+        ItemAmount = amount;
+
+        UpdateAmount(ItemAmount);
+        Debug.Log("Pressed sell button");
         //GameManager.Instance.InventoryController.Inventory.OnItemSold();
     }
     //Kaupan Buy nappi.
@@ -142,7 +155,18 @@ public class ShopItemScript : MonoBehaviour
             }
         }
 
-        //UpdateAmount(ItemAmount += (int)buyingAmount);
+        int amount = 0;
+        ItemScript itemScript = GameManager.Instance.InventoryController.Inventory.GetItemScript(item.id);
+
+        if (itemScript != null)
+        {
+            amount = itemScript.currentItemAmount;
+        }
+
+        ItemAmount = amount;
+
+        UpdateAmount(ItemAmount);
+        Debug.Log("Pressed sell button");
         //GameManager.Instance.InventoryController.Inventory.OnItemSold(); GameManager.Instance.InventoryController.Inventory.OnItemBought();
     }
 }
