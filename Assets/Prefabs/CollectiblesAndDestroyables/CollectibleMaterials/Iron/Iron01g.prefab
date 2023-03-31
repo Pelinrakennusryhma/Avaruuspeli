@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5529493203681866433}
   - component: {fileID: 5419534288999257396}
   - component: {fileID: 5387506832628075721}
-  - component: {fileID: 4794941921144978065}
+  - component: {fileID: 4471897844916862154}
   m_Layer: 6
   m_Name: Iron01g
   m_TagString: Untagged
@@ -65,7 +65,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2770853054432096569, guid: 7ab76e4bd4079764eb99ac4e384cd8bd, type: 3}
---- !u!114 &4794941921144978065
+--- !u!114 &4471897844916862154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5185723898810116219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a6b86b2fae1164d8fc7af8d6a3ba47, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f77162a786c2344b209ca8cdd41810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceType: 5
   OffsetFromGround: 0.2
 --- !u!1001 &8174985371272366157
 PrefabInstance:

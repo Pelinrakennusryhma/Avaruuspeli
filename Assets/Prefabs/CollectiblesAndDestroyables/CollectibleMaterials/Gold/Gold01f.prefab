@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4818593152213773928}
   - component: {fileID: 4996090179994880413}
   - component: {fileID: 4947174362462113888}
-  - component: {fileID: 3306517771615912796}
+  - component: {fileID: -5387614535076032418}
   m_Layer: 6
   m_Name: Gold01f
   m_TagString: Untagged
@@ -65,7 +65,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6501646322212705205, guid: cdb424643e99d554ba94e150ce46801a, type: 3}
---- !u!114 &3306517771615912796
+--- !u!114 &-5387614535076032418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5302078568126526674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10982cc4df5bdda4692cdb2aaa41bb67, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f77162a786c2344b209ca8cdd41810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceType: 2
   OffsetFromGround: 0.2
 --- !u!1001 &9156031164241433828
 PrefabInstance:

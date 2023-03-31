@@ -25,7 +25,7 @@ public class SpaceshipBT : BTree
     SpaceshipShoot spaceshipShoot;
     SpaceshipEvents spaceshipEvents;
 
-    private void Awake()
+    private void OnEnable()
     {
         enemyControls = GetComponent<EnemyControls>();
         shipTransform = transform.GetChild(0);

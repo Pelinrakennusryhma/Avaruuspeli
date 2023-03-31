@@ -29,7 +29,6 @@ public class SpaceshipHealth : UITrackable
     void Awake()
     {
         spaceshipEvents = GetComponent<SpaceshipEvents>();
-        currentHealth = maxHealth;
     }
 
     public void DecreaseHealth(int value)

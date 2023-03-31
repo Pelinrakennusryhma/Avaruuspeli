@@ -36,15 +36,14 @@ public class PointOfInterest : MonoBehaviour
     [field: SerializeField]
     public POISceneData Data { get; private set; }
 
-    private POISpawner _spawner;
     private Target targetScript;
 
     private void Awake()
     {
         targetScript = GetComponent<Target>();
         targetScript.descriptionText = Icon;
-        worldMapClickDetector.OnObjectClicked -= OnPOIClicked;
-        worldMapClickDetector.OnObjectClicked += OnPOIClicked;
+        //worldMapClickDetector.OnObjectClicked -= OnPOIClicked;
+        //worldMapClickDetector.OnObjectClicked += OnPOIClicked;
     }
 
     void Start()
@@ -54,31 +53,15 @@ public class PointOfInterest : MonoBehaviour
     }
     void Update()
     {
-        //Vector3 offsetPos = transform.position + UIItemOffset;
-        //Vector3 screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        //Vector2 canvasPos;
-        //RectTransformUtility.ScreenPointToLocalPointInRectangle(uiComponents, screenPoint, null, out canvasPos);
-
-        ////screenPos.x -= Screen.width / 2;
-        ////screenPos.y -= Screen.height / 2;
-        ////screenPos += UIItemOffset;
-
-        //uiComponents.localPosition = canvasPos;
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        //Debug.Log("screenPos: " + screenPos);
-        //screenPos.x -= Screen.width / 2;
-        //screenPos.y -= Screen.height / 2;
-        //screenPos -= canvas.transform.position;
-
         screenPos += UIItemOffset;
         uiComponents.position = screenPos;
 
         CheckIfMothershipInVicinity();
     }
 
-    public void Init(POISceneData data, POISpawner spawner)
+    public void Init(POISceneData data)
     {
-        _spawner = spawner;
         Data = data;
         description.text = data.GetDescription();
         title.text = data.Title;
@@ -95,14 +78,6 @@ public class PointOfInterest : MonoBehaviour
         {
             DisableInfoPanel();
         }
-    }
-
-    public void OnPOIClicked(WorldMapClickDetector.ClickableObjectType objectType)
-    {
-        GameManager.Instance.currentPOI = null;
-        //GameManager.Instance.CurrentAsteroidFieldData = AsteroidFieldData;
-        _spawner.RemovePOI(this);
-        Destroy(gameObject);
     }
 
     void CreateGraphics()

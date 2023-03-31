@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e181801185371fd4ba3851a97fa1548d, type: 3}
-  m_Name: PeacefulMining
+  m_Name: MediumThreatMining
   m_EditorClassIdentifier: 
-  <Title>k__BackingField: Peaceful Mineral Field
-  descriptionTemplate: A secluded, mineral rich part of the asteroid belt.
+  <Title>k__BackingField: Occupied Mineral Field
+  descriptionTemplate: A mineral field that has drawn hostile ships.
   <SceneToLoad>k__BackingField: MineableAsteroidScene
-  minNumEnemies: 0
-  maxNumEnemies: 0
+  minNumEnemies: 3
+  maxNumEnemies: 5
   <NumAsteroids>k__BackingField: 1000
-  minMineables: 2
-  maxMineables: 4
+  minMineables: 6
+  maxMineables: 9
   <MineableResources>k__BackingField:
   - {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}

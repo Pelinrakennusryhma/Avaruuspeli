@@ -20,10 +20,6 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private BoxCollider reachableArea;
     [SerializeField]
-    private int amountOfAsteroids = 500;
-    [SerializeField]
-    private int amountOfMineables = 1;
-    [SerializeField]
     private AnimationCurve sizeCurve;
     [SerializeField]
     private AnimationCurve mineableSizeCurve;
@@ -33,21 +29,13 @@ public class AsteroidSpawner : MonoBehaviour
     private ActorManager actorManager;
     [SerializeField]
     MineableRockDensity mineableRockDensity;
-    [SerializeField]
-    Resource resourceType;
 
+    // Get spaceship reach from somewhere, player ship stats perhaps?
     float reach = 3000;
 
-    // Start is called before the first frame update
-    void Start()
+    public void SpawnNonMineableAsteroids(int amount)
     {
-        SpawnNonMineableAsteroids();
-        SpawnMineableAsteroids();
-    }
-
-    void SpawnNonMineableAsteroids()
-    {
-        for (int i = 0; i < amountOfAsteroids; i++)
+        for (int i = 0; i < amount; i++)
         {
             GameObject asteroidToSpawn = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
 
@@ -69,10 +57,10 @@ public class AsteroidSpawner : MonoBehaviour
         }
     }
 
-    void SpawnMineableAsteroids()
+    public void SpawnMineableAsteroids(int amount, Resource[] resourceTypes)
     {
         reachableArea.size = new Vector3(reach, reachableArea.size.y, reachableArea.size.z);
-        for (int i = 0; i < amountOfMineables; i++)
+        for (int i = 0; i < amount; i++)
         {
             Vector3 spawnPos = GetPositionInSpawnArea(reachableArea.bounds, true);
             Quaternion spawnRot = Random.rotation;
@@ -81,6 +69,7 @@ public class AsteroidSpawner : MonoBehaviour
             GameObject asteroidModel = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
             float randomValue = Random.Range(0f, 1f);
             float scale = mineableSizeCurve.Evaluate(randomValue);
+            Resource resourceType = resourceTypes[Random.Range(0, resourceTypes.Length)];
             mineableScript.Init(asteroidModel, scale, mineableRockDensity, resourceType, actorManager);
         }
     }

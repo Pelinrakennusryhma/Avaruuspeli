@@ -11,7 +11,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipShoot spaceshipShoot;
     public SpaceshipEvents spaceshipEvents;
 
-    virtual protected void Awake()
+    virtual protected void OnEnable()
     {
         ship = transform.GetChild(0).gameObject;
         spaceshipMovement = ship.GetComponent<SpaceshipMovement>();

@@ -194,9 +194,11 @@ MonoBehaviour:
     type: 3}
   starSystem: {fileID: 6049776469781103335}
   allPOISceneData:
+  - {fileID: 11400000, guid: dcd11acbbdec5f54ebaeaed7c32f6bb6, type: 2}
+  - {fileID: 11400000, guid: 316a1c3837b07d542b749a870b8837d1, type: 2}
   - {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4, type: 2}
-  minPOIs: 1
-  maxPOIs: 3
+  minPois: 1
+  maxPois: 3
   minSpawnDelay: 5
   maxSpawnDelay: 10
 --- !u!1001 &686109095850921730

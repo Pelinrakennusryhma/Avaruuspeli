@@ -37,6 +37,17 @@ public class POISpawner : MonoBehaviour
     {
         spawnTimer = 0f;
         nextSpawnTime = GetSpawnTime();
+
+        ClearCurrentPOI();     
+    }
+
+    void ClearCurrentPOI()
+    {
+        if(GameManager.Instance != null && GameManager.Instance.currentPOI != null)
+        {
+            RemovePOI(GameManager.Instance.currentPOI);
+            GameManager.Instance.currentPOI = null;
+        }
     }
 
     private void Update()
@@ -61,7 +72,7 @@ public class POISpawner : MonoBehaviour
         GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
         PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
         activePOIs.Add(pointOfInterest);
-        pointOfInterest.Init(GetSceneData(), this);
+        pointOfInterest.Init(GetSceneData());
     }
 
     void GetPossibleSpawnPoints()
@@ -100,5 +111,6 @@ public class POISpawner : MonoBehaviour
     public void RemovePOI(PointOfInterest POI) 
     { 
         activePOIs.Remove(POI);
+        Destroy(POI.gameObject);
     }
 }
