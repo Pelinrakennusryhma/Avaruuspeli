@@ -21,7 +21,7 @@ public class SpaceshipBoost : UITrackable
     public bool boosting = false;
     private float currentBoostAmount;
 
-    public override int MaxValue
+    public override float MaxValue
     {
         get
         {
@@ -29,7 +29,7 @@ public class SpaceshipBoost : UITrackable
         }
     }
 
-    public override int CurrentValue
+    public override float CurrentValue
     {
         get
         {

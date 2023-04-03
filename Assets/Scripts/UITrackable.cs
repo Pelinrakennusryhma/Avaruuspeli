@@ -4,12 +4,12 @@ using UnityEngine;
 
 public abstract class UITrackable : MonoBehaviour
 {
-    public abstract int MaxValue
+    public abstract float MaxValue
     {
         get;
     }
 
-    public abstract int CurrentValue
+    public abstract float CurrentValue
     {
         get;
     }

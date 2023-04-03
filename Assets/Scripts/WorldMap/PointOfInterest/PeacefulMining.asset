@@ -21,4 +21,4 @@ MonoBehaviour:
   minMineables: 2
   maxMineables: 4
   <MineableResources>k__BackingField:
-  - {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}
+  - {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5, type: 2}

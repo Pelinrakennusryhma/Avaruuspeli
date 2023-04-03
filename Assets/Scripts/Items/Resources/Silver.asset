@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
   m_Name: Silver
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: Copper
-  plural: Copper
-  value: 150
-  description: Copper ore.
-  itemPrefab: {fileID: 6481246586380655480, guid: 712798441937f5240a5bccce6983e5f4,
+  id: 2
+  itemName: Silver
+  plural: Silver
+  value: 250
+  description: Silver ore.
+  itemPrefab: {fileID: 7118768071914602803, guid: 97dd57dd3dfa9da4ba5e3c334232e97e,
     type: 3}
   itemPrefabVariants:
-  - {fileID: 6481246586380655480, guid: 712798441937f5240a5bccce6983e5f4, type: 3}
-  - {fileID: 2394676295458325450, guid: f9e7b1190539de64d987feaec14e442d, type: 3}
-  - {fileID: 1945498201635183005, guid: 2c4a15d03730e014981ed27b7b3292f5, type: 3}
-  - {fileID: 6624736451327454340, guid: 9ac5de38ffd2aea49ba1945ab72e5cf9, type: 3}
-  - {fileID: 8864810828011692868, guid: bad1d2b17059edb44a4770f573fa9cbb, type: 3}
-  - {fileID: 22110733633274555, guid: 5cbf38183645f534eb53944543cd3774, type: 3}
-  - {fileID: 2369830778835212608, guid: f83ee7b117b823144914bc390e17b67f, type: 3}
+  - {fileID: 7118768071914602803, guid: 97dd57dd3dfa9da4ba5e3c334232e97e, type: 3}
+  - {fileID: 2364193931190882496, guid: 247beb1a69c1ab04aae2004916a87914, type: 3}
+  - {fileID: 295899010739091771, guid: 9dde522115995334fbff33a019809022, type: 3}
+  - {fileID: 5558593070356433517, guid: 3b64b689c533b41449ad5b84e90f5fbd, type: 3}
+  - {fileID: 2130796613481805814, guid: 32616c14f6ea9df41a201895383f9315, type: 3}
+  - {fileID: 3731993380885079235, guid: 85d6607b31cb6404c92672d1a7731ce3, type: 3}
+  - {fileID: 5684254478696707357, guid: a7829718f8c643646a2178e9aea9e1bf, type: 3}
   itemIcon: {fileID: 0}
   rare: {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}
   rareChance: 0.05

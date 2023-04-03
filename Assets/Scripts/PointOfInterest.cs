@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PointOfInterest : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class PointOfInterest : MonoBehaviour
     [SerializeField]
     GameObject infoPanel;
     [SerializeField]
+    Button enterButton;
+    [SerializeField]
     WorldMapClickDetector worldMapClickDetector;
     [SerializeField]
     Canvas canvas;
@@ -42,8 +45,13 @@ public class PointOfInterest : MonoBehaviour
     {
         targetScript = GetComponent<Target>();
         targetScript.descriptionText = Icon;
-        //worldMapClickDetector.OnObjectClicked -= OnPOIClicked;
-        //worldMapClickDetector.OnObjectClicked += OnPOIClicked;
+
+        enterButton.onClick.AddListener(OnEnterClicked);
+    }
+
+    void OnEnterClicked()
+    {
+        GameManager.Instance.EnterPOI(this);
     }
 
     void Start()

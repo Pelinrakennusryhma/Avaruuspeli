@@ -28,5 +28,5 @@ MonoBehaviour:
   - {fileID: 7603247722571580278, guid: 5112daa19d2935145bb4c1df8f129eba, type: 3}
   - {fileID: 5185723898810116219, guid: 594106553620a104c975394607768d3b, type: 3}
   itemIcon: {fileID: 0}
-  rare: {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}
+  rare: {fileID: 11400000, guid: cbb3e1de24baeb8478002f02458e87b1, type: 2}
   rareChance: 0.05

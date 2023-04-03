@@ -124,11 +124,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOnWorldMap
-            && Input.GetKeyDown(KeyCode.M))
-        {
-            GoBackToWorldMap();
-        }
+        //if (!IsOnWorldMap
+        //    && Input.GetKeyDown(KeyCode.M))
+        //{
+        //    GoBackToWorldMap();
+        //}
 
         if (WaitingForSceneLoad
             && FramesPassedTillLoadScenes >= 0)
@@ -297,6 +297,12 @@ public class GameManager : MonoBehaviour
 
         IncomingSceneType = TypeOfScene.AsteroidField;
         StackAndLoadAndLaunchScene("MineableAsteroidScene", 5);
+    }
+
+    public void EnterPOI(PointOfInterest pointOfInterest)
+    {
+        currentPOI = pointOfInterest;
+        EnterPOI();
     }
 
     public void EnterPOI()

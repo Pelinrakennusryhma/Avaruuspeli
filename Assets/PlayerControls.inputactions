@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LeaveScene",
+                    "type": "Button",
+                    "id": "e062c6b2-834e-4796-b4e0-3fcecbd05e80",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -334,6 +343,17 @@
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34c30d8e-da01-4ab5-beff-1a3a0bc6a1f2",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeaveScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -525,6 +545,15 @@
                     "name": "Inventory",
                     "type": "Button",
                     "id": "ae046845-1c3b-43b0-a8c9-53e81991721e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeaveScene",
+                    "type": "Button",
+                    "id": "eeb56751-443d-4a72-bdc7-d006fca8023a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -804,6 +833,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bba0704-5d23-4549-8aa9-dbb2bb421e40",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeaveScene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

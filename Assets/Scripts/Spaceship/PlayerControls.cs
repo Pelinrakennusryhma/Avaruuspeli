@@ -82,4 +82,15 @@ public class PlayerControls : ActorSpaceship
             GameManager.Instance.OnInventoryPressed();
         }
     }
+
+    public void OnLeaveScene(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameEvents.Instance.CallEventLeavingSceneStarted();
+        } else if (context.canceled)
+        {
+            GameEvents.Instance.CallEventLeavingSceneCancelled();
+        }
+    }
 }
