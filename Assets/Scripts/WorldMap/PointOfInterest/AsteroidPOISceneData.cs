@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum EnemyAmountThresholds
-{
-    Small = 3,
-    Moderate = 6,
-    Big = 10,
-    Huge = 11,
-}
+//enum EnemyAmountThresholds
+//{
+//    Small = 3,
+//    Moderate = 6,
+//    Big = 10,
+//    Huge = 11,
+//}
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/POIScene/Asteroid", order = 0)]
 public class AsteroidPOISceneData : POISceneData

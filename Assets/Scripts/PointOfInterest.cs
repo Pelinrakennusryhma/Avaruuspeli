@@ -56,7 +56,17 @@ public class PointOfInterest : MonoBehaviour
 
     void Start()
     {
-        CreateGraphics();
+        if(models != null && models.Length > 0)
+        {
+            CreateGraphics();
+        }
+
+        // placeholder mechanism for planets
+        if(Data != null)
+        {
+            Init(Data);
+        }
+
         ApplyIcon();
     }
     void Update()
@@ -78,7 +88,7 @@ public class PointOfInterest : MonoBehaviour
     void CheckIfMothershipInVicinity()
     {
         float distance = (MotherShipOnWorldMapController.Instance.transform.position - transform.position).sqrMagnitude;
-        if(distance < 0.003)
+        if(distance < 0.005)
         {
             EnableInfoPanel();
             GameManager.Instance.currentPOI = this;
