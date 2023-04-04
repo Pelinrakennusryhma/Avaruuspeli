@@ -10,6 +10,8 @@ public class SpaceshipSceneInteractions : MonoBehaviour
     AsteroidSpawner asteroidSpawner;
     [SerializeField]
     ActorManager actorManager;
+    [SerializeField]
+    MothershipHangar mothershipHangar;
 
     // Just so the scene can be ran directly without coming from worldmap
     [SerializeField]
@@ -23,7 +25,7 @@ public class SpaceshipSceneInteractions : MonoBehaviour
 
     void OnEventLeavingSceneStarted()
     {
-        if (actorManager.SceneCleared)
+        if (actorManager.SceneCleared || mothershipHangar.PlayerShipInHangar)
         {
             StartCoroutine(LeaveScene(Globals.Instance.leaveSpaceshipSceneDelay));
         }

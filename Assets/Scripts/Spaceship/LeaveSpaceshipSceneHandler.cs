@@ -4,24 +4,43 @@ using UnityEngine;
 
 public class LeaveSpaceshipSceneHandler : UITrackable
 {
+    [SerializeField]
+    ActorManager actorManager;
+    [SerializeField]
+    MothershipHangar mothershipHangar;
+    [SerializeField]
+    GameObject successObject;
+    [SerializeField]
+    GameObject failureObject;
     bool leavingScene = false;
     float buttonHeldFor = 0f;
     void Awake()
     {
         GameEvents.Instance.EventLeavingSceneStarted.AddListener(OnEventLeavingSceneStarted);
         GameEvents.Instance.EventLeavingSceneCancelled.AddListener(OnEventLeavingSceneCancelled);
-        gameObject.SetActive(false);
+        successObject.SetActive(false);
     }
 
     void OnEventLeavingSceneStarted()
     {
         leavingScene = true;
+
+        if (actorManager.SceneCleared || mothershipHangar.PlayerShipInHangar)
+        {
+            successObject.SetActive(true);
+        } else
+        {
+            failureObject.SetActive(true);
+        }
     }
 
     void OnEventLeavingSceneCancelled()
     {
         leavingScene = false;
         buttonHeldFor = 0f;
+
+        successObject.SetActive(false);
+        failureObject.SetActive(false);
     }
 
     // Update is called once per frame

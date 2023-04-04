@@ -52,7 +52,7 @@ public class AsteroidPOISceneData : POISceneData
 
         if(minNumEnemies > 0)
         {
-            if(maxNumEnemies == 1)
+            if(minNumEnemies == 1)
             {
                 description += $"\n - At least one enemy ship";
             } else

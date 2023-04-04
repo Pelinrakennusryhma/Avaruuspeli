@@ -20,11 +20,7 @@ public class GUI_Spaceship : MonoBehaviour
     [SerializeField]
     TMP_Text promptText;
     [SerializeField]
-    GameObject holdPromptObject;
-    [SerializeField]
     GameObject spaceshipHUD;
-    [SerializeField]
-    ActorManager actorManager;
 
     void Awake()
     {
@@ -34,8 +30,6 @@ public class GUI_Spaceship : MonoBehaviour
         GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
         GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
-        GameEvents.Instance.EventLeavingSceneStarted.AddListener(OnLeaveSceneStarted);
-        GameEvents.Instance.EventLeavingSceneCancelled.AddListener(OnLeaveSceneCancelled);
     }
 
     private void Start()
@@ -83,19 +77,6 @@ public class GUI_Spaceship : MonoBehaviour
     public void OnQuitClicked()
     {
         Application.Quit();
-    }
-
-    void OnLeaveSceneStarted()
-    {
-        if (actorManager.SceneCleared)
-        {
-            holdPromptObject.SetActive(true);
-        }
-    }
-
-    void OnLeaveSceneCancelled()
-    {
-        holdPromptObject.SetActive(false);
     }
 
     void ShowControls()
