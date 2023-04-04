@@ -15,6 +15,7 @@ public class InventoryController : MonoBehaviour
 
     public bool ShowingInventory;
     public bool IsInShoppingArea;
+    public bool IsShopping;
 
     CursorLockMode cachedCursorLockMode = CursorLockMode.None;
 
@@ -168,6 +169,7 @@ public class InventoryController : MonoBehaviour
 
     public void OnEnterShop()
     {
+        IsShopping = true;
         Shop.Init();
         OnInventoryShow();
         CanvasScript.ShowEquipment();
@@ -192,6 +194,7 @@ public class InventoryController : MonoBehaviour
         OnInventoryHide();
         CanvasScript.HideShop();
         CanvasScript.HideHeadsUpShop();
-        ResourceInventory.Instance.OnEnterShoppingArea();
+        ResourceInventory.Instance.OnEnterShoppingArea();        
+        IsShopping = false;
     }
 }

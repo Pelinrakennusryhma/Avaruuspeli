@@ -37,7 +37,7 @@ public class ShopHeadsUp : MonoBehaviour
 
     public void SetVendor(Vendor vendor)
     {
-        //CurrentVendor = vendor;
+        CurrentVendor = vendor;
         Debug.Log("Setting vendor for heads up shop");
     }
 
@@ -45,8 +45,27 @@ public class ShopHeadsUp : MonoBehaviour
     {
         Init();
 
-        CurrentVendor = new Vendor();        
-        CurrentVendor.InitializeVendor();
+        int galaxyId = GameManager.Instance.CurrentGalaxyData.ID;
+        int starSystemId = GameManager.Instance.CurrentStarSystemData.ID;
+        int planetId = GameManager.Instance.CurrentPlanetData.ID;
+
+        CurrentVendor = GameManager.Instance.SaverLoader.GetVendor(galaxyId, 
+                                                                   starSystemId, 
+                                                                   planetId);
+
+        if (CurrentVendor == null
+            || (CurrentVendor != null 
+                && CurrentVendor.SellMultipliers.Length != GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count))
+        {
+            CurrentVendor = new Vendor();        
+            CurrentVendor.InitializeVendor(galaxyId,
+                                           starSystemId,
+                                           planetId);
+
+            Debug.LogError("NULL vendor. Created a new one");
+        }
+
+
 
         AddPlayerItems();
         AddVendorItems();
@@ -60,6 +79,8 @@ public class ShopHeadsUp : MonoBehaviour
 
     public void FinishShopping()
     {
+        Debug.LogError("Missing functionality: SAVE the items the vendor has!!!");
+
         for (int i = 0; i < PlayerShopItems.Count; i++)
         {
             Destroy(PlayerShopItems[i].gameObject);
@@ -67,11 +88,21 @@ public class ShopHeadsUp : MonoBehaviour
 
         PlayerShopItems.Clear();
 
+        CurrentVendor.Items.Clear();
+
         for (int i = 0; i < VendorShopItems.Count; i++)
         {
+            CurrentVendor.Items.Add(new Vendor.VendorInventoryItem(VendorShopItems[i].item.id, VendorShopItems[i].ItemAmount));
+
             Destroy(VendorShopItems[i].gameObject);
         }
 
+        for (int i = 0; i < CurrentVendor.Items.Count; i++)
+        {
+            Debug.Log("Currently the vendor has " + CurrentVendor.Items[i].ItemId + " of amount " + CurrentVendor.Items[i].ItemAmount);
+        }
+
+        GameManager.Instance.SaverLoader.SaveVendor(CurrentVendor);
         VendorShopItems.Clear();
     }
 
@@ -101,7 +132,7 @@ public class ShopHeadsUp : MonoBehaviour
                            true);
             shopItem.UpdateAmount(GameManager.Instance.InventoryController.Inventory.GetItemScript(playerItems[i].itemToAdd.id).currentItemAmount);
 
-            Debug.Log("Player item " + playerItems[i].itemToAdd.name);
+            //Debug.Log("Player item " + playerItems[i].itemToAdd.name);
         }
 
         Debug.Log("Adding player items");

@@ -168,8 +168,22 @@ public class PlanetOnWorldMap : MonoBehaviour
             Debug.LogError("Null planet data");
         }
 
+        Debug.Log("Setting vendor");
+
         Vendor = Vendor.GetVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
                                   ParentStarSystem.StarSystemData.ID,
                                   PlanetData.ID);
+
+        if (Vendor == null
+            || (Vendor != null
+                && Vendor.SellMultipliers.Length != GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count))
+        {
+            Vendor = new Vendor();
+            Vendor.InitializeVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                    ParentStarSystem.StarSystemData.ID,
+                                    PlanetData.ID);
+
+            Debug.LogError("Null vendor. A new one is created....");
+        }
     }
 }

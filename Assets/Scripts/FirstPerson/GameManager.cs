@@ -136,7 +136,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!IsOnWorldMap
-            && Input.GetKeyDown(KeyCode.M))
+            && Input.GetKeyDown(KeyCode.M)
+            && !InventoryController.IsShopping)
         {
             GoBackToWorldMap();
         }
