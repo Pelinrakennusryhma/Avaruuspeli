@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28917203fd236e4f92a77b863a69d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneTimeVisit: 0
   models: []
   modelSpawnArea: 0.16
   modelSize: 0.005
@@ -482,7 +483,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &673906737703816110
 MonoBehaviour:

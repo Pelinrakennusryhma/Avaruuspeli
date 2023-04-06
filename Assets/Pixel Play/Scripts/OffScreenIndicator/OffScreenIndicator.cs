@@ -61,7 +61,6 @@ public class OffScreenIndicator : MonoBehaviour
 
                 if (target.NeedDescriptionOnArrow)
                 {
-                    Debug.Log("set desc on arrow");
                     indicator.SetDescription(target.descriptionText);
                 }
             }

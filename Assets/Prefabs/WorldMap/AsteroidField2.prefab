@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5770079905922237426}
   - component: {fileID: 327877903198769303}
   - component: {fileID: 4494659351240923506}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AsteroidField2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,6 @@ MonoBehaviour:
     ReferenceObjectPosY: 0
     ReferenceObjectPosZ: 0
   ParentStarSystem: {fileID: 0}
-  WorldMapClickDetector: {fileID: 0}
   ReferenceObject: {fileID: 5889320630960455902}
   Asteroid01aOriginal: {fileID: 5889320630960455902}
   Asteroid01bOriginal: {fileID: 1134893422400323907}

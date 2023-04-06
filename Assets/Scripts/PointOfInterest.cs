@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PointOfInterest : MonoBehaviour
 {
+    [Tooltip("Should the PoI be destroyed after visit?")]
+    public bool oneTimeVisit = false;
     [SerializeField]
     GameObject[] models;
     [SerializeField]
@@ -120,19 +122,33 @@ public class PointOfInterest : MonoBehaviour
     {
         foreach (TMP_Text iconText in iconTexts)
         {
-            iconText.text = Icon;
+            if(Icon != "")
+            {
+                iconText.text = Icon;
+            } else
+            {
+                Destroy(iconText.gameObject);
+            }
+
         }
     }
 
     void EnableInfoPanel()
     {
-        iconBig.SetActive(false);
+        if(iconBig != null)
+        {
+            iconBig.SetActive(false);
+        }
+        
         infoPanel.SetActive(true);
     }
 
     void DisableInfoPanel()
     {
-        iconBig.SetActive(true);
+        if (iconBig != null)
+        {
+            iconBig.SetActive(true);
+        }
         infoPanel.SetActive(false);
     }
 }

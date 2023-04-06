@@ -64,5 +64,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stance: 0
-  detectTargetRange: 800
+  detectTargetRange: 1500
   patrolArea: 500

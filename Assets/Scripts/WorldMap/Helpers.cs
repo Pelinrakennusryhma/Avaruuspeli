@@ -30,6 +30,7 @@ public class Helpers : MonoBehaviour
 
             for (int i = 0; i < raycastResults.Count; i++)
             {
+                Debug.Log(raycastResults[i].gameObject.name);
                 if (raycastResults[i].gameObject.layer == 5)
                 {
 

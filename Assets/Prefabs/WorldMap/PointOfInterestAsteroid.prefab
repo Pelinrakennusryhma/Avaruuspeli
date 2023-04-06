@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28917203fd236e4f92a77b863a69d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneTimeVisit: 1
   models:
   - {fileID: 919132149155446097, guid: 3e0555aabb8db544bac0dc1d50d4f9c5, type: 3}
   - {fileID: 919132149155446097, guid: 08e7efc324b8de74ca64f104122ed164, type: 3}
@@ -488,7 +489,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &673906737703816110
 MonoBehaviour:

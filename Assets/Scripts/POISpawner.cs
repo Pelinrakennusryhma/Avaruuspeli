@@ -45,8 +45,11 @@ public class POISpawner : MonoBehaviour
     {
         if(GameManager.Instance != null && GameManager.Instance.currentPOI != null)
         {
-            RemovePOI(GameManager.Instance.currentPOI);
-            GameManager.Instance.currentPOI = null;
+            if (GameManager.Instance.currentPOI.oneTimeVisit)
+            {
+                RemovePOI(GameManager.Instance.currentPOI);
+                GameManager.Instance.currentPOI = null;
+            }
         }
     }
 
