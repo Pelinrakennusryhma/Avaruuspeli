@@ -176,7 +176,7 @@ public class PlanetOnWorldMap : MonoBehaviour
 
         if (Vendor == null
             || (Vendor != null
-                && Vendor.SellMultipliers.Length != GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count))
+                && Vendor.SellMultiplierss.Length != GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count))
         {
             Vendor = new Vendor();
             Vendor.InitializeVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,

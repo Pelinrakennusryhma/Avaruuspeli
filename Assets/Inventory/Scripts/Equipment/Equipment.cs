@@ -8,10 +8,10 @@ public class Equipment : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image spacesuitImage;
     [SerializeField] private UnityEngine.UI.Image shipWeapon1Image;
     [SerializeField] private UnityEngine.UI.Image shipWeapon2Image;
-    public Item equippedDrill;
-    public Item equippedSpacesuit;
-    public Item equippedShipWeapon1;
-    public Item equippedShipWeapon2;
+    public ItemSO equippedDrill;
+    public ItemSO equippedSpacesuit;
+    public ItemSO equippedShipWeapon1;
+    public ItemSO equippedShipWeapon2;
     public Inventory inventory;
 
     //Tavaroitten unequip ja equip. Kutsutaan ContextMenu.cs kautta.
@@ -27,7 +27,9 @@ public class Equipment : MonoBehaviour
         {
             inventory.AddItem(equippedDrill.id, 1);
             equippedDrill = null;
-            drillImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
+            //drillImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
+            drillImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Replace with some scriptable object stuff");
         }
     }
     public void UnequipSpacesuit()
@@ -36,26 +38,41 @@ public class Equipment : MonoBehaviour
         {
             inventory.AddItem(equippedSpacesuit.id, 1);
             equippedSpacesuit = null;
-            spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
+            //spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
+            spacesuitImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Replace with some scriptable object stuff");
         }
     }
-    public void EquipDrill(Item item)
+    public void EquipDrill(ItemSO item)
     {
         UnequipDrill();
         equippedDrill = item;
-        drillImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedDrill.name);
+        //drillImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedDrill.name);
+
+        if (equippedDrill.itemIcon != null)
+        {
+            drillImage.sprite = equippedDrill.itemIcon;
+            Debug.LogWarning("We had a sprite for a drill");
+        }
+
+        else
+        {
+            drillImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
+        }
+        Debug.LogError("Replace with some scriptable object stuff");
 
         Debug.Log("Equipping drill. Item id is " + item.id);
         
         if (ResourceGatherer.Instance != null) 
         {
-            if (item.id == 2)
+            if (item.id == 7)
             {
                 ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.BasicDrill;
                 ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.BasicDrill);
             }   
             
-            else if (item.id == 4)     
+            else if (item.id == 8)     
             {
                 ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.AdvancedDrill;
                 ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.AdvancedDrill);
@@ -65,11 +82,25 @@ public class Equipment : MonoBehaviour
    
     }
 
-    public void EquipSpacesuit(Item item)
+    public void EquipSpacesuit(ItemSO item)
     {
         UnequipSpacesuit();
         equippedSpacesuit = item;
-        spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedSpacesuit.name);
+        //spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedSpacesuit.name);
+
+        if (equippedSpacesuit.itemIcon != null)
+        {
+            spacesuitImage.sprite = equippedDrill.itemIcon;
+            Debug.LogWarning("We had a sprite for a spacesuit");
+        }
+
+        else
+        {
+            spacesuitImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
+        }
+
+        Debug.LogError("Replace with some scriptable object stuff");
     }
 
     public void UnequipShipWeapon1()
@@ -78,7 +109,11 @@ public class Equipment : MonoBehaviour
         {
             inventory.AddItem(equippedShipWeapon1.id, 1);
             equippedShipWeapon1 = null;
-            shipWeapon1Image.sprite = Resources.Load<Sprite>("Sprites/Empty");
+            //shipWeapon1Image.sprite = Resources.Load<Sprite>("Sprites/Empty");
+
+            shipWeapon1Image.sprite = GameManager.Instance.InventoryController.BlankSprite;
+
+            Debug.LogError("Replace with some scriptable object stuff");
         }
     }
     public void UnequipShipWeapon2()
@@ -87,19 +122,51 @@ public class Equipment : MonoBehaviour
         {
             inventory.AddItem(equippedShipWeapon2.id, 1);
             equippedShipWeapon2 = null;
-            shipWeapon2Image.sprite = Resources.Load<Sprite>("Sprites/Empty");
+            //shipWeapon2Image.sprite = Resources.Load<Sprite>("Sprites/Empty");
+
+            shipWeapon1Image.sprite = GameManager.Instance.InventoryController.BlankSprite;
+
+            Debug.LogError("Replace with some scriptable object stuff");
         }
     }
-    public void EquipShipWeapon1(Item item)
+    public void EquipShipWeapon1(ItemSO item)
     {
         UnequipShipWeapon1();
         equippedShipWeapon1 = item;
-        shipWeapon1Image.sprite = Resources.Load<Sprite>("Sprites/" + equippedShipWeapon1.name);
+        //shipWeapon1Image.sprite = Resources.Load<Sprite>("Sprites/" + equippedShipWeapon1.name);
+
+        if (equippedShipWeapon1.itemIcon != null)
+        {
+            shipWeapon1Image.sprite = equippedShipWeapon1.itemIcon;
+            Debug.LogWarning("We have a good sprite. Put it out there");
+        }
+
+        else
+        {
+            shipWeapon1Image.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Had to put a blank sprite out there");
+        }
+
+        Debug.LogError("Replace with some scriptable object stuff");
     }
-    public void EquipShipWeapon2(Item item)
+    public void EquipShipWeapon2(ItemSO item)
     {
         UnequipShipWeapon2();
         equippedShipWeapon2 = item;
-        shipWeapon2Image.sprite = Resources.Load<Sprite>("Sprites/" + equippedShipWeapon2.name);
+        //shipWeapon2Image.sprite = Resources.Load<Sprite>("Sprites/" + equippedShipWeapon2.name);
+
+        if (equippedShipWeapon2.itemIcon != null)
+        {
+            shipWeapon2Image.sprite = equippedShipWeapon2.itemIcon;
+            Debug.LogWarning("We have a good sprite. Put it out there");
+        }
+
+        else
+        {
+            shipWeapon2Image.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Had to put a blank sprite out there");
+        }
+
+        Debug.LogError("Replace with some scriptable object stuff");
     }
 }

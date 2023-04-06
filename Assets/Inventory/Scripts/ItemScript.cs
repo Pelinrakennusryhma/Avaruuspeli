@@ -17,7 +17,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     public double currentItemWeight = 0;
     public float currentTotalValue = 0;
 
-    public Item itemToAdd;
+    public ItemSO itemToAdd;
 
     public CanvasScript CanvasScript;
     public ContextMenu contextMenuScript;
@@ -27,22 +27,46 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
 
     public void Awake()
     {
-        Setup();
+        //Setup();
     }
 
-    public void Setup()
+    public void Setup(Inventory inventory)
     {
-        CanvasScript = FindObjectOfType<CanvasScript>();
+        CanvasScript = GameManager.Instance.InventoryController.CanvasScript;
 
         //canvas = GameObject.Find("Canvas");
         //contextMenu = GameObject.Find("ContextMenu");
         //contextMenuScript = contextMenu.GetComponent<ContextMenu>();
-        contextMenuScript = FindObjectOfType<ContextMenu>();
+        contextMenuScript = GameManager.Instance.InventoryController.ContextMenuScript;
+
+
         //Itemin lisättäessä asettaa tiedot Inventory-skriptistä haettujen tietojen mukaan
-        itemToAdd = GameObject.Find("InventoryPanel").GetComponent<Inventory>().itemToAdd;
-        Item item = itemToAdd;
-        itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
-        itemName.text = itemToAdd.name;
+        //itemToAdd = GameObject.Find("InventoryPanel").GetComponent<Inventory>().itemToAdd;
+
+        itemToAdd = inventory.itemToAdd;
+
+        Debug.Log("Setup called on itemscript " + Time.time);
+
+        Debug.LogError("Replace the find with something else!!!");
+        ItemSO item = itemToAdd;
+
+        if (itemToAdd.itemIcon != null)
+        {        
+            itemImage.sprite = itemToAdd.itemIcon;
+            Debug.LogWarning("Non null icon. proceed");
+        }
+
+        else
+        {
+            itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Null sprite. Replacing with a blank one");
+        }
+
+        //itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
+        //Debug.LogError("Replace this with scriptable object's sprite");
+
+
+        itemName.text = itemToAdd.itemName;
         itemAmount.text = currentItemAmount.ToString();
         itemValue.text = item.value.ToString();
         itemWeight.text = item.weight.ToString();
@@ -103,7 +127,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     }
 
     //Lisää nykyiseen määrään 'amount'. Päivittää määrän.
-    public void AddItem(int amount, Item item)
+    public void AddItem(int amount, ItemSO item)
     {
         itemToAdd = item;
         currentItemAmount += amount;
@@ -125,7 +149,8 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log(itemToAdd);
-            contextMenuScript.ShowOptions(itemToAdd.type);
+            contextMenuScript.ShowOptions(itemToAdd.itemType.ToString());
+            Debug.LogError("Possibly replace the above call with something else that fetches a good type");
             contextMenuScript.SetPositionToMouse();
             contextMenuScript.itemID = itemToAdd.id;
         }

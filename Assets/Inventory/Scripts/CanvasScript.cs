@@ -9,7 +9,7 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] private GameObject equipmentPanel;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private ShopHeadsUp headsUpShop;
-    public Item infoAbout;
+    public ItemSO infoAbout;
     public ContextMenu contextMenu;
     //Pelaajan rahat
     public double money = 10000;
@@ -19,7 +19,7 @@ public class CanvasScript : MonoBehaviour
         headsUpShop.gameObject.SetActive(false);
     }
 
-    public void InfoAboutItem(Item item)
+    public void InfoAboutItem(ItemSO item)
     {
         infoAbout = item;
     }

@@ -5,13 +5,15 @@ using UnityEngine.EventSystems;
 
 public class HideContextMenu : MonoBehaviour, IPointerClickHandler
 {
-    private GameObject contextMenu;
+    ///private GameObject contextMenu;
     private ContextMenu contextMenuScript;
 
     void Start()
     {
-        contextMenu = GameObject.Find("ContextMenu");
-        contextMenuScript = contextMenu.GetComponent<ContextMenu>();
+        //contextMenu = GameObject.Find("ContextMenu");
+        //Debug.LogError("Replace the find with something else!!!");
+        //contextMenuScript = contextMenu.GetComponent<ContextMenu>();
+        contextMenuScript = GameManager.Instance.InventoryController.ContextMenuScript;
     }
 
     //Painettaessa piilottaa context menun. Tuhoaa myös info paneelin
@@ -25,6 +27,9 @@ public class HideContextMenu : MonoBehaviour, IPointerClickHandler
         {
             contextMenuScript.HideMenu();
             GameObject[] gos = GameObject.FindGameObjectsWithTag("InfoPanel");
+
+            Debug.LogError("Info panel find objects with tag. Maybe this could be refactored?");
+
             foreach (GameObject go in gos)
             {
                 Destroy(go);

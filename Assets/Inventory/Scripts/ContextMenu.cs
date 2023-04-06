@@ -16,7 +16,7 @@ public class ContextMenu : MonoBehaviour
     [SerializeField] private GameObject buttonDiscard;
     public int itemID;
     public Inventory inventory;
-    public ItemDatabase itemDatabase;
+    //public ItemDatabase itemDatabase;
     public Equipment equipment;
     public CanvasScript canvasScript;
     public bool shopping;
@@ -89,29 +89,33 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Unequip' (1/3) vaihtoehto. Unequippaa pelaajalta itemin josta context menu on avattu. Ship weapon 1 ja 2 menevät suoraan oman napin kautta.
     public void UnequipItem()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
-        if (item.type == "Drill")
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+
+        Debug.LogError("We are doing checks with ids. Maybe we should do it with a TYPE. Maybe...");
+
+        if (item.id == 7
+            || item.id == 8)
         {
             UnequipDrill();
         }
-        else if (item.type == "Spacesuit")
+        else if (item.id == 12)
         {
             UnequipSpacesuit();
         }
     }
     public void EquipDrill()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
         equipment.EquipDrill(item);
         HideMenu();
     }
     public void EquipSpacesuit()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
         equipment.EquipSpacesuit(item);
         HideMenu();
@@ -119,8 +123,8 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Equip 1' vaihtoehto. 
     public void EquipShipWeapon1()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
         equipment.EquipShipWeapon1(item);
         HideMenu();
@@ -128,8 +132,8 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Equip 2' vaihtoehto. 
     public void EquipShipWeapon2()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
         equipment.EquipShipWeapon2(item);
         HideMenu();
@@ -138,12 +142,18 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Equip' vaihtoehto. Equippaa pelaajalta itemin josta context menu on avattu. Ship weapon 1 ja 2 menevät suoraan oman napin kautta.
     public void EquipItem()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
-        if (item.type == "Drill")
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+                    
+        Debug.LogError("We are checking for an item with id. Maybe we could and should do the check with a TYPE");
+
+        if (item.id == 7
+            || item.id == 8)
         {
+
             EquipDrill();
-        }else if(item.type == "Spacesuit")
+        }
+        else if(item.id == 12)
         {
             EquipSpacesuit();
         }
@@ -159,12 +169,19 @@ public class ContextMenu : MonoBehaviour
     public void SellItem()
     {
         ItemScript itemScript;
-        Item item;
+        ItemSO item;
         item = inventory.CheckForItem(itemID);
-        itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + itemID).GetComponent<ItemScript>();
+        itemScript = FindCorrectItemScript();
+
         canvasScript.money += item.value * itemScript.currentItemAmount;
         inventory.RemoveItem(itemID, itemScript.currentItemAmount);
         HideMenu();
+    }
+
+    public ItemScript FindCorrectItemScript()
+    {        
+        Debug.LogError("Replace the find with something else!!!");
+        return GameObject.Find("InventoryPanel/Scroll/View/Layout/" + itemID).GetComponent<ItemScript>();        
     }
 
     //Tuo näkyville tai piilottaa näkyvistä eri nappeja context menusta

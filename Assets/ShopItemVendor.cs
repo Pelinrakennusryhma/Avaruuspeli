@@ -17,10 +17,10 @@ public class ShopItemVendor : MonoBehaviour
         bool hasEnoughRoom = false;
 
         bool alreadyHasSingletonItem = false;
-        Item item = GameManager.Instance.InventoryController.Inventory.CheckForItem(ShopItemScript.ID);
+        ItemSO item = GameManager.Instance.InventoryController.Inventory.CheckForItem(ShopItemScript.ID);
 
         if (item != null
-            && !item.stackable)
+            && !item.isStackable)
         {
             alreadyHasSingletonItem = true;
             Debug.Log("AlreadyHasSingletonItem ");

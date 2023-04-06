@@ -57,12 +57,14 @@ public class GameManager : MonoBehaviour
         IncomingSceneType = TypeOfScene.None;
         if (Instance == null)
         {
-
+            Instance = this;
 
             //Cursor.visible = false;
             //Cursor.lockState = CursorLockMode.Locked;
+            InventoryController = GetComponentInChildren<InventoryController>(true);
+            InventoryController.Init();
 
-            Instance = this;
+
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
@@ -78,8 +80,7 @@ public class GameManager : MonoBehaviour
             TransitionalCamera.gameObject.SetActive(false);
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
             Helpers = GetComponentInChildren<Helpers>(true);
-            InventoryController = GetComponentInChildren<InventoryController>(true);
-            InventoryController.Init();
+
 
             CurrentSceneType = TypeOfScene.WorldMap;
 

@@ -19,9 +19,25 @@ public class Vendor
         }
     }
 
+    [System.Serializable]
+    public class ItemMultiplier
+    {
+        public int ItemId;
+        public float Multiplier;
+
+        public ItemMultiplier(int itemId,
+                              float multiplier)
+        {
+            ItemId = itemId;
+            Multiplier = multiplier;
+        }
+    }
+
     public List<VendorInventoryItem> Items;
-    public float[] BuyMultipliers;
-    public float[] SellMultipliers;
+
+
+    public ItemMultiplier[] BuyMultiplierss;
+    public ItemMultiplier[] SellMultiplierss;
 
     public int GalaxyID;
     public int StarSystemID;
@@ -38,32 +54,46 @@ public class Vendor
         Debug.Log("Arvo kertoimet vendorille");
 
         // Get amount from somewhere. Maybe where item scriptable objects are stored?
-        BuyMultipliers = new float[GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count];
+        //BuyMultipliers = new float[GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count + 1];
 
-        for (int i = 0; i < BuyMultipliers.Length; i++)
+        //for (int i = 0; i < BuyMultipliers.Length; i++)
+        //{
+        //    BuyMultipliers[i] = Random.Range(0.2f, 1.0f);
+        //}
+
+        BuyMultiplierss = new ItemMultiplier[GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count];
+
+        for (int i = 0; i < BuyMultiplierss.Length; i++)
         {
-            BuyMultipliers[i] = Random.Range(0.2f, 1.0f);
+            BuyMultiplierss[i] = new ItemMultiplier(GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems[i].id,
+                                                    Random.Range(0.2f, 1.0f));
         }
 
-        SellMultipliers = new float[GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count];
+        SellMultiplierss = new ItemMultiplier[GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count];
 
-        Debug.LogError("Item count is " + GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count);
 
-        for (int i = 0; i < SellMultipliers.Length; i++)
+        for (int i = 0; i < SellMultiplierss.Length; i++)
         {
-            SellMultipliers[i] = Random.Range(1.0f, 3.0f);
+            SellMultiplierss[i] = new ItemMultiplier(GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems[i].id,
+                                                     Random.Range(1.0f, 3.0f));
         }
+        //Debug.LogError("Item count is " + (GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count + 1));
 
-        Debug.LogError("Buy and sell multipliers are not currently implemented properly and not saved anywhere.");
+        //for (int i = 0; i < SellMultipliers.Length; i++)
+        //{
+        //    SellMultipliers[i] = Random.Range(1.0f, 3.0f);
+        //}
+
+        //Debug.LogError("Buy and sell multipliers are not currently implemented properly and not saved anywhere.");
 
 
         Items = new List<VendorInventoryItem>();
 
         // How much should the maximum amount of items be? Probably not all items. That would clutter the inventory!!!
         // And should there be some items that always spawn. Like fuel? That should spawn at least once per star system!!!
-        int amountOfItems = Random.Range(3, GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count + 1);
+        int amountOfItems = Random.Range(3, 11);
 
-        List<Item> allItems = new List<Item>(GameManager.Instance.InventoryController.Inventory.itemDatabase.items);
+        List<ItemSO> allItems = new List<ItemSO>(GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems);
 
 
 
@@ -81,7 +111,7 @@ public class Vendor
                 iterationsInAWhileLoop++;
                 Debug.Log("Iterating in a while-loop! " + iterationsInAWhileLoop);
                 bool foundAnItem = false;
-                Item foundItem = null;
+                ItemSO foundItem = null;
                 int amount = 0;
                 
                 // Decide if we want to spawn this item 
@@ -104,7 +134,7 @@ public class Vendor
                         random = Random.Range(0.33f, 1.0f);
                     }
 
-                    float threshold = 1.0f / GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count;
+                    float threshold = 1.0f / GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count;
 
                     Debug.Log("random threshold is " + threshold + " random number is " + random);
 
@@ -119,7 +149,7 @@ public class Vendor
                 if (foundAnItem
                     && foundItem != null)
                 {
-                    if (!foundItem.stackable)
+                    if (!foundItem.isStackable)
                     {
                         amount = 1;
                     }
@@ -159,12 +189,80 @@ public class Vendor
 
     public float GetSellMultiplier(int itemId)
     {
-        return SellMultipliers[itemId];
+        float value = 1.0f;
+        bool foundAValue = false;
+
+        for (int i = 0; i < SellMultiplierss.Length; i++)
+        {
+            if (SellMultiplierss[i].ItemId == itemId)
+            {
+                value = SellMultiplierss[i].Multiplier;
+                foundAValue = true;
+                break;
+            }
+        }
+
+        if (foundAValue)
+        {
+            Debug.Log("Found a sell multiplier value " + value + " for item id " + itemId);
+        }
+
+        else
+        {
+            Debug.LogError("Tried to fetch a sell multiplier with no success. Item id is " + itemId);
+        }
+
+
+        return value;
+        //if (itemId < 0
+        //    || itemId >= SellMultipliers.Length)
+        //{
+        //    Debug.LogError("Totally invalid id. Sell multipliers do not match");
+        //}
+
+        //Debug.LogError("Replace this approach with a serializable double array!! THERE WILL BE PROBLEMS WITH ID's");
+
+        //return SellMultipliers[itemId];
     }
 
     public float GetBuyMultiplier(int itemId)
     {
-        return BuyMultipliers[itemId];
+        float value = 1.0f;
+        bool foundAValue = false;
+
+        for (int i = 0; i < BuyMultiplierss.Length; i++)
+        {
+            if (BuyMultiplierss[i].ItemId == itemId)
+            {
+                value = BuyMultiplierss[i].Multiplier;
+                foundAValue = true;
+                break;
+            }
+        }
+
+        if (foundAValue)
+        {
+            Debug.Log("Found a buy multiplier value " + value + " for item id " + itemId);
+        }
+
+        else
+        {
+            Debug.LogError("Tried to fetch a buy multiplier with no success. Item id is " + itemId);
+        }
+
+
+        return value;
+
+        //if (itemId < 0
+        //    || itemId >= BuyMultipliers.Length)
+        //{
+        //    Debug.LogError("Totally invalid id. Buy multipliers do not match");
+        //}
+
+
+        //Debug.LogError("Replace this approach with a serializable double array!! THERE WILL BE PROBLEMS WITH ID's");
+
+        //return BuyMultipliers[itemId];
     }
 
     public static Vendor GetVendor(int galaxyID, 

@@ -53,9 +53,13 @@ public class ShopHeadsUp : MonoBehaviour
                                                                    starSystemId, 
                                                                    planetId);
 
+  
+
         if (CurrentVendor == null
+            || (CurrentVendor != null
+                && CurrentVendor.SellMultiplierss == null)
             || (CurrentVendor != null 
-                && CurrentVendor.SellMultipliers.Length != GameManager.Instance.InventoryController.Inventory.itemDatabase.items.Count))
+                && CurrentVendor.SellMultiplierss.Length != GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count))
         {
             CurrentVendor = new Vendor();        
             CurrentVendor.InitializeVendor(galaxyId,
@@ -125,7 +129,7 @@ public class ShopHeadsUp : MonoBehaviour
             ShopItemScript shopItem = shopObject.GetComponent<ShopItemScript>();
             PlayerShopItems.Add(shopItem);
 
-            Item item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(playerItems[i].itemToAdd.id);
+            ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(playerItems[i].itemToAdd.id);
             shopItem.Setup(item, 
                            GameManager.Instance.InventoryController.Inventory, 
                            CurrentVendor.GetBuyMultiplier(item.id),
@@ -154,7 +158,20 @@ public class ShopHeadsUp : MonoBehaviour
             ShopItemScript shopItem = shopObject.GetComponent<ShopItemScript>();
             VendorShopItems.Add(shopItem);
 
-            Item item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(CurrentVendor.Items[i].ItemId);
+
+            Debug.Log("Gettin an item for vendor " + CurrentVendor.Items[i].ItemId);
+
+            
+
+            ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(CurrentVendor.Items[i].ItemId);
+
+            if (shopItem == null)
+            {
+                Debug.LogError("Null shop item");
+            }
+
+
+
             shopItem.Setup(item, 
                            GameManager.Instance.InventoryController.Inventory, 
                            CurrentVendor.GetSellMultiplier(item.id),
@@ -172,7 +189,7 @@ public class ShopHeadsUp : MonoBehaviour
         ShopItemScript shopItem = shopObject.GetComponent<ShopItemScript>();
         PlayerShopItems.Add(shopItem);
 
-        Item item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(itemId);
+        ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemId);
         shopItem.Setup(item,
                        GameManager.Instance.InventoryController.Inventory,
                        CurrentVendor.GetBuyMultiplier(item.id),
@@ -190,7 +207,7 @@ public class ShopHeadsUp : MonoBehaviour
         ShopItemScript shopItem = shopObject.GetComponent<ShopItemScript>();
         VendorShopItems.Add(shopItem);
 
-        Item item = GameManager.Instance.InventoryController.Inventory.itemDatabase.GetItem(itemId);
+        ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemId);
         shopItem.Setup(item,
                        GameManager.Instance.InventoryController.Inventory,
                        CurrentVendor.GetSellMultiplier(item.id),

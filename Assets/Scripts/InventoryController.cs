@@ -8,6 +8,10 @@ public class InventoryController : MonoBehaviour
 
     public CanvasScript CanvasScript;
 
+    public ContextMenu ContextMenuScript;
+    public ItemCatalog ItemCatalog;
+
+    public ItemDataBaseWithScriptables ItemDataBaseWithScriptables;
     public Inventory Inventory;
     public Equipment Equipment;
     public ShopNumberTwo Shop;
@@ -17,16 +21,23 @@ public class InventoryController : MonoBehaviour
     public bool IsInShoppingArea;
     public bool IsShopping;
 
+    public Sprite BlankSprite;
+
     CursorLockMode cachedCursorLockMode = CursorLockMode.None;
 
     public float Money = 10000.0f;
     public void Init()
-    {
+    {        
+        ItemDataBaseWithScriptables.Init();
+
         //Item item;
         //item = CanvasScript.contextMenu.itemDatabase.GetItem(2);
         ////Inventory.RemoveItem(item.id, 1);
         //Equipment.EquipDrill(item);
         //Shop.Init();
+
+        //ItemDataBaseWithScriptables = GetComponentInChildren<ItemDataBaseWithScriptables>(true);
+
         Money = 10000.0f;
         OnInventoryShow();
 
@@ -64,18 +75,18 @@ public class InventoryController : MonoBehaviour
         {
             ResourceGatherer.ToolType currentTool = ResourceGatherer.Instance.Tool;
 
-            Item item;
+            ItemSO item;
 
             if (currentTool == ResourceGatherer.ToolType.BasicDrill)
             {
-                item = CanvasScript.contextMenu.itemDatabase.GetItem(2);
+                item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(7);
                 Inventory.RemoveItem(item.id, 1);
                 Equipment.EquipDrill(item);
             }
 
             else if (currentTool == ResourceGatherer.ToolType.AdvancedDrill)
             {
-                item = CanvasScript.contextMenu.itemDatabase.GetItem(4);
+                item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(8);
                 Inventory.RemoveItem(item.id, 1);
                 Equipment.EquipDrill(item);
             }

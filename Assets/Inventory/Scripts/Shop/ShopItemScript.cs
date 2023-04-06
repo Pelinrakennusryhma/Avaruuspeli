@@ -13,7 +13,7 @@ public class ShopItemScript : MonoBehaviour
     [SerializeField] public TMP_InputField buyAmount;
     [SerializeField] public TMP_InputField sellAmount;
     public Inventory inventory;
-    public Item item;
+    public ItemSO item;
 
     public CanvasScript canvasScript;
     public int ItemAmount;
@@ -36,7 +36,7 @@ public class ShopItemScript : MonoBehaviour
         this.shopNumberTwo = shopNumberTwo;
     }
 
-    public void Setup(Item item, 
+    public void Setup(ItemSO item, 
                       Inventory inventory,
                       float priceMultiplier,
                       bool isPlayerItem)
@@ -49,8 +49,23 @@ public class ShopItemScript : MonoBehaviour
         canvasScript = GameManager.Instance.InventoryController.CanvasScript;
         this.item = item;
         ID = item.id;
-        itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
-        itemName.text = item.name;
+        //itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
+        //Debug.LogError("REplace sprite call with scriptable object's sprite");
+
+        if (item.itemIcon != null)
+        {
+            itemImage.sprite = item.itemIcon;
+            Debug.LogWarning("Non null icon. proceed");
+        }
+
+        else
+        {
+            itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            Debug.LogError("Null sprite. Replacing with a blank one");
+        }
+
+
+        itemName.text = item.itemName;
         itemPrice.text = adjustedPrice.ToString("0.00") + "€";
 
         //Tarkistaa montako pelaajalla on itemiä ja muuttaa numeron näyttämään kuinka monta niitä on.
@@ -134,13 +149,13 @@ public class ShopItemScript : MonoBehaviour
     {
         bool alreadyHasSingletonItem = false;
 
-        if (!item.stackable
+        if (!item.isStackable
             && inventory.CheckForItem(item.id) != null) 
         {
             alreadyHasSingletonItem = true;
         }
 
-        Debug.Log("Buy " + Time.time + " item id " + item.name + " already has singleton item " + alreadyHasSingletonItem);
+        Debug.Log("Buy " + Time.time + " item id " + item.itemName + " already has singleton item " + alreadyHasSingletonItem);
 
 
         double buyingAmount = int.Parse(buyAmount.text);

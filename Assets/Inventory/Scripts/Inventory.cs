@@ -8,12 +8,12 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject layout;
     [SerializeField] private TextMeshProUGUI weightDisplay;
-    public List<Item> playerItems = new List<Item>();
-    public ItemDatabase itemDatabase;
-    public Item itemToAdd;
-    public Item equippedDrill;
-    public Item equippedSpacesuit;
-    public Item equippedShipWeapon;
+    public List<ItemSO> playerItems = new List<ItemSO>();
+    //public ItemDatabase itemDatabase;
+    public ItemSO itemToAdd;
+    public ItemSO equippedDrill;
+    public ItemSO equippedSpacesuit;
+    public ItemSO equippedShipWeapon;
     public double maxWeight;
     public double currentWeight = 0;
 
@@ -22,23 +22,45 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
+        maxWeight = 100000;
         UpdateWeight();
     }
     //Tarkistaa onko pelaajalla itemiä
-    public Item CheckForItem(int id)
+    public ItemSO CheckForItem(int id)
     {
+        Debug.LogError("Maybe replace this with another kind of check?");
         return playerItems.Find(item => item.id == id);
     }
     
     //Antaa pelaajalle itemin. Jos pelaajalla ei ole ennestään sitä, lisää uuden rivin inventoryyn. Jos pelaajalla on jo inventoryssa se ja tavara on stackattava, lisää määrään lisää.
     public void AddItem(int id, int amount)
     {
-        Item item = CheckForItem(id);
-        itemToAdd = itemDatabase.GetItem(id);
+        ItemSO item = CheckForItem(id);
+
+        //if (GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO == null)
+        //{
+        //    Debug.LogError("NULL GAME MANAGER");
+        //}
+
+        //else
+        //{
+        //    Debug.LogError("WE have a valid item database");
+        //}
+
+        //if (!GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.HasBeenInitted)
+        //{
+        //    Debug.LogError("Database has not been initted");
+        //}
+
+        itemToAdd = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(id);
+        
+        Debug.Log("About to add item " + Time.time);
+        
         if (item == null)
         {
             playerItems.Add(itemToAdd);
             Object prefab = Resources.Load("Prefabs/item");
+            Debug.LogError("REplace this resources load with something else?");
             if (prefab == null)
             {
                 Debug.LogError("Null prefab");
@@ -49,17 +71,19 @@ public class Inventory : MonoBehaviour
                 Debug.LogError("Null layoout");
             }
 
+
             GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
             newItem.name = itemToAdd.id.ToString();
             //newItem.GetComponent<ItemScript>().Setup();
             ItemScript itemScript = newItem.GetComponent<ItemScript>();
+            itemScript.Setup(this);
             itemScript.AddItem(amount, itemToAdd);
             ItemScripts.Add(itemScript);
             currentWeight += itemToAdd.weight * amount;
             UpdateWeight();
             //Debug.LogError("ADDED ITEM");
         }
-        else if(item.stackable)
+        else if(item.isStackable)
         {
             //ItemScript[] allItems = layout.GetComponentsInChildren<ItemScript>(true);
 
@@ -89,7 +113,7 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(int id, int amount)
     {
 
-        Item item = CheckForItem(id);
+        ItemSO item = CheckForItem(id);
         if(item != null)
         {
             //ItemScript itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id.ToString()).GetComponent<ItemScript>();
@@ -210,7 +234,7 @@ public class Inventory : MonoBehaviour
         //    Debug.Log(i + " playeritem " + ItemScripts[i].itemToAdd.name);
         //}
 
-        ItemScripts = ItemScripts.OrderBy(x => x.itemToAdd.name).ToList();
+        ItemScripts = ItemScripts.OrderBy(x => x.itemToAdd.itemName).ToList();
         //playerItems = playerItems.OrderBy(x => x.weight).ToList();
 
         //for (int i = 0; i < ItemScripts.Count; i++)
@@ -239,7 +263,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < ItemScripts.Count; i++)
         {
-            Debug.Log(ItemScripts[i].itemToAdd.name);
+            Debug.Log(ItemScripts[i].itemToAdd.itemName);
         }
     }
 
@@ -323,7 +347,7 @@ public class Inventory : MonoBehaviour
         GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
     }
 
-    public bool CheckIfWeHaveRoomForItem(Item item, int itemAmount)
+    public bool CheckIfWeHaveRoomForItem(ItemSO item, int itemAmount)
     {
         float wouldBeWeight = ((float)item.weight * itemAmount)  + (float)currentWeight;
 
