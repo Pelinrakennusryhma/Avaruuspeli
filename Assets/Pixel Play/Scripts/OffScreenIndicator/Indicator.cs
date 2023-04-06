@@ -53,14 +53,7 @@ public class Indicator : MonoBehaviour
 
     public void SetDescription(string text)
     {
-        if(indicatorType == IndicatorType.BOX)
-        {
-            descriptionText.text = text;
-        } else
-        {
-            descriptionText.text = "";
-        }
-        
+        descriptionText.text = text;       
     }
 
     void Awake()

@@ -19,6 +19,11 @@ class ArrowObjectPool : MonoBehaviour
         current = this;
     }
 
+    private void OnEnable()
+    {
+        current = this;
+    }
+
     void Start()
     {
         pooledObjects = new List<Indicator>();

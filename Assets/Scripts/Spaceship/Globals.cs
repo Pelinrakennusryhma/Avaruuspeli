@@ -6,6 +6,7 @@ public class Globals : MonoBehaviour
 {
     public static Globals Instance { get; private set; }
     public string landKey;
+    public float leaveSpaceshipSceneDelay;
     void Awake()
     {
         if (Instance != null && Instance != this)

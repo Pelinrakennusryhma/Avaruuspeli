@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public StarSystemOnFocus CurrentStarSystem;
     public PlanetOnWorldMap CurrentPlanet;
     public AsteroidFieldOnWorldMap CurrentAsteroidField;
+    public PointOfInterest currentPOI;
 
 
     public GalaxyData CurrentGalaxyData;
@@ -44,7 +45,8 @@ public class GameManager : MonoBehaviour
         None = 0,
         WorldMap = 1,
         Planet = 2,
-        AsteroidField = 3
+        AsteroidField = 3,
+        POI
     }
 
     public TypeOfScene IncomingSceneType;
@@ -114,22 +116,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnInventoryPressed(InputAction.CallbackContext context)
+    public void OnInventoryPressed()
     {
-        if (context.performed)
-        {
-            inventoryToggleQueued = true;
-        }
+        inventoryToggleQueued = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsOnWorldMap
-            && Input.GetKeyDown(KeyCode.M))
-        {
-            GoBackToWorldMap();
-        }
+        //if (!IsOnWorldMap
+        //    && Input.GetKeyDown(KeyCode.M))
+        //{
+        //    GoBackToWorldMap();
+        //}
 
         if (WaitingForSceneLoad
             && FramesPassedTillLoadScenes >= 0)
@@ -266,7 +265,7 @@ public class GameManager : MonoBehaviour
 
     public void GoBackToWorldMap()
     {
-
+        Cursor.lockState = CursorLockMode.None;
         IncomingSceneType = TypeOfScene.WorldMap;
 
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
@@ -297,7 +296,22 @@ public class GameManager : MonoBehaviour
         Debug.LogWarning("ENTER ASTEROID FIELD");
 
         IncomingSceneType = TypeOfScene.AsteroidField;
-        StackAndLoadAndLaunchScene("SampleScene", 1);
+        StackAndLoadAndLaunchScene("MineableAsteroidScene", 5);
+    }
+
+    public void EnterPOI(PointOfInterest pointOfInterest)
+    {
+        currentPOI = pointOfInterest;
+        EnterPOI();
+    }
+
+    public void EnterPOI()
+    {
+        IncomingSceneType = TypeOfScene.POI;
+        Debug.Log("currentPOI: " + currentPOI);
+        Debug.Log("Data: " + currentPOI.Data);
+        Debug.Log("SceneToLoad: " + currentPOI.Data.SceneToLoad);
+        StackAndLoadAndLaunchScene(currentPOI.Data.SceneToLoad);
     }
 
     public void EnterPlanet()
@@ -309,12 +323,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void StackAndLoadAndLaunchScene(string sceneName,
-                                           int buildIndex)
+                                           int buildIndex = 0)
     {
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
         WorldMapScene.Instance.gameObject.SetActive(false);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
         ActiveStackedScene = SceneManager.GetSceneByBuildIndex(buildIndex);
+        ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
         //ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
         FramesPassedTillLoadScenes = 0;
         WaitingForSceneLoad = true;
@@ -340,6 +355,10 @@ public class GameManager : MonoBehaviour
         else if (IncomingSceneType == TypeOfScene.AsteroidField)
         {
             Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
+        }
+        else if(IncomingSceneType == TypeOfScene.POI)
+        {
+
         }
 
         IncomingSceneType = TypeOfScene.None;

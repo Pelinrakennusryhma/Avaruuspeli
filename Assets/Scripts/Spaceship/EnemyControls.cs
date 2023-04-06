@@ -11,11 +11,11 @@ public class EnemyControls : ActorSpaceship
     float minRollThreshold = 0.05f;
     float maxRollThreshold = 0.5f;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
-        base.Start();
     }
 
     protected override void OnDeath()

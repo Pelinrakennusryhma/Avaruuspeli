@@ -8,8 +8,6 @@ public class MineableAsteroidTrigger : MonoBehaviour
     [field: SerializeField]
     public Transform CharacterPosition { get; private set; }
     ActorManager _actorManager;
-    [SerializeField]
-    Target targetScript;
     [field: SerializeField]
     public CenterOfGravity CenterOfGravity { get; private set; }
     [field: SerializeField]
@@ -37,7 +35,6 @@ public class MineableAsteroidTrigger : MonoBehaviour
         GameEvents.Instance.EventEnemiesKilled.AddListener(OnEnemiesKilled);
         GameEvents.Instance.EventPlayerTriedLanding.AddListener(OnLandingAttempt);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
-        GameEvents.Instance.EventToggleIndicators.AddListener(OnToggleIndicators);
     }
 
     public void Init(GameObject asteroidPrefab, float scale, MineableRockDensity mineableRockDensity, Resource resourceType, ActorManager actorManager)
@@ -147,11 +144,6 @@ public class MineableAsteroidTrigger : MonoBehaviour
         {
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
         }
-    }
-
-    void OnToggleIndicators(bool showIndicator)
-    {
-        targetScript.enabled = showIndicator;
     }
 
     private void OnTriggerEnter(Collider other)

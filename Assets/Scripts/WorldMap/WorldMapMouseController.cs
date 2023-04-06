@@ -69,7 +69,7 @@ public class WorldMapMouseController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
 
         //DoSingleHit(ray);
-        DoMultiHit(ray);
+        //DoMultiHit(ray);
     }
 
     private static void DoMultiHit(Ray ray)
@@ -96,7 +96,7 @@ public class WorldMapMouseController : MonoBehaviour
                     && detector.type != WorldMapClickDetector.ClickableObjectType.AsteroidField)
                 {                
                     detector1 = detector;
-                    detector.OnClick();
+                    //detector.OnClick();
                     hitSomethingOtherThanAsteroidField = true;
                     break;
                 }
@@ -147,7 +147,7 @@ public class WorldMapMouseController : MonoBehaviour
                     {
                         Vector3 hitPoint = new Vector3(Hits[i].point.x, 0, Hits[i].point.z);
                         MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObjectAndPosOnAsteroidField(detector, hitPoint);
-                        detector.OnClick();
+                        //detector.OnClick();
                         //Debug.LogWarning("We CLICKED ASTEROID FIELD");
                         break;
                     }
@@ -175,7 +175,7 @@ public class WorldMapMouseController : MonoBehaviour
 
                 if (detector != null)
                 {
-                    detector.OnClick();
+                    //detector.OnClick();
                 }
 
                 Debug.Log("Clicked an object that a raycast hits " + Time.time);

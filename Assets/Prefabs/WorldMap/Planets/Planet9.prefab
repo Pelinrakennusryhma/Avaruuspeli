@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 967578143914980878, guid: 744a164fd58a87b49b86265662012836,
         type: 3}
       propertyPath: m_Name
-      value: PlanetTest9 Variant
+      value: Planet9
       objectReference: {fileID: 0}
     - target: {fileID: 967578143914980878, guid: 744a164fd58a87b49b86265662012836,
         type: 3}
@@ -27,6 +27,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2f7aede10308d144a93d5ea10bdc6d45, type: 2}
+    - target: {fileID: 5987466628509939528, guid: 744a164fd58a87b49b86265662012836,
+        type: 3}
+      propertyPath: POIPrefab
+      value: 
+      objectReference: {fileID: 5694329005874326872, guid: 02d58ba0f12101045bf711ef9cd8aa24,
+        type: 3}
     - target: {fileID: 6815490307124125452, guid: 744a164fd58a87b49b86265662012836,
         type: 3}
       propertyPath: m_RootOrder

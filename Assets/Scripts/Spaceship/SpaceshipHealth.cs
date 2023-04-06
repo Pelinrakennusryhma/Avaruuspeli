@@ -10,7 +10,7 @@ public class SpaceshipHealth : UITrackable
     int currentHealth = 100;
 
     SpaceshipEvents spaceshipEvents;
-    public override int MaxValue
+    public override float MaxValue
     {
         get
         {
@@ -18,7 +18,7 @@ public class SpaceshipHealth : UITrackable
         }
     }
 
-    public override int CurrentValue
+    public override float CurrentValue
     {
         get
         {
@@ -29,7 +29,6 @@ public class SpaceshipHealth : UITrackable
     void Awake()
     {
         spaceshipEvents = GetComponent<SpaceshipEvents>();
-        currentHealth = maxHealth;
     }
 
     public void DecreaseHealth(int value)
