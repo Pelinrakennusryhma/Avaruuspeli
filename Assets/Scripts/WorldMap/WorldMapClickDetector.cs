@@ -26,12 +26,8 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
     {
         if(eventData.button != PointerEventData.InputButton.Left)
         {
-            Debug.Log("not left click, return");
             return;
         }
-        Debug.Log("Clicked an object of type " + type);
-        Debug.Log("clicked on: " + gameObject.name);
-        Debug.Log(Camera.main.gameObject.name);
 
         Vector3 mousePos = new Vector3(0, -10000, 0);
 
@@ -45,7 +41,7 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
             && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
             == this) 
         {
-            Debug.Log("Clickity");
+            //Debug.Log("Clickity");
 
             WorldMapMouseController.ZoomLevel zoom = WorldMapMouseController.ZoomLevel.None;
 
