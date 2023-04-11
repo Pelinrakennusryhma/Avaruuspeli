@@ -37,6 +37,7 @@ public class PointOfInterest : MonoBehaviour
     public POISceneData Data { get; private set; }
 
     private Target targetScript;
+    bool mothershipInTrigger = false;
 
     private void Awake()
     {
@@ -60,45 +61,47 @@ public class PointOfInterest : MonoBehaviour
         }
 
         ApplyIcon();
-    }
-
-    private void OnEnable()
-    {
+        UpdatePosition();
         DisableInfoPanel();
     }
 
     void Update()
     {
+        UpdatePosition();
+    }
+
+    void UpdatePosition()
+    {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         screenPos += UIItemOffset;
         uiComponents.position = screenPos;
-
-        //CheckIfMothershipInVicinity();
     }
 
-    public void Init(POISceneData data)
+    public void Init(POISceneData data, POISpawner.OnPOIEnteredDelegate callback=null)
     {
         Data = data;
         description.text = data.GetDescription();
         title.text = data.Title;
-    }
 
-    void CheckIfMothershipInVicinity()
-    {
-        float distance = (MotherShipOnWorldMapController.Instance.transform.position - transform.position).sqrMagnitude;
-        if(distance < 0.005)
+        if(callback != null)
         {
-            EnableInfoPanel();
-            GameManager.Instance.currentPOI = this;
-        } else
-        {
-            DisableInfoPanel();
+            enterButton.onClick.AddListener(() => callback(this));
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {      
         if (other.gameObject.CompareTag("PlayerShip"))
+        {
+            mothershipInTrigger = true;
+            StartCoroutine(EnableInfoPanelWithDelay());
+        }
+    }
+
+    IEnumerator EnableInfoPanelWithDelay(float delay = 0.25f)
+    {
+        yield return new WaitForSeconds(delay);
+        if (mothershipInTrigger)
         {
             EnableInfoPanel();
             GameManager.Instance.currentPOI = this;
@@ -109,6 +112,7 @@ public class PointOfInterest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerShip"))
         {
+            mothershipInTrigger = false;
             DisableInfoPanel();
         }
     }
@@ -174,5 +178,10 @@ public class PointOfInterest : MonoBehaviour
     public void Destroy()
     {
         Destroy(transform.parent.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        DisableInfoPanel();
     }
 }
