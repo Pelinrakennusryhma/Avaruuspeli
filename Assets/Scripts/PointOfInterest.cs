@@ -10,12 +10,6 @@ public class PointOfInterest : MonoBehaviour
     [Tooltip("Should the PoI be destroyed after visit?")]
     public bool oneTimeVisit = false;
     [SerializeField]
-    GameObject[] models;
-    [SerializeField]
-    float modelSpawnArea = 0.1f;
-    [SerializeField]
-    float modelSize = 0.5f;
-    [SerializeField]
     Transform uiComponents;
     [SerializeField]
     Vector3 UIItemOffset = new Vector3(0f, 40f, 0f);
@@ -34,14 +28,16 @@ public class PointOfInterest : MonoBehaviour
     [SerializeField]
     Button enterButton;
     [SerializeField]
+    Button maximizeButton;
+    [SerializeField]
     WorldMapClickDetector worldMapClickDetector;
     [SerializeField]
     Canvas canvas;
-    int modelAmount = 3;
     [field: SerializeField]
     public POISceneData Data { get; private set; }
 
     private Target targetScript;
+    bool mothershipInTrigger = false;
 
     private void Awake()
     {
@@ -58,11 +54,6 @@ public class PointOfInterest : MonoBehaviour
 
     void Start()
     {
-        if(models != null && models.Length > 0)
-        {
-            CreateGraphics();
-        }
-
         // placeholder mechanism for planets
         if(Data != null)
         {
@@ -70,51 +61,59 @@ public class PointOfInterest : MonoBehaviour
         }
 
         ApplyIcon();
+        UpdatePosition();
+        DisableInfoPanel();
     }
+
     void Update()
+    {
+        UpdatePosition();
+    }
+
+    void UpdatePosition()
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         screenPos += UIItemOffset;
         uiComponents.position = screenPos;
-
-        CheckIfMothershipInVicinity();
     }
 
-    public void Init(POISceneData data)
+    public void Init(POISceneData data, POISpawner.OnPOIEnteredDelegate callback=null)
     {
         Data = data;
         description.text = data.GetDescription();
         title.text = data.Title;
-    }
 
-    void CheckIfMothershipInVicinity()
-    {
-        float distance = (MotherShipOnWorldMapController.Instance.transform.position - transform.position).sqrMagnitude;
-        if(distance < 0.005)
+        if(callback != null)
         {
-            EnableInfoPanel();
-            GameManager.Instance.currentPOI = this;
-        } else
-        {
-            DisableInfoPanel();
+            enterButton.onClick.AddListener(() => callback(this));
         }
     }
 
-    void CreateGraphics()
-    {
-        for (int i = 0; i < modelAmount; i++)
+    private void OnTriggerEnter(Collider other)
+    {      
+        if (other.gameObject.CompareTag("PlayerShip"))
         {
-            Vector3 spawnPos = Random.insideUnitSphere * modelSpawnArea + transform.position;
-            spawnPos.y = transform.position.y;
-            GameObject model = models[Random.Range(0, models.Length)];
-            GameObject spawnedModel = Instantiate(model, spawnPos, Quaternion.identity, transform);
-            spawnedModel.transform.localScale *= modelSize;
+            mothershipInTrigger = true;
+            StartCoroutine(EnableInfoPanelWithDelay());
+        }
+    }
 
-            // Flatten for world map
-            spawnedModel.transform.localScale = new Vector3(
-                spawnedModel.transform.localScale.x,
-                spawnedModel.transform.localScale.y / 10f,
-                spawnedModel.transform.localScale.z);
+    IEnumerator EnableInfoPanelWithDelay(float delay = 0.25f)
+    {
+        yield return new WaitForSeconds(delay);
+        if (mothershipInTrigger)
+        {
+            EnableInfoPanel();
+            GameManager.Instance.currentPOI = this;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("PlayerShip"))
+        {
+            mothershipInTrigger = false;
+            DisableInfoPanel();
         }
     }
 
@@ -139,8 +138,9 @@ public class PointOfInterest : MonoBehaviour
         {
             iconBig.SetActive(false);
         }
-        
+
         infoPanel.SetActive(true);
+        maximizeButton.gameObject.SetActive(false);
     }
 
     void DisableInfoPanel()
@@ -150,5 +150,38 @@ public class PointOfInterest : MonoBehaviour
             iconBig.SetActive(true);
         }
         infoPanel.SetActive(false);
+        maximizeButton.gameObject.SetActive(false);
+    }
+
+    public void OnMinimize()
+    {
+        if (iconBig != null)
+        {
+            iconBig.SetActive(true);
+        }
+
+        infoPanel.SetActive(false);
+        maximizeButton.gameObject.SetActive(true);
+    }
+
+    public void OnMaximize()
+    {
+        if (iconBig != null)
+        {
+            iconBig.SetActive(false);
+        }
+
+        infoPanel.SetActive(true);
+        maximizeButton.gameObject.SetActive(false);
+    }
+
+    public void Destroy()
+    {
+        Destroy(transform.parent.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        DisableInfoPanel();
     }
 }
