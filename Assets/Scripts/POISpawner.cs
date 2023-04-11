@@ -73,7 +73,7 @@ public class POISpawner : MonoBehaviour
     {
         Vector3 pos = GetPosition();
         GameObject instantiatedPOI = Instantiate(asteroidPOIPrefab, pos, Quaternion.identity, transform);
-        PointOfInterest pointOfInterest = instantiatedPOI.GetComponent<PointOfInterest>();
+        PointOfInterest pointOfInterest = instantiatedPOI.GetComponentInChildren<PointOfInterest>();
         activePOIs.Add(pointOfInterest);
         pointOfInterest.Init(GetSceneData());
     }
@@ -114,6 +114,6 @@ public class POISpawner : MonoBehaviour
     public void RemovePOI(PointOfInterest POI) 
     { 
         activePOIs.Remove(POI);
-        Destroy(POI.gameObject);
+        POI.Destroy();
     }
 }
