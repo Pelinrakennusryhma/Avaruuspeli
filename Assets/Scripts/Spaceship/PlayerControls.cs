@@ -93,4 +93,9 @@ public class PlayerControls : ActorSpaceship
             GameEvents.Instance.CallEventLeavingSceneCancelled();
         }
     }
+
+    public void OnSecondaryShoot(InputAction.CallbackContext context)
+    {
+        spaceshipMissile.shooting = context.performed;
+    }
 }

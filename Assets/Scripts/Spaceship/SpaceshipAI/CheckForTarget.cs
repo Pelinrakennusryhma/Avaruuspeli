@@ -18,7 +18,6 @@ public class CheckForTarget : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("_possibleTargets: " + _possibleTargets.Count);
         object t = GetData("target");
         GameObject tGO = (GameObject)t;
 

@@ -10,6 +10,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipBoost spaceshipBoost;
     public SpaceshipShoot spaceshipShoot;
     public SpaceshipEvents spaceshipEvents;
+    public SpaceshipMissile spaceshipMissile;
 
     virtual protected void OnEnable()
     {
@@ -18,6 +19,7 @@ public abstract class ActorSpaceship : MonoBehaviour
         spaceshipBoost = ship.GetComponent<SpaceshipBoost>();
         spaceshipShoot = ship.GetComponent<SpaceshipShoot>();
         spaceshipEvents = ship.GetComponent<SpaceshipEvents>();
+        spaceshipMissile = ship.GetComponent<SpaceshipMissile>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
     }
