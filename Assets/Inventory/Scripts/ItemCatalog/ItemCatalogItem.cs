@@ -12,7 +12,7 @@ public class ItemCatalogItem : MonoBehaviour, IPointerClickHandler
     public ItemSO itemToAdd;
     void Awake()
     {
-        Debug.LogWarning("Awake called on item catalog item " + Time.time);
+        //Debug.LogWarning("Awake called on item catalog item " + Time.time);
 
         //canvas = GameObject.Find("Canvas");
         canvas = GameManager.Instance.InventoryController.CanvasScript.gameObject;
@@ -31,13 +31,13 @@ public class ItemCatalogItem : MonoBehaviour, IPointerClickHandler
         if (item.itemIcon != null)
         {
             itemImage.sprite = item.itemIcon;
-            Debug.LogWarning("We had a good sprite. Well done");
+            //Debug.LogWarning("We had a good sprite. Well done");
         }
 
         else
         {
             itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("No sprite, putting a blank out there");
+            //Debug.LogError("No sprite, putting a blank out there");
         }
 
         //Debug.LogError("Replace this with scriptable object's sprite");
@@ -50,21 +50,10 @@ public class ItemCatalogItem : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             GameObject[] gos = GameObject.FindGameObjectsWithTag("InfoPanel");
-            Debug.LogError("Replace the find with something else!!!");
 
             foreach (GameObject go in gos)
             {
                 Destroy(go);
-            }
-
-            if (itemToAdd == null)
-            {
-                Debug.LogError("Item to add is null");
-            }
-
-            else
-            {
-                Debug.LogWarning("Item to add is not null");
             }
 
             //GameObject.Find("Canvas").GetComponent<CanvasScript>().InfoAboutItem(itemToAdd);
@@ -72,7 +61,6 @@ public class ItemCatalogItem : MonoBehaviour, IPointerClickHandler
 
 
             Object prefab = Resources.Load("Prefabs/ItemInfoPanel");
-            Debug.LogError("Replace prefab load with something else");
 
             GameObject newItem = Instantiate(prefab, canvas.transform) as GameObject;
             newItem.name = itemToAdd.id.ToString();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class ShopHeadsUp : MonoBehaviour
 {
@@ -32,13 +33,13 @@ public class ShopHeadsUp : MonoBehaviour
         PlayerShopItems = new List<ShopItemScript>();
         VendorShopItems = new List<ShopItemScript>();
 
-        Debug.Log("Initializing heads up shop");
+        //Debug.Log("Initializing heads up shop");
     }
 
     public void SetVendor(Vendor vendor)
     {
         CurrentVendor = vendor;
-        Debug.Log("Setting vendor for heads up shop");
+        //Debug.Log("Setting vendor for heads up shop");
     }
 
     public void StartShopping()
@@ -78,12 +79,12 @@ public class ShopHeadsUp : MonoBehaviour
 
         InfoText.text = "";
 
-        Debug.Log("Start shopping " + Time.time);
+        //Debug.Log("Start shopping " + Time.time);
     }
 
     public void FinishShopping()
     {
-        Debug.LogError("Missing functionality: SAVE the items the vendor has!!!");
+        //Debug.LogError("Missing functionality: SAVE the items the vendor has!!!");
 
         for (int i = 0; i < PlayerShopItems.Count; i++)
         {
@@ -101,26 +102,37 @@ public class ShopHeadsUp : MonoBehaviour
             Destroy(VendorShopItems[i].gameObject);
         }
 
-        for (int i = 0; i < CurrentVendor.Items.Count; i++)
+
+
+        //for (int i = 0; i < CurrentVendor.Items.Count; i++)
+        //{
+        //    Debug.Log("Currently the vendor has " + CurrentVendor.Items[i].ItemId + " of amount " + CurrentVendor.Items[i].ItemAmount);
+        //}
+
+
+        if (CurrentVendor.GalaxyID != 0
+            && CurrentVendor.StarSystemID != 0            
+            && CurrentVendor.PlanetID != 0) 
         {
-            Debug.Log("Currently the vendor has " + CurrentVendor.Items[i].ItemId + " of amount " + CurrentVendor.Items[i].ItemAmount);
+            //Debug.Log("Finishing shopping. About to save vendor " + CurrentVendor.GalaxyID + " " + CurrentVendor.StarSystemID + " " + CurrentVendor.PlanetID);
+            GameManager.Instance.SaverLoader.SaveVendor(CurrentVendor);
+            
         }
 
-        GameManager.Instance.SaverLoader.SaveVendor(CurrentVendor);
         VendorShopItems.Clear();
     }
 
     public void AddPlayerItems()
     {
         // DEstryo any previously shown items
-        //for (int i = 0; i < PlayerShopItems.Count; i++)
-        //{
-        //    Destroy(PlayerShopItems[i].gameObject);
-        //}
+        for (int i = 0; i < PlayerShopItems.Count; i++)
+        {
+            Destroy(PlayerShopItems[i].gameObject);
+        }
 
         PlayerShopItems = new List<ShopItemScript>();
 
-        List<ItemScript> playerItems = GameManager.Instance.InventoryController.Inventory.ItemScripts;
+        List<ItemScript> playerItems = GameManager.Instance.InventoryController.Inventory.InventoryItemScripts;
 
         for (int i = 0; i < playerItems.Count; i++)
         {
@@ -139,15 +151,15 @@ public class ShopHeadsUp : MonoBehaviour
             //Debug.Log("Player item " + playerItems[i].itemToAdd.name);
         }
 
-        Debug.Log("Adding player items");
+        //Debug.Log("Adding player items");
     }
 
     public void AddVendorItems()
     {
-        //for (int i = 0; i < VendorShopItems.Count; i++)
-        //{
-        //    Destroy(VendorShopItems[i].gameObject);
-        //}
+        for (int i = 0; i < VendorShopItems.Count; i++)
+        {
+            Destroy(VendorShopItems[i].gameObject);
+        }
 
         VendorShopItems = new List<ShopItemScript>();
 
@@ -159,16 +171,16 @@ public class ShopHeadsUp : MonoBehaviour
             VendorShopItems.Add(shopItem);
 
 
-            Debug.Log("Gettin an item for vendor " + CurrentVendor.Items[i].ItemId);
+            //Debug.Log("Gettin an item for vendor " + CurrentVendor.Items[i].ItemId);
 
             
 
             ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(CurrentVendor.Items[i].ItemId);
 
-            if (shopItem == null)
-            {
-                Debug.LogError("Null shop item");
-            }
+            //if (shopItem == null)
+            //{
+            //    Debug.LogError("Null shop item");
+            //}
 
 
 
@@ -179,7 +191,7 @@ public class ShopHeadsUp : MonoBehaviour
             shopItem.UpdateAmount(CurrentVendor.Items[i].ItemAmount);
         }
 
-        Debug.Log("Adding vendor items");
+        //Debug.Log("Adding vendor items");
     }
 
     public void AddItemToPlayerList(int itemId, int amount)
@@ -196,7 +208,7 @@ public class ShopHeadsUp : MonoBehaviour
                        true);
         shopItem.UpdateAmount(amount);
 
-        Debug.Log("Should add item " + itemId + " amount " + amount + " to player list");
+        //Debug.Log("Should add item " + itemId + " amount " + amount + " to player list");
     }
     public void AddItemToVendorList(int itemId, int amount)
     {
@@ -214,20 +226,14 @@ public class ShopHeadsUp : MonoBehaviour
                        false);
         shopItem.UpdateAmount(amount);
 
-        Debug.Log("Should add item " + itemId + " amount " + amount + " to vendor list");
-    }
-
-    public void OnSoldOut()
-    {
-        Debug.Log("Remove item from list");
+        //Debug.Log("Should add item " + itemId + " amount " + amount + " to vendor list");
     }
 
     public void UpdateShopAmount(bool isPlayerItem,
                                  int id,
-                                 int newAmount,
                                  int buyAmount)
     {
-        Debug.Log("New amount is " + newAmount + " buy amount is " + buyAmount);
+        //Debug.Log("New amount is " + " buy amount is " + buyAmount);
 
         ShopItemScript itemScript = null;
 
@@ -289,13 +295,13 @@ public class ShopHeadsUp : MonoBehaviour
             if (isPlayerItem)
             {
                 PlayerShopItems.Remove(itemScript);
-                Debug.Log("Should have removed player item");
+                //Debug.Log("Should have removed player item");
             }
 
             else
             {
                 VendorShopItems.Remove(itemScript);
-                Debug.Log("Should have removed vendor item");
+                //Debug.Log("Should have removed vendor item");
             }
 
             Destroy(itemScript.gameObject);
@@ -303,7 +309,7 @@ public class ShopHeadsUp : MonoBehaviour
 
         if (!hasItemAlready)
         {
-            Debug.Log("Does not have the item. is player item " + isPlayerItem);
+            //Debug.Log("Does not have the item. is player item " + isPlayerItem);
 
             if (!isPlayerItem)
             {
@@ -318,7 +324,7 @@ public class ShopHeadsUp : MonoBehaviour
 
         else
         {
-            Debug.Log("Has item should add");
+            //Debug.Log("Has item should add");
 
             if (!isPlayerItem)
             {
@@ -328,7 +334,7 @@ public class ShopHeadsUp : MonoBehaviour
                     {
                         PlayerShopItems[i].UpdateAmount(PlayerShopItems[i].ItemAmount + buyAmount);
                         //itemScript = PlayerShopItems[i];
-                        Debug.Log("Should add to player items. item id " + id);
+                        //Debug.Log("Should add to player items. item id " + id);
                         break;
                     }
                 }
@@ -342,34 +348,12 @@ public class ShopHeadsUp : MonoBehaviour
                     {
                         VendorShopItems[i].UpdateAmount(VendorShopItems[i].ItemAmount + buyAmount);
                         //itemScript = VendorShopItems[i];
-                        Debug.Log("Should add to vendor items. item id " + id);
+                        //Debug.Log("Should add to vendor items. item id " + id);
                         break;
                     }
                 }
             }
         }
-
-        RefreshInventory();
-    }
-
-    public void RefreshInventory()
-    {
-
-        //for (int i = 0; i < PlayerShopItems.Count; i++)
-        //{
-
-        //}
-        Debug.Log("Should refresh inventory");
-    }
-
-    public void UpdateMoney()
-    {
-
-    }
-
-    public void UpdateWeight()
-    {
-
     }
 
     public void PlayerIsOutOfMoneyToBuyItem()
@@ -391,4 +375,99 @@ public class ShopHeadsUp : MonoBehaviour
     {
         InfoText.text = "";
     }
+
+    public void SortPlayerItemsByName()
+    {
+        // Destroy previous
+        for (int i = 0; i < PlayerShopItems.Count; i++)
+        {
+            Destroy(PlayerShopItems[i].gameObject);
+        }
+
+        PlayerShopItems.Clear();
+
+        // Get a list of playeritems
+        List<ItemScript> playerItems = GameManager.Instance.InventoryController.Inventory.InventoryItemScripts;
+
+        // sort them
+        playerItems = playerItems.OrderBy(x => x.itemToAdd.itemName).ToList();
+
+        // display them
+
+        for (int i = 0; i < playerItems.Count; i++)
+        {
+            AddItemToPlayerList(playerItems[i].itemToAdd.id, playerItems[i].currentItemAmount);
+        }
+
+        // Set scrollbar to top
+        PlayerScrollBar.value = 1.0f;
+
+        //Debug.LogError("MISSING FUNCTIONALITY: Sort player items by name");
+    }
+
+    public void SortPlayerItemsByWeight()
+    {
+        // Destroy previous
+        for (int i = 0; i < PlayerShopItems.Count; i++)
+        {
+            Destroy(PlayerShopItems[i].gameObject);
+        }
+
+        PlayerShopItems.Clear();
+
+        // Get a list of playeritems
+        List<ItemScript> playerItems = GameManager.Instance.InventoryController.Inventory.InventoryItemScripts;
+
+        // sort them
+        // swap to descending order
+        // There is a order operation for this descending thing already! nice find
+
+        playerItems = playerItems.OrderByDescending(x => x.currentItemWeight).ToList();
+
+
+
+        // display them
+        for (int i = 0; i < playerItems.Count; i++)
+        {
+            AddItemToPlayerList(playerItems[i].itemToAdd.id, playerItems[i].currentItemAmount);
+        }
+
+        // Set scrollbar to top
+        PlayerScrollBar.value = 1.0f;
+
+        //Debug.LogError("MISSING FUNCTIONALITY: Sort player items by weight");
+    }
+
+    public void SortPlayerItemsByValue()
+    {
+        // Destroy previous
+
+        for (int i = 0; i < PlayerShopItems.Count; i++)
+        {
+            Destroy(PlayerShopItems[i].gameObject);
+        }
+
+        PlayerShopItems.Clear();
+
+        // Get a list of playeritems
+        List<ItemScript> playerItems = GameManager.Instance.InventoryController.Inventory.InventoryItemScripts;
+
+        // sort them
+        // swap to descending order
+        // There is a order operation for this descending thing already! nice find
+
+        playerItems = playerItems.OrderByDescending(x => x.currentTotalValue).ToList();
+
+        // display them
+        for (int i = 0; i < playerItems.Count; i++)
+        {
+            AddItemToPlayerList(playerItems[i].itemToAdd.id, playerItems[i].currentItemAmount);
+        }
+
+        // Set scrollbar to top
+        PlayerScrollBar.value = 1.0f;
+        //Debug.LogError("MISSING FUNCTIONALITY: Sort player items by value");
+    }
+
+
 }

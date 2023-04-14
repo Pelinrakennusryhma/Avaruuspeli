@@ -25,11 +25,16 @@ public class CanvasScript : MonoBehaviour
     }
     public void ShowItemCatalog()
     {
+        HideHeadsUpShop(false);
+        inventoryPanel.SetActive(false);
+        HideEquipment();
         itemCatalogPanel.SetActive(true);
     }
     public void HideItemCatalog()
     {
         itemCatalogPanel.SetActive(false);
+        inventoryPanel.SetActive(true);
+        ShowEquipment();
     }
 
     public void ShowShop()
@@ -53,20 +58,37 @@ public class CanvasScript : MonoBehaviour
 
     public void ShowHeadsUpShop()
     {
-        HideEquipment();
+        //Debug.Log("Show heads up shop called");
+
         HideShop();
-        HideItemCatalog();
+        HideItemCatalog();        
+        HideEquipment();
         inventoryPanel.SetActive(false);
         headsUpShop.gameObject.SetActive(true);
         headsUpShop.Init();
         headsUpShop.StartShopping();
     }
 
-    public void HideHeadsUpShop()
+    public void HideHeadsUpShop(bool finishShopping)
     {
+       // Debug.Log("Hide heads up shop called");
+
+        if (finishShopping) 
+        {
+            headsUpShop.FinishShopping();
+            //Debug.LogError("Finishing shopping");
+        }
+
+        else
+        {
+            //Debug.LogError("We are not shopping anymore");
+        }
+
         inventoryPanel.SetActive(true);
         ShowEquipment();
         headsUpShop.gameObject.SetActive(false);
-        headsUpShop.FinishShopping();
+
+
+        
     }
 }

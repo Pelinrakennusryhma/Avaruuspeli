@@ -10,6 +10,13 @@ public class ItemCatalog : MonoBehaviour
     public List<Resource> resources = new List<Resource>();
     public List<EquipmentItemSO> equipment = new List<EquipmentItemSO>();
     public List<ConsumableItemSO> consumables = new List<ConsumableItemSO>();
+
+    public List<FuelItemSO> fuels = new List<FuelItemSO>();
+    public List<DrillItemSO> drills = new List<DrillItemSO>();
+    public List<PlayerWeaponItemSO> playerWeapons = new List<PlayerWeaponItemSO>();
+    public List<ShipItemSO> shipItems = new List<ShipItemSO>();
+    public List<ShipWeaponItemSO> shipWeapons = new List<ShipWeaponItemSO>();
+
     public ItemSO itemToAdd;
 
     void Start()
@@ -18,7 +25,13 @@ public class ItemCatalog : MonoBehaviour
         resources = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.Resources;
         equipment = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.EquipmentItems;
         consumables = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.ConsumableItems;
-        Debug.LogError("Should probably add other item types too. But requires more and rehauled UI and stuff");
+
+        fuels = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.FuelItems;
+        drills = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.DrillItems;
+        playerWeapons = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.PlayerWeaponItems;
+        shipItems = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.ShipItems;
+        shipWeapons = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.ShipWeaponItems;
+
 
         ////Lajittelee itemit omiin ryhmiin
         //foreach (Item item in itemDatabase.items)
@@ -37,58 +50,135 @@ public class ItemCatalog : MonoBehaviour
         //    }
 
         //}
+
         ShowAll();
     }
 
     public void ShowAllItems()
     {
-        Debug.LogError("Missing functionality to show all items");
+        //Debug.LogError("Missing functionality to show all items");
 
         foreach (ItemSO item in allItems)
         {
-            itemToAdd = item;
-            Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
-            GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
-            newItem.name = item.id.ToString();
+            CreateItem(item);
+
+            //itemToAdd = item;
+            //Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
+            //GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
+            //newItem.name = item.id.ToString();
         }
     }
 
+
+    // FROM NOW ON THERE'S A LOT OF SIMILAR COPY/PASTE CODE
+    // MAYBE THIS COULD BE REFACTORED?
+    // BUT MAYBE NOT, BECAUSE WE NEED FUNCTIONS FOR BUTTONS
+
+
     public void ShowResources()
     {
-        Debug.Log("About to show resources " + Time.time);
+        //Debug.Log("About to show resources " + Time.time);
 
         foreach(Resource item in resources)
         {
-            itemToAdd = item;
-            Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
-            GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
-            newItem.name = item.id.ToString();
+            CreateItem(item);
+            //itemToAdd = item;
+            //Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
+            //GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
+            //newItem.name = item.id.ToString();
         }
     }
     public void ShowEquipment()
     {
-        Debug.Log("About to show equipment " + Time.time);
+        //Debug.Log("About to show equipment " + Time.time);
 
 
         foreach (EquipmentItemSO item in equipment)
         {
-            itemToAdd = item;
-            Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
-            GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
-            newItem.name = item.id.ToString();
+            CreateItem(item);
+
+            //itemToAdd = item;
+            //Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
+            //GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
+            //newItem.name = item.id.ToString();
         }
     }
+
+    private void CreateItem(ItemSO item)
+    {
+        itemToAdd = item;
+        Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
+        GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
+        newItem.name = item.id.ToString();
+    }
+
     public void ShowConsumables()
     {
-        Debug.Log("About to show consumables " + Time.time);
+        //Debug.Log("About to show consumables " + Time.time);
 
 
         foreach (ConsumableItemSO item in consumables)
         {
-            itemToAdd = item;
-            Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
-            GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
-            newItem.name = item.id.ToString();
+            CreateItem(item);
+            //itemToAdd = item;
+            //Object prefab = Resources.Load("Prefabs/ItemCatalogItem");
+            //GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
+            //newItem.name = item.id.ToString();
+        }
+    }
+
+    public void ShowFuels()
+    {
+        //Debug.Log("About to show fuels " + Time.time);
+
+
+        foreach (FuelItemSO item in fuels)
+        {
+            CreateItem(item);
+        }
+    }
+
+    public void ShowDrills()
+    {
+        //Debug.Log("About to show drills " + Time.time);
+
+
+        foreach (DrillItemSO item in drills)
+        {
+            CreateItem(item);
+        }
+    }
+
+    public void ShowPlayerWeapons()
+    {
+        //Debug.Log("About to show ship weapons " + Time.time);
+
+
+        foreach (PlayerWeaponItemSO item in playerWeapons)
+        {
+            CreateItem(item);
+        }
+    }
+
+    public void ShowShipItems()
+    {
+        //Debug.Log("About to show ship items " + Time.time);
+
+
+        foreach (ShipItemSO item in shipItems)
+        {
+            CreateItem(item);
+        }
+    }
+
+    public void ShowShipWeapons()
+    {
+        //Debug.Log("About to show ship weapons " + Time.time);
+
+
+        foreach (ShipWeaponItemSO item in shipWeapons)
+        {
+            CreateItem(item);
         }
     }
     public void ResetCatalog()
@@ -102,7 +192,7 @@ public class ItemCatalog : MonoBehaviour
     public void ShowAll()
     {
 
-        Debug.Log("About to show all items");
+        //Debug.Log("About to show all items");
         ResetCatalog();
 
         ShowAllItems();
@@ -126,5 +216,42 @@ public class ItemCatalog : MonoBehaviour
     {
         ResetCatalog();
         ShowConsumables();
+    }
+
+    public void ShowOnlyFuels()
+    {
+        ResetCatalog();
+        ShowFuels();
+    }
+
+
+    //fuels 
+    //drills
+    //playerWeapons
+    //shipItems
+    //shipWeapons
+
+    public void ShowOnlyDrills()
+    {
+        ResetCatalog();
+        ShowDrills();
+    }
+
+    public void ShowOnlyPlayerWeapons()
+    {
+        ResetCatalog();
+        ShowPlayerWeapons();
+    }
+
+    public void ShowOnlyShipItems()
+    {
+        ResetCatalog();
+        ShowShipItems();
+    }
+
+    public void ShowOnlyShipWeapons()
+    {
+        ResetCatalog();
+        ShowShipWeapons();
     }
 }

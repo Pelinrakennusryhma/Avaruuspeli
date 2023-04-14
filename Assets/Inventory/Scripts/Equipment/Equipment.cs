@@ -25,22 +25,27 @@ public class Equipment : MonoBehaviour
 
         if (equippedDrill != null)
         {
-            inventory.AddItem(equippedDrill.id, 1);
+            //inventory.AddItem(equippedDrill.id, 1);
+            //Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
+            
             equippedDrill = null;
             //drillImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
             drillImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Replace with some scriptable object stuff");
-        }
+
+        }            
+        
+        //Debug.LogError("Unequipping drill");
     }
     public void UnequipSpacesuit()
     {
         if (equippedSpacesuit != null)
         {
-            inventory.AddItem(equippedSpacesuit.id, 1);
+            //inventory.AddItem(equippedSpacesuit.id, 1);
+            //Debug.LogWarning("Don't add and remove spacesuit from inventory during equip/unequip?");
             equippedSpacesuit = null;
             //spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
             spacesuitImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Replace with some scriptable object stuff");
+
         }
     }
     public void EquipDrill(ItemSO item)
@@ -52,15 +57,14 @@ public class Equipment : MonoBehaviour
         if (equippedDrill.itemIcon != null)
         {
             drillImage.sprite = equippedDrill.itemIcon;
-            Debug.LogWarning("We had a sprite for a drill");
+            //Debug.LogWarning("We had a sprite for a drill");
         }
 
         else
         {
             drillImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
+            //Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
         }
-        Debug.LogError("Replace with some scriptable object stuff");
 
         Debug.Log("Equipping drill. Item id is " + item.id);
         
@@ -86,21 +90,24 @@ public class Equipment : MonoBehaviour
     {
         UnequipSpacesuit();
         equippedSpacesuit = item;
+
+        Debug.LogWarning("Equipping spacesuit");
+
         //spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedSpacesuit.name);
 
         if (equippedSpacesuit.itemIcon != null)
         {
-            spacesuitImage.sprite = equippedDrill.itemIcon;
-            Debug.LogWarning("We had a sprite for a spacesuit");
+            spacesuitImage.sprite = equippedSpacesuit.itemIcon;
+            //Debug.LogWarning("We had a sprite for a spacesuit");
         }
 
         else
         {
             spacesuitImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
+            //Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
         }
 
-        Debug.LogError("Replace with some scriptable object stuff");
+        //Debug.LogError("Replace with some scriptable object stuff");
     }
 
     public void UnequipShipWeapon1()
@@ -111,9 +118,10 @@ public class Equipment : MonoBehaviour
             equippedShipWeapon1 = null;
             //shipWeapon1Image.sprite = Resources.Load<Sprite>("Sprites/Empty");
 
+
             shipWeapon1Image.sprite = GameManager.Instance.InventoryController.BlankSprite;
 
-            Debug.LogError("Replace with some scriptable object stuff");
+            //Debug.LogError("Replace with some scriptable object stuff");
         }
     }
     public void UnequipShipWeapon2()
@@ -126,7 +134,7 @@ public class Equipment : MonoBehaviour
 
             shipWeapon1Image.sprite = GameManager.Instance.InventoryController.BlankSprite;
 
-            Debug.LogError("Replace with some scriptable object stuff");
+            //Debug.LogError("Replace with some scriptable object stuff");
         }
     }
     public void EquipShipWeapon1(ItemSO item)
@@ -147,7 +155,7 @@ public class Equipment : MonoBehaviour
             Debug.LogError("Had to put a blank sprite out there");
         }
 
-        Debug.LogError("Replace with some scriptable object stuff");
+        //Debug.LogError("Replace with some scriptable object stuff");
     }
     public void EquipShipWeapon2(ItemSO item)
     {
@@ -167,6 +175,41 @@ public class Equipment : MonoBehaviour
             Debug.LogError("Had to put a blank sprite out there");
         }
 
-        Debug.LogError("Replace with some scriptable object stuff");
+        //Debug.LogError("Replace with some scriptable object stuff");
+    }
+
+    public bool CheckIfAnItemIsEquipped(ItemSO item)
+    {
+        bool isAnEquippedItem = false;
+
+        if (item == equippedDrill
+            || item == equippedSpacesuit
+            || item == equippedShipWeapon1
+            || item == equippedShipWeapon2)
+        {
+            isAnEquippedItem = true;
+            Debug.LogWarning("Tried to discard an equipped item, but we won't allow that for now.");
+        }
+
+        else
+        {
+            Debug.LogWarning("We didn't catch an equipped item with a check. Item is " + item.id + " name is " + item.itemName);
+        }
+
+        //if ((equippedDrill != null && item.id == equippedDrill.id)
+        //    || (equippedSpacesuit != null && item.id == equippedSpacesuit.id)
+        //    || (equippedShipWeapon1 != null && item.id == equippedShipWeapon1.id)
+        //    || (equippedShipWeapon2 != null && item.id == equippedShipWeapon2.id))
+        //{
+        //    isAnEquippedItem = true;
+        //    Debug.LogWarning("Tried to discard an equipped item, but we won't allow that for now.");
+        //}
+
+        //else
+        //{
+        //    Debug.LogWarning("We didn't catch an equipped item with a check. Item is " + item.id + " name is " + item.itemName);
+        //}
+
+        return isAnEquippedItem;
     }
 }

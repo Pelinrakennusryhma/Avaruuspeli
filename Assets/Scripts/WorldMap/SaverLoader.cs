@@ -358,7 +358,7 @@ public class SaverLoader : MonoBehaviour
                 && VendorSaveData.Vendors[i].PlanetID == planetId)
             {
                 vendor = VendorSaveData.Vendors[i];
-                Debug.Log("Found vendor from galaxy " + galaxyId + " star system " + starSystemId + " from planet " + planetId);
+                //Debug.Log("Found vendor from galaxy " + galaxyId + " star system " + starSystemId + " from planet " + planetId);
                 break;
             }
         }
@@ -370,16 +370,69 @@ public class SaverLoader : MonoBehaviour
     {
         if (VendorSaveData == null)
         {
+            ReadFromVendorFile();
+            Debug.LogError("Had to read from vendor file");
+        }
+
+        if (VendorSaveData == null)
+        {
             VendorSaveData = new VendorSaveData();
+            Debug.LogError("Vendor save data is null");
         }
 
         if (VendorSaveData.Vendors == null)
         {
-            VendorSaveData.Vendors= new List<Vendor>();
+            VendorSaveData.Vendors = new List<Vendor>();
+            Debug.LogError("A null list of vendors");
         }
 
-        VendorSaveData.Vendors.Add(vendor);
+        //Debug.LogWarning("Saving vendor with galaxy id " + vendor.GalaxyID 
+        //                 + " star system id " + vendor.StarSystemID + " at planed id " + vendor.PlanetID);
+
+        bool alreadyInList = false;
+
+        // God, I wish there was better solution for this
+        // But don't know yet, how to implement this otherwise and save to json
+        for (int i = 0; i < VendorSaveData.Vendors.Count; i++)
+        {
+            if (VendorSaveData.Vendors[i].GalaxyID == vendor.GalaxyID
+                && VendorSaveData.Vendors[i].StarSystemID == vendor.StarSystemID
+                && VendorSaveData.Vendors[i].PlanetID == vendor.PlanetID) 
+            {
+                alreadyInList = true;
+                VendorSaveData.Vendors[i] = vendor;
+                break;
+            }
+        }
+
+        if (!alreadyInList) 
+        {
+            VendorSaveData.Vendors.Add(vendor);
+        }
+
+        //for (int i = 0; i < VendorSaveData.Vendors.Count; i++)
+        //{
+        //    if (VendorSaveData.Vendors[i].Items.Count > 0) 
+        //    {
+        //        for (int j = 0; j < VendorSaveData.Vendors[i].Items.Count; j++)
+        //        {
+        //            Debug.Log("Vendor " + VendorSaveData.Vendors[i].GalaxyID + " "
+        //                      + VendorSaveData.Vendors[i].StarSystemID
+        //                      + " " + VendorSaveData.Vendors[i].PlanetID + "  has item "
+        //                      + VendorSaveData.Vendors[i].Items[j].ItemId + " of amount "
+        //                      + VendorSaveData.Vendors[i].Items[j].ItemAmount);
+        //        }
+        //    }
+
+        //    else
+        //    {
+        //        Debug.Log("Vendor " + VendorSaveData.Vendors[i].GalaxyID + " "
+        //                      + VendorSaveData.Vendors[i].StarSystemID
+        //                      + " " + VendorSaveData.Vendors[i].PlanetID + " has zero items");
+        //    }
+        //}
+
         WriteToVendorSaveFile();
-        Debug.LogWarning("Save vendor");
+        //Debug.LogWarning("Save vendor");
     }
 }

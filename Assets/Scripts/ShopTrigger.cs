@@ -37,7 +37,7 @@ public class ShopTrigger : MonoBehaviour
             {
                 GameManager.Instance.InventoryController.OnEnterShoppingArea();
                 PlayerIsInShoppingAreaFacingShop = true;            
-                Debug.Log("Entered shopping area");
+                //Debug.Log("Entered shopping area");
             }
 
 
@@ -48,7 +48,7 @@ public class ShopTrigger : MonoBehaviour
             {
                 GameManager.Instance.InventoryController.OnExitShoppingArea();
                 PlayerIsInShoppingAreaFacingShop = false;            
-                Debug.Log("Exited shopping area");
+                //Debug.Log("Exited shopping area");
             }
 
         }

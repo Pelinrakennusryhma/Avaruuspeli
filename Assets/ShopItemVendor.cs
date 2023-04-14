@@ -23,12 +23,12 @@ public class ShopItemVendor : MonoBehaviour
             && !item.isStackable)
         {
             alreadyHasSingletonItem = true;
-            Debug.Log("AlreadyHasSingletonItem ");
+            //Debug.Log("AlreadyHasSingletonItem ");
         }
 
         else
         {
-            Debug.Log("Does not have singleton item yet.");
+            //Debug.Log("Does not have singleton item yet.");
         }
 
         hasEnoughRoom = GameManager.Instance.InventoryController.Inventory.CheckIfWeHaveRoomForItem(ShopItemScript.item, 
@@ -37,20 +37,20 @@ public class ShopItemVendor : MonoBehaviour
         if (!alreadyHasSingletonItem 
             && hasEnoughRoom)
         {
-            Debug.Log("WE have enough room for items");
+            //Debug.Log("WE have enough room for items");
 
             hasEnoughMoney = GameManager.Instance.InventoryController.Inventory.TryToBuyItemWithMoney(int.Parse(ShopItemScript.buyAmount.text) 
                                                                                                       * ShopItemScript.adjustedPrice,
                                                                                                       true);
 
-            if (hasEnoughMoney)
-            {
-                Debug.Log("Had enough money to buy items");
-            }
-            else
-            {
-                Debug.Log("Not enough money to buy item");
-            }
+            //if (hasEnoughMoney)
+            //{
+            //    Debug.Log("Had enough money to buy items");
+            //}
+            //else
+            //{
+            //    Debug.Log("Not enough money to buy item");
+            //}
         }
 
         else
@@ -63,7 +63,7 @@ public class ShopItemVendor : MonoBehaviour
         if (!hasEnoughMoney)
         {
             GameManager.Instance.InventoryController.ShopHeadsUp.PlayerIsOutOfMoneyToBuyItem();
-            Debug.Log("Current money is " + GameManager.Instance.InventoryController.Money);
+            //Debug.Log("Current money is " + GameManager.Instance.InventoryController.Money);
         }
 
         else if (!hasEnoughRoom)
@@ -85,7 +85,6 @@ public class ShopItemVendor : MonoBehaviour
             int buyAmount = Mathf.Clamp(int.Parse(ShopItemScript.buyAmount.text), 0, ShopItemScript.ItemAmount + 1);
             GameManager.Instance.InventoryController.ShopHeadsUp.UpdateShopAmount(false,
                                                                                   ShopItemScript.ID,
-                                                                                  666,
                                                                                   buyAmount);
 
             GameManager.Instance.InventoryController.Inventory.OnItemBought(ShopItemScript.ID,
@@ -95,7 +94,7 @@ public class ShopItemVendor : MonoBehaviour
             GameManager.Instance.InventoryController.Inventory.UpdateWeight((float)ShopItemScript.item.weight * buyAmount);
 
             GameManager.Instance.InventoryController.ShopHeadsUp.OnSuccesfullBuy();
-            Debug.Log("Buy amount is " + buyAmount);
+            //Debug.Log("Buy amount is " + buyAmount);
         }
     }
 }

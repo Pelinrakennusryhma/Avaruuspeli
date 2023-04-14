@@ -18,6 +18,7 @@ public class GatherableObject : MonoBehaviour
     MeshCollider meshCollider;
     Vector3 targetPosition;
 
+
     private void Awake()
     {
        rb = GetComponent<Rigidbody>();
@@ -46,6 +47,17 @@ public class GatherableObject : MonoBehaviour
             PickupTime = Time.time;
             HasBeenPickedUp = true;
             PickUpStartPos = transform.position;
+
+            if (_centerOfGravity != null) 
+            {
+                rb.useGravity = false;
+            }
+
+            if (_centerOfGravity == null)
+            {
+                rb.useGravity = false;
+                meshCollider.isTrigger = true;
+            }
             //Debug.Log("We have first person instance");
         }
 
@@ -69,9 +81,58 @@ public class GatherableObject : MonoBehaviour
     public virtual void Activate(CenterOfGravity centerOfGravity)
     {
         _centerOfGravity = centerOfGravity;
-        MeshCollider asteroidCollider = centerOfGravity.GetComponent<MeshCollider>();
-        targetPosition = CalculateTargetPos(asteroidCollider);
-        meshCollider.enabled = true;
+        
+        if (_centerOfGravity != null) 
+        {
+            MeshCollider asteroidCollider = centerOfGravity.GetComponent<MeshCollider>();
+            targetPosition = CalculateTargetPos(asteroidCollider);
+            meshCollider.enabled = true;
+        }
+
+        else
+        {
+            if (rb == null)
+            {
+                //Debug.LogError("Null rb");
+                rb = GetComponent<Rigidbody>();
+
+                //if (rb == null)
+                //{
+                //    Debug.LogError("Null rb. STILL");
+
+                //}
+            }
+
+            rb.constraints = RigidbodyConstraints.None;
+            rb.isKinematic = false;
+            rb.mass = 1.0f;
+            rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+
+            if (meshCollider == null)
+            {
+                meshCollider = GetComponentInChildren<MeshCollider>(true);
+            }
+
+            meshCollider.enabled = true;
+            meshCollider.isTrigger = false;
+
+            //RaycastHit hitinfo;
+            //bool hits = Physics.Raycast(rb.position,
+            //                            Vector3.down * 210f,
+            //                            out hitinfo);
+
+            //if (hits)
+            //{
+            //    targetPosition = hitinfo.point;
+            //    Debug.Log("Target position is " + targetPosition);
+            //}
+
+            //else
+            //{
+            //    Debug.LogError("Didn't hit anything. LayerMask is " + TerrainGroundLayerMask);
+            //}
+        }
     }
 
     Vector3 CalculateTargetPos(MeshCollider asteroidCollider)
@@ -161,9 +222,15 @@ public class GatherableObject : MonoBehaviour
                 HasBeenPickedUp = false;
                 gameObject.SetActive(false);
             }
-        } else
+        } 
+        
+        else
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 3f);
+            if (_centerOfGravity != null) 
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 3f);
+                //Debug.LogError("Moving towards target position " + Time.time);
+            }
         }
     }
 }

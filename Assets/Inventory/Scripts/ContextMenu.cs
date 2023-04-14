@@ -22,28 +22,78 @@ public class ContextMenu : MonoBehaviour
     public bool shopping;
 
     //Piilottaa context menusta kaikki vaihtoehdot ja sitten näyttää kaikki itemin tyyppiin liittyvät vaihtoehdot. Näyttää 'Sell' jos pelaaja on kaupassa.
-    public void ShowOptions(string type)
+    public void ShowOptions(ItemSO.ItemType  itemType)
     {
         HideAll();
-        if (type == "Resource")
+
+        //Debug.LogWarning("The string searches have been replaced with enum use.");
+
+        switch (itemType)
         {
-            ShowDiscard();
+            case ItemSO.ItemType.None:
+                ShowDiscard();
+                break;
+            case ItemSO.ItemType.Consumable:
+                ShowUse();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.Drill:
+                ShowEquip();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.Equipment:
+                ShowEquip();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.PlayerWeapon:
+                Debug.LogError("Missing functionality: player weapons can't yet be equipped in any way.");
+                ShowDiscard();
+                break;
+            case ItemSO.ItemType.Resource:
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.ShipItem:
+                Debug.LogError("Missing functionality: ship items can't yet be equipped in any way.");
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.ShipWeapon:
+                ShowEquip1();
+                ShowEquip2();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.Fuel:
+                Debug.LogError("Missing functionality: fuels are missing context menus.");
+                ShowDiscard();
+                break;
+            default:
+                break;
         }
-        else if ((type == "Drill") || (type == "Spacesuit"))
-        {
-            ShowEquip();
-            ShowDiscard();
-        }
-        else if(type == "ShipWeapon") {
-            ShowEquip1();
-            ShowEquip2();
-            ShowDiscard();
-        }
-        else if(type == "Consumable")
-        {
-            ShowUse();
-            ShowDiscard();
-        }
+
+        //if (type == "Resource")
+        //{
+        //    ShowDiscard();
+        //}
+        //else if ((type == "Drill") || (type == "Spacesuit"))
+        //{
+        //    ShowEquip();
+        //    ShowDiscard();
+        //}
+        //else if(type == "ShipWeapon") {
+        //    ShowEquip1();
+        //    ShowEquip2();
+        //    ShowDiscard();
+        //}
+        //else if(type == "Consumable")
+        //{
+        //    ShowUse();
+        //    ShowDiscard();
+        //}
 
         if (shopping == true)
         {
@@ -70,6 +120,7 @@ public class ContextMenu : MonoBehaviour
     }
     public void UnequipSpacesuit()
     {
+        Debug.LogWarning("Unequipping spacesuit");
         equipment.UnequipSpacesuit();
         HideMenu();
     }
@@ -92,7 +143,7 @@ public class ContextMenu : MonoBehaviour
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
 
-        Debug.LogError("We are doing checks with ids. Maybe we should do it with a TYPE. Maybe...");
+        Debug.LogError("Unequipping item with id " + itemID);
 
         if (item.id == 7
             || item.id == 8)
@@ -108,7 +159,9 @@ public class ContextMenu : MonoBehaviour
     {
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
-        inventory.RemoveItem(item.id, 1);
+        //inventory.RemoveItem(item.id, 1);
+        //Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
+
         equipment.EquipDrill(item);
         HideMenu();
     }
@@ -116,7 +169,8 @@ public class ContextMenu : MonoBehaviour
     {
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
-        inventory.RemoveItem(item.id, 1);
+        //inventory.RemoveItem(item.id, 1);
+        //Debug.LogWarning("Don't add and remove spacesuit during equip/unequip");
         equipment.EquipSpacesuit(item);
         HideMenu();
     }
@@ -126,6 +180,7 @@ public class ContextMenu : MonoBehaviour
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
+        Debug.LogWarning("We are adding and removing ship weapon from invenotry during equip/unequip. This is old functionality and should be made consistent with the rest of items.");
         equipment.EquipShipWeapon1(item);
         HideMenu();
     }
@@ -135,6 +190,8 @@ public class ContextMenu : MonoBehaviour
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
+        Debug.LogWarning("We are adding and removing ship weapon from invenotry during equip/unequip. This is old functionality and should be made consistent with the rest of items.");
+
         equipment.EquipShipWeapon2(item);
         HideMenu();
     }
@@ -145,8 +202,6 @@ public class ContextMenu : MonoBehaviour
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
                     
-        Debug.LogError("We are checking for an item with id. Maybe we could and should do the check with a TYPE");
-
         if (item.id == 7
             || item.id == 8)
         {
@@ -161,7 +216,27 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Discard' vaihtoehto
     public void DiscardItem()
     {
-        inventory.RemoveItem(itemID, 999999999);
+        ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+        Debug.LogWarning("Checking that we don't discard an equipped item!!");
+
+        bool isAnEquippedItem = false;
+
+        if (GameManager.Instance.InventoryController.Equipment.CheckIfAnItemIsEquipped(item))
+        {
+            isAnEquippedItem = true;
+            Debug.LogWarning("Tried to discard an equipped item, but we won't allow that for now.");
+        }
+
+        else
+        {
+            Debug.LogWarning("Item wasn't equipped so we can discard it safely");
+        }
+
+        if (!isAnEquippedItem) 
+        {
+            inventory.RemoveItem(itemID, 999999999);
+        }
+
         HideMenu();
     }
 
@@ -180,7 +255,10 @@ public class ContextMenu : MonoBehaviour
 
     public ItemScript FindCorrectItemScript()
     {        
-        Debug.LogError("Replace the find with something else!!!");
+        Debug.LogError("Replace the find with something else!!! But these are dynamically created, " +
+                       "so some thought is required from where to fetch this. But also, it is not " +
+                       "possible to shop anymore with inventory open, so you should never even see this message!");
+
         return GameObject.Find("InventoryPanel/Scroll/View/Layout/" + itemID).GetComponent<ItemScript>();        
     }
 

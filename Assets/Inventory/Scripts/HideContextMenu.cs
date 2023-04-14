@@ -28,8 +28,6 @@ public class HideContextMenu : MonoBehaviour, IPointerClickHandler
             contextMenuScript.HideMenu();
             GameObject[] gos = GameObject.FindGameObjectsWithTag("InfoPanel");
 
-            Debug.LogError("Info panel find objects with tag. Maybe this could be refactored?");
-
             foreach (GameObject go in gos)
             {
                 Destroy(go);

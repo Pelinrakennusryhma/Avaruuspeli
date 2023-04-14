@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
             && Input.GetKeyDown(KeyCode.M)
             && !InventoryController.IsShopping)
         {
+
             GoBackToWorldMap();
         }
 
@@ -168,7 +169,7 @@ public class GameManager : MonoBehaviour
             {
                 if (inventoryToggleQueued)
                 {
-                    Debug.LogWarning("Should launch inveneotry");
+                    //Debug.LogWarning("Should launch inveneotry");
 
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 

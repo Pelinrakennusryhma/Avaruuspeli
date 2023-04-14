@@ -20,7 +20,7 @@ MonoBehaviour:
     asteroids.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: eeebd313dd738cd44956255e2115e019, type: 3}
   isStackable: 0
   weight: 250
   itemType: 2

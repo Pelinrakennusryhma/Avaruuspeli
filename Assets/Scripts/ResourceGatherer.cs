@@ -53,7 +53,21 @@ public class ResourceGatherer : MonoBehaviour
 
             if (gatherable != null && gatherable.enabled)
             {
-                gatherable.OnPickUp();
+                bool weHaveRoom = GameManager.Instance.InventoryController.Inventory.CheckIfWeHaveRoomForItem(gatherable.ResourceType, 1);
+
+                if (weHaveRoom)
+                {
+                    GameManager.Instance.InventoryController.Inventory.UpdateWeight(gatherable.ResourceType.weight);
+                    gatherable.OnPickUp();
+                    Debug.Log("WE have room for item. Can collect");
+                }
+
+                else
+                {
+                    Debug.Log("No room for pickup");
+                }
+                
+
             }
 
             else

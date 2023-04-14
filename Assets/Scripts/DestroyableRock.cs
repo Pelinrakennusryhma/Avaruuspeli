@@ -35,6 +35,7 @@ public class DestroyableRock : MonoBehaviour
     private List<GatherableObject> spawnedResources = new List<GatherableObject>();
     CenterOfGravity _centerOfGravity;
     MeshFilter meshFilter;
+
     // Start is called before the first frame update
 
     public void Awake()
@@ -73,6 +74,8 @@ public class DestroyableRock : MonoBehaviour
         ResourceAmount = Random.Range(minResourceAmount, maxResourceAmount + 1);
         //ResourceAmount = Pickups.Setup(resourceType, mineralDensity, centerOfGravity);
         //Pickups.Decorate(gameObject);
+        //Debug.Log("Initting destroyable rock " + Time.time);
+
         SpawnResources();
     }
 
@@ -85,6 +88,8 @@ public class DestroyableRock : MonoBehaviour
             Vector3 spawnPos = FindVertexOnMesh();
             GameObject spawnedResource = Instantiate(resourceVariant, spawnPos, Random.rotation, Graphics.transform);
             GatherableObject gatherableObject = spawnedResource.GetComponent<GatherableObject>();
+
+
             gatherableObject.Init(ResourceType);
             gatherableObject.enabled = false;
             spawnedResources.Add(gatherableObject);

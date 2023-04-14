@@ -11,6 +11,12 @@ public class ShipWeaponSlot2 : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            if (equipment.equippedShipWeapon2 == null)
+            {
+                //Debug.LogWarning("Nothing equipped. Returning.");
+                return;
+            }
+
             contextMenuScript.HideAll();
             contextMenuScript.ShowUnequip2();
             contextMenuScript.SetPositionToMouse();

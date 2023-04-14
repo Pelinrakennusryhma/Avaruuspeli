@@ -29,7 +29,7 @@ public class InventoryController : MonoBehaviour
     public void Init()
     {        
         ItemDataBaseWithScriptables.Init();
-
+        Inventory.OnInventoryControllerInit();
         //Item item;
         //item = CanvasScript.contextMenu.itemDatabase.GetItem(2);
         ////Inventory.RemoveItem(item.id, 1);
@@ -51,6 +51,16 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(8, 1);
         Inventory.AddItem(9, 1);
         Inventory.AddItem(10, 1);
+        Inventory.AddItem(11, 1);
+        Inventory.AddItem(12, 1);
+        Inventory.AddItem(13, 1);
+        Inventory.AddItem(14, 1);
+        Inventory.AddItem(15, 1);
+        Inventory.AddItem(16, 1);
+        Inventory.AddItem(17, 1);
+        Inventory.AddItem(18, 1);
+        Inventory.AddItem(19, 1);
+        Inventory.AddItem(20, 1);
 
         Shop.Init();
         ShopHeadsUp.Init();
@@ -80,14 +90,18 @@ public class InventoryController : MonoBehaviour
             if (currentTool == ResourceGatherer.ToolType.BasicDrill)
             {
                 item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(7);
-                Inventory.RemoveItem(item.id, 1);
+                //Inventory.RemoveItem(item.id, 1);
+                Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
+
                 Equipment.EquipDrill(item);
             }
 
             else if (currentTool == ResourceGatherer.ToolType.AdvancedDrill)
             {
                 item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(8);
-                Inventory.RemoveItem(item.id, 1);
+                //Inventory.RemoveItem(item.id, 1);
+                Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
+
                 Equipment.EquipDrill(item);
             }
         }
@@ -102,9 +116,15 @@ public class InventoryController : MonoBehaviour
 
     public void OnInventoryHide()
     {
+        if (ResourceInventory.Instance != null) 
+        {
+            ResourceInventory.Instance.SetResourceAmounts(Inventory);
+        }
+
         Cursor.lockState = cachedCursorLockMode;
         Time.timeScale = 1.0f;
         ShowingInventory = false;
+        CanvasScript.HideHeadsUpShop(false);
         CanvasObject.SetActive(false);
         DetachFromMainCamera();
         //Debug.Log("Hide inventory");
@@ -192,11 +212,26 @@ public class InventoryController : MonoBehaviour
 
         if (useHeadsUpShop)
         {
-            ShopHeadsUp.SetVendor(GameManager.Instance.CurrentPlanet.Vendor);
             CanvasScript.HideEquipment();
             CanvasScript.HideItemCatalog();
             CanvasScript.HideShop();
             CanvasScript.ShowHeadsUpShop();
+
+
+            if (GameManager.Instance.CurrentPlanet
+                != null
+                && GameManager.Instance.CurrentPlanet.Vendor != null)
+            {
+                ShopHeadsUp.SetVendor(GameManager.Instance.CurrentPlanet.Vendor);
+            }
+
+            else
+            {
+                // This an editor launch straight in the scene. Just create a new vendor, when it is
+                // Noticed that the vendor is actually null
+                ShopHeadsUp.SetVendor(null);
+            }
+
         }
     }
 
@@ -204,8 +239,10 @@ public class InventoryController : MonoBehaviour
     {
         OnInventoryHide();
         CanvasScript.HideShop();
-        CanvasScript.HideHeadsUpShop();
+        CanvasScript.HideHeadsUpShop(true);
         ResourceInventory.Instance.OnEnterShoppingArea();        
         IsShopping = false;
     }
+
+
 }

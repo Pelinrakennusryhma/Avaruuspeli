@@ -45,21 +45,21 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
 
         itemToAdd = inventory.itemToAdd;
 
-        Debug.Log("Setup called on itemscript " + Time.time);
+        //Debug.Log("Setup called on itemscript at time " + Time.time + " item is " + itemToAdd.itemName);
 
-        Debug.LogError("Replace the find with something else!!!");
+
         ItemSO item = itemToAdd;
 
         if (itemToAdd.itemIcon != null)
         {        
             itemImage.sprite = itemToAdd.itemIcon;
-            Debug.LogWarning("Non null icon. proceed");
+            //Debug.LogWarning("Non null icon. proceed");
         }
 
         else
         {
             itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Null sprite. Replacing with a blank one");
+            //Debug.LogError("Null sprite. Replacing with a blank one");
         }
 
         //itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
@@ -70,6 +70,8 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         itemAmount.text = currentItemAmount.ToString();
         itemValue.text = item.value.ToString();
         itemWeight.text = item.weight.ToString();
+        
+        //Debug.Log("Item weight is " + itemWeight.text + " item is " + itemName.text);
 
         ShopItemScript[] allShopItems = GameManager.Instance.InventoryController.Shop.ShopItems;
 
@@ -85,7 +87,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
 
     public void UpdateShopAmount()
     {
-        Debug.Log("Updating shop amount");
+        //Debug.Log("Updating shop amount");
 
  
         //shopItemScript.UpdateAmount(currentItemAmount);
@@ -98,6 +100,8 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         itemWeight.text = currentItemWeight.ToString();
         currentTotalValue = currentItemAmount * itemToAdd.value;
         itemValue.text = currentTotalValue.ToString();
+
+        //Debug.Log("Current item weight is " + currentItemWeight + " item is " + itemToAdd.itemName);
 
         //try
         //{
@@ -129,15 +133,24 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     //Lisää nykyiseen määrään 'amount'. Päivittää määrän.
     public void AddItem(int amount, ItemSO item)
     {
+
         itemToAdd = item;
         currentItemAmount += amount;
         currentItemWeight += itemToAdd.weight * amount;
+        //Debug.Log("Adding an item. " + item.itemName + " Weight is " + item.weight + "Current item weight is " + currentItemWeight);
         UpdateAmount();
     }
 
     //Poistaa nykyisestä määrästä 'amount'. Päivittää määrän.
     public void RemoveItem(int amount)
     {
+        if (itemToAdd.id == 12)
+        {
+            //Debug.LogWarning("We removed spacesuit");
+        }
+
+        //Debug.LogWarning("We removed item with id " + itemToAdd.id + " of name " + itemToAdd.itemName);
+
         currentItemAmount -= amount;
         currentItemWeight -= itemToAdd.weight * amount;
         UpdateAmount();
@@ -148,9 +161,9 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log(itemToAdd);
-            contextMenuScript.ShowOptions(itemToAdd.itemType.ToString());
-            Debug.LogError("Possibly replace the above call with something else that fetches a good type");
+
+            contextMenuScript.ShowOptions(itemToAdd.itemType);
+
             contextMenuScript.SetPositionToMouse();
             contextMenuScript.itemID = itemToAdd.id;
         }

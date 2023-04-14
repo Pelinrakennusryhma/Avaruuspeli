@@ -20,7 +20,7 @@ MonoBehaviour:
     in varied atmospheres.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 424986872d6986348bcba280818f11e7, type: 3}
   isStackable: 0
   weight: 100
   itemType: 3

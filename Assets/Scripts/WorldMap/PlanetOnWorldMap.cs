@@ -168,20 +168,51 @@ public class PlanetOnWorldMap : MonoBehaviour
             Debug.LogError("Null planet data");
         }
 
-        Debug.Log("Setting vendor");
+       // Debug.Log("Setting vendor");
 
         Vendor = Vendor.GetVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
                                   ParentStarSystem.StarSystemData.ID,
                                   PlanetData.ID);
 
+        if (Vendor != null
+            && Vendor.Items.Count == 0)
+        {
+            //Debug.LogWarning("Refilling vendor inventory");
+            Vendor.InitializeVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                    ParentStarSystem.StarSystemData.ID,
+                                    PlanetData.ID);
+        }
+
+        if (Vendor == null)
+        {
+            //Debug.LogError("Vendor is null");
+        }
+
         if (Vendor == null
             || (Vendor != null
                 && Vendor.SellMultiplierss.Length != GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count))
         {
+
+
+
+            if ((Vendor != null
+                && Vendor.SellMultiplierss.Length != GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count))
+            {
+                Debug.LogError("Buy and sell multiplier counts do not match. Sell multipliers is " + Vendor.SellMultiplierss.Length + " all items count is " + GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count);
+            }
+
+            else
+            {
+                Debug.LogWarning("Counts match and vendor is not null");
+            }
+
             Vendor = new Vendor();
             Vendor.InitializeVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
                                     ParentStarSystem.StarSystemData.ID,
                                     PlanetData.ID);
+
+
+
 
             Debug.LogError("Null vendor. A new one is created....");
         }

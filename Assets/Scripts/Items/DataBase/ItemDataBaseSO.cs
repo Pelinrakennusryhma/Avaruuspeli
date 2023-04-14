@@ -39,7 +39,7 @@ public class ItemDataBaseSO : ScriptableObject
 
     public void OnInit()
     {
-        Debug.Log("On Init is called on item data base SO");
+        //Debug.Log("On Init is called on item data base SO");
 
         BuildDictionaries();
         HasBeenInitted = true;

@@ -51,7 +51,7 @@ public class Vendor
         StarSystemID = starSystemId;
         PlanetID = planetId;
 
-        Debug.Log("Arvo kertoimet vendorille");
+        //Debug.Log("Arvo kertoimet vendorille");
 
         // Get amount from somewhere. Maybe where item scriptable objects are stored?
         //BuyMultipliers = new float[GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count + 1];
@@ -109,7 +109,7 @@ public class Vendor
             while (true) 
             {
                 iterationsInAWhileLoop++;
-                Debug.Log("Iterating in a while-loop! " + iterationsInAWhileLoop);
+                //Debug.Log("Iterating in a while-loop! " + iterationsInAWhileLoop);
                 bool foundAnItem = false;
                 ItemSO foundItem = null;
                 int amount = 0;
@@ -136,7 +136,7 @@ public class Vendor
 
                     float threshold = 1.0f / GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count;
 
-                    Debug.Log("random threshold is " + threshold + " random number is " + random);
+                    //Debug.Log("random threshold is " + threshold + " random number is " + random);
 
                     if (random <= threshold)
                     {
@@ -157,7 +157,7 @@ public class Vendor
                     else
                     {
                         amount = Random.Range(0, 400);
-                        Debug.LogError("But how many items we should spawn?!?");
+                        //Debug.LogError("But how many items we should spawn?!?");
                     }
 
                     Items.Add(new VendorInventoryItem(foundItem.id, amount));
@@ -168,10 +168,10 @@ public class Vendor
 
             }
 
-            Debug.Log("arvotaan kama " + i);
+            //Debug.Log("arvotaan kama " + i);
         }
 
-        Debug.Log("Arvo kamat vendorille. Kamojen määrä on " + amountOfItems);
+        //Debug.Log("Arvo kamat vendorille. Kamojen määrä on " + amountOfItems);
 
 
 
@@ -190,27 +190,27 @@ public class Vendor
     public float GetSellMultiplier(int itemId)
     {
         float value = 1.0f;
-        bool foundAValue = false;
+        //bool foundAValue = false;
 
         for (int i = 0; i < SellMultiplierss.Length; i++)
         {
             if (SellMultiplierss[i].ItemId == itemId)
             {
                 value = SellMultiplierss[i].Multiplier;
-                foundAValue = true;
+                //foundAValue = true;
                 break;
             }
         }
 
-        if (foundAValue)
-        {
-            Debug.Log("Found a sell multiplier value " + value + " for item id " + itemId);
-        }
+        //if (foundAValue)
+        //{
+        //    Debug.Log("Found a sell multiplier value " + value + " for item id " + itemId);
+        //}
 
-        else
-        {
-            Debug.LogError("Tried to fetch a sell multiplier with no success. Item id is " + itemId);
-        }
+        //else
+        //{
+        //    Debug.LogError("Tried to fetch a sell multiplier with no success. Item id is " + itemId);
+        //}
 
 
         return value;
@@ -228,27 +228,27 @@ public class Vendor
     public float GetBuyMultiplier(int itemId)
     {
         float value = 1.0f;
-        bool foundAValue = false;
+        //bool foundAValue = false;
 
         for (int i = 0; i < BuyMultiplierss.Length; i++)
         {
             if (BuyMultiplierss[i].ItemId == itemId)
             {
                 value = BuyMultiplierss[i].Multiplier;
-                foundAValue = true;
+                //foundAValue = true;
                 break;
             }
         }
 
-        if (foundAValue)
-        {
-            Debug.Log("Found a buy multiplier value " + value + " for item id " + itemId);
-        }
+        //if (foundAValue)
+        //{
+        //    Debug.Log("Found a buy multiplier value " + value + " for item id " + itemId);
+        //}
 
-        else
-        {
-            Debug.LogError("Tried to fetch a buy multiplier with no success. Item id is " + itemId);
-        }
+        //else
+        //{
+        //    Debug.LogError("Tried to fetch a buy multiplier with no success. Item id is " + itemId);
+        //}
 
 
         return value;
@@ -269,13 +269,13 @@ public class Vendor
                                    int starSystemID, 
                                    int planetID)
     {
-        //Debug.LogError("Getting vendor. Implementation doesn't exist yet. galaxy is " + galaxyID + " star system is " + starSystemID + " planet is " + planetID);
+        Debug.LogError("Getting vendor. Implementation doesn't exist yet. galaxy is " + galaxyID + " star system is " + starSystemID + " planet is " + planetID);
 
         return GameManager.Instance.SaverLoader.GetVendor(galaxyID, starSystemID, planetID);
     }
 
     public void CheckForFuelInStarSystem()
     {
-        Debug.LogError("Missing functionality: Should check if there is some fuel somewhere in the star system!!!");
+        Debug.LogError("Missing functionality: Should maybe check if there is some fuel somewhere in the star system!!! BUT HOW, that is the question?");
     }
 }

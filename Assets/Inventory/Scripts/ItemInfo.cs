@@ -14,7 +14,7 @@ public class ItemInfo : MonoBehaviour
     private ItemSO infoAbout;
     void Start()
     {
-        infoAbout = FindObjectOfType<CanvasScript>().infoAbout;
+        infoAbout = GameManager.Instance.InventoryController.CanvasScript.infoAbout;
         ItemSO item = infoAbout;
         //itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
         //Debug.LogError("Replace this with scriptable objects sprite");
@@ -22,20 +22,19 @@ public class ItemInfo : MonoBehaviour
         if (item.itemIcon != null)
         {
             itemImage.sprite = item.itemIcon;
-            Debug.LogWarning("Non null icon. proceed");
+            //Debug.LogWarning("Non null icon. proceed");
         }
 
         else
         {
             itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Null sprite. Replacing with a blank one");
+            //Debug.LogError("Null sprite. Replacing with a blank one");
         }
 
 
 
         itemName.text = infoAbout.itemName;
         itemType.text = item.itemType.ToString();
-        Debug.LogError("REplace this possibly with different type of item type fetching");
         itemValue.text = item.value.ToString();
         itemDescription.text = item.description;
     }

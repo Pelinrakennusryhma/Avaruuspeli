@@ -55,13 +55,13 @@ public class ShopItemScript : MonoBehaviour
         if (item.itemIcon != null)
         {
             itemImage.sprite = item.itemIcon;
-            Debug.LogWarning("Non null icon. proceed");
+            //Debug.LogWarning("Non null icon. proceed");
         }
 
         else
         {
             itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
-            Debug.LogError("Null sprite. Replacing with a blank one");
+            //Debug.LogError("Null sprite. Replacing with a blank one");
         }
 
 
