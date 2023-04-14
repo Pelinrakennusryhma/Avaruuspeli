@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyControls : ActorSpaceship
 {
+    TargetProjectionIcon targetProjectionIcon;
     Transform shipTransform;
     Rigidbody rb;
     float breakThreshold = 8f;
@@ -22,6 +23,26 @@ public class EnemyControls : ActorSpaceship
     {
         base.OnDeath();
         Destroy(gameObject);
+    }
+
+    public override void LockMissile(ActorSpaceship shooter)
+    {
+        base.LockMissile(shooter);
+        if(targetProjectionIcon == null)
+        {
+            targetProjectionIcon = ship.GetComponentInChildren<TargetProjectionIcon>();
+        }
+        targetProjectionIcon.pulsing = true;
+    }
+
+    public override void UnlockMissile(ActorSpaceship shooter)
+    {
+        base.LockMissile(shooter);
+        if (targetProjectionIcon == null)
+        {
+            targetProjectionIcon = ship.GetComponentInChildren<TargetProjectionIcon>();
+        }
+        targetProjectionIcon.pulsing = false;
     }
 
     // returns true when destination is reached
