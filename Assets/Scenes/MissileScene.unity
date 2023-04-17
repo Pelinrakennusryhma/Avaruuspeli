@@ -5542,7 +5542,7 @@ MonoBehaviour:
   descriptionText: Mothership
   needDescriptionOnArrow: 1
   customSprite: {fileID: 21300000, guid: c511f893cf83d4b47910f09c80807805, type: 3}
-  targetScale: 0
+  targetScale: 1
   indicator: {fileID: 0}
 --- !u!1 &3942892927043893842 stripped
 GameObject:
