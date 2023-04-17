@@ -45,7 +45,6 @@ public class TargetProjectionIcon : MonoBehaviour
 
     IEnumerator FlashColor()
     {
-        Debug.Log("flashing??");
         targetScript.SetColor(Color.red);
         yield return new WaitForSeconds(0.15f);
         targetScript.SetColor(originalColor);

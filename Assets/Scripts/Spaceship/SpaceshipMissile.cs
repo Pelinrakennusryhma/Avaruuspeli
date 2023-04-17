@@ -5,7 +5,9 @@ using UnityEngine;
 public class SpaceshipMissile : MonoBehaviour
 {
     [SerializeField]
-    float maxLockAngle = 10f;
+    GameObject missilePrefab;
+    [SerializeField]
+    Transform missileOrigin;
     ActorSpaceship actor;
     public bool shooting = false;
 
@@ -13,10 +15,12 @@ public class SpaceshipMissile : MonoBehaviour
     ActorSpaceship closestTarget = null;
     List<ActorSpaceship> lockedTargets = new List<ActorSpaceship>();
 
+    GameObject projectileParent;
+
     void Start()
     {
         actor = GetComponentInParent<ActorSpaceship>();
-        
+        projectileParent = GameObject.FindGameObjectWithTag("ProjectileParent");
     }
 
     // Update is called once per frame
@@ -31,10 +35,22 @@ public class SpaceshipMissile : MonoBehaviour
 
     void LockOnTarget()
     {
-        if(closestTarget != null)
+        if(closestTarget != null && !lockedTargets.Contains(closestTarget))
         {
+            lockedTargets.Add(closestTarget);
             closestTarget.LockMissile(actor);
+            Debug.Log("locking on: " + closestTarget.name);
+            GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
+            Missile spawnedMissile = missileObject.GetComponent<Missile>();
+            spawnedMissile.Init(closestTarget, this);
         }
+    }
+
+    public void ReleaseTarget(ActorSpaceship target)
+    {
+        target.UnlockMissile(actor);
+        lockedTargets.Remove(target);
+
     }
 
     void ScanForTarget()
@@ -52,7 +68,7 @@ public class SpaceshipMissile : MonoBehaviour
                 closestAngleToTarget = angle;
                 closestTarget = hostileActor;
             }
-            Debug.Log("angle: " + angle + " name: " + hostileActor.name);
+            //Debug.Log("angle: " + angle + " name: " + hostileActor.name);
         }
 
         Debug.Log("closestTarget: " + closestTarget);

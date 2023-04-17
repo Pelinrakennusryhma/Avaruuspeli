@@ -439,6 +439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbb12815038abd4ea8b37cae89a5883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missilePrefab: {fileID: 8056582532287308422, guid: 1002659bb89dab24ab506f3adf27e5ba,
+    type: 3}
+  missileOrigin: {fileID: 1134921867257646773}
+  shooting: 0
 --- !u!1 &1134921867257646772
 GameObject:
   m_ObjectHideFlags: 0
