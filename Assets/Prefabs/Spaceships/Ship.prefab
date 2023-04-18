@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 1134921867126457020}
   - component: {fileID: 1134921867126457023}
   - component: {fileID: 1134921867126457017}
+  - component: {fileID: 4775760650964221550}
   - component: {fileID: 1134921867126457018}
   - component: {fileID: 1134921867126457012}
   - component: {fileID: 1134921867126457019}
@@ -192,7 +193,6 @@ GameObject:
   - component: {fileID: 1134921867126457016}
   - component: {fileID: 5954328637049747390}
   - component: {fileID: 2606030096390219700}
-  - component: {fileID: 4775760650964221550}
   m_Layer: 10
   m_Name: Ship
   m_TagString: Untagged
@@ -295,6 +295,23 @@ MonoBehaviour:
   shootInterval: 0.25
   laserParent: {fileID: 0}
   shooting: 0
+--- !u!114 &4775760650964221550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134921867126456992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbb12815038abd4ea8b37cae89a5883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missilePrefab: {fileID: 8056582532287308422, guid: 1002659bb89dab24ab506f3adf27e5ba,
+    type: 3}
+  missileOrigin: {fileID: 1134921867257646773}
+  shooting: 0
+  maxMissiles: 4
 --- !u!114 &1134921867126457018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,22 +444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f94b8ae2ad83b47a4b92d410418285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4775760650964221550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134921867126456992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cbb12815038abd4ea8b37cae89a5883, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missilePrefab: {fileID: 8056582532287308422, guid: 1002659bb89dab24ab506f3adf27e5ba,
-    type: 3}
-  missileOrigin: {fileID: 1134921867257646773}
-  shooting: 0
 --- !u!1 &1134921867257646772
 GameObject:
   m_ObjectHideFlags: 0

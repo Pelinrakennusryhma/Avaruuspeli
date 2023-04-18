@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceshipMissile : MonoBehaviour
+public class SpaceshipMissile : UITrackable
 {
     [SerializeField]
     GameObject missilePrefab;
@@ -17,8 +17,21 @@ public class SpaceshipMissile : MonoBehaviour
 
     GameObject projectileParent;
 
+    [SerializeField]
+    int maxMissiles = 4;
+    int currentMissiles;
+    public override float MaxValue => maxMissiles;
+
+    public override float CurrentValue => currentMissiles;
+
+    [SerializeField]
+    float shootInterval = 0.25f;
+    float cooldown;
+
+
     void Start()
     {
+        currentMissiles = maxMissiles;
         actor = GetComponentInParent<ActorSpaceship>();
         projectileParent = GameObject.FindGameObjectWithTag("ProjectileParent");
     }
@@ -26,20 +39,27 @@ public class SpaceshipMissile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cooldown -= Time.deltaTime;
+
         if (shooting)
         {
             ScanForTarget();
-            LockOnTarget();
+            if (cooldown <= 0)
+            {
+                cooldown = shootInterval;
+                LockOnTarget();
+            }
         }
     }
 
     void LockOnTarget()
     {
-        if(closestTarget != null && !lockedTargets.Contains(closestTarget))
+        if(closestTarget != null && !lockedTargets.Contains(closestTarget) && currentMissiles > 0)
         {
             lockedTargets.Add(closestTarget);
             closestTarget.LockMissile(actor);
             Debug.Log("locking on: " + closestTarget.name);
+            currentMissiles--;
             GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
             Missile spawnedMissile = missileObject.GetComponent<Missile>();
             spawnedMissile.Init(closestTarget, this);
