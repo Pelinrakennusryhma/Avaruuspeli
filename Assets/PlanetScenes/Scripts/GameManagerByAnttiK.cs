@@ -37,7 +37,7 @@ public class GameManagerByAnttiK : MonoBehaviour
         {
             // RelaunchingTheSameScene = false;
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
             // SceneManager.sceneLoaded -= OnSceneLoaded;
             // SceneManager.sceneLoaded += OnSceneLoaded;
             // OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);

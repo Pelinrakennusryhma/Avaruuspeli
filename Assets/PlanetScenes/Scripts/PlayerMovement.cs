@@ -63,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
      {
          Debug.Log("KUOLIT");
      }
+    if (other.gameObject.tag == "TippuvaKivi")
+     {
+         Debug.Log("KUOLIT");
+     }
  }
  
  void OnCollisionExit(Collision other)

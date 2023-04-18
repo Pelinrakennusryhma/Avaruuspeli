@@ -44,6 +44,8 @@ public class RandomRockInitter : MonoBehaviour
 
         float spawnAtAll = Random.Range(0.0f, 1.0f);
 
+        spawnAtAll = 1.0f;
+
         if (spawnAtAll <= 0.33f)
         {
             Destroy(gameObject);

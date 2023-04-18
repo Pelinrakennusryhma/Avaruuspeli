@@ -334,19 +334,196 @@ public class GameManager : MonoBehaviour
     {
         Debug.LogWarning("ENTER PLANET");
 
+        PlanetData.PlanetGraphicsType planetType = CurrentPlanetData.PlanetGraphics;
         IncomingSceneType = TypeOfScene.Planet;
 
-        int rando = Random.Range(0, 2);
+        Debug.Log("Current planet type is " + planetType.ToString());
+
+        int rando = Random.Range(0, 6);
+        rando = 0;
 
         if (rando == 0)
         {
-            StackAndLoadAndLaunchScene("Maapallo 1", 3);
+            StackAndLoadAndLaunchScene("Maapallo", 3);
         }
 
-        else
+        else if (rando == 1)
         {
             StackAndLoadAndLaunchScene("Marssi", 4);
         }
+
+        else if (rando == 2)
+        {
+            StackAndLoadAndLaunchScene("Kuu", 5);
+        }
+
+        else if (rando == 3)
+        {
+            StackAndLoadAndLaunchScene("LumiMaa", 6);
+        }
+
+        else if (rando == 4)
+        {
+            StackAndLoadAndLaunchScene("Pluto", 7);
+        }
+
+        else if (rando == 5)
+        {
+            StackAndLoadAndLaunchScene("PuuMaa", 8);
+        }
+
+        switch (planetType) 
+        {
+            case PlanetData.PlanetGraphicsType.None:
+                Debug.LogError("We are entering planet, but we don't have a type of planet.");
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder1:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder2:
+                StackAndLoadAndLaunchScene("Marssi", 4);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder3:
+                StackAndLoadAndLaunchScene("Pluto", 7);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder4:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder5:
+                StackAndLoadAndLaunchScene("Pluto", 7);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder6:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder7:
+                StackAndLoadAndLaunchScene("Pluto", 7);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder8:
+                StackAndLoadAndLaunchScene("Marssi", 4);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder9:
+                StackAndLoadAndLaunchScene("Marssi", 4);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder10:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder11:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder12:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder13:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder14:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder15:
+                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder16:
+                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder17:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder18:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder19:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder20:
+                StackAndLoadAndLaunchScene("Pluto", 7);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder21:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder22:
+                StackAndLoadAndLaunchScene("Marssi", 4);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder23:
+                StackAndLoadAndLaunchScene("Pluto", 7);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder24:
+                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder25:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder26:
+                StackAndLoadAndLaunchScene("Marssi", 4);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder27:
+                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder28:
+                StackAndLoadAndLaunchScene("Maapallo", 3);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder29:
+                StackAndLoadAndLaunchScene("Pluto", 7);
+                break;
+
+            case PlanetData.PlanetGraphicsType.Placeholder30:
+                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                break;
+
+            default:
+                Debug.LogError("We are entering planet, but we don't have a type of planet.");
+                break;
+
+                //    StackAndLoadAndLaunchScene("Maapallo", 3);
+
+
+                //StackAndLoadAndLaunchScene("Marssi", 4);
+
+
+
+                //StackAndLoadAndLaunchScene("Kuu", 5);
+
+
+
+                //StackAndLoadAndLaunchScene("LumiMaa", 6);
+
+
+
+                //StackAndLoadAndLaunchScene("Pluto", 7);
+
+
+
+                //StackAndLoadAndLaunchScene("PuuMaa", 8);
+        }
+
 
         //StackAndLoadAndLaunchScene("PlanetTestLauncher", 2);
     }

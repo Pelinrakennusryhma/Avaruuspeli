@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 8732920663479883760}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Pelaaja
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00cd387266e7ee9c58e76f29a4608116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 3
+  playerSpeed: 5
   jumpHeight: 250
   isGrounded: 0
 --- !u!1 &8732920664764999186
@@ -437,9 +437,13 @@ MonoBehaviour:
   kultaa: 5
   timantteja: 2
   "kivi\xE4": 10
+  puita: 20
+  hopeaa: 15
   kultaaKaivettu: 0
   timanttejaKaivettu: 0
   "kivi\xE4Kaivettu": 0
+  hopeaaKaivettu: 0
+  puitaHakattu: 0
   attackPoint: {fileID: 8732920663407364269}
   attackRange: 0.5
 --- !u!4 &9131937122544297530 stripped

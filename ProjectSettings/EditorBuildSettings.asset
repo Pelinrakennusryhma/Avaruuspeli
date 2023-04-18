@@ -15,11 +15,23 @@ EditorBuildSettings:
     path: Assets/Scenes/PlanetTestLauncher.unity
     guid: 9e32b00dd5bffff4ab83de5c82fb0fc8
   - enabled: 1
-    path: Assets/PlanetScenes/Scenes/Maapallo 1.unity
-    guid: 9c0543f65aaec2b188c65b8af26690fd
+    path: Assets/PlanetScenes/Scenes/Maapallo.unity
+    guid: e0515f044f82c8221af037ad2105c98d
   - enabled: 1
     path: Assets/PlanetScenes/Scenes/Marssi.unity
     guid: ce853f8f3c30760d79c76d39df76b1f6
+  - enabled: 1
+    path: Assets/PlanetScenes/Scenes/Kuu.unity
+    guid: 875191f6e07ed919aafe56ff630e0758
+  - enabled: 1
+    path: Assets/PlanetScenes/Scenes/LumiMaa.unity
+    guid: e61321738b97bcd8d92002618c346473
+  - enabled: 1
+    path: Assets/PlanetScenes/Scenes/Pluto.unity
+    guid: ac5f93a87a05688dc9c80ba63026dd98
+  - enabled: 1
+    path: Assets/PlanetScenes/Scenes/PuuMaa.unity
+    guid: 05a8b7cc842aff470a04a8a2d45312ac
   - enabled: 1
     path: Assets/Scenes/Asteroids/Asteroid1.unity
     guid: e3fbb521efafb304ab253364bfc0e3bb

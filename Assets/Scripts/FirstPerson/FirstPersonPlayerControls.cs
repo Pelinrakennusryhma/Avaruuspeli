@@ -33,7 +33,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
 
     private PlayerInput playerInput;
 
-    public void Awake()
+    public void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         //playerInput.SwitchCurrentActionMap("FirstPersonControls");

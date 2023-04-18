@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1634889816297997470}
   - component: {fileID: 3554673718326751316}
   - component: {fileID: 392279751665930310}
+  - component: {fileID: 4360768187796115346}
   m_Layer: 0
   m_Name: aseLaatikkoV02
-  m_TagString: Untagged
+  m_TagString: Puu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.202467, y: 2.000274, z: 2.1955786}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4360768187796115346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3050133877401571713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a74d3e98a309495fbcff4317b73e623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 53240574997619927, guid: 7de2abd7e4f27c5f79290448deba1c64, type: 3}

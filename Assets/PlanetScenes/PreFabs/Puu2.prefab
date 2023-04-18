@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4577178262793814260}
   - component: {fileID: 9197559337730818841}
   - component: {fileID: 8316092389638837602}
+  - component: {fileID: 8658770900286474101}
   m_Layer: 0
   m_Name: Puu2
   m_TagString: Puu
@@ -95,7 +96,7 @@ MeshCollider:
   m_GameObject: {fileID: 2631680055622279457}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -113,4 +114,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 53240574997619927, guid: 7de2abd7e4f27c5f79290448deba1c64, type: 3}
-  target: {fileID: 0}
+--- !u!205 &8658770900286474101
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631680055622279457}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4577178262793814260}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4577178262793814260}
+  - screenRelativeHeight: 0.017684333
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4577178262793814260}
+  m_Enabled: 1

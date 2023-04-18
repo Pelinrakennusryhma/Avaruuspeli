@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6558233024794081909}
   - component: {fileID: -1547667318649293790}
   - component: {fileID: 2391992604320207825}
+  - component: {fileID: 1842585589}
   m_Layer: 0
   m_Name: Timantti
   m_TagString: Timantti
@@ -111,4 +112,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 53240574997619927, guid: 7de2abd7e4f27c5f79290448deba1c64, type: 3}
-  target: {fileID: 0}
+--- !u!114 &1842585589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612664860058688416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f5f73461020f8afb2549c15875e89f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerSecond: 20

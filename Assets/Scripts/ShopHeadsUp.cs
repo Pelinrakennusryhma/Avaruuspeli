@@ -93,13 +93,35 @@ public class ShopHeadsUp : MonoBehaviour
 
         PlayerShopItems.Clear();
 
-        CurrentVendor.Items.Clear();
-
-        for (int i = 0; i < VendorShopItems.Count; i++)
+        if (CurrentVendor != null 
+            && CurrentVendor.Items != null)
         {
-            CurrentVendor.Items.Add(new Vendor.VendorInventoryItem(VendorShopItems[i].item.id, VendorShopItems[i].ItemAmount));
+            CurrentVendor.Items.Clear();        
+            
+            if (VendorShopItems != null)
+            {
+                for (int i = 0; i < VendorShopItems.Count; i++)
+                {
+                    CurrentVendor.Items.Add(new Vendor.VendorInventoryItem(VendorShopItems[i].item.id, VendorShopItems[i].ItemAmount));
 
-            Destroy(VendorShopItems[i].gameObject);
+                    Destroy(VendorShopItems[i].gameObject);
+                }
+            }
+        }
+
+        else
+        {
+            if (VendorShopItems != null)
+            {
+                for (int i = 0; i < VendorShopItems.Count; i++)
+                {
+                    //CurrentVendor.Items.Add(new Vendor.VendorInventoryItem(VendorShopItems[i].item.id, VendorShopItems[i].ItemAmount));
+
+                    Destroy(VendorShopItems[i].gameObject);
+                }
+
+                VendorShopItems.Clear();
+            }
         }
 
 
@@ -109,14 +131,16 @@ public class ShopHeadsUp : MonoBehaviour
         //    Debug.Log("Currently the vendor has " + CurrentVendor.Items[i].ItemId + " of amount " + CurrentVendor.Items[i].ItemAmount);
         //}
 
-
-        if (CurrentVendor.GalaxyID != 0
-            && CurrentVendor.StarSystemID != 0            
-            && CurrentVendor.PlanetID != 0) 
+        if (CurrentVendor != null) 
         {
-            //Debug.Log("Finishing shopping. About to save vendor " + CurrentVendor.GalaxyID + " " + CurrentVendor.StarSystemID + " " + CurrentVendor.PlanetID);
-            GameManager.Instance.SaverLoader.SaveVendor(CurrentVendor);
-            
+            if (CurrentVendor.GalaxyID != 0
+                && CurrentVendor.StarSystemID != 0
+                && CurrentVendor.PlanetID != 0)
+            {
+                //Debug.Log("Finishing shopping. About to save vendor " + CurrentVendor.GalaxyID + " " + CurrentVendor.StarSystemID + " " + CurrentVendor.PlanetID);
+                GameManager.Instance.SaverLoader.SaveVendor(CurrentVendor);
+
+            }
         }
 
         VendorShopItems.Clear();
