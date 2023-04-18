@@ -26,7 +26,7 @@ public class POISpawner : MonoBehaviour
     float spawnTimer = 0f;
 
     List<Transform> possibleSpawnPoints;
-
+    PointOfInterest poiQueuedForRemoval;
     public delegate void OnPOIEnteredDelegate(PointOfInterest POI);
     void Start()
     {
@@ -37,7 +37,8 @@ public class POISpawner : MonoBehaviour
     private void OnEnable()
     {
         spawnTimer = 0f;
-        nextSpawnTime = GetSpawnTime();  
+        nextSpawnTime = GetSpawnTime();
+        ClearPOI();
     }
 
     private void Update()
@@ -108,8 +109,17 @@ public class POISpawner : MonoBehaviour
     {
         if (POI.oneTimeVisit)
         {
-            RemovePOI(POI);
+            poiQueuedForRemoval = POI;
+        }
+    }
+
+    void ClearPOI()
+    {
+        if(poiQueuedForRemoval != null)
+        {
+            RemovePOI(poiQueuedForRemoval);
             GameManager.Instance.currentPOI = null;
+            poiQueuedForRemoval = null;
         }
     }
 }

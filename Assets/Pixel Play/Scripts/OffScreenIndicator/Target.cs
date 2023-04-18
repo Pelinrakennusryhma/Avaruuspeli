@@ -29,7 +29,7 @@ public class Target : MonoBehaviour
     public Sprite customSprite;
 
     [Tooltip("Scale of the icon")]
-    public float targetScale;
+    public float targetScale = 1f;
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.
     /// A reference to the target's indicator, 
