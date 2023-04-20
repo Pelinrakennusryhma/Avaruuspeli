@@ -10,8 +10,11 @@ public class Missile : MonoBehaviour
     SpaceshipMissile _shooter;
     GameObject shooterShip;
 
+    [SerializeField]
     float moveSpeed = 80f;
+    [SerializeField]
     float explosionRadius = 20f;
+    [SerializeField]
     float explosionDamage = 90f;
     // Start is called before the first frame update
     void Start()
