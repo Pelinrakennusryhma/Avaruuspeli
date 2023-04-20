@@ -26,6 +26,9 @@ public class InventoryController : MonoBehaviour
     CursorLockMode cachedCursorLockMode = CursorLockMode.None;
 
     public float Money = 10000.0f;
+
+    public string previousPromptText;
+
     public void Init()
     {        
         ItemDataBaseWithScriptables.Init();
@@ -53,7 +56,7 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(10, 1);
         Inventory.AddItem(11, 1);
         Inventory.AddItem(12, 1);
-        Inventory.AddItem(13, 1);
+        Inventory.AddItem(13, 3);
         Inventory.AddItem(14, 1);
         Inventory.AddItem(15, 1);
         Inventory.AddItem(16, 1);
@@ -61,6 +64,7 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(18, 1);
         Inventory.AddItem(19, 1);
         Inventory.AddItem(20, 1);
+        Inventory.AddItem(21, 1);
 
         Shop.Init();
         ShopHeadsUp.Init();
@@ -70,6 +74,8 @@ public class InventoryController : MonoBehaviour
 
     public void OnInventoryShow()
     {
+
+
         cachedCursorLockMode = Cursor.lockState;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
@@ -104,6 +110,15 @@ public class InventoryController : MonoBehaviour
 
                 Equipment.EquipDrill(item);
             }
+
+            else if (currentTool == ResourceGatherer.ToolType.DiamondDrill)
+            {
+                item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(21);
+                //Inventory.RemoveItem(item.id, 1);
+                Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
+
+                Equipment.EquipDrill(item);
+            }
         }
 
         if (ResourceInventory.Instance != null)
@@ -111,11 +126,19 @@ public class InventoryController : MonoBehaviour
             ResourceInventory.Instance.UnloadGatheredItems(Inventory);
         }
 
+        if (GameEvents.Instance != null)
+        {
+            GameEvents.Instance.CallEventInventoryOpened();
+        }
+
+        //GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
         //Debug.Log("Show inventory");
     }
 
     public void OnInventoryHide()
     {
+
+
         if (ResourceInventory.Instance != null) 
         {
             ResourceInventory.Instance.SetResourceAmounts(Inventory);
@@ -127,6 +150,11 @@ public class InventoryController : MonoBehaviour
         CanvasScript.HideHeadsUpShop(false);
         CanvasObject.SetActive(false);
         DetachFromMainCamera();
+
+        if (GameEvents.Instance != null)
+        {
+            GameEvents.Instance.CallEventInventoryClosed();
+        }
         //Debug.Log("Hide inventory");
     }
 
@@ -151,14 +179,20 @@ public class InventoryController : MonoBehaviour
 
         if (Equipment.equippedDrill != null)
         {
-            if (Equipment.equippedDrill.id == 2)
+            if (Equipment.equippedDrill.id == 7)
             {
                 currentTool = ResourceGatherer.ToolType.BasicDrill;
             }
 
-            else if  (Equipment.equippedDrill.id == 2)
+            else if  (Equipment.equippedDrill.id == 7)
             {
                 currentTool = ResourceGatherer.ToolType.AdvancedDrill;
+            }
+
+            else if (Equipment.equippedDrill.id == 21)
+            {
+                currentTool = ResourceGatherer.ToolType.DiamondDrill;
+                Debug.Log("We are currently euipping diamond drill");
             }
 
         }

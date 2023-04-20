@@ -172,6 +172,11 @@ public class DestroyableRock : MonoBehaviour
             severity = 4.0f;
         }
 
+        else if (tool == ResourceGatherer.ToolType.DiamondDrill)
+        {
+            severity = 6.5f;
+        }
+
         severity *= (1.0f - Health) * 4.0f;
 
         Graphics.gameObject.transform.localPosition = Vector3.Lerp(Graphics.gameObject.transform.localPosition,

@@ -203,7 +203,8 @@ public class ContextMenu : MonoBehaviour
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
                     
         if (item.id == 7
-            || item.id == 8)
+            || item.id == 8
+            || item.id == 21)
         {
 
             EquipDrill();
@@ -234,6 +235,10 @@ public class ContextMenu : MonoBehaviour
 
         if (!isAnEquippedItem) 
         {
+            if (itemID == 13)
+            {
+                GameManager.Instance.LifeSupportSystem.UpdateOxygenStorage(0);
+            }
             inventory.RemoveItem(itemID, 999999999);
         }
 

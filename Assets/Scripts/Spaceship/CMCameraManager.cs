@@ -15,6 +15,7 @@ public class CMCameraManager : MonoBehaviour
     {
         GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+        //Debug.Log("Listener added to on leftasteroid" + Time.time);
     }
     void Start()
     {

@@ -11,5 +11,15 @@ public class FirstPersonPlayerCharacter : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        CheckIfWeAreOnBreathableScene();
+    }
+
+    public void CheckIfWeAreOnBreathableScene()
+    {
+        if (GameManager.Instance.CurrentSceneType == GameManager.TypeOfScene.AsteroidField)
+        {
+            GameManager.Instance.LifeSupportSystem.OnEnterUnbreathablePlace();
+        }
     }
 }

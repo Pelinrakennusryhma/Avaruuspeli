@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public SaverLoader SaverLoader;
     public Helpers Helpers;
     public InventoryController InventoryController;
+    public LifeSupportSystem LifeSupportSystem;
 
     public GalaxyOnWorldMap CurrentGalaxy;
     public StarSystemOnFocus CurrentStarSystem;
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour
             InventoryController.Init();
 
 
+
+
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
@@ -79,7 +82,11 @@ public class GameManager : MonoBehaviour
             
             TransitionalCamera.gameObject.SetActive(false);
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
+            SaverLoader.OnInitialStartUp();
             Helpers = GetComponentInChildren<Helpers>(true);
+
+            LifeSupportSystem = GetComponentInChildren<LifeSupportSystem>(true);
+            LifeSupportSystem.Init();
 
 
             CurrentSceneType = TypeOfScene.WorldMap;
@@ -320,11 +327,14 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        //LifeSupportSystem.OnExitUnbreathablePlace();
+
         Debug.Log("Going back to world map");
     }
     public void EnterAsteroidField()
     {
         Debug.LogWarning("ENTER ASTEROID FIELD");
+
 
         IncomingSceneType = TypeOfScene.AsteroidField;
         StackAndLoadAndLaunchScene("MineableAsteroidScene", 1);

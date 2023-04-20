@@ -6,26 +6,35 @@ public class PlayerHands : MonoBehaviour
 {
     public ResourceGatherer.ToolType CurrentTool;
 
-    public GameObject Drill;
-    public GameObject BlowTorch;
+    public GameObject DiamondDrill;
+    public GameObject AdvancedDrill;
+    public GameObject BasicDrill;
 
     public void SetTool(ResourceGatherer.ToolType tool)
     {
-        Drill.SetActive(false);
-        BlowTorch.SetActive(false);
+        AdvancedDrill.SetActive(false);
+        BasicDrill.SetActive(false);
+        DiamondDrill.SetActive(false);
 
         switch (tool)
         {
             case ResourceGatherer.ToolType.None:
                 break;
+
             case ResourceGatherer.ToolType.BasicDrill:
                 //Debug.Log("We are here 1");
-                BlowTorch.SetActive(true);
+                BasicDrill.SetActive(true);
                 break;
+
             case ResourceGatherer.ToolType.AdvancedDrill:
                 //Debug.Log("We are here 2");
-                Drill.SetActive(true);
+                AdvancedDrill.SetActive(true);
                 break;
+
+             case ResourceGatherer.ToolType.DiamondDrill:
+                DiamondDrill.SetActive(true);
+                break;
+
             default:
                 break;
         }

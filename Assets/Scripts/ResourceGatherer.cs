@@ -8,7 +8,8 @@ public class ResourceGatherer : MonoBehaviour
     {
         None = 0,
         BasicDrill = 1,
-        AdvancedDrill = 2
+        AdvancedDrill = 2,
+        DiamondDrill = 3
     }
 
     public static ResourceGatherer Instance;
@@ -105,15 +106,24 @@ public class ResourceGatherer : MonoBehaviour
             return;
         }
 
-        if (Controls.Alpha1Down)
+        if (Controls.Alpha1Down
+            && GameManager.Instance.InventoryController.Inventory.CheckForItem(7))
         {
             Tool = ToolType.BasicDrill;
             Hands.SetTool(Tool);
         }
 
-        else if (Controls.Alpha2Down)
+        else if (Controls.Alpha2Down
+                 && GameManager.Instance.InventoryController.Inventory.CheckForItem(8))
         {
             Tool = ToolType.AdvancedDrill;
+            Hands.SetTool(Tool);
+        }
+
+        else if (Controls.Alpha3Down
+                 && GameManager.Instance.InventoryController.Inventory.CheckForItem(21))
+        {
+            Tool = ToolType.DiamondDrill;
             Hands.SetTool(Tool);
         }
 
@@ -157,7 +167,12 @@ public class ResourceGatherer : MonoBehaviour
                 else if (Tool == ToolType.AdvancedDrill)
                 {
                     hitRock.ReduceHealth(Time.deltaTime, Tool);
-                } 
+                }
+
+                else if (Tool == ToolType.DiamondDrill)
+                {
+                    hitRock.ReduceHealth(Time.deltaTime * 1.5f, Tool);
+                }
             }
         }
     }

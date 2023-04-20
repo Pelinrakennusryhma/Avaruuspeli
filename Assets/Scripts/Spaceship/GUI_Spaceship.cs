@@ -22,6 +22,9 @@ public class GUI_Spaceship : MonoBehaviour
     [SerializeField]
     GameObject spaceshipHUD;
 
+    private bool prompTextWasActiveBeforeInventoryShow;
+    private bool spaceshipHUDWasActiveBeforeInventoryShow;
+
     void Awake()
     {
         promptText.text = "";
@@ -30,6 +33,9 @@ public class GUI_Spaceship : MonoBehaviour
         GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerSpaceshipDeath);
         GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+        GameEvents.Instance.EventInventoryClosed.AddListener(OnInventoryClosed);
+        GameEvents.Instance.EventInventoryOpened.AddListener(OnInventoryOpened);
+        //Debug.Log("Listener added to on leftasteroid" + Time.time);
     }
 
     private void Start()
@@ -39,8 +45,28 @@ public class GUI_Spaceship : MonoBehaviour
 
     void OnPromptTriggerEnter(string text)
     {
+        if (GameManager.Instance.InventoryController.ShowingInventory)
+        {
+            Debug.LogWarning("Returned, because invenotry is showing. Don't draw a prompt on top that");
+            return;
+        }
+
         promptText.gameObject.SetActive(true);
-        promptText.text = text.Replace("%landKey%", Globals.Instance.landKey);
+
+        if(text == null)
+        {
+            Debug.LogError("Null text passed to prompt trigger. How could this happen?");
+            
+            promptText.text = "ERROR. NULL TEXT. Find out why null string is passed";
+        }
+
+        else
+        {
+            promptText.text = text.Replace("%landKey%", Globals.Instance.landKey);
+        }
+
+
+
     }
 
     void OnPromptTriggerExit()
@@ -123,6 +149,48 @@ public class GUI_Spaceship : MonoBehaviour
         }
 
         helpText.text = textToShow;
+    }
+
+    public void OnInventoryOpened()
+    {
+        if (spaceshipHUD.activeSelf)
+        {
+            spaceshipHUDWasActiveBeforeInventoryShow = true;
+            spaceshipHUD.SetActive(false);
+        }
+
+        else
+        {
+            spaceshipHUDWasActiveBeforeInventoryShow = false;
+        }
+
+        if (promptText.gameObject.activeSelf)
+        {
+            promptText.gameObject.SetActive(false);
+            prompTextWasActiveBeforeInventoryShow = true;
+        }
+
+        else
+        {
+            prompTextWasActiveBeforeInventoryShow = false;
+        }
+
+        Debug.Log("Hide everything");
+    }
+
+    public void OnInventoryClosed()
+    {
+        if (spaceshipHUDWasActiveBeforeInventoryShow)
+        {
+            spaceshipHUD.SetActive(true);
+        }
+
+        if (prompTextWasActiveBeforeInventoryShow)
+        {
+            promptText.gameObject.SetActive(true);
+        }
+
+        Debug.Log("Show everything");
     }
 
     //public void OnToggleCursor()

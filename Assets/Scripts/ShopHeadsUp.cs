@@ -444,7 +444,6 @@ public class ShopHeadsUp : MonoBehaviour
 
         // sort them
         // swap to descending order
-        // There is a order operation for this descending thing already! nice find
 
         playerItems = playerItems.OrderByDescending(x => x.currentItemWeight).ToList();
 
@@ -459,7 +458,6 @@ public class ShopHeadsUp : MonoBehaviour
         // Set scrollbar to top
         PlayerScrollBar.value = 1.0f;
 
-        //Debug.LogError("MISSING FUNCTIONALITY: Sort player items by weight");
     }
 
     public void SortPlayerItemsByValue()

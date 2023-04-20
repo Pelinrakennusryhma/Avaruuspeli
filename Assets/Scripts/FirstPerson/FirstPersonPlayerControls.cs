@@ -43,6 +43,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
         if (GameManager.Instance.CurrentSceneType == GameManager.TypeOfScene.AsteroidField) 
         {
             GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+            Debug.Log("Listener added to on leftasteroid" + Time.time);
         }
 
         else

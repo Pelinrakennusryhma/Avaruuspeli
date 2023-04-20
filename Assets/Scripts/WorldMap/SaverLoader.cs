@@ -11,6 +11,11 @@ public class SaverLoader : MonoBehaviour
     public const string VendorSaveDataPath = "/VendorData.json";
 
 
+    public void OnInitialStartUp()
+    {
+        Debug.Log("Saver loader initial startup is called. This has no functionality yet, but this is probably the place to load initial data?");
+    }
+
     public bool LoadUniverse()
     {
         bool success = ReadFromUniverseFile();

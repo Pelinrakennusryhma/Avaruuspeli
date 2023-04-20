@@ -15,6 +15,9 @@ public class LandedShip : MonoBehaviour
     {
         GameEvents.Instance.EventPlayerTriedLeaving.AddListener(OnTryLeaving);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeave);
+        GameEvents.Instance.EventPlayerRanOutOfOxygen.AddListener(OnRanOutOfOxygen);
+        //Debug.Log("Added a listener to player ran out of oxygen");
+        //Debug.Log("Listener added to on leftasteroid" + Time.time + " gameobject is " + gameObject.name);
     }
 
     private void OnTryLeaving()
@@ -81,4 +84,11 @@ public class LandedShip : MonoBehaviour
             }
         }
     }
+
+    private void OnRanOutOfOxygen()
+    {
+        GameEvents.Instance.CallEventPlayerExitedPromptTrigger();
+        GameEvents.Instance.CallEventPlayerLeftAstroid(asteroid);
+    }
+
 }

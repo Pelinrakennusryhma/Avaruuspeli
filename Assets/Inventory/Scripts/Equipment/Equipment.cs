@@ -46,6 +46,9 @@ public class Equipment : MonoBehaviour
             //spacesuitImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
             spacesuitImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
 
+
+            GameManager.Instance.LifeSupportSystem.OnSpaceSuitUnequipped();
+
         }
     }
     public void EquipDrill(ItemSO item)
@@ -82,6 +85,13 @@ public class Equipment : MonoBehaviour
                 ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.AdvancedDrill);
         
             }
+
+            else if (item.id == 21)
+            {
+                ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.DiamondDrill;
+                ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.DiamondDrill);
+
+            }
         }
    
     }
@@ -106,6 +116,8 @@ public class Equipment : MonoBehaviour
             spacesuitImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
             //Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
         }
+
+        GameManager.Instance.LifeSupportSystem.OnSpaceSuitEquipped(item);
 
         //Debug.LogError("Replace with some scriptable object stuff");
     }

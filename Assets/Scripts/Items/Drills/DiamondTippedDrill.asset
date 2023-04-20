@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8acf95ee2ec0d044b2e870ea88209ec, type: 3}
+  m_Name: DiamondTippedDrill
+  m_EditorClassIdentifier: 
+  id: 21
+  itemName: Diamond Tipped Drill
+  plural: Diamond Tipped Drills
+  value: 40
+  description: Diamond-tipped drilling tool extracts resources with greater precision.
+  itemPrefab: {fileID: 0}
+  itemPrefabVariants: []
+  itemIcon: {fileID: 21300000, guid: 7dd567b3476e8b6438bcee17b5dec38c, type: 3}
+  isStackable: 0
+  weight: 500
+  itemType: 2
