@@ -31,6 +31,8 @@ public class SpaceshipMissile : UITrackable
     [SerializeField]
     float maxLockAngle = 3f;
 
+    // Obstacle layer
+    int layerMask = 1 << 11;
 
     void Start()
     {
@@ -91,10 +93,29 @@ public class SpaceshipMissile : UITrackable
             Vector3 projectedPos = hostileActor.GetProjectedPosition(250f, transform.position);
             Vector3 targetDir = projectedPos - transform.position;
             float angle = Vector3.Angle(targetDir, transform.forward);
+
             if (angle < closestAngleToTarget && angle < maxLockAngle)
             {
-                closestAngleToTarget = angle;
-                focusedTarget = hostileActor;
+                bool targetInSight = true;
+                RaycastHit hit;
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                    Debug.Log("Did Hit: " + hit.collider.gameObject.name);
+
+                    float distanceToShip = Vector3.Distance(transform.position, hostileActor.ship.transform.position);
+                    if (hit.distance < distanceToShip)
+                    {
+                        targetInSight = false;
+                    }
+                }
+
+                if (targetInSight)
+                {
+                    closestAngleToTarget = angle;
+                    focusedTarget = hostileActor;
+                }           
             }
             //Debug.Log("angle: " + angle + " name: " + hostileActor.name);
         }
