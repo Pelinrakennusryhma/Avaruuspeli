@@ -11,6 +11,9 @@ public class EnemyControls : ActorSpaceship
     float rotationDotThreshold = 0.999f;
     float minRollThreshold = 0.05f;
     float maxRollThreshold = 0.5f;
+    [SerializeField]
+    GameObject missileLockIndicatorPrefab;
+    GameObject missileLockIndicator;
 
     protected override void OnEnable()
     {
@@ -28,16 +31,28 @@ public class EnemyControls : ActorSpaceship
     public override void LockMissile(ActorSpaceship shooter)
     {
         base.LockMissile(shooter);
-        if(targetProjectionIcon == null)
+        missileLockIndicator = Instantiate(missileLockIndicatorPrefab, shipTransform);
+    }
+
+    public override void UnlockMissile(ActorSpaceship shooter)
+    {
+        base.LockMissile(shooter);
+        Destroy(missileLockIndicator);
+    }
+
+    public override void FocusShip(ActorSpaceship shooter)
+    {
+        base.FocusShip(shooter);
+        if (targetProjectionIcon == null)
         {
             targetProjectionIcon = ship.GetComponentInChildren<TargetProjectionIcon>();
         }
         targetProjectionIcon.pulsing = true;
     }
 
-    public override void UnlockMissile(ActorSpaceship shooter)
+    public override void UnfocusShip(ActorSpaceship shooter)
     {
-        base.LockMissile(shooter);
+        base.UnfocusShip(shooter);
         if (targetProjectionIcon == null)
         {
             targetProjectionIcon = ship.GetComponentInChildren<TargetProjectionIcon>();

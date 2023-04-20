@@ -51,4 +51,14 @@ public abstract class ActorSpaceship : MonoBehaviour
     {
         Debug.Log("missile unlocked");
     }
+
+    public virtual void FocusShip(ActorSpaceship shooter)
+    {
+        Debug.Log("ship focused");
+    }
+
+    public virtual void UnfocusShip(ActorSpaceship shooter)
+    {
+        Debug.Log("ship unfocused");
+    }
 }

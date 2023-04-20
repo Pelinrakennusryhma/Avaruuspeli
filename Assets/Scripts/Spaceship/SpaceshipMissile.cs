@@ -12,7 +12,8 @@ public class SpaceshipMissile : UITrackable
     public bool shooting = false;
 
     float closestAngleToTarget = Mathf.Infinity;
-    ActorSpaceship closestTarget = null;
+    ActorSpaceship focusedTarget = null;
+    ActorSpaceship prevFocusedTarget = null;
     List<ActorSpaceship> lockedTargets = new List<ActorSpaceship>();
 
     GameObject projectileParent;
@@ -26,7 +27,9 @@ public class SpaceshipMissile : UITrackable
 
     [SerializeField]
     float shootInterval = 0.25f;
-    float cooldown;
+    float cooldown = 0f;
+    [SerializeField]
+    float maxLockAngle = 3f;
 
 
     void Start()
@@ -41,9 +44,13 @@ public class SpaceshipMissile : UITrackable
     {
         cooldown -= Time.deltaTime;
 
-        if (shooting)
+        if(cooldown <= 0f)
         {
             ScanForTarget();
+        }
+
+        if (shooting)
+        {
             if (cooldown <= 0)
             {
                 cooldown = shootInterval;
@@ -54,15 +61,16 @@ public class SpaceshipMissile : UITrackable
 
     void LockOnTarget()
     {
-        if(closestTarget != null && !lockedTargets.Contains(closestTarget) && currentMissiles > 0)
+        if(focusedTarget != null && !lockedTargets.Contains(focusedTarget) && currentMissiles > 0)
         {
-            lockedTargets.Add(closestTarget);
-            closestTarget.LockMissile(actor);
-            Debug.Log("locking on: " + closestTarget.name);
+            lockedTargets.Add(focusedTarget);
+            focusedTarget.UnfocusShip(actor);
+            focusedTarget.LockMissile(actor);
+            Debug.Log("locking on: " + focusedTarget.name);
             currentMissiles--;
             GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
             Missile spawnedMissile = missileObject.GetComponent<Missile>();
-            spawnedMissile.Init(closestTarget, this);
+            spawnedMissile.Init(focusedTarget, this);
         }
     }
 
@@ -70,27 +78,44 @@ public class SpaceshipMissile : UITrackable
     {
         target.UnlockMissile(actor);
         lockedTargets.Remove(target);
-
+        focusedTarget = null;
     }
 
     void ScanForTarget()
     {
+        prevFocusedTarget = focusedTarget;
         closestAngleToTarget = Mathf.Infinity;
-        closestTarget = null;
+        focusedTarget = null;
         foreach (ActorSpaceship hostileActor in actor.faction.hostileActors)
         {
             Vector3 projectedPos = hostileActor.GetProjectedPosition(250f, transform.position);
             Vector3 targetDir = projectedPos - transform.position;
             float angle = Vector3.Angle(targetDir, transform.forward);
-
-            if (angle < closestAngleToTarget)
+            if (angle < closestAngleToTarget && angle < maxLockAngle)
             {
                 closestAngleToTarget = angle;
-                closestTarget = hostileActor;
+                focusedTarget = hostileActor;
             }
             //Debug.Log("angle: " + angle + " name: " + hostileActor.name);
         }
 
-        Debug.Log("closestTarget: " + closestTarget);
+        if(prevFocusedTarget != focusedTarget)
+        {
+            if(prevFocusedTarget != null)
+            {
+                prevFocusedTarget.UnfocusShip(actor);
+            }
+
+            if (focusedTarget)
+            {
+                if (!lockedTargets.Contains(focusedTarget) && currentMissiles > 0)
+                {
+                    focusedTarget.FocusShip(actor);
+                }
+            }
+            //Debug.Log("focused target changed");
+        }
+
+        //Debug.Log("closestTarget: " + focusedTarget);
     }
 }
