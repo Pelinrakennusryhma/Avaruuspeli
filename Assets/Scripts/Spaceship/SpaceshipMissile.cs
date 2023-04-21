@@ -67,12 +67,13 @@ public class SpaceshipMissile : UITrackable
         {
             lockedTargets.Add(focusedTarget);
             focusedTarget.UnfocusShip(actor);
-            focusedTarget.LockMissile(actor);
+
             Debug.Log("locking on: " + focusedTarget.name);
             currentMissiles--;
             GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
             Missile spawnedMissile = missileObject.GetComponent<Missile>();
             spawnedMissile.Init(focusedTarget, this);
+            focusedTarget.LockMissile(actor, spawnedMissile);
         }
     }
 
@@ -105,7 +106,7 @@ public class SpaceshipMissile : UITrackable
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                    Debug.Log("Did Hit: " + hit.collider.gameObject.name);
+                    //Debug.Log("Did Hit: " + hit.collider.gameObject.name);
 
                     float distanceToShip = Vector3.Distance(transform.position, hostileActor.ship.transform.position);
                     if (hit.distance < distanceToShip)

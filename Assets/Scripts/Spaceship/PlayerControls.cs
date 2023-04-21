@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
+    public bool InDanger { get { return lockedMissiles.Count > 0; }}
     protected override void OnDeath()
     {
         base.OnDeath();

@@ -13,6 +13,8 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
 
+    protected Dictionary<ActorSpaceship, Missile> lockedMissiles = new Dictionary<ActorSpaceship, Missile>();
+
     virtual protected void OnEnable()
     {
         ship = transform.GetChild(0).gameObject;
@@ -42,23 +44,25 @@ public abstract class ActorSpaceship : MonoBehaviour
         return targetProjection.GetPosition(projectileSpeed, shooterPosition);
     }
 
-    public virtual void LockMissile(ActorSpaceship shooter)
+    public virtual void LockMissile(ActorSpaceship shooter, Missile missile)
     {
-        Debug.Log("missile locked");
+        //Debug.Log("missile locked");
+        lockedMissiles[shooter] = missile;
     }
 
     public virtual void UnlockMissile(ActorSpaceship shooter)
     {
-        Debug.Log("missile unlocked");
+        //Debug.Log("missile unlocked");
+        lockedMissiles.Remove(shooter);
     }
 
     public virtual void FocusShip(ActorSpaceship shooter)
     {
-        Debug.Log("ship focused");
+        //Debug.Log("ship focused");
     }
 
     public virtual void UnfocusShip(ActorSpaceship shooter)
     {
-        Debug.Log("ship unfocused");
+        //Debug.Log("ship unfocused");
     }
 }

@@ -24,12 +24,10 @@ public class SpaceshipSceneInteractions : MonoBehaviour
 
         AsteroidPOISceneData data = null;
 
-        Debug.Log("manager: " + GameManager.Instance);
-        Debug.Log("currentPOI: " + GameManager.Instance.currentPOI);
         if (GameManager.Instance != null && GameManager.Instance.currentPOI != null)
         {
             data = (AsteroidPOISceneData)GameManager.Instance.currentPOI.Data;
-            Debug.Log("data: " + data);
+            //Debug.Log("data: " + data);
         }
 
         if (data == null)

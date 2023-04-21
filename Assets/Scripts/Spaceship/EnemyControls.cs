@@ -28,15 +28,15 @@ public class EnemyControls : ActorSpaceship
         Destroy(gameObject);
     }
 
-    public override void LockMissile(ActorSpaceship shooter)
+    public override void LockMissile(ActorSpaceship shooter, Missile missile)
     {
-        base.LockMissile(shooter);
+        base.LockMissile(shooter, missile);
         missileLockIndicator = Instantiate(missileLockIndicatorPrefab, shipTransform);
     }
 
     public override void UnlockMissile(ActorSpaceship shooter)
     {
-        base.LockMissile(shooter);
+        base.UnlockMissile(shooter);
         Destroy(missileLockIndicator);
     }
 
