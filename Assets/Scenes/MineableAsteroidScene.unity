@@ -4558,6 +4558,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 577270566353154302, guid: 8c6f722c77e9af741a343976d0c24553,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c6f722c77e9af741a343976d0c24553, type: 3}
 --- !u!4 &1736298349 stripped
@@ -5500,6 +5505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 577270566353154302, guid: 8c6f722c77e9af741a343976d0c24553,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c6f722c77e9af741a343976d0c24553, type: 3}
 --- !u!4 &543450653698449383
@@ -6204,7 +6214,7 @@ MonoBehaviour:
   asteroidSpawner: {fileID: 7003948108148386285}
   actorManager: {fileID: 754047033}
   mothershipHangar: {fileID: 84133338}
-  fallbackSceneData: {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4, type: 2}
+  fallbackSceneData: {fileID: 11400000, guid: dcd11acbbdec5f54ebaeaed7c32f6bb6, type: 2}
 --- !u!114 &7003948108148386285 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,

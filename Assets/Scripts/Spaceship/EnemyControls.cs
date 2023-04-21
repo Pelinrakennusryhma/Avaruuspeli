@@ -239,4 +239,9 @@ public class EnemyControls : ActorSpaceship
     {
         spaceshipShoot.shooting = shooting;
     }
+
+    public void OnSecondaryShoot(bool shooting)
+    {
+        spaceshipMissile.shooting = shooting;
+    }
 }

@@ -80,6 +80,8 @@ public class SpaceshipMissile : UITrackable
     {
         target.UnlockMissile(actor);
         lockedTargets.Remove(target);
+
+        // dirty hack to resume pulsing after missile hits if cursor is on the target
         focusedTarget = null;
     }
 
@@ -94,11 +96,12 @@ public class SpaceshipMissile : UITrackable
             Vector3 targetDir = projectedPos - transform.position;
             float angle = Vector3.Angle(targetDir, transform.forward);
 
+            // is the target prefered as being closer in angle and is the angle within allowed angle
             if (angle < closestAngleToTarget && angle < maxLockAngle)
             {
                 bool targetInSight = true;
                 RaycastHit hit;
-                // Does the ray intersect any objects excluding the player layer
+                // check for asteroids blocking the sight
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
@@ -117,7 +120,6 @@ public class SpaceshipMissile : UITrackable
                     focusedTarget = hostileActor;
                 }           
             }
-            //Debug.Log("angle: " + angle + " name: " + hostileActor.name);
         }
 
         if(prevFocusedTarget != focusedTarget)
@@ -134,9 +136,6 @@ public class SpaceshipMissile : UITrackable
                     focusedTarget.FocusShip(actor);
                 }
             }
-            //Debug.Log("focused target changed");
         }
-
-        //Debug.Log("closestTarget: " + focusedTarget);
     }
 }

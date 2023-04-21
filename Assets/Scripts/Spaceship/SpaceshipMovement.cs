@@ -55,11 +55,11 @@ public class SpaceshipMovement : MonoBehaviour
     void HandleMovement()
     {
         // Roll
-        rb.AddRelativeTorque(mass * Vector3.back * roll1D * rollTorque);
+        rb.AddRelativeTorque(mass * roll1D * rollTorque * Vector3.back);
         // Pitch
-        rb.AddRelativeTorque(mass * Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque);
+        rb.AddRelativeTorque(mass * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Vector3.right);
         // Yaw
-        rb.AddRelativeTorque(mass * Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque);
+        rb.AddRelativeTorque(mass * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Vector3.up);
 
         // Thrust
         if(thrust1D > 0.1f || thrust1D < -0.1f)
@@ -72,22 +72,22 @@ public class SpaceshipMovement : MonoBehaviour
                 currentThrust = thrust;
             }
 
-            rb.AddRelativeForce(mass * Vector3.forward * thrust1D * currentThrust);
+            rb.AddRelativeForce(currentThrust * mass * thrust1D * Vector3.forward);
             glide = thrust;
         } else
         {
-            rb.AddRelativeForce(mass * Vector3.forward * glide);
+            rb.AddRelativeForce(glide * mass * Vector3.forward);
             glide *= thrustGlideReduction;
         }
 
         // Up/Down
         if(upDown1D > 0.1f || upDown1D < -0.1f)
         {
-            rb.AddRelativeForce(mass * Vector3.up * upDown1D * upThrust);
+            rb.AddRelativeForce(mass * upDown1D * upThrust * Vector3.up);
             verticalGlide = upDown1D * upThrust;
         } else
         {
-            rb.AddRelativeForce(mass * Vector3.up * verticalGlide);
+            rb.AddRelativeForce(mass * verticalGlide * Vector3.up);
             verticalGlide *= upDownGlideReduction;
         }
 
@@ -95,12 +95,12 @@ public class SpaceshipMovement : MonoBehaviour
 
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
-            rb.AddRelativeForce(mass * Vector3.right * strafe1D * strafeThrust);
+            rb.AddRelativeForce(mass * strafe1D * strafeThrust * Vector3.right);
             horizontalGlide = strafe1D * strafeThrust;
         }
         else
         {
-            rb.AddRelativeForce(mass * Vector3.right * horizontalGlide);
+            rb.AddRelativeForce(horizontalGlide * mass * Vector3.right);
             horizontalGlide *= leftRightGlideReduction;
         }
     }

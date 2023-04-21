@@ -70,3 +70,5 @@ MonoBehaviour:
   stance: 0
   detectTargetRange: 1500
   patrolArea: 500
+  minMissileCooldown: 5
+  maxMissileCooldown: 25

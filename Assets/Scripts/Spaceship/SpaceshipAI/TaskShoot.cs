@@ -21,7 +21,7 @@ public class TaskShoot : Node
         _enemyControls.OnShoot(shouldShoot);
 
 
-        state = NodeState.FAILURE;
+        state = NodeState.RUNNING;
         return state;
     }
 }
