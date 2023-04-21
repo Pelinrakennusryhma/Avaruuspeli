@@ -57,8 +57,8 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(11, 1);
         Inventory.AddItem(12, 1);
         Inventory.AddItem(13, 3);
-        Inventory.AddItem(14, 1);
-        Inventory.AddItem(15, 1);
+        Inventory.AddItem(14, 21);
+        Inventory.AddItem(15, 21);
         Inventory.AddItem(16, 1);
         Inventory.AddItem(17, 1);
         Inventory.AddItem(18, 1);
@@ -154,6 +154,17 @@ public class InventoryController : MonoBehaviour
         if (GameEvents.Instance != null)
         {
             GameEvents.Instance.CallEventInventoryClosed();
+        }
+
+        if (MotherShipOnWorldMapController.Instance != null)
+        {
+            MotherShipOnWorldMapController.Instance.FuelSystem.UpdateAllFuelAmounts();
+            //Debug.LogWarning("Updating all fuel amounts");
+        }
+
+        else
+        {
+           // Debug.LogError("Null mothership instance. Don't update warpdrive amounts");
         }
         //Debug.Log("Hide inventory");
     }
@@ -276,6 +287,7 @@ public class InventoryController : MonoBehaviour
         CanvasScript.HideHeadsUpShop(true);
         ResourceInventory.Instance.OnEnterShoppingArea();        
         IsShopping = false;
+
     }
 
 

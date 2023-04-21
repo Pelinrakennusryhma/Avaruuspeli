@@ -32,6 +32,8 @@ public class WorldMapClickDetector : MonoBehaviour
             return;
         }
 
+        bool isOnAClickableObject = false;
+
         if (MotherShipOnWorldMapController.Instance.IsOnCurrentClickableObject
             && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
             == this) 
@@ -126,6 +128,8 @@ public class WorldMapClickDetector : MonoBehaviour
                                                                                                                 0, 
                                                                                                                 transform.position.z));
 
+            //Debug.LogWarning("We have fuel for travel " + hasEnoughFuelForTravel);
+
             if (hasEnoughFuelForTravel) 
             {
                 MotherShipOnWorldMapController.Instance.SetCurrentTargetClickableObject(this);
@@ -133,7 +137,7 @@ public class WorldMapClickDetector : MonoBehaviour
 
             else
             {
-                Debug.LogError("Not enough fuel. Don't travel to destination.");
+                //Debug.LogError("Not enough fuel. Don't travel to destination.");
             }
         }
     }

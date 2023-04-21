@@ -51,7 +51,7 @@ public class WorldMapMouseController : MonoBehaviour
     }
     public void Start()
     {
-        GameManager.Instance.OnEnterWorldMap();  
+        //GameManager.Instance.OnEnterWorldMapCall();  
     }
 
     public void ChangeZoomLevel(ZoomLevel newZoomLevel,

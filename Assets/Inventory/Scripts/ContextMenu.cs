@@ -68,7 +68,7 @@ public class ContextMenu : MonoBehaviour
                 break;
 
             case ItemSO.ItemType.Fuel:
-                Debug.LogError("Missing functionality: fuels are missing context menus.");
+                //Debug.LogError("Missing functionality: fuels are missing context menus.");
                 ShowDiscard();
                 break;
             default:
@@ -239,6 +239,17 @@ public class ContextMenu : MonoBehaviour
             {
                 GameManager.Instance.LifeSupportSystem.UpdateOxygenStorage(0);
             }
+
+            else if (itemID == 14)
+            {
+                MotherShipOnWorldMapController.Instance.FuelSystem.UpdateWarpdriveFuelTankAmount(0);
+            }
+
+            else if (itemID == 15)
+            {
+                MotherShipOnWorldMapController.Instance.FuelSystem.UpdateRocketFuelTankAmount(0);
+            }
+
             inventory.RemoveItem(itemID, 999999999);
         }
 

@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
 
     public TypeOfScene CurrentSceneType;
 
+    public delegate void EnterWorldMap();
+    public EnterWorldMap OnEnterWorldMap;
+
     public enum TypeOfScene
     {
         None = 0,
@@ -99,6 +102,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             Debug.LogWarning("Destroyed game manager");
         }
+    }
+
+    public void Start()
+    {
+        OnEnterWorldMapCall();
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -349,38 +357,38 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Current planet type is " + planetType.ToString());
 
-        int rando = Random.Range(0, 6);
-        rando = 0;
+        //int rando = Random.Range(0, 6);
+        //rando = 0;
 
-        if (rando == 0)
-        {
-            StackAndLoadAndLaunchScene("Maapallo", 3);
-        }
+        //if (rando == 0)
+        //{
+        //    StackAndLoadAndLaunchScene("Maapallo", 3);
+        //}
 
-        else if (rando == 1)
-        {
-            StackAndLoadAndLaunchScene("Marssi", 4);
-        }
+        //else if (rando == 1)
+        //{
+        //    StackAndLoadAndLaunchScene("Marssi", 4);
+        //}
 
-        else if (rando == 2)
-        {
-            StackAndLoadAndLaunchScene("Kuu", 5);
-        }
+        //else if (rando == 2)
+        //{
+        //    StackAndLoadAndLaunchScene("Kuu", 5);
+        //}
 
-        else if (rando == 3)
-        {
-            StackAndLoadAndLaunchScene("LumiMaa", 6);
-        }
+        //else if (rando == 3)
+        //{
+        //    StackAndLoadAndLaunchScene("LumiMaa", 6);
+        //}
 
-        else if (rando == 4)
-        {
-            StackAndLoadAndLaunchScene("Pluto", 7);
-        }
+        //else if (rando == 4)
+        //{
+        //    StackAndLoadAndLaunchScene("Pluto", 7);
+        //}
 
-        else if (rando == 5)
-        {
-            StackAndLoadAndLaunchScene("PuuMaa", 8);
-        }
+        //else if (rando == 5)
+        //{
+        //    StackAndLoadAndLaunchScene("PuuMaa", 8);
+        //}
 
         switch (planetType) 
         {
@@ -575,6 +583,11 @@ public class GameManager : MonoBehaviour
 
         CurrentSceneType = IncomingSceneType;
         IncomingSceneType = TypeOfScene.None;
+
+        if (CurrentSceneType == TypeOfScene.WorldMap)
+        {
+            OnEnterWorldMapCall();
+        }
     }
 
     public void SetSceneWaitingForNextFrame()
@@ -584,10 +597,17 @@ public class GameManager : MonoBehaviour
 
     // WIP ENDED
 
-    public void OnEnterWorldMap()
+    public void OnEnterWorldMapCall()
     {
         IsOnWorldMap = true;
         IncomingSceneType = TypeOfScene.None;
+
+        if (OnEnterWorldMap != null)
+        {
+            OnEnterWorldMap();
+        }
+
+        Debug.Log("On enter world map called");
     }
 
     public void OnLeaveAsteroidSurface()

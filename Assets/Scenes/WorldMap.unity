@@ -168,7 +168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Galaxy Fuel: xxxxxxxxxx'
+  m_text: 'Rocket Fuel: xxxxxxxxxx'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -262,8 +262,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 118, y: 183}
-  m_SizeDelta: {x: 245.6, y: 19.49}
+  m_AnchoredPosition: {x: 80, y: 183}
+  m_SizeDelta: {x: 304, y: 19.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &91713760
 GameObject:
@@ -1707,8 +1707,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 204}
-  m_SizeDelta: {x: 258.4, y: 22.43}
+  m_AnchoredPosition: {x: 70.1, y: 204}
+  m_SizeDelta: {x: 300.8, y: 22.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113231374
 MonoBehaviour:
@@ -3156,8 +3156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 117.99998, y: 205}
-  m_SizeDelta: {x: 250.81, y: 19.49}
+  m_AnchoredPosition: {x: 80.6, y: 205}
+  m_SizeDelta: {x: 304, y: 19.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1831385520
 CanvasRenderer:
@@ -3187,7 +3187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'UNIVERSE FUEL: 1000000'
+  m_text: 'WARPDRIVE FUEL: 1000000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3376,8 +3376,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 181}
-  m_SizeDelta: {x: 258.4, y: 22.43}
+  m_AnchoredPosition: {x: 70.09999, y: 181}
+  m_SizeDelta: {x: 300.8, y: 22.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1864273075
 MonoBehaviour:
