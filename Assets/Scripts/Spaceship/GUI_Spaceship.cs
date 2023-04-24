@@ -113,7 +113,7 @@ public class GUI_Spaceship : MonoBehaviour
         {
             // NOTE: WE don't want to show first person controls right now.
             // A more robust solution would be fine here.
-            if (i < 14)
+            if (i < 15)
             {
                 textToShow += $"{bindData.Key}{bindData.Value}\n";
             }

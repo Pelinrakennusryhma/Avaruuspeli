@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
-    public bool InDanger { get { return lockedMissiles.Count > 0; }}
     protected override void OnDeath()
     {
         base.OnDeath();
@@ -98,5 +97,14 @@ public class PlayerControls : ActorSpaceship
     public void OnSecondaryShoot(InputAction.CallbackContext context)
     {
         spaceshipMissile.shooting = context.performed;
+    }
+
+    public void OnUtility1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            // Get some spaceshipstats going and call its first utility component
+            Debug.Log("utility 1");
+        }
     }
 }

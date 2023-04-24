@@ -12,6 +12,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipEvents spaceshipEvents;
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
+    public bool InDanger { get { return lockedMissiles.Count > 0; } }
 
     protected List<Missile> lockedMissiles = new List<Missile>();
 
