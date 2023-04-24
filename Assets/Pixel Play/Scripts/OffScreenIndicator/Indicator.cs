@@ -56,9 +56,14 @@ public class Indicator : MonoBehaviour
         descriptionText.text = text;       
     }
 
+    public void SetScale(float scale)
+    {
+        indicatorImage.transform.localScale = Vector3.one * scale;
+    }
+
     void Awake()
     {
-        indicatorImage = transform.GetComponent<Image>();
+        indicatorImage = transform.GetComponentInChildren<Image>();
         defaultSprite = indicatorImage.sprite;
         if(distanceText == null)
         {

@@ -27,7 +27,7 @@ public class TaskPatrol : Node
     {
         if (_waiting)
         {
-            Debug.Log("waiting");
+            //Debug.Log("waiting");
             _waitCounter += Time.deltaTime;
             if(_waitCounter >= _waitTime)
             {
@@ -37,14 +37,14 @@ public class TaskPatrol : Node
         {
             if(needsNewDestination)
             {
-                Debug.Log("new destination");
+                //Debug.Log("new destination");
                 destination = GetNewPatrolPosition();
                 needsNewDestination = false;
             }
 
             if (_enemyControls.MoveToPosition(destination, 50f, true))
             {
-                Debug.Log("reached destination");
+                //Debug.Log("reached destination");
                 needsNewDestination = true;
                 _waitCounter = 0f;
                 _waiting = true;

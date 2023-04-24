@@ -21,6 +21,23 @@ public class SpaceshipSceneInteractions : MonoBehaviour
     {
         GameEvents.Instance.EventLeavingSceneStarted.AddListener(OnEventLeavingSceneStarted);
         GameEvents.Instance.EventLeavingSceneCancelled.AddListener(OnEventLeavingSceneCancelled);
+
+        AsteroidPOISceneData data = null;
+
+        if (GameManager.Instance != null && GameManager.Instance.currentPOI != null)
+        {
+            data = (AsteroidPOISceneData)GameManager.Instance.currentPOI.Data;
+            //Debug.Log("data: " + data);
+        }
+
+        if (data == null)
+        {
+            data = fallbackSceneData;
+        }
+
+        asteroidSpawner.SpawnNonMineableAsteroids(data.NumAsteroids);
+        asteroidSpawner.SpawnMineableAsteroids(data.NumMineables, data.MineableResources);
+        enemySpaceshipSpawner.SpawnEnemies(data.NumEnemies);
     }
 
     void OnEventLeavingSceneStarted()
@@ -40,26 +57,5 @@ public class SpaceshipSceneInteractions : MonoBehaviour
     { 
         yield return new WaitForSeconds(delay);
         GameManager.Instance.GoBackToWorldMap();
-    }
-
-    private void Start()
-    {
-        AsteroidPOISceneData data = null;
-
-        if(GameManager.Instance != null && GameManager.Instance.currentPOI != null)
-        {
-            data = (AsteroidPOISceneData)GameManager.Instance.currentPOI.Data;
-            Debug.Log("data: " + data);
-        }
-
-        if(data == null)
-        {
-            data = fallbackSceneData;
-        }
-
-        asteroidSpawner.SpawnNonMineableAsteroids(data.NumAsteroids);
-        asteroidSpawner.SpawnMineableAsteroids(data.NumMineables, data.MineableResources);
-
-        enemySpaceshipSpawner.SpawnEnemies(data.NumEnemies);
     }
 }

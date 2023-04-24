@@ -121,6 +121,11 @@ public class GameManager : MonoBehaviour
         inventoryToggleQueued = true;
     }
 
+    public void OnQuitPressed()
+    {
+        Application.Quit();
+    }
+
     // Update is called once per frame
     void Update()
     {

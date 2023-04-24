@@ -141,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipPosition: {fileID: 3598516067148384311}
   <CharacterPosition>k__BackingField: {fileID: 3598516066891151902}
-  targetScript: {fileID: 3598516068117989779}
   <CenterOfGravity>k__BackingField: {fileID: 0}
   <Collider>k__BackingField: {fileID: 0}
   <TriggerCollider>k__BackingField: {fileID: 3598516068117989774}
@@ -187,6 +186,7 @@ MonoBehaviour:
   descriptionText: aaasqwd
   needDescriptionOnArrow: 0
   customSprite: {fileID: 21300000, guid: d48b2b2a9c974de4996ff37fc1b2b203, type: 3}
+  targetScale: 1
   indicator: {fileID: 0}
 --- !u!114 &1770166269648418027
 MonoBehaviour:

@@ -28,6 +28,8 @@ public class Target : MonoBehaviour
     [Tooltip("Optional sprite to use instead of the default circle")]
     public Sprite customSprite;
 
+    [Tooltip("Scale of the icon")]
+    public float targetScale = 1f;
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.
     /// A reference to the target's indicator, 
@@ -49,6 +51,11 @@ public class Target : MonoBehaviour
     public void SetColor(Color color)
     {
         targetColor = color;
+    }
+
+    public void SetScale(float scale)
+    {
+        targetScale = scale;
     }
 
     /// <summary>

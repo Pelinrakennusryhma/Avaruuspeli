@@ -51,6 +51,10 @@ MonoBehaviour:
   spaceshipBoost: {fileID: 0}
   spaceshipShoot: {fileID: 0}
   spaceshipEvents: {fileID: 0}
+  spaceshipMissile: {fileID: 0}
+  targetProjection: {fileID: 0}
+  missileLockIndicatorPrefab: {fileID: 8445849859529224481, guid: d23c7b5994f5c134792acdeb4838ca77,
+    type: 3}
 --- !u!114 &577270566353154299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,3 +70,5 @@ MonoBehaviour:
   stance: 0
   detectTargetRange: 1500
   patrolArea: 500
+  minMissileCooldown: 2
+  maxMissileCooldown: 10

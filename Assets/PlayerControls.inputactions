@@ -121,6 +121,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SecondaryShoot",
+                    "type": "PassThrough",
+                    "id": "5395e9b6-7b00-42db-93be-0b8dd40248e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Utility1",
+                    "type": "Button",
+                    "id": "bd42281e-6ff1-420f-9a4a-40533679e8ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -352,6 +370,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "LeaveScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b3e54e4-7e87-4392-bbd7-436c858a9eeb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80bdbfd9-7c7f-498d-8d11-65fc14b59e16",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Utility1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
