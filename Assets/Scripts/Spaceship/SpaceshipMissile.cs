@@ -79,7 +79,7 @@ public class SpaceshipMissile : UITrackable
 
     public void ReleaseTarget(ActorSpaceship target)
     {
-        target.UnlockMissile(actor);
+        //target.UnlockMissile(actor);
         lockedTargets.Remove(target);
 
         // dirty hack to resume pulsing after missile hits if cursor is on the target

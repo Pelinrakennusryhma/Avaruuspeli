@@ -11,7 +11,14 @@ public class UIDangerIndicator : MonoBehaviour
     Image dangerImage;
     Color originalColor;
     float minAlpha = 0.02f;
-    float maxAlpha = 0.30f;
+    float maxAlpha = 0.25f;
+
+    bool playerAlive = true;
+
+    private void Awake()
+    {
+        GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnPlayerDied);
+    }
 
     void Start()
     {
@@ -30,7 +37,7 @@ public class UIDangerIndicator : MonoBehaviour
 
     void Update()
     {
-        if (playerControls.InDanger)
+        if (playerControls.InDanger && playerAlive)
         {
             dangerImage.enabled = true;
             float newAlpha = Mathf.PingPong(Time.time, maxAlpha - minAlpha) + minAlpha;
@@ -41,5 +48,10 @@ public class UIDangerIndicator : MonoBehaviour
         {
             dangerImage.enabled = false;
         }
+    }
+
+    void OnPlayerDied()
+    {
+        playerAlive = false;
     }
 }

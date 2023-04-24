@@ -13,7 +13,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
 
-    protected Dictionary<ActorSpaceship, Missile> lockedMissiles = new Dictionary<ActorSpaceship, Missile>();
+    protected List<Missile> lockedMissiles = new List<Missile>();
 
     virtual protected void OnEnable()
     {
@@ -47,13 +47,18 @@ public abstract class ActorSpaceship : MonoBehaviour
     public virtual void LockMissile(ActorSpaceship shooter, Missile missile)
     {
         //Debug.Log("missile locked");
-        lockedMissiles[shooter] = missile;
+        lockedMissiles.Add(missile);
     }
 
-    public virtual void UnlockMissile(ActorSpaceship shooter)
+    //public virtual void UnlockMissile(ActorSpaceship shooter)
+    //{
+    //    //Debug.Log("missile unlocked");
+    //    //lockedMissiles.Remove(shooter);
+    //}
+
+    public virtual void UnlockMissile(Missile missile)
     {
-        //Debug.Log("missile unlocked");
-        lockedMissiles.Remove(shooter);
+        lockedMissiles.Remove(missile);
     }
 
     public virtual void FocusShip(ActorSpaceship shooter)

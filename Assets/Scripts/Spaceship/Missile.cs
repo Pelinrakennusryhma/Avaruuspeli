@@ -61,6 +61,11 @@ public class Missile : MonoBehaviour
                 _shooter.ReleaseTarget(_target);
             }
 
+            if(_target != null)
+            {
+                _target.UnlockMissile(this);
+            }
+
             Explode();
         }
     }

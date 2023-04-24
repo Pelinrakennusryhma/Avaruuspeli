@@ -34,9 +34,9 @@ public class EnemyControls : ActorSpaceship
         missileLockIndicator = Instantiate(missileLockIndicatorPrefab, shipTransform);
     }
 
-    public override void UnlockMissile(ActorSpaceship shooter)
+    public override void UnlockMissile(Missile missile)
     {
-        base.UnlockMissile(shooter);
+        base.UnlockMissile(missile);
         Destroy(missileLockIndicator);
     }
 
