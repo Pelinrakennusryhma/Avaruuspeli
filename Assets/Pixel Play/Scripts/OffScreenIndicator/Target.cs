@@ -22,9 +22,14 @@ public class Target : MonoBehaviour
     [Tooltip("Optional description text to show above the indicator")]
     public string descriptionText;
 
+    [Tooltip("Select if description text should be shown with arrow indicator")]
+    [SerializeField] private bool needDescriptionOnArrow = false;
+
     [Tooltip("Optional sprite to use instead of the default circle")]
     public Sprite customSprite;
 
+    [Tooltip("Scale of the icon")]
+    public float targetScale = 1f;
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.
     /// A reference to the target's indicator, 
@@ -46,6 +51,11 @@ public class Target : MonoBehaviour
     public void SetColor(Color color)
     {
         targetColor = color;
+    }
+
+    public void SetScale(float scale)
+    {
+        targetScale = scale;
     }
 
     /// <summary>
@@ -78,6 +88,14 @@ public class Target : MonoBehaviour
         get
         {
             return needDistanceText;
+        }
+    }
+
+    public bool NeedDescriptionOnArrow
+    {
+        get
+        {
+            return needDescriptionOnArrow;
         }
     }
 

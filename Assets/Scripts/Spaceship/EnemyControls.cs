@@ -4,24 +4,60 @@ using UnityEngine;
 
 public class EnemyControls : ActorSpaceship
 {
+    TargetProjectionIcon targetProjectionIcon;
     Transform shipTransform;
     Rigidbody rb;
     float breakThreshold = 8f;
     float rotationDotThreshold = 0.999f;
     float minRollThreshold = 0.05f;
     float maxRollThreshold = 0.5f;
+    [SerializeField]
+    GameObject missileLockIndicatorPrefab;
+    GameObject missileLockIndicator;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
-        base.Start();
     }
 
     protected override void OnDeath()
     {
         base.OnDeath();
         Destroy(gameObject);
+    }
+
+    public override void LockMissile(ActorSpaceship shooter, Missile missile)
+    {
+        base.LockMissile(shooter, missile);
+        missileLockIndicator = Instantiate(missileLockIndicatorPrefab, shipTransform);
+    }
+
+    public override void UnlockMissile(Missile missile)
+    {
+        base.UnlockMissile(missile);
+        Destroy(missileLockIndicator);
+    }
+
+    public override void FocusShip(ActorSpaceship shooter)
+    {
+        base.FocusShip(shooter);
+        if (targetProjectionIcon == null)
+        {
+            targetProjectionIcon = ship.GetComponentInChildren<TargetProjectionIcon>();
+        }
+        targetProjectionIcon.pulsing = true;
+    }
+
+    public override void UnfocusShip(ActorSpaceship shooter)
+    {
+        base.UnfocusShip(shooter);
+        if (targetProjectionIcon == null)
+        {
+            targetProjectionIcon = ship.GetComponentInChildren<TargetProjectionIcon>();
+        }
+        targetProjectionIcon.pulsing = false;
     }
 
     // returns true when destination is reached
@@ -202,5 +238,10 @@ public class EnemyControls : ActorSpaceship
     public void OnShoot(bool shooting)
     {
         spaceshipShoot.shooting = shooting;
+    }
+
+    public void OnSecondaryShoot(bool shooting)
+    {
+        spaceshipMissile.shooting = shooting;
     }
 }

@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class TargetProjectionIcon : MonoBehaviour
 {
-    SpaceshipEvents _spaceshipEvents;
-    Image icon;
     Color originalColor;
     TargetProjection targetProjection;
-    Canvas _canvas;
     SpaceshipShoot targetterShoot;
     Target targetScript;
+    public bool pulsing;
 
     //void Start()
     //{
@@ -43,7 +41,6 @@ public class TargetProjectionIcon : MonoBehaviour
     void OnShipHitByPlayer()
     {
         StartCoroutine(FlashColor());
-        Debug.Log("hit by player");
     }
 
     IEnumerator FlashColor()
@@ -55,7 +52,16 @@ public class TargetProjectionIcon : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(targetterShoot);
+        //Debug.Log(targetterShoot);
         transform.position = targetProjection.GetPosition(targetterShoot.laserSpeed, targetterShoot.transform.position);
+
+        if (pulsing)
+        {
+            float scaleAdjust = Mathf.PingPong(Time.time * 1f, 0.25f);
+            targetScript.SetScale(1f - scaleAdjust);
+        } else
+        {
+            targetScript.SetScale(1f);
+        }
     }
 }

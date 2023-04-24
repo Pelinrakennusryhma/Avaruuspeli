@@ -254,6 +254,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251344400070701582, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251344400070701582, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5448442547160360519, guid: 181445b4bb28fac45bc3eab8424d73ae,
         type: 3}
       propertyPath: type
@@ -288,6 +298,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StarSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804272086259976957, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804272086259976957, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624363048032881868, guid: 181445b4bb28fac45bc3eab8424d73ae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7845042064148235349, guid: 181445b4bb28fac45bc3eab8424d73ae,
         type: 3}

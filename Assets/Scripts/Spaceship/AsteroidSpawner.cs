@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum MineableRockDensity
 {
@@ -19,41 +16,40 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private GameObject asteroidParent;
     [SerializeField]
-    private int amountOfAsteroids = 500;
+    private BoxCollider asteroidArea;
     [SerializeField]
-    private int amountOfMineables = 1;
+    private BoxCollider reachableArea;
     [SerializeField]
     private AnimationCurve sizeCurve;
     [SerializeField]
-    private AnimationCurve mineableCurve;
+    private AnimationCurve mineableSizeCurve;
     [SerializeField]
-    private float spawnArea = 1500f;
+    private AnimationCurve mineableDistanceCurve;
     [SerializeField]
     private ActorManager actorManager;
     [SerializeField]
     MineableRockDensity mineableRockDensity;
-    [SerializeField]
-    Resource resourceType;
-    // Start is called before the first frame update
-    void Start()
-    {
-        SpawnAsteroids();
-        SpawnMineableAsteroids();
-    }
 
-    void SpawnAsteroids()
-    {
-        //SceneManager.LoadScene(mineableScene, LoadSceneMode.Additive);
+    // Get spaceship reach from somewhere, player ship stats perhaps?
+    float reach = 3000;
 
-        for (int i = 0; i < amountOfAsteroids; i++)
+    public void SpawnNonMineableAsteroids(int amount)
+    {
+        for (int i = 0; i < amount; i++)
         {
             GameObject asteroidToSpawn = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
 
 
-            Vector3 spawnPos = Random.insideUnitSphere * spawnArea;
+            Vector3 spawnPos = GetPositionInSpawnArea(asteroidArea.bounds);
             Quaternion spawnRot = Random.rotation;
 
             GameObject asteroid = Instantiate(asteroidToSpawn, spawnPos, spawnRot, asteroidParent.transform);
+            float distanceFromOrigo = Vector3.Distance(Vector3.zero, spawnPos);
+            if (distanceFromOrigo > reach * 1.5f)
+            {
+                Destroy(asteroid.GetComponent<Rigidbody>());
+                Destroy(asteroid.GetComponent<MeshCollider>());
+            }
 
             float randomValue = Random.Range(0f, 1f);
             float scale = sizeCurve.Evaluate(randomValue);
@@ -61,18 +57,38 @@ public class AsteroidSpawner : MonoBehaviour
         }
     }
 
-    void SpawnMineableAsteroids()
+    public void SpawnMineableAsteroids(int amount, Resource[] resourceTypes)
     {
-        for (int i = 0; i < amountOfMineables; i++)
+        reachableArea.size = new Vector3(reach, reachableArea.size.y, reachableArea.size.z);
+        for (int i = 0; i < amount; i++)
         {
-            Vector3 spawnPos = Random.insideUnitSphere * spawnArea;
+            Vector3 spawnPos = GetPositionInSpawnArea(reachableArea.bounds, true);
             Quaternion spawnRot = Random.rotation;
             GameObject mineable = Instantiate(mineableAsteroidPrefab, spawnPos, spawnRot, asteroidParent.transform);
             MineableAsteroidTrigger mineableScript = mineable.GetComponent<MineableAsteroidTrigger>();
             GameObject asteroidModel = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
             float randomValue = Random.Range(0f, 1f);
-            float scale = mineableCurve.Evaluate(randomValue);
+            float scale = mineableSizeCurve.Evaluate(randomValue);
+            Resource resourceType = resourceTypes[Random.Range(0, resourceTypes.Length)];
             mineableScript.Init(asteroidModel, scale, mineableRockDensity, resourceType, actorManager);
+        }
+    }
+
+    Vector3 GetPositionInSpawnArea(Bounds bounds, bool useCurve=false)
+    {
+        if (useCurve)
+        {
+            float x = Mathf.Lerp(bounds.min.x, bounds.max.x, mineableDistanceCurve.Evaluate(Random.value));
+            float y = Mathf.Lerp(bounds.min.y, bounds.max.y, mineableDistanceCurve.Evaluate(Random.value));
+            float z = Mathf.Lerp(bounds.min.z, bounds.max.z, mineableDistanceCurve.Evaluate(Random.value));
+            return new Vector3(x, y, z);
+        } else
+        {
+            return new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                Random.Range(bounds.min.y, bounds.max.y),
+                Random.Range(bounds.min.z, bounds.max.z)
+                );
         }
     }
 }

@@ -65,4 +65,46 @@ public class PlayerControls : ActorSpaceship
             GameEvents.Instance.CallEventToggleIndicators(false);
         }
     }
+
+    public void OnOptions(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.OnOptionsPressed();
+        }
+
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.OnInventoryPressed();
+        }
+    }
+
+    public void OnLeaveScene(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameEvents.Instance.CallEventLeavingSceneStarted();
+        } else if (context.canceled)
+        {
+            GameEvents.Instance.CallEventLeavingSceneCancelled();
+        }
+    }
+
+    public void OnSecondaryShoot(InputAction.CallbackContext context)
+    {
+        spaceshipMissile.shooting = context.performed;
+    }
+
+    public void OnUtility1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            // Get some spaceshipstats going and call its first utility component
+            Debug.Log("utility 1");
+        }
+    }
 }

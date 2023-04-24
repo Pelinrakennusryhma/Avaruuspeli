@@ -357,6 +357,22 @@ public class FirstPersonPlayerControls : MonoBehaviour
         }
     }
 
+    public void OnOptions(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.OnOptionsPressed();
+        }
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.OnInventoryPressed();
+        }
+    }
+
     public void LateUpdate()
     {
         ClearControls();

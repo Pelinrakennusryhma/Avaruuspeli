@@ -9,7 +9,7 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
     public StarSystemOnFocus ParentStarSystem;
 
 
-    public WorldMapClickDetector WorldMapClickDetector;
+    //public WorldMapClickDetector WorldMapClickDetector;
 
     public GameObject ReferenceObject;
 
@@ -25,9 +25,9 @@ public class AsteroidFieldOnWorldMap : MonoBehaviour
 
     public void Awake()
     {
-        WorldMapClickDetector = GetComponent<WorldMapClickDetector>();
-        WorldMapClickDetector.OnObjectClicked -= OnAsteroidFieldClicked;
-        WorldMapClickDetector.OnObjectClicked += OnAsteroidFieldClicked;
+        //WorldMapClickDetector = GetComponent<WorldMapClickDetector>();
+        //WorldMapClickDetector.OnObjectClicked -= OnAsteroidFieldClicked;
+        //WorldMapClickDetector.OnObjectClicked += OnAsteroidFieldClicked;
 
     }
 

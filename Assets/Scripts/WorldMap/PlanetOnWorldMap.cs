@@ -14,7 +14,12 @@ public class PlanetOnWorldMap : MonoBehaviour
 
     public WorldMapClickDetector ClickDetector;
 
+
     public Vendor Vendor;
+
+    [SerializeField]
+    GameObject POIPrefab;
+
 
     public void Init(CenterStarOnWorldMap centerStar,
                      StarSystemOnFocus parentStarSystem)
@@ -25,6 +30,8 @@ public class PlanetOnWorldMap : MonoBehaviour
         ClickDetector = GetComponent<WorldMapClickDetector>();
         ClickDetector.OnObjectClicked -= OnPlanetClicked;
         ClickDetector.OnObjectClicked += OnPlanetClicked;
+
+        Instantiate(POIPrefab, transform);
     }
 
     public void OnPlanetClicked(WorldMapClickDetector.ClickableObjectType type)

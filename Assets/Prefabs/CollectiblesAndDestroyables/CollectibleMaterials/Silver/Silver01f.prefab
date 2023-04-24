@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4071646143752437369}
   - component: {fileID: 4542968625284159884}
   - component: {fileID: 4537821610431627377}
-  - component: {fileID: 7180025913588060380}
+  - component: {fileID: -3537048192896233144}
   m_Layer: 6
   m_Name: Silver01f
   m_TagString: Untagged
@@ -148,7 +148,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6501646322212705205, guid: cdb424643e99d554ba94e150ce46801a, type: 3}
---- !u!114 &7180025913588060380
+--- !u!114 &-3537048192896233144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,8 +157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3731993380885079235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a61bdfa7cc7469044a37b78ad9d43572, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f77162a786c2344b209ca8cdd41810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceType: 3
   OffsetFromGround: 0.2

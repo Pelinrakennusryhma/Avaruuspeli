@@ -20,6 +20,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 6481246586380655480, guid: 712798441937f5240a5bccce6983e5f4,
     type: 3}
   itemPrefabVariants:
+  - {fileID: 6481246586380655480, guid: 712798441937f5240a5bccce6983e5f4, type: 3}
   - {fileID: 2394676295458325450, guid: f9e7b1190539de64d987feaec14e442d, type: 3}
   - {fileID: 1945498201635183005, guid: 2c4a15d03730e014981ed27b7b3292f5, type: 3}
   - {fileID: 6624736451327454340, guid: 9ac5de38ffd2aea49ba1945ab72e5cf9, type: 3}

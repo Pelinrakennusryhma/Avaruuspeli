@@ -19,13 +19,17 @@ public class SpaceshipBT : BTree
     float detectTargetRange = 500f;
     [SerializeField]
     float patrolArea = 1000f;
+    [SerializeField]
+    float minMissileCooldown = 10f;
+    [SerializeField]
+    float maxMissileCooldown = 60f;
 
     EnemyControls enemyControls;
     Transform shipTransform;
     SpaceshipShoot spaceshipShoot;
     SpaceshipEvents spaceshipEvents;
 
-    private void Awake()
+    private void OnEnable()
     {
         enemyControls = GetComponent<EnemyControls>();
         shipTransform = transform.GetChild(0);
@@ -45,6 +49,7 @@ public class SpaceshipBT : BTree
                     {
                         new CheckTargetInShootingRange(shipTransform),
                         new TaskShoot(enemyControls),
+                        new TaskSecondaryShoot(enemyControls, minMissileCooldown, maxMissileCooldown)
                     }),
                     new Sequence(new List<Node>
                     {

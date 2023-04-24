@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
   m_Name: Iron
   m_EditorClassIdentifier: 
-  id: 2
+  id: 1
   itemName: Iron
   plural: Iron
-  value: 1
-  description: Metal commonly used in construction, manufacturing, and transportation
-    industries.
+  value: 100
+  description: Iron ore.
   itemPrefab: {fileID: 4253190446834730643, guid: 5fb8916d60fe40149a1eafb934a31fe8,
     type: 3}
   itemPrefabVariants:
+  - {fileID: 4253190446834730643, guid: 5fb8916d60fe40149a1eafb934a31fe8, type: 3}
   - {fileID: 1636022269187562763, guid: f183bb8346d4c4e43826562693897592, type: 3}
   - {fileID: 2944774647325709394, guid: 7a16f59d284879e4babcfaeb6cb3ad0c, type: 3}
   - {fileID: 4947251645500065695, guid: bd5a3c032b66a634a9328fb2d18003dc, type: 3}
@@ -28,8 +28,5 @@ MonoBehaviour:
   - {fileID: 7603247722571580278, guid: 5112daa19d2935145bb4c1df8f129eba, type: 3}
   - {fileID: 5185723898810116219, guid: 594106553620a104c975394607768d3b, type: 3}
   itemIcon: {fileID: 0}
-  isStackable: 1
-  weight: 3.1
-  itemType: 5
-  rare: {fileID: 0}
-  rareChance: 0
+  rare: {fileID: 11400000, guid: cbb3e1de24baeb8478002f02458e87b1, type: 2}
+  rareChance: 0.05

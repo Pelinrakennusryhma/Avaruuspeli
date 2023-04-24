@@ -53,19 +53,17 @@ public class Indicator : MonoBehaviour
 
     public void SetDescription(string text)
     {
-        if(indicatorType == IndicatorType.BOX)
-        {
-            descriptionText.text = text;
-        } else
-        {
-            descriptionText.text = "";
-        }
-        
+        descriptionText.text = text;       
+    }
+
+    public void SetScale(float scale)
+    {
+        indicatorImage.transform.localScale = Vector3.one * scale;
     }
 
     void Awake()
     {
-        indicatorImage = transform.GetComponent<Image>();
+        indicatorImage = transform.GetComponentInChildren<Image>();
         defaultSprite = indicatorImage.sprite;
         if(distanceText == null)
         {

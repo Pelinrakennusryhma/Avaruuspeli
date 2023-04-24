@@ -9,6 +9,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public Vector3 CurrentStarSystemPos;
 
     public Vector3 CurrentAsteroidFieldPos;
+    public Vector3 currentPOIPos;
 
     public static MotherShipOnWorldMapController Instance;
 
@@ -257,6 +258,26 @@ public class MotherShipOnWorldMapController : MonoBehaviour
         Vector3 yZeroedAsteroidFieldPos = new Vector3(CurrentAsteroidFieldPos.x, 0, CurrentAsteroidFieldPos.z);
         
         if ((yZeroedPos - yZeroedAsteroidFieldPos).magnitude <= 0.1f)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CheckIfPOIPositionIsWithinTolerance()
+    {
+
+        Vector3 yZeroedPos = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 yZeroedPOIPos = new Vector3(currentPOIPos.x, 0, currentPOIPos.z);
+
+        float distance = (yZeroedPos - yZeroedPOIPos).magnitude;
+        Debug.Log("checking pos, distance: " + distance);
+
+        if (distance <= 6f)
         {
             return true;
         }

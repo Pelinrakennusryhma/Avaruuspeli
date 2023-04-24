@@ -30,9 +30,14 @@ public class GameEvents : MonoBehaviour
     public UnityEvent<MineableAsteroidTrigger> EventPlayerLeftAsteroid;
     public UnityEvent<bool> EventToggleIndicators;
 
+
     public UnityEvent EventPlayerRanOutOfOxygen;
     public UnityEvent EventInventoryOpened;
     public UnityEvent EventInventoryClosed;
+
+    public UnityEvent EventLeavingSceneStarted;
+    public UnityEvent EventLeavingSceneCancelled;
+
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -94,6 +99,7 @@ public class GameEvents : MonoBehaviour
         EventToggleIndicators.Invoke(showIndicators);
     }
 
+
     public void CallEventPlayerRanOutOfOxygen()
     {        
         Debug.Log("Calling event player ran out of oxygen"+ Time.time);
@@ -108,5 +114,16 @@ public class GameEvents : MonoBehaviour
     public void CallEventInventoryClosed()
     {
         EventInventoryClosed.Invoke();
+    }
+
+    public void CallEventLeavingSceneStarted()
+    {
+        EventLeavingSceneStarted.Invoke();
+    }
+
+    public void CallEventLeavingSceneCancelled()
+    {
+        EventLeavingSceneCancelled.Invoke();
+
     }
 }

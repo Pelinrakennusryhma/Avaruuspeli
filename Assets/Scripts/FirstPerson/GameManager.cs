@@ -24,12 +24,14 @@ public class GameManager : MonoBehaviour
     public SaverLoader SaverLoader;
     public Helpers Helpers;
     public InventoryController InventoryController;
+
     public LifeSupportSystem LifeSupportSystem;
 
     public GalaxyOnWorldMap CurrentGalaxy;
     public StarSystemOnFocus CurrentStarSystem;
     public PlanetOnWorldMap CurrentPlanet;
     public AsteroidFieldOnWorldMap CurrentAsteroidField;
+    public PointOfInterest currentPOI;
 
 
     public GalaxyData CurrentGalaxyData;
@@ -51,7 +53,8 @@ public class GameManager : MonoBehaviour
         None = 0,
         WorldMap = 1,
         Planet = 2,
-        AsteroidField = 3
+        AsteroidField = 3,
+        POI = 4
     }
 
     public TypeOfScene IncomingSceneType;
@@ -123,10 +126,9 @@ public class GameManager : MonoBehaviour
         Helpers.RefreshReferenceToGraphicsRaycasterAndEventSystem();
     }
 
-    public void OnOptionsPressed(InputAction.CallbackContext context)
+    public void OnOptionsPressed()
     {
-        if (context.performed
-            && CurrentSceneType != TypeOfScene.WorldMap) 
+        if (CurrentSceneType != TypeOfScene.WorldMap) 
         {
             if (IsPaused)
             {
@@ -140,12 +142,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnInventoryPressed(InputAction.CallbackContext context)
+    public void OnInventoryPressed()
     {
-        if (context.performed)
-        {
-            inventoryToggleQueued = true;
-        }
+
+        inventoryToggleQueued = true;
+        
     }
 
     // Update is called once per frame
@@ -184,8 +185,6 @@ public class GameManager : MonoBehaviour
             {
                 if (inventoryToggleQueued)
                 {
-                    //Debug.LogWarning("Should launch inveneotry");
-
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {
@@ -308,7 +307,7 @@ public class GameManager : MonoBehaviour
 
     public void GoBackToWorldMap()
     {
-
+        Cursor.lockState = CursorLockMode.None;
         IncomingSceneType = TypeOfScene.WorldMap;
 
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
@@ -339,13 +338,29 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Going back to world map");
     }
+
+
     public void EnterAsteroidField()
     {
         Debug.LogWarning("ENTER ASTEROID FIELD");
 
-
         IncomingSceneType = TypeOfScene.AsteroidField;
         StackAndLoadAndLaunchScene("MineableAsteroidScene", 1);
+    }
+
+    public void EnterPOI(PointOfInterest pointOfInterest)
+    {
+        currentPOI = pointOfInterest;
+        EnterPOI();
+    }
+
+    public void EnterPOI()
+    {
+        IncomingSceneType = TypeOfScene.POI;
+        Debug.Log("currentPOI: " + currentPOI);
+        Debug.Log("Data: " + currentPOI.Data);
+        Debug.Log("SceneToLoad: " + currentPOI.Data.SceneToLoad);
+        StackAndLoadAndLaunchScene(currentPOI.Data.SceneToLoad, -1);
     }
 
     public void EnterPlanet()
@@ -552,8 +567,19 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
         WorldMapScene.Instance.gameObject.SetActive(false);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        ActiveStackedScene = SceneManager.GetSceneByBuildIndex(buildIndex);
-        //ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
+
+        if (buildIndex >= 0) 
+        { 
+            ActiveStackedScene = SceneManager.GetSceneByBuildIndex(buildIndex);
+        }
+
+        else
+        {
+            ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
+            Debug.LogError("");
+        }
+
+
         FramesPassedTillLoadScenes = 0;
         WaitingForSceneLoad = true;
         IsOnWorldMap = false;
@@ -579,6 +605,11 @@ public class GameManager : MonoBehaviour
         else if (IncomingSceneType == TypeOfScene.AsteroidField)
         {
             Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
+        }
+
+        else if (IncomingSceneType == TypeOfScene.POI)
+        {
+            Debug.LogWarning("Incoming scene is of type POI");
         }
 
         CurrentSceneType = IncomingSceneType;

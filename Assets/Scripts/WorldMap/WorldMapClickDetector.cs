@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class WorldMapClickDetector : MonoBehaviour
+public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
 {
     public enum ClickableObjectType
     {
@@ -12,7 +13,8 @@ public class WorldMapClickDetector : MonoBehaviour
         Planet = 3,
         Star = 4,
         AsteroidField = 5,
-        Wormhole = 6
+        Wormhole = 6,
+        POI = 7,
     }
 
     public ClickableObjectType type;
@@ -20,15 +22,18 @@ public class WorldMapClickDetector : MonoBehaviour
     public delegate void ClickCallback(ClickableObjectType type);
     public ClickCallback OnObjectClicked;
 
-    public void OnClick()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("Clicked an object of type " + type);
+        if(eventData.button != PointerEventData.InputButton.Left)
+        {
+            return;
+        }
 
         Vector3 mousePos = new Vector3(0, -10000, 0);
 
         if (GameManager.Instance.Helpers.CheckIfUIisHit())
         {
-            //Debug.Log("we clicked, but hit UI at the same time. return");
+            Debug.Log("we clicked, but hit UI at the same time. return");
             return;
         }
 
@@ -70,7 +75,7 @@ public class WorldMapClickDetector : MonoBehaviour
 
                     if (MotherShipOnWorldMapController.Instance.CheckIfPlanetOrStarPositionIsWithinTolerance()) 
                     {
-                        GameManager.Instance.EnterPlanet();
+                        //GameManager.Instance.EnterPlanet();
                         //Debug.LogError("CLICKED PLANET");
                     }
 
@@ -94,10 +99,19 @@ public class WorldMapClickDetector : MonoBehaviour
 
                     if (MotherShipOnWorldMapController.Instance.CheckIfAsteroidFieldPositionIsWithinTolerance()) 
                     {
-                        GameManager.Instance.EnterAsteroidField();
+                        //GameManager.Instance.EnterAsteroidField();
                         //Debug.LogError("CLICKED ASTEROID FIELD");
                     }
                         //Debug.Log("WE SHOULD MOVE TO ASTEROID FIELD POS");
+                    break;
+                case ClickableObjectType.POI:
+                    zoom = WorldMapMouseController.ZoomLevel.None;
+                    MotherShipOnWorldMapController.Instance.SetPosOnCurrentStarSystem(transform.position);
+
+                    if (MotherShipOnWorldMapController.Instance.CheckIfPOIPositionIsWithinTolerance())
+                    {
+                        //GameManager.Instance.EnterPOI();
+                    }
                     break;
 
                 default:
