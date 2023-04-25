@@ -37,7 +37,12 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        bool isOnAClickableObject = false;
+        if (OnObjectClicked != null)
+        {
+            OnObjectClicked(type);
+        }
+
+        //bool isOnAClickableObject = false;
 
         if (MotherShipOnWorldMapController.Instance.IsOnCurrentClickableObject
             && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
@@ -125,10 +130,7 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
                                                     WorldMapMouseController.Instance.CurrentGalaxy,
                                                     WorldMapMouseController.Instance.CurrentStarSystem);        
             
-            if (OnObjectClicked != null)
-            {
-                OnObjectClicked(type);
-            }
+
         }
 
         else

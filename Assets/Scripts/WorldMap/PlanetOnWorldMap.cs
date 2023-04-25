@@ -36,6 +36,7 @@ public class PlanetOnWorldMap : MonoBehaviour
 
     public void OnPlanetClicked(WorldMapClickDetector.ClickableObjectType type)
     {
+        Debug.Log("clicked planet?");
         GameManager.Instance.CurrentPlanet = this;
         GameManager.Instance.CurrentPlanetData = PlanetData;
         SetVendor();
