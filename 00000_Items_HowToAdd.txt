@@ -1,0 +1,15 @@
+Items are currently SCriptableObject -based containers of relevant data.
+These can be dragged and ropped in the editor or accessed via a database
+in script. 
+
+DataBase can be accessed at:
+GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO
+
+HOW TO ADD ITEMS:
+1. Assets/Scripts/Items contains folders for items for organization purposes.
+2. In a suitable folder, right click -> Create ScriptableObjects and select a type of item
+3. Rename the object
+4. Give item an id (UNIQUE) and fill in the fields woth relevant data. Give a reference 
+to inventory icon for an example.
+5. Finally click the bool "Item is in DataBase" to add object to item data base
+6. Access via script or drag and drop in editor. Voila!

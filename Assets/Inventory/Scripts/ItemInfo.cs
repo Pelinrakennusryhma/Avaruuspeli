@@ -11,15 +11,30 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemValue;
     [SerializeField] private TextMeshProUGUI itemDescription;
 
-    private Item infoAbout;
+    private ItemSO infoAbout;
     void Start()
     {
-        //infoAbout = GameObject.Find("Canvas").GetComponent<CanvasScript>().infoAbout;
-        infoAbout = FindObjectOfType<CanvasScript>().infoAbout;
-        Item item = infoAbout;
-        itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
-        itemName.text = infoAbout.name;
-        itemType.text = item.type;
+        infoAbout = GameManager.Instance.InventoryController.CanvasScript.infoAbout;
+        ItemSO item = infoAbout;
+        //itemImage.sprite = Resources.Load<Sprite>("Sprites/" + item.name);
+        //Debug.LogError("Replace this with scriptable objects sprite");
+
+        if (item.itemIcon != null)
+        {
+            itemImage.sprite = item.itemIcon;
+            //Debug.LogWarning("Non null icon. proceed");
+        }
+
+        else
+        {
+            itemImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            //Debug.LogError("Null sprite. Replacing with a blank one");
+        }
+
+
+
+        itemName.text = infoAbout.itemName;
+        itemType.text = item.itemType.ToString();
         itemValue.text = item.value.ToString();
         itemDescription.text = item.description;
     }

@@ -11,13 +11,19 @@ public class MotherShipFuelSystem : MonoBehaviour
     public TextMeshProUGUI NeededFuelPlaceHolderText;
     public GameObject NeededFuelUIBackPlate;
 
-    private float UniverseFuel = 100000.0f;
-    private float GalaxyFuel = 100000.0f;
+    private float WarpdriveFuel = 100000.0f;
+    private float RocketFuel = 100000.0f;
 
     private float universeConsumptionRate = 10.0f;
     private float galaxyConsumptionRate = 500.0f;
 
     public MotherShipOnWorldMapController MotherShipController;
+
+    public int AmountOfWarpdriveFuelTanks;
+    public int AmountOfRocketFuelTanks;
+
+    public float AmountOfWarpdriveFuelInLastTank;
+    public float AmountOfRocketFuelInLastTank;
 
     // Update is called once per frame
 
@@ -33,8 +39,15 @@ public class MotherShipFuelSystem : MonoBehaviour
 
     private void Awake()
     {
-        UniverseFuelPlaceHolderText.text = "UNIVERSE FUEL: " + ((int)UniverseFuel).ToString();
-        GalaxyFuelPlaceHolderText.text = "GALAXY FUEL: " + ((int)GalaxyFuel).ToString();
+        AmountOfWarpdriveFuelInLastTank = 1.0f;
+        AmountOfRocketFuelInLastTank = 1.0f;
+        UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
+        GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
+
+        GameManager.Instance.OnEnterWorldMap -= UpdateAllFuelAmounts;
+        GameManager.Instance.OnEnterWorldMap += UpdateAllFuelAmounts;
+
+        UpdateAllFuelAmounts();
     }
 
     public void LateUpdate()
@@ -74,8 +87,65 @@ public class MotherShipFuelSystem : MonoBehaviour
                 distanceTravelled = 0;
             }
 
-            UniverseFuel -= distanceTravelled * universeConsumptionRate;
-            UniverseFuelPlaceHolderText.text = "UNIVERSE FUEL: " + ((int)UniverseFuel).ToString();
+            WarpdriveFuel = (AmountOfWarpdriveFuelTanks - 1 + AmountOfWarpdriveFuelInLastTank) * 1000;
+
+            //WarpdriveFuel -= distanceTravelled * universeConsumptionRate;
+            AmountOfWarpdriveFuelInLastTank -= (distanceTravelled * universeConsumptionRate) / 1000;
+
+            if (AmountOfWarpdriveFuelInLastTank <= 0)
+            {
+                if (AmountOfWarpdriveFuelTanks > 1) 
+                {
+                    AmountOfWarpdriveFuelTanks--;
+                    GameManager.Instance.InventoryController.Inventory.RemoveItem(14, 1);
+
+                    AmountOfWarpdriveFuelInLastTank = 1.0f + AmountOfWarpdriveFuelInLastTank;
+
+                    if (AmountOfWarpdriveFuelInLastTank < 0.0f)
+                    {
+                        Debug.LogError("We went through two tanks in one update. Not cool. Fix this");
+                    }
+                }
+
+                else
+                {
+                    AmountOfWarpdriveFuelInLastTank = 0.1f;
+
+                    if (AmountOfWarpdriveFuelTanks > 0) 
+                    {
+                        GameManager.Instance.InventoryController.Inventory.RemoveItem(14, 999999);
+                    }
+
+                    AmountOfWarpdriveFuelTanks = 0;
+
+
+                }
+            }
+
+            int amountOfTanks = AmountOfWarpdriveFuelTanks;
+            //Debug.Log("Amount of tanks is " + amountOfTanks + " universe fuel is " + WarpdriveFuel + " amount of warpdrive fuel in last tank is " + AmountOfWarpdriveFuelInLastTank);
+
+            // Divide and conquer?
+
+            //if (AmountOfWarpdriveFuelInLastTank >= 0)
+            //{
+            //    AmountOfWarpdriveFuelTanks = amountOfFullTanks + 1; 
+            //}
+
+            //else
+            //{
+            //    AmountOfWarpdriveFuelTanks = 0;
+            //}
+
+
+            if (WarpdriveFuel <= 0)
+            {
+                WarpdriveFuel = 0.1f;
+            }
+
+            UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
+
+            //Debug.Log("Universe fuel is " + UniverseFuel);
 
             previousUniversePos = transform.position;
             previousKnownZoomLevel = WorldMapMouseController.ZoomLevel.Universe;
@@ -90,24 +160,71 @@ public class MotherShipFuelSystem : MonoBehaviour
                 distanceTravelled = 0;
             }
 
-            
-            GalaxyFuel -= distanceTravelled * galaxyConsumptionRate;
-            GalaxyFuelPlaceHolderText.text = "GALAXY FUEL: " + ((int)GalaxyFuel).ToString();
+            //RocketFuel = ((AmountOfRocketFuelTanks - 1) + AmountOfRocketFuelInLastTank) * 1000;
+            //RocketFuel -= distanceTravelled * galaxyConsumptionRate;
+
+            RocketFuel = (AmountOfRocketFuelTanks - 1 + AmountOfRocketFuelInLastTank) * 1000;
+
+            //WarpdriveFuel -= distanceTravelled * universeConsumptionRate;
+            AmountOfRocketFuelInLastTank -= (distanceTravelled * galaxyConsumptionRate) / 1000;
+
+            if (AmountOfRocketFuelInLastTank <= 0)
+            {
+                if (AmountOfRocketFuelTanks > 1)
+                {
+                    AmountOfRocketFuelTanks--;
+                    GameManager.Instance.InventoryController.Inventory.RemoveItem(15, 1);
+
+                    AmountOfRocketFuelInLastTank = 1.0f + AmountOfRocketFuelInLastTank;
+
+                    if (AmountOfRocketFuelInLastTank < 0.0f)
+                    {
+                        Debug.LogError("We went through two tanks in one update. Not cool. Fix this");
+                    }
+                }
+
+                else
+                {
+                    AmountOfRocketFuelInLastTank = 0.1f;
+                    
+                    if (AmountOfRocketFuelTanks > 0) 
+                    {
+                        GameManager.Instance.InventoryController.Inventory.RemoveItem(15, 999999);
+                    }
+                    AmountOfRocketFuelTanks = 0;
+ 
+
+                }
+            }
+
+            int amountOfTanks = AmountOfRocketFuelTanks;
+            //Debug.Log("Amount of tanks is " + amountOfTanks + " rocket fuel is " + RocketFuel + " amount of rocket fuel in last tank is " + AmountOfRocketFuelInLastTank);
+
+
+
+            //Debug.Log("Galaxy fuel is " + RocketFuel);
+
+            if (RocketFuel <= 0)
+            {
+                RocketFuel = 0.1f;
+            }
+
+            GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
 
             previousGalaxyPos = transform.position;
             previousKnownZoomLevel = WorldMapMouseController.ZoomLevel.Galaxy;
         }
 
-        if (GalaxyFuel <= 0.0f)
+        if (RocketFuel <= 0.0f)
         {
-            GalaxyFuel = 0.1f;
+            RocketFuel = 0.1f;
 
             //UniverseFuelPlaceHolderText.text = "RUNNING ON FUMES";
         }
 
-        if (UniverseFuel <= 0.0f)
+        if (WarpdriveFuel <= 0.0f)
         {
-            UniverseFuel = 0.1f;
+            WarpdriveFuel = 0.1f;
             //GalaxyFuelPlaceHolderText.text = "RUNNING ON FUMES";
         }
 
@@ -135,7 +252,8 @@ public class MotherShipFuelSystem : MonoBehaviour
             distanceToTravel = (yZeroedPos - targetPos).magnitude;
             neededFuelIs = distanceToTravel * universeConsumptionRate;
 
-            if (UniverseFuel - neededFuelIs >= 0.0f)
+            if (WarpdriveFuel - neededFuelIs >= 0.0f
+                || distanceToTravel <= 1.0f)
             {
                 weHaveEnoughFuel = true;
             }
@@ -147,11 +265,14 @@ public class MotherShipFuelSystem : MonoBehaviour
             distanceToTravel = (yZeroedPos - targetPos).magnitude;
             neededFuelIs = distanceToTravel * galaxyConsumptionRate;
 
-            if (GalaxyFuel - neededFuelIs >= 0.0f)
+            if (RocketFuel - neededFuelIs >= 0.0f
+                || distanceToTravel <= 0.1f)
             {
                 weHaveEnoughFuel = true;
             }
         }
+
+
 
         //Debug.LogWarning("we are at a point where we should evaluate needed fuel to target position. Fuel needed for travel is " + neededFuelIs + " we have enough fuel is " + weHaveEnoughFuel);
         return weHaveEnoughFuel;
@@ -218,12 +339,12 @@ public class MotherShipFuelSystem : MonoBehaviour
 
     public void AddGalaxyFuel(float amount)
     {
-        GalaxyFuel += amount;
+        RocketFuel += amount;
     }
 
     public void AddUniverseFuel(float amount)
     {
-        UniverseFuel += amount;
+        WarpdriveFuel += amount;
     }
 
     public void OnTeleportStarted()
@@ -231,5 +352,82 @@ public class MotherShipFuelSystem : MonoBehaviour
         HasTeleportedLastFrame = true;
         previousGalaxyPos = transform.position;
         previousUniversePos = transform.position;
+    }
+
+    public void UpdateWarpdriveFuelTankAmount(int newAmount)
+    {
+        if (AmountOfWarpdriveFuelTanks <= 0
+            && newAmount > 0)
+        {
+            AmountOfWarpdriveFuelInLastTank = 1.0f;
+        }
+
+        AmountOfWarpdriveFuelTanks = newAmount;
+
+        if (newAmount <= 0)
+        {
+            AmountOfWarpdriveFuelInLastTank = 0;
+        }
+
+        WarpdriveFuel = ((AmountOfWarpdriveFuelTanks - 1) + AmountOfWarpdriveFuelInLastTank) * 1000.0f;
+
+        if (WarpdriveFuel <= 0.0f)
+        {
+            WarpdriveFuel = 0.1f;
+        }
+
+        Debug.Log("Amount of warpdrive fuel is " + WarpdriveFuel + " amount of fuel in last tank is " + AmountOfWarpdriveFuelInLastTank);
+        UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
+    }
+
+    public void UpdateRocketFuelTankAmount(int newAmount)
+    {
+        if (AmountOfRocketFuelTanks <= 0
+            && newAmount > 0)
+        {
+            AmountOfRocketFuelInLastTank = 1.0f;
+        }
+
+        AmountOfRocketFuelTanks = newAmount;
+
+        if(newAmount <= 0)
+        {
+            AmountOfRocketFuelInLastTank = 0;
+        }
+
+        RocketFuel = ((AmountOfRocketFuelTanks - 1) + AmountOfRocketFuelInLastTank) * 1000.0f;
+
+        if (RocketFuel <= 0.0f)
+        {
+            RocketFuel = 0.1f;
+        }
+
+        Debug.Log("Amount of rocket fuel is " + RocketFuel + " amount of fuel in last tank is " + AmountOfRocketFuelInLastTank);
+
+        GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
+    }
+
+    public void UpdateAllFuelAmounts()
+    {
+        int rocketAmount = 0;
+        int warpAmount = 0;
+
+        ItemScript rockets = GameManager.Instance.InventoryController.Inventory.GetItemScript(14);
+        ItemScript warps = GameManager.Instance.InventoryController.Inventory.GetItemScript(15);
+
+        if (rockets != null)
+        {
+            rocketAmount = rockets.currentItemAmount;
+        }
+
+        if (warps != null)
+        {
+            warpAmount = warps.currentItemAmount;
+        }
+
+        UpdateWarpdriveFuelTankAmount(rocketAmount);
+        UpdateRocketFuelTankAmount(warpAmount);
+
+        Debug.Log("Update fuels. We entered world map.");
     }
 }

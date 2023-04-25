@@ -11,6 +11,12 @@ public class DrillSlot : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            if (equipment.equippedDrill == null)
+            {
+                //Debug.LogWarning("Nothing equipped. Returning");
+                return;
+            }
+
             contextMenuScript.HideAll();
             contextMenuScript.ShowUnequip();
             contextMenuScript.SetPositionToMouse();

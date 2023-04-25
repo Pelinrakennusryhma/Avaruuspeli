@@ -10,10 +10,17 @@ public class SpacesuitSlot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
-        {
+        {            
+            if (equipment.equippedSpacesuit == null)
+            {
+                //Debug.LogWarning("Equipped spacesuit is null. Returning");
+                return;
+            }
+
             contextMenuScript.HideAll();
             contextMenuScript.ShowUnequip();
             contextMenuScript.SetPositionToMouse();
+            
             contextMenuScript.itemID = equipment.equippedSpacesuit.id;
         }
         if (eventData.button == PointerEventData.InputButton.Left)

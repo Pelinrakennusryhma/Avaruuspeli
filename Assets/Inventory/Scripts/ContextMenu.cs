@@ -16,34 +16,84 @@ public class ContextMenu : MonoBehaviour
     [SerializeField] private GameObject buttonDiscard;
     public int itemID;
     public Inventory inventory;
-    public ItemDatabase itemDatabase;
+    //public ItemDatabase itemDatabase;
     public Equipment equipment;
     public CanvasScript canvasScript;
     public bool shopping;
 
     //Piilottaa context menusta kaikki vaihtoehdot ja sitten näyttää kaikki itemin tyyppiin liittyvät vaihtoehdot. Näyttää 'Sell' jos pelaaja on kaupassa.
-    public void ShowOptions(string type)
+    public void ShowOptions(ItemSO.ItemType  itemType)
     {
         HideAll();
-        if (type == "Resource")
+
+        //Debug.LogWarning("The string searches have been replaced with enum use.");
+
+        switch (itemType)
         {
-            ShowDiscard();
+            case ItemSO.ItemType.None:
+                ShowDiscard();
+                break;
+            case ItemSO.ItemType.Consumable:
+                ShowUse();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.Drill:
+                ShowEquip();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.Equipment:
+                ShowEquip();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.PlayerWeapon:
+                Debug.LogError("Missing functionality: player weapons can't yet be equipped in any way.");
+                ShowDiscard();
+                break;
+            case ItemSO.ItemType.Resource:
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.ShipItem:
+                Debug.LogError("Missing functionality: ship items can't yet be equipped in any way.");
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.ShipWeapon:
+                ShowEquip1();
+                ShowEquip2();
+                ShowDiscard();
+                break;
+
+            case ItemSO.ItemType.Fuel:
+                //Debug.LogError("Missing functionality: fuels are missing context menus.");
+                ShowDiscard();
+                break;
+            default:
+                break;
         }
-        else if ((type == "Drill") || (type == "Spacesuit"))
-        {
-            ShowEquip();
-            ShowDiscard();
-        }
-        else if(type == "ShipWeapon") {
-            ShowEquip1();
-            ShowEquip2();
-            ShowDiscard();
-        }
-        else if(type == "Consumable")
-        {
-            ShowUse();
-            ShowDiscard();
-        }
+
+        //if (type == "Resource")
+        //{
+        //    ShowDiscard();
+        //}
+        //else if ((type == "Drill") || (type == "Spacesuit"))
+        //{
+        //    ShowEquip();
+        //    ShowDiscard();
+        //}
+        //else if(type == "ShipWeapon") {
+        //    ShowEquip1();
+        //    ShowEquip2();
+        //    ShowDiscard();
+        //}
+        //else if(type == "Consumable")
+        //{
+        //    ShowUse();
+        //    ShowDiscard();
+        //}
 
         if (shopping == true)
         {
@@ -70,6 +120,7 @@ public class ContextMenu : MonoBehaviour
     }
     public void UnequipSpacesuit()
     {
+        Debug.LogWarning("Unequipping spacesuit");
         equipment.UnequipSpacesuit();
         HideMenu();
     }
@@ -89,48 +140,58 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Unequip' (1/3) vaihtoehto. Unequippaa pelaajalta itemin josta context menu on avattu. Ship weapon 1 ja 2 menevät suoraan oman napin kautta.
     public void UnequipItem()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
-        if (item.type == "Drill")
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+
+        Debug.LogError("Unequipping item with id " + itemID);
+
+        if (item.id == 7
+            || item.id == 8)
         {
             UnequipDrill();
         }
-        else if (item.type == "Spacesuit")
+        else if (item.id == 12)
         {
             UnequipSpacesuit();
         }
     }
     public void EquipDrill()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
-        inventory.RemoveItem(item.id, 1);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+        //inventory.RemoveItem(item.id, 1);
+        //Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
+
         equipment.EquipDrill(item);
         HideMenu();
     }
     public void EquipSpacesuit()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
-        inventory.RemoveItem(item.id, 1);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+        //inventory.RemoveItem(item.id, 1);
+        //Debug.LogWarning("Don't add and remove spacesuit during equip/unequip");
         equipment.EquipSpacesuit(item);
         HideMenu();
     }
     //Context menun 'Equip 1' vaihtoehto. 
     public void EquipShipWeapon1()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
+        Debug.LogWarning("We are adding and removing ship weapon from invenotry during equip/unequip. This is old functionality and should be made consistent with the rest of items.");
         equipment.EquipShipWeapon1(item);
         HideMenu();
     }
     //Context menun 'Equip 2' vaihtoehto. 
     public void EquipShipWeapon2()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         inventory.RemoveItem(item.id, 1);
+        Debug.LogWarning("We are adding and removing ship weapon from invenotry during equip/unequip. This is old functionality and should be made consistent with the rest of items.");
+
         equipment.EquipShipWeapon2(item);
         HideMenu();
     }
@@ -138,12 +199,17 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Equip' vaihtoehto. Equippaa pelaajalta itemin josta context menu on avattu. Ship weapon 1 ja 2 menevät suoraan oman napin kautta.
     public void EquipItem()
     {
-        Item item;
-        item = itemDatabase.GetItem(itemID);
-        if (item.type == "Drill")
+        ItemSO item;
+        item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+                    
+        if (item.id == 7
+            || item.id == 8
+            || item.id == 21)
         {
+
             EquipDrill();
-        }else if(item.type == "Spacesuit")
+        }
+        else if(item.id == 12)
         {
             EquipSpacesuit();
         }
@@ -151,7 +217,42 @@ public class ContextMenu : MonoBehaviour
     //Context menun 'Discard' vaihtoehto
     public void DiscardItem()
     {
-        inventory.RemoveItem(itemID, 99999);
+        ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+        Debug.LogWarning("Checking that we don't discard an equipped item!!");
+
+        bool isAnEquippedItem = false;
+
+        if (GameManager.Instance.InventoryController.Equipment.CheckIfAnItemIsEquipped(item))
+        {
+            isAnEquippedItem = true;
+            Debug.LogWarning("Tried to discard an equipped item, but we won't allow that for now.");
+        }
+
+        else
+        {
+            Debug.LogWarning("Item wasn't equipped so we can discard it safely");
+        }
+
+        if (!isAnEquippedItem) 
+        {
+            if (itemID == 13)
+            {
+                GameManager.Instance.LifeSupportSystem.UpdateOxygenStorage(0);
+            }
+
+            else if (itemID == 14)
+            {
+                MotherShipOnWorldMapController.Instance.FuelSystem.UpdateWarpdriveFuelTankAmount(0);
+            }
+
+            else if (itemID == 15)
+            {
+                MotherShipOnWorldMapController.Instance.FuelSystem.UpdateRocketFuelTankAmount(0);
+            }
+
+            inventory.RemoveItem(itemID, 999999999);
+        }
+
         HideMenu();
     }
 
@@ -159,12 +260,22 @@ public class ContextMenu : MonoBehaviour
     public void SellItem()
     {
         ItemScript itemScript;
-        Item item;
+        ItemSO item;
         item = inventory.CheckForItem(itemID);
-        itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + itemID).GetComponent<ItemScript>();
+        itemScript = FindCorrectItemScript();
+
         canvasScript.money += item.value * itemScript.currentItemAmount;
         inventory.RemoveItem(itemID, itemScript.currentItemAmount);
         HideMenu();
+    }
+
+    public ItemScript FindCorrectItemScript()
+    {        
+        Debug.LogError("Replace the find with something else!!! But these are dynamically created, " +
+                       "so some thought is required from where to fetch this. But also, it is not " +
+                       "possible to shop anymore with inventory open, so you should never even see this message!");
+
+        return GameObject.Find("InventoryPanel/Scroll/View/Layout/" + itemID).GetComponent<ItemScript>();        
     }
 
     //Tuo näkyville tai piilottaa näkyvistä eri nappeja context menusta

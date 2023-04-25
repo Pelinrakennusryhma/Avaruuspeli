@@ -7,22 +7,34 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] private GameObject itemCatalogPanel;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject equipmentPanel;
-    public Item infoAbout;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private ShopHeadsUp headsUpShop;
+    public ItemSO infoAbout;
     public ContextMenu contextMenu;
     //Pelaajan rahat
-    public double money = 0;
+    public double money = 10000;
 
-    public void InfoAboutItem(Item item)
+    public void Awake()
+    {
+        headsUpShop.gameObject.SetActive(false);
+    }
+
+    public void InfoAboutItem(ItemSO item)
     {
         infoAbout = item;
     }
     public void ShowItemCatalog()
     {
+        HideHeadsUpShop(false);
+        inventoryPanel.SetActive(false);
+        HideEquipment();
         itemCatalogPanel.SetActive(true);
     }
     public void HideItemCatalog()
     {
         itemCatalogPanel.SetActive(false);
+        inventoryPanel.SetActive(true);
+        ShowEquipment();
     }
 
     public void ShowShop()
@@ -42,5 +54,41 @@ public class CanvasScript : MonoBehaviour
     public void HideEquipment()
     {
         equipmentPanel.SetActive(false);
+    }
+
+    public void ShowHeadsUpShop()
+    {
+        //Debug.Log("Show heads up shop called");
+
+        HideShop();
+        HideItemCatalog();        
+        HideEquipment();
+        inventoryPanel.SetActive(false);
+        headsUpShop.gameObject.SetActive(true);
+        headsUpShop.Init();
+        headsUpShop.StartShopping();
+    }
+
+    public void HideHeadsUpShop(bool finishShopping)
+    {
+       // Debug.Log("Hide heads up shop called");
+
+        if (finishShopping) 
+        {
+            headsUpShop.FinishShopping();
+            //Debug.LogError("Finishing shopping");
+        }
+
+        else
+        {
+            //Debug.LogError("We are not shopping anymore");
+        }
+
+        inventoryPanel.SetActive(true);
+        ShowEquipment();
+        headsUpShop.gameObject.SetActive(false);
+
+
+        
     }
 }

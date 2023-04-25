@@ -30,8 +30,14 @@ public class GameEvents : MonoBehaviour
     public UnityEvent<MineableAsteroidTrigger> EventPlayerLeftAsteroid;
     public UnityEvent<bool> EventToggleIndicators;
 
+
+    public UnityEvent EventPlayerRanOutOfOxygen;
+    public UnityEvent EventInventoryOpened;
+    public UnityEvent EventInventoryClosed;
+
     public UnityEvent EventLeavingSceneStarted;
     public UnityEvent EventLeavingSceneCancelled;
+
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -79,16 +85,35 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerTriedLeaving()
     {
         EventPlayerTriedLeaving.Invoke();
+        //Debug.Log("Event player tried leaving is called");
     }
 
     public void CallEventPlayerLeftAstroid(MineableAsteroidTrigger asteroid)
     {
         EventPlayerLeftAsteroid.Invoke(asteroid);
+        //Debug.Log("Calling event player left asteroid");
     }
 
     public void CallEventToggleIndicators(bool showIndicators)
     {
         EventToggleIndicators.Invoke(showIndicators);
+    }
+
+
+    public void CallEventPlayerRanOutOfOxygen()
+    {        
+        Debug.Log("Calling event player ran out of oxygen"+ Time.time);
+        EventPlayerRanOutOfOxygen.Invoke();
+    }
+
+    public void CallEventInventoryOpened()
+    {
+        EventInventoryOpened.Invoke();
+    }
+
+    public void CallEventInventoryClosed()
+    {
+        EventInventoryClosed.Invoke();
     }
 
     public void CallEventLeavingSceneStarted()
@@ -99,5 +124,6 @@ public class GameEvents : MonoBehaviour
     public void CallEventLeavingSceneCancelled()
     {
         EventLeavingSceneCancelled.Invoke();
+
     }
 }

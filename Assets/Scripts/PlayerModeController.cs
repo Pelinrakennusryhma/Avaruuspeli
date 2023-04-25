@@ -18,6 +18,7 @@ public class PlayerModeController : MonoBehaviour
     {
         GameEvents.Instance.EventPlayerLanded.AddListener(OnLand);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+        //Debug.Log("Listener added to on leftasteroid" + Time.time);
     }
 
     private void Start()
@@ -45,6 +46,8 @@ public class PlayerModeController : MonoBehaviour
         //firstPersonControls.transform.SetPositionAndRotation(asteroid.CharacterPosition.position, asteroid.CharacterPosition.rotation);
         firstPersonControls.SetActive(true);
         playerInput.actions.FindActionMap("FirstPersonControls").Enable();
+
+        GameManager.Instance.LifeSupportSystem.OnEnterUnbreathablePlace();
     }
 
     void LandShipOnAsteroid(Transform ship, MineableAsteroidTrigger asteroid)
@@ -63,5 +66,8 @@ public class PlayerModeController : MonoBehaviour
         playerControls.spaceshipMovement.UnFreeze();
         playerInput.actions.FindActionMap("FirstPersonControls").Disable();
         playerInput.actions.FindActionMap("ShipControls").Enable();
+
+        //Debug.Log("On leave asteroid called" + Time.time +" asteroid is "+ asteroid.gameObject.name + " gameobject is " + gameObject.name);
+        //GameManager.Instance.LifeSupportSystem.OnExitUnbreathablePlace();
     }
 }

@@ -21,6 +21,12 @@ public class MineableAsteroidTrigger : MonoBehaviour
     Resource _resourceType;
     string successText = "Press %landKey% to land on the asteroid.";
     string failureText = "Clear the area of hostiles before landing on the asteroid.";
+
+
+    string noSpacesuitText = "Equip a spacesuit before landing on the asteroid.";
+    string noOxygenBottlesText = "You need oxygen bottles before landing on the asteroid.";
+    string noSpacesuitNoOxygenBottlesText = "Equip space suit and get some oxygen bottles before landing on the asteroid.";
+
     string currentText;
     bool playerInTriggerArea = false;
     [SerializeField]
@@ -29,12 +35,20 @@ public class MineableAsteroidTrigger : MonoBehaviour
     float minSpawnRange = 2f;
     int allowedSearches = 5;
 
+    private bool HadSpaceSuitOnFirstTriggerEnterAttempt = false;
+
 
     private void Awake()
     {
         GameEvents.Instance.EventEnemiesKilled.AddListener(OnEnemiesKilled);
         GameEvents.Instance.EventPlayerTriedLanding.AddListener(OnLandingAttempt);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnLeaveAsteroid);
+
+        //GameEvents.Instance.EventToggleIndicators.AddListener(OnToggleIndicators);
+        Debug.LogWarning("On toggle indicators removed, because the method doesn't exist anymore");
+        GameEvents.Instance.EventInventoryClosed.AddListener(OnInventoryClose);
+        //Debug.Log("Listener added to on leftasteroid" + Time.time + " gameobject is " + gameObject.name);
+
     }
 
     public void Init(GameObject asteroidPrefab, float scale, MineableRockDensity mineableRockDensity, Resource resourceType, ActorManager actorManager)
@@ -115,7 +129,9 @@ public class MineableAsteroidTrigger : MonoBehaviour
 
     void OnLandingAttempt()
     {
-        if (playerInTriggerArea && _actorManager.SceneCleared)
+        if (playerInTriggerArea 
+            && _actorManager.SceneCleared
+            && GameManager.Instance.LifeSupportSystem.CheckIfWeCanEnterUnreathableArea())
         {
             //LaunchAsteroidScene(AsteroidType.Asteroid01a, ResourceInventory.ResourceType.Iron, MineralDensity.Medium, true);
             Land();
@@ -150,15 +166,62 @@ public class MineableAsteroidTrigger : MonoBehaviour
     {
         if (other.CompareTag("PlayerShip"))
         {
+
+            Debug.LogWarning("We triggered here");
+
             playerInTriggerArea = true;
             if (_actorManager.SceneCleared)
             {
-                currentText = successText;
-            } else
+                // Check if we have spacesuit equipped and some oxygen
+
+                if (!GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped
+                    && GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks <= 0)
+                {
+                    currentText = noSpacesuitNoOxygenBottlesText;
+                    HadSpaceSuitOnFirstTriggerEnterAttempt = false;
+                }
+
+                else if (!GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped)
+                {
+                    currentText = noSpacesuitText;
+                    HadSpaceSuitOnFirstTriggerEnterAttempt = false;
+                    Debug.Log("Setting the current text to " + currentText);
+                }
+
+                else if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks <= 0)
+                {
+                    currentText = noOxygenBottlesText;
+                    HadSpaceSuitOnFirstTriggerEnterAttempt = true;
+                }
+
+                else 
+                {
+
+                    HadSpaceSuitOnFirstTriggerEnterAttempt = true;
+                    currentText = successText;
+                }
+            } 
+
+            else
             {
-                currentText = failureText;
+                currentText = failureText;        
             }
+
+            //if (GameManager.Instance.LifeSupportSystem.JustRanOutOfOxygen)
+            //{
+
+            //    Debug.Log("We just ran out of oxygen. Make the UI reflect that");
+            //    currentText = ranOutOfOxygenText;
+            //    //GameManager.Instance.LifeSupportSystem.ClearJustRanOutOfOxygenBool();
+            //}
+
+            //else
+            //{
+            //    Debug.LogWarning("Do we have oxygen");
+            //}
+
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
+
         }
         // TODO: destroy overlapping asteroids somehow
         //else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
@@ -199,6 +262,41 @@ public class MineableAsteroidTrigger : MonoBehaviour
                 return Random.Range(7, 9);
             default:
                 return 0;
+        }
+    }
+
+    private void Update()
+    {
+        if (playerInTriggerArea
+            && !HadSpaceSuitOnFirstTriggerEnterAttempt
+            && GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped)
+        {
+            if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks > 0) 
+            {
+                currentText = successText;
+
+            }
+            else
+            {
+                currentText = noOxygenBottlesText;
+            }
+            
+            GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
+            Debug.Log("We are here, should put a suitable text out there. Text is " + currentText);
+            HadSpaceSuitOnFirstTriggerEnterAttempt = true;
+        }
+    }
+
+    private void OnInventoryClose()
+    {
+        if (playerInTriggerArea
+            &&  GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped
+            && GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks > 0
+            && _actorManager.SceneCleared)
+        {
+            currentText = successText;
+            GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
+            Debug.Log("Invenotry closed, showing prompt ");
         }
     }
 

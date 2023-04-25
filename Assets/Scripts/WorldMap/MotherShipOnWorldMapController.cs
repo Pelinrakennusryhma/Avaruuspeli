@@ -37,12 +37,51 @@ public class MotherShipOnWorldMapController : MonoBehaviour
 
     public void OnTriggered(Collider other)
     {
+        if (CurrentTargetClickableObject == null) 
+        {
+            if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.Universe)
+            {
+
+                WorldMapClickDetector clickDetector = other.GetComponentInChildren<WorldMapClickDetector>(true);
+
+                if (clickDetector.type == WorldMapClickDetector.ClickableObjectType.Galaxy)
+                {
+                    CurrentTargetClickableObject = clickDetector;
+                    IsOnCurrentClickableObject = true;
+                    Debug.Log("Set galaxy current target clickable object");
+                }
+
+                //Debug.Log("clickdetector type is " + clickDetector.type);
+            }
+
+            else if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.Galaxy)
+            {
+
+                WorldMapClickDetector clickDetector = other.GetComponentInChildren<WorldMapClickDetector>(true);
+
+                if (clickDetector.type == WorldMapClickDetector.ClickableObjectType.StarSystem)
+                {
+                    CurrentTargetClickableObject = clickDetector;
+                    IsOnCurrentClickableObject = true;
+                    Debug.Log("Set star system current target clickable object");
+                }
+                //Debug.Log("Set galaxy current target clickable object");
+
+            }
+        }
+
+        //else if ()
+        //{
+
+        //}
+            
         //Debug.LogError("Other is " + other.gameObject.name);
     }
 
     public void OnZoom(WorldMapMouseController.ZoomLevel newZoomLevel,
                        Vector3 originPos)
     {
+        CurrentTargetClickableObject = null;
         float localPosY = 0;
 
         switch (newZoomLevel)

@@ -7,14 +7,23 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject layout;
     [SerializeField] private TextMeshProUGUI playerMoney;
-    public ItemDatabase itemDatabase;
-    public Item itemToAdd;
+    //public ItemDatabase itemDatabase;
+    public ItemSO itemToAdd;
     public CanvasScript canvasScript;
 
     void Start()
     {
         NewItem(0);
         NewItem(1);
+        NewItem(2);
+        NewItem(3);
+        NewItem(4);
+        NewItem(5);
+        NewItem(6);
+        NewItem(7);
+        NewItem(8);
+        NewItem(9);
+        NewItem(10);
     }
 
     void Update()
@@ -25,7 +34,7 @@ public class Shop : MonoBehaviour
     //Lisää kauppaan uuden itemin myyntiin ID:n mukaan.
     public void NewItem(int id)
     {
-        itemToAdd = itemDatabase.GetItem(id);
+        itemToAdd = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(id);
         Object prefab = Resources.Load("Prefabs/ShopItem");
         GameObject newItem = Instantiate(prefab, layout.transform) as GameObject;
         newItem.name = itemToAdd.id.ToString();

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca797166d47bab49a63abca414de52f, type: 3}
+  m_Name: ShipLaser
+  m_EditorClassIdentifier: 
+  id: 11
+  itemName: Ship Laser
+  plural: Ship Lasers
+  value: 60
+  description: Weapon system that fires a high-powered laser beam to damage targets.
+  itemPrefab: {fileID: 0}
+  itemPrefabVariants: []
+  itemIcon: {fileID: 21300000, guid: 3d6c803a4f763ef428f6e6fea5169a56, type: 3}
+  isStackable: 0
+  weight: 250
+  itemType: 7

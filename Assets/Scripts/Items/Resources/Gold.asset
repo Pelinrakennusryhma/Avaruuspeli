@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
+  m_Name: Gold
+  m_EditorClassIdentifier: 
+  id: 5
+  itemName: Gold
+  plural: Gold
+  value: 100
+  description: Precious metal commonly used in jewelry, electronics, and aerospace
+    industry.
+  itemPrefab: {fileID: 4523827458930545499, guid: 6c0d66f21af9d8d418ebeb1c8851c048,
+    type: 3}
+  itemPrefabVariants:
+  - {fileID: 1491120477474364478, guid: 06599641f2f9f9a49960ed12124d3541, type: 3}
+  - {fileID: 2899226694319453429, guid: fa3b2d0a5776c6e4ba409ae1d4dd6f3a, type: 3}
+  - {fileID: 4911087566201280629, guid: 69c235a0ac1890541bb4ebc6e68d6ae7, type: 3}
+  - {fileID: 8107541715633661504, guid: a3dd76136944265409b0f8a9b37a509e, type: 3}
+  - {fileID: 5302078568126526674, guid: 1d3de3dce5750bd478fac473945175c6, type: 3}
+  - {fileID: 2954817149804263259, guid: 1168475e9627c4f48bc86bc9db2902b1, type: 3}
+  itemIcon: {fileID: 21300000, guid: 1915664887c25b643ade3d910e1df5d0, type: 3}
+  isStackable: 1
+  weight: 7.7
+  itemType: 5
+  rare: {fileID: 0}
+  rareChance: 0

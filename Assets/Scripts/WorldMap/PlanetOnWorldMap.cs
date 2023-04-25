@@ -14,8 +14,12 @@ public class PlanetOnWorldMap : MonoBehaviour
 
     public WorldMapClickDetector ClickDetector;
 
+
+    public Vendor Vendor;
+
     [SerializeField]
     GameObject POIPrefab;
+
 
     public void Init(CenterStarOnWorldMap centerStar,
                      StarSystemOnFocus parentStarSystem)
@@ -34,6 +38,7 @@ public class PlanetOnWorldMap : MonoBehaviour
     {
         GameManager.Instance.CurrentPlanet = this;
         GameManager.Instance.CurrentPlanetData = PlanetData;
+        SetVendor();
 
         //Debug.Log("Planet listens to a click now");
     }
@@ -150,5 +155,73 @@ public class PlanetOnWorldMap : MonoBehaviour
         }
 
         LineRenderer.SetPositions(points);
+    }
+
+    public void SetVendor()
+    {
+        if (ParentStarSystem == null)
+        {
+            Debug.LogError("Null parent star system");
+        }
+
+        else if (ParentStarSystem.ParentGalaxy == null)
+        {
+            Debug.LogError("Null parent galaxy");
+        }
+
+
+        if (PlanetData == null)
+        {
+            Debug.LogError("Null planet data");
+        }
+
+       // Debug.Log("Setting vendor");
+
+        Vendor = Vendor.GetVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                  ParentStarSystem.StarSystemData.ID,
+                                  PlanetData.ID);
+
+        if (Vendor != null
+            && Vendor.Items.Count == 0)
+        {
+            //Debug.LogWarning("Refilling vendor inventory");
+            Vendor.InitializeVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                    ParentStarSystem.StarSystemData.ID,
+                                    PlanetData.ID);
+        }
+
+        if (Vendor == null)
+        {
+            //Debug.LogError("Vendor is null");
+        }
+
+        if (Vendor == null
+            || (Vendor != null
+                && Vendor.SellMultiplierss.Length != GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count))
+        {
+
+
+
+            if ((Vendor != null
+                && Vendor.SellMultiplierss.Length != GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count))
+            {
+                Debug.LogError("Buy and sell multiplier counts do not match. Sell multipliers is " + Vendor.SellMultiplierss.Length + " all items count is " + GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count);
+            }
+
+            else
+            {
+                Debug.LogWarning("Counts match and vendor is not null");
+            }
+
+            Vendor = new Vendor();
+            Vendor.InitializeVendor(ParentStarSystem.ParentGalaxy.GalaxyData.ID,
+                                    ParentStarSystem.StarSystemData.ID,
+                                    PlanetData.ID);
+
+
+
+
+            Debug.LogError("Null vendor. A new one is created....");
+        }
     }
 }
