@@ -2789,13 +2789,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 537342571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0636c83f956da4d4e99c2b5330658119, type: 3}
+  m_Script: {fileID: 11500000, guid: 716d825e5d5c754489bf37ad19fdb42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actorManager: {fileID: 754047033}
-  mothershipHangar: {fileID: 84133338}
   successObject: {fileID: 578904726}
   failureObject: {fileID: 432518029}
+  delay: 0
+  actorManager: {fileID: 754047033}
+  mothershipHangar: {fileID: 84133338}
 --- !u!1 &578904726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7152063362731972223, guid: e3bdfad40f041964889e5f3f43ba553b,
@@ -3901,12 +3902,6 @@ MonoBehaviour:
   EventInventoryClosed:
     m_PersistentCalls:
       m_Calls: []
-  EventLeavingSceneStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  EventLeavingSceneCancelled:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &910284773
 Transform:
   m_ObjectHideFlags: 0
@@ -4274,6 +4269,7 @@ MonoBehaviour:
   spaceshipEvents: {fileID: 0}
   spaceshipMissile: {fileID: 0}
   targetProjection: {fileID: 0}
+  leaveSpaceshipSceneHandler: {fileID: 0}
 --- !u!4 &1004082103
 Transform:
   m_ObjectHideFlags: 0

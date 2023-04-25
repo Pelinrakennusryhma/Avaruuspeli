@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : ActorSpaceship
 {
+    [SerializeField]
+    ButtonHeldAction leaveSpaceshipSceneHandler;
     protected override void OnDeath()
     {
         base.OnDeath();
@@ -85,12 +87,17 @@ public class PlayerControls : ActorSpaceship
 
     public void OnLeaveScene(InputAction.CallbackContext context)
     {
+        if(leaveSpaceshipSceneHandler == null)
+        {
+            leaveSpaceshipSceneHandler = FindObjectOfType<ButtonHeldAction>();
+        }
+
         if (context.started)
         {
-            GameEvents.Instance.CallEventLeavingSceneStarted();
+            leaveSpaceshipSceneHandler.OnEventLeavingSceneStarted();
         } else if (context.canceled)
         {
-            GameEvents.Instance.CallEventLeavingSceneCancelled();
+            leaveSpaceshipSceneHandler.OnEventLeavingSceneCancelled();
         }
     }
 
