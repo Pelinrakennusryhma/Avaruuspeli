@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
   m_Name: Silver
   m_EditorClassIdentifier: 
-  id: 2
+  id: 4
   itemName: Silver
   plural: Silver
-  value: 250
-  description: Silver ore.
+  value: 50
+  description: Precious metal used in jewelry and electronics.
   itemPrefab: {fileID: 7118768071914602803, guid: 97dd57dd3dfa9da4ba5e3c334232e97e,
     type: 3}
   itemPrefabVariants:
@@ -28,5 +28,8 @@ MonoBehaviour:
   - {fileID: 3731993380885079235, guid: 85d6607b31cb6404c92672d1a7731ce3, type: 3}
   - {fileID: 5684254478696707357, guid: a7829718f8c643646a2178e9aea9e1bf, type: 3}
   itemIcon: {fileID: 0}
+  isStackable: 0
+  weight: 4
+  itemType: 5
   rare: {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}
   rareChance: 0.05

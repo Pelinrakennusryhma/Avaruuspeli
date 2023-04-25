@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194759ecc76fa964d92f9c8f238c26c4, type: 3}
   m_Name: BasicItem
   m_EditorClassIdentifier: 
-  id: 0
+  id: 9999
   itemName: 
   plural: 
   value: 0
@@ -20,4 +20,6 @@ MonoBehaviour:
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
   itemIcon: {fileID: 0}
+  isStackable: 0
+  weight: 0
   itemType: 0

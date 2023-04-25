@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     public delegate void EnterWorldMap();
     public EnterWorldMap OnEnterWorldMap;
 
+    public string ActiveStackedString;
+    public bool UseStringWithActiveStackedScene;
+
     public enum TypeOfScene
     {
         None = 0,
@@ -569,14 +572,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 
         if (buildIndex >= 0) 
-        { 
+        {
+            UseStringWithActiveStackedScene = false;
             ActiveStackedScene = SceneManager.GetSceneByBuildIndex(buildIndex);
         }
 
         else
         {
+            //ActiveStackedString = sceneName;
+            //UseStringWithActiveStackedScene = true;
+
             ActiveStackedScene = SceneManager.GetSceneByName(sceneName);
-            Debug.LogError("");
+            //Debug.LogError("We cannot get scene by name in this case, because the scene is not loaded yet.");
         }
 
 
@@ -590,7 +597,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("We are activating incoming scene of type " + IncomingSceneType.ToString());
         WaitingForSceneLoad = false;
         FramesPassedTillLoadScenes = -1;
+
+
         SceneManager.SetActiveScene(ActiveStackedScene);
+        
+
+
+        
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
 
         if (IncomingSceneType == TypeOfScene.Planet)
