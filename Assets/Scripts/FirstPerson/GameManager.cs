@@ -97,8 +97,10 @@ public class GameManager : MonoBehaviour
             LifeSupportSystem = GetComponentInChildren<LifeSupportSystem>(true);
             LifeSupportSystem.Init();
 
-
-            CurrentSceneType = TypeOfScene.WorldMap;
+            if(CurrentSceneType == TypeOfScene.None)
+            {
+                CurrentSceneType = TypeOfScene.WorldMap;
+            }
 
             //Debug.Log("Don't destroy game manager");
         }
@@ -117,7 +119,10 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        OptionsScreen = FindObjectOfType<Options>(true);
+        if(OptionsScreen == null)
+        {
+            OptionsScreen = FindObjectOfType<Options>(true);
+        }
 
         if (OptionsScreen != null) 
         {
@@ -131,17 +136,14 @@ public class GameManager : MonoBehaviour
 
     public void OnOptionsPressed()
     {
-        if (CurrentSceneType != TypeOfScene.WorldMap) 
+        if (IsPaused)
         {
-            if (IsPaused)
-            {
-                OnUnpause();
-            }
+            OnUnpause();
+        }
 
-            else
-            {
-                OnPause();
-            }
+        else
+        {
+            OnPause();
         }
     }
 
@@ -155,13 +157,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOnWorldMap
-            && Input.GetKeyDown(KeyCode.M)
-            && !InventoryController.IsShopping)
-        {
+        //if (!IsOnWorldMap
+        //    && Input.GetKeyDown(KeyCode.M)
+        //    && !InventoryController.IsShopping)
+        //{
 
-            GoBackToWorldMap();
-        }
+        //    GoBackToWorldMap();
+        //}
 
         if (WaitingForSceneLoad
             && FramesPassedTillLoadScenes >= 0)
@@ -188,6 +190,7 @@ public class GameManager : MonoBehaviour
             {
                 if (inventoryToggleQueued)
                 {
+                    Debug.Log("InventoryToggle");
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {

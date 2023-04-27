@@ -31,6 +31,9 @@ public class FirstPersonPlayerControls : MonoBehaviour
     public bool Alpha9Down;
     public bool Alpha0Down;
 
+    [SerializeField]
+    ButtonHeldAction leavePlanetScene;
+
     private PlayerInput playerInput;
 
     public void Start()
@@ -370,6 +373,23 @@ public class FirstPersonPlayerControls : MonoBehaviour
         if (context.performed)
         {
             GameManager.Instance.OnInventoryPressed();
+        }
+    }
+
+    public void OnLeaveScene(InputAction.CallbackContext context)
+    {
+        if (leavePlanetScene == null)
+        {
+            leavePlanetScene = FindObjectOfType<ButtonHeldAction>();
+        }
+
+        if (context.started)
+        {
+            leavePlanetScene.OnButtonPressed();
+        }
+        else if (context.canceled)
+        {
+            leavePlanetScene.OnButtonReleased();
         }
     }
 

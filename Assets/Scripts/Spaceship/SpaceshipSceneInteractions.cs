@@ -19,8 +19,6 @@ public class SpaceshipSceneInteractions : MonoBehaviour
 
     private void Awake()
     {
-        GameEvents.Instance.EventLeavingSceneStarted.AddListener(OnEventLeavingSceneStarted);
-        GameEvents.Instance.EventLeavingSceneCancelled.AddListener(OnEventLeavingSceneCancelled);
 
         AsteroidPOISceneData data = null;
 
@@ -38,24 +36,5 @@ public class SpaceshipSceneInteractions : MonoBehaviour
         asteroidSpawner.SpawnNonMineableAsteroids(data.NumAsteroids);
         asteroidSpawner.SpawnMineableAsteroids(data.NumMineables, data.MineableResources);
         enemySpaceshipSpawner.SpawnEnemies(data.NumEnemies);
-    }
-
-    void OnEventLeavingSceneStarted()
-    {
-        if (actorManager.SceneCleared || mothershipHangar.PlayerShipInHangar)
-        {
-            StartCoroutine(LeaveScene(Globals.Instance.leaveSpaceshipSceneDelay));
-        }
-    }
-
-    void OnEventLeavingSceneCancelled()
-    {
-        StopAllCoroutines();
-    }
-
-    IEnumerator LeaveScene(float delay) 
-    { 
-        yield return new WaitForSeconds(delay);
-        GameManager.Instance.GoBackToWorldMap();
     }
 }

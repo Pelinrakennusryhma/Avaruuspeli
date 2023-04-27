@@ -2,45 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeaveSpaceshipSceneHandler : UITrackable
+public abstract class ButtonHeldAction : UITrackable
 {
-    [SerializeField]
-    ActorManager actorManager;
-    [SerializeField]
-    MothershipHangar mothershipHangar;
     [SerializeField]
     GameObject successObject;
     [SerializeField]
     GameObject failureObject;
+    [SerializeField]
+    protected float delay;
     bool leavingScene = false;
     float buttonHeldFor = 0f;
-    void Awake()
+    protected virtual void Awake()
     {
-        GameEvents.Instance.EventLeavingSceneStarted.AddListener(OnEventLeavingSceneStarted);
-        GameEvents.Instance.EventLeavingSceneCancelled.AddListener(OnEventLeavingSceneCancelled);
         successObject.SetActive(false);
     }
 
-    void OnEventLeavingSceneStarted()
+    protected abstract bool CanTrigger();
+    protected abstract void OnSuccess();
+
+    public void OnButtonPressed()
     {
         leavingScene = true;
 
-        if (actorManager.SceneCleared || mothershipHangar.PlayerShipInHangar)
+        if (CanTrigger())
         {
             successObject.SetActive(true);
+            StartCoroutine(CompletionRoutine(delay));
         } else
         {
             failureObject.SetActive(true);
         }
+
     }
 
-    void OnEventLeavingSceneCancelled()
+    public void OnButtonReleased()
     {
         leavingScene = false;
         buttonHeldFor = 0f;
 
         successObject.SetActive(false);
         failureObject.SetActive(false);
+
+        StopAllCoroutines();
     }
 
     // Update is called once per frame
@@ -52,11 +55,17 @@ public class LeaveSpaceshipSceneHandler : UITrackable
         }
     }
 
+    IEnumerator CompletionRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OnSuccess();
+    }
+
     public override float MaxValue
     {
         get
         {
-            return Globals.Instance.leaveSpaceshipSceneDelay;
+            return delay;
         }
     }
 

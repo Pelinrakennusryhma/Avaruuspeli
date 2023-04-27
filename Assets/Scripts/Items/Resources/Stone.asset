@@ -17,8 +17,15 @@ MonoBehaviour:
   plural: Stones
   value: 1
   description: Natural rock material with varying properties and composition.
-  itemPrefab: {fileID: 0}
-  itemPrefabVariants: []
+  itemPrefab: {fileID: 4253190446834730643, guid: 5fb8916d60fe40149a1eafb934a31fe8,
+    type: 3}
+  itemPrefabVariants:
+  - {fileID: 1636022269187562763, guid: f183bb8346d4c4e43826562693897592, type: 3}
+  - {fileID: 2944774647325709394, guid: 7a16f59d284879e4babcfaeb6cb3ad0c, type: 3}
+  - {fileID: 4947251645500065695, guid: bd5a3c032b66a634a9328fb2d18003dc, type: 3}
+  - {fileID: 2295803433556911869, guid: 138d43ab6af5fdd4fa0faeaac345888f, type: 3}
+  - {fileID: 7603247722571580278, guid: 5112daa19d2935145bb4c1df8f129eba, type: 3}
+  - {fileID: 5185723898810116219, guid: 594106553620a104c975394607768d3b, type: 3}
   itemIcon: {fileID: 0}
   isStackable: 1
   weight: 1
