@@ -94,10 +94,10 @@ public class PlayerControls : ActorSpaceship
 
         if (context.started)
         {
-            leaveSpaceshipSceneHandler.OnEventLeavingSceneStarted();
+            leaveSpaceshipSceneHandler.OnButtonPressed();
         } else if (context.canceled)
         {
-            leaveSpaceshipSceneHandler.OnEventLeavingSceneCancelled();
+            leaveSpaceshipSceneHandler.OnButtonReleased();
         }
     }
 

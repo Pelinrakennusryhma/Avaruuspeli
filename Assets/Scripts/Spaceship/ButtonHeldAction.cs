@@ -20,7 +20,7 @@ public abstract class ButtonHeldAction : UITrackable
     protected abstract bool CanTrigger();
     protected abstract void OnSuccess();
 
-    public void OnEventLeavingSceneStarted()
+    public void OnButtonPressed()
     {
         leavingScene = true;
 
@@ -35,7 +35,7 @@ public abstract class ButtonHeldAction : UITrackable
 
     }
 
-    public void OnEventLeavingSceneCancelled()
+    public void OnButtonReleased()
     {
         leavingScene = false;
         buttonHeldFor = 0f;
