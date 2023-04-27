@@ -76,12 +76,6 @@ public class PointOfInterest : MonoBehaviour
 
     void Start()
     {
-        // placeholder mechanism for planets
-        if(Data != null)
-        {
-            Init(Data);
-        }
-
         ApplyIcon();
         UpdatePosition();
         DisableInfoPanel();
@@ -97,6 +91,18 @@ public class PointOfInterest : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         screenPos += UIItemOffset;
         uiComponents.position = screenPos;
+    }
+
+    public void Init(PlanetOnWorldMap planet)
+    {
+        description.text = "Get some interesting data from planet.PlanetData";
+        title.text = planet.PlanetData.Name;
+
+        enterButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.CurrentPlanet = planet;
+            GameManager.Instance.CurrentPlanetData = planet.PlanetData;
+        });
     }
 
     public void Init(POISceneData data, POISpawner.OnPOIEnteredDelegate callback=null)

@@ -31,7 +31,9 @@ public class PlanetOnWorldMap : MonoBehaviour
         ClickDetector.OnObjectClicked -= OnPlanetClicked;
         ClickDetector.OnObjectClicked += OnPlanetClicked;
 
-        Instantiate(POIPrefab, transform);
+        GameObject spawnedPOI = Instantiate(POIPrefab, transform);
+        PointOfInterest POI = spawnedPOI.GetComponent<PointOfInterest>();
+        POI.Init(this);
     }
 
     public void OnPlanetClicked(WorldMapClickDetector.ClickableObjectType type)
