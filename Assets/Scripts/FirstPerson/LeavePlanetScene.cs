@@ -6,7 +6,7 @@ public class LeavePlanetScene : ButtonHeldAction
 {
     protected override bool CanTrigger()
     {
-        // Check if player can leave the scene. In combat, shop open etc. ?
+        Debug.LogWarning("Leaving planet scene. Check here if player can leave the scene or not.. in combat, shop open etc. ?");
         return true;
     }
 
