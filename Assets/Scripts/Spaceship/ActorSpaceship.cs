@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class ActorSpaceship : MonoBehaviour
 {
     public Faction faction;
     public GameObject ship;
+    public SpaceshipData spaceshipData;
     public SpaceshipMovement spaceshipMovement;
     public SpaceshipBoost spaceshipBoost;
     public SpaceshipShoot spaceshipShoot;
@@ -27,6 +29,23 @@ public abstract class ActorSpaceship : MonoBehaviour
         targetProjection = ship.GetComponent<TargetProjection>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
+
+        InitUtilities();
+    }
+
+    void InitUtilities()
+    {
+        if(spaceshipData != null && spaceshipData.utilities != null)
+        {
+            foreach (ShipUtility utility in spaceshipData.utilities)
+            {
+                if (utility != null)
+                {
+                    Debug.Log("Adding class: " + utility.scriptToAdd.GetClass());
+                    ship.AddComponent(utility.scriptToAdd.GetClass());
+                }
+            }
+        }
     }
 
     virtual protected void Start()
