@@ -7,4 +7,6 @@ using UnityEngine;
 public class ShipUtility : ShipItemSO
 {
     public MonoScript scriptToAdd;
+    public float effectDuration;
+    public float cooldown;
 }

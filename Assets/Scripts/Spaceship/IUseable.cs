@@ -4,5 +4,9 @@ using UnityEngine;
 
 public interface IUseable
 {
-    public void Use();
+    public bool Active { get; set; }
+    public float Duration { get; set; }
+    public float Cooldown { get; set; }
+
+    public abstract void Init(float duration, float cooldown);
 }

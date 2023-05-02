@@ -167,7 +167,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
         if (other.CompareTag("PlayerShip"))
         {
 
-            Debug.LogWarning("We triggered here");
+            Debug.LogWarning("We triggered here, scene cleared: " + _actorManager.SceneCleared);
 
             playerInTriggerArea = true;
             if (_actorManager.SceneCleared)
@@ -201,7 +201,6 @@ public class MineableAsteroidTrigger : MonoBehaviour
                     currentText = successText;
                 }
             } 
-
             else
             {
                 currentText = failureText;        
@@ -219,7 +218,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
             //{
             //    Debug.LogWarning("Do we have oxygen");
             //}
-
+            Debug.Log("currentText: " + currentText);
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
 
         }
@@ -273,8 +272,14 @@ public class MineableAsteroidTrigger : MonoBehaviour
         {
             if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks > 0) 
             {
-                currentText = successText;
-
+                if (_actorManager.SceneCleared)
+                {
+                    currentText = successText;
+                }
+                else
+                {
+                    currentText = failureText;
+                }
             }
             else
             {

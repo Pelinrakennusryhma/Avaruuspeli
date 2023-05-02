@@ -34,9 +34,10 @@ public abstract class ActorSpaceship : MonoBehaviour
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
 
         InitUtilities();
+        GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
-    void InitUtilities()
+    protected virtual void InitUtilities()
     {
         if(spaceshipData != null && spaceshipData.utilities != null)
         {
@@ -47,7 +48,9 @@ public abstract class ActorSpaceship : MonoBehaviour
                     Type scriptType = utility.scriptToAdd.GetClass();
                     Debug.Log("Adding class: " + scriptType);
                     Component addedScript = ship.AddComponent(scriptType);
-                    shipUtilityScripts.Add((IUseable)addedScript);
+                    IUseable useable = (IUseable)addedScript;
+                    shipUtilityScripts.Add(useable);
+                    useable.Init(utility.effectDuration, utility.cooldown);
                 }
             }
         }
@@ -55,7 +58,7 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     virtual protected void Start()
     {
-        GameEvents.Instance.CallEventSpaceshipSpawned(this);
+        //GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
     virtual protected void OnDeath()

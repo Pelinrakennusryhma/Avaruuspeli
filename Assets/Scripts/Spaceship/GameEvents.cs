@@ -30,7 +30,6 @@ public class GameEvents : MonoBehaviour
     public UnityEvent<MineableAsteroidTrigger> EventPlayerLeftAsteroid;
     public UnityEvent<bool> EventToggleIndicators;
 
-
     public UnityEvent EventPlayerRanOutOfOxygen;
     public UnityEvent EventInventoryOpened;
     public UnityEvent EventInventoryClosed;

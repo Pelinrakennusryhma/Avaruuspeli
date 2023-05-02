@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class SpaceshipECM : MonoBehaviour, IUseable
 {
-    void Start()
+    public bool Active { get; set; }
+    public float Duration { get; set; }
+    public float Cooldown { get; set; }
+    private float timer;
+
+
+    public void Init(float duration, float cooldown)
     {
-        
+        Duration = duration;
+        Cooldown = cooldown;
+        timer = cooldown;
     }
 
     void Update()
     {
-        Debug.Log("ECM ticking");
+        timer += Time.deltaTime;
+        if (Active)
+        {
+            if(timer > Cooldown)
+            {
+                Debug.Log("use ECM");
+                timer = 0f;
+            }
+        }
     }
 
-    public void Use()
-    {
-        Debug.Log("ECM used");
-    }
 }

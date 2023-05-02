@@ -14,6 +14,12 @@ public class PlayerControls : ActorSpaceship
         Cursor.visible = true;
     }
 
+    protected override void InitUtilities()
+    {
+        base.InitUtilities();
+        //GameEvents.Instance.
+    }
+
     public void OnThrust(InputAction.CallbackContext context)
     {
         spaceshipMovement.thrust1D = context.ReadValue<float>();
@@ -108,9 +114,6 @@ public class PlayerControls : ActorSpaceship
 
     public void OnUtility1(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            shipUtilityScripts[0].Use();
-        }
+        shipUtilityScripts[0].Active = context.performed;
     }
 }
