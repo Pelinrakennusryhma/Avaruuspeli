@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IUseable
 {
+    public bool TryingToActivate { get; set; }
     public bool Active { get; set; }
     public float Duration { get; set; }
     public float Cooldown { get; set; }

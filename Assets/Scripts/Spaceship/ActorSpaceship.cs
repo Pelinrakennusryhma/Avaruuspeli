@@ -37,7 +37,7 @@ public abstract class ActorSpaceship : MonoBehaviour
         GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
-    protected virtual void InitUtilities()
+    void InitUtilities()
     {
         if(spaceshipData != null && spaceshipData.utilities != null)
         {
