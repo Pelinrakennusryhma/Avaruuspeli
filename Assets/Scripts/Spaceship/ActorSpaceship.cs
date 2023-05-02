@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -17,6 +18,8 @@ public abstract class ActorSpaceship : MonoBehaviour
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
 
     protected List<Missile> lockedMissiles = new List<Missile>();
+
+    protected List<IUseable> shipUtilityScripts = new List<IUseable>();
 
     virtual protected void OnEnable()
     {
@@ -41,8 +44,10 @@ public abstract class ActorSpaceship : MonoBehaviour
             {
                 if (utility != null)
                 {
-                    Debug.Log("Adding class: " + utility.scriptToAdd.GetClass());
-                    ship.AddComponent(utility.scriptToAdd.GetClass());
+                    Type scriptType = utility.scriptToAdd.GetClass();
+                    Debug.Log("Adding class: " + scriptType);
+                    Component addedScript = ship.AddComponent(scriptType);
+                    shipUtilityScripts.Add((IUseable)addedScript);
                 }
             }
         }

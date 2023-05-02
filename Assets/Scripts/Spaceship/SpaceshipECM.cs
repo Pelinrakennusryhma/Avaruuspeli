@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceshipECM : MonoBehaviour
+public class SpaceshipECM : MonoBehaviour, IUseable
 {
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.Log("ECM ticking");
+    }
+
+    public void Use()
+    {
+        Debug.Log("ECM used");
     }
 }

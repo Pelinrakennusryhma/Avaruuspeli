@@ -133,7 +133,7 @@
                 },
                 {
                     "name": "Utility1",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "bd42281e-6ff1-420f-9a4a-40533679e8ce",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -388,7 +388,7 @@
                     "name": "",
                     "id": "80bdbfd9-7c7f-498d-8d11-65fc14b59e16",
                     "path": "<Keyboard>/1",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Utility1",

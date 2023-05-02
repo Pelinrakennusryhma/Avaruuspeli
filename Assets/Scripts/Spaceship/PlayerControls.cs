@@ -110,8 +110,7 @@ public class PlayerControls : ActorSpaceship
     {
         if (context.performed)
         {
-            // Get some spaceshipstats going and call its first utility component
-            Debug.Log("utility 1");
+            shipUtilityScripts[0].Use();
         }
     }
 }
