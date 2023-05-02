@@ -3012,6 +3012,7 @@ MonoBehaviour:
   CurrentStarSystem: {fileID: 0}
   CurrentPlanet: {fileID: 0}
   CurrentAsteroidField: {fileID: 0}
+  currentPOI: {fileID: 0}
   CurrentGalaxyData:
     posX: 0
     posY: 0
@@ -3116,6 +3117,8 @@ MonoBehaviour:
     ReferenceObjectPosY: 0
     ReferenceObjectPosZ: 0
   CurrentSceneType: 0
+  ActiveStackedString: 
+  UseStringWithActiveStackedScene: 0
   IncomingSceneType: 0
 --- !u!114 &1743098529
 MonoBehaviour:
@@ -3188,7 +3191,19 @@ MonoBehaviour:
     m_ActionId: d7a5097e-38f9-4150-94c6-8efee28b0e6a
     m_ActionName: ShipControls/ShowIndicators[/Keyboard/alt]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1839369551}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnInventoryPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_ActionId: 9b8097f7-4b89-4f54-b4a4-581a3d7f767e
     m_ActionName: ShipControls/Inventory[/Keyboard/i]
   - m_PersistentCalls:
@@ -3256,7 +3271,19 @@ MonoBehaviour:
     m_ActionId: 7ac9ef14-6fcd-46f3-9e94-8e430b23e07b
     m_ActionName: FirstPersonControls/Fire1[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1839369551}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnOptionsPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_ActionId: 302a2d89-a81c-4028-a556-dcacfdbea1d3
     m_ActionName: FirstPersonControls/Options[/Keyboard/escape]
   - m_PersistentCalls:
@@ -3272,7 +3299,19 @@ MonoBehaviour:
     m_ActionId: 69b18dad-63a5-4e42-8540-a4b6637d50bb
     m_ActionName: FirstPersonControls/Leave[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1839369551}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnInventoryPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_ActionId: ae046845-1c3b-43b0-a8c9-53e81991721e
     m_ActionName: FirstPersonControls/Inventory[/Keyboard/i]
   - m_PersistentCalls:
@@ -3280,7 +3319,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1839369551}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnOptionsPressed
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3296,7 +3335,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1839369551}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnInventoryPressed
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3307,6 +3346,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 73a9d680-bb2e-4233-ae3e-37d9ee54d87f
     m_ActionName: WorldMapControls/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e062c6b2-834e-4796-b4e0-3fcecbd05e80
+    m_ActionName: ShipControls/LeaveScene[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5395e9b6-7b00-42db-93be-0b8dd40248e1
+    m_ActionName: ShipControls/SecondaryShoot[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd42281e-6ff1-420f-9a4a-40533679e8ce
+    m_ActionName: ShipControls/Utility1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eeb56751-443d-4a72-bdc7-d006fca8023a
+    m_ActionName: FirstPersonControls/LeaveScene[/Keyboard/m]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: WorldMapControls
@@ -3507,6 +3562,7 @@ MonoBehaviour:
   IsShopping: 0
   BlankSprite: {fileID: 21300000, guid: c137ba5843dac0c4c94a7ced3e6e861a, type: 3}
   Money: 10000
+  previousPromptText: 
 --- !u!114 &291931967463705070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4955,6 +5011,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -184
       objectReference: {fileID: 0}
+    - target: {fileID: 1228472342239278221, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: imageOfObjectInHands
+      value: 
+      objectReference: {fileID: 8377526992174411982}
     - target: {fileID: 1228472342282348739, guid: 44d101c09d62ac8458504377ce36e535,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -6219,6 +6280,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 454503ca2e2f3264a93986c27d24bacf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8377526992174411982 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1228472343453080036, guid: 44d101c09d62ac8458504377ce36e535,
+    type: 3}
+  m_PrefabInstance: {fileID: 7299945218007427370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8377526992483746765 stripped

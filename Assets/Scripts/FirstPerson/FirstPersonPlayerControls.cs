@@ -369,7 +369,8 @@ public class FirstPersonPlayerControls : MonoBehaviour
     {
         if (context.performed)
         {
-            GameManager.Instance.OnInventoryPressed();
+            GameManager.Instance.OnInventoryPressed(context);
+            Debug.Log("On inventory pressed");
         }
     }
 

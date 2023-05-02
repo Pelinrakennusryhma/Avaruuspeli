@@ -145,10 +145,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnInventoryPressed()
+    public void OnInventoryPressed(InputAction.CallbackContext context)
     {
-
-        inventoryToggleQueued = true;
+        if (context.performed) 
+        {
+            inventoryToggleQueued = true;
+            Debug.Log("On inventory pressed");
+        }
         
     }
 
@@ -188,6 +191,8 @@ public class GameManager : MonoBehaviour
             {
                 if (inventoryToggleQueued)
                 {
+                    ///Debug.LogWarning("We are calling inventory with old input system, because inventory functionality has been lost on planet scenes. Find out what is wrong");
+
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {
@@ -651,7 +656,7 @@ public class GameManager : MonoBehaviour
             OnEnterWorldMap();
         }
 
-        Debug.Log("On enter world map called");
+        //Debug.Log("On enter world map called");
     }
 
     public void OnLeaveAsteroidSurface()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3931941726690552612}
   m_Layer: 6
   m_Name: ResourceGatherer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tool: 0
-  Rock: {fileID: 0}
-  RockCollider: {fileID: 0}
+  Rocks: []
+  RockColliders: []
   Controls: {fileID: 0}
   Camera: {fileID: 0}
   PickUppableLayerMask:
@@ -81,3 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63d6213730a0904e83ab99251d30948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AsteroidSurface: {fileID: 0}
+  PlanetSurface: {fileID: 0}
+  IgnoreColliders: []
+  HUDText: {fileID: 0}
+  OriginalHUDScale: {x: 0, y: 0, z: 0}
+  scanDistance: 20
