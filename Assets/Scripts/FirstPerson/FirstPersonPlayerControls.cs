@@ -370,10 +370,18 @@ public class FirstPersonPlayerControls : MonoBehaviour
 
     public void OnInventory(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        //if (context.performed)
+        //{
+        //   GameManager.Instance.OnInventoryPressed(context);
+        // Debug.Log("On inventory pressed");
+        //}
+
+        if (context.performed) 
         {
             GameManager.Instance.OnInventoryPressed();
         }
+
+        Debug.Log("On invenotry pressed");
     }
 
     public void OnLeaveScene(InputAction.CallbackContext context)

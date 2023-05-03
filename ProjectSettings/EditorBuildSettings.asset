@@ -72,9 +72,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Asteroids/AsteroidLauncher.unity
     guid: 8fbdbc4789f59a947b5545af47b1005e
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: 
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/PlanetTest1.unity
     guid: 8ca35ad60b708fc4c999da470ddfb657
+  - enabled: 1
+    path: Assets/Scenes/ShootingRange.unity
+    guid: c06f59d375234d74286668ad22270bfa
   m_configObjects: {}

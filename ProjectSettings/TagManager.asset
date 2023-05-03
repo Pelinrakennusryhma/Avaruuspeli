@@ -9,6 +9,16 @@ TagManager:
   - PlayerShip
   - CatalogItem
   - InfoPanel
+  - Ground
+  - Kivi
+  - Puu
+  - Hopea
+  - Kulta
+  - Timantti
+  - Pelaaja
+  - TippuvaKivi
+  - Water
+  - Walls
   layers:
   - Default
   - TransparentFX

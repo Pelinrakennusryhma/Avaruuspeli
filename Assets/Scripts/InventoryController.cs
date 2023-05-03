@@ -65,6 +65,7 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(19, 1);
         Inventory.AddItem(20, 1);
         Inventory.AddItem(21, 1);
+        Inventory.AddItem(22, 1);
 
         Shop.Init();
         ShopHeadsUp.Init();
@@ -99,7 +100,7 @@ public class InventoryController : MonoBehaviour
                 //Inventory.RemoveItem(item.id, 1);
                 Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
 
-                Equipment.EquipDrill(item);
+                Equipment.EquipObjectInHands(item);
             }
 
             else if (currentTool == ResourceGatherer.ToolType.AdvancedDrill)
@@ -108,7 +109,7 @@ public class InventoryController : MonoBehaviour
                 //Inventory.RemoveItem(item.id, 1);
                 Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
 
-                Equipment.EquipDrill(item);
+                Equipment.EquipObjectInHands(item);
             }
 
             else if (currentTool == ResourceGatherer.ToolType.DiamondDrill)
@@ -117,8 +118,26 @@ public class InventoryController : MonoBehaviour
                 //Inventory.RemoveItem(item.id, 1);
                 Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
 
-                Equipment.EquipDrill(item);
+                Equipment.EquipObjectInHands(item);
             }
+        }
+
+        if (PlayerHands.Instance != null)
+        {
+            ItemSO item;
+
+            if (PlayerHands.Instance.CurrentWeapon == Weapon.WeaponType.LaserGun)
+            {
+                item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(9);
+                Equipment.EquipObjectInHands(item);
+            }
+
+            else if (PlayerHands.Instance.CurrentWeapon == Weapon.WeaponType.MeleeWeapon)
+            {
+                item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(22);
+                Equipment.EquipObjectInHands(item);
+            }
+            Debug.LogWarning("Player hands are not null. Should equipWeapon");
         }
 
         if (ResourceInventory.Instance != null)
@@ -188,19 +207,19 @@ public class InventoryController : MonoBehaviour
     {
         ResourceGatherer.ToolType currentTool = ResourceGatherer.ToolType.None;
 
-        if (Equipment.equippedDrill != null)
+        if (Equipment.equippedObjectInHands != null)
         {
-            if (Equipment.equippedDrill.id == 7)
+            if (Equipment.equippedObjectInHands.id == 7)
             {
                 currentTool = ResourceGatherer.ToolType.BasicDrill;
             }
 
-            else if  (Equipment.equippedDrill.id == 7)
+            else if  (Equipment.equippedObjectInHands.id == 7)
             {
                 currentTool = ResourceGatherer.ToolType.AdvancedDrill;
             }
 
-            else if (Equipment.equippedDrill.id == 21)
+            else if (Equipment.equippedObjectInHands.id == 21)
             {
                 currentTool = ResourceGatherer.ToolType.DiamondDrill;
                 Debug.Log("We are currently euipping diamond drill");
@@ -209,6 +228,26 @@ public class InventoryController : MonoBehaviour
         }
 
         return currentTool;
+    }
+
+    public Weapon.WeaponType GetCurrentEquippedWeapon()
+    {
+        Weapon.WeaponType currentWeapon = Weapon.WeaponType.None;
+
+        if (Equipment.equippedObjectInHands != null) 
+        {
+            if (Equipment.equippedObjectInHands.id == 9)
+            {
+                currentWeapon = Weapon.WeaponType.LaserGun;
+            }
+
+            else if (Equipment.equippedObjectInHands.id == 22)
+            {
+                currentWeapon = Weapon.WeaponType.MeleeWeapon;
+            }
+        }
+
+        return currentWeapon;
     }
 
     public void OnEnterShoppingArea()

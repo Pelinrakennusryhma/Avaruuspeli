@@ -149,9 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void OnInventoryPressed()
     {
-
-        inventoryToggleQueued = true;
-        
+        inventoryToggleQueued = true;    
     }
 
     // Update is called once per frame
