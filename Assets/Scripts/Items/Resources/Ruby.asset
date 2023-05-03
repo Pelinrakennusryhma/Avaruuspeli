@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
+  m_Name: Ruby
+  m_EditorClassIdentifier: 
+  id: 25
+  itemName: Ruby
+  plural: Rubies
+  value: 500
+  description: Red gemstone used in jewelry and precision instruments.
+  itemPrefab: {fileID: 7118768071914602803, guid: 977981ae78f4d0747908e5e6d49ecc8f,
+    type: 3}
+  itemPrefabVariants:
+  - {fileID: 2364193931190882496, guid: aad5ce67c7b04af44b218a91aaacf0b7, type: 3}
+  - {fileID: 295899010739091771, guid: 4ecb87b9a60c2fe468d470c0d5a3c9c4, type: 3}
+  - {fileID: 5558593070356433517, guid: e2fb861d7d4e71c46a30a77b74eba284, type: 3}
+  - {fileID: 2130796613481805814, guid: 082606d586452d547ba1a2d7665b634f, type: 3}
+  - {fileID: 3731993380885079235, guid: d78c58532dcab944f910234e8b7277b8, type: 3}
+  - {fileID: 5684254478696707357, guid: 9bebc5b26624b0c4a8adc6fbe14b2f2e, type: 3}
+  itemIcon: {fileID: 0}
+  isStackable: 1
+  weight: 1.4
+  itemType: 5
+  rare: {fileID: 0}
+  rareChance: 0

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
+  m_Name: Emerald
+  m_EditorClassIdentifier: 
+  id: 26
+  itemName: Emerald
+  plural: Emeralds
+  value: 750
+  description: Valuable green gemstone used in jewelry.
+  itemPrefab: {fileID: 7118768071914602803, guid: 9692f783ba4cac04fbdb5030d1564fff,
+    type: 3}
+  itemPrefabVariants:
+  - {fileID: 2364193931190882496, guid: e6b28190ad57ac94a945c59170cb5caa, type: 3}
+  - {fileID: 295899010739091771, guid: e76f4ac29931ed2438fe158b7a872adf, type: 3}
+  - {fileID: 5558593070356433517, guid: ee0904b8bf57a6243beb619eac27c1df, type: 3}
+  - {fileID: 2130796613481805814, guid: 0cc29350320ad90439fe3a11d9b9850e, type: 3}
+  - {fileID: 3731993380885079235, guid: ac98df742f3efd743a8bbf137673395e, type: 3}
+  - {fileID: 5684254478696707357, guid: c896e1c6b8b83df4e9a0fe22adb56f57, type: 3}
+  itemIcon: {fileID: 0}
+  isStackable: 1
+  weight: 1
+  itemType: 5
+  rare: {fileID: 0}
+  rareChance: 0
