@@ -105,6 +105,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7629276469402009156, guid: 66999e4449770fb4b963a3dad1f733e9,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 7629276469402009156, guid: 66999e4449770fb4b963a3dad1f733e9,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66999e4449770fb4b963a3dad1f733e9, type: 3}
 --- !u!4 &787331744663467754 stripped
@@ -120,6 +132,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2401241299168311438}
     m_Modifications:
+    - target: {fileID: 1438966321, guid: f7a9d7bbc2a2d274b84ef1a2fbf24fa7, type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 1438966321, guid: f7a9d7bbc2a2d274b84ef1a2fbf24fa7, type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     - target: {fileID: 8202845828765346094, guid: f7a9d7bbc2a2d274b84ef1a2fbf24fa7,
         type: 3}
       propertyPath: m_Name
@@ -255,6 +277,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Random_DestroyableRock6
       objectReference: {fileID: 0}
+    - target: {fileID: 4950361132524539657, guid: 45f03d30a1544634581887571e5df260,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 4950361132524539657, guid: 45f03d30a1544634581887571e5df260,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45f03d30a1544634581887571e5df260, type: 3}
 --- !u!4 &2582237980199265302 stripped
@@ -270,6 +304,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2401241299168311438}
     m_Modifications:
+    - target: {fileID: 2619265586650310855, guid: a69c60633bd1ab44e9e765c364b94f6b,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 2619265586650310855, guid: a69c60633bd1ab44e9e765c364b94f6b,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     - target: {fileID: 3989407483747384247, guid: a69c60633bd1ab44e9e765c364b94f6b,
         type: 3}
       propertyPath: m_RootOrder
@@ -345,6 +391,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2401241299168311438}
     m_Modifications:
+    - target: {fileID: 2642311538752577500, guid: a37f344a10dc7ce479bd40deed4e9b78,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 2642311538752577500, guid: a37f344a10dc7ce479bd40deed4e9b78,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     - target: {fileID: 3776434118592914930, guid: a37f344a10dc7ce479bd40deed4e9b78,
         type: 3}
       propertyPath: m_RootOrder
@@ -480,6 +538,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Random_DestroyableRock3
       objectReference: {fileID: 0}
+    - target: {fileID: 8609550493610130675, guid: d41c453934266a24cbac33de052592eb,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 8609550493610130675, guid: d41c453934266a24cbac33de052592eb,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d41c453934266a24cbac33de052592eb, type: 3}
 --- !u!4 &4545990142458823433 stripped
@@ -555,6 +625,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Random_DestroyableRock7
       objectReference: {fileID: 0}
+    - target: {fileID: 9007280324889712800, guid: d0c43136c65a3c2438c9e17bcdee612a,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5,
+        type: 2}
+    - target: {fileID: 9007280324889712800, guid: d0c43136c65a3c2438c9e17bcdee612a,
+        type: 3}
+      propertyPath: SpawnableResources.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0c43136c65a3c2438c9e17bcdee612a, type: 3}
 --- !u!4 &6546021252334874464 stripped

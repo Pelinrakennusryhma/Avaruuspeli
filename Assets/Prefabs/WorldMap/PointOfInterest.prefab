@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28917203fd236e4f92a77b863a69d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneTimeVisit: 0
+  poiType: 1
   uiComponents: {fileID: 5694329006751610165}
   UIItemOffset: {x: 0, y: 100, z: 0}
   <Icon>k__BackingField: 

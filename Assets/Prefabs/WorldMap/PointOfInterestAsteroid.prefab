@@ -319,6 +319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5694329005874326878, guid: 02d58ba0f12101045bf711ef9cd8aa24,
         type: 3}
+      propertyPath: poiType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694329005874326878, guid: 02d58ba0f12101045bf711ef9cd8aa24,
+        type: 3}
       propertyPath: oneTimeVisit
       value: 1
       objectReference: {fileID: 0}

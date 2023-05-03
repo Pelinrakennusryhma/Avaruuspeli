@@ -35,9 +35,6 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventInventoryOpened;
     public UnityEvent EventInventoryClosed;
 
-    public UnityEvent EventLeavingSceneStarted;
-    public UnityEvent EventLeavingSceneCancelled;
-
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -114,16 +111,5 @@ public class GameEvents : MonoBehaviour
     public void CallEventInventoryClosed()
     {
         EventInventoryClosed.Invoke();
-    }
-
-    public void CallEventLeavingSceneStarted()
-    {
-        EventLeavingSceneStarted.Invoke();
-    }
-
-    public void CallEventLeavingSceneCancelled()
-    {
-        EventLeavingSceneCancelled.Invoke();
-
     }
 }

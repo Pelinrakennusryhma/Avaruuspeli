@@ -5,10 +5,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum POIType
+{
+    Asteroid,
+    Planet
+}
+
 public class PointOfInterest : MonoBehaviour
 {
-    [Tooltip("Should the PoI be destroyed after visit?")]
-    public bool oneTimeVisit = false;
+    [SerializeField]
+    POIType poiType;
+    public bool OneTimeVisit { get; private set; }
     [SerializeField]
     Transform uiComponents;
     [SerializeField]
@@ -44,22 +51,31 @@ public class PointOfInterest : MonoBehaviour
         targetScript = GetComponent<Target>();
         targetScript.descriptionText = Icon;
 
+        if(poiType == POIType.Asteroid)
+        {
+            OneTimeVisit = true;
+        } else
+        {
+            OneTimeVisit = false;
+        }
+
         enterButton.onClick.AddListener(OnEnterClicked);
     }
 
     void OnEnterClicked()
     {
-        GameManager.Instance.EnterPOI(this);
+        if(poiType == POIType.Asteroid)
+        {
+            GameManager.Instance.EnterPOI(this);
+        } else
+        {
+            GameManager.Instance.EnterPlanet();
+        }
+
     }
 
     void Start()
     {
-        // placeholder mechanism for planets
-        if(Data != null)
-        {
-            Init(Data);
-        }
-
         ApplyIcon();
         UpdatePosition();
         DisableInfoPanel();
@@ -75,6 +91,18 @@ public class PointOfInterest : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         screenPos += UIItemOffset;
         uiComponents.position = screenPos;
+    }
+
+    public void Init(PlanetOnWorldMap planet)
+    {
+        description.text = "Get some interesting data from planet.PlanetData";
+        title.text = planet.PlanetData.Name;
+
+        enterButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.CurrentPlanet = planet;
+            GameManager.Instance.CurrentPlanetData = planet.PlanetData;
+        });
     }
 
     public void Init(POISceneData data, POISpawner.OnPOIEnteredDelegate callback=null)

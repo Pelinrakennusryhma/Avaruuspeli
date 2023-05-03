@@ -107,7 +107,7 @@ public class POISpawner : MonoBehaviour
 
     void OnEnterPOI(PointOfInterest POI)
     {
-        if (POI.oneTimeVisit)
+        if (POI.OneTimeVisit)
         {
             poiQueuedForRemoval = POI;
         }

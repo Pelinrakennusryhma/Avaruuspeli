@@ -40,7 +40,7 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        bool isOnAClickableObject = false;
+        //bool isOnAClickableObject = false;
 
         if (MotherShipOnWorldMapController.Instance.IsOnCurrentClickableObject
             && MotherShipOnWorldMapController.Instance.CurrentTargetClickableObject
@@ -126,8 +126,8 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
             WorldMapMouseController.Instance.ZoomIn(transform.position,
                                                     zoom,
                                                     WorldMapMouseController.Instance.CurrentGalaxy,
-                                                    WorldMapMouseController.Instance.CurrentStarSystem);        
-            
+                                                    WorldMapMouseController.Instance.CurrentStarSystem);
+
             if (OnObjectClicked != null)
             {
                 OnObjectClicked(type);
