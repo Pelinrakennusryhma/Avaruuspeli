@@ -8,6 +8,7 @@ public interface IUseable
     public bool Active { get; set; }
     public float Duration { get; set; }
     public float Cooldown { get; set; }
+    public ActorSpaceship Actor { get; set; }
 
-    public abstract void Init(float duration, float cooldown);
+    public abstract void Init(float duration, float cooldown, ActorSpaceship actor);
 }

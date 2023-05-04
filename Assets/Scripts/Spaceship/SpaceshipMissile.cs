@@ -61,9 +61,17 @@ public class SpaceshipMissile : UITrackable
         }
     }
 
+    bool CanLock()
+    {
+        return focusedTarget != null && 
+            !lockedTargets.Contains(focusedTarget) &&
+            currentMissiles > 0 &&
+            !focusedTarget.Protected;
+    }
+
     void LockOnTarget()
     {
-        if(focusedTarget != null && !lockedTargets.Contains(focusedTarget) && currentMissiles > 0)
+        if(CanLock())
         {
             lockedTargets.Add(focusedTarget);
             focusedTarget.UnfocusShip(actor);
@@ -132,7 +140,7 @@ public class SpaceshipMissile : UITrackable
 
             if (focusedTarget)
             {
-                if (!lockedTargets.Contains(focusedTarget) && currentMissiles > 0)
+                if (CanLock())
                 {
                     focusedTarget.FocusShip(actor);
                 }

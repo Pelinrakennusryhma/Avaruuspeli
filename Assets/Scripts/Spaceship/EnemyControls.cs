@@ -15,9 +15,9 @@ public class EnemyControls : ActorSpaceship
     GameObject missileLockIndicatorPrefab;
     GameObject missileLockIndicator;
 
-    protected override void OnEnable()
+    protected override void Start()
     {
-        base.OnEnable();
+        base.Start();
         shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
     }

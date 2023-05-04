@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UISafetyIndicator : MonoBehaviour
 {
     [SerializeField]
-    SpaceshipECM ecmScript;
+    PlayerControls player;
     [SerializeField]
     Image safetyImage;
     void Awake()
@@ -24,19 +24,15 @@ public class UISafetyIndicator : MonoBehaviour
     {
         if(actor is PlayerControls)
         {
-            SpaceshipECM ecm = actor.ship.GetComponent<SpaceshipECM>();
-            if(ecm != null)
-            {
-                ecmScript = ecm;
-            }
+            player = (PlayerControls)actor;
         }
     }
 
     private void Update()
     {
-        if(ecmScript != null)
+        if(player != null)
         {
-            if (ecmScript.Active)
+            if (player.Protected)
             {
                 safetyImage.enabled = true;
             } else

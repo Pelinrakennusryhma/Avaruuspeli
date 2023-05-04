@@ -16,12 +16,13 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
+    public bool Protected { get; set; }
 
     protected List<Missile> lockedMissiles = new List<Missile>();
 
     protected List<IUseable> shipUtilityScripts = new List<IUseable>();
 
-    virtual protected void OnEnable()
+    virtual protected void Start()
     {
         ship = transform.GetChild(0).gameObject;
         spaceshipMovement = ship.GetComponent<SpaceshipMovement>();
@@ -37,7 +38,7 @@ public abstract class ActorSpaceship : MonoBehaviour
         GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
-    void InitUtilities()
+    protected virtual void InitUtilities()
     {
         if(spaceshipData != null && spaceshipData.utilities != null)
         {
@@ -50,15 +51,10 @@ public abstract class ActorSpaceship : MonoBehaviour
                     Component addedScript = ship.AddComponent(scriptType);
                     IUseable useable = (IUseable)addedScript;
                     shipUtilityScripts.Add(useable);
-                    useable.Init(utility.effectDuration, utility.cooldown);
+                    useable.Init(utility.effectDuration, utility.cooldown, this);
                 }
             }
         }
-    }
-
-    virtual protected void Start()
-    {
-        //GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
     virtual protected void OnDeath()
@@ -97,5 +93,15 @@ public abstract class ActorSpaceship : MonoBehaviour
     public virtual void UnfocusShip(ActorSpaceship shooter)
     {
         //Debug.Log("ship unfocused");
+    }
+
+    public void ClearLockedMissiles()
+    {
+        foreach (Missile missile in lockedMissiles)
+        {
+            missile.ClearTarget();
+        }
+
+        lockedMissiles.Clear();
     }
 }

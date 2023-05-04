@@ -106,6 +106,12 @@ public class PlayerControls : ActorSpaceship
         spaceshipMissile.shooting = context.performed;
     }
 
+    protected override void InitUtilities()
+    {
+        base.InitUtilities();
+        GameEvents.Instance.CallEventPlayerUtilitiesInited(shipUtilityScripts);
+    }
+
     public void OnUtility1(InputAction.CallbackContext context)
     {
         shipUtilityScripts[0].TryingToActivate = context.performed;
