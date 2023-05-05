@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +30,7 @@ public class UISafetyIndicator : MonoBehaviour
     {
         if(player != null)
         {
-            if (player.Protected)
+            if(Utils.ListContains<SpaceshipECM>(player.ActiveUtils))
             {
                 safetyImage.enabled = true;
             } else

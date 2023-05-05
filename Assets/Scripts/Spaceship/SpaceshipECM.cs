@@ -51,10 +51,10 @@ public class SpaceshipECM : MonoBehaviour, IUseable
 
     IEnumerator Activate()
     {
-        Actor.Protected = true;
+        Actor.ActivateUtil(this);
         Actor.ClearLockedMissiles();
         yield return new WaitForSeconds(Duration);
-        Actor.Protected = false;
+        Actor.DeactivateUtil(this);
     }
 
 }

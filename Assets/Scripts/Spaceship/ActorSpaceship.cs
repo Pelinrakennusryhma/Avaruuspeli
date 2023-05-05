@@ -16,7 +16,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
-    public bool Protected { get; set; }
+    public List<IUseable> ActiveUtils { get; private set; }
 
     protected List<Missile> lockedMissiles = new List<Missile>();
 
@@ -40,6 +40,8 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     protected virtual void InitUtilities()
     {
+        ActiveUtils = new List<IUseable>();
+
         if(spaceshipData != null && spaceshipData.utilities != null)
         {
             foreach (ShipUtility utility in spaceshipData.utilities)
@@ -103,5 +105,15 @@ public abstract class ActorSpaceship : MonoBehaviour
         }
 
         lockedMissiles.Clear();
+    }
+
+    public void ActivateUtil(IUseable util)
+    {
+        ActiveUtils.Add(util);
+    }
+
+    public void DeactivateUtil(IUseable util)
+    {
+        ActiveUtils.Remove(util);
     }
 }

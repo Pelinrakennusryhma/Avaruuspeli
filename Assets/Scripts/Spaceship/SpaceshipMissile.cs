@@ -63,10 +63,11 @@ public class SpaceshipMissile : UITrackable
 
     bool CanLock()
     {
-        return focusedTarget != null && 
+        return focusedTarget != null &&
             !lockedTargets.Contains(focusedTarget) &&
             currentMissiles > 0 &&
-            !focusedTarget.Protected;
+            !Utils.ListContains<SpaceshipECM>(focusedTarget.ActiveUtils);
+            //!focusedTarget.Protected;
     }
 
     void LockOnTarget()

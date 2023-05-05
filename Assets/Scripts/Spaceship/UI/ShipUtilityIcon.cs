@@ -50,7 +50,7 @@ public class ShipUtilityIcon : MonoBehaviour
 
     string GetRemainingCooldown()
     {
-        return (_util.Cooldown - _util.CooldownTimer).ToString("F0");
+        return (_util.Cooldown - _util.CooldownTimer).ToString("F1");
     }
 
     float GetCooldownFill()
