@@ -51,7 +51,7 @@ public abstract class ActorSpaceship : MonoBehaviour
                     Component addedScript = ship.AddComponent(scriptType);
                     IUseable useable = (IUseable)addedScript;
                     shipUtilityScripts.Add(useable);
-                    useable.Init(utility.effectDuration, utility.cooldown, this);
+                    useable.Init(utility, this);
                 }
             }
         }

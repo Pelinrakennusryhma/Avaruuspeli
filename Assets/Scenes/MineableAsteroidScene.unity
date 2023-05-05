@@ -7478,6 +7478,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShipUtilityIcons
       objectReference: {fileID: 0}
+    - target: {fileID: 972556916431707367, guid: 58f483b139c20cb4fbd717a237bafa39,
+        type: 3}
+      propertyPath: iconPrefab
+      value: 
+      objectReference: {fileID: 1092470265719220472, guid: ac05f74d9b653794ab8d735759e0caaf,
+        type: 3}
     - target: {fileID: 2341482400327035671, guid: 58f483b139c20cb4fbd717a237bafa39,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7581,21 +7587,6 @@ PrefabInstance:
     - target: {fileID: 2341482400327035671, guid: 58f483b139c20cb4fbd717a237bafa39,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2667086585317585678, guid: 58f483b139c20cb4fbd717a237bafa39,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613513698496831624, guid: 58f483b139c20cb4fbd717a237bafa39,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5423635428608001999, guid: 58f483b139c20cb4fbd717a237bafa39,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8181291044567886180, guid: 58f483b139c20cb4fbd717a237bafa39,

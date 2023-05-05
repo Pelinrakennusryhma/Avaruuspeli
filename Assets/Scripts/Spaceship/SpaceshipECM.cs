@@ -7,27 +7,28 @@ public class SpaceshipECM : MonoBehaviour, IUseable
     public bool TryingToActivate { get; set; }
     public bool Active { get; set; }
     public float Duration { get; set; }
-    public float UseTimer { get; private set; }
+    public float DurationTimer { get; set; }
     public float Cooldown { get; set; }
     public ActorSpaceship Actor { get; set; }
+    public float CooldownTimer { get; set; }
+    public ShipUtility Data { get; set; }
 
-    public float CooldownTimer { get; private set; }
 
-
-    public void Init(float duration, float cooldown, ActorSpaceship actor)
+    public void Init(ShipUtility data, ActorSpaceship actor)
     {
-        Duration = duration;
-        Cooldown = cooldown;
-        CooldownTimer = cooldown;
+        Duration = data.effectDuration;
+        Cooldown = data.cooldown;
+        CooldownTimer = data.cooldown;
         Actor = actor;
+        Data = data;
     }
 
     void Update()
     {
         if (Active)
         {
-            UseTimer -= Time.deltaTime;
-            if(UseTimer <= 0f)
+            DurationTimer -= Time.deltaTime;
+            if(DurationTimer <= 0f)
             {
                 Active = false;
             }
@@ -41,7 +42,7 @@ public class SpaceshipECM : MonoBehaviour, IUseable
                 {
                     StartCoroutine(Activate());
                     Active = true;
-                    UseTimer = Duration;
+                    DurationTimer = Duration;
                     CooldownTimer = 0f;
                 }
             }
@@ -50,7 +51,6 @@ public class SpaceshipECM : MonoBehaviour, IUseable
 
     IEnumerator Activate()
     {
-        Debug.Log("activating ecm");
         Actor.Protected = true;
         Actor.ClearLockedMissiles();
         yield return new WaitForSeconds(Duration);

@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class ShipUtilityIcons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    GameObject iconPrefab;
+    void Awake()
     {
-        
+        GameEvents.Instance.EventPlayerUtilitiesInited.AddListener(OnPlayerUtilitiesInited);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnPlayerUtilitiesInited(List<IUseable> utils)
     {
-        
+        for (int i = 0; i < utils.Count; i++)
+        {
+            GameObject go = Instantiate(iconPrefab, transform);
+            ShipUtilityIcon icon = go.GetComponent<ShipUtilityIcon>();
+            icon.Init(utils[i], i + 1);
+        }
     }
+
 }
