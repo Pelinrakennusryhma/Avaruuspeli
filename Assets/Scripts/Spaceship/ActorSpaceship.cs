@@ -16,11 +16,11 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
-    public List<IUseable> ActiveUtils { get; private set; }
+    public List<Useable> ActiveUtils { get; private set; }
 
     protected List<Missile> lockedMissiles = new List<Missile>();
 
-    protected List<IUseable> shipUtilityScripts = new List<IUseable>();
+    protected List<Useable> shipUtilityScripts = new List<Useable>();
 
     virtual protected void Start()
     {
@@ -40,7 +40,7 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     protected virtual void InitUtilities()
     {
-        ActiveUtils = new List<IUseable>();
+        ActiveUtils = new List<Useable>();
 
         if(spaceshipData != null && spaceshipData.utilities != null)
         {
@@ -51,7 +51,7 @@ public abstract class ActorSpaceship : MonoBehaviour
                     Type scriptType = utility.scriptToAdd.GetClass();
                     Debug.Log("Adding class: " + scriptType);
                     Component addedScript = ship.AddComponent(scriptType);
-                    IUseable useable = (IUseable)addedScript;
+                    Useable useable = (Useable)addedScript;
                     shipUtilityScripts.Add(useable);
                     useable.Init(utility, this);
                 }
@@ -107,12 +107,12 @@ public abstract class ActorSpaceship : MonoBehaviour
         lockedMissiles.Clear();
     }
 
-    public void ActivateUtil(IUseable util)
+    public void ActivateUtil(Useable util)
     {
         ActiveUtils.Add(util);
     }
 
-    public void DeactivateUtil(IUseable util)
+    public void DeactivateUtil(Useable util)
     {
         ActiveUtils.Remove(util);
     }

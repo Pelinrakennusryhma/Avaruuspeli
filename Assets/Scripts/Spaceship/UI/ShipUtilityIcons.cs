@@ -11,7 +11,7 @@ public class ShipUtilityIcons : MonoBehaviour
         GameEvents.Instance.EventPlayerUtilitiesInited.AddListener(OnPlayerUtilitiesInited);
     }
 
-    void OnPlayerUtilitiesInited(List<IUseable> utils)
+    void OnPlayerUtilitiesInited(List<Useable> utils)
     {
         for (int i = 0; i < utils.Count; i++)
         {

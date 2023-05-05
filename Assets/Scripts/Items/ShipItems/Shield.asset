@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d3146dd05639e146b580858fbd5ecba, type: 3}
-  m_Name: ECM
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  id: 789789
-  itemName: ECM
-  plural: ECMs
-  value: 250
-  description: Electronic Countermeasures Module. Clears locked missiles and grants
-    a brief missile lock immunity.
+  id: 789790
+  itemName: Shield
+  plural: Shields
+  value: 300
+  description: Protects from all damage for a short duration.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 21300000, guid: 5548f72b53766aa46a9c3b5eabea5a77, type: 3}
+  itemIcon: {fileID: 21300000, guid: 4b45b6c32c737bb41ad3193a50e4a92e, type: 3}
   isStackable: 0
   weight: 100
   itemType: 6
-  scriptToAdd: {fileID: 11500000, guid: 54726d1d91d41434dad084acd5061b9b, type: 3}
-  effectDuration: 3
-  cooldown: 10
+  scriptToAdd: {fileID: 11500000, guid: 3535cf9c9a1c2714da648abfaacbbcdb, type: 3}
+  effectDuration: 1.5
+  cooldown: 15

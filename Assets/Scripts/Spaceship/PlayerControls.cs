@@ -116,4 +116,8 @@ public class PlayerControls : ActorSpaceship
     {
         shipUtilityScripts[0].TryingToActivate = context.performed;
     }
+    public void OnUtility2(InputAction.CallbackContext context)
+    {
+        shipUtilityScripts[1].TryingToActivate = context.performed;
+    }
 }

@@ -267,6 +267,7 @@ MonoBehaviour:
   cooldownFillColor: {r: 1, g: 1, b: 0, a: 0.4117647}
   useFillColor: {r: 0, g: 1, b: 1, a: 0.4117647}
   nameText: {fileID: 8826987698517695247}
+  icon: {fileID: 5246898946744826953}
 --- !u!1 &5105872763668533106
 GameObject:
   m_ObjectHideFlags: 0

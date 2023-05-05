@@ -4,11 +4,11 @@ using UnityEngine;
 
 public static class Utils
 {
-    public static bool ListContains<T>(List<IUseable> utils) where T : IUseable
+    public static bool ListContains<T>(List<Useable> utils) where T : Useable
     {
-        foreach (IUseable util in utils)
+        foreach (Useable util in utils)
         {
-            if (util is SpaceshipECM)
+            if (util is T)
             {
                 return true;
             }

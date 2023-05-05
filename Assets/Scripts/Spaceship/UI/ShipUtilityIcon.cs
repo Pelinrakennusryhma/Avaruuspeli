@@ -10,19 +10,23 @@ public class ShipUtilityIcon : MonoBehaviour
     TMP_Text timerText;
     [SerializeField]
     Image timerImage;
-    IUseable _util;
+    Useable _util;
     [SerializeField]
     Color cooldownFillColor;
     [SerializeField]
     Color useFillColor;
     [SerializeField]
     TMP_Text nameText;
+    [SerializeField]
+    Image icon;
 
-    public void Init(IUseable util, int utilIndex)
+    public void Init(Useable util, int utilIndex)
     {
         _util = util;
 
         nameText.text = $"{util.Data.itemName} ({utilIndex})";
+
+        icon.sprite = util.Data.itemIcon;
     }
     void Update()
     {

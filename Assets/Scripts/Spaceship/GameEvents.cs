@@ -29,7 +29,7 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventPlayerTriedLeaving;
     public UnityEvent<MineableAsteroidTrigger> EventPlayerLeftAsteroid;
     public UnityEvent<bool> EventToggleIndicators;
-    public UnityEvent<List<IUseable>> EventPlayerUtilitiesInited;
+    public UnityEvent<List<Useable>> EventPlayerUtilitiesInited;
 
     public UnityEvent EventPlayerRanOutOfOxygen;
     public UnityEvent EventInventoryOpened;
@@ -96,7 +96,7 @@ public class GameEvents : MonoBehaviour
         EventToggleIndicators.Invoke(showIndicators);
     }
 
-    public void CallEventPlayerUtilitiesInited(List<IUseable> utilities)
+    public void CallEventPlayerUtilitiesInited(List<Useable> utilities)
     {
         EventPlayerUtilitiesInited.Invoke(utilities);
     }
