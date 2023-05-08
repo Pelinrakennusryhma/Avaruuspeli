@@ -4213,10 +4213,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1134921867126457017, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+        type: 3}
+      propertyPath: laserDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4775760650964221550, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae6be1c296fe214daef5e7a4f3ad938, type: 3}
@@ -5971,12 +5976,22 @@ PrefabInstance:
     - target: {fileID: 577270566353154299, guid: 8c6f722c77e9af741a343976d0c24553,
         type: 3}
       propertyPath: stance
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 577270566353154299, guid: 8c6f722c77e9af741a343976d0c24553,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 577270566353154299, guid: 8c6f722c77e9af741a343976d0c24553,
+        type: 3}
+      propertyPath: maxMissileCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 577270566353154299, guid: 8c6f722c77e9af741a343976d0c24553,
+        type: 3}
+      propertyPath: minMissileCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 577270566353154300, guid: 8c6f722c77e9af741a343976d0c24553,
         type: 3}
@@ -8298,7 +8313,7 @@ MonoBehaviour:
   asteroidSpawner: {fileID: 7003948108148386285}
   actorManager: {fileID: 754047033}
   mothershipHangar: {fileID: 84133338}
-  fallbackSceneData: {fileID: 11400000, guid: dcd11acbbdec5f54ebaeaed7c32f6bb6, type: 2}
+  fallbackSceneData: {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4, type: 2}
 --- !u!114 &7003948108148386285 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,

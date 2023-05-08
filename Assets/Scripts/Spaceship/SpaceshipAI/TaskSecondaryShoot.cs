@@ -35,6 +35,9 @@ public class TaskSecondaryShoot : Node
 
             _enemyControls.OnSecondaryShoot(shouldShoot);
             GetNewCooldown();
+        } else
+        {
+            _enemyControls.OnSecondaryShoot(false);
         }
         
         state = NodeState.FAILURE;
