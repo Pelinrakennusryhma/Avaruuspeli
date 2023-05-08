@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
+  m_Name: Sapphire
+  m_EditorClassIdentifier: 
+  id: 24
+  itemName: Sapphire
+  plural: Sapphires
+  value: 250
+  description: Durable crystal used in high-performance optics, electronics, and
+    industrial applications.
+  itemPrefab: {fileID: 7118768071914602803, guid: 53693f30ec0bf2c468de24c909619e80,
+    type: 3}
+  itemPrefabVariants:
+  - {fileID: 2364193931190882496, guid: b8e093c7bb1d61f43a0f82260581a51b, type: 3}
+  - {fileID: 295899010739091771, guid: 459a0121cbf20b948b8b2e1bb2f284aa, type: 3}
+  - {fileID: 5558593070356433517, guid: cc575130877ac674fbbe762422d00e6c, type: 3}
+  - {fileID: 2130796613481805814, guid: 698e3b2cbc79e324787178ad16775b95, type: 3}
+  - {fileID: 3731993380885079235, guid: 19e50c34bd681cd4e99e3a439b501240, type: 3}
+  - {fileID: 5684254478696707357, guid: a1d9fd905e4add1489859672df8383b6, type: 3}
+  itemIcon: {fileID: 0}
+  isStackable: 1
+  weight: 1.4
+  itemType: 5
+  rare: {fileID: 0}
+  rareChance: 0

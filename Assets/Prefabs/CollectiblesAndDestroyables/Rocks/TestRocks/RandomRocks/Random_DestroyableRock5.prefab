@@ -109,10 +109,16 @@ MonoBehaviour:
   ResourceType: {fileID: 0}
   SpawnableResources:
   - {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}
+  - {fileID: 11400000, guid: 24c39d56c459ba445acdaa88e384efa6, type: 2}
+  - {fileID: 11400000, guid: 6c4f6d468059708499ceb1382d20d841, type: 2}
+  - {fileID: 11400000, guid: 6c0342465982fab46895bdd208648ab7, type: 2}
+  - {fileID: 11400000, guid: e5976927af7c2d04797471cb9a158cfb, type: 2}
   - {fileID: 11400000, guid: 6c6df3b5d647b0e4791aaecb43b5a52a, type: 2}
-  - {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5, type: 2}
-  - {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}
   - {fileID: 11400000, guid: cbb3e1de24baeb8478002f02458e87b1, type: 2}
+  - {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}
+  - {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5, type: 2}
+  - {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c, type: 2}
+  - {fileID: 11400000, guid: d4292f71ccd02ba43af4fa87e8e5f73e, type: 2}
 --- !u!1 &8583846358780517863
 GameObject:
   m_ObjectHideFlags: 0
