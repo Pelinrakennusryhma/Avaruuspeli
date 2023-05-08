@@ -82,7 +82,13 @@ public class PlayerControls : ActorSpaceship
         if (context.performed)
         {
             GameManager.Instance.OnInventoryPressed();
+            Debug.Log("On inventory pressed");
         }
+
+
+        //GameManager.Instance.OnInventoryPressed();
+        //Debug.Log("On inventory pressed");
+
     }
 
     public void OnLeaveScene(InputAction.CallbackContext context)

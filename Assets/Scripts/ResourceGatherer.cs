@@ -60,12 +60,12 @@ public class ResourceGatherer : MonoBehaviour
                 {
                     GameManager.Instance.InventoryController.Inventory.UpdateWeight(gatherable.ResourceType.weight);
                     gatherable.OnPickUp();
-                    Debug.Log("WE have room for item. Can collect");
+                    //Debug.Log("WE have room for item. Can collect");
                 }
 
                 else
                 {
-                    Debug.Log("No room for pickup");
+                    //Debug.Log("No room for pickup");
                 }
                 
 
@@ -107,24 +107,30 @@ public class ResourceGatherer : MonoBehaviour
         }
 
         if (Controls.Alpha1Down
+            && Tool != ToolType.BasicDrill
             && GameManager.Instance.InventoryController.Inventory.CheckForItem(7))
         {
             Tool = ToolType.BasicDrill;
             Hands.SetTool(Tool);
+            Hands.SetWeapon(Weapon.WeaponType.None);
         }
 
         else if (Controls.Alpha2Down
+                 && Tool != ToolType.AdvancedDrill
                  && GameManager.Instance.InventoryController.Inventory.CheckForItem(8))
         {
             Tool = ToolType.AdvancedDrill;
             Hands.SetTool(Tool);
+            Hands.SetWeapon(Weapon.WeaponType.None);
         }
 
         else if (Controls.Alpha3Down
+                 && Tool != ToolType.DiamondDrill
                  && GameManager.Instance.InventoryController.Inventory.CheckForItem(21))
         {
             Tool = ToolType.DiamondDrill;
             Hands.SetTool(Tool);
+            Hands.SetWeapon(Weapon.WeaponType.None);
         }
 
         //Debug.Log("Tool is " + Tool.ToString());

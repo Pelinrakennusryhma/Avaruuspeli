@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.UI.Image drillImage;
+    [SerializeField] private UnityEngine.UI.Image imageOfObjectInHands;
     [SerializeField] private UnityEngine.UI.Image spacesuitImage;
     [SerializeField] private UnityEngine.UI.Image shipWeapon1Image;
     [SerializeField] private UnityEngine.UI.Image shipWeapon2Image;
-    public ItemSO equippedDrill;
+    public ItemSO equippedObjectInHands;
     public ItemSO equippedSpacesuit;
     public ItemSO equippedShipWeapon1;
     public ItemSO equippedShipWeapon2;
     public Inventory inventory;
 
     //Tavaroitten unequip ja equip. Kutsutaan ContextMenu.cs kautta.
-    public void UnequipDrill()
+    public void UnequipObjectInHands()
     {
         if (ResourceGatherer.Instance != null) 
         {
@@ -23,14 +23,20 @@ public class Equipment : MonoBehaviour
             ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.None);
         }
 
-        if (equippedDrill != null)
+        if (PlayerHands.Instance != null)
+        {
+            PlayerHands.Instance.SetWeapon(Weapon.WeaponType.None);
+            
+        }
+
+        if (equippedObjectInHands != null)
         {
             //inventory.AddItem(equippedDrill.id, 1);
             //Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
             
-            equippedDrill = null;
+            equippedObjectInHands = null;
             //drillImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
-            drillImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            imageOfObjectInHands.sprite = GameManager.Instance.InventoryController.BlankSprite;
 
         }            
         
@@ -51,25 +57,25 @@ public class Equipment : MonoBehaviour
 
         }
     }
-    public void EquipDrill(ItemSO item)
+    public void EquipObjectInHands(ItemSO item)
     {
-        UnequipDrill();
-        equippedDrill = item;
+        UnequipObjectInHands();
+        equippedObjectInHands = item;
         //drillImage.sprite = Resources.Load<Sprite>("Sprites/" + equippedDrill.name);
 
-        if (equippedDrill.itemIcon != null)
+        if (equippedObjectInHands.itemIcon != null)
         {
-            drillImage.sprite = equippedDrill.itemIcon;
-            //Debug.LogWarning("We had a sprite for a drill");
+            imageOfObjectInHands.sprite = equippedObjectInHands.itemIcon;
+            //Debug.LogWarning("We had a sprite for a drill or gun");
         }
 
         else
         {
-            drillImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+            imageOfObjectInHands.sprite = GameManager.Instance.InventoryController.BlankSprite;
             //Debug.LogError("Had to put to blank sprite out there, because we didn't have an image");
         }
 
-        Debug.Log("Equipping drill. Item id is " + item.id);
+        //Debug.Log("Equipping object in hands. Item id is " + item.id + " at time " + Time.time);
         
         if (ResourceGatherer.Instance != null) 
         {
@@ -92,6 +98,38 @@ public class Equipment : MonoBehaviour
                 ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.DiamondDrill);
 
             }
+
+            else
+            {
+                ResourceGatherer.Instance.Tool = ResourceGatherer.ToolType.None;
+                ResourceGatherer.Instance.Hands.SetTool(ResourceGatherer.ToolType.None);
+            }
+        }
+
+        if (PlayerHands.Instance != null)
+        {
+            if (item.id == 9)
+            {
+                PlayerHands.Instance.SetTool(ResourceGatherer.ToolType.None);
+                PlayerHands.Instance.SetWeapon(Weapon.WeaponType.LaserGun);
+                //Debug.Log("Equip laser gun" + Time.time);
+            }
+
+            else if (item.id == 22)
+            {
+                PlayerHands.Instance.SetTool(ResourceGatherer.ToolType.None);
+                PlayerHands.Instance.SetWeapon(Weapon.WeaponType.MeleeWeapon);
+                //Debug.Log("Equip melee weapon" + Time.time);
+            }
+
+            else
+            {
+                PlayerHands.Instance.SetWeapon(Weapon.WeaponType.None);
+                //Debug.Log("Do not equip a weapon");
+                //PlayerHands.Instance.SetTool(ResourceGatherer.ToolType.None);
+            }
+
+            //Debug.LogWarning("Non null player hands instance");
         }
    
     }
@@ -194,7 +232,7 @@ public class Equipment : MonoBehaviour
     {
         bool isAnEquippedItem = false;
 
-        if (item == equippedDrill
+        if (item == equippedObjectInHands
             || item == equippedSpacesuit
             || item == equippedShipWeapon1
             || item == equippedShipWeapon2)

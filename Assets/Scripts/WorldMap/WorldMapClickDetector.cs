@@ -31,9 +31,12 @@ public class WorldMapClickDetector : MonoBehaviour, IPointerClickHandler
 
         Vector3 mousePos = new Vector3(0, -10000, 0);
 
-        if (GameManager.Instance.Helpers.CheckIfUIisHit())
+        if (GameManager.Instance.Helpers.CheckIfUIisHit()
+            || GameManager.Instance.InventoryController.ShowingInventory)
         {
-            Debug.Log("we clicked, but hit UI at the same time. return");
+
+            Debug.Log("we clicked, but hit UI at the same time or we we're showing inventory. return");
+
             return;
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RandomRockInitter : MonoBehaviour
 {
+    public bool AlwaysSpawn = false;
     public Resource ResourceType;
     private DestroyableRock Rock;
 
@@ -46,7 +47,8 @@ public class RandomRockInitter : MonoBehaviour
 
         //spawnAtAll = 0.0f;
 
-        if (spawnAtAll <= 0.33f)
+        if (spawnAtAll <= 0.33f
+            && !AlwaysSpawn)
         {
             Destroy(gameObject);
             //Debug.Log("Destroyed rock at start");

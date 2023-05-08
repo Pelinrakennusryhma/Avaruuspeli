@@ -53,7 +53,7 @@ public class LifeSupportSystem : MonoBehaviour
         }
 
         JustRanOutOfOxygen = false;
-        Debug.Log("Initting life support system. Do this after initial savedata loading!");
+        //Debug.Log("Initting life support system. Do this after initial savedata loading!");
     }
 
     public void OnExitAsteroid(MineableAsteroidTrigger asteroid)
@@ -141,7 +141,7 @@ public class LifeSupportSystem : MonoBehaviour
                 && AmountOfOxygenTanks <= 1
                 && !JustRanOutOfOxygen)
             {
-                Debug.Log("We ran out of oxygen. Die!!! or leave asteroid, if that's the better solution? " + Time.time);
+                //Debug.Log("We ran out of oxygen. Die!!! or leave asteroid, if that's the better solution? " + Time.time);
                 
                 JustRanOutOfOxygen = true;
                 TriedLeavingTheSceneAlready = true;
@@ -151,7 +151,7 @@ public class LifeSupportSystem : MonoBehaviour
 
                 if (!TheEventHasBeenCalled) 
                 {
-                    Debug.Log("A call to the event is up next " + Time.time);
+                    //Debug.Log("A call to the event is up next " + Time.time);
                     OnExitUnbreathablePlace();
                     GameEvents.Instance.CallEventPlayerRanOutOfOxygen();
                     GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(ranOutOfOxygenText);
@@ -175,7 +175,7 @@ public class LifeSupportSystem : MonoBehaviour
                     }
                 }
 
-                Debug.Log("amount of oxygen in last tank is " + AmountOfOxygenInLastTank + " amount of bottles is " + AmountOfOxygenTanks);
+               // Debug.Log("amount of oxygen in last tank is " + AmountOfOxygenInLastTank + " amount of bottles is " + AmountOfOxygenTanks);
             }
 
             OxygenHUDText.text = "OXYGEN: " + (AmountOfOxygenInLastTank * 1000.0f + (AmountOfOxygenTanks - 1) * 1000.0f).ToString("0.0") + " mg/L";
@@ -186,7 +186,7 @@ public class LifeSupportSystem : MonoBehaviour
 
         else
         {
-            Debug.Log("Timescale is zero. Do not reduce oxygen");
+            //Debug.Log("Timescale is zero. Do not reduce oxygen");
         }
 
 
