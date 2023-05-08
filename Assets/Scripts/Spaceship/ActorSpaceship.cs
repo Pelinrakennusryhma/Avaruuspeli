@@ -34,14 +34,13 @@ public abstract class ActorSpaceship : MonoBehaviour
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
 
+        ActiveUtils = new List<Useable>();
         InitUtilities();
         GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
     protected virtual void InitUtilities()
     {
-        ActiveUtils = new List<Useable>();
-
         if(spaceshipData != null && spaceshipData.utilities != null)
         {
             foreach (ShipUtility utility in spaceshipData.utilities)
@@ -49,7 +48,7 @@ public abstract class ActorSpaceship : MonoBehaviour
                 if (utility != null)
                 {
                     Type scriptType = utility.scriptToAdd.GetClass();
-                    Debug.Log("Adding class: " + scriptType);
+                    //Debug.Log("Adding class: " + scriptType);
                     Component addedScript = ship.AddComponent(scriptType);
                     Useable useable = (Useable)addedScript;
                     shipUtilityScripts.Add(useable);
@@ -99,16 +98,22 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     public void ClearLockedMissiles()
     {
+        List<Missile> deepCopy = new List<Missile>();
         foreach (Missile missile in lockedMissiles)
         {
+            deepCopy.Add(missile);
             missile.ClearTarget();
         }
 
-        lockedMissiles.Clear();
+        foreach (Missile missile in deepCopy)
+        {
+            UnlockMissile(missile);
+        }
     }
 
     public void ActivateUtil(Useable util)
     {
+        Debug.Log("Activating: " + util.Data.itemName);
         ActiveUtils.Add(util);
     }
 

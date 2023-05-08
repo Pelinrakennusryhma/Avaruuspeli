@@ -77,7 +77,6 @@ public class SpaceshipMissile : UITrackable
             lockedTargets.Add(focusedTarget);
             focusedTarget.UnfocusShip(actor);
 
-            Debug.Log("locking on: " + focusedTarget.name);
             currentMissiles--;
             GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
             Missile spawnedMissile = missileObject.GetComponent<Missile>();

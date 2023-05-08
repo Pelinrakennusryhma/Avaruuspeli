@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: {fileID: 11400000, guid: 65d9ba8b11e8005449d65b3ada7d9a16, type: 2}
   ship: {fileID: 0}
+  spaceshipData: {fileID: 11400000, guid: 12a26f858ae611c4f9bd719e747ddfe9, type: 2}
   spaceshipMovement: {fileID: 0}
   spaceshipBoost: {fileID: 0}
   spaceshipShoot: {fileID: 0}
@@ -72,3 +73,5 @@ MonoBehaviour:
   patrolArea: 500
   minMissileCooldown: 2
   maxMissileCooldown: 10
+  minUtilCooldown: 10
+  maxUtilCooldown: 30

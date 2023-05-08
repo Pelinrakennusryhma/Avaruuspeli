@@ -23,6 +23,10 @@ public class SpaceshipBT : BTree
     float minMissileCooldown = 10f;
     [SerializeField]
     float maxMissileCooldown = 60f;
+    [SerializeField]
+    float minUtilCooldown = 10f;
+    [SerializeField]
+    float maxUtilCooldown = 30f;
 
     EnemyControls enemyControls;
     Transform shipTransform;
@@ -49,7 +53,8 @@ public class SpaceshipBT : BTree
                     {
                         new CheckTargetInShootingRange(shipTransform),
                         new TaskShoot(enemyControls),
-                        new TaskSecondaryShoot(enemyControls, minMissileCooldown, maxMissileCooldown)
+                        new TaskUseUtil(enemyControls, minUtilCooldown, maxUtilCooldown),
+                        new TaskSecondaryShoot(enemyControls, minMissileCooldown, maxMissileCooldown)                     
                     }),
                     new Sequence(new List<Node>
                     {

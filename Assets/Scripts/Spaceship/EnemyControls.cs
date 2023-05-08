@@ -244,4 +244,18 @@ public class EnemyControls : ActorSpaceship
     {
         spaceshipMissile.shooting = shooting;
     }
+
+    public void OnRandomUtility()
+    {
+        int utilIndex = Random.Range(0, shipUtilityScripts.Count);
+        shipUtilityScripts[utilIndex].TryingToActivate = true;
+    }
+
+    public void OnCancelAllUtilities()
+    {
+        foreach (Useable useable in shipUtilityScripts)
+        {
+            useable.TryingToActivate = false;
+        }
+    }
 }
