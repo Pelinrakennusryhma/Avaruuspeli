@@ -9,6 +9,10 @@ public class SpaceshipEffects : MonoBehaviour
     [SerializeField]
     Material[] electrifiedMaterials;
     Material[] originalMaterials;
+
+    [SerializeField]
+    GameObject shieldPrefab;
+    GameObject activeShield;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +40,15 @@ public class SpaceshipEffects : MonoBehaviour
     public void UnElectrify()
     {
         m_Renderer.materials = originalMaterials;
+    }
+
+    public void Shield()
+    {
+        activeShield = Instantiate(shieldPrefab, transform);
+    }
+
+    public void UnShield()
+    {
+        Destroy(activeShield);
     }
 }

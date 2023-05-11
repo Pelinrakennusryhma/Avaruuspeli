@@ -467,6 +467,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9998a8af7dfa3ac468309c120319cebf, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  shieldPrefab: {fileID: 4159680363082821287, guid: 920879fe68a7e134e858156fd6e3ad75,
+    type: 3}
 --- !u!1 &1134921867257646772
 GameObject:
   m_ObjectHideFlags: 0
