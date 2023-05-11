@@ -57,5 +57,6 @@ public class CMCameraManager : MonoBehaviour
                 vCams[i].SetActive(false);
             }
         }
+        GameEvents.Instance.CallEventCameraChanged(currentCameraID);
     }
 }

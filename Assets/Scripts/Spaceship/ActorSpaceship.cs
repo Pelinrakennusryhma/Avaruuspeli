@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class ActorSpaceship : MonoBehaviour
 {
     public Faction faction;
     public GameObject ship;
+    public SpaceshipData spaceshipData;
     public SpaceshipMovement spaceshipMovement;
     public SpaceshipBoost spaceshipBoost;
     public SpaceshipShoot spaceshipShoot;
@@ -13,10 +16,13 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
+    public List<Useable> ActiveUtils { get; private set; }
 
     protected List<Missile> lockedMissiles = new List<Missile>();
 
-    virtual protected void OnEnable()
+    protected List<Useable> shipUtilityScripts = new List<Useable>();
+
+    virtual protected void Start()
     {
         ship = transform.GetChild(0).gameObject;
         spaceshipMovement = ship.GetComponent<SpaceshipMovement>();
@@ -27,11 +33,29 @@ public abstract class ActorSpaceship : MonoBehaviour
         targetProjection = ship.GetComponent<TargetProjection>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
+
+        ActiveUtils = new List<Useable>();
+        InitUtilities();
+        GameEvents.Instance.CallEventSpaceshipSpawned(this);
     }
 
-    virtual protected void Start()
+    protected virtual void InitUtilities()
     {
-        GameEvents.Instance.CallEventSpaceshipSpawned(this);
+        if(spaceshipData != null && spaceshipData.utilities != null)
+        {
+            foreach (ShipUtility utility in spaceshipData.utilities)
+            {
+                if (utility != null)
+                {
+                    Type scriptType = utility.scriptToAdd.GetClass();
+                    //Debug.Log("Adding class: " + scriptType);
+                    Component addedScript = ship.AddComponent(scriptType);
+                    Useable useable = (Useable)addedScript;
+                    shipUtilityScripts.Add(useable);
+                    useable.Init(utility, this);
+                }
+            }
+        }
     }
 
     virtual protected void OnDeath()
@@ -70,5 +94,31 @@ public abstract class ActorSpaceship : MonoBehaviour
     public virtual void UnfocusShip(ActorSpaceship shooter)
     {
         //Debug.Log("ship unfocused");
+    }
+
+    public void ClearLockedMissiles()
+    {
+        List<Missile> deepCopy = new List<Missile>();
+        foreach (Missile missile in lockedMissiles)
+        {
+            deepCopy.Add(missile);
+            missile.ClearTarget();
+        }
+
+        foreach (Missile missile in deepCopy)
+        {
+            UnlockMissile(missile);
+        }
+    }
+
+    public void ActivateUtil(Useable util)
+    {
+        Debug.Log("Activating: " + util.Data.itemName);
+        ActiveUtils.Add(util);
+    }
+
+    public void DeactivateUtil(Useable util)
+    {
+        ActiveUtils.Remove(util);
     }
 }

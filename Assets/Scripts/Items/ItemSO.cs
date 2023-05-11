@@ -22,6 +22,7 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public string plural;
     public int value;
+    [TextArea(5,5)]
     public string description;
     public GameObject itemPrefab;
     public GameObject[] itemPrefabVariants;
