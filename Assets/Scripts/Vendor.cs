@@ -269,7 +269,7 @@ public class Vendor
                                    int starSystemID, 
                                    int planetID)
     {
-        Debug.LogError("Getting vendor. Implementation doesn't exist yet. galaxy is " + galaxyID + " star system is " + starSystemID + " planet is " + planetID);
+        //Debug.LogError("Getting vendor. Implementation doesn't exist yet. galaxy is " + galaxyID + " star system is " + starSystemID + " planet is " + planetID);
 
         return GameManager.Instance.SaverLoader.GetVendor(galaxyID, starSystemID, planetID);
     }

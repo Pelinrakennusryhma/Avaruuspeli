@@ -376,7 +376,7 @@ public class MotherShipFuelSystem : MonoBehaviour
             WarpdriveFuel = 0.1f;
         }
 
-        Debug.Log("Amount of warpdrive fuel is " + WarpdriveFuel + " amount of fuel in last tank is " + AmountOfWarpdriveFuelInLastTank);
+        //Debug.Log("Amount of warpdrive fuel is " + WarpdriveFuel + " amount of fuel in last tank is " + AmountOfWarpdriveFuelInLastTank);
         UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
     }
 
@@ -402,7 +402,7 @@ public class MotherShipFuelSystem : MonoBehaviour
             RocketFuel = 0.1f;
         }
 
-        Debug.Log("Amount of rocket fuel is " + RocketFuel + " amount of fuel in last tank is " + AmountOfRocketFuelInLastTank);
+        //Debug.Log("Amount of rocket fuel is " + RocketFuel + " amount of fuel in last tank is " + AmountOfRocketFuelInLastTank);
 
         GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
     }

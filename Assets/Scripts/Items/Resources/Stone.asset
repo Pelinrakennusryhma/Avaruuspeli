@@ -17,15 +17,15 @@ MonoBehaviour:
   plural: Stones
   value: 1
   description: Natural rock material with varying properties and composition.
-  itemPrefab: {fileID: 4253190446834730643, guid: 5fb8916d60fe40149a1eafb934a31fe8,
+  itemPrefab: {fileID: 7118768071914602803, guid: c0f43ccd9cc61e44bbd2b637f349dcf0,
     type: 3}
   itemPrefabVariants:
-  - {fileID: 1636022269187562763, guid: f183bb8346d4c4e43826562693897592, type: 3}
-  - {fileID: 2944774647325709394, guid: 7a16f59d284879e4babcfaeb6cb3ad0c, type: 3}
-  - {fileID: 4947251645500065695, guid: bd5a3c032b66a634a9328fb2d18003dc, type: 3}
-  - {fileID: 2295803433556911869, guid: 138d43ab6af5fdd4fa0faeaac345888f, type: 3}
-  - {fileID: 7603247722571580278, guid: 5112daa19d2935145bb4c1df8f129eba, type: 3}
-  - {fileID: 5185723898810116219, guid: 594106553620a104c975394607768d3b, type: 3}
+  - {fileID: 2364193931190882496, guid: 650818b2a9b3063439d5df9b254c5955, type: 3}
+  - {fileID: 295899010739091771, guid: 6dcf9ee2009c53643a71d11de0a2e22d, type: 3}
+  - {fileID: 5558593070356433517, guid: 2b6b5e35bac172744b3f2a81c704f513, type: 3}
+  - {fileID: 2130796613481805814, guid: bce5489cbe5b0054aa159be9b2c85974, type: 3}
+  - {fileID: 3731993380885079235, guid: 823ac4b3edb3f5c4da9e569dd458e1d0, type: 3}
+  - {fileID: 5684254478696707357, guid: c67d2a5294dc83a45b4bf21fc26eded1, type: 3}
   itemIcon: {fileID: 0}
   isStackable: 1
   weight: 1

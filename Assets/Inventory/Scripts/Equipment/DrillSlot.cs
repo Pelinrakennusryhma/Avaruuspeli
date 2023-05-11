@@ -11,7 +11,7 @@ public class DrillSlot : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (equipment.equippedDrill == null)
+            if (equipment.equippedObjectInHands == null)
             {
                 //Debug.LogWarning("Nothing equipped. Returning");
                 return;
@@ -20,7 +20,7 @@ public class DrillSlot : MonoBehaviour, IPointerClickHandler
             contextMenuScript.HideAll();
             contextMenuScript.ShowUnequip();
             contextMenuScript.SetPositionToMouse();
-            contextMenuScript.itemID = equipment.equippedDrill.id;
+            contextMenuScript.itemID = equipment.equippedObjectInHands.id;
         }
         if (eventData.button == PointerEventData.InputButton.Left)
         {

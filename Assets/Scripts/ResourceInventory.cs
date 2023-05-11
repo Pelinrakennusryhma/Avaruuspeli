@@ -37,7 +37,7 @@ public class ResourceInventory : MonoBehaviour
 
     public void CollectResource(Resource collectedResourceType, int amount = 1)
     {
-        Debug.Log("Collected " + collectedResourceType.ToString());
+        //Debug.Log("Collected " + collectedResourceType.ToString());
 
         int totalAmount;
 
@@ -188,6 +188,7 @@ public class ResourceInventory : MonoBehaviour
     {
         ShoppingPrompt.gameObject.SetActive(true);
         ShoppingPrompt.text = "PRESS E TO SHOP";
+        Debug.LogError("Enter shopping area");
     }
 
     public void OnStartShopping()

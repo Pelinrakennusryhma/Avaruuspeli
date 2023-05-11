@@ -36,6 +36,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 64b7adfb3ffebe64c8b8b55de2e6aca5, type: 2}
   - {fileID: 11400000, guid: 0d96be50a494a2e419f9eab561f60d9e, type: 2}
   - {fileID: 11400000, guid: 2f76357559782c8498fa08a62ae7ec1a, type: 2}
+  - {fileID: 11400000, guid: 24c39d56c459ba445acdaa88e384efa6, type: 2}
+  - {fileID: 11400000, guid: d4292f71ccd02ba43af4fa87e8e5f73e, type: 2}
+  - {fileID: 11400000, guid: 6c4f6d468059708499ceb1382d20d841, type: 2}
+  - {fileID: 11400000, guid: 6c0342465982fab46895bdd208648ab7, type: 2}
+  - {fileID: 11400000, guid: e5976927af7c2d04797471cb9a158cfb, type: 2}
+  - {fileID: 11400000, guid: 83a282d181473b14e830f308999cc3d7, type: 2}
   ConsumableItems:
   - {fileID: 11400000, guid: d19fef16d1b2c384aa3f85ff67758cf5, type: 2}
   DrillItems:
@@ -51,6 +57,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a2a591e22a320e4bb670366a6a7c5a5, type: 2}
   PlayerWeaponItems:
   - {fileID: 11400000, guid: dc6266ec64db74d43a907ea98ddd4913, type: 2}
+  - {fileID: 11400000, guid: 83a282d181473b14e830f308999cc3d7, type: 2}
   Resources:
   - {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}
   - {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}
@@ -58,6 +65,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 930bc1d40b055b9499ebacfc3a581c3c, type: 2}
   - {fileID: 11400000, guid: 54676903e47cfc14f963afb8593cf8f5, type: 2}
   - {fileID: 11400000, guid: cbb3e1de24baeb8478002f02458e87b1, type: 2}
+  - {fileID: 11400000, guid: 24c39d56c459ba445acdaa88e384efa6, type: 2}
+  - {fileID: 11400000, guid: d4292f71ccd02ba43af4fa87e8e5f73e, type: 2}
+  - {fileID: 11400000, guid: 6c4f6d468059708499ceb1382d20d841, type: 2}
+  - {fileID: 11400000, guid: 6c0342465982fab46895bdd208648ab7, type: 2}
+  - {fileID: 11400000, guid: e5976927af7c2d04797471cb9a158cfb, type: 2}
   ShipItems:
   - {fileID: 11400000, guid: 9639b516beed100468b17ca4e72b45b8, type: 2}
   - {fileID: 11400000, guid: 8722498a8fd2fec428bf0b7d4b9a67d0, type: 2}

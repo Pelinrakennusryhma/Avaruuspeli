@@ -14,7 +14,7 @@ public class DestroyableRock : MonoBehaviour
     [field: SerializeField]
     public int ResourceAmount { get; private set; }
 
-    public float Health;
+    public float HitPoints;
 
     public GameObject Graphics;
     public GameObject Rubble;
@@ -36,12 +36,16 @@ public class DestroyableRock : MonoBehaviour
     CenterOfGravity _centerOfGravity;
     MeshFilter meshFilter;
 
+    private bool DoDecayShake;
+    private float DecayLength;
+    private float DecaySeverity;
+    private float DecayStartTime;
     // Start is called before the first frame update
 
     public void Awake()
     {
         OriginalGraphicsLocalPosition = Graphics.transform.localPosition;
-        Health = 1.0f;
+        HitPoints = 1.0f;
         Graphics.SetActive(true);
         Rubble.SetActive(false);
         Spawnables.SetActive(false);
@@ -131,30 +135,58 @@ public class DestroyableRock : MonoBehaviour
     public void ReduceHealth(float amount, 
                              ResourceGatherer.ToolType tool)
     {
-        Health -= amount;
+        HitPoints -= amount;
 
         //Debug.Log("Current health is " + Health);
 
         ShakeRock(tool);
       
-        if(Health <= 0.0f)
+        if(HitPoints <= 0.0f)
         {
-            //Debug.Log("Rock destroyed. Spawn shit");
-            Invoke("DestroySelf", 15f);
-            Graphics.SetActive(false);
-            Rubble.SetActive(true);
-            EnableResources();
-            //Spawnables.SetActive(true);
-            OwnCollider.enabled = false;
-            DeathParticles.Play(true);
-            Explosion.Play();
+            DoDieThings();
+        }
+    }
 
-            //Pickups.Spawn();
+    public void ReduceHealth(float amount,
+                             Health.DamageType damage,
+                             bool doDecayShake,
+                             float decayShakeLength,
+                             float decaySeverity)
+    {
+        HitPoints -= amount;
 
-            for (int i = 0; i < RubblePieces.Length; i++)
-            {
-                RubblePieces[i].Spawn(transform.position, _centerOfGravity);
-            }
+        //Debug.Log("Current health is " + Health);
+
+        DoDecayShake = doDecayShake;
+        DecayLength = decayShakeLength;
+        DecaySeverity = decaySeverity;
+        DecayStartTime = Time.time;
+
+        ShakeRock(damage);
+
+        if (HitPoints <= 0.0f)
+        {
+            DoDieThings();
+        }
+    }
+
+    private void DoDieThings()
+    {
+        //Debug.Log("Rock destroyed. Spawn shit");
+        Invoke("DestroySelf", 15f);
+        Graphics.SetActive(false);
+        Rubble.SetActive(true);
+        EnableResources();
+        //Spawnables.SetActive(true);
+        OwnCollider.enabled = false;
+        DeathParticles.Play(true);
+        Explosion.Play();
+
+        //Pickups.Spawn();
+
+        for (int i = 0; i < RubblePieces.Length; i++)
+        {
+            RubblePieces[i].Spawn(transform.position, _centerOfGravity);
         }
     }
 
@@ -177,14 +209,52 @@ public class DestroyableRock : MonoBehaviour
             severity = 6.5f;
         }
 
-        severity *= (1.0f - Health) * 4.0f;
+        severity = DoTheShaking(severity);
+    }
+
+    private void ShakeRock(Health.DamageType damage)
+    {
+        float severity = 1.0f;
+
+        if (damage == Health.DamageType.PlasmaCutter)
+        {
+            severity = 1.4f;
+        }
+
+        severity = DoTheShaking(severity);
+    }
+
+    private float DoTheShaking(float severity)
+    {
+        severity *= (1.0f - HitPoints) * 4.0f;
 
         Graphics.gameObject.transform.localPosition = Vector3.Lerp(Graphics.gameObject.transform.localPosition,
                                                                    (OriginalGraphicsLocalPosition +
-                                                                    new Vector3(Random.Range(-severity, severity), 
-                                                                                Random.Range(-severity, severity), 
-                                                                                Random.Range(-severity, severity))), 
+                                                                    new Vector3(Random.Range(-severity, severity),
+                                                                                Random.Range(-severity, severity),
+                                                                                Random.Range(-severity, severity))),
                                                                     2.9f * Time.deltaTime);
+        return severity;
+    }
+
+    private void Update()
+    {
+        if (DoDecayShake)
+        {
+            float ratio = (Time.time - DecayStartTime) / DecayLength;
+
+            if (ratio >= 1.0f)
+            {
+                DoDecayShake = false;
+            }
+
+            else
+            {
+                float severity = (1.0f - ratio) * DecaySeverity;
+
+                DoTheShaking(severity);
+            }
+        }
     }
 
     private void DestroySelf()

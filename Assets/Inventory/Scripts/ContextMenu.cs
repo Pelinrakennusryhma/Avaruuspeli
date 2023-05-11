@@ -49,7 +49,8 @@ public class ContextMenu : MonoBehaviour
                 break;
 
             case ItemSO.ItemType.PlayerWeapon:
-                Debug.LogError("Missing functionality: player weapons can't yet be equipped in any way.");
+                //Debug.LogError("Missing functionality: player weapons can't yet be equipped in any way.");
+                ShowEquip();
                 ShowDiscard();
                 break;
             case ItemSO.ItemType.Resource:
@@ -115,7 +116,7 @@ public class ContextMenu : MonoBehaviour
     }
     public void UnequipDrill()
     {
-        equipment.UnequipDrill();
+        equipment.UnequipObjectInHands();
         HideMenu();
     }
     public void UnequipSpacesuit()
@@ -155,14 +156,14 @@ public class ContextMenu : MonoBehaviour
             UnequipSpacesuit();
         }
     }
-    public void EquipDrill()
+    public void EquipDrillOrWeapon()
     {
         ItemSO item;
         item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
         //inventory.RemoveItem(item.id, 1);
         //Debug.LogWarning("Don't add and remove drill from inventory during equip/unequip?");
 
-        equipment.EquipDrill(item);
+        equipment.EquipObjectInHands(item);
         HideMenu();
     }
     public void EquipSpacesuit()
@@ -204,10 +205,12 @@ public class ContextMenu : MonoBehaviour
                     
         if (item.id == 7
             || item.id == 8
-            || item.id == 21)
+            || item.id == 9
+            || item.id == 21
+            || item.id == 22)
         {
 
-            EquipDrill();
+            EquipDrillOrWeapon();
         }
         else if(item.id == 12)
         {
