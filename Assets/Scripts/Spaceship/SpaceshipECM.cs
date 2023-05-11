@@ -8,8 +8,26 @@ public class SpaceshipECM : Useable
     {
         Actor.ActivateUtil(this);
         Actor.ClearLockedMissiles();
+        EnableVisuals();
         yield return new WaitForSeconds(Duration);
+        DisableVisuals();
         Actor.DeactivateUtil(this);
+    }
+
+    void EnableVisuals()
+    {
+        if(spaceshipEffects != null)
+        {
+            spaceshipEffects.Electrify();
+        }
+    }
+
+    void DisableVisuals()
+    {
+        if (spaceshipEffects != null)
+        {
+            spaceshipEffects.UnElectrify();
+        }
     }
 
 }

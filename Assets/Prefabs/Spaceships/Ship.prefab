@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 1134921867126457016}
   - component: {fileID: 5954328637049747390}
   - component: {fileID: 2606030096390219700}
+  - component: {fileID: 1292462188933584428}
   m_Layer: 10
   m_Name: Ship
   m_TagString: Untagged
@@ -312,6 +313,8 @@ MonoBehaviour:
   missileOrigin: {fileID: 1134921867257646773}
   shooting: 0
   maxMissiles: 4
+  shootInterval: 0.25
+  maxLockAngle: 3
 --- !u!114 &1134921867126457018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +447,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f94b8ae2ad83b47a4b92d410418285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1292462188933584428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134921867126456992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e32bb01c12c944090780a352be5727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Renderer: {fileID: 2925677455255938215}
+  electrifiedMaterials:
+  - {fileID: 2100000, guid: 7d4030d46d1bc684ebd4d06013aea210, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2100000, guid: 9998a8af7dfa3ac468309c120319cebf, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1134921867257646772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1560,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ffbd990ab6e80459f53be825a506ab, type: 3}
+--- !u!23 &2925677455255938215 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d9ffbd990ab6e80459f53be825a506ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 4565398248923379747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4094111783193272264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9ffbd990ab6e80459f53be825a506ab,

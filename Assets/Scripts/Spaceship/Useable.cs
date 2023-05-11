@@ -13,6 +13,8 @@ public abstract class Useable : MonoBehaviour
     public ActorSpaceship Actor { get; set; }
     public ShipUtility Data { get; set; }
 
+    protected SpaceshipEffects spaceshipEffects;
+
     public virtual void Init(ShipUtility data, ActorSpaceship actor)
     {
         Duration = data.effectDuration;
@@ -20,6 +22,8 @@ public abstract class Useable : MonoBehaviour
         CooldownTimer = data.cooldown;
         Actor = actor;
         Data = data;
+
+        spaceshipEffects = GetComponent<SpaceshipEffects>();
     }
 
     protected abstract IEnumerator Activate();
