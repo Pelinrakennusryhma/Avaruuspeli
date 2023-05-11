@@ -12,11 +12,41 @@ public class SpaceshipEffects : MonoBehaviour
 
     [SerializeField]
     GameObject shieldPrefab;
-    GameObject activeShield;
+    ShieldEffect activeShield;
+    int cameraIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
         originalMaterials = m_Renderer.materials;
+
+        if (IsOnPlayerShip())
+        {
+            GameEvents.Instance.EventCameraChanged.AddListener(OnCameraChanged);
+        }
+    }
+
+    bool IsOnPlayerShip()
+    {
+        PlayerControls playerControls = GetComponentInParent<PlayerControls>();
+        return playerControls != null;
+    }
+
+    void OnCameraChanged(int camIndex)
+    {
+        cameraIndex = camIndex;
+        if(camIndex == 0)
+        {
+            if(activeShield != null)
+            {
+                activeShield.ActivateInsideShield();
+            }
+        } else
+        {
+            if (activeShield != null)
+            {
+                activeShield.ActivateOutsideShield();
+            }
+        }
     }
 
     public void Electrify()
@@ -44,11 +74,20 @@ public class SpaceshipEffects : MonoBehaviour
 
     public void Shield()
     {
-        activeShield = Instantiate(shieldPrefab, transform);
+        GameObject shieldObj = Instantiate(shieldPrefab, transform);
+        activeShield = shieldObj.GetComponent<ShieldEffect>();
+
+        if(cameraIndex == 0)
+        {
+            activeShield.ActivateInsideShield();
+        } else
+        {
+            activeShield.ActivateOutsideShield();
+        }
     }
 
     public void UnShield()
     {
-        Destroy(activeShield);
+        Destroy(activeShield.gameObject);
     }
 }

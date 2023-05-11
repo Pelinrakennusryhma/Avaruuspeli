@@ -30,6 +30,7 @@ public class GameEvents : MonoBehaviour
     public UnityEvent<MineableAsteroidTrigger> EventPlayerLeftAsteroid;
     public UnityEvent<bool> EventToggleIndicators;
     public UnityEvent<List<Useable>> EventPlayerUtilitiesInited;
+    public UnityEvent<int> EventCameraChanged;
 
     public UnityEvent EventPlayerRanOutOfOxygen;
     public UnityEvent EventInventoryOpened;
@@ -99,6 +100,11 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerUtilitiesInited(List<Useable> utilities)
     {
         EventPlayerUtilitiesInited.Invoke(utilities);
+    }
+
+    public void CallEventCameraChanged(int cameraIndex)
+    {
+        EventCameraChanged.Invoke(cameraIndex);
     }
 
     public void CallEventPlayerRanOutOfOxygen()
