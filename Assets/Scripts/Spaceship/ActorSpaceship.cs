@@ -47,7 +47,7 @@ public abstract class ActorSpaceship : MonoBehaviour
             {
                 if (utility != null)
                 {
-                    Type scriptType = utility.scriptToAdd.GetClass();
+                    Type scriptType = Type.GetType(utility.scriptToAdd);
                     //Debug.Log("Adding class: " + scriptType);
                     Component addedScript = ship.AddComponent(scriptType);
                     Useable useable = (Useable)addedScript;

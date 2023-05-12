@@ -4097,6 +4097,7 @@ GameObject:
   - component: {fileID: 5282870969358418791}
   - component: {fileID: 1839369551}
   - component: {fileID: 1743098529}
+  - component: {fileID: 5943281130269763230}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4480,11 +4481,46 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: eeb56751-443d-4a72-bdc7-d006fca8023a
     m_ActionName: FirstPersonControls/LeaveScene[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d4fcccf-c07a-414d-a1b6-24f4565aa9c1
+    m_ActionName: ShipControls/Utility2[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: WorldMapControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5943281130269763230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201655378773765333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -798764566
+      Data2: 1309522433
+      Data3: 2032542340
+      Data4: 32951113
+    Path: event:/Music
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4961935598172326144
 GameObject:
   m_ObjectHideFlags: 0

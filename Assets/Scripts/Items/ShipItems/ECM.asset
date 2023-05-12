@@ -24,6 +24,6 @@ MonoBehaviour:
   isStackable: 0
   weight: 100
   itemType: 6
-  scriptToAdd: {fileID: 11500000, guid: 54726d1d91d41434dad084acd5061b9b, type: 3}
+  scriptToAdd: SpaceshipECM
   effectDuration: 3
   cooldown: 10

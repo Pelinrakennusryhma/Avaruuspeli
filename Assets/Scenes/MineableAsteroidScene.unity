@@ -335,6 +335,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1327036007, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1839369551, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
       propertyPath: OptionsScreen
       value: 
@@ -1668,7 +1672,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   m_Layer: 0
@@ -1678,14 +1681,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -2680,6 +2675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517175596}
   - component: {fileID: 517175595}
+  - component: {fileID: 517175597}
   m_Layer: 0
   m_Name: CM vcam2(cockpit)
   m_TagString: Untagged
@@ -2741,6 +2737,19 @@ Transform:
   m_Father: {fileID: 1975872387}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &517175597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517175594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 655503919}
 --- !u!1 &526144225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4440,6 +4449,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae6be1c296fe214daef5e7a4f3ad938, type: 3}
+--- !u!1 &959155173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9048973881532894786, guid: 2860f7e6817cf4c42a835d6ae1c84c90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5414331668898814902}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &975090987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1134921865962600679, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
@@ -5180,6 +5195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078490512}
   - component: {fileID: 1078490511}
+  - component: {fileID: 1078490513}
   m_Layer: 0
   m_Name: CM vcam1(behind)
   m_TagString: Untagged
@@ -5241,6 +5257,19 @@ Transform:
   m_Father: {fileID: 1975872387}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078490513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078490510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 655503919}
 --- !u!1 &1078970298
 GameObject:
   m_ObjectHideFlags: 0
@@ -5529,6 +5558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255702042}
   - component: {fileID: 1255702043}
+  - component: {fileID: 1255702044}
   m_Layer: 0
   m_Name: CM vcam3(character)
   m_TagString: Untagged
@@ -5590,6 +5620,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1480763924}
+--- !u!114 &1255702044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255702041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 655503919}
 --- !u!1 &1273469032
 GameObject:
   m_ObjectHideFlags: 0
@@ -8079,6 +8122,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5414331668898814902}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3942892928159110648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959155173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &5414331668898814902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8146,7 +8202,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9048973881532894787, guid: 2860f7e6817cf4c42a835d6ae1c84c90, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2860f7e6817cf4c42a835d6ae1c84c90, type: 3}
 --- !u!114 &6853676080119067386 stripped
 MonoBehaviour:
