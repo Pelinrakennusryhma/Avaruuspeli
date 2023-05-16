@@ -1,4 +1,3 @@
-using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +20,6 @@ public class SpaceshipShoot : MonoBehaviour
     float shootInterval = 3f;
     [SerializeField]
     Transform laserParent;
-
-    public EventReference LaserShootEvent;
 
     public bool shooting = false;
     float cooldown;
@@ -79,6 +76,6 @@ public class SpaceshipShoot : MonoBehaviour
         LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
         laserBolt.Init(laserSpeed, coloredMaterial, laserDamage, laserLifetime, gameObject);
 
-        FMODUnity.RuntimeManager.PlayOneShot(LaserShootEvent, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.LaserShoot, transform.position);
     }
 }

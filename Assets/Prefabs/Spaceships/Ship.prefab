@@ -295,7 +295,7 @@ MonoBehaviour:
   - {fileID: 1134921867257646773}
   shootInterval: 0.25
   laserParent: {fileID: 0}
-  LaserShootEvent:
+  laserShootSound:
     Guid:
       Data1: 259541080
       Data2: 1091639919
