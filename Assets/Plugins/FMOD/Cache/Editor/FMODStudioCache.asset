@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638198499012085551
+  lastModified: 638201047376486355
   FileSizes:
   - Name: Desktop
     Value: 4824672
@@ -35,11 +35,38 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638198499012355548
+  lastModified: 638201103008244039
   FileSizes:
   - Name: Desktop
-    Value: 6976
+    Value: 120128
   Exists: 1
+--- !u!114 &-3904825994098084040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShipEngine
+  m_EditorClassIdentifier: 
+  Path: event:/ShipEngine
+  Guid:
+    Data1: -1702057430
+    Data2: 1274608192
+    Data3: 1471658369
+    Data4: 360164921
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 13609
 --- !u!114 &-2120696587179564206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,10 +82,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638198499012105553
+  lastModified: 638201047376496338
   FileSizes:
   - Name: Desktop
-    Value: 906
+    Value: 948
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -78,13 +105,14 @@ MonoBehaviour:
   - {fileID: -4569274950992851411}
   EditorEvents:
   - {fileID: 5373853538064610802}
-  - {fileID: 6783858675129993861}
+  - {fileID: 5663932861693792825}
+  - {fileID: -3904825994098084040}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7780352504398547623}
   StringsBanks:
   - {fileID: -2120696587179564206}
-  cacheTime: 638198499012355548
+  cacheTime: 638201103008244039
   cacheVersion: 131603
 --- !u!114 &4940391416440928446
 MonoBehaviour:
@@ -138,7 +166,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 371500
---- !u!114 &6783858675129993861
+--- !u!114 &5663932861693792825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,9 +176,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/ShootLaser
+  m_Name: event:/LaserShoot
   m_EditorClassIdentifier: 
-  Path: event:/ShootLaser
+  Path: event:/LaserShoot
   Guid:
     Data1: 259541080
     Data2: 1091639919

@@ -337,7 +337,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1327036007, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1839369551, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
       propertyPath: OptionsScreen
@@ -1273,7 +1273,7 @@ PrefabInstance:
     - target: {fileID: 4577837520878276334, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5282870969358418791, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
@@ -1329,6 +1329,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943281130269763230, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <LaserShoot>k__BackingField.Path
+      value: event:/LaserShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <ShipEngine>k__BackingField.Path
+      value: event:/ShipEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <ShipEngine>k__BackingField.Guid.Data1
+      value: -1702057430
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <ShipEngine>k__BackingField.Guid.Data2
+      value: 1274608192
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <ShipEngine>k__BackingField.Guid.Data3
+      value: 1471658369
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <ShipEngine>k__BackingField.Guid.Data4
+      value: 360164921
       objectReference: {fileID: 0}
     - target: {fileID: 8377526990889496069, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
@@ -1665,7 +1700,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5943281130269763230, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -4287,7 +4323,7 @@ MonoBehaviour:
   spaceshipEvents: {fileID: 0}
   spaceshipMissile: {fileID: 0}
   targetProjection: {fileID: 0}
-  leaveSpaceshipSceneHandler: {fileID: 0}
+  leaveSpaceshipSceneHandler: {fileID: 537342573}
 --- !u!4 &1004082103
 Transform:
   m_ObjectHideFlags: 0
@@ -7449,7 +7485,7 @@ MonoBehaviour:
   asteroidSpawner: {fileID: 7003948108148386285}
   actorManager: {fileID: 754047033}
   mothershipHangar: {fileID: 84133338}
-  fallbackSceneData: {fileID: 11400000, guid: dcd11acbbdec5f54ebaeaed7c32f6bb6, type: 2}
+  fallbackSceneData: {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4, type: 2}
 --- !u!114 &7003948108148386285 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7003948107814007263, guid: dac59e95555769b4ab675d8977c8e94d,
