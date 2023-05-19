@@ -4758,18 +4758,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ShipEngine>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1702057430
+      Data2: 1274608192
+      Data3: 1471658369
+      Data4: 360164921
+    Path: event:/Spaceship/ShipEngine
   <LaserShoot>k__BackingField:
     Guid:
       Data1: 259541080
       Data2: 1091639919
       Data3: -1263206784
       Data4: -1782933795
-    Path: event:/ShootLaser
+    Path: event:/Spaceship/LaserShoot
 --- !u!1 &5479704163686736514
 GameObject:
   m_ObjectHideFlags: 0
