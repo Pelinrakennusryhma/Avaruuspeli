@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +16,10 @@ public abstract class Useable : MonoBehaviour
     public ShipUtility Data { get; set; }
 
     protected SpaceshipEffects spaceshipEffects;
+    protected Rigidbody rb;
+
+    // Audio
+    protected EventInstance soundEffect;
 
     public virtual void Init(ShipUtility data, ActorSpaceship actor)
     {
@@ -24,6 +30,7 @@ public abstract class Useable : MonoBehaviour
         Data = data;
 
         spaceshipEffects = GetComponent<SpaceshipEffects>();
+        rb = GetComponent<Rigidbody>();
     }
 
     protected abstract IEnumerator Activate();
@@ -51,6 +58,27 @@ public abstract class Useable : MonoBehaviour
                     CooldownTimer = 0f;
                 }
             }
+        }
+
+        UpdateSound();
+    }
+
+    private void UpdateSound()
+    {
+        // play engine sound when 'forward' is held down.. or something else?
+        if (Active)
+        {
+            PLAYBACK_STATE playbackState;
+            soundEffect.getPlaybackState(out playbackState);
+            RuntimeManager.AttachInstanceToGameObject(soundEffect, transform, rb);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                soundEffect.start();
+            }
+        }
+        else
+        {
+            soundEffect.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

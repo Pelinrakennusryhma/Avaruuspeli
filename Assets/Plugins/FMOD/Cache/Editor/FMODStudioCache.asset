@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8042517987043723179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../../AvaruuspeliSoundSet/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638203686096578957
+  FileSizes:
+  - Name: Desktop
+    Value: 6647488
+  Exists: 1
 --- !u!114 &-7780352504398547623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +35,7 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638203672586265461
+  lastModified: 638203686093528961
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -47,6 +67,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1776
+--- !u!114 &-6876441820481654719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Spaceship/Shield
+  m_EditorClassIdentifier: 
+  Path: event:/Spaceship/Shield
+  Guid:
+    Data1: -38676065
+    Data2: 1237047518
+    Data3: -416238690
+    Data4: 1587711391
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 7471
 --- !u!114 &-5120774234606402078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,10 +136,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638203672586585442
+  lastModified: 638203686837008928
   FileSizes:
   - Name: Desktop
-    Value: 141600
+    Value: 209888
   Exists: 1
 --- !u!114 &-3016839161299768015
 MonoBehaviour:
@@ -136,10 +183,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638203672586285450
+  lastModified: 638203686093548955
   FileSizes:
   - Name: Desktop
-    Value: 1186
+    Value: 1222
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -157,18 +204,19 @@ MonoBehaviour:
   - {fileID: -2120696587179564206}
   - {fileID: -7780352504398547623}
   - {fileID: -4569274950992851411}
-  - {fileID: 4341993308261744797}
+  - {fileID: -8042517987043723179}
   EditorEvents:
   - {fileID: -3016839161299768015}
   - {fileID: -5120774234606402078}
   - {fileID: 2619476829916310653}
   - {fileID: -6893495003532009557}
+  - {fileID: -6876441820481654719}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7780352504398547623}
   StringsBanks:
   - {fileID: -2120696587179564206}
-  cacheTime: 638203672586585442
+  cacheTime: 638203686837008928
   cacheVersion: 131603
 --- !u!114 &2619476829916310653
 MonoBehaviour:
@@ -189,7 +237,7 @@ MonoBehaviour:
     Data3: -2067544936
     Data4: -425790048
   Banks:
-  - {fileID: 4341993308261744797}
+  - {fileID: -8042517987043723179}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -198,26 +246,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4341993308261744797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SpaceshipScene.bank
-  m_EditorClassIdentifier: 
-  Path: ../../AvaruuspeliSoundSet/Build/Desktop/SpaceshipScene.bank
-  Name: SpaceshipScene
-  StudioPath: bank:/SpaceshipScene
-  lastModified: 638203634497091635
-  FileSizes:
-  - Name: Desktop
-    Value: 6647488
-  Exists: 1
 --- !u!114 &5396968829546939843
 MonoBehaviour:
   m_ObjectHideFlags: 0

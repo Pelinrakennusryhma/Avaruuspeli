@@ -4947,6 +4947,13 @@ MonoBehaviour:
       Data3: 1471658369
       Data4: 360164921
     Path: event:/Spaceship/ShipEngine
+  <Shield>k__BackingField:
+    Guid:
+      Data1: -38676065
+      Data2: 1237047518
+      Data3: -416238690
+      Data4: 1587711391
+    Path: event:/Spaceship/Shield
   <Alarm>k__BackingField:
     Guid:
       Data1: -98325060

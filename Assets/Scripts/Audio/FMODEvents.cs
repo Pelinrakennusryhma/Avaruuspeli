@@ -9,6 +9,7 @@ public class FMODEvents : MonoBehaviour
     [field:SerializeField] public EventReference SpaceshipSceneMusic { get; private set; }
     [field: Header("Ship SFX")]
     [field: SerializeField] public EventReference ShipEngine { get; private set; }
+    [field: SerializeField] public EventReference Shield { get; private set; }
     [field: Header("Player Ship SFX")]
     [field: SerializeField] public EventReference Alarm { get; private set; }
 
