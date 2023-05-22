@@ -15,11 +15,38 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638203634495901662
+  lastModified: 638203672586265461
   FileSizes:
   - Name: Desktop
     Value: 1486
   Exists: 1
+--- !u!114 &-6893495003532009557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Spaceship/MissileAlarm
+  m_EditorClassIdentifier: 
+  Path: event:/Spaceship/MissileAlarm
+  Guid:
+    Data1: -98325060
+    Data2: 1216499493
+    Data3: -541598791
+    Data4: 382260047
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1776
 --- !u!114 &-5120774234606402078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,10 +89,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638203634496451651
+  lastModified: 638203672586585442
   FileSizes:
   - Name: Desktop
-    Value: 120128
+    Value: 141600
   Exists: 1
 --- !u!114 &-3016839161299768015
 MonoBehaviour:
@@ -109,10 +136,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638203634495921657
+  lastModified: 638203672586285450
   FileSizes:
   - Name: Desktop
-    Value: 1142
+    Value: 1186
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -135,12 +162,13 @@ MonoBehaviour:
   - {fileID: -3016839161299768015}
   - {fileID: -5120774234606402078}
   - {fileID: 2619476829916310653}
+  - {fileID: -6893495003532009557}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7780352504398547623}
   StringsBanks:
   - {fileID: -2120696587179564206}
-  cacheTime: 638203634497091635
+  cacheTime: 638203672586585442
   cacheVersion: 131603
 --- !u!114 &2619476829916310653
 MonoBehaviour:

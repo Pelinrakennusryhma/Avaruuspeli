@@ -128,7 +128,6 @@ public class SpaceshipMovement : MonoBehaviour
         // play engine sound when 'forward' is held down.. or something else?
         if (thrust1D > 0.1f)
         {
-            Debug.Log("play engine?");
             PLAYBACK_STATE playbackState;
             engineSFX.getPlaybackState(out playbackState);
             RuntimeManager.AttachInstanceToGameObject(engineSFX, transform, rb);
@@ -137,7 +136,6 @@ public class SpaceshipMovement : MonoBehaviour
                 engineSFX.start();
             }
         } else {
-            Debug.Log("stop engine?");
             engineSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
