@@ -12,8 +12,31 @@ enum MusicArea
     PLANET = 2
 }
 
+public enum FMODBus 
+{
+    MASTER,
+    MUSIC,
+    SFX,
+    AMBIENCE
+}
+
 public class AudioManager : MonoBehaviour
 {
+    [Header("Volume")]
+    [Range(0, 1)]
+    private float masterVolume = 1f;
+    [Range(0, 1)]
+    private float musicVolume = 1f;
+    [Range(0, 1)]
+    private float SFXVolume = 1f;
+    [Range(0, 1)]
+    private float ambienceVolume = 1f;
+
+    private Bus masterBus;
+    private Bus musicBus;
+    private Bus SFXBus;
+    private Bus ambienceBus;
+
     private List<EventInstance> eventInstances = new List<EventInstance>();
     private EventInstance musicEventInstance;
     public static AudioManager Instance { get; private set; }
@@ -31,6 +54,10 @@ public class AudioManager : MonoBehaviour
             Instance = this;
         }
 
+        masterBus = RuntimeManager.GetBus("bus:/");
+        musicBus = RuntimeManager.GetBus("bus:/Music");
+        SFXBus = RuntimeManager.GetBus("bus:/SFX");
+        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
     }
 
     private void Start()
@@ -38,6 +65,27 @@ public class AudioManager : MonoBehaviour
         InitializeMusic(FMODEvents.Instance.SpaceshipSceneMusic);
 
         //SetMusicArea(GetMusicArea());
+    }
+
+    public void SetBusValue(FMODBus bus, float value)
+    {
+        switch (bus)
+        {
+            case FMODBus.MASTER:
+                masterBus.setVolume(value);
+                break;
+            case FMODBus.MUSIC:
+                musicBus.setVolume(value);
+                break;
+            case FMODBus.SFX:
+                SFXBus.setVolume(value);
+                break;
+            case FMODBus.AMBIENCE:
+                ambienceBus.setVolume(value);
+                break;
+            default:
+                break;
+        }        
     }
 
     private MusicArea GetMusicArea()

@@ -15,37 +15,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638203610647411785
+  lastModified: 638203634495901662
   FileSizes:
   - Name: Desktop
-    Value: 1036
-  Exists: 1
---- !u!114 &-5464114056151567150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Music/MusicArea
-  m_EditorClassIdentifier: 
-  Name: MusicArea
-  StudioPath: 
-  Min: 0
-  Max: 2
-  Default: 0
-  ID:
-    data1: 211323842
-    data2: 772364740
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - WorldMap
-  - SpaceshipScene
-  - Planet
+    Value: 1486
   Exists: 1
 --- !u!114 &-5120774234606402078
 MonoBehaviour:
@@ -89,7 +62,7 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638201105059268735
+  lastModified: 638203634496451651
   FileSizes:
   - Name: Desktop
     Value: 120128
@@ -121,34 +94,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 13609
---- !u!114 &-2544126826930175027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music
-  Guid:
-    Data1: 463212929
-    Data2: 1125765431
-    Data3: -2067544936
-    Data4: -425790048
-  Banks:
-  - {fileID: 4341993308261744797}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -5464114056151567150}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2120696587179564206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,10 +109,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638203610647431777
+  lastModified: 638203634495921657
   FileSizes:
   - Name: Desktop
-    Value: 1030
+    Value: 1142
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -189,14 +134,42 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -3016839161299768015}
   - {fileID: -5120774234606402078}
-  - {fileID: -2544126826930175027}
+  - {fileID: 2619476829916310653}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7780352504398547623}
   StringsBanks:
   - {fileID: -2120696587179564206}
-  cacheTime: 638203610648211782
+  cacheTime: 638203634497091635
   cacheVersion: 131603
+--- !u!114 &2619476829916310653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicMain
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicMain
+  Guid:
+    Data1: 463212929
+    Data2: 1125765431
+    Data3: -2067544936
+    Data4: -425790048
+  Banks:
+  - {fileID: 4341993308261744797}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5396968829546939843}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &4341993308261744797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,8 +185,35 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SpaceshipScene.bank
   Name: SpaceshipScene
   StudioPath: bank:/SpaceshipScene
-  lastModified: 638203610648211782
+  lastModified: 638203634497091635
   FileSizes:
   - Name: Desktop
     Value: 6647488
+  Exists: 1
+--- !u!114 &5396968829546939843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMain/MusicArea
+  m_EditorClassIdentifier: 
+  Name: MusicArea
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 211323842
+    data2: 772364740
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - WorldMap
+  - SpaceshipScene
+  - Planet
   Exists: 1
