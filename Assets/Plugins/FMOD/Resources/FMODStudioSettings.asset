@@ -452,6 +452,7 @@ MonoBehaviour:
   - Master
   Banks:
   - SFX
+  - SpaceshipScene
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

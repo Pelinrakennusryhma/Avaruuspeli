@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FMODEvents : MonoBehaviour
 {
+    [field: Header("Music")]
+    [field:SerializeField] public EventReference SpaceshipSceneMusic { get; private set; }
     [field: Header("Ship SFX")]
     [field: SerializeField] public EventReference ShipEngine { get; private set; }
 

@@ -1015,6 +1015,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Path
+      value: event:/Music/Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data1
+      value: 463212929
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data2
+      value: 1125765431
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data3
+      value: -2067544936
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data4
+      value: -425790048
+      objectReference: {fileID: 0}
     - target: {fileID: 8377526990889496069, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: m_AnchorMax.y

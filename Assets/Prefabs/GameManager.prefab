@@ -4756,6 +4756,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0aec8597d7c0549abe7237fd665b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <SpaceshipSceneMusic>k__BackingField:
+    Guid:
+      Data1: 463212929
+      Data2: 1125765431
+      Data3: -2067544936
+      Data4: -425790048
+    Path: event:/Music/Music
   <ShipEngine>k__BackingField:
     Guid:
       Data1: -1702057430

@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
         }
 
         Helpers.RefreshReferenceToGraphicsRaycasterAndEventSystem();
+        AudioManager.Instance.SetMusicAreaBySceneIndex(scene.buildIndex);
     }
 
     public void OnOptionsPressed()
@@ -341,6 +342,8 @@ public class GameManager : MonoBehaviour
         //LifeSupportSystem.OnExitUnbreathablePlace();
 
         Debug.Log("Going back to world map");
+
+        AudioManager.Instance.SetMusicAreaBySceneIndex(0);
     }
 
 

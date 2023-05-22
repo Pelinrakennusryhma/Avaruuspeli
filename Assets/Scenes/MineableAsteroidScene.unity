@@ -1338,12 +1338,12 @@ PrefabInstance:
     - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: <LaserShoot>k__BackingField.Path
-      value: event:/LaserShoot
+      value: event:/Spaceship/LaserShoot
       objectReference: {fileID: 0}
     - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: <ShipEngine>k__BackingField.Path
-      value: event:/ShipEngine
+      value: event:/Spaceship/ShipEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
@@ -1364,6 +1364,31 @@ PrefabInstance:
         type: 3}
       propertyPath: <ShipEngine>k__BackingField.Guid.Data4
       value: 360164921
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Path
+      value: event:/Music/Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data1
+      value: 463212929
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data2
+      value: 1125765431
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data3
+      value: -2067544936
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257184541072215572, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <SpaceshipSceneMusic>k__BackingField.Guid.Data4
+      value: -425790048
       objectReference: {fileID: 0}
     - target: {fileID: 8377526990889496069, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
