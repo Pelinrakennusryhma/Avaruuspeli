@@ -36,11 +36,6 @@ public class ResourceGatherer : MonoBehaviour
         Tool = ToolType.None;
         Controls = transform.parent.GetComponent<FirstPersonPlayerControls>();
         Hands = transform.parent.GetComponentInChildren<PlayerHands>();
-
-        drillSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Drill);
-        rb = GetComponentInParent<Rigidbody>();
-        RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
-
     }
 
     public void Start()
@@ -52,6 +47,10 @@ public class ResourceGatherer : MonoBehaviour
 
         //Debug.Log("Setting tool to " + Tool.ToString());
         Hands.SetTool(Tool);
+
+        drillSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Drill);
+        rb = GetComponentInParent<Rigidbody>();
+        RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
     }
 
     // Start is called before the first frame update

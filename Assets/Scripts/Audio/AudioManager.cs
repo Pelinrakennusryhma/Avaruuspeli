@@ -60,8 +60,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Instance = this;
-            InitializeMusic(FMODEvents.Instance.Music);
+            Instance = this;        
         }
 
         masterBus = RuntimeManager.GetBus("bus:/");
@@ -71,6 +70,11 @@ public class AudioManager : MonoBehaviour
 
         LoadData();
         SetInitialVolumes();
+    }
+
+    private void Start()
+    {
+        InitializeMusic(FMODEvents.Instance.Music);
     }
 
     void LoadData()
