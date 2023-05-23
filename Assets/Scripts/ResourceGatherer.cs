@@ -178,18 +178,21 @@ public class ResourceGatherer : MonoBehaviour
                 if (Tool == ToolType.BasicDrill)
                 {
                     hitRock.ReduceHealth(0.3f * Time.deltaTime, Tool);
+                    UpdateSound(true);
                 }
 
                 else if (Tool == ToolType.AdvancedDrill)
                 {
                     hitRock.ReduceHealth(Time.deltaTime, Tool);
+                    UpdateSound(true);
                 }
 
                 else if (Tool == ToolType.DiamondDrill)
                 {
                     hitRock.ReduceHealth(Time.deltaTime * 1.5f, Tool);
+                    UpdateSound(true);
                 }
-                UpdateSound(true);
+                
             }
             else
             {
