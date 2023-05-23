@@ -35,7 +35,7 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638204471991509284
+  lastModified: 638204505533744581
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -136,10 +136,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638204479415111866
+  lastModified: 638204505538129973
   FileSizes:
   - Name: Desktop
-    Value: 301856
+    Value: 512224
   Exists: 1
 --- !u!114 &-2120696587179564206
 MonoBehaviour:
@@ -156,10 +156,10 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638204471991529293
+  lastModified: 638204505533754576
   FileSizes:
   - Name: Desktop
-    Value: 1278
+    Value: 1376
   Exists: 1
 --- !u!114 &-277131180234531025
 MonoBehaviour:
@@ -212,13 +212,42 @@ MonoBehaviour:
   - {fileID: -5446252144600309146}
   - {fileID: -277131180234531025}
   - {fileID: -5257054933763993117}
+  - {fileID: 9077477679595511061}
+  - {fileID: 646619835282600595}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7780352504398547623}
   StringsBanks:
   - {fileID: -2120696587179564206}
-  cacheTime: 638204479415111866
+  cacheTime: 638204505538129973
   cacheVersion: 131603
+--- !u!114 &646619835282600595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FirstPerson/Drill
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FirstPerson/Drill
+  Guid:
+    Data1: -1191775359
+    Data2: 1238056090
+    Data3: 1884335750
+    Data4: 625294970
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 14811
 --- !u!114 &2499033138171599228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,3 +330,30 @@ MonoBehaviour:
   - SpaceshipScene
   - Planet
   Exists: 1
+--- !u!114 &9077477679595511061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/MissileLaunch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/MissileLaunch
+  Guid:
+    Data1: 1646285604
+    Data2: 1112468936
+    Data3: 534954640
+    Data4: -462625261
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 75
+  Length: 0

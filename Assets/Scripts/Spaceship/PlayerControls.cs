@@ -45,6 +45,7 @@ public class PlayerControls : ActorSpaceship
         base.OnDeath();
         Destroy(gameObject);
         Cursor.visible = true;
+        alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public void OnThrust(InputAction.CallbackContext context)

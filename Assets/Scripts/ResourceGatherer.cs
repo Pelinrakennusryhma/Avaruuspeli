@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +25,10 @@ public class ResourceGatherer : MonoBehaviour
 
     public PlayerHands Hands;
 
+    Rigidbody rb;
+    // Audio
+    private EventInstance drillSFX;
+
     public void Awake()
     {
         Instance = this; 
@@ -30,6 +36,10 @@ public class ResourceGatherer : MonoBehaviour
         Tool = ToolType.None;
         Controls = transform.parent.GetComponent<FirstPersonPlayerControls>();
         Hands = transform.parent.GetComponentInChildren<PlayerHands>();
+
+        drillSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Drill);
+        rb = GetComponentInParent<Rigidbody>();
+        RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
 
     }
 
@@ -179,7 +189,31 @@ public class ResourceGatherer : MonoBehaviour
                 {
                     hitRock.ReduceHealth(Time.deltaTime * 1.5f, Tool);
                 }
+                UpdateSound(true);
             }
+            else
+            {
+                UpdateSound(false);
+            }
+        }
+    }
+
+    void UpdateSound(bool shouldPlay)
+    {
+        // play engine sound when 'forward' is held down.. or something else?
+        if (shouldPlay)
+        {
+            PLAYBACK_STATE playbackState;
+            drillSFX.getPlaybackState(out playbackState);
+            RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                drillSFX.start();
+            }
+        }
+        else
+        {
+            drillSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

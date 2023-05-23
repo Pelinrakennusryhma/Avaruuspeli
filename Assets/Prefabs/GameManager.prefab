@@ -4968,6 +4968,13 @@ MonoBehaviour:
       Data3: 973153699
       Data4: -976597474
     Path: event:/SFX/Explosion
+  <MissileLaunch>k__BackingField:
+    Guid:
+      Data1: 1646285604
+      Data2: 1112468936
+      Data3: 534954640
+      Data4: -462625261
+    Path: event:/SFX/Spaceship/MissileLaunch
   <Alarm>k__BackingField:
     Guid:
       Data1: -98325060
@@ -4975,6 +4982,13 @@ MonoBehaviour:
       Data3: -541598791
       Data4: 382260047
     Path: event:/SFX/Spaceship/MissileAlarm
+  <Drill>k__BackingField:
+    Guid:
+      Data1: -1191775359
+      Data2: 1238056090
+      Data3: 1884335750
+      Data4: 625294970
+    Path: event:/SFX/FirstPerson/Drill
 --- !u!1 &5479704163686736514
 GameObject:
   m_ObjectHideFlags: 0

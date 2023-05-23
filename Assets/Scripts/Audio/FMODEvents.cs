@@ -12,8 +12,11 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Shield { get; private set; }
     [field: SerializeField] public EventReference LaserShoot { get; private set; }
     [field: SerializeField] public EventReference Explosion { get; private set; }
+    [field: SerializeField] public EventReference MissileLaunch { get; private set; }
     [field: Header("Player Ship SFX")]
     [field: SerializeField] public EventReference Alarm { get; private set; }
+    [field: Header("First Person SFX")]
+    [field: SerializeField] public EventReference Drill { get; private set; }
 
     public static FMODEvents Instance { get; private set; }
 
