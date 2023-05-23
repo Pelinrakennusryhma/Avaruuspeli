@@ -426,8 +426,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../AvaruuspeliSoundSet/AvaruuspeliSoundSet.fspro
-  sourceBankPath: ../../AvaruuspeliSoundSet/Build
+  sourceProjectPath: AvaruuspeliSoundSet/AvaruuspeliSoundSet.fspro
+  sourceBankPath: AvaruuspeliSoundSet/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
