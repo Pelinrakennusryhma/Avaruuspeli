@@ -857,8 +857,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9048973881532894785}
   - component: {fileID: 9048973881532894784}
-  - component: {fileID: 9048973881532894787}
   - component: {fileID: 9048973881532894790}
+  - component: {fileID: 2491908514391521320}
   m_Layer: 0
   m_Name: CharacterCamera
   m_TagString: MainCamera
@@ -928,14 +928,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &9048973881532894787
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9048973881532894786}
-  m_Enabled: 0
 --- !u!114 &9048973881532894790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,6 +961,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &2491908514391521320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048973881532894786}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &9048973882144678372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1498,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ae046845-1c3b-43b0-a8c9-53e81991721e
     m_ActionName: FirstPersonControls/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e062c6b2-834e-4796-b4e0-3fcecbd05e80
+    m_ActionName: ShipControls/LeaveScene[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5395e9b6-7b00-42db-93be-0b8dd40248e1
+    m_ActionName: ShipControls/SecondaryShoot[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd42281e-6ff1-420f-9a4a-40533679e8ce
+    m_ActionName: ShipControls/Utility1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d4fcccf-c07a-414d-a1b6-24f4565aa9c1
+    m_ActionName: ShipControls/Utility2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eeb56751-443d-4a72-bdc7-d006fca8023a
+    m_ActionName: FirstPersonControls/LeaveScene[/Keyboard/m]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -1532,6 +1557,7 @@ MonoBehaviour:
   Alpha8Down: 0
   Alpha9Down: 0
   Alpha0Down: 0
+  leavePlanetScene: {fileID: 0}
 --- !u!114 &4160795830551820671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowHideInventory: {fileID: 0}
+  ShoppingPrompt: {fileID: 0}
 --- !u!114 &8048096091338248557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1585,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StandingCapsule: {fileID: 9048973881282847465}
+  OverlayCamera: {fileID: 0}
+  OverlayLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &3721163903059515302
 PrefabInstance:
   m_ObjectHideFlags: 0

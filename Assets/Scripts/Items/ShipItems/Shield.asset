@@ -23,6 +23,6 @@ MonoBehaviour:
   isStackable: 0
   weight: 100
   itemType: 6
-  scriptToAdd: {fileID: 11500000, guid: 3535cf9c9a1c2714da648abfaacbbcdb, type: 3}
+  scriptToAdd: SpaceshipShield
   effectDuration: 5
   cooldown: 30

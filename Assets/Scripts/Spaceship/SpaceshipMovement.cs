@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,16 +42,22 @@ public class SpaceshipMovement : MonoBehaviour
     public float roll1D;
     public Vector2 pitchYaw;
 
+    // Audio
+    private EventInstance engineSFX;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         mass = rb.mass;
         //rb.inertiaTensor = rb.inertiaTensor;
+        engineSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ShipEngine);
+        RuntimeManager.AttachInstanceToGameObject(engineSFX, transform, rb);
     }
 
     void FixedUpdate()
     {
         HandleMovement();
+        UpdateSound();
     }
 
     void HandleMovement()
@@ -113,5 +121,22 @@ public class SpaceshipMovement : MonoBehaviour
     public void UnFreeze()
     {
         rb.constraints = RigidbodyConstraints.None;
+    }
+
+    void UpdateSound()
+    {
+        // play engine sound when 'forward' is held down.. or something else?
+        if (thrust1D > 0.1f)
+        {
+            PLAYBACK_STATE playbackState;
+            engineSFX.getPlaybackState(out playbackState);
+            RuntimeManager.AttachInstanceToGameObject(engineSFX, transform, rb);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                engineSFX.start();
+            }
+        } else {
+            engineSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }

@@ -86,6 +86,7 @@ public class Missile : MonoBehaviour
         }
 
         Destroy(gameObject);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.Explosion, transform.position);
     }
 
     public void ClearTarget()

@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,44 @@ public class PlayerControls : ActorSpaceship
 {
     [SerializeField]
     ButtonHeldAction leaveSpaceshipSceneHandler;
+
+    // Audio
+    private EventInstance alarmSFX;
+
+    protected override void Start()
+    {
+        base.Start();
+        alarmSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Alarm);
+    }
+
+    private void Update()
+    {
+        UpdateSounds();
+    }
+
+    void UpdateSounds()
+    {
+        if (lockedMissiles.Count > 0)
+        {
+            PLAYBACK_STATE playbackState;
+            alarmSFX.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                alarmSFX.start();
+            }
+        }
+        else
+        {
+            alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
     protected override void OnDeath()
     {
         base.OnDeath();
         Destroy(gameObject);
         Cursor.visible = true;
+        alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public void OnThrust(InputAction.CallbackContext context)

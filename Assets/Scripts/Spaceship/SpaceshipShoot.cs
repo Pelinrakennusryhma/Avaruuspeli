@@ -75,5 +75,7 @@ public class SpaceshipShoot : MonoBehaviour
         GameObject laserBoltObject = Instantiate(laserBoltPrefab, laserOrigins[0].position, laserOrigins[0].rotation, laserParent);
         LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
         laserBolt.Init(laserSpeed, coloredMaterial, laserDamage, laserLifetime, gameObject);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.LaserShoot, transform.position);
     }
 }

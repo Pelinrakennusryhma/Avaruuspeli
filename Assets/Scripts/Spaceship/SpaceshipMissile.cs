@@ -82,6 +82,7 @@ public class SpaceshipMissile : UITrackable
             Missile spawnedMissile = missileObject.GetComponent<Missile>();
             spawnedMissile.Init(focusedTarget, this);
             focusedTarget.LockMissile(actor, spawnedMissile);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.MissileLaunch, transform.position);
         }
     }
 
