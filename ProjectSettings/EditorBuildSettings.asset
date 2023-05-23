@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PlanetScenes/Scenes/Pluto.unity
     guid: ac5f93a87a05688dc9c80ba63026dd98
-  - enabled: 0
+  - enabled: 1
     path: Assets/PlanetScenes/Scenes/PuuMaa.unity
     guid: 05a8b7cc842aff470a04a8a2d45312ac
   - enabled: 0
