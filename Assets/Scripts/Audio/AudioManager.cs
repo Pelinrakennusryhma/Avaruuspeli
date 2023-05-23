@@ -20,17 +20,26 @@ public enum FMODBus
     AMBIENCE
 }
 
+[System.Serializable]
+public class SavedVolumeData
+{
+    public float master;
+    public float music;
+    public float sfx;
+    public float ambience;
+}
+
 public class AudioManager : MonoBehaviour
 {
-    //[Header("Volume")]
-    //[Range(0, 1)]
-    //private float masterVolume = 1f;
-    //[Range(0, 1)]
-    //private float musicVolume = 1f;
-    //[Range(0, 1)]
-    //private float SFXVolume = 1f;
-    //[Range(0, 1)]
-    //private float ambienceVolume = 1f;
+    [field: Header("Volume")]
+    [field: Range(0, 1)]
+    [field: SerializeField] public float MasterVolume { get; private set; }
+    [field: Range(0, 1)]
+    [field: SerializeField] public float MusicVolume { get; private set; }
+    [field: Range(0, 1)]
+    [field: SerializeField] public float SFXVolume { get; private set; }
+    [field: Range(0, 1)]
+    [field: SerializeField] public float AmbienceVolume { get; private set; }
 
     private Bus masterBus;
     private Bus musicBus;
@@ -59,6 +68,64 @@ public class AudioManager : MonoBehaviour
         musicBus = RuntimeManager.GetBus("bus:/Music");
         SFXBus = RuntimeManager.GetBus("bus:/SFX");
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
+
+        LoadData();
+        SetInitialVolumes();
+    }
+
+    void LoadData()
+    {
+        SavedVolumeData data = JsonUtility.FromJson<SavedVolumeData>(PlayerPrefs.GetString("VolumeData"));
+        if (data != null)
+        {
+            MasterVolume = data.master;
+            MusicVolume = data.music;
+            SFXVolume = data.sfx;
+            AmbienceVolume = data.ambience;
+        } else
+        {
+            MasterVolume = 1f;
+            MusicVolume = 1f;
+            SFXVolume = 1f;
+            AmbienceVolume = 1f;
+        }
+    }
+
+    public void SaveData()
+    {
+        SavedVolumeData newVolumeData = new SavedVolumeData()
+        {
+        master = MasterVolume,
+        music = MusicVolume,
+        sfx = SFXVolume,
+        ambience = AmbienceVolume,
+        };
+        PlayerPrefs.SetString("VolumeData", JsonUtility.ToJson(newVolumeData));
+    }
+
+    void SetInitialVolumes()
+    {
+        masterBus.setVolume(MasterVolume);
+        musicBus.setVolume(MusicVolume);
+        SFXBus.setVolume(SFXVolume);
+        ambienceBus.setVolume(SFXVolume);
+    }
+
+    public float GetBusValue(FMODBus bus)
+    {
+        switch (bus)
+        {
+            case FMODBus.MASTER:
+                return MasterVolume;
+            case FMODBus.MUSIC:
+                return MusicVolume;
+            case FMODBus.SFX:
+                return SFXVolume;
+            case FMODBus.AMBIENCE:
+                return AmbienceVolume;
+            default:
+                return 1f;
+        }
     }
 
     public void SetBusValue(FMODBus bus, float value)
@@ -67,28 +134,23 @@ public class AudioManager : MonoBehaviour
         {
             case FMODBus.MASTER:
                 masterBus.setVolume(value);
+                MasterVolume = value;
                 break;
             case FMODBus.MUSIC:
                 musicBus.setVolume(value);
+                MusicVolume = value;
                 break;
             case FMODBus.SFX:
                 SFXBus.setVolume(value);
+                SFXVolume = value;
                 break;
             case FMODBus.AMBIENCE:
                 ambienceBus.setVolume(value);
+                AmbienceVolume = value;
                 break;
             default:
                 break;
-        }        
-    }
-
-    private MusicArea GetMusicArea()
-    {
-        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        MusicArea musicArea = sceneIndex <= 1 ? (MusicArea)sceneIndex : MusicArea.PLANET;
-        Debug.Log("MUSIC AREA: " + musicArea + "sceneIndex: " + sceneIndex + "sceneName: " + SceneManager.GetActiveScene().name);
-        return musicArea;
+        }
     }
 
     private void InitializeMusic(EventReference musicEventReference)
@@ -105,7 +167,6 @@ public class AudioManager : MonoBehaviour
 
     void SetMusicArea(MusicArea area)
     {
-        Debug.Log("SETTING MUSIC: " + (float)area);
         musicEventInstance.setParameterByName("MusicArea", (float)area);
     }
 
@@ -121,7 +182,7 @@ public class AudioManager : MonoBehaviour
         {
             eventInstances.Add(eventInstance);
         }
-        Debug.Log("Add audio");
+
         return eventInstance;
     }
 
@@ -132,9 +193,6 @@ public class AudioManager : MonoBehaviour
             eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             eventInstance.release();
         }
-
-        //eventInstances.Clear();
-        Debug.Log("CleanUp Audio");
     }
 
     private void OnDestroy()

@@ -1270,6 +1270,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4329774331365640393, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: <MasterVolume>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4577837520878276334, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: m_RootOrder

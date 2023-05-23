@@ -5483,6 +5483,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e2c8c800b57854da850157a8e2ec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MasterVolume>k__BackingField: 1
+  <MusicVolume>k__BackingField: 1
+  <SFXVolume>k__BackingField: 1
+  <AmbienceVolume>k__BackingField: 1
 --- !u!1 &8749896324703315924
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,8 +15,8 @@ public class VolumeSlider : MonoBehaviour
         slider.onValueChanged.AddListener(OnValueChanged);
 
         // load values from save?
-        float startValue = 1f;
-        OnValueChanged(startValue);
+        float startValue = AudioManager.Instance.GetBusValue(bus);
+        slider.value = startValue;
     }
 
     private void OnValueChanged(float value)
