@@ -4933,7 +4933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0aec8597d7c0549abe7237fd665b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SpaceshipSceneMusic>k__BackingField:
+  <Music>k__BackingField:
     Guid:
       Data1: 463212929
       Data2: 1125765431
@@ -4946,28 +4946,35 @@ MonoBehaviour:
       Data2: 1274608192
       Data3: 1471658369
       Data4: 360164921
-    Path: event:/Spaceship/ShipEngine
+    Path: event:/SFX/Spaceship/ShipEngine
   <Shield>k__BackingField:
     Guid:
       Data1: -38676065
       Data2: 1237047518
       Data3: -416238690
       Data4: 1587711391
-    Path: event:/Spaceship/Shield
-  <Alarm>k__BackingField:
-    Guid:
-      Data1: -98325060
-      Data2: 1216499493
-      Data3: -541598791
-      Data4: 382260047
-    Path: event:/Spaceship/MissileAlarm
+    Path: event:/SFX/Spaceship/Shield
   <LaserShoot>k__BackingField:
     Guid:
       Data1: 259541080
       Data2: 1091639919
       Data3: -1263206784
       Data4: -1782933795
-    Path: event:/Spaceship/LaserShoot
+    Path: event:/SFX/LaserShoot
+  <Explosion>k__BackingField:
+    Guid:
+      Data1: -18160038
+      Data2: 1213348715
+      Data3: 973153699
+      Data4: -976597474
+    Path: event:/SFX/Explosion
+  <Alarm>k__BackingField:
+    Guid:
+      Data1: -98325060
+      Data2: 1216499493
+      Data3: -541598791
+      Data4: 382260047
+    Path: event:/SFX/Spaceship/MissileAlarm
 --- !u!1 &5479704163686736514
 GameObject:
   m_ObjectHideFlags: 0

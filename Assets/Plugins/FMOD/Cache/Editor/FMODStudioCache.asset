@@ -35,12 +35,12 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638203686093528961
+  lastModified: 638204471991509284
   FileSizes:
   - Name: Desktop
     Value: 1486
   Exists: 1
---- !u!114 &-6893495003532009557
+--- !u!114 &-6571702607001493279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,24 +50,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Spaceship/MissileAlarm
+  m_Name: event:/SFX/LaserShoot
   m_EditorClassIdentifier: 
-  Path: event:/Spaceship/MissileAlarm
+  Path: event:/SFX/LaserShoot
   Guid:
-    Data1: -98325060
-    Data2: 1216499493
-    Data3: -541598791
-    Data4: 382260047
+    Data1: 259541080
+    Data2: 1091639919
+    Data3: -1263206784
+    Data4: -1782933795
   Banks:
   - {fileID: -4569274950992851411}
   IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
+  Is3D: 1
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
-  Length: 1776
---- !u!114 &-6876441820481654719
+  MaxDistance: 800
+  Length: 0
+--- !u!114 &-5446252144600309146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,9 +77,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Spaceship/Shield
+  m_Name: event:/SFX/Spaceship/Shield
   m_EditorClassIdentifier: 
-  Path: event:/Spaceship/Shield
+  Path: event:/SFX/Spaceship/Shield
   Guid:
     Data1: -38676065
     Data2: 1237047518
@@ -94,7 +94,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 7471
---- !u!114 &-5120774234606402078
+--- !u!114 &-5257054933763993117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,14 +104,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Spaceship/LaserShoot
+  m_Name: event:/SFX/Explosion
   m_EditorClassIdentifier: 
-  Path: event:/Spaceship/LaserShoot
+  Path: event:/SFX/Explosion
   Guid:
-    Data1: 259541080
-    Data2: 1091639919
-    Data3: -1263206784
-    Data4: -1782933795
+    Data1: -18160038
+    Data2: 1213348715
+    Data3: 973153699
+    Data4: -976597474
   Banks:
   - {fileID: -4569274950992851411}
   IsStream: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 800
+  MaxDistance: 100
   Length: 0
 --- !u!114 &-4569274950992851411
 MonoBehaviour:
@@ -136,38 +136,11 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638203686837008928
+  lastModified: 638204479415111866
   FileSizes:
   - Name: Desktop
-    Value: 209888
+    Value: 301856
   Exists: 1
---- !u!114 &-3016839161299768015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Spaceship/ShipEngine
-  m_EditorClassIdentifier: 
-  Path: event:/Spaceship/ShipEngine
-  Guid:
-    Data1: -1702057430
-    Data2: 1274608192
-    Data3: 1471658369
-    Data4: 360164921
-  Banks:
-  - {fileID: -4569274950992851411}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 100
-  Length: 13609
 --- !u!114 &-2120696587179564206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,11 +156,38 @@ MonoBehaviour:
   Path: ../../AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638203686093548955
+  lastModified: 638204471991529293
   FileSizes:
   - Name: Desktop
-    Value: 1222
+    Value: 1278
   Exists: 1
+--- !u!114 &-277131180234531025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/MissileAlarm
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/MissileAlarm
+  Guid:
+    Data1: -98325060
+    Data2: 1216499493
+    Data3: -541598791
+    Data4: 382260047
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1776
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,18 +206,46 @@ MonoBehaviour:
   - {fileID: -4569274950992851411}
   - {fileID: -8042517987043723179}
   EditorEvents:
-  - {fileID: -3016839161299768015}
-  - {fileID: -5120774234606402078}
   - {fileID: 2619476829916310653}
-  - {fileID: -6893495003532009557}
-  - {fileID: -6876441820481654719}
+  - {fileID: 2499033138171599228}
+  - {fileID: -6571702607001493279}
+  - {fileID: -5446252144600309146}
+  - {fileID: -277131180234531025}
+  - {fileID: -5257054933763993117}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7780352504398547623}
   StringsBanks:
   - {fileID: -2120696587179564206}
-  cacheTime: 638203686837008928
+  cacheTime: 638204479415111866
   cacheVersion: 131603
+--- !u!114 &2499033138171599228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/ShipEngine
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/ShipEngine
+  Guid:
+    Data1: -1702057430
+    Data2: 1274608192
+    Data3: 1471658369
+    Data4: 360164921
+  Banks:
+  - {fileID: -4569274950992851411}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 13609
 --- !u!114 &2619476829916310653
 MonoBehaviour:
   m_ObjectHideFlags: 0
