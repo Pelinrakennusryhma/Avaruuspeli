@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            Helpers = GetComponentInChildren<Helpers>(true);
 
             //Cursor.visible = false;
             //Cursor.lockState = CursorLockMode.Locked;
@@ -92,7 +93,6 @@ public class GameManager : MonoBehaviour
             TransitionalCamera.gameObject.SetActive(false);
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
             SaverLoader.OnInitialStartUp();
-            Helpers = GetComponentInChildren<Helpers>(true);
 
             LifeSupportSystem = GetComponentInChildren<LifeSupportSystem>(true);
             LifeSupportSystem.Init();
@@ -163,6 +163,13 @@ public class GameManager : MonoBehaviour
         //    GoBackToWorldMap();
         //}
 
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    InventoryController.Inventory.AddItem(30, 100); // CArbon
+        //    InventoryController.Inventory.AddItem(27, 100); // Ice
+        //    InventoryController.Inventory.AddItem(28, 100); // silicate
+        //}
+
         if (WaitingForSceneLoad
             && FramesPassedTillLoadScenes >= 0)
         {
@@ -188,7 +195,7 @@ public class GameManager : MonoBehaviour
             {
                 if (inventoryToggleQueued)
                 {
-                    Debug.Log("InventoryToggle");
+                    //Debug.Log("InventoryToggle");
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {

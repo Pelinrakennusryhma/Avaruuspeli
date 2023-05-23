@@ -22,8 +22,12 @@ public class ContextMenu : MonoBehaviour
     public bool shopping;
 
     //Piilottaa context menusta kaikki vaihtoehdot ja sitten näyttää kaikki itemin tyyppiin liittyvät vaihtoehdot. Näyttää 'Sell' jos pelaaja on kaupassa.
-    public void ShowOptions(ItemSO.ItemType  itemType)
+    public void ShowOptions(ItemSO.ItemType  itemType,
+                            int itemId)
     {
+        this.itemID = itemId;
+
+        HideContextMenu.FindAndDestroyInfoPanels();
         HideAll();
 
         //Debug.LogWarning("The string searches have been replaced with enum use.");
@@ -44,7 +48,19 @@ public class ContextMenu : MonoBehaviour
                 break;
 
             case ItemSO.ItemType.Equipment:
-                ShowEquip();
+
+                //Debug.Log("Item id is " + itemID);
+
+                if (itemID == 29) 
+                {
+                    ShowUse(); // ISRU MODULE
+                }
+
+                else
+                {
+                    ShowEquip();
+                }
+
                 ShowDiscard();
                 break;
 
@@ -393,5 +409,17 @@ public class ContextMenu : MonoBehaviour
     public void ShoppingOff()
     {
         shopping = false;
+    }
+
+    public void OnUseClicked()
+    {
+        if (itemID == 29)
+        {
+            GameManager.Instance.InventoryController.OnISRUShow();
+        }
+
+
+        HideAll();
+        //Debug.Log("Use clicked");
     }
 }

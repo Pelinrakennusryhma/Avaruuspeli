@@ -48,7 +48,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 {
                     CurrentTargetClickableObject = clickDetector;
                     IsOnCurrentClickableObject = true;
-                    Debug.Log("Set galaxy current target clickable object");
+                    //Debug.Log("Set galaxy current target clickable object");
                 }
 
                 //Debug.Log("clickdetector type is " + clickDetector.type);
@@ -63,7 +63,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 {
                     CurrentTargetClickableObject = clickDetector;
                     IsOnCurrentClickableObject = true;
-                    Debug.Log("Set star system current target clickable object");
+                    //Debug.Log("Set star system current target clickable object");
                 }
                 //Debug.Log("Set galaxy current target clickable object");
 

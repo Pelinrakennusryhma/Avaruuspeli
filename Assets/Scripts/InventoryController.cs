@@ -16,6 +16,7 @@ public class InventoryController : MonoBehaviour
     public Equipment Equipment;
     public ShopNumberTwo Shop;
     public ShopHeadsUp ShopHeadsUp;
+    public ISRUModule ISRUModule;
 
     public bool ShowingInventory;
     public bool IsInShoppingArea;
@@ -33,6 +34,7 @@ public class InventoryController : MonoBehaviour
     {        
         ItemDataBaseWithScriptables.Init();
         Inventory.OnInventoryControllerInit();
+        ISRUModule.Init();
         //Item item;
         //item = CanvasScript.contextMenu.itemDatabase.GetItem(2);
         ////Inventory.RemoveItem(item.id, 1);
@@ -44,6 +46,7 @@ public class InventoryController : MonoBehaviour
         Money = 10000.0f;
         OnInventoryShow();
 
+        Inventory.AddItem(29, 1);
         Inventory.AddItem(2, 1);
         Inventory.AddItem(3, 1);
         Inventory.AddItem(4, 1);
@@ -56,9 +59,10 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(10, 1);
         Inventory.AddItem(11, 1);
         Inventory.AddItem(12, 1);
-        Inventory.AddItem(13, 3);
-        Inventory.AddItem(14, 21);
-        Inventory.AddItem(15, 21);
+
+        Inventory.AddItem(13, 21); // Oxygen bottle
+        Inventory.AddItem(14, 100); // Warpdrive fuel
+        Inventory.AddItem(15, 100); // rocket fuel
         Inventory.AddItem(16, 1);
         Inventory.AddItem(17, 1);
         Inventory.AddItem(18, 1);
@@ -66,6 +70,10 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(20, 1);
         Inventory.AddItem(21, 1);
         Inventory.AddItem(22, 1);
+
+        Inventory.AddItem(27, 100);
+        Inventory.AddItem(28, 100);
+        Inventory.AddItem(30, 100);
 
         Shop.Init();
         ShopHeadsUp.Init();
@@ -87,6 +95,8 @@ public class InventoryController : MonoBehaviour
         CanvasScript.HideItemCatalog();
         CanvasScript.HideShop();
         CanvasScript.ShowEquipment();
+
+        ISRUModule.gameObject.SetActive(false);
 
         if (ResourceGatherer.Instance != null) 
         {
@@ -137,7 +147,7 @@ public class InventoryController : MonoBehaviour
                 item = ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(22);
                 Equipment.EquipObjectInHands(item);
             }
-            Debug.LogWarning("Player hands are not null. Should equipWeapon");
+            //Debug.LogWarning("Player hands are not null. Should equipWeapon");
         }
 
         if (ResourceInventory.Instance != null)
@@ -191,11 +201,21 @@ public class InventoryController : MonoBehaviour
     public void AttachToMainCamera()
     {
         CanvasObject.transform.SetParent(Camera.main.transform, false);
+
+        if (WorldMapScene.Instance != null)
+        {
+            WorldMapScene.Instance.HideCanvas();
+        }
     }
 
     public void DetachFromMainCamera()
     {
         CanvasObject.transform.SetParent(transform, false);
+
+        if (WorldMapScene.Instance != null)
+        {
+            WorldMapScene.Instance.ShowCanvas();
+        }
     }
 
     public void OnDrill1Equipped()
@@ -260,6 +280,32 @@ public class InventoryController : MonoBehaviour
     {
         IsInShoppingArea = false;
         ResourceInventory.Instance.OnExitShoppingArea();
+    }
+
+    public void OnISRUShow()
+    {
+        CanvasObject.SetActive(true);
+        AttachToMainCamera();
+
+        CanvasScript.HideHeadsUpShop(false);
+        CanvasScript.HideItemCatalog();
+        CanvasScript.HideShop();
+        CanvasScript.HideEquipment();
+
+        Inventory.gameObject.SetActive(false);
+
+        ISRUModule.gameObject.SetActive(true);
+        ISRUModule.OnViewOpened();
+
+        //Debug.Log("Show isru module");
+    }
+
+    public void OnISRUHide()
+    {
+        Inventory.gameObject.SetActive(true);
+        ISRUModule.gameObject.SetActive(false);
+        OnInventoryShow();
+        //Debug.Log("Hide isru module");
     }
 
     public void Update()

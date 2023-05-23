@@ -27,8 +27,8 @@ MonoBehaviour:
   - {fileID: 4843846868792224709, guid: 8695e6c72af304847882b62517206fc3, type: 3}
   - {fileID: 4130283384215808055, guid: 681600888da1bc44992f5ba715beff83, type: 3}
   - {fileID: 8941917039107780826, guid: aad7f68915bf6e542a1a2a0e3cb92997, type: 3}
-  itemIcon: {fileID: 0}
-  isStackable: 0
+  itemIcon: {fileID: 21300000, guid: b9da725b3a155b046a8afe4cab5732df, type: 3}
+  isStackable: 1
   weight: 1.4
   itemType: 5
   rare: {fileID: 0}
