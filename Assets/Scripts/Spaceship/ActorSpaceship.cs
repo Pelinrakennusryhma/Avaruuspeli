@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipEvents spaceshipEvents;
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
+    [SerializeField] SpaceshipHealth spaceshipHealth;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
     public List<Useable> ActiveUtils { get; private set; }
 
@@ -31,17 +33,38 @@ public abstract class ActorSpaceship : MonoBehaviour
         spaceshipEvents = ship.GetComponent<SpaceshipEvents>();
         spaceshipMissile = ship.GetComponent<SpaceshipMissile>();
         targetProjection = ship.GetComponent<TargetProjection>();
+        spaceshipHealth = ship.GetComponent<SpaceshipHealth>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
 
         ActiveUtils = new List<Useable>();
-        InitUtilities();
+        InitShip();
         GameEvents.Instance.CallEventSpaceshipSpawned(this);
+    }
+
+    protected virtual void InitShip()
+    {
+        if(spaceshipData != null)
+        {
+            InitShipHealth();
+            InitUtilities();
+        }
+    }
+
+    void InitShipHealth()
+    {
+        if(spaceshipHealth != null && spaceshipData.hull != null)
+        {
+            spaceshipHealth.InitHull(spaceshipData.hull);
+        } else
+        {
+            throw new Exception("Unable to initialize ship health.");
+        }
     }
 
     protected virtual void InitUtilities()
     {
-        if(spaceshipData != null && spaceshipData.utilities != null)
+        if(spaceshipData.utilities != null)
         {
             foreach (ShipUtility utility in spaceshipData.utilities)
             {

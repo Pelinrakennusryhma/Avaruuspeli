@@ -96,7 +96,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638204505533754576
+  lastModified: 638206237095810665
   FileSizes:
   - Name: Desktop
     Value: 1376
@@ -159,7 +159,7 @@ MonoBehaviour:
   - {fileID: 688270757908266836}
   StringsBanks:
   - {fileID: -286429430098339160}
-  cacheTime: 638204573031153893
+  cacheTime: 638206237096990694
   cacheVersion: 131603
 --- !u!114 &371905620781687472
 MonoBehaviour:
@@ -176,7 +176,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638203686096578957
+  lastModified: 638206237096850692
   FileSizes:
   - Name: Desktop
     Value: 6647488
@@ -223,7 +223,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638204505533744581
+  lastModified: 638206237095800686
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -298,7 +298,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638204573031153893
+  lastModified: 638206237096990694
   FileSizes:
   - Name: Desktop
     Value: 512224
