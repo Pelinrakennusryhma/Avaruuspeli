@@ -47,6 +47,7 @@ public abstract class ActorSpaceship : MonoBehaviour
         if(spaceshipData != null)
         {
             InitShipHealth();
+            InitShipWeapons();
             InitUtilities();
         }
     }
@@ -59,6 +60,22 @@ public abstract class ActorSpaceship : MonoBehaviour
         } else
         {
             throw new Exception("Unable to initialize ship health.");
+        }
+    }
+
+    void InitShipWeapons()
+    {
+        if(spaceshipData.primaryWeapon != null && spaceshipShoot != null)
+        {
+            if(spaceshipData.primaryWeapon is ShipLaser)
+            {
+                ShipLaser shipLaser = (ShipLaser)spaceshipData.primaryWeapon;
+                float damage = shipLaser.damage;
+                float velocity = shipLaser.velocity;
+                float rateOfFire = shipLaser.rateOfFire;
+                spaceshipShoot.Init(damage, velocity, rateOfFire);
+            }
+
         }
     }
 

@@ -8,4 +8,5 @@ public class SpaceshipData : ScriptableObject
     public GameObject prefab;
     public ShipUtility[] utilities = new ShipUtility[2];
     public ShipHull hull;
+    public ShipWeaponItemSO primaryWeapon;
 }

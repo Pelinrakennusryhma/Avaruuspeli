@@ -44,6 +44,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 83a282d181473b14e830f308999cc3d7, type: 2}
   - {fileID: 11400000, guid: ef60f24b1293a7f4b9c304ed1e4be818, type: 2}
   - {fileID: 11400000, guid: 4ce53014864678d48bed6089ac24d63b, type: 2}
+  - {fileID: 11400000, guid: 941ddbf6ad094464d9ba468bf8fc2386, type: 2}
+  - {fileID: 11400000, guid: a6c3c4a70aaaeee4fbc75a359b5563ab, type: 2}
+  - {fileID: 11400000, guid: 7d062380ddaa2da48a6553da6800a450, type: 2}
   ConsumableItems:
   - {fileID: 11400000, guid: d19fef16d1b2c384aa3f85ff67758cf5, type: 2}
   DrillItems:
@@ -83,4 +86,7 @@ MonoBehaviour:
   ShipWeaponItems:
   - {fileID: 11400000, guid: 1671868f65796174ebf2919737926411, type: 2}
   - {fileID: 11400000, guid: abf0d52edeb25a645abfa3fa1ab58cbd, type: 2}
+  - {fileID: 11400000, guid: 941ddbf6ad094464d9ba468bf8fc2386, type: 2}
+  - {fileID: 11400000, guid: a6c3c4a70aaaeee4fbc75a359b5563ab, type: 2}
+  - {fileID: 11400000, guid: 7d062380ddaa2da48a6553da6800a450, type: 2}
   HasBeenInitted: 1

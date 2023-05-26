@@ -293,15 +293,8 @@ MonoBehaviour:
     type: 3}
   laserOrigins:
   - {fileID: 1134921867257646773}
-  shootInterval: 0.25
+  rateOfFire: 240
   laserParent: {fileID: 0}
-  laserShootSound:
-    Guid:
-      Data1: 259541080
-      Data2: 1091639919
-      Data3: -1263206784
-      Data4: -1782933795
-    Path: event:/ShootLaser
   shooting: 0
 --- !u!114 &4775760650964221550
 MonoBehaviour:
