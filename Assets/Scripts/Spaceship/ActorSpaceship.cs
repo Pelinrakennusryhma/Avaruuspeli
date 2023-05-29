@@ -75,7 +75,20 @@ public abstract class ActorSpaceship : MonoBehaviour
                 float rateOfFire = shipLaser.rateOfFire;
                 spaceshipShoot.Init(damage, velocity, rateOfFire);
             }
+        }
 
+        if(spaceshipData.secondaryWeapon != null)
+        {
+            if(spaceshipData.secondaryWeapon is ShipMissileBattery && spaceshipMissile != null)
+            {
+                ShipMissileBattery missileBattery = (ShipMissileBattery)spaceshipData.secondaryWeapon;
+                float damage = missileBattery.explosionDamage;
+                float speed = missileBattery.missileSpeed;
+                float cooldown = missileBattery.cooldown;
+                float radius = missileBattery.explosionRadius;
+                int amount = missileBattery.missileCapacity;
+                spaceshipMissile.Init(damage, radius, speed, cooldown, amount);
+            }
         }
     }
 

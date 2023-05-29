@@ -28,6 +28,9 @@ public class SpaceshipMissile : UITrackable
     [SerializeField]
     float shootInterval = 0.25f;
     float cooldown = 0f;
+    float explosionDamage = 90f;
+    float explosionRadius = 20f;
+    float missileSpeed = 150f;
     [SerializeField]
     float maxLockAngle = 3f;
 
@@ -61,6 +64,13 @@ public class SpaceshipMissile : UITrackable
         }
     }
 
+    public void Init(float explosionDamage, float explosionRadius, float speed, float cooldown, int amountMissiles)
+    {
+        shootInterval = cooldown;
+        currentMissiles = amountMissiles;
+        maxMissiles = amountMissiles;
+    }
+
     bool CanLock()
     {
         return focusedTarget != null &&
@@ -80,7 +90,7 @@ public class SpaceshipMissile : UITrackable
             currentMissiles--;
             GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
             Missile spawnedMissile = missileObject.GetComponent<Missile>();
-            spawnedMissile.Init(focusedTarget, this);
+            spawnedMissile.Init(focusedTarget, this, missileSpeed, explosionRadius, explosionDamage);
             focusedTarget.LockMissile(actor, spawnedMissile);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.MissileLaunch, transform.position);
         }

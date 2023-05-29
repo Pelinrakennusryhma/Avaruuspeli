@@ -9,4 +9,5 @@ public class SpaceshipData : ScriptableObject
     public ShipUtility[] utilities = new ShipUtility[2];
     public ShipHull hull;
     public ShipWeaponItemSO primaryWeapon;
+    public ShipWeaponItemSO secondaryWeapon;
 }
