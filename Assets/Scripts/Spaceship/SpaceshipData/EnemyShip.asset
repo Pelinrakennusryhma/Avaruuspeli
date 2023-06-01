@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f76357559782c8498fa08a62ae7ec1a, type: 2}
   hull: {fileID: 11400000, guid: ef60f24b1293a7f4b9c304ed1e4be818, type: 2}
   primaryWeapon: {fileID: 11400000, guid: a6c3c4a70aaaeee4fbc75a359b5563ab, type: 2}
+  secondaryWeapon: {fileID: 11400000, guid: d28ee744f8579934fa960a7d9f60897b, type: 2}

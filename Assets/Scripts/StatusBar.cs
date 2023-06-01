@@ -28,6 +28,11 @@ public class StatusBar : MonoBehaviour
         UpdateBar();
     }
 
+    public void SetTrackable(UITrackable tracked)
+    {
+        trackedScript = tracked;
+    }
+
     void UpdateText()
     {
         text.text = $"{trackedScript.CurrentValue} / {trackedScript.MaxValue}";

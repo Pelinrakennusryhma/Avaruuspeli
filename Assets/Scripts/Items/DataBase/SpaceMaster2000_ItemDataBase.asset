@@ -47,6 +47,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 941ddbf6ad094464d9ba468bf8fc2386, type: 2}
   - {fileID: 11400000, guid: a6c3c4a70aaaeee4fbc75a359b5563ab, type: 2}
   - {fileID: 11400000, guid: 7d062380ddaa2da48a6553da6800a450, type: 2}
+  - {fileID: 11400000, guid: d28ee744f8579934fa960a7d9f60897b, type: 2}
+  - {fileID: 11400000, guid: f88e835bdb00c9349bf11c8c601d8339, type: 2}
   ConsumableItems:
   - {fileID: 11400000, guid: d19fef16d1b2c384aa3f85ff67758cf5, type: 2}
   DrillItems:
@@ -89,4 +91,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 941ddbf6ad094464d9ba468bf8fc2386, type: 2}
   - {fileID: 11400000, guid: a6c3c4a70aaaeee4fbc75a359b5563ab, type: 2}
   - {fileID: 11400000, guid: 7d062380ddaa2da48a6553da6800a450, type: 2}
+  - {fileID: 11400000, guid: d28ee744f8579934fa960a7d9f60897b, type: 2}
+  - {fileID: 11400000, guid: f88e835bdb00c9349bf11c8c601d8339, type: 2}
   HasBeenInitted: 1

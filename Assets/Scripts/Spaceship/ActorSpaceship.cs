@@ -16,7 +16,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipEvents spaceshipEvents;
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
-    [SerializeField] SpaceshipHealth spaceshipHealth;
+    public SpaceshipHealth spaceshipHealth;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
     public List<Useable> ActiveUtils { get; private set; }
 
