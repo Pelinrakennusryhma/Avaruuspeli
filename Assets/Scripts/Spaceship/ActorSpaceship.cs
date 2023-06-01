@@ -45,6 +45,12 @@ public abstract class ActorSpaceship : MonoBehaviour
     {
         if(spaceshipData != null)
         {
+
+            //for (int i = 0; i < transform.childCount; i++)
+            //{
+            //    Destroy(transform.GetChild(i));
+            //}
+
             InitShipHealth();
             InitShipWeapons();
             InitUtilities();
