@@ -131,7 +131,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
     {
         if (playerInTriggerArea 
             && _actorManager.SceneCleared
-            && GameManager.Instance.LifeSupportSystem.CheckIfWeCanEnterUnreathableArea())
+            && GameManager.Instance.LifeSupportSystem.CheckIfWeCanEnterUnbreathableArea())
         {
             //LaunchAsteroidScene(AsteroidType.Asteroid01a, ResourceInventory.ResourceType.Iron, MineralDensity.Medium, true);
             Land();

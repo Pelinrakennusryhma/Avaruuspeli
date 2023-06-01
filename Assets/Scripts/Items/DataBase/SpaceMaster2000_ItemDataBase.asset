@@ -44,6 +44,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: acac9b7f78f9cb3449e2c47dc8caaa19, type: 2}
   - {fileID: 11400000, guid: 7837802386a299f498fdb9ed8604de3c, type: 2}
   - {fileID: 11400000, guid: 9ca91e2c5a53cf14ea8eeb7862f4623a, type: 2}
+  - {fileID: 11400000, guid: 030d88d09c5bd024e86d66dea5486e68, type: 2}
   ConsumableItems:
   - {fileID: 11400000, guid: d19fef16d1b2c384aa3f85ff67758cf5, type: 2}
   - {fileID: 11400000, guid: 9ca91e2c5a53cf14ea8eeb7862f4623a, type: 2}
@@ -56,6 +57,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c1c0ce9d569e6a438089e4b1afd0bd5, type: 2}
   - {fileID: 11400000, guid: 735ff64e85aca0c41be8f70eba17101d, type: 2}
   - {fileID: 11400000, guid: 715d318978d9be348911c325ccd2429d, type: 2}
+  - {fileID: 11400000, guid: 030d88d09c5bd024e86d66dea5486e68, type: 2}
   FuelItems:
   - {fileID: 11400000, guid: d648fd22be50a3340ac1b51e7bd3ad4d, type: 2}
   - {fileID: 11400000, guid: 9a2a591e22a320e4bb670366a6a7c5a5, type: 2}

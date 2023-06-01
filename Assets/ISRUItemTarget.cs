@@ -30,7 +30,7 @@ public class ISRUItemTarget : MonoBehaviour
         Item = item;
         ItemNameText.text = Item.itemName;
         Amount = amount;
-        ItemAmountText.text = "OWNED " + Amount.ToString();
+        ItemAmountText.text = "OWNED:\n" + Amount.ToString();
 
         if (Item.itemIcon != null)
         {

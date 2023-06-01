@@ -20,6 +20,8 @@ public class ISRUItemPlayer : MonoBehaviour
 
     public Color OriginalBackPlateColor;
 
+    public HydroponicsBay OwnerHydroponicsBay;
+
     public void SetupItem(ItemSO item,
                           int amount,
                           ISRUModule owner)
@@ -43,6 +45,29 @@ public class ISRUItemPlayer : MonoBehaviour
         }
     }
 
+    public void SetupItem(ItemSO item,
+                          int amount,
+                          HydroponicsBay owner)
+    {
+        OriginalBackPlateColor = BackgroundPlate.color;
+        OwnerHydroponicsBay = owner;
+
+        Item = item;
+        ItemNameText.text = Item.itemName;
+        Amount = amount;
+        ItemAmountText.text = "OWNED:\n" + Amount.ToString();
+
+        if (Item.itemIcon != null)
+        {
+            IconImage.sprite = Item.itemIcon;
+        }
+
+        else
+        {
+            IconImage.sprite = GameManager.Instance.InventoryController.BlankSprite;
+        }
+    }
+
     public void UpdateAmount(int newAmount)
     {
         Amount = newAmount;
@@ -51,7 +76,15 @@ public class ISRUItemPlayer : MonoBehaviour
 
     public void OnButtonPressed()
     {
-        OwnerISRU.OnPrecursorPressed(this);
+        if (OwnerISRU != null) 
+        {
+            OwnerISRU.OnPrecursorPressed(this);
+        }
+
+        else if (OwnerHydroponicsBay != null)
+        {
+            OwnerHydroponicsBay.OnPrecursorPressed(this);
+        }
     }
 
     public void OnSelected()

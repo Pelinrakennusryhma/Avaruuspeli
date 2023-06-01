@@ -66,7 +66,16 @@ public class PointOfInterest : MonoBehaviour
     {
         if(poiType == POIType.Asteroid)
         {
-            GameManager.Instance.EnterPOI(this);
+            if (GameManager.Instance.ShipLifeSupportSystem.CheckIfWeCanEnterShip()) 
+            {
+                GameManager.Instance.EnterPOI(this);
+            }
+
+            else
+            {
+                GameManager.Instance.ShipLifeSupportSystem.DisplayPromptAboutNotBeingAbleToEnterShip();
+            }
+
         } else
         {
             GameManager.Instance.EnterPlanet();

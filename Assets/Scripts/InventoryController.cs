@@ -17,6 +17,7 @@ public class InventoryController : MonoBehaviour
     public ShopNumberTwo Shop;
     public ShopHeadsUp ShopHeadsUp;
     public ISRUModule ISRUModule;
+    public HydroponicsBay HydroponicsBay;
 
     public bool ShowingInventory;
     public bool IsInShoppingArea;
@@ -35,6 +36,7 @@ public class InventoryController : MonoBehaviour
         ItemDataBaseWithScriptables.Init();
         Inventory.OnInventoryControllerInit();
         ISRUModule.Init();
+        HydroponicsBay.Init();
         //Item item;
         //item = CanvasScript.contextMenu.itemDatabase.GetItem(2);
         ////Inventory.RemoveItem(item.id, 1);
@@ -47,6 +49,7 @@ public class InventoryController : MonoBehaviour
         OnInventoryShow();
 
         Inventory.AddItem(29, 1);
+        Inventory.AddItem(32, 1);
         Inventory.AddItem(2, 1);
         Inventory.AddItem(3, 1);
         Inventory.AddItem(4, 1);
@@ -63,7 +66,7 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(13, 21); // Oxygen bottle
         Inventory.AddItem(14, 100); // Warpdrive fuel
         Inventory.AddItem(15, 100); // rocket fuel
-        Inventory.AddItem(16, 1);
+        Inventory.AddItem(16, 10); // Oxygen storage
         Inventory.AddItem(17, 1);
         Inventory.AddItem(18, 1);
         Inventory.AddItem(19, 1);
@@ -73,7 +76,8 @@ public class InventoryController : MonoBehaviour
 
         Inventory.AddItem(27, 100);
         Inventory.AddItem(28, 100);
-        Inventory.AddItem(30, 100);
+        Inventory.AddItem(30, 10);
+        Inventory.AddItem(31, 10);
 
         Shop.Init();
         ShopHeadsUp.Init();
@@ -97,6 +101,7 @@ public class InventoryController : MonoBehaviour
         CanvasScript.ShowEquipment();
 
         ISRUModule.gameObject.SetActive(false);
+        HydroponicsBay.gameObject.SetActive(false);
 
         if (ResourceGatherer.Instance != null) 
         {
@@ -306,6 +311,29 @@ public class InventoryController : MonoBehaviour
         ISRUModule.gameObject.SetActive(false);
         OnInventoryShow();
         //Debug.Log("Hide isru module");
+    }
+
+    public void OnHydroponicsBayShow()
+    {
+        CanvasObject.SetActive(true);
+        AttachToMainCamera();
+
+        CanvasScript.HideHeadsUpShop(false);
+        CanvasScript.HideItemCatalog();
+        CanvasScript.HideShop();
+        CanvasScript.HideEquipment();
+
+        Inventory.gameObject.SetActive(false);
+
+        HydroponicsBay.gameObject.SetActive(true);
+        HydroponicsBay.OnViewOpened();
+    }
+
+    public void OnHydroponicsBayHide()
+    {
+        Inventory.gameObject.SetActive(true);
+        HydroponicsBay.gameObject.SetActive(false);
+        OnInventoryShow();
     }
 
     public void Update()

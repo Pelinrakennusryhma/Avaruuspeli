@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public InventoryController InventoryController;
 
     public LifeSupportSystem LifeSupportSystem;
+    public ShipLifeSupportSystem ShipLifeSupportSystem;
 
     public GalaxyOnWorldMap CurrentGalaxy;
     public StarSystemOnFocus CurrentStarSystem;
@@ -70,6 +71,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
             Helpers = GetComponentInChildren<Helpers>(true);
 
+            SaverLoader = GetComponentInChildren<SaverLoader>(true);
+            SaverLoader.OnInitialStartUp();
             //Cursor.visible = false;
             //Cursor.lockState = CursorLockMode.Locked;
             InventoryController = GetComponentInChildren<InventoryController>(true);
@@ -81,6 +84,8 @@ public class GameManager : MonoBehaviour
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
+            Options.OnLaunch();
+
             if (OptionsScreen != null) 
             {
                 OptionsScreen.gameObject.SetActive(false);
@@ -91,11 +96,13 @@ public class GameManager : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;        
             
             TransitionalCamera.gameObject.SetActive(false);
-            SaverLoader = GetComponentInChildren<SaverLoader>(true);
-            SaverLoader.OnInitialStartUp();
+
 
             LifeSupportSystem = GetComponentInChildren<LifeSupportSystem>(true);
             LifeSupportSystem.Init();
+
+            ShipLifeSupportSystem = GetComponentInChildren<ShipLifeSupportSystem>(true);
+            ShipLifeSupportSystem.Init();
 
             if(CurrentSceneType == TypeOfScene.None)
             {
@@ -185,6 +192,8 @@ public class GameManager : MonoBehaviour
                     && IsOnWorldMap)
             {
                 GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
+                OnEnterWorldMapCall();
+                //Debug.LogError("We are on world map");
             }
         }
 
@@ -209,6 +218,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        //Debug.Log("Invenotry toggle is queued " + inventoryToggleQueued + " waiting for scene load " + WaitingForSceneLoad);
 
         //if (Input.GetKeyDown(KeyCode.Escape)
         //    || Input.GetKeyDown(KeyCode.O))
@@ -347,12 +358,15 @@ public class GameManager : MonoBehaviour
 
         //LifeSupportSystem.OnExitUnbreathablePlace();
 
-        Debug.Log("Going back to world map");
+        ShipLifeSupportSystem.OnExitShip();
+
+        //Debug.Log("Going back to world map");
     }
 
 
     public void EnterAsteroidField()
     {
+
         Debug.LogWarning("ENTER ASTEROID FIELD");
 
         IncomingSceneType = TypeOfScene.AsteroidField;
@@ -376,6 +390,8 @@ public class GameManager : MonoBehaviour
 
     public void EnterPlanet()
     {
+        ShipLifeSupportSystem.OnExitShip();
+
         Debug.LogWarning("ENTER PLANET");
 
         PlanetData.PlanetGraphicsType planetType = CurrentPlanetData.PlanetGraphics;
@@ -651,15 +667,23 @@ public class GameManager : MonoBehaviour
 
     public void OnEnterWorldMapCall()
     {
+        WaitingForSceneLoad = false;
         IsOnWorldMap = true;
         IncomingSceneType = TypeOfScene.None;
+
+        if (ShipLifeSupportSystem.WaitingToShowRunningOutOfOxygenPrompt)
+        {
+            ShipLifeSupportSystem.ActivateRunninOutOfOxygenPrompt();
+        }
 
         if (OnEnterWorldMap != null)
         {
             OnEnterWorldMap();
         }
 
-        Debug.Log("On enter world map called");
+
+
+       // Debug.LogWarning("On enter world map called");
     }
 
     public void OnLeaveAsteroidSurface()

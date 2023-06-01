@@ -553,7 +553,7 @@ public class ISRUModule : MonoBehaviour
                 // DIAMOND
                 else if (SelectedTarget.Item.id == 6)
                 {
-                    text = "Convert 10 Carbon to \n 1 Diamond";
+                    text = "Convert 100 Carbon to \n 1 Diamond";
                     foundAValidConversion = true;
                 }
             }
@@ -760,7 +760,7 @@ public class ISRUModule : MonoBehaviour
         else if (SelectedTarget.Item.id == 6)
         {
             // Required carbon
-            amountRequiredForOneUnit = 10;
+            amountRequiredForOneUnit = 100;
 
             CalculateSubstractAndResultAmounts(targetAmount,
                                                out precursorSubstractAmount,
@@ -875,6 +875,4 @@ public class ISRUModule : MonoBehaviour
         //Debug.Log("Precursor substract amount is " + precursorSubstractAmount);
         //Debug.Log("Amount of successfull conversion is " + amountOfSuccesfullConversion);
     }
-
-
 }

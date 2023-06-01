@@ -56,6 +56,11 @@ public class ContextMenu : MonoBehaviour
                     ShowUse(); // ISRU MODULE
                 }
 
+                else if (itemID == 32)
+                {
+                    ShowUse(); // Hydroponics bay
+                }
+
                 else
                 {
                     ShowEquip();
@@ -256,7 +261,22 @@ public class ContextMenu : MonoBehaviour
         {
             if (itemID == 13)
             {
-                GameManager.Instance.LifeSupportSystem.UpdateOxygenStorage(0);
+                GameManager.Instance.LifeSupportSystem.UpdateOxygenTanks(0);
+            }
+
+            else if (itemID == 16)
+            {
+                GameManager.Instance.ShipLifeSupportSystem.ZeroOutOxygenStorages();
+            }
+
+            else if (itemID == 31)
+            {
+                GameManager.Instance.ShipLifeSupportSystem.ZeroOutWaterBottles();
+            }
+
+            else if (itemID == 30)
+            {
+                GameManager.Instance.ShipLifeSupportSystem.ZeroOutCarbon();
             }
 
             else if (itemID == 14)
@@ -416,6 +436,11 @@ public class ContextMenu : MonoBehaviour
         if (itemID == 29)
         {
             GameManager.Instance.InventoryController.OnISRUShow();
+        }
+
+        else if (itemID == 32)
+        {
+            GameManager.Instance.InventoryController.OnHydroponicsBayShow();
         }
 
 

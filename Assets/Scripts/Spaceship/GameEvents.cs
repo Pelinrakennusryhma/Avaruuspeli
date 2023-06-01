@@ -43,6 +43,11 @@ public class GameEvents : MonoBehaviour
     public void CallEventSpaceshipSpawned(ActorSpaceship ship)
     {
         EventSpaceshipSpawned.Invoke(ship);
+
+        if (GameManager.Instance != null) 
+        {
+            GameManager.Instance.ShipLifeSupportSystem.OnEnterShip();
+        }
     }
     public void CallEventSpaceshipDied(ActorSpaceship ship)
     {
@@ -77,6 +82,11 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerLanded(MineableAsteroidTrigger asteroid)
     {
         EventPlayerLanded.Invoke(asteroid);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ShipLifeSupportSystem.OnExitShip();
+        }
     }
     
     public void CallEventPlayerTriedLeaving()
@@ -88,6 +98,11 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerLeftAstroid(MineableAsteroidTrigger asteroid)
     {
         EventPlayerLeftAsteroid.Invoke(asteroid);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ShipLifeSupportSystem.OnEnterShip();
+        }
         //Debug.Log("Calling event player left asteroid");
     }
 

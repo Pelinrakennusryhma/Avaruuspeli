@@ -11,6 +11,53 @@ public class Options : MonoBehaviour
     public Toggle InvertToggle;
     public Scrollbar SensitivityScrollbar;
 
+    public static void OnLaunch()
+    {
+        //Debug.Log("On launch called in options");
+
+        // GEt from player prefs
+        if (PlayerPrefs.HasKey("Sensitivity"))
+        {
+            MouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        }
+
+        else
+        {
+            MouseSensitivity = 2.0f;
+            PlayerPrefs.SetFloat("Sensitivity", MouseSensitivity);
+            PlayerPrefs.Save();
+        }
+
+        if (PlayerPrefs.HasKey("Invert"))
+        {
+            int invert = PlayerPrefs.GetInt("Invert");
+
+            if (invert == 0)
+            {
+                InvertMouse = false;
+            }
+
+            else
+            {
+                InvertMouse = true;
+            }
+        }
+
+        else
+        {
+            InvertMouse = false;
+            PlayerPrefs.SetInt("Invert", 0);
+            PlayerPrefs.Save();
+        }
+
+        if (MouseSensitivity <= 0.5f)
+        {
+            MouseSensitivity = 0.5f;
+        }
+
+        //Debug.Log("Mouse sensitivity is " + MouseSensitivity + " invert mouse is " + InvertMouse);
+    } 
+
     public void OnGameStarted()
     {
         // GEt from player prefs

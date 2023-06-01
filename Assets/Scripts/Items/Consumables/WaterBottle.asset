@@ -21,5 +21,5 @@ MonoBehaviour:
   itemPrefabVariants: []
   itemIcon: {fileID: 21300000, guid: 71452f15b4690bb4ab160722e565a8e3, type: 3}
   isStackable: 1
-  weight: 0
+  weight: 0.5
   itemType: 1

@@ -82,7 +82,7 @@ public class PlayerControls : ActorSpaceship
         if (context.performed)
         {
             GameManager.Instance.OnInventoryPressed();
-            Debug.Log("On inventory pressed");
+            //Debug.Log("On inventory pressed");
         }
 
 

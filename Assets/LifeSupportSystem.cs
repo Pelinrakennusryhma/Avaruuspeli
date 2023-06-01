@@ -24,12 +24,14 @@ public class LifeSupportSystem : MonoBehaviour
 
     public bool TriedLeavingTheSceneAlready;
 
-    private float OxygenConsumptionRate = 60;
+    private float OxygenConsumptionRatePerMinute = 0.1f;
 
     private bool TheEventHasBeenCalled;
 
     public const string ranOutOfOxygenText = "You ran out of oxygen";
     public const string removedSpaceSuitText = "You removed your spacesuit. Can't survive in space without it.";
+    public const string OxygenString = "OXYGEN IN BOTTLES: ";
+    public const string MgLString = " mg/L";
 
     public ItemSO EquippedSpaceSuit;
 
@@ -61,8 +63,14 @@ public class LifeSupportSystem : MonoBehaviour
         OnExitUnbreathablePlace();
     }
 
-    public void UpdateOxygenStorage(int amount)
+    public void UpdateOxygenTanks(int amount)
     {
+        if (AmountOfOxygenTanks <= 0
+            && amount > 0)
+        {
+            AmountOfOxygenInLastTank = 1.0f;
+        }
+
         AmountOfOxygenTanks = amount;
 
         if (AmountOfOxygenTanks <= 0)
@@ -97,8 +105,17 @@ public class LifeSupportSystem : MonoBehaviour
         DoOxygenThings = true;
         TriedLeavingTheSceneAlready = false;
 
-        int amountOfBottles = GameManager.Instance.InventoryController.Inventory.GetItemScript(13).currentItemAmount;
-        UpdateOxygenStorage(amountOfBottles);
+        int amountOfBottles = 0;
+        ItemScript inventoryItemScript = GameManager.Instance.InventoryController.Inventory.GetItemScript(13);
+
+        if (inventoryItemScript != null)
+        {
+            amountOfBottles = GameManager.Instance.InventoryController.Inventory.GetItemScript(13).currentItemAmount;
+        }
+
+
+
+        UpdateOxygenTanks(amountOfBottles);
         Debug.Log("Enter unbreathable place");
     }
 
@@ -135,7 +152,9 @@ public class LifeSupportSystem : MonoBehaviour
 
         if (deltaTime != 0f)
         {
-            AmountOfOxygenInLastTank -= deltaTime / OxygenConsumptionRate;
+            float consumptionPerSecond = OxygenConsumptionRatePerMinute / 60.0f;
+
+            AmountOfOxygenInLastTank -= deltaTime * consumptionPerSecond;
 
             if (AmountOfOxygenInLastTank <= 0
                 && AmountOfOxygenTanks <= 1
@@ -178,7 +197,7 @@ public class LifeSupportSystem : MonoBehaviour
                // Debug.Log("amount of oxygen in last tank is " + AmountOfOxygenInLastTank + " amount of bottles is " + AmountOfOxygenTanks);
             }
 
-            OxygenHUDText.text = "OXYGEN: " + (AmountOfOxygenInLastTank * 1000.0f + (AmountOfOxygenTanks - 1) * 1000.0f).ToString("0.0") + " mg/L";
+            OxygenHUDText.text = OxygenString + "\n" + (AmountOfOxygenInLastTank * 1000.0f + (AmountOfOxygenTanks - 1) * 1000.0f).ToString("0") + MgLString;
 
             //AmountOfOxygenInLastTank -= deltaTime / 120.0f;
 
@@ -192,13 +211,13 @@ public class LifeSupportSystem : MonoBehaviour
 
     }        
     
-    public bool CheckIfWeCanEnterUnreathableArea()
+    public bool CheckIfWeCanEnterUnbreathableArea()
     {
         if (!HasSpaceSuitEquipped
             || AmountOfOxygenTanks <= 0
             || AmountOfOxygenInLastTank <= 0)
         {
-            Debug.LogWarning("Can't enter ubreathable area");
+            Debug.LogWarning("Can't enter unbreathable area");
             return false;
         }
 

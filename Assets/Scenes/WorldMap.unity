@@ -935,6 +935,31 @@ PrefabInstance:
       propertyPath: WorldMapCameraCanvasRaycaster
       value: 
       objectReference: {fileID: 2075898673}
+    - target: {fileID: 1878795062480326395, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 435.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878795062480326395, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878795062480326395, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -139
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194497192259260785, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194497192259260785, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 3886498004605279863, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: m_AnchorMax.x
