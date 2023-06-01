@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ElectricityTextured
+  m_Name: ElectricityTextured2
   m_Shader: {fileID: -6465566751694194690, guid: f74bd668ab4c4cf4fbf4f1b591b769d9,
     type: 3}
   m_ValidKeywords: []

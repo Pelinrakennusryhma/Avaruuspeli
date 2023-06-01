@@ -112,7 +112,6 @@ public class GUI_Spaceship : MonoBehaviour
 
     void InitShipHUD(ActorSpaceship actor)
     {
-        GameObject playerShip = actor.ship;
         healthBar.SetTrackable(actor.spaceshipHealth);
         boostBar.SetTrackable(actor.spaceshipBoost);
         missileBar.SetTrackable(actor.spaceshipMissile);

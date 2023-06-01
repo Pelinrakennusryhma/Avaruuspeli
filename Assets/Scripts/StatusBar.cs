@@ -24,8 +24,11 @@ public class StatusBar : MonoBehaviour
 
     void Update()
     {
-        UpdateText();
-        UpdateBar();
+        if(trackedScript != null)
+        {
+            UpdateText();
+            UpdateBar();
+        }
     }
 
     public void SetTrackable(UITrackable tracked)

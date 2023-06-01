@@ -36,7 +36,6 @@ public abstract class ActorSpaceship : MonoBehaviour
         spaceshipHealth = ship.GetComponent<SpaceshipHealth>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
-
         ActiveUtils = new List<Useable>();
         InitShip();
         GameEvents.Instance.CallEventSpaceshipSpawned(this);

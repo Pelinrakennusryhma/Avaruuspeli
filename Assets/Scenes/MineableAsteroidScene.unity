@@ -2337,9 +2337,9 @@ MonoBehaviour:
   quitButton: {fileID: 501875531}
   promptText: {fileID: 716040858}
   spaceshipHUD: {fileID: 1413916885}
-  healthBar: {fileID: 0}
-  boostBar: {fileID: 0}
-  missileBar: {fileID: 0}
+  healthBar: {fileID: 1180114883}
+  boostBar: {fileID: 1763581697}
+  missileBar: {fileID: 1250312849}
 --- !u!114 &678490489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4002,6 +4002,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078970298}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1180114883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7152063362731972220, guid: e3bdfad40f041964889e5f3f43ba553b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7152063362579412987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22882d0919c3a3479f7cba7619ae83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1250312849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7152063362731972220, guid: e3bdfad40f041964889e5f3f43ba553b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1858362650}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22882d0919c3a3479f7cba7619ae83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1255702041
 GameObject:
   m_ObjectHideFlags: 0
@@ -4639,6 +4663,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1955753505}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1763581697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7152063362731972220, guid: e3bdfad40f041964889e5f3f43ba553b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1955753505}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22882d0919c3a3479f7cba7619ae83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821343560
 GameObject:
   m_ObjectHideFlags: 0

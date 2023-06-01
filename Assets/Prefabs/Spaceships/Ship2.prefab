@@ -463,10 +463,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Renderer: {fileID: 2876582345614212255}
   electrifiedMaterials:
-  - {fileID: 2100000, guid: 7d4030d46d1bc684ebd4d06013aea210, type: 2}
+  - {fileID: 2100000, guid: 81b2e07c02c52f24b9cf620aeccb88f4, type: 2}
+  - {fileID: 2100000, guid: 6cdd1a94cb820414eb767f486d138d7b, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 2100000, guid: 9998a8af7dfa3ac468309c120319cebf, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   shieldPrefab: {fileID: 4159680363082821287, guid: 920879fe68a7e134e858156fd6e3ad75,
@@ -858,7 +857,7 @@ PrefabInstance:
     - target: {fileID: 6441939964868624093, guid: a03a084c68707bb4eaf4e06b9054823d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.1
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6441939964868624093, guid: a03a084c68707bb4eaf4e06b9054823d,
         type: 3}
@@ -1329,7 +1328,7 @@ PrefabInstance:
     - target: {fileID: 6441939964868624093, guid: a03a084c68707bb4eaf4e06b9054823d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.1
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6441939964868624093, guid: a03a084c68707bb4eaf4e06b9054823d,
         type: 3}

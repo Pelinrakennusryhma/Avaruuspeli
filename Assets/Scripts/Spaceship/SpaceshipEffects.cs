@@ -58,6 +58,7 @@ public class SpaceshipEffects : MonoBehaviour
             if(electrifiedMaterials[i] != null)
             {
                 changedMaterials[i] = electrifiedMaterials[i];
+                changedMaterials[i].color = originalMaterials[i].color;
             } else
             {
                 changedMaterials[i] = originalMaterials[i];
