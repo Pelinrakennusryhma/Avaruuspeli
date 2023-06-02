@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,44 @@ public class PlayerControls : ActorSpaceship
 {
     [SerializeField]
     ButtonHeldAction leaveSpaceshipSceneHandler;
+
+    // Audio
+    private EventInstance alarmSFX;
+
+    protected override void Start()
+    {
+        base.Start();
+        alarmSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Alarm);
+    }
+
+    private void Update()
+    {
+        UpdateSounds();
+    }
+
+    void UpdateSounds()
+    {
+        if (lockedMissiles.Count > 0)
+        {
+            PLAYBACK_STATE playbackState;
+            alarmSFX.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                alarmSFX.start();
+            }
+        }
+        else
+        {
+            alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
     protected override void OnDeath()
     {
         base.OnDeath();
         Destroy(gameObject);
         Cursor.visible = true;
+        alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public void OnThrust(InputAction.CallbackContext context)
@@ -112,12 +146,18 @@ public class PlayerControls : ActorSpaceship
         spaceshipMissile.shooting = context.performed;
     }
 
+    protected override void InitUtilities()
+    {
+        base.InitUtilities();
+        GameEvents.Instance.CallEventPlayerUtilitiesInited(shipUtilityScripts);
+    }
+
     public void OnUtility1(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            // Get some spaceshipstats going and call its first utility component
-            Debug.Log("utility 1");
-        }
+        shipUtilityScripts[0].TryingToActivate = context.performed;
+    }
+    public void OnUtility2(InputAction.CallbackContext context)
+    {
+        shipUtilityScripts[1].TryingToActivate = context.performed;
     }
 }

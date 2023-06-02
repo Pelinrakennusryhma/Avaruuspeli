@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShipItem", order = 9)]
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShipItem/ShipItem", order = 9)]
 public class ShipItemSO : ItemSO
 {
     [ExecuteInEditMode]

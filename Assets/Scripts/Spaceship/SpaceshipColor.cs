@@ -11,7 +11,8 @@ public class SpaceshipColor : MonoBehaviour
         ActorSpaceship actor = GetComponentInParent<ActorSpaceship>();
         if(actor != null)
         {
-            ColorHull(actor.faction.hullColor);
+            Debug.LogWarning("Coloring ship disabled due to effect shaders");
+            //ColorHull(actor.faction.hullColor);
         }
     }
 

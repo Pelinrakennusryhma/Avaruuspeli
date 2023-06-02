@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +25,10 @@ public class ResourceGatherer : MonoBehaviour
 
     public PlayerHands Hands;
 
+    Rigidbody rb;
+    // Audio
+    private EventInstance drillSFX;
+
     public void Awake()
     {
         Instance = this; 
@@ -30,7 +36,6 @@ public class ResourceGatherer : MonoBehaviour
         Tool = ToolType.None;
         Controls = transform.parent.GetComponent<FirstPersonPlayerControls>();
         Hands = transform.parent.GetComponentInChildren<PlayerHands>();
-
     }
 
     public void Start()
@@ -42,6 +47,10 @@ public class ResourceGatherer : MonoBehaviour
 
         //Debug.Log("Setting tool to " + Tool.ToString());
         Hands.SetTool(Tool);
+
+        drillSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Drill);
+        rb = GetComponentInParent<Rigidbody>();
+        RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
     }
 
     // Start is called before the first frame update
@@ -168,18 +177,45 @@ public class ResourceGatherer : MonoBehaviour
                 if (Tool == ToolType.BasicDrill)
                 {
                     hitRock.ReduceHealth(0.3f * Time.deltaTime, Tool);
+                    UpdateSound(true);
                 }
 
                 else if (Tool == ToolType.AdvancedDrill)
                 {
                     hitRock.ReduceHealth(Time.deltaTime, Tool);
+                    UpdateSound(true);
                 }
 
                 else if (Tool == ToolType.DiamondDrill)
                 {
                     hitRock.ReduceHealth(Time.deltaTime * 1.5f, Tool);
+                    UpdateSound(true);
                 }
+                
             }
+            else
+            {
+                UpdateSound(false);
+            }
+        }
+    }
+
+    void UpdateSound(bool shouldPlay)
+    {
+        // play engine sound when 'forward' is held down.. or something else?
+        if (shouldPlay)
+        {
+            PLAYBACK_STATE playbackState;
+            drillSFX.getPlaybackState(out playbackState);
+            RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                drillSFX.start();
+            }
+        }
+        else
+        {
+            drillSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

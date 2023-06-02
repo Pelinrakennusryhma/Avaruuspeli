@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{0d11c2b6-9166-4f76-a2ea-f4965808a77f}">
+		<property name="name">
+			<value>MusicArea</value>
+		</property>
+		<relationship name="folder">
+			<destination>{23352a25-dcaf-42e6-9542-0bdaa6a45c85}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{60764b71-f08c-4775-ab61-79258f21810c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{60764b71-f08c-4775-ab61-79258f21810c}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>WorldMap</value>
+			<value>SpaceshipScene</value>
+			<value>Planet</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

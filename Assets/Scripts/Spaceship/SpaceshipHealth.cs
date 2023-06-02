@@ -52,6 +52,7 @@ public class SpaceshipHealth : UITrackable
         {
             currentHealth = 0;
             spaceshipEvents.CallEventSpaceshipDied();
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.Explosion, transform.position);
         } else if(newValue > maxHealth) {
             currentHealth = maxHealth;
         } else

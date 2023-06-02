@@ -34,6 +34,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1671868f65796174ebf2919737926411, type: 2}
   - {fileID: 11400000, guid: abf0d52edeb25a645abfa3fa1ab58cbd, type: 2}
   - {fileID: 11400000, guid: 64b7adfb3ffebe64c8b8b55de2e6aca5, type: 2}
+  - {fileID: 11400000, guid: 0d96be50a494a2e419f9eab561f60d9e, type: 2}
+  - {fileID: 11400000, guid: 2f76357559782c8498fa08a62ae7ec1a, type: 2}
   - {fileID: 11400000, guid: 24c39d56c459ba445acdaa88e384efa6, type: 2}
   - {fileID: 11400000, guid: d4292f71ccd02ba43af4fa87e8e5f73e, type: 2}
   - {fileID: 11400000, guid: 6c4f6d468059708499ceb1382d20d841, type: 2}
@@ -82,6 +84,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9639b516beed100468b17ca4e72b45b8, type: 2}
   - {fileID: 11400000, guid: 8722498a8fd2fec428bf0b7d4b9a67d0, type: 2}
   - {fileID: 11400000, guid: 1a9ff413a57153a46b1ffd1accae2df3, type: 2}
+  - {fileID: 11400000, guid: 0d96be50a494a2e419f9eab561f60d9e, type: 2}
+  - {fileID: 11400000, guid: 2f76357559782c8498fa08a62ae7ec1a, type: 2}
   ShipWeaponItems:
   - {fileID: 11400000, guid: 1671868f65796174ebf2919737926411, type: 2}
   - {fileID: 11400000, guid: abf0d52edeb25a645abfa3fa1ab58cbd, type: 2}

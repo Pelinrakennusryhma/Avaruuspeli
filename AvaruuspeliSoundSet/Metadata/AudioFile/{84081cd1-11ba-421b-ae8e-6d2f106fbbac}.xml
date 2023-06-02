@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{84081cd1-11ba-421b-ae8e-6d2f106fbbac}">
+		<property name="assetPath">
+			<value>Sounds/lento.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>13.609795918367347</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{95f099aa-d65e-4a12-9f3a-5e46638d4f71}</destination>
+		</relationship>
+	</object>
+</objects>

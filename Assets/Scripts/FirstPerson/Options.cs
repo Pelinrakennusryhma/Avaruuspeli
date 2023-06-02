@@ -131,6 +131,9 @@ public class Options : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("Invert", invert);
+
+        AudioManager.Instance.SaveData();
+
         PlayerPrefs.Save();
 
         // Save to player prefs

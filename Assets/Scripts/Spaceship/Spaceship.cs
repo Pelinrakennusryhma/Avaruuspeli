@@ -6,12 +6,14 @@ public class Spaceship : MonoBehaviour, IDamageable
 {
     SpaceshipEvents spaceshipEvents;
     SpaceshipHealth spaceshipHealth;
+    ActorSpaceship actor;
 
     void Awake()
     {
         spaceshipEvents = GetComponent<SpaceshipEvents>();
         spaceshipHealth = GetComponent<SpaceshipHealth>();
         spaceshipEvents.EventSpaceshipCollided.AddListener(OnCollision);
+        actor = GetComponentInParent<ActorSpaceship>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,6 +37,15 @@ public class Spaceship : MonoBehaviour, IDamageable
 
     public void Damage(float damage, GameObject source)
     {
+        if(actor != null)
+        {
+            if (Utils.ListContains<SpaceshipShield>(actor.ActiveUtils))
+            {
+                Debug.Log("Shield up, damage blocked");
+                return;
+            }
+        }
+
         spaceshipHealth.DecreaseHealth((int)damage);
 
         if(source != null)

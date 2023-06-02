@@ -61,19 +61,28 @@ public class SpaceshipMissile : UITrackable
         }
     }
 
+    bool CanLock()
+    {
+        return focusedTarget != null &&
+            !lockedTargets.Contains(focusedTarget) &&
+            currentMissiles > 0 &&
+            !Utils.ListContains<SpaceshipECM>(focusedTarget.ActiveUtils);
+            //!focusedTarget.Protected;
+    }
+
     void LockOnTarget()
     {
-        if(focusedTarget != null && !lockedTargets.Contains(focusedTarget) && currentMissiles > 0)
+        if(CanLock())
         {
             lockedTargets.Add(focusedTarget);
             focusedTarget.UnfocusShip(actor);
 
-            Debug.Log("locking on: " + focusedTarget.name);
             currentMissiles--;
             GameObject missileObject = Instantiate(missilePrefab, missileOrigin.position, Quaternion.identity, projectileParent.transform);
             Missile spawnedMissile = missileObject.GetComponent<Missile>();
             spawnedMissile.Init(focusedTarget, this);
             focusedTarget.LockMissile(actor, spawnedMissile);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.MissileLaunch, transform.position);
         }
     }
 
@@ -132,7 +141,7 @@ public class SpaceshipMissile : UITrackable
 
             if (focusedTarget)
             {
-                if (!lockedTargets.Contains(focusedTarget) && currentMissiles > 0)
+                if (CanLock())
                 {
                     focusedTarget.FocusShip(actor);
                 }

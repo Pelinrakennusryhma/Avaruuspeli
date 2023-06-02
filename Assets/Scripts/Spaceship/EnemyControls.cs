@@ -15,9 +15,9 @@ public class EnemyControls : ActorSpaceship
     GameObject missileLockIndicatorPrefab;
     GameObject missileLockIndicator;
 
-    protected override void OnEnable()
+    protected override void Start()
     {
-        base.OnEnable();
+        base.Start();
         shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
     }
@@ -243,5 +243,19 @@ public class EnemyControls : ActorSpaceship
     public void OnSecondaryShoot(bool shooting)
     {
         spaceshipMissile.shooting = shooting;
+    }
+
+    public void OnRandomUtility()
+    {
+        int utilIndex = Random.Range(0, shipUtilityScripts.Count);
+        shipUtilityScripts[utilIndex].TryingToActivate = true;
+    }
+
+    public void OnCancelAllUtilities()
+    {
+        foreach (Useable useable in shipUtilityScripts)
+        {
+            useable.TryingToActivate = false;
+        }
     }
 }
