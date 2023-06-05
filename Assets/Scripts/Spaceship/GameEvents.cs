@@ -36,6 +36,8 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventInventoryOpened;
     public UnityEvent EventInventoryClosed;
 
+    public UnityEvent EventPlayerWasTooHungryToContinue;
+
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -87,6 +89,7 @@ public class GameEvents : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ShipLifeSupportSystem.OnExitShip();
+            GameManager.Instance.OnEnterAsteroidSurface();
         }
     }
     
@@ -103,6 +106,7 @@ public class GameEvents : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ShipLifeSupportSystem.OnEnterShip();
+            GameManager.Instance.HungerTracker.OnLeaveFirstPersonScene();
         }
         //Debug.Log("Calling event player left asteroid");
     }
@@ -136,5 +140,10 @@ public class GameEvents : MonoBehaviour
     public void CallEventInventoryClosed()
     {
         EventInventoryClosed.Invoke();
+    }
+
+    public void CallEventPlayerWasTooHungyToContinue()
+    {
+        EventPlayerWasTooHungryToContinue.Invoke();
     }
 }

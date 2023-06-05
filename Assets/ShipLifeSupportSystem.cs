@@ -19,10 +19,12 @@ public class ShipLifeSupportSystem : MonoBehaviour
 
     public bool DoOxygenThings;
 
-    private float WaterAndCarbonConsumptionRatePerMinute = 0.01f;
-    //private float WaterAndCarbonConsumptionRatePerMinute = 60.0f;
-    //private float OxygenStorageConsumptionRatePerMinute = 30.0f;
+    private float WaterAndCarbonConsumptionRatePerMinute = 0.01f;    
     private float OxygenStorageConsumptionRatePerMinute = 0.1f;
+
+    // private float WaterAndCarbonConsumptionRatePerMinute = 60.0f;
+    // private float OxygenStorageConsumptionRatePerMinute = 30.0f;
+
 
     public GameObject NoOxygenPromptParent;
     public TextMeshProUGUI NoOxygenPrompt;
@@ -78,23 +80,7 @@ public class ShipLifeSupportSystem : MonoBehaviour
         }
     }
 
-    public void DisplayPromptAboutNotBeingAbleToEnterShip()
-    {
-        // Where do we parent the prompt and which prompt? Main camera probably.
-        // Probably we show it just for a set period of time, so it is not left on.
 
-        NoOxygenPromptParent.transform.SetParent(Camera.main.transform);
-        NoOxygenPromptParent.SetActive(true);
-        NoOxygenPrompt.text = NoOxygenPromptString;
-        NoOxygenPromptTimer = NoOxygenPromptTimerLenght;
-        //Debug.Log("we can't enter ship, because we don't have oxygen. Display a prompt about this.");
-    }
-
-    public void DisablePromptAboutNotBeingAbleToEnterShip()
-    {
-        NoOxygenPromptParent.transform.SetParent(GameManager.Instance.gameObject.transform);
-        NoOxygenPromptParent.SetActive(false);
-    }
 
     public void OnEnterShip()
     {
@@ -542,13 +528,34 @@ public class ShipLifeSupportSystem : MonoBehaviour
 
     }
 
+    public void DisplayPromptAboutNotBeingAbleToEnterShip()
+    {
+        // Where do we parent the prompt and which prompt? Main camera probably.
+        // Probably we show it just for a set period of time, so it is not left on.
+
+        //NoOxygenPromptParent.transform.SetParent(Camera.main.transform);
+        //NoOxygenPromptParent.SetActive(true);
+        //NoOxygenPrompt.text = NoOxygenPromptString;
+        //NoOxygenPromptTimer = NoOxygenPromptTimerLenght;
+        GameManager.Instance.WorldMapMessagePrompt.DisplayMessage(NoOxygenPromptString, NoOxygenPromptTimerLenght);
+        //Debug.Log("we can't enter ship, because we don't have oxygen. Display a prompt about this.");
+    }
+
+    public void DisablePromptAboutNotBeingAbleToEnterShip()
+    {
+        NoOxygenPromptParent.transform.SetParent(GameManager.Instance.gameObject.transform);
+        NoOxygenPromptParent.SetActive(false);
+    }
+
     public void ActivateRunninOutOfOxygenPrompt()
     {
-        NoOxygenPromptParent.gameObject.transform.SetParent(Camera.main.transform);
-        NoOxygenPrompt.text = RanOutOfOxygenPromptString;
-        NoOxygenPromptParent.gameObject.SetActive(true);
-        WaitingToShowRunningOutOfOxygenPrompt = false;
-        RanOutOfOxygenPromptTimer = RanOutOfOxygenPromptTimerLength;
+        //NoOxygenPromptParent.gameObject.transform.SetParent(Camera.main.transform);
+        //NoOxygenPrompt.text = RanOutOfOxygenPromptString;
+        //NoOxygenPromptParent.gameObject.SetActive(true);
+        //WaitingToShowRunningOutOfOxygenPrompt = false;
+        //RanOutOfOxygenPromptTimer = RanOutOfOxygenPromptTimerLength;
+
+        GameManager.Instance.WorldMapMessagePrompt.DisplayMessage(RanOutOfOxygenPromptString, NoOxygenPromptTimerLenght);
         //Debug.LogError("Should show a prompt about running out of oxygen");
     }
 

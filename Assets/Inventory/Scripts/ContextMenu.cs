@@ -443,6 +443,14 @@ public class ContextMenu : MonoBehaviour
             GameManager.Instance.InventoryController.OnHydroponicsBayShow();
         }
 
+        if (itemID == 20)
+        {
+            if (GameManager.Instance.HungerTracker.CheckIfCanEatASandwich())
+            {
+                GameManager.Instance.HungerTracker.OnEatSandwich();
+            }
+        }
+
 
         HideAll();
         //Debug.Log("Use clicked");

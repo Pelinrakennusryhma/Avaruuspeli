@@ -52,6 +52,10 @@ public class GameManager : MonoBehaviour
     public string ActiveStackedString;
     public bool UseStringWithActiveStackedScene;
 
+    public HungerTracker HungerTracker;
+
+    public WorldMapMessagePrompt WorldMapMessagePrompt;
+
     public enum TypeOfScene
     {
         None = 0,
@@ -78,7 +82,9 @@ public class GameManager : MonoBehaviour
             InventoryController = GetComponentInChildren<InventoryController>(true);
             InventoryController.Init();
 
-
+            HungerTracker = GetComponentInChildren<HungerTracker>(true);
+            WorldMapMessagePrompt = GetComponentInChildren<WorldMapMessagePrompt>(true);
+            WorldMapMessagePrompt.Init();
 
 
             transform.parent = null;
@@ -114,7 +120,7 @@ public class GameManager : MonoBehaviour
 
         else
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             Debug.LogWarning("Destroyed game manager");
         }
     }
@@ -335,6 +341,8 @@ public class GameManager : MonoBehaviour
 
         GameManager.Instance.TransitionalCamera.gameObject.SetActive(true);
 
+        HungerTracker.OnLeaveFirstPersonScene();
+
         if (WorldMapScene.Instance != null)
         {        
             SceneManager.UnloadSceneAsync(ActiveStackedScene);
@@ -396,6 +404,7 @@ public class GameManager : MonoBehaviour
     public void EnterPlanet()
     {
         ShipLifeSupportSystem.OnExitShip();
+        HungerTracker.OnEnterFirstPersonScene();
 
         Debug.LogWarning("ENTER PLANET");
 
@@ -696,4 +705,12 @@ public class GameManager : MonoBehaviour
         GoBackToWorldMap();
         Debug.Log("Ready to leave asteroid surface");
     }
+
+    public void OnEnterAsteroidSurface()
+    {
+        HungerTracker.OnEnterFirstPersonScene();
+        Debug.Log("Gamemanager knows we entered asteroid surface");
+    }
+
+
 }
