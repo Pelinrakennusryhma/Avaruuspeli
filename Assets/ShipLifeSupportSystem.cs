@@ -555,7 +555,7 @@ public class ShipLifeSupportSystem : MonoBehaviour
         //WaitingToShowRunningOutOfOxygenPrompt = false;
         //RanOutOfOxygenPromptTimer = RanOutOfOxygenPromptTimerLength;
 
-        GameManager.Instance.WorldMapMessagePrompt.DisplayMessage(RanOutOfOxygenPromptString, NoOxygenPromptTimerLenght);
+        GameManager.Instance.WorldMapMessagePrompt.DisplayMessage(RanOutOfOxygenPromptString, RanOutOfOxygenPromptTimerLength);
         //Debug.LogError("Should show a prompt about running out of oxygen");
     }
 

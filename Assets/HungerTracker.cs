@@ -28,13 +28,13 @@ public class HungerTracker : MonoBehaviour
     {
         IsOnFirstPersonScene = true;
         CurrentFullness = 100;
-        Debug.Log("We entered first person scene");
+        //Debug.Log("We entered first person scene");
     }
 
     public void OnLeaveFirstPersonScene()
     {
         IsOnFirstPersonScene = false;
-        Debug.Log("We exited first person scene");
+        //Debug.Log("We exited first person scene");
     }
 
     public bool CheckIfCanEatASandwich()

@@ -703,13 +703,13 @@ public class GameManager : MonoBehaviour
     public void OnLeaveAsteroidSurface()
     {
         GoBackToWorldMap();
-        Debug.Log("Ready to leave asteroid surface");
+        //Debug.Log("Ready to leave asteroid surface");
     }
 
     public void OnEnterAsteroidSurface()
     {
         HungerTracker.OnEnterFirstPersonScene();
-        Debug.Log("Gamemanager knows we entered asteroid surface");
+        //Debug.Log("Gamemanager knows we entered asteroid surface");
     }
 
 

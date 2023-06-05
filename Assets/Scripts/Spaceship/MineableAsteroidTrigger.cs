@@ -37,6 +37,8 @@ public class MineableAsteroidTrigger : MonoBehaviour
 
     private bool HadSpaceSuitOnFirstTriggerEnterAttempt = false;
 
+    private bool playerHasLanded;
+
 
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
         Debug.LogWarning("On toggle indicators removed, because the method doesn't exist anymore");
         GameEvents.Instance.EventInventoryClosed.AddListener(OnInventoryClose);
         //Debug.Log("Listener added to on leftasteroid" + Time.time + " gameobject is " + gameObject.name);
+        
 
     }
 
@@ -142,6 +145,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
     {
         GameEvents.Instance.CallEventPlayerLanded(this);
         CenterOfGravity.enabled = true;
+        playerHasLanded = true;
     }
 
     void OnLeaveAsteroid(MineableAsteroidTrigger asteroid)
@@ -151,6 +155,8 @@ public class MineableAsteroidTrigger : MonoBehaviour
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
             CenterOfGravity.enabled = false;
         }
+
+        playerHasLanded = false;
     }
 
     void OnEnemiesKilled()
@@ -185,7 +191,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
                 {
                     currentText = noSpacesuitText;
                     HadSpaceSuitOnFirstTriggerEnterAttempt = false;
-                    Debug.Log("Setting the current text to " + currentText);
+                    //Debug.Log("Setting the current text to " + currentText);
                 }
 
                 else if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks <= 0)
@@ -294,14 +300,15 @@ public class MineableAsteroidTrigger : MonoBehaviour
 
     private void OnInventoryClose()
     {
-        if (playerInTriggerArea
+        if (playerInTriggerArea          
+            && !playerHasLanded 
             &&  GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped
             && GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks > 0
             && _actorManager.SceneCleared)
         {
             currentText = successText;
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(currentText);
-            Debug.Log("Invenotry closed, showing prompt ");
+            //Debug.Log("Invenotry closed, showing prompt ");
         }
     }
 

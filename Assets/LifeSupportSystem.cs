@@ -116,7 +116,7 @@ public class LifeSupportSystem : MonoBehaviour
 
 
         UpdateOxygenTanks(amountOfBottles);
-        Debug.Log("Enter unbreathable place");
+        //Debug.Log("Enter unbreathable place");
     }
 
     public void OnExitUnbreathablePlace()
@@ -124,7 +124,7 @@ public class LifeSupportSystem : MonoBehaviour
         OxygenHUDParent.transform.SetParent(GameManager.Instance.gameObject.transform);
         OxygenHUDParent.SetActive(false);
         DoOxygenThings = false;
-        Debug.Log("On exit unbreathable place" + Time.time);
+        //Debug.Log("On exit unbreathable place" + Time.time);
     }
 
     public void Update()
@@ -217,13 +217,13 @@ public class LifeSupportSystem : MonoBehaviour
             || AmountOfOxygenTanks <= 0
             || AmountOfOxygenInLastTank <= 0)
         {
-            Debug.LogWarning("Can't enter unbreathable area");
+            //Debug.LogWarning("Can't enter unbreathable area");
             return false;
         }
 
         else
         {
-            Debug.LogWarning("CAN enter unbreathable area");
+            //Debug.LogWarning("CAN enter unbreathable area");
             return true;
         }
     }
