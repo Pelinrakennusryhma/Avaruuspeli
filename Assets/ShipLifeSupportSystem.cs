@@ -566,4 +566,13 @@ public class ShipLifeSupportSystem : MonoBehaviour
         WaitingToShowRunningOutOfOxygenPrompt = false;
         //Debug.LogError("Should hide a prompt about running out of oxygen");
     }
+
+    public void SaveRelevantData()
+    {
+        GameManager.Instance.SaverLoader.SaveAmountOfOxygenInLastStorage(AmountOfOxygenInLastStorage);
+        GameManager.Instance.SaverLoader.SaveTimeInMinutesForHydroPonicsBay(TimeThatHydroponicsBayHasBeenOutOfResources);
+        GameManager.Instance.SaverLoader.SaveAmountOfCarbonInLastUnit(AmountOfCarbonInLastUnit);
+        GameManager.Instance.SaverLoader.SaveAmountOfWaterInLastBottle(AmountOfWaterInLastBottle);
+        Debug.Log("Saving data");
+    }
 }

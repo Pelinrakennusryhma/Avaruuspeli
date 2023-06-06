@@ -1178,6 +1178,8 @@ MonoBehaviour:
   OwnerISRU: {fileID: 0}
   BackgroundPlate: {fileID: 1924366928680611452}
   HighlighterPlate: {fileID: 6618434824599277439}
+  OriginalBackPlateColor: {r: 0, g: 0, b: 0, a: 0}
+  OwnerHydroponicsBay: {fileID: 0}
 --- !u!114 &7106882341185814275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2314,6 +2316,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9004727888465105959}
     m_Modifications:
+    - target: {fileID: 2137310641482936117, guid: 49bd50fd51fe79d4d843e410b3da800d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137310641482936117, guid: 49bd50fd51fe79d4d843e410b3da800d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137310641482936117, guid: 49bd50fd51fe79d4d843e410b3da800d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3094789320232953983, guid: 49bd50fd51fe79d4d843e410b3da800d,
         type: 3}
       propertyPath: m_Name

@@ -131,7 +131,6 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     public void SetPosOnCurrentStarSystem(Vector3 currentStarPos)
     {
         CurrentStarSystemPos = currentStarPos;
-
         //Debug.Log("Setting the position on current star system");
         //transform.position = new Vector3(currentStar.x, 0, currentStar.z);
     }
@@ -165,7 +164,25 @@ public class MotherShipOnWorldMapController : MonoBehaviour
     {
         CurrentTargetClickableObject = clickableObject;
         IsOnCurrentClickableObject = false;
-        
+
+        if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.Universe)
+        {
+            GameManager.Instance.SaverLoader.SaveCurrentUniversePos(CurrentTargetClickableObject.transform.position);
+            FuelSystem.SaveData();
+        }
+
+        else if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.Galaxy)
+        {
+            GameManager.Instance.SaverLoader.SaveCurrentGalaxyPos(CurrentTargetClickableObject.transform.position);
+            FuelSystem.SaveData();
+        }
+
+        else if (WorldMapMouseController.Instance.CurrentZoomLevel == WorldMapMouseController.ZoomLevel.StarSystem)
+        {
+            GameManager.Instance.SaverLoader.SaveCurrentStarSystemPos(CurrentTargetClickableObject.transform.position);
+            FuelSystem.SaveData();
+        }
+
         if (clickableObject != null) 
         {
             //Debug.Log("Setting the current target clickable object " + clickableObject.gameObject.name);

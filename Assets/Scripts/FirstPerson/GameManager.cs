@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     private bool inventoryToggleQueued = false;
 
     private CursorLockMode cachedCursorLockMode = CursorLockMode.None;
+    public bool cachedCursorHideMode = true;
 
     public TypeOfScene CurrentSceneType;
 
@@ -55,6 +56,8 @@ public class GameManager : MonoBehaviour
     public HungerTracker HungerTracker;
 
     public WorldMapMessagePrompt WorldMapMessagePrompt;
+
+
 
     public enum TypeOfScene
     {
@@ -220,7 +223,7 @@ public class GameManager : MonoBehaviour
 
                     else
                     {
-                        InventoryController.OnInventoryShow();
+                        InventoryController.OnInventoryShow(true);
                     }
                 }
             }
@@ -245,8 +248,12 @@ public class GameManager : MonoBehaviour
 
     void OnPause()
     {
+
         cachedCursorLockMode = Cursor.lockState;
+        cachedCursorHideMode = Cursor.visible;
+
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         if (OptionsScreen != null) 
         {
@@ -267,6 +274,9 @@ public class GameManager : MonoBehaviour
     void OnUnpause()
     {
         Cursor.lockState = cachedCursorLockMode;
+        Cursor.visible = cachedCursorHideMode;
+
+
 
         if (OptionsScreen != null) 
         {
@@ -364,6 +374,7 @@ public class GameManager : MonoBehaviour
         IncomingSceneType = TypeOfScene.None;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Debug.Log("This caused visibility");
 
         //LifeSupportSystem.OnExitUnbreathablePlace();
 
@@ -379,7 +390,7 @@ public class GameManager : MonoBehaviour
 
     public void EnterAsteroidField()
     {
-
+        SaveData();
         Debug.LogWarning("ENTER ASTEROID FIELD");
 
         IncomingSceneType = TypeOfScene.AsteroidField;
@@ -388,12 +399,14 @@ public class GameManager : MonoBehaviour
 
     public void EnterPOI(PointOfInterest pointOfInterest)
     {
+
         currentPOI = pointOfInterest;
         EnterPOI();
     }
 
     public void EnterPOI()
-    {
+    {        
+        SaveData();
         IncomingSceneType = TypeOfScene.POI;
         Debug.Log("currentPOI: " + currentPOI);
         Debug.Log("Data: " + currentPOI.Data);
@@ -403,6 +416,7 @@ public class GameManager : MonoBehaviour
 
     public void EnterPlanet()
     {
+        SaveData();
         ShipLifeSupportSystem.OnExitShip();
         HungerTracker.OnEnterFirstPersonScene();
 
@@ -685,6 +699,8 @@ public class GameManager : MonoBehaviour
         IsOnWorldMap = true;
         IncomingSceneType = TypeOfScene.None;
 
+        SaveData();
+
         if (ShipLifeSupportSystem.WaitingToShowRunningOutOfOxygenPrompt)
         {
             ShipLifeSupportSystem.ActivateRunninOutOfOxygenPrompt();
@@ -708,9 +724,16 @@ public class GameManager : MonoBehaviour
 
     public void OnEnterAsteroidSurface()
     {
+        SaveData();
         HungerTracker.OnEnterFirstPersonScene();
         //Debug.Log("Gamemanager knows we entered asteroid surface");
     }
 
+    private void SaveData()
+    {
+        InventoryController.HydroponicsBay.SaveRelevantData();
+        LifeSupportSystem.SaveRelevantData();
+        ShipLifeSupportSystem.SaveRelevantData();
+    }
 
 }

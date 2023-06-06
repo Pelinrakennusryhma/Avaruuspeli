@@ -7,7 +7,7 @@ public class HungerTracker : MonoBehaviour
     public float CurrentFullness = 100;
     public float MaxFullness = 100;
 
-    private float SandwichConsumptionRatePerMinute = 10.0f;
+    private float SandwichConsumptionRatePerMinute = 33.0f;
     //private float SandwichConsumptionRatePerMinute = 100.0f;
 
     public bool IsOnFirstPersonScene;

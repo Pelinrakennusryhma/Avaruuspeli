@@ -26,6 +26,7 @@ public class InventoryController : MonoBehaviour
     public Sprite BlankSprite;
 
     CursorLockMode cachedCursorLockMode = CursorLockMode.None;
+    private bool cachedCursorHideMode = true;
 
     public float Money = 10000.0f;
 
@@ -46,7 +47,7 @@ public class InventoryController : MonoBehaviour
         //ItemDataBaseWithScriptables = GetComponentInChildren<ItemDataBaseWithScriptables>(true);
 
         Money = 10000.0f;
-        OnInventoryShow();
+        OnInventoryShow(false);
 
         Inventory.AddItem(29, 1);
         Inventory.AddItem(32, 1);
@@ -79,18 +80,30 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(30, 10);
         Inventory.AddItem(31, 10);
 
+        GameManager.Instance.SaverLoader.SaveMoney(Money);
+
+        Equipment.UnequipObjectInHands();
+        Equipment.UnequipSpacesuit();
+
         Shop.Init();
         ShopHeadsUp.Init();
 
         OnInventoryHide();
     }
 
-    public void OnInventoryShow()
+    public void OnInventoryShow(bool cacheCursor)
     {
 
+        if (cacheCursor) 
+        {
+            cachedCursorLockMode = Cursor.lockState;
+            cachedCursorHideMode = Cursor.visible;
+        }
 
-        cachedCursorLockMode = Cursor.lockState;
+
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         Time.timeScale = 0;
         ShowingInventory = true;
         CanvasObject.SetActive(true);
@@ -179,6 +192,10 @@ public class InventoryController : MonoBehaviour
         }
 
         Cursor.lockState = cachedCursorLockMode;
+        Cursor.visible = cachedCursorHideMode;
+
+
+
         Time.timeScale = 1.0f;
         ShowingInventory = false;
         CanvasScript.HideHeadsUpShop(false);
@@ -200,6 +217,8 @@ public class InventoryController : MonoBehaviour
         {
            // Debug.LogError("Null mothership instance. Don't update warpdrive amounts");
         }
+
+        GameManager.Instance.SaverLoader.SaveInventory(Inventory.InventoryItemScripts);
         //Debug.Log("Hide inventory");
     }
 
@@ -309,7 +328,7 @@ public class InventoryController : MonoBehaviour
     {
         Inventory.gameObject.SetActive(true);
         ISRUModule.gameObject.SetActive(false);
-        OnInventoryShow();
+        OnInventoryShow(false);
         //Debug.Log("Hide isru module");
     }
 
@@ -333,7 +352,7 @@ public class InventoryController : MonoBehaviour
     {
         Inventory.gameObject.SetActive(true);
         HydroponicsBay.gameObject.SetActive(false);
-        OnInventoryShow();
+        OnInventoryShow(false);
     }
 
     public void Update()
@@ -360,7 +379,7 @@ public class InventoryController : MonoBehaviour
     {
         IsShopping = true;
         Shop.Init();
-        OnInventoryShow();
+        OnInventoryShow(true);
         CanvasScript.ShowEquipment();
         CanvasScript.HideItemCatalog();
         CanvasScript.ShowShop();
@@ -398,7 +417,8 @@ public class InventoryController : MonoBehaviour
         OnInventoryHide();
         CanvasScript.HideShop();
         CanvasScript.HideHeadsUpShop(true);
-        ResourceInventory.Instance.OnEnterShoppingArea();        
+        ResourceInventory.Instance.OnEnterShoppingArea();
+        GameManager.Instance.SaverLoader.SaveMoney(Money);
         IsShopping = false;
 
     }

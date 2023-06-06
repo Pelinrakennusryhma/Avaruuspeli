@@ -697,6 +697,8 @@ public class HydroponicsBay : MonoBehaviour
 
         GameManager.Instance.ShipLifeSupportSystem.OnHydroponicsBaySetup();
 
+        GameManager.Instance.SaverLoader.SaveHydroponicsBayIsRunningStatus(true);
+
         CheckWhichButtonsShouldBeGrayedOut();
     }
 
@@ -711,6 +713,8 @@ public class HydroponicsBay : MonoBehaviour
         OxygenButtonText.text = StopString;
 
         GameManager.Instance.ShipLifeSupportSystem.OnOxygenProductionStarted();
+
+        GameManager.Instance.SaverLoader.SaveHydroponicsBayIsProducingOxygenStatus(true);
 
         CheckWhichButtonsShouldBeGrayedOut();
     }
@@ -748,6 +752,8 @@ public class HydroponicsBay : MonoBehaviour
 
         OxygenButtonText.text = StartString;
 
+        GameManager.Instance.SaverLoader.SaveHydroponicsBayIsProducingOxygenStatus(false);
+
         CheckWhichButtonsShouldBeGrayedOut();
     }
 
@@ -759,7 +765,7 @@ public class HydroponicsBay : MonoBehaviour
 
         Status1Text.text = UnfunctionalRequiresSetupString;
         Status2Text.text = "";
-
+        GameManager.Instance.SaverLoader.SaveHydroponicsBayIsRunningStatus(false);
         //Debug.Log("On ran out of setup");
         CheckWhichButtonsShouldBeGrayedOut();
     }
@@ -768,6 +774,7 @@ public class HydroponicsBay : MonoBehaviour
     {
         IsProducingOxygen = false;
         Status2Text.text = "";
+        GameManager.Instance.SaverLoader.SaveHydroponicsBayIsProducingOxygenStatus(false);
         //Debug.Log("Hydroponics bay knows we ran out of oxygen production materials");
     }
 
@@ -810,5 +817,11 @@ public class HydroponicsBay : MonoBehaviour
         {
             ResourceInventory.Instance.SetResourceAmounts(GameManager.Instance.InventoryController.Inventory);
         }
+    }
+
+    public void SaveRelevantData()
+    {
+
+        Debug.Log("We don't really need to save anything here after all");
     }
 }

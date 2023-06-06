@@ -28,7 +28,7 @@ public class TargetProjection : MonoBehaviour
         //if the target is stopping or if it is impossible for the projectile to catch up with the target (Sine Formula)
         if (targetVelocity.magnitude == 0 || targetVelocity.magnitude > projectileSpeed && Mathf.Sin(targetMoveAngle) / projectileSpeed > Mathf.Cos(targetMoveAngle) / targetVelocity.magnitude)
         {
-            //Debug.Log("Position prediction is not feasible.");
+            Debug.Log("Position prediction is not feasible.");
             return targetPosition;
         }
         //also Sine Formula

@@ -81,6 +81,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         cameraOriginalLocalPosition = Camera.transform.localPosition;
         yRot = 35.0f;
         Camera.transform.localRotation = Quaternion.Euler(yRot, 0, 0);
+
     }
 
     private void OnDestroy()
