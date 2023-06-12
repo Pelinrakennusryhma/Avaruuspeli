@@ -26,7 +26,7 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     virtual protected void Start()
     {
-        ship = transform.GetChild(0).gameObject;
+        ship = InitShipModel();
         spaceshipMovement = ship.GetComponent<SpaceshipMovement>();
         spaceshipBoost = ship.GetComponent<SpaceshipBoost>();
         spaceshipShoot = ship.GetComponent<SpaceshipShoot>();
@@ -39,6 +39,27 @@ public abstract class ActorSpaceship : MonoBehaviour
         ActiveUtils = new List<Useable>();
         InitShip();
         GameEvents.Instance.CallEventSpaceshipSpawned(this);
+    }
+
+    private GameObject InitShipModel() 
+    {
+        GameObject shipModel;
+        if(spaceshipData != null && spaceshipData.shipModel != null)
+        {
+            // delete current ship if it exists
+            if(transform.childCount > 0)
+            {
+                Destroy(transform.GetChild(0).gameObject);            
+            }
+
+            shipModel = Instantiate(spaceshipData.shipModel.itemPrefab, transform);
+
+        } else
+        {
+            shipModel = transform.GetChild(0).gameObject;
+        }
+
+        return shipModel;
     }
 
     protected virtual void InitShip()

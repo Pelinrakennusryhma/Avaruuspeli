@@ -44,7 +44,8 @@ public class CMCameraManager : MonoBehaviour
     {
         if(actor.faction.factionName == "Player")
         {
-            Spaceship playerShip = actor.GetComponentInChildren<Spaceship>();
+            Spaceship playerShip = actor.ship.GetComponent<Spaceship>();
+            Debug.Log("shipname: " + playerShip.gameObject.name);
             SetCamTargets(playerShip);
         }
     }

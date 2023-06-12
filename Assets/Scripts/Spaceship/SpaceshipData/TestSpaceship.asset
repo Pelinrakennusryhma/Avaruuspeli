@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ffd8c5be9edf14bbe437ff904a3f1f, type: 3}
   m_Name: TestSpaceship
   m_EditorClassIdentifier: 
-  ship: {fileID: 11400000, guid: 8722498a8fd2fec428bf0b7d4b9a67d0, type: 2}
+  shipModel: {fileID: 11400000, guid: 4df3ce4087480b94c9687815ac8d9744, type: 2}
   utilities:
   - {fileID: 11400000, guid: 0d96be50a494a2e419f9eab561f60d9e, type: 2}
   - {fileID: 11400000, guid: 2f76357559782c8498fa08a62ae7ec1a, type: 2}
