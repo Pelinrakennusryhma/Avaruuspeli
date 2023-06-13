@@ -174,17 +174,10 @@ public class GUI_Spaceship : MonoBehaviour
     }
 
     public void OnInventoryOpened()
-    {
-        if (spaceshipHUD.activeSelf)
-        {
-            spaceshipHUDWasActiveBeforeInventoryShow = true;
-            spaceshipHUD.SetActive(false);
-        }
+    {            
+        
+        spaceshipHUD.SetActive(false);
 
-        else
-        {
-            spaceshipHUDWasActiveBeforeInventoryShow = false;
-        }
 
         if (promptText.gameObject.activeSelf)
         {
@@ -202,10 +195,8 @@ public class GUI_Spaceship : MonoBehaviour
 
     public void OnInventoryClosed()
     {
-        if (spaceshipHUDWasActiveBeforeInventoryShow)
-        {
-            spaceshipHUD.SetActive(true);
-        }
+
+        spaceshipHUD.SetActive(true);
 
         if (prompTextWasActiveBeforeInventoryShow)
         {

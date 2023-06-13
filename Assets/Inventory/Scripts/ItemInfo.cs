@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemInfo : MonoBehaviour
+public class ItemInfo : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private UnityEngine.UI.Image itemImage;
     [SerializeField] private TextMeshProUGUI itemName;
@@ -37,6 +38,20 @@ public class ItemInfo : MonoBehaviour
         itemType.text = item.itemType.ToString();
         itemValue.text = item.value.ToString();
         itemDescription.text = item.description;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            
+        }
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+           
+        }
+
+        ClosePanel();
     }
 
     public void ClosePanel()

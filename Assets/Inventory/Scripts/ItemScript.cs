@@ -162,7 +162,7 @@ public class ItemScript : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
 
-            contextMenuScript.ShowOptions(itemToAdd.itemType);
+            contextMenuScript.ShowOptions(itemToAdd.itemType, itemToAdd.id);
 
             contextMenuScript.SetPositionToMouse();
             contextMenuScript.itemID = itemToAdd.id;

@@ -6,13 +6,28 @@ public class SaverLoader : MonoBehaviour
 {
     public UniverseSaveData UniverseSaveData;
     public VendorSaveData VendorSaveData;
+    public GeneralSaveData GeneralSaveData;
+
 
     public const string UniverseSaveDataPath = "/UniverseData.json";
     public const string VendorSaveDataPath = "/VendorData.json";
+    public const string GeneralSaveDataPath = "/GeneralSaveData.json";
 
 
     public void OnInitialStartUp()
     {
+        bool successfulRead = ReadFromGeneralSaveDataFile();
+
+        if (successfulRead)
+        {
+            Debug.LogWarning("We fetched general save data successfully");
+        }
+
+        else
+        {
+            Debug.LogError("We failed to read general save data");
+        }
+
         Debug.Log("Saver loader initial startup is called. This has no functionality yet, but this is probably the place to load initial data?");
     }
 
@@ -440,4 +455,185 @@ public class SaverLoader : MonoBehaviour
         WriteToVendorSaveFile();
         //Debug.LogWarning("Save vendor");
     }
+
+    public void WriteToGeneralSaveDataFile()
+    {
+        string generalSaveDataString = JsonUtility.ToJson(GeneralSaveData);
+        System.IO.File.WriteAllText(Application.persistentDataPath + GeneralSaveDataPath, generalSaveDataString);
+        Debug.LogWarning("Writing to general save data file");
+    }
+
+    public bool ReadFromGeneralSaveDataFile()
+    {
+        Debug.LogWarning("READING FROM general SAVE FILE");
+        bool succesfullRead = false;
+
+        string saveFile = Application.persistentDataPath + GeneralSaveDataPath;
+
+        if (System.IO.File.Exists(saveFile))
+        {
+            Debug.Log("WE have a general save file that exists");
+
+            string savedGeneralData = System.IO.File.ReadAllText(saveFile);
+            GeneralSaveData = JsonUtility.FromJson<GeneralSaveData>(savedGeneralData);
+
+            if (GeneralSaveData != null)
+            {
+                succesfullRead = true;
+                Debug.Log("We had a valid GENERAL save data object");
+            }
+
+            else
+            {
+                succesfullRead = false;
+                GeneralSaveData = new GeneralSaveData();
+            }
+        }
+
+        return succesfullRead;
+    }
+
+    // This won't work on WebGL. So, we shouldn't rely on it if we decide a browser version will be supported.
+    public void OnApplicationQuit()
+    {
+        Debug.Log("Quitting, so we start fetching things to save");
+        WriteToGeneralSaveDataFile();
+    }
+
+    #region MiscellaneousSaving
+
+    // DONE
+    public void SaveCurrentUniversePos(Vector3 pos)
+    {
+        GeneralSaveData.CurrentUniversePos = pos;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveCurrentGalaxyPos(Vector3 pos)
+    {
+        GeneralSaveData.CurrentGalaxyPos = pos;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveCurrentStarSystemPos(Vector3 pos)
+    {
+        GeneralSaveData.CurrentStarSystemPos = pos;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveWorldMapZoomLevel(WorldMapMouseController.ZoomLevel zoomLevel)
+    {
+        GeneralSaveData.ZoomLevel = zoomLevel;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // Save equipped items
+    // DONE
+    public void SaveEquippedItemInHands(int itemID)
+    {
+        GeneralSaveData.EquippedItemInHands = itemID;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveEquippedSpaceSuit(int itemID)
+    {
+        GeneralSaveData.EquippedSpaceSuit = itemID;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // Hydroponics Bay
+    // DONE
+    public void SaveHydroponicsBayIsRunningStatus(bool isRunning)
+    {
+        GeneralSaveData.HydroponicsBayIsRunning = isRunning;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveHydroponicsBayIsProducingOxygenStatus(bool isProducingOxygen)
+    {
+        GeneralSaveData.HydroponicsBayIsProducingOxygen = isProducingOxygen;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveAmountOfCarbonInLastUnit(float amountOfCarbonInLastUnit)
+    {
+        GeneralSaveData.AmountOfCarbonInLastUnit = amountOfCarbonInLastUnit;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveAmountOfWaterInLastBottle(float amountOfWaterInLastBottle)
+    {
+        GeneralSaveData.AmountOfWaterInLastBottle = amountOfWaterInLastBottle;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveTimeInMinutesForHydroPonicsBay(float time)
+    {
+        GeneralSaveData.TimeInMinutesHydroponicsBayHasBeenOutOfOxygenProduction = time;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // Fuel system
+
+    // DONE
+    public void SaveAmountOfRocketFuelInLastTank(float amountOfFuel)
+    {
+        GeneralSaveData.AmountOfRocketFuelInLastTank = amountOfFuel;
+        WriteToGeneralSaveDataFile();
+    }
+
+    //DONE
+    public void SaveAmountOfWarpDriveFuelInLastTank(float amountOfFuel)
+    {
+        GeneralSaveData.AmountOfWarpDriveFuelInLastTank = amountOfFuel;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // Life support systems
+    // DONE
+    public void SaveAmountOfOxygenInLastBottle(float amount)
+    {
+        GeneralSaveData.AmountOfOxygenInLastBottle = amount;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveAmountOfOxygenInLastStorage(float amount)
+    {
+        GeneralSaveData.AmountOfOxygenInLastStorage = amount;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    public void SaveMoney(float money)
+    {
+        GeneralSaveData.AmountOfMoney = money;
+        WriteToGeneralSaveDataFile();
+    }
+
+    // DONE
+    // Inventory
+    public void SaveInventory(List<ItemScript> inventoryItems)
+    {
+        // Just overwrite anything already existing
+        GeneralSaveData.InventoryItems = new List<GeneralSaveData.InventoryItem>();
+
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            GeneralSaveData.InventoryItem toAdd = new GeneralSaveData.InventoryItem();
+            toAdd.ID = inventoryItems[i].itemToAdd.id;
+            toAdd.Amount = inventoryItems[i].currentItemAmount;
+            GeneralSaveData.InventoryItems.Add(toAdd);
+        }
+    }
+
+    #endregion
 }

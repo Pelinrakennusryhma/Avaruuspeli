@@ -1,289 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6571702607001493279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/LaserShoot
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/LaserShoot
-  Guid:
-    Data1: 259541080
-    Data2: 1091639919
-    Data3: -1263206784
-    Data4: -1782933795
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 800
-  Length: 0
---- !u!114 &-5446252144600309146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Spaceship/Shield
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Spaceship/Shield
-  Guid:
-    Data1: -38676065
-    Data2: 1237047518
-    Data3: -416238690
-    Data4: 1587711391
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 100
-  Length: 7471
---- !u!114 &-5257054933763993117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Explosion
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Explosion
-  Guid:
-    Data1: -18160038
-    Data2: 1213348715
-    Data3: 973153699
-    Data4: -976597474
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 100
-  Length: 0
---- !u!114 &-286429430098339160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638206237095810665
-  FileSizes:
-  - Name: Desktop
-    Value: 1376
-  Exists: 1
---- !u!114 &-277131180234531025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Spaceship/MissileAlarm
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Spaceship/MissileAlarm
-  Guid:
-    Data1: -98325060
-    Data2: 1216499493
-    Data3: -541598791
-    Data4: 382260047
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1776
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -286429430098339160}
-  - {fileID: 688270757908266836}
-  - {fileID: 371905620781687472}
-  - {fileID: 3337833941732400094}
-  EditorEvents:
-  - {fileID: 2619476829916310653}
-  - {fileID: 2499033138171599228}
-  - {fileID: -6571702607001493279}
-  - {fileID: -5446252144600309146}
-  - {fileID: -277131180234531025}
-  - {fileID: -5257054933763993117}
-  - {fileID: 9077477679595511061}
-  - {fileID: 646619835282600595}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: 688270757908266836}
-  StringsBanks:
-  - {fileID: -286429430098339160}
-  cacheTime: 638206237096990694
-  cacheVersion: 131603
---- !u!114 &371905620781687472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
-  m_EditorClassIdentifier: 
-  Path: AvaruuspeliSoundSet/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638206237096850692
-  FileSizes:
-  - Name: Desktop
-    Value: 6647488
-  Exists: 1
---- !u!114 &646619835282600595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/FirstPerson/Drill
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/FirstPerson/Drill
-  Guid:
-    Data1: -1191775359
-    Data2: 1238056090
-    Data3: 1884335750
-    Data4: 625294970
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 14811
---- !u!114 &688270757908266836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: AvaruuspeliSoundSet/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638206237095800686
-  FileSizes:
-  - Name: Desktop
-    Value: 1486
-  Exists: 1
---- !u!114 &2499033138171599228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Spaceship/ShipEngine
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Spaceship/ShipEngine
-  Guid:
-    Data1: -1702057430
-    Data2: 1274608192
-    Data3: 1471658369
-    Data4: 360164921
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 100
-  Length: 13609
---- !u!114 &2619476829916310653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicMain
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicMain
-  Guid:
-    Data1: 463212929
-    Data2: 1125765431
-    Data3: -2067544936
-    Data4: -425790048
-  Banks:
-  - {fileID: 371905620781687472}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 5396968829546939843}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3337833941732400094
+--- !u!114 &-8911991336493343931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,7 +20,297 @@ MonoBehaviour:
   - Name: Desktop
     Value: 512224
   Exists: 1
---- !u!114 &5396968829546939843
+--- !u!114 &-8774597480779414707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: AvaruuspeliSoundSet/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638206237096850692
+  FileSizes:
+  - Name: Desktop
+    Value: 6647488
+  Exists: 1
+--- !u!114 &-5820345046848980506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FirstPerson/Drill
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FirstPerson/Drill
+  Guid:
+    Data1: -1191775359
+    Data2: 1238056090
+    Data3: 1884335750
+    Data4: 625294970
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 14811
+--- !u!114 &-4713650096811182260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638206237095810665
+  FileSizes:
+  - Name: Desktop
+    Value: 1376
+  Exists: 1
+--- !u!114 &-3685324580094904386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Explosion
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Explosion
+  Guid:
+    Data1: -18160038
+    Data2: 1213348715
+    Data3: 973153699
+    Data4: -976597474
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -4713650096811182260}
+  - {fileID: 7121734363969831196}
+  - {fileID: -8774597480779414707}
+  - {fileID: -8911991336493343931}
+  EditorEvents:
+  - {fileID: 4800621893957051339}
+  - {fileID: 5625292849380399886}
+  - {fileID: 1666817709097712227}
+  - {fileID: 3694184079979338041}
+  - {fileID: -3685324580094904386}
+  - {fileID: -5820345046848980506}
+  - {fileID: 4251020463827199591}
+  - {fileID: 4633130338041227516}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 7121734363969831196}
+  StringsBanks:
+  - {fileID: -4713650096811182260}
+  cacheTime: 638206237096990694
+  cacheVersion: 131603
+--- !u!114 &1666817709097712227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/ShipEngine
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/ShipEngine
+  Guid:
+    Data1: -1702057430
+    Data2: 1274608192
+    Data3: 1471658369
+    Data4: 360164921
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 13609
+--- !u!114 &3694184079979338041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/LaserShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/LaserShoot
+  Guid:
+    Data1: 259541080
+    Data2: 1091639919
+    Data3: -1263206784
+    Data4: -1782933795
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 800
+  Length: 0
+--- !u!114 &4251020463827199591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/Shield
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/Shield
+  Guid:
+    Data1: -38676065
+    Data2: 1237047518
+    Data3: -416238690
+    Data4: 1587711391
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 7471
+--- !u!114 &4633130338041227516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/MissileAlarm
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/MissileAlarm
+  Guid:
+    Data1: -98325060
+    Data2: 1216499493
+    Data3: -541598791
+    Data4: 382260047
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1776
+--- !u!114 &4800621893957051339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicMain
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicMain
+  Guid:
+    Data1: 463212929
+    Data2: 1125765431
+    Data3: -2067544936
+    Data4: -425790048
+  Banks:
+  - {fileID: -8774597480779414707}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6536424929294720402}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5625292849380399886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Spaceship/MissileLaunch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Spaceship/MissileLaunch
+  Guid:
+    Data1: 1646285604
+    Data2: 1112468936
+    Data3: 534954640
+    Data4: -462625261
+  Banks:
+  - {fileID: -8911991336493343931}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 75
+  Length: 0
+--- !u!114 &6536424929294720402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -330,7 +337,7 @@ MonoBehaviour:
   - SpaceshipScene
   - Planet
   Exists: 1
---- !u!114 &9077477679595511061
+--- !u!114 &7121734363969831196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,21 +346,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Spaceship/MissileLaunch
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Spaceship/MissileLaunch
-  Guid:
-    Data1: 1646285604
-    Data2: 1112468936
-    Data3: 534954640
-    Data4: -462625261
-  Banks:
-  - {fileID: 3337833941732400094}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 75
-  Length: 0
+  Path: AvaruuspeliSoundSet/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638206237095800686
+  FileSizes:
+  - Name: Desktop
+    Value: 1486
+  Exists: 1

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed583a81beb8346b72c99da33df1ef, type: 3}
+  m_Name: Silicate
+  m_EditorClassIdentifier: 
+  id: 28
+  itemName: Silicate
+  plural: Silicates
+  value: 15
+  description: Mineral compounds used in construction, ceramics, and electronics
+    industries.
+  itemPrefab: {fileID: 0}
+  itemPrefabVariants: []
+  itemIcon: {fileID: 21300000, guid: 8ce5e61cb2103e840beabdd0e53b160d, type: 3}
+  isStackable: 1
+  weight: 1
+  itemType: 5
+  rare: {fileID: 0}
+  rareChance: 0

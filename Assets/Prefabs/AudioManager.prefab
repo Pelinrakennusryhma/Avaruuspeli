@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5266885335761954489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5581107654948025561}
+  - component: {fileID: 7378790973432469540}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5581107654948025561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266885335761954489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4420203117475944670}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7378790973432469540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266885335761954489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0aec8597d7c0549abe7237fd665b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Music>k__BackingField:
+    Guid:
+      Data1: 463212929
+      Data2: 1125765431
+      Data3: -2067544936
+      Data4: -425790048
+    Path: event:/Music/MusicMain
+  <ShipEngine>k__BackingField:
+    Guid:
+      Data1: -1702057430
+      Data2: 1274608192
+      Data3: 1471658369
+      Data4: 360164921
+    Path: event:/SFX/Spaceship/ShipEngine
+  <Shield>k__BackingField:
+    Guid:
+      Data1: -38676065
+      Data2: 1237047518
+      Data3: -416238690
+      Data4: 1587711391
+    Path: event:/SFX/Spaceship/Shield
+  <LaserShoot>k__BackingField:
+    Guid:
+      Data1: 259541080
+      Data2: 1091639919
+      Data3: -1263206784
+      Data4: -1782933795
+    Path: event:/SFX/LaserShoot
+  <Explosion>k__BackingField:
+    Guid:
+      Data1: -18160038
+      Data2: 1213348715
+      Data3: 973153699
+      Data4: -976597474
+    Path: event:/SFX/Explosion
+  <MissileLaunch>k__BackingField:
+    Guid:
+      Data1: 1646285604
+      Data2: 1112468936
+      Data3: 534954640
+      Data4: -462625261
+    Path: event:/SFX/Spaceship/MissileLaunch
+  <Alarm>k__BackingField:
+    Guid:
+      Data1: -98325060
+      Data2: 1216499493
+      Data3: -541598791
+      Data4: 382260047
+    Path: event:/SFX/Spaceship/MissileAlarm
+  <Drill>k__BackingField:
+    Guid:
+      Data1: -1191775359
+      Data2: 1238056090
+      Data3: 1884335750
+      Data4: 625294970
+    Path: event:/SFX/FirstPerson/Drill
+--- !u!1 &8819676285665916687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4420203117475944670}
+  - component: {fileID: 4523438631502388985}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4420203117475944670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819676285665916687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5581107654948025561}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4523438631502388985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819676285665916687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e2c8c800b57854da850157a8e2ec09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MasterVolume>k__BackingField: 1
+  <MusicVolume>k__BackingField: 1
+  <SFXVolume>k__BackingField: 1
+  <AmbienceVolume>k__BackingField: 1

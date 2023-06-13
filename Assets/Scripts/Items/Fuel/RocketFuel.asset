@@ -20,7 +20,7 @@ MonoBehaviour:
     maneuvering.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: e25ccf01d9e5b6848b140f956b6bda99, type: 3}
   isStackable: 1
   weight: 1.2
   itemType: 8

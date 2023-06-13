@@ -22,8 +22,12 @@ public class ContextMenu : MonoBehaviour
     public bool shopping;
 
     //Piilottaa context menusta kaikki vaihtoehdot ja sitten näyttää kaikki itemin tyyppiin liittyvät vaihtoehdot. Näyttää 'Sell' jos pelaaja on kaupassa.
-    public void ShowOptions(ItemSO.ItemType  itemType)
+    public void ShowOptions(ItemSO.ItemType  itemType,
+                            int itemId)
     {
+        this.itemID = itemId;
+
+        HideContextMenu.FindAndDestroyInfoPanels();
         HideAll();
 
         //Debug.LogWarning("The string searches have been replaced with enum use.");
@@ -44,7 +48,24 @@ public class ContextMenu : MonoBehaviour
                 break;
 
             case ItemSO.ItemType.Equipment:
-                ShowEquip();
+
+                //Debug.Log("Item id is " + itemID);
+
+                if (itemID == 29) 
+                {
+                    ShowUse(); // ISRU MODULE
+                }
+
+                else if (itemID == 32)
+                {
+                    ShowUse(); // Hydroponics bay
+                }
+
+                else
+                {
+                    ShowEquip();
+                }
+
                 ShowDiscard();
                 break;
 
@@ -240,7 +261,22 @@ public class ContextMenu : MonoBehaviour
         {
             if (itemID == 13)
             {
-                GameManager.Instance.LifeSupportSystem.UpdateOxygenStorage(0);
+                GameManager.Instance.LifeSupportSystem.UpdateOxygenTanks(0);
+            }
+
+            else if (itemID == 16)
+            {
+                GameManager.Instance.ShipLifeSupportSystem.ZeroOutOxygenStorages();
+            }
+
+            else if (itemID == 31)
+            {
+                GameManager.Instance.ShipLifeSupportSystem.ZeroOutWaterBottles();
+            }
+
+            else if (itemID == 30)
+            {
+                GameManager.Instance.ShipLifeSupportSystem.ZeroOutCarbon();
             }
 
             else if (itemID == 14)
@@ -393,5 +429,30 @@ public class ContextMenu : MonoBehaviour
     public void ShoppingOff()
     {
         shopping = false;
+    }
+
+    public void OnUseClicked()
+    {
+        if (itemID == 29)
+        {
+            GameManager.Instance.InventoryController.OnISRUShow();
+        }
+
+        else if (itemID == 32)
+        {
+            GameManager.Instance.InventoryController.OnHydroponicsBayShow();
+        }
+
+        if (itemID == 20)
+        {
+            if (GameManager.Instance.HungerTracker.CheckIfCanEatASandwich())
+            {
+                GameManager.Instance.HungerTracker.OnEatSandwich();
+            }
+        }
+
+
+        HideAll();
+        //Debug.Log("Use clicked");
     }
 }

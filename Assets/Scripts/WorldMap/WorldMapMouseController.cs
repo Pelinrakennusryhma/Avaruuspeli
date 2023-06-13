@@ -47,6 +47,7 @@ public class WorldMapMouseController : MonoBehaviour
         CurrentZoomLevel = ZoomLevel.Universe;
         ZoomOutButton.Init();
         ZoomOutButton.HideButton();
+        GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
 
     }
     public void Start()
@@ -387,6 +388,8 @@ public class WorldMapMouseController : MonoBehaviour
 
         MotherShipController.OnZoom(CurrentZoomLevel, originPos);
 
+        GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
+
         //Debug.Log("Should zoom in");
     }
 
@@ -435,6 +438,7 @@ public class WorldMapMouseController : MonoBehaviour
         }
 
         MotherShipController.OnZoom(CurrentZoomLevel, origin);
+        GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
 
         //Debug.Log("Should zoom out");
     }
