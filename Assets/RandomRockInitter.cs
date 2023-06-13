@@ -116,7 +116,7 @@ public class RandomRockInitter : MonoBehaviour
         else
         {
             ResourceType = SpawnableResources[10];
-            Debug.Log("Should see ice out there");
+            //Debug.Log("Should see ice out there");
         }
 
         Rock.Init(ResourceType, null);

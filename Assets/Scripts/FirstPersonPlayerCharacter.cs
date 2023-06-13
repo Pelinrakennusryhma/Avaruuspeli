@@ -51,6 +51,10 @@ public class FirstPersonPlayerCharacter : MonoBehaviour
         OverlayLayerMask = (1 << 12);
         OverlayCamera.cullingMask = OverlayLayerMask;
 
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Update()

@@ -381,7 +381,7 @@ public class FirstPersonPlayerControls : MonoBehaviour
             GameManager.Instance.OnInventoryPressed();
         }
 
-        Debug.Log("On invenotry pressed");
+        //Debug.Log("On invenotry pressed");
     }
 
     public void OnLeaveScene(InputAction.CallbackContext context)

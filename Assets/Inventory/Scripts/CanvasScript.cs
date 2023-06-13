@@ -25,6 +25,8 @@ public class CanvasScript : MonoBehaviour
     }
     public void ShowItemCatalog()
     {
+        GameManager.Instance.InventoryController.OnISRUHide();
+        GameManager.Instance.InventoryController.OnHydroponicsBayHide();
         HideHeadsUpShop(false);
         inventoryPanel.SetActive(false);
         HideEquipment();
@@ -32,6 +34,7 @@ public class CanvasScript : MonoBehaviour
     }
     public void HideItemCatalog()
     {
+
         itemCatalogPanel.SetActive(false);
         inventoryPanel.SetActive(true);
         ShowEquipment();
@@ -60,6 +63,8 @@ public class CanvasScript : MonoBehaviour
     {
         //Debug.Log("Show heads up shop called");
 
+        GameManager.Instance.InventoryController.OnISRUHide();
+        GameManager.Instance.InventoryController.OnHydroponicsBayHide();
         HideShop();
         HideItemCatalog();        
         HideEquipment();
@@ -83,6 +88,7 @@ public class CanvasScript : MonoBehaviour
         {
             //Debug.LogError("We are not shopping anymore");
         }
+
 
         inventoryPanel.SetActive(true);
         ShowEquipment();

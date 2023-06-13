@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
     public void OnInventoryControllerInit()
     {
         maxWeight = 100000;
+        //maxWeight = 5200;
         UpdateWeight();
     }
 
@@ -115,10 +116,11 @@ public class Inventory : MonoBehaviour
             //ItemScript itemScript = GameObject.Find("InventoryPanel/Scroll/View/Layout/" + id.ToString()).GetComponent<ItemScript>();
             ItemScript itemScript = GetItemScript(id);
 
-
+            //Debug.LogWarning("Item is not null. Proceed");
 
             if (itemScript.currentItemAmount <= amount)
             {
+                //Debug.LogWarning("Removing and destryoing item script");
                 InventoryItemScripts.Remove(itemScript);
                 playerItems.Remove(item);
                 currentWeight -= item.weight * itemScript.currentItemAmount;
@@ -131,7 +133,7 @@ public class Inventory : MonoBehaviour
             {
                 //ItemScripts.Remove(itemScript);
 
-
+                //Debug.LogWarning("Removing from item script");
                 itemScript.RemoveItem(amount);
                 currentWeight -= item.weight * amount;
                 UpdateWeight();
@@ -356,6 +358,23 @@ public class Inventory : MonoBehaviour
         {
             //Debug.Log("We HAVE ROOM for item in inventory. Would be weight is " + wouldBeWeight + " current weight is " + currentWeight);
             return true;
+        }
+    }
+
+    public bool CheckForRoomWithWeight(double weightToAdd)
+    {
+        double wouldBeWeight = currentWeight + weightToAdd;
+        
+        if (wouldBeWeight <= maxWeight)
+        {
+            //Debug.Log("We have room. Max weight is " + maxWeight + " would be weight is " + wouldBeWeight);
+            return true;
+        }
+
+        else
+        {
+            //Debug.Log("No room in invenotry. Max weight is " + maxWeight + " would be weight is " + wouldBeWeight);
+            return false;
         }
     }
 

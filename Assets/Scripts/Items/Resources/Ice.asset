@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 2130796613481805814, guid: c6188cc50e8af3a488284e647e7ba8fd, type: 3}
   - {fileID: 3731993380885079235, guid: 78db1bce433a3f04db409bc5b44adac2, type: 3}
   - {fileID: 5684254478696707357, guid: 6dbe58ed79c2d504ea55bfa4e91e5461, type: 3}
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 60f28a779dc42d044bfa0b50e0f7facb, type: 3}
   isStackable: 1
   weight: 0.3
   itemType: 5

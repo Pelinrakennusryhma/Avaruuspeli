@@ -428,6 +428,12 @@ public class MotherShipFuelSystem : MonoBehaviour
         UpdateWarpdriveFuelTankAmount(rocketAmount);
         UpdateRocketFuelTankAmount(warpAmount);
 
-        Debug.Log("Update fuels. We entered world map.");
+        //Debug.Log("Update fuels. We entered world map.");
+    }
+
+    public void SaveData()
+    {
+        GameManager.Instance.SaverLoader.SaveAmountOfRocketFuelInLastTank(AmountOfRocketFuelInLastTank);
+        GameManager.Instance.SaverLoader.SaveAmountOfWarpDriveFuelInLastTank(AmountOfWarpdriveFuelInLastTank);
     }
 }
