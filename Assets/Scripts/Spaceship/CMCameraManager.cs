@@ -10,11 +10,16 @@ public class CMCameraManager : MonoBehaviour
     [SerializeField]
     private int currentCameraID = 0;
     private int cachedShipCamID;
+    [SerializeField]
+    CinemachineVirtualCamera behindVCam;
+    [SerializeField]
+    CinemachineVirtualCamera cockpitVCam;
 
     void Awake()
     {
         GameEvents.Instance.EventPlayerLanded.AddListener(OnPlayerLanded);
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
+        GameEvents.Instance.EventSpaceshipSpawned.AddListener(OnSpaceshipSpawned);
         //Debug.Log("Listener added to on leftasteroid" + Time.time);
     }
     void Start()
@@ -33,6 +38,23 @@ public class CMCameraManager : MonoBehaviour
     {
         currentCameraID = cachedShipCamID;
         SetActiveCamera();
+    }
+
+    void OnSpaceshipSpawned(ActorSpaceship actor)
+    {
+        if(actor.faction.factionName == "Player")
+        {
+            Spaceship playerShip = actor.ship.GetComponent<Spaceship>();
+            Debug.Log("shipname: " + playerShip.gameObject.name);
+            SetCamTargets(playerShip);
+        }
+    }
+
+    void SetCamTargets(Spaceship playerShip)
+    {
+        behindVCam.Follow = playerShip.BehindCamera;
+        behindVCam.LookAt = playerShip.BehindCamera;
+        cockpitVCam.Follow = playerShip.CockpitCamera;
     }
 
     public void OnChangeCamera()

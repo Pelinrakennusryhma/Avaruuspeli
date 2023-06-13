@@ -31,6 +31,12 @@ public class SpaceshipHealth : UITrackable
         spaceshipEvents = GetComponent<SpaceshipEvents>();
     }
 
+    public void InitHull(ShipHull hull)
+    {
+        maxHealth = hull.healthAmount;
+        currentHealth = hull.healthAmount;
+    }
+
     public void DecreaseHealth(int value)
     {
         SetHealth(currentHealth - value);

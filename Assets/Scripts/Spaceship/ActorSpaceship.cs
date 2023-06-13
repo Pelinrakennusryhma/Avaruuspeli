@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public abstract class ActorSpaceship : MonoBehaviour
     public SpaceshipEvents spaceshipEvents;
     public SpaceshipMissile spaceshipMissile;
     public TargetProjection targetProjection;
+    public SpaceshipHealth spaceshipHealth;
     public bool InDanger { get { return lockedMissiles.Count > 0; } }
     public List<Useable> ActiveUtils { get; private set; }
 
@@ -24,24 +26,95 @@ public abstract class ActorSpaceship : MonoBehaviour
 
     virtual protected void Start()
     {
-        ship = transform.GetChild(0).gameObject;
+        ship = InitShipModel();
         spaceshipMovement = ship.GetComponent<SpaceshipMovement>();
         spaceshipBoost = ship.GetComponent<SpaceshipBoost>();
         spaceshipShoot = ship.GetComponent<SpaceshipShoot>();
         spaceshipEvents = ship.GetComponent<SpaceshipEvents>();
         spaceshipMissile = ship.GetComponent<SpaceshipMissile>();
         targetProjection = ship.GetComponent<TargetProjection>();
+        spaceshipHealth = ship.GetComponent<SpaceshipHealth>();
 
         spaceshipEvents.EventSpaceshipDied.AddListener(OnDeath);
-
         ActiveUtils = new List<Useable>();
-        InitUtilities();
+        InitShip();
         GameEvents.Instance.CallEventSpaceshipSpawned(this);
+    }
+
+    private GameObject InitShipModel() 
+    {
+        GameObject shipModel;
+        if(spaceshipData != null && spaceshipData.shipModel != null)
+        {
+            // delete current ship if it exists
+            if(transform.childCount > 0)
+            {
+                Destroy(transform.GetChild(0).gameObject);            
+            }
+
+            shipModel = Instantiate(spaceshipData.shipModel.itemPrefab, transform);
+
+        } else
+        {
+            shipModel = transform.GetChild(0).gameObject;
+        }
+
+        return shipModel;
+    }
+
+    protected virtual void InitShip()
+    {
+        if(spaceshipData != null)
+        {
+            InitShipHealth();
+            InitShipWeapons();
+            InitUtilities();
+        }
+    }
+
+    void InitShipHealth()
+    {
+        if(spaceshipHealth != null && spaceshipData.hull != null)
+        {
+            spaceshipHealth.InitHull(spaceshipData.hull);
+        } else
+        {
+            throw new Exception("Unable to initialize ship health.");
+        }
+    }
+
+    void InitShipWeapons()
+    {
+        if(spaceshipData.primaryWeapon != null && spaceshipShoot != null)
+        {
+            if(spaceshipData.primaryWeapon is ShipLaser)
+            {
+                ShipLaser shipLaser = (ShipLaser)spaceshipData.primaryWeapon;
+                float damage = shipLaser.damage;
+                float velocity = shipLaser.velocity;
+                float rateOfFire = shipLaser.rateOfFire;
+                spaceshipShoot.Init(damage, velocity, rateOfFire);
+            }
+        }
+
+        if(spaceshipData.secondaryWeapon != null)
+        {
+            if(spaceshipData.secondaryWeapon is ShipMissileBattery && spaceshipMissile != null)
+            {
+                ShipMissileBattery missileBattery = (ShipMissileBattery)spaceshipData.secondaryWeapon;
+                float damage = missileBattery.explosionDamage;
+                float speed = missileBattery.missileSpeed;
+                float cooldown = missileBattery.cooldown;
+                float radius = missileBattery.explosionRadius;
+                int amount = missileBattery.missileCapacity;
+                spaceshipMissile.Init(damage, radius, speed, cooldown, amount);
+            }
+        }
     }
 
     protected virtual void InitUtilities()
     {
-        if(spaceshipData != null && spaceshipData.utilities != null)
+        if(spaceshipData.utilities != null)
         {
             foreach (ShipUtility utility in spaceshipData.utilities)
             {

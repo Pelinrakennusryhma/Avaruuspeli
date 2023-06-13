@@ -27,6 +27,9 @@ public class UITargetProjections : MonoBehaviour
         if(playerFaction.hostileFactions.Contains(actor.faction))
         {
             AddIndicator(actor);
+        } else if(actor.faction.factionName == "Player")
+        {
+            playerShip = actor.ship;
         }
     }
 
