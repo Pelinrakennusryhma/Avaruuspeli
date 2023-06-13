@@ -36,6 +36,8 @@ public class GameEvents : MonoBehaviour
     public UnityEvent EventInventoryOpened;
     public UnityEvent EventInventoryClosed;
 
+    public UnityEvent EventPlayerWasTooHungryToContinue;
+
     //public void CallEventPlayerSpaceshipDied()
     //{
     //    EventPlayerSpaceshipDied.Invoke();
@@ -44,6 +46,11 @@ public class GameEvents : MonoBehaviour
     public void CallEventSpaceshipSpawned(ActorSpaceship ship)
     {
         EventSpaceshipSpawned.Invoke(ship);
+
+        if (GameManager.Instance != null) 
+        {
+            GameManager.Instance.ShipLifeSupportSystem.OnEnterShip();
+        }
     }
     public void CallEventSpaceshipDied(ActorSpaceship ship)
     {
@@ -78,6 +85,12 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerLanded(MineableAsteroidTrigger asteroid)
     {
         EventPlayerLanded.Invoke(asteroid);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ShipLifeSupportSystem.OnExitShip();
+            GameManager.Instance.OnEnterAsteroidSurface();
+        }
     }
     
     public void CallEventPlayerTriedLeaving()
@@ -89,6 +102,12 @@ public class GameEvents : MonoBehaviour
     public void CallEventPlayerLeftAstroid(MineableAsteroidTrigger asteroid)
     {
         EventPlayerLeftAsteroid.Invoke(asteroid);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ShipLifeSupportSystem.OnEnterShip();
+            GameManager.Instance.HungerTracker.OnLeaveFirstPersonScene();
+        }
         //Debug.Log("Calling event player left asteroid");
     }
 
@@ -121,5 +140,10 @@ public class GameEvents : MonoBehaviour
     public void CallEventInventoryClosed()
     {
         EventInventoryClosed.Invoke();
+    }
+
+    public void CallEventPlayerWasTooHungyToContinue()
+    {
+        EventPlayerWasTooHungryToContinue.Invoke();
     }
 }

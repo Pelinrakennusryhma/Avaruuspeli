@@ -61,4 +61,28 @@ public class Helpers : MonoBehaviour
     {
         CheckIfUIisHit();
     }
+
+    public Sprite MakeTextureGrayScaled(Texture2D originalTexture,
+                                           Sprite originalSprite)
+    {
+        Texture2D clone = new Texture2D(originalTexture.width, originalTexture.height, TextureFormat.RGBA32, false);
+        clone.SetPixels(originalTexture.GetPixels());
+        clone.Apply();
+
+        Color[] colors = clone.GetPixels();
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            float grayValue = colors[i].grayscale;
+            colors[i] =  new Color(grayValue, grayValue, grayValue, colors[i].a);
+        }
+
+        clone.SetPixels(colors);
+        clone.Apply();
+
+        Sprite cloneSprite = Sprite.Create(clone, originalSprite.rect, originalSprite.pivot);
+        
+
+        return cloneSprite;
+    }
 }

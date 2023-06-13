@@ -26,12 +26,20 @@ public class HideContextMenu : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             contextMenuScript.HideMenu();
-            GameObject[] gos = GameObject.FindGameObjectsWithTag("InfoPanel");
+        }
 
-            foreach (GameObject go in gos)
-            {
-                Destroy(go);
-            }
+
+        //DEstroy info panels on all clicks, not only on left click
+        FindAndDestroyInfoPanels();
+    }
+
+    public static void FindAndDestroyInfoPanels()
+    {
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("InfoPanel");
+        // Debug.LogWarning("Destroying info panels ");
+        foreach (GameObject go in gos)
+        {
+            Destroy(go);
         }
     }
 }

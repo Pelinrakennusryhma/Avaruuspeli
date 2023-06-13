@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1177,6 +1177,7 @@ MonoBehaviour:
   buyAmount: {fileID: 9004727888578573638}
   sellAmount: {fileID: 9004727889065293855}
   inventory: {fileID: 0}
+  item: {fileID: 0}
   canvasScript: {fileID: 0}
   ItemAmount: 0
   adjustedPrice: 0
@@ -1193,6 +1194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea92f65516e4b5e489afec1914d8eb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShopItemScript: {fileID: 0}
 --- !u!1 &9004727888501433942
 GameObject:
   m_ObjectHideFlags: 0

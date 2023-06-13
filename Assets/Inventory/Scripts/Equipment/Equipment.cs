@@ -38,7 +38,9 @@ public class Equipment : MonoBehaviour
             //drillImage.sprite = Resources.Load<Sprite>("Sprites/Empty");
             imageOfObjectInHands.sprite = GameManager.Instance.InventoryController.BlankSprite;
 
-        }            
+        }
+
+        GameManager.Instance.SaverLoader.SaveEquippedItemInHands(-1);
         
         //Debug.LogError("Unequipping drill");
     }
@@ -54,7 +56,7 @@ public class Equipment : MonoBehaviour
 
 
             GameManager.Instance.LifeSupportSystem.OnSpaceSuitUnequipped();
-
+            GameManager.Instance.SaverLoader.SaveEquippedSpaceSuit(-1);
         }
     }
     public void EquipObjectInHands(ItemSO item)
@@ -131,6 +133,8 @@ public class Equipment : MonoBehaviour
 
             //Debug.LogWarning("Non null player hands instance");
         }
+
+        GameManager.Instance.SaverLoader.SaveEquippedItemInHands(item.id);
    
     }
 
@@ -156,7 +160,7 @@ public class Equipment : MonoBehaviour
         }
 
         GameManager.Instance.LifeSupportSystem.OnSpaceSuitEquipped(item);
-
+        GameManager.Instance.SaverLoader.SaveEquippedSpaceSuit(item.id);
         //Debug.LogError("Replace with some scriptable object stuff");
     }
 

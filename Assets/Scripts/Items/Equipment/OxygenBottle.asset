@@ -19,7 +19,7 @@ MonoBehaviour:
   description: Portable tank that stores breathable air for the wearer of a spacesuit.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 13398a22d2f87634480655adedce8cba, type: 3}
   isStackable: 1
   weight: 3.6
   itemType: 3
