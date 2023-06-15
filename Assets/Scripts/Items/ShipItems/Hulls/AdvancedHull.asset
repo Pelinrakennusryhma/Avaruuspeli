@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716d6f093fc66c044978d072d3c910f9, type: 3}
   m_Name: AdvancedHull
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: 
-  plural: 
+  id: 111
+  itemName: Advanced Ship Hull
+  plural: Advanced Ship Hulls
   value: 1000
   description: Advanced ship hull.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: de5641c7c9df0bd4d81d596d47946cdc, type: 3}
   isStackable: 0
   weight: 0
   itemType: 6

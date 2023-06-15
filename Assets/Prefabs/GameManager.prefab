@@ -1298,6 +1298,24 @@ MonoBehaviour:
     Galaxies: []
   VendorSaveData:
     Vendors: []
+  GeneralSaveData:
+    InventoryItems: []
+    CurrentUniversePos: {x: 0, y: 0, z: 0}
+    CurrentGalaxyPos: {x: 0, y: 0, z: 0}
+    CurrentStarSystemPos: {x: 0, y: 0, z: 0}
+    ZoomLevel: 0
+    EquippedItemInHands: 0
+    EquippedSpaceSuit: 0
+    HydroponicsBayIsRunning: 0
+    HydroponicsBayIsProducingOxygen: 0
+    AmountOfCarbonInLastUnit: 0
+    AmountOfWaterInLastBottle: 0
+    TimeInMinutesHydroponicsBayHasBeenOutOfOxygenProduction: 0
+    AmountOfRocketFuelInLastTank: 0
+    AmountOfWarpDriveFuelInLastTank: 0
+    AmountOfOxygenInLastBottle: 0
+    AmountOfOxygenInLastStorage: 0
+    AmountOfMoney: 0
 --- !u!1 &3872244995138400275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1364,7 @@ MonoBehaviour:
   OxygenHUDParent: {fileID: 3651162608252648214}
   OxygenHUDText: {fileID: 7317871650034195685}
   AmountOfOxygenTanks: 0
-  AmountOfOxygenInLastTank: 0
+  AmountOfOxygenInLastBottle: 0
   HasSpaceSuitEquipped: 0
   IsOnBreathablePlanet: 0
   DoOxygenThings: 0
@@ -1531,6 +1549,7 @@ MonoBehaviour:
     ReferenceObjectPosX: 0
     ReferenceObjectPosY: 0
     ReferenceObjectPosZ: 0
+  cachedCursorHideMode: 1
   CurrentSceneType: 0
   ActiveStackedString: 
   UseStringWithActiveStackedScene: 0
@@ -3019,6 +3038,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1228472342239278216, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -79.17
+      objectReference: {fileID: 0}
     - target: {fileID: 1228472342285477989, guid: 44d101c09d62ac8458504377ce36e535,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3422,6 +3446,26 @@ PrefabInstance:
     - target: {fileID: 2920050943284040887, guid: 44d101c09d62ac8458504377ce36e535,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588753758568517159, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588753758568517159, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588753758568517159, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588753758568517159, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3630097201723943876, guid: 44d101c09d62ac8458504377ce36e535,

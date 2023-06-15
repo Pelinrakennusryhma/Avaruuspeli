@@ -60,8 +60,6 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(7, 1);
         Inventory.AddItem(8, 1);
         Inventory.AddItem(9, 1);
-        Inventory.AddItem(10, 1);
-        Inventory.AddItem(11, 1);
         Inventory.AddItem(12, 1);
 
         Inventory.AddItem(13, 21); // Oxygen bottle
@@ -79,6 +77,14 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(28, 100);
         Inventory.AddItem(30, 10);
         Inventory.AddItem(31, 10);
+
+        // === SHIP STUFF ===
+        // Models
+        Inventory.AddItem(500, 1);
+        // Hulls
+        Inventory.AddItem(110, 1);
+        // Weapons
+        Inventory.AddItem(300, 1);
 
         GameManager.Instance.SaverLoader.SaveMoney(Money);
 
