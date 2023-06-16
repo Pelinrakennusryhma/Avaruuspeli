@@ -78,13 +78,9 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(30, 10);
         Inventory.AddItem(31, 10);
 
-        // === SHIP STUFF ===
-        // Models
-        Inventory.AddItem(500, 1);
-        // Hulls
-        Inventory.AddItem(110, 1);
-        // Weapons
-        Inventory.AddItem(300, 1);
+#if UNITY_EDITOR
+        AddShipItems();
+#endif
 
         GameManager.Instance.SaverLoader.SaveMoney(Money);
 
@@ -95,6 +91,19 @@ public class InventoryController : MonoBehaviour
         ShopHeadsUp.Init();
 
         OnInventoryHide();
+    }
+
+    void AddShipItems()
+    {
+        foreach (ItemSO item in ItemDataBaseWithScriptables.ItemDataBaseSO.ShipItems)
+        {
+            Inventory.AddItem(item.id, 1);
+        }
+
+        foreach (ItemSO item in ItemDataBaseWithScriptables.ItemDataBaseSO.ShipWeaponItems)
+        {
+            Inventory.AddItem(item.id, 1);
+        }
     }
 
     public void OnInventoryShow(bool cacheCursor)

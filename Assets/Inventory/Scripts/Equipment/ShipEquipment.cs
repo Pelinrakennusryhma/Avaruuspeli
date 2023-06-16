@@ -19,6 +19,8 @@ public class ShipEquipment : MonoBehaviour
     [SerializeField] Transform itemSlotsParent;
     Dictionary<ShipItemSlotType, ShipItemSlot> itemSlots = new Dictionary<ShipItemSlotType, ShipItemSlot>();
 
+    int utilSlotId = 0;
+
     private void Start()
     {
         for (int i = 0; i < itemSlotsParent.childCount; i++)
@@ -52,6 +54,26 @@ public class ShipEquipment : MonoBehaviour
         else if (itemType == typeof(ShipWeaponItemPrimary))
         {
             slot = itemSlots[ShipItemSlotType.PrimaryWeapon];
+        }
+        else if (itemType == typeof(ShipWeaponItemSecondary))
+        {
+            slot = itemSlots[ShipItemSlotType.SecondaryWeapon];
+        }
+        else if (itemType == typeof(ShipUtility))
+        {
+            if(utilSlotId == 0)
+            {
+                slot = itemSlots[ShipItemSlotType.Utility1];
+            } else
+            {
+                slot = itemSlots[ShipItemSlotType.Utility2];
+            }
+
+            utilSlotId++;
+            if(utilSlotId > 1)
+            {
+                utilSlotId = 0;
+            }
         }
         else
         {
