@@ -79,18 +79,14 @@ public class ContextMenu : MonoBehaviour
             case ItemSO.ItemType.Resource:
                 ShowDiscard();
                 break;
-
             case ItemSO.ItemType.ShipItem:
                 ShowEquipShipItem();
                 ShowDiscard();
                 break;
-
-            //case ItemSO.ItemType.ShipWeapon:
-            //    ShowEquip1();
-            //    ShowEquip2();
-            //    ShowDiscard();
-            //    break;
-
+            case ItemSO.ItemType.ShipWeapon:
+                ShowEquipShipItem();
+                ShowDiscard();
+                break;
             case ItemSO.ItemType.Fuel:
                 //Debug.LogError("Missing functionality: fuels are missing context menus.");
                 ShowDiscard();

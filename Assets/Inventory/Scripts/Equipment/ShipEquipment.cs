@@ -39,27 +39,25 @@ public class ShipEquipment : MonoBehaviour
 
     ShipItemSlot GetItemSlot(ItemSO item)
     {
-        Type itemType = item.GetType();
-
         ShipItemSlot slot;
 
-        if (itemType == typeof(ShipModel))
+        if (item is ShipModel)
         {
             slot = itemSlots[ShipItemSlotType.Model];
         }
-        else if (itemType == typeof(ShipHull)) 
+        else if (item is ShipHull) 
         {
             slot = itemSlots[ShipItemSlotType.Hull];
         } 
-        else if (itemType == typeof(ShipWeaponItemPrimary))
+        else if (item is ShipWeaponItemPrimary)
         {
             slot = itemSlots[ShipItemSlotType.PrimaryWeapon];
         }
-        else if (itemType == typeof(ShipWeaponItemSecondary))
+        else if (item is ShipWeaponItemSecondary)
         {
             slot = itemSlots[ShipItemSlotType.SecondaryWeapon];
         }
-        else if (itemType == typeof(ShipUtility))
+        else if (item is ShipUtility)
         {
             if(utilSlotId == 0)
             {
