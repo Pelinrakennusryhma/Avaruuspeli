@@ -297,12 +297,12 @@ public class ItemDataBaseSO : ScriptableObject
             AllItems.Add(item);
         }
 
-        AddDefaultIcon(item);
+        TryAddDefaultIcon(item);
 
         Debug.Log("Should add to all items. Object name is " + item.name + " Item name is " + item.itemName);
     }
 
-    void AddDefaultIcon(ItemSO item)
+    void TryAddDefaultIcon(ItemSO item)
     {
         if (item.itemIcon == null && defaultIcon != null)
         {
