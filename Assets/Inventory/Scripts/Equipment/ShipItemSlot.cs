@@ -11,7 +11,7 @@ public class ShipItemSlot : MonoBehaviour
     [SerializeField] Image icon;
     [SerializeField] TMP_Text itemName;
 
-    ItemSO equipedItem;
+    [SerializeField] public ItemSO equippedItem { get; private set; }
     void Start()
     {
         
@@ -24,12 +24,12 @@ public class ShipItemSlot : MonoBehaviour
             icon.sprite = item.itemIcon;
         }
         itemName.text = item.itemName;
-        equipedItem = item;
+        equippedItem = item;
     }
 
     public void Unequip()
     {
-        equipedItem = null;
+        equippedItem = null;
         itemName.text = "";
         icon.sprite = null;
     }

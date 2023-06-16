@@ -14,6 +14,7 @@ public class PlayerControls : ActorSpaceship
 
     protected override void Start()
     {
+        //LoadShipEquipment();
         base.Start();
         alarmSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Alarm);
         ship.tag = "PlayerShip";
@@ -22,6 +23,53 @@ public class PlayerControls : ActorSpaceship
     private void Update()
     {
         UpdateSounds();
+    }
+
+    private void LoadShipEquipment()
+    {
+        ShipEquipment shipEquipment = GameManager.Instance.ShipEquipment;
+
+        if(shipEquipment == null)
+        {
+            shipEquipment = FindObjectOfType<ShipEquipment>();
+
+            if(shipEquipment == null)
+            {
+                throw new System.Exception("Could not find ShipEquipment script (in GameManager, under canvas)");
+            }
+        }
+
+        ShipModel model = shipEquipment.itemSlots[ShipItemSlotType.Model].equippedItem as ShipModel;
+        ShipHull hull = shipEquipment.itemSlots[ShipItemSlotType.Hull].equippedItem as ShipHull;
+        ShipWeaponItemPrimary primary = shipEquipment.itemSlots[ShipItemSlotType.PrimaryWeapon].equippedItem as ShipWeaponItemPrimary;
+        ShipWeaponItemSecondary secondary = shipEquipment.itemSlots[ShipItemSlotType.SecondaryWeapon].equippedItem as ShipWeaponItemSecondary;
+        ShipUtility util1 = shipEquipment.itemSlots[ShipItemSlotType.Utility1].equippedItem as ShipUtility;
+        ShipUtility util2 = shipEquipment.itemSlots[ShipItemSlotType.Utility2].equippedItem as ShipUtility;
+
+        if(model != null)
+        {
+            spaceshipData.shipModel = model;
+        }
+        if(hull != null)
+        {
+            spaceshipData.hull = hull;
+        }
+        if(primary != null)
+        {
+            spaceshipData.primaryWeapon = primary;
+        }
+        if(secondary != null)
+        {
+            spaceshipData.secondaryWeapon = secondary;
+        }
+        if(util1 != null)
+        {
+            spaceshipData.utilities[0] = util1;
+        }
+        if(util2 != null)
+        {
+            spaceshipData.utilities[1] = util2;
+        }
     }
 
     void UpdateSounds()
