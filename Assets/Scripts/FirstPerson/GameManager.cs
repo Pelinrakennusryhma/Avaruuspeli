@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
             }
 
             //Debug.Log("Don't destroy game manager");
+            ShipEquipment.Init();
         }
 
         else

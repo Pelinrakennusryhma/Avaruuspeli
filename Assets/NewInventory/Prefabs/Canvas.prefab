@@ -23049,6 +23049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3cef9a68f1db446926d776b4514d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShipData: {fileID: 11400000, guid: a32c94732171d5946b2dc594a64dddc7, type: 2}
   itemSlotsParent: {fileID: 5783156311484750120}
 --- !u!1 &6746546713094284824
 GameObject:

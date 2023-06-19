@@ -16,6 +16,7 @@ public enum ShipItemSlotType
 
 public class ShipEquipment : MonoBehaviour
 {
+    [SerializeField] SpaceshipData playerShipData;
     [SerializeField] Transform itemSlotsParent;
     [field: SerializeField]
     public Dictionary<ShipItemSlotType, ShipItemSlot> itemSlots 
@@ -23,7 +24,14 @@ public class ShipEquipment : MonoBehaviour
 
     int utilSlotId = 0;
 
-    private void Awake()
+    public void Init()
+    {
+        InitSlots();
+        LoadData();
+        FillSlots();
+    }
+
+    private void InitSlots()
     {
         for (int i = 0; i < itemSlotsParent.childCount; i++)
         {
@@ -31,8 +39,21 @@ public class ShipEquipment : MonoBehaviour
             ShipItemSlot slot = child.GetComponent<ShipItemSlot>();
             itemSlots.Add(slot.Type, slot);
         }
+    }
+
+    private void LoadData()
+    {
         // TODO: Load from disk to PlayerShipData
-        // Load from PlayershipData to Slots
+    }
+
+    private void FillSlots()
+    {
+        Equip(playerShipData.shipModel);
+        Equip(playerShipData.hull);
+        Equip(playerShipData.primaryWeapon);
+        Equip(playerShipData.secondaryWeapon);
+        Equip(playerShipData.utilities[0]);
+        Equip(playerShipData.utilities[1]);
     }
 
     public void Equip(ItemSO item)
