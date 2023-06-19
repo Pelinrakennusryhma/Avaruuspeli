@@ -524,6 +524,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3823410372136644610, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823410372136644610, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000030517578
+      objectReference: {fileID: 0}
     - target: {fileID: 4061588100957470853, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: m_IsActive
@@ -723,6 +733,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650020731509302655, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 6653697907541688962, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
@@ -1261,18 +1276,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fadcf1afcb662914fa4157fb469ef74c, type: 3}
---- !u!114 &257255270 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9166586152769784189, guid: fadcf1afcb662914fa4157fb469ef74c,
-    type: 3}
-  m_PrefabInstance: {fileID: 257255269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e3cef9a68f1db446926d776b4514d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3799,7 +3802,6 @@ MonoBehaviour:
   targetProjection: {fileID: 0}
   spaceshipHealth: {fileID: 0}
   leaveSpaceshipSceneHandler: {fileID: 537342573}
-  shipEquipment: {fileID: 257255270}
 --- !u!4 &1004082103
 Transform:
   m_ObjectHideFlags: 0

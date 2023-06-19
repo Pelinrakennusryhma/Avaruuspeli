@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ShipItemSlotType
 {
@@ -18,11 +19,25 @@ public class ShipEquipment : MonoBehaviour
 {
     [SerializeField] SpaceshipData playerShipData;
     [SerializeField] Transform itemSlotsParent;
+    [SerializeField] GameObject blockerPanel;
     [field: SerializeField]
     public Dictionary<ShipItemSlotType, ShipItemSlot> itemSlots 
     { get; private set; } = new Dictionary<ShipItemSlotType, ShipItemSlot>();
 
     int utilSlotId = 0;
+
+    private void OnEnable()
+    {
+        // only enable if NOT in SpaceshipScene
+        // TODO: disable actually equipping stuff somehow
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            blockerPanel.SetActive(true);
+        } else
+        {
+            blockerPanel.SetActive(false);
+        }
+    }
 
     public void Init()
     {
