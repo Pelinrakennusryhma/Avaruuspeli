@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ContextMenu : MonoBehaviour
@@ -338,6 +339,13 @@ public class ContextMenu : MonoBehaviour
     public void ShowEquipShipItem()
     {
         buttonEquipShipItem.gameObject.SetActive(true);
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            buttonEquipShipItem.interactable = false;
+        } else
+        {
+            buttonEquipShipItem.interactable = true;
+        }
     }
     public void HideEquipShipItem()
     {
