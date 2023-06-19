@@ -7,6 +7,7 @@ public class ContextMenu : MonoBehaviour
 {
     [SerializeField] private GameObject buttonUse;
     [SerializeField] private GameObject buttonEquip;
+    [SerializeField] private GameObject buttonEquipShipItem;
     [SerializeField] private GameObject buttonUnequip1;
     [SerializeField] private GameObject buttonUnequip2;
     [SerializeField] private GameObject buttonEquip1;
@@ -18,6 +19,7 @@ public class ContextMenu : MonoBehaviour
     public Inventory inventory;
     //public ItemDatabase itemDatabase;
     public Equipment equipment;
+    [SerializeField] private ShipEquipment shipEquipment;
     public CanvasScript canvasScript;
     public bool shopping;
 
@@ -77,18 +79,14 @@ public class ContextMenu : MonoBehaviour
             case ItemSO.ItemType.Resource:
                 ShowDiscard();
                 break;
-
             case ItemSO.ItemType.ShipItem:
-                Debug.LogError("Missing functionality: ship items can't yet be equipped in any way.");
+                ShowEquipShipItem();
                 ShowDiscard();
                 break;
-
             case ItemSO.ItemType.ShipWeapon:
-                ShowEquip1();
-                ShowEquip2();
+                ShowEquipShipItem();
                 ShowDiscard();
                 break;
-
             case ItemSO.ItemType.Fuel:
                 //Debug.LogError("Missing functionality: fuels are missing context menus.");
                 ShowDiscard();
@@ -238,6 +236,13 @@ public class ContextMenu : MonoBehaviour
             EquipSpacesuit();
         }
     }
+
+    public void EquipShipItem()
+    {
+        ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(itemID);
+        shipEquipment.Equip(item);
+        HideMenu();
+    }
     //Context menun 'Discard' vaihtoehto
     public void DiscardItem()
     {
@@ -330,6 +335,14 @@ public class ContextMenu : MonoBehaviour
     {
         buttonEquip.SetActive(true);
     }
+    public void ShowEquipShipItem()
+    {
+        buttonEquipShipItem.SetActive(true);
+    }
+    public void HideEquipShipItem()
+    {
+        buttonEquipShipItem.SetActive(false);
+    }
     public void HideEquip()
     {
         buttonEquip.SetActive(false);
@@ -395,6 +408,7 @@ public class ContextMenu : MonoBehaviour
     {
         ShowUse();
         ShowEquip();
+        ShowEquipShipItem();
         ShowEquip1();
         ShowEquip2();
         ShowUnequip();
@@ -408,6 +422,7 @@ public class ContextMenu : MonoBehaviour
     {
         HideUse();
         HideEquip();
+        HideEquipShipItem();
         HideEquip1();
         HideEquip2();
         HideUnequip();

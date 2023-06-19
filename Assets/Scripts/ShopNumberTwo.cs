@@ -49,8 +49,6 @@ public class ShopNumberTwo : MonoBehaviour
         NewItem(7);
         NewItem(8);
         NewItem(9);
-        NewItem(10);
-        NewItem(11);
         NewItem(12);
         NewItem(13);
         NewItem(14);

@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
 
     public WorldMapMessagePrompt WorldMapMessagePrompt;
 
-
+    [field: SerializeField]
+    public ShipEquipment ShipEquipment { get; private set; }
 
     public enum TypeOfScene
     {
@@ -119,6 +120,7 @@ public class GameManager : MonoBehaviour
             }
 
             //Debug.Log("Don't destroy game manager");
+            ShipEquipment.Init();
         }
 
         else

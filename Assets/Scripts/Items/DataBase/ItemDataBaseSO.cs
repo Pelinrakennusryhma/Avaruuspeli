@@ -36,6 +36,7 @@ public class ItemDataBaseSO : ScriptableObject
     #endregion
 
     public bool HasBeenInitted = false;
+    public Sprite defaultIcon;
 
     public void OnInit()
     {
@@ -296,7 +297,17 @@ public class ItemDataBaseSO : ScriptableObject
             AllItems.Add(item);
         }
 
+        TryAddDefaultIcon(item);
+
         Debug.Log("Should add to all items. Object name is " + item.name + " Item name is " + item.itemName);
+    }
+
+    void TryAddDefaultIcon(ItemSO item)
+    {
+        if (item.itemIcon == null && defaultIcon != null)
+        {
+            item.itemIcon = defaultIcon;
+        }
     }
 
     public void AddToConsumables(ConsumableItemSO item)

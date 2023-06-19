@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShipWeapon/ShipMissileBattery", order = 10)]
-public class ShipMissileBattery : ShipWeaponItemSO
+public class ShipMissileBattery : ShipWeaponItemSecondary
 {
     public float cooldown = 0.25f;
     public float explosionDamage = 90f;

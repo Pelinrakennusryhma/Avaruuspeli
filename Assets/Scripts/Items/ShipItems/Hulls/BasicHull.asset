@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: BasicHull
   m_EditorClassIdentifier: 
   id: 110
-  itemName: 
-  plural: 
+  itemName: Basic Ship Hull
+  plural: Basic Ship Hulls
   value: 200
   description: Basic ship hull.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: de5641c7c9df0bd4d81d596d47946cdc, type: 3}
   isStackable: 0
   weight: 0
   itemType: 6
