@@ -137,6 +137,7 @@ public class StarSystemOnFocus : MonoBehaviour
     {
         GameManager.Instance.CurrentStarSystem = this;
         GameManager.Instance.CurrentStarSystemData = StarSystemData;
+        GameManager.Instance.SaverLoader.SaveStarSystemID(StarSystemData.ID);
 
         if (!HasBeenInitted)
         {

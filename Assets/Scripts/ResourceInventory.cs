@@ -188,7 +188,7 @@ public class ResourceInventory : MonoBehaviour
     {
         ShoppingPrompt.gameObject.SetActive(true);
         ShoppingPrompt.text = "PRESS E TO SHOP";
-        Debug.LogError("Enter shopping area");
+        //Debug.LogError("Enter shopping area");
     }
 
     public void OnStartShopping()

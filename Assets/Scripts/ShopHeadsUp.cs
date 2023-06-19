@@ -30,6 +30,24 @@ public class ShopHeadsUp : MonoBehaviour
 
     public void Init()
     {
+        if (PlayerShopItems != null)
+        {
+            for (int i = 0; i < PlayerShopItems.Count; i++)
+            {
+                Destroy(PlayerShopItems[i].gameObject);
+                Debug.Log("Destroying player item");
+            }
+        }
+
+        if (VendorShopItems != null)
+        {
+            for (int i = 0; i < VendorShopItems.Count; i++)
+            {
+                Destroy(VendorShopItems[i].gameObject);
+                Debug.Log("Destroying vendor item");
+            }
+        }
+
         PlayerShopItems = new List<ShopItemScript>();
         VendorShopItems = new List<ShopItemScript>();
 
@@ -84,11 +102,12 @@ public class ShopHeadsUp : MonoBehaviour
 
     public void FinishShopping()
     {
-        //Debug.LogError("Missing functionality: SAVE the items the vendor has!!!");
+        //Debug.LogError("Finish shopping");
 
         for (int i = 0; i < PlayerShopItems.Count; i++)
         {
             Destroy(PlayerShopItems[i].gameObject);
+            //Debug.Log("Destroying player items");
         }
 
         PlayerShopItems.Clear();
@@ -103,7 +122,8 @@ public class ShopHeadsUp : MonoBehaviour
                 for (int i = 0; i < VendorShopItems.Count; i++)
                 {
                     CurrentVendor.Items.Add(new Vendor.VendorInventoryItem(VendorShopItems[i].item.id, VendorShopItems[i].ItemAmount));
-
+                    
+                    //Debug.Log("Destroying a vendor shop item " + VendorShopItems[i].item.itemName);
                     Destroy(VendorShopItems[i].gameObject);
                 }
             }
@@ -118,6 +138,7 @@ public class ShopHeadsUp : MonoBehaviour
                     //CurrentVendor.Items.Add(new Vendor.VendorInventoryItem(VendorShopItems[i].item.id, VendorShopItems[i].ItemAmount));
 
                     Destroy(VendorShopItems[i].gameObject);
+                    //Debug.Log("Destroying vendot items");
                 }
 
                 VendorShopItems.Clear();
@@ -149,9 +170,12 @@ public class ShopHeadsUp : MonoBehaviour
     public void AddPlayerItems()
     {
         // DEstryo any previously shown items
+        //Debug.Log("Player shop items count before adding items is " + PlayerShopItems.Count);
+
         for (int i = 0; i < PlayerShopItems.Count; i++)
         {
             Destroy(PlayerShopItems[i].gameObject);
+            //Debug.Log("Destroying player item");
         }
 
         PlayerShopItems = new List<ShopItemScript>();
@@ -175,6 +199,8 @@ public class ShopHeadsUp : MonoBehaviour
             //Debug.Log("Player item " + playerItems[i].itemToAdd.name);
         }
 
+        //Debug.Log("Player shop items count after adding items is " + PlayerShopItems.Count);
+
         //Debug.Log("Adding player items");
     }
 
@@ -183,6 +209,7 @@ public class ShopHeadsUp : MonoBehaviour
         for (int i = 0; i < VendorShopItems.Count; i++)
         {
             Destroy(VendorShopItems[i].gameObject);
+            //Debug.Log("Destroying vendor item");
         }
 
         VendorShopItems = new List<ShopItemScript>();
@@ -213,6 +240,8 @@ public class ShopHeadsUp : MonoBehaviour
                            CurrentVendor.GetSellMultiplier(item.id),
                            false);
             shopItem.UpdateAmount(CurrentVendor.Items[i].ItemAmount);
+
+            //Debug.Log("Vendor item " + item.itemName);
         }
 
         //Debug.Log("Adding vendor items");
@@ -232,7 +261,7 @@ public class ShopHeadsUp : MonoBehaviour
                        true);
         shopItem.UpdateAmount(amount);
 
-        //Debug.Log("Should add item " + itemId + " amount " + amount + " to player list");
+        Debug.Log("Should add item " + itemId + " amount " + amount + " to player list");
     }
     public void AddItemToVendorList(int itemId, int amount)
     {
@@ -250,7 +279,7 @@ public class ShopHeadsUp : MonoBehaviour
                        false);
         shopItem.UpdateAmount(amount);
 
-        //Debug.Log("Should add item " + itemId + " amount " + amount + " to vendor list");
+        Debug.Log("Should add item " + itemId + " amount " + amount + " to vendor list");
     }
 
     public void UpdateShopAmount(bool isPlayerItem,

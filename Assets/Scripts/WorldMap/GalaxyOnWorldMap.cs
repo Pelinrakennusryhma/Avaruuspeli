@@ -118,13 +118,14 @@ public class GalaxyOnWorldMap : MonoBehaviour
         WorldMapMouseController.Instance.ZoomIn(transform.position,
                                                 WorldMapMouseController.ZoomLevel.Galaxy,
                                                 this, 
-                                                null);
+                                                null,
+                                                true);
         //Debug.Log("Clicked a galaxy");
 
 
         GameManager.Instance.CurrentGalaxy = this;
         GameManager.Instance.CurrentGalaxyData = GalaxyData;
-
+        GameManager.Instance.SaverLoader.SaveGalaxyID(GalaxyData.ID);
 
         ShowStars();
         UniverseController.Instance.HideGalaxyLineRenderers();

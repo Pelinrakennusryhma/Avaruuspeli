@@ -33,7 +33,7 @@ public class InventoryController : MonoBehaviour
     public string previousPromptText;
 
     public void Init()
-    {        
+    {
         ItemDataBaseWithScriptables.Init();
         Inventory.OnInventoryControllerInit();
         ISRUModule.Init();
@@ -46,6 +46,74 @@ public class InventoryController : MonoBehaviour
 
         //ItemDataBaseWithScriptables = GetComponentInChildren<ItemDataBaseWithScriptables>(true);
 
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.DevGame)
+        {
+            SetDevMoneyAndInventory();
+        }
+
+        else if(GameManager.LaunchType == GameManager.TypeOfLaunch.LoadedGame)
+        {
+            Money = GameManager.Instance.SaverLoader.LoadMoney();
+
+            int loadedObjectInHands = GameManager.Instance.SaverLoader.LoadEquippedItemInHands();
+            int loadedSpaceSuit = GameManager.Instance.SaverLoader.LoadEquippedSpaceSuit();
+
+
+            if (loadedObjectInHands > 0)
+            {
+                ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(loadedObjectInHands);
+                Equipment.EquipObjectInHands(item);
+            }
+
+            if (loadedSpaceSuit > 0)
+            {
+                ItemSO item = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.GetItem(loadedSpaceSuit);
+                Equipment.EquipSpacesuit(item);
+            }
+
+            //Debug.Log("Equipped object in hands is " + loadedObjectInHands + " equipped spacesuit is " + loadedSpaceSuit);
+
+            List<GeneralSaveData.InventoryItem> loadedItems = GameManager.Instance.SaverLoader.LoadInventory();
+
+            if (loadedItems != null
+                && loadedItems.Count > 0)
+            {
+                for (int i = 0; i < loadedItems.Count; i++)
+                {
+                    Inventory.AddItem(loadedItems[i].ID, loadedItems[i].Amount);
+                }
+            }
+
+            //Debug.Log("Load invenotry here");
+
+        }
+
+        else
+        {
+            Money = 1.0f;
+            Inventory.AddItem(20, 1);
+            Inventory.AddItem(7, 1); // Can't even start the game without this.
+            Inventory.AddItem(13, 2); // Oxygen bottle
+            Inventory.AddItem(14, 1); // Warpdrive fuel
+            Inventory.AddItem(15, 1); // rocket fuel
+            Inventory.AddItem(16, 2); // Oxygen storage
+            Equipment.UnequipObjectInHands();
+            Equipment.UnequipSpacesuit();
+        }
+
+
+
+
+
+
+        Shop.Init();
+        ShopHeadsUp.Init();
+
+        OnInventoryHide(false);
+    }
+
+    private void SetDevMoneyAndInventory()
+    {
         Money = 10000.0f;
         OnInventoryShow(false);
 
@@ -77,18 +145,10 @@ public class InventoryController : MonoBehaviour
 
         Inventory.AddItem(27, 100);
         Inventory.AddItem(28, 100);
-        Inventory.AddItem(30, 10);
-        Inventory.AddItem(31, 10);
+        Inventory.AddItem(30, 100);
+        Inventory.AddItem(31, 100);
 
         GameManager.Instance.SaverLoader.SaveMoney(Money);
-
-        Equipment.UnequipObjectInHands();
-        Equipment.UnequipSpacesuit();
-
-        Shop.Init();
-        ShopHeadsUp.Init();
-
-        OnInventoryHide();
     }
 
     public void OnInventoryShow(bool cacheCursor)
@@ -182,7 +242,7 @@ public class InventoryController : MonoBehaviour
         //Debug.Log("Show inventory");
     }
 
-    public void OnInventoryHide()
+    public void OnInventoryHide(bool saveToo)
     {
 
 
@@ -218,8 +278,19 @@ public class InventoryController : MonoBehaviour
            // Debug.LogError("Null mothership instance. Don't update warpdrive amounts");
         }
 
-        GameManager.Instance.SaverLoader.SaveInventory(Inventory.InventoryItemScripts);
+        if (saveToo) 
+        {
+            GameManager.Instance.SaverLoader.SaveMoney(Money);
+            GameManager.Instance.SaveLifeSupportData(false);
+            SaveInventory();
+        }
+
         //Debug.Log("Hide inventory");
+    }
+
+    public void SaveInventory()
+    {
+        GameManager.Instance.SaverLoader.SaveInventory(Inventory.InventoryItemScripts);
     }
 
     public void AttachToMainCamera()
@@ -414,7 +485,7 @@ public class InventoryController : MonoBehaviour
 
     public void OnExitShop()
     {
-        OnInventoryHide();
+        OnInventoryHide(true);
         CanvasScript.HideShop();
         CanvasScript.HideHeadsUpShop(true);
         ResourceInventory.Instance.OnEnterShoppingArea();

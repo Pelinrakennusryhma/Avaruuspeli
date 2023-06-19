@@ -24,8 +24,8 @@ public class WorldMapMouseController : MonoBehaviour
     public StarOnWorldMap CurrentStarSystem;
 
 
-    public Vector3 CurrentUniversePos;
-    public Vector3 CurrentGalaxyPos;
+    public Vector3 CurrentCameraPosOnUniversePos;
+    public Vector3 CurrentCameraPosGalaxyPos;
     public Vector3 CurrentStartSystemPos;
 
     public ZoomOutOnWorldMapButton ZoomOutButton;
@@ -44,14 +44,30 @@ public class WorldMapMouseController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        CurrentZoomLevel = ZoomLevel.Universe;
+
         ZoomOutButton.Init();
         ZoomOutButton.HideButton();
-        GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
+
 
     }
-    public void Start()
+
+    public void OnGameBegin()
     {
+        if (GameManager.LaunchType != GameManager.TypeOfLaunch.LoadedGame)
+        {
+            CurrentZoomLevel = ZoomLevel.Universe;
+            GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
+        }
+
+        else
+        {
+            CurrentZoomLevel = GameManager.Instance.SaverLoader.LoadWorldMapZoomLevel();
+        }
+    }
+
+    public void Start()
+    {        
+
         //GameManager.Instance.OnEnterWorldMapCall();  
     }
 
@@ -61,6 +77,26 @@ public class WorldMapMouseController : MonoBehaviour
         CurrentZoomLevel = newZoomLevel;
 
 
+    }
+
+    public void SetCurrentUniversePos(Vector3 pos)
+    {
+        CurrentCameraPosOnUniversePos = pos;
+    }
+
+    public void SetCurrentGalaxyPos(Vector3 pos)
+    {
+        CurrentCameraPosGalaxyPos = pos;
+    }
+
+    public void SetCurrentStarSystemPos(Vector3 pos)
+    {
+        CurrentStartSystemPos = pos;
+    }
+
+    public void SetZoomLevel(ZoomLevel zoom)
+    {
+        CurrentZoomLevel = zoom;
     }
 
     void Update()
@@ -272,7 +308,7 @@ public class WorldMapMouseController : MonoBehaviour
 
             case ZoomLevel.Galaxy:
                 zoomScale = 150.0f;
-                cameraSpeed = 10.0f * Time.deltaTime;
+                cameraSpeed = 6.0f * Time.deltaTime;
                 break;
 
             case ZoomLevel.StarSystem:
@@ -310,11 +346,12 @@ public class WorldMapMouseController : MonoBehaviour
                 break;
 
             case ZoomLevel.Universe:
-                CurrentUniversePos = cameraPos;
+                CurrentCameraPosOnUniversePos = cameraPos;
+                //Debug.LogError("Current universe pos at mouse controller is x " + CurrentUniversePos.x + " z " + CurrentUniversePos.z);
                 break;
 
             case ZoomLevel.Galaxy:
-                CurrentGalaxyPos = cameraPos;
+                CurrentCameraPosGalaxyPos = cameraPos;
                 break;
 
             case ZoomLevel.StarSystem:
@@ -334,7 +371,8 @@ public class WorldMapMouseController : MonoBehaviour
     public void ZoomIn(Vector3 originPos,
                        ZoomLevel newZoomLevel,
                        GalaxyOnWorldMap currentGalaxy,
-                       StarOnWorldMap currentStar)
+                       StarOnWorldMap currentStar,
+                       bool saveToFile)
     {
         if (newZoomLevel == ZoomLevel.None)
         {
@@ -344,8 +382,6 @@ public class WorldMapMouseController : MonoBehaviour
 
         CurrentGalaxy = currentGalaxy;
         CurrentStarSystem = currentStar;
-
-
 
         CurrentZoomLevel = newZoomLevel;
 
@@ -386,9 +422,13 @@ public class WorldMapMouseController : MonoBehaviour
             ZoomOutButton.SetZoomText();
         }
 
-        MotherShipController.OnZoom(CurrentZoomLevel, originPos);
+        MotherShipController.OnZoom(CurrentZoomLevel, originPos, saveToFile);
+        MotherShipController.OnZoomIn(CurrentZoomLevel, originPos);
 
-        GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
+        if (saveToFile) 
+        {
+            GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
+        }
 
         //Debug.Log("Should zoom in");
     }
@@ -405,20 +445,24 @@ public class WorldMapMouseController : MonoBehaviour
                 Debug.Log("Hide the button on universe scale!!!");
                 break;
             case ZoomLevel.Galaxy:
-                Camera.main.transform.position = CurrentUniversePos;
+                CurrentCameraPosOnUniversePos = new Vector3(CurrentCameraPosOnUniversePos.x, 800f, CurrentCameraPosOnUniversePos.z);
+                Camera.main.transform.position = CurrentCameraPosOnUniversePos;
                 CurrentZoomLevel = ZoomLevel.Universe;
-                SetZoomOrigin(CurrentUniversePos);
+                SetZoomOrigin(CurrentCameraPosOnUniversePos);
                 CurrentGalaxy.OnZoomOutToGalaxy();
 
-                origin = CurrentUniversePos;
+                origin = CurrentCameraPosOnUniversePos;
+
+                Debug.LogError("Current universe pos is x " + CurrentCameraPosOnUniversePos.x + " z " + CurrentCameraPosOnUniversePos.z);
                 break;
 
-            case ZoomLevel.StarSystem:                
-                Camera.main.transform.position = CurrentGalaxyPos;
+            case ZoomLevel.StarSystem:
+                CurrentCameraPosGalaxyPos = new Vector3(CurrentCameraPosGalaxyPos.x, 13.8f, CurrentCameraPosGalaxyPos.z);
+                Camera.main.transform.position = CurrentCameraPosGalaxyPos;
                 CurrentZoomLevel = ZoomLevel.Galaxy;
-                SetZoomOrigin(CurrentGalaxyPos);
+                SetZoomOrigin(CurrentCameraPosGalaxyPos);
                 CurrentStarSystem.OnZoomOutToStarSystems();
-                origin = CurrentGalaxyPos;
+                origin = CurrentCameraPosGalaxyPos;
                 break;
 
             default:
@@ -437,7 +481,8 @@ public class WorldMapMouseController : MonoBehaviour
             ZoomOutButton.SetZoomText();
         }
 
-        MotherShipController.OnZoom(CurrentZoomLevel, origin);
+        MotherShipController.OnZoom(CurrentZoomLevel, origin, true);
+        MotherShipController.OnZoomOut();
         GameManager.Instance.SaverLoader.SaveWorldMapZoomLevel(CurrentZoomLevel);
 
         //Debug.Log("Should zoom out");

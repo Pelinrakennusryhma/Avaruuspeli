@@ -5,8 +5,14 @@ using TMPro;
 
 public class MotherShipFuelSystem : MonoBehaviour
 {
-    public TextMeshProUGUI UniverseFuelPlaceHolderText;
-    public TextMeshProUGUI GalaxyFuelPlaceHolderText;
+    public const string WarpdriveFuelText = "WARPDRIVE FUEL: ";
+    public const string RocketFuelText = "ROCKET FUEL: ";
+
+    public TextMeshProUGUI WarpdriveFuelPlaceHolderText;
+    public TextMeshProUGUI RocketFuelPlaceHolderText;
+
+    public GameObject WarpdriveFuelBackPlate;
+    public GameObject RocketFuelBackPlate;
 
     public TextMeshProUGUI NeededFuelPlaceHolderText;
     public GameObject NeededFuelUIBackPlate;
@@ -41,12 +47,36 @@ public class MotherShipFuelSystem : MonoBehaviour
     {
         AmountOfWarpdriveFuelInLastTank = 1.0f;
         AmountOfRocketFuelInLastTank = 1.0f;
-        UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
-        GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
+        WarpdriveFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
+        RocketFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
 
-        GameManager.Instance.OnEnterWorldMap -= UpdateAllFuelAmounts;
-        GameManager.Instance.OnEnterWorldMap += UpdateAllFuelAmounts;
+        if (GameManager.Instance != null) 
+        {
+            GameManager.Instance.OnEnterWorldMap -= UpdateAllFuelAmounts;
+            GameManager.Instance.OnEnterWorldMap += UpdateAllFuelAmounts;
+        }
 
+
+    }
+
+    private void Start()
+    {
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.LoadedGame)
+        {
+            AmountOfWarpdriveFuelInLastTank = GameManager.Instance.SaverLoader.LoadAmountOfWarpDriveFuelInLastTank();
+            AmountOfRocketFuelInLastTank = GameManager.Instance.SaverLoader.LoadAmountOfRocketFuelInLastTank();
+
+            if (AmountOfRocketFuelInLastTank < 0)
+            {
+                AmountOfRocketFuelInLastTank = 0;
+            }
+
+            if (AmountOfWarpdriveFuelInLastTank < 0)
+            {
+                AmountOfWarpdriveFuelInLastTank = 0;
+            }
+        }        
+        
         UpdateAllFuelAmounts();
     }
 
@@ -103,7 +133,7 @@ public class MotherShipFuelSystem : MonoBehaviour
 
                     if (AmountOfWarpdriveFuelInLastTank < 0.0f)
                     {
-                        Debug.LogError("We went through two tanks in one update. Not cool. Fix this");
+                        Debug.LogError("We went through two tanks in one update. Not cool. Fix this. Amount of warpdrive fuel in last tank is " + AmountOfWarpdriveFuelInLastTank);
                     }
                 }
 
@@ -143,7 +173,7 @@ public class MotherShipFuelSystem : MonoBehaviour
                 WarpdriveFuel = 0.1f;
             }
 
-            UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
+            WarpdriveFuelPlaceHolderText.text = WarpdriveFuelText + ((int)WarpdriveFuel).ToString();
 
             //Debug.Log("Universe fuel is " + UniverseFuel);
 
@@ -209,7 +239,7 @@ public class MotherShipFuelSystem : MonoBehaviour
                 RocketFuel = 0.1f;
             }
 
-            GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
+            RocketFuelPlaceHolderText.text = RocketFuelText + ((int)RocketFuel).ToString();
 
             previousGalaxyPos = transform.position;
             previousKnownZoomLevel = WorldMapMouseController.ZoomLevel.Galaxy;
@@ -230,6 +260,11 @@ public class MotherShipFuelSystem : MonoBehaviour
 
         previousKnownZoomLevel = WorldMapMouseController.Instance.CurrentZoomLevel;
         //Debug.Log("Distance travelled during frame is " + distanceTravelled);
+    }
+
+    public void SetPreviousKnownZoomLevel(WorldMapMouseController.ZoomLevel zoom)
+    {
+        previousKnownZoomLevel = zoom;
     }
 
     public bool EvaluateNeededFuel(Vector3 targetPos)
@@ -377,7 +412,7 @@ public class MotherShipFuelSystem : MonoBehaviour
         }
 
         //Debug.Log("Amount of warpdrive fuel is " + WarpdriveFuel + " amount of fuel in last tank is " + AmountOfWarpdriveFuelInLastTank);
-        UniverseFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
+        WarpdriveFuelPlaceHolderText.text = "WARPDRIVE FUEL: " + ((int)WarpdriveFuel).ToString();
     }
 
     public void UpdateRocketFuelTankAmount(int newAmount)
@@ -404,7 +439,7 @@ public class MotherShipFuelSystem : MonoBehaviour
 
         //Debug.Log("Amount of rocket fuel is " + RocketFuel + " amount of fuel in last tank is " + AmountOfRocketFuelInLastTank);
 
-        GalaxyFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
+        RocketFuelPlaceHolderText.text = "ROCKET FUEL: " + ((int)RocketFuel).ToString();
     }
 
     public void UpdateAllFuelAmounts()
@@ -412,8 +447,8 @@ public class MotherShipFuelSystem : MonoBehaviour
         int rocketAmount = 0;
         int warpAmount = 0;
 
-        ItemScript rockets = GameManager.Instance.InventoryController.Inventory.GetItemScript(14);
-        ItemScript warps = GameManager.Instance.InventoryController.Inventory.GetItemScript(15);
+        ItemScript rockets = GameManager.Instance.InventoryController.Inventory.GetItemScript(15);
+        ItemScript warps = GameManager.Instance.InventoryController.Inventory.GetItemScript(14);
 
         if (rockets != null)
         {
@@ -425,15 +460,60 @@ public class MotherShipFuelSystem : MonoBehaviour
             warpAmount = warps.currentItemAmount;
         }
 
-        UpdateWarpdriveFuelTankAmount(rocketAmount);
-        UpdateRocketFuelTankAmount(warpAmount);
+        UpdateWarpdriveFuelTankAmount(warpAmount);
+        UpdateRocketFuelTankAmount(rocketAmount);
 
         //Debug.Log("Update fuels. We entered world map.");
     }
 
+    public void OnZoom(WorldMapMouseController.ZoomLevel zoom)
+    {
+        switch (zoom)
+        {
+            case WorldMapMouseController.ZoomLevel.None:
+                break;
+            case WorldMapMouseController.ZoomLevel.Universe:
+
+                WarpdriveFuelPlaceHolderText.gameObject.SetActive(true);
+                RocketFuelPlaceHolderText.gameObject.SetActive(false);
+
+                WarpdriveFuelBackPlate.gameObject.SetActive(true);
+                RocketFuelBackPlate.gameObject.SetActive(false);
+                break;
+
+            case WorldMapMouseController.ZoomLevel.Galaxy:
+
+                WarpdriveFuelPlaceHolderText.gameObject.SetActive(false);
+                RocketFuelPlaceHolderText.gameObject.SetActive(true);
+
+                WarpdriveFuelBackPlate.gameObject.SetActive(false);
+                RocketFuelBackPlate.gameObject.SetActive(true);
+                break;
+
+            case WorldMapMouseController.ZoomLevel.StarSystem:
+
+                WarpdriveFuelPlaceHolderText.gameObject.SetActive(false);
+                RocketFuelPlaceHolderText.gameObject.SetActive(false);
+
+                WarpdriveFuelBackPlate.gameObject.SetActive(false);
+                RocketFuelBackPlate.gameObject.SetActive(false);
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public void SaveData()
     {
-        GameManager.Instance.SaverLoader.SaveAmountOfRocketFuelInLastTank(AmountOfRocketFuelInLastTank);
-        GameManager.Instance.SaverLoader.SaveAmountOfWarpDriveFuelInLastTank(AmountOfWarpdriveFuelInLastTank);
+        //GameManager.Instance.SaverLoader.SaveAmountOfRocketFuelInLastTank(AmountOfRocketFuelInLastTank);
+        //GameManager.Instance.SaverLoader.SaveAmountOfWarpDriveFuelInLastTank(AmountOfWarpdriveFuelInLastTank);
+
+        //// We have to save inventory too, so we keep track of consumed fuel
+        //GameManager.Instance.InventoryController.SaveInventory();
+
+        GameManager.Instance.SaverLoader.SaveFuelDataAndInventory(AmountOfRocketFuelInLastTank,
+                                                                  AmountOfWarpdriveFuelInLastTank,
+                                                                  GameManager.Instance.InventoryController.Inventory.InventoryItemScripts);
     }
 }

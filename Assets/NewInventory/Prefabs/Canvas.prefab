@@ -8052,7 +8052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbf5bde1fe443148a55ce866cc8c5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageOfObjectInHands: {fileID: 1228472343453080036}
+  imageOfObjectInHands: {fileID: 1228472343455595823}
   spacesuitImage: {fileID: 1228472342917199184}
   shipWeapon1Image: {fileID: 1228472342306001831}
   shipWeapon2Image: {fileID: 1228472343031041469}
@@ -26417,6 +26417,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1181554175005584937, guid: f7490261b7f3bd64692aae18b0719672,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1181554175005584938, guid: f7490261b7f3bd64692aae18b0719672,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -26680,6 +26685,11 @@ PrefabInstance:
     - target: {fileID: 6706471162886136494, guid: f7490261b7f3bd64692aae18b0719672,
         type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198035887232828927, guid: f7490261b7f3bd64692aae18b0719672,
+        type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -9,7 +9,7 @@ public class LifeSupportSystem : MonoBehaviour
     public GameObject OxygenHUDParent;
     public TextMeshProUGUI OxygenHUDText;
 
-    public int AmountOfOxygenTanks;
+    public int AmountOfOxygenBottles;
     public float AmountOfOxygenInLastBottle;
 
     public bool HasSpaceSuitEquipped = true;
@@ -41,8 +41,8 @@ public class LifeSupportSystem : MonoBehaviour
 
         OxygenHUDParent.SetActive(false);
 
-        AmountOfOxygenTanks = 3;
-        AmountOfOxygenInLastBottle = 1;
+        AmountOfOxygenBottles = 0;
+        AmountOfOxygenInLastBottle = 0;
 
         if (GameManager.Instance.InventoryController.Equipment.equippedSpacesuit != null) 
         {
@@ -58,22 +58,45 @@ public class LifeSupportSystem : MonoBehaviour
         //Debug.Log("Initting life support system. Do this after initial savedata loading!");
     }
 
+    public void Start()
+    {
+        int amountOfBottles = 0;
+        ItemScript inventoryItemScript = GameManager.Instance.InventoryController.Inventory.GetItemScript(13);
+
+        if (inventoryItemScript != null)
+        {
+            amountOfBottles = GameManager.Instance.InventoryController.Inventory.GetItemScript(13).currentItemAmount;
+        }
+
+        UpdateOxygenBottles(amountOfBottles);
+
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.LoadedGame)
+        {
+            float amountOfOxygen = GameManager.Instance.SaverLoader.LoadAmountOfOxygenInLastBottle();
+
+            if (amountOfOxygen > 0) 
+            {
+                AmountOfOxygenInLastBottle = amountOfOxygen;
+            }
+        }
+    }
+
     public void OnExitAsteroid(MineableAsteroidTrigger asteroid)
     {
         OnExitUnbreathablePlace();
     }
 
-    public void UpdateOxygenTanks(int amount)
+    public void UpdateOxygenBottles(int amount)
     {
-        if (AmountOfOxygenTanks <= 0
+        if (AmountOfOxygenBottles <= 0
             && amount > 0)
         {
             AmountOfOxygenInLastBottle = 1.0f;
         }
 
-        AmountOfOxygenTanks = amount;
+        AmountOfOxygenBottles = amount;
 
-        if (AmountOfOxygenTanks <= 0)
+        if (AmountOfOxygenBottles <= 0)
         {
             AmountOfOxygenInLastBottle = 0.0f;
         }
@@ -115,7 +138,7 @@ public class LifeSupportSystem : MonoBehaviour
 
 
 
-        UpdateOxygenTanks(amountOfBottles);
+        UpdateOxygenBottles(amountOfBottles);
         //Debug.Log("Enter unbreathable place");
     }
 
@@ -124,6 +147,8 @@ public class LifeSupportSystem : MonoBehaviour
         OxygenHUDParent.transform.SetParent(GameManager.Instance.gameObject.transform);
         OxygenHUDParent.SetActive(false);
         DoOxygenThings = false;
+        SaveRelevantData();
+        GameManager.Instance.InventoryController.SaveInventory(); // Save invenotry too due, to reduced oxygen bottles
         //Debug.Log("On exit unbreathable place" + Time.time);
     }
 
@@ -157,7 +182,7 @@ public class LifeSupportSystem : MonoBehaviour
             AmountOfOxygenInLastBottle -= deltaTime * consumptionPerSecond;
 
             if (AmountOfOxygenInLastBottle <= 0
-                && AmountOfOxygenTanks <= 1
+                && AmountOfOxygenBottles <= 1
                 && !JustRanOutOfOxygen)
             {
                 //Debug.Log("We ran out of oxygen. Die!!! or leave asteroid, if that's the better solution? " + Time.time);
@@ -184,11 +209,13 @@ public class LifeSupportSystem : MonoBehaviour
             {
                 if (AmountOfOxygenInLastBottle <= 0)
                 {
-                    AmountOfOxygenTanks--;
+                    AmountOfOxygenBottles--;
                     GameManager.Instance.InventoryController.Inventory.RemoveItem(13, 1);
                     AmountOfOxygenInLastBottle = 1.0f;
 
-                    if (AmountOfOxygenTanks <= 0)
+                    SaveRelevantData();
+
+                    if (AmountOfOxygenBottles <= 0)
                     {
                         Debug.LogError("Problem with code, this shouldn't happen");
                     }
@@ -197,7 +224,7 @@ public class LifeSupportSystem : MonoBehaviour
                // Debug.Log("amount of oxygen in last tank is " + AmountOfOxygenInLastTank + " amount of bottles is " + AmountOfOxygenTanks);
             }
 
-            OxygenHUDText.text = OxygenString + "\n" + (AmountOfOxygenInLastBottle * 1000.0f + (AmountOfOxygenTanks - 1) * 1000.0f).ToString("0") + MgLString;
+            OxygenHUDText.text = OxygenString + "\n" + (AmountOfOxygenInLastBottle * 1000.0f + (AmountOfOxygenBottles - 1) * 1000.0f).ToString("0") + MgLString;
 
             //AmountOfOxygenInLastTank -= deltaTime / 120.0f;
 
@@ -214,8 +241,7 @@ public class LifeSupportSystem : MonoBehaviour
     public bool CheckIfWeCanEnterUnbreathableArea()
     {
         if (!HasSpaceSuitEquipped
-            || AmountOfOxygenTanks <= 0
-            || AmountOfOxygenInLastBottle <= 0)
+            || AmountOfOxygenBottles <= 0)
         {
             //Debug.LogWarning("Can't enter unbreathable area");
             return false;
@@ -232,7 +258,7 @@ public class LifeSupportSystem : MonoBehaviour
     {
         if (DoOxygenThings) 
         {
-            GameManager.Instance.InventoryController.OnInventoryHide();
+            GameManager.Instance.InventoryController.OnInventoryHide(true);
             OnExitUnbreathablePlace();
             GameEvents.Instance.CallEventPlayerRanOutOfOxygen();
             GameEvents.Instance.CallEventPlayerEnteredPromptTrigger(removedSpaceSuitText);
@@ -243,6 +269,11 @@ public class LifeSupportSystem : MonoBehaviour
     public void SaveRelevantData()
     {
         GameManager.Instance.SaverLoader.SaveAmountOfOxygenInLastBottle(AmountOfOxygenInLastBottle);
-        Debug.Log("Saving data");
+        //Debug.Log("Saving data");
+    }
+
+    public float GetAmountOfOxygenInLastBottle()
+    {
+        return AmountOfOxygenInLastBottle;
     }
 }

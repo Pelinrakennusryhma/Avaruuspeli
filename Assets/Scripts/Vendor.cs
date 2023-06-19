@@ -113,6 +113,8 @@ public class Vendor
                 bool foundAnItem = false;
                 ItemSO foundItem = null;
                 int amount = 0;
+
+                bool isFuelOrOxygen = false;
                 
                 // Decide if we want to spawn this item 
 
@@ -126,6 +128,14 @@ public class Vendor
                     //    shouldHaveMoreRandomWeight = true;
                     //}
 
+                    if (allItems[j].id == 15
+                        || allItems[j].id == 14
+                        || allItems[j].id == 13
+                        || allItems[j].id == 16)
+                    {
+                        isFuelOrOxygen = true;
+                    }
+
 
                     float random = Random.Range(0, 1.0f);
 
@@ -135,6 +145,11 @@ public class Vendor
                     }
 
                     float threshold = 1.0f / GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO.AllItems.Count;
+
+                    if (isFuelOrOxygen)
+                    {
+                        random = 0;
+                    }
 
                     //Debug.Log("random threshold is " + threshold + " random number is " + random);
 
@@ -154,9 +169,14 @@ public class Vendor
                         amount = 1;
                     }
 
+                    else if (isFuelOrOxygen)
+                    {
+                        amount = Random.Range(1, 5);
+                    }
+
                     else
                     {
-                        amount = Random.Range(0, 400);
+                        amount = Random.Range(1, 400);
                         //Debug.LogError("But how many items we should spawn?!?");
                     }
 
@@ -276,6 +296,6 @@ public class Vendor
 
     public void CheckForFuelInStarSystem()
     {
-        Debug.LogError("Missing functionality: Should maybe check if there is some fuel somewhere in the star system!!! BUT HOW, that is the question?");
+        //Debug.LogError("Missing functionality: Should maybe check if there is some fuel somewhere in the star system!!! BUT HOW, that is the question?");
     }
 }

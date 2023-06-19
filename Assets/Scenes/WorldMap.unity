@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: de8ce73e45f024c46993cf97da11b57c,
+    type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -257,11 +258,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2075898672}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.999985, y: 148.5}
+  m_AnchoredPosition: {x: 105.999985, y: 170.3}
   m_SizeDelta: {x: 281.5, y: 19.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &91713760
@@ -502,6 +503,50 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &202446011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202446013}
+  - component: {fileID: 202446012}
+  m_Layer: 0
+  m_Name: DevListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &202446012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202446011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e48dbc4deaea04d90a8a0b6bc01d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &202446013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202446011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &316737326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5578843320735299881, guid: 64a828875e281ce4ea934261fe5b0466,
@@ -1605,6 +1650,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8747901140369586758, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747901140369586758, guid: fadcf1afcb662914fa4157fb469ef74c,
+        type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8846448440418993916, guid: fadcf1afcb662914fa4157fb469ef74c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2078,7 +2133,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2075898672}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2162,7 +2217,7 @@ Transform:
   - {fileID: 1050296013}
   - {fileID: 881943300}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1123853330
 MonoBehaviour:
@@ -2792,8 +2847,8 @@ MonoBehaviour:
   zoomOrigin: {x: 0, y: 0, z: 0}
   CurrentGalaxy: {fileID: 0}
   CurrentStarSystem: {fileID: 0}
-  CurrentUniversePos: {x: 0, y: 0, z: 0}
-  CurrentGalaxyPos: {x: 0, y: 0, z: 0}
+  CurrentCameraPosOnUniversePos: {x: 0, y: 0, z: 0}
+  CurrentCameraPosGalaxyPos: {x: 0, y: 0, z: 0}
   CurrentStartSystemPos: {x: 0, y: 0, z: 0}
   ZoomOutButton: {fileID: 1148167665}
 --- !u!4 &1409681574
@@ -3017,6 +3072,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: eeb56751-443d-4a72-bdc7-d006fca8023a
     m_ActionName: FirstPersonControls/LeaveScene[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d4fcccf-c07a-414d-a1b6-24f4565aa9c1
+    m_ActionName: ShipControls/Utility2[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: WorldMapControls
@@ -3665,12 +3724,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831385518}
   m_LocalRotation: {x: 0.000000029802315, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00009795011}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2075898672}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3885,16 +3944,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864273073}
   m_LocalRotation: {x: 0.000000029802315, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00008570635}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0001714127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2075898672}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104.000015, y: 146.3}
+  m_AnchoredPosition: {x: 104.000015, y: 169}
   m_SizeDelta: {x: 284.57, y: 22.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1864273075
@@ -4207,10 +4266,10 @@ RectTransform:
   m_Children:
   - {fileID: 1148167661}
   - {fileID: 1984983261}
-  - {fileID: 1864273074}
   - {fileID: 1113231373}
-  - {fileID: 45127042}
+  - {fileID: 1864273074}
   - {fileID: 1831385519}
+  - {fileID: 45127042}
   - {fileID: 867513906}
   m_Father: {fileID: 1937840464}
   m_RootOrder: 0
@@ -4356,9 +4415,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
         type: 3}
+      propertyPath: RocketFuelBackPlate
+      value: 
+      objectReference: {fileID: 1864273073}
+    - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
+        type: 3}
       propertyPath: NeededFuelUIBackPlate
       value: 
       objectReference: {fileID: 1984983260}
+    - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
+        type: 3}
+      propertyPath: WarpdriveFuelBackPlate
+      value: 
+      objectReference: {fileID: 1113231372}
     - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
         type: 3}
       propertyPath: GalaxyFuelPlaceHolderText
@@ -4371,7 +4440,17 @@ PrefabInstance:
       objectReference: {fileID: 867513907}
     - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
         type: 3}
+      propertyPath: RocketFuelPlaceHolderText
+      value: 
+      objectReference: {fileID: 45127040}
+    - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
+        type: 3}
       propertyPath: UniverseFuelPlaceHolderText
+      value: 
+      objectReference: {fileID: 1831385521}
+    - target: {fileID: 6789565820884117789, guid: 78143c31b8023c5428a29456c4143f15,
+        type: 3}
+      propertyPath: WarpdriveFuelPlaceHolderText
       value: 
       objectReference: {fileID: 1831385521}
     m_RemovedComponents: []
