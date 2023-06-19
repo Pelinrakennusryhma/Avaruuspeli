@@ -45,7 +45,10 @@ public class LandedShip : MonoBehaviour
         {
             if(fpControls == null)
             {
-                fpControls = other.transform.parent.parent.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
+                // THIS GIVES NULL REFS. Probably the hierarchy has changed or something
+                //fpControls = other.transform.parent.parent.GetComponent<FirstPersonPlayerControllerWithCentreOfGravity>();
+
+                fpControls = FindObjectOfType<FirstPersonPlayerControllerWithCentreOfGravity>();
             }
 
             Debug.Log("enter");

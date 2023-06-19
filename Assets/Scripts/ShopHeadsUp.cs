@@ -85,7 +85,7 @@ public class ShopHeadsUp : MonoBehaviour
                                            starSystemId,
                                            planetId);
 
-            Debug.LogError("NULL vendor. Created a new one");
+            //Debug.LogError("NULL vendor. Created a new one");
         }
 
 

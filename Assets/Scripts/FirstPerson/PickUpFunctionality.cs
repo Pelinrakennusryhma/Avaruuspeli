@@ -24,6 +24,11 @@ public class PickUpFunctionality : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
         if (GameManager.Instance.IsPaused)
         {
             return;

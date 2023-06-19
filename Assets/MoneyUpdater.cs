@@ -16,6 +16,11 @@ public class MoneyUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
         moneyAmount.text = GameManager.Instance.InventoryController.Money.ToString("0.00") + "€";
     }
 }

@@ -948,10 +948,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'WASD - MOVE, ESC - OPTIONS
+  m_text: 'WASD - MOVE, M - LEAVE, I - INVENTORY ,ESC - OPTIONS
 
-    LEFT SHIFT - RUN, LEFT CTRL - CROUCH,
-    SPACE - JUMP'
+    LEFT SHIFT -
+    RUN, LEFT CTRL - CROUCH, SPACE - JUMP'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2521,6 +2521,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: eeb56751-443d-4a72-bdc7-d006fca8023a
     m_ActionName: FirstPersonControls/LeaveScene[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d4fcccf-c07a-414d-a1b6-24f4565aa9c1
+    m_ActionName: ShipControls/Utility2[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -2588,6 +2592,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StandingCapsule: {fileID: 670593430604572488}
+  OverlayCamera: {fileID: 0}
+  OverlayLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3867493804087331114
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,11 @@ public class WeightUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
         //float currentWeight = Mathf.Round((float)GameManager.Instance.InventoryController.Inventory.currentWeight);
         //float maximumWeight = Mathf.Round((float)GameManager.Instance.InventoryController.Inventory.maxWeight);        
         //weightText.text = "Weight: " + currentWeight.ToString("0.0") +

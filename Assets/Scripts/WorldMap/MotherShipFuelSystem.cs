@@ -329,6 +329,11 @@ public class MotherShipFuelSystem : MonoBehaviour
                                    out hitInfo,
                                    10000.0f);
 
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
         bool hitUI = GameManager.Instance.Helpers.CheckIfUIisHit();
 
         float distance = 0;
