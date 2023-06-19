@@ -4406,7 +4406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonUse: {fileID: 1228472342285477990}
   buttonEquip: {fileID: 1228472341884178837}
-  buttonEquipShipItem: {fileID: 4001006084347698231}
+  buttonEquipShipItem: {fileID: 2175524691160708935}
   buttonUnequip1: {fileID: 1228472343256337245}
   buttonUnequip2: {fileID: 1228472343497577343}
   buttonEquip1: {fileID: 1228472342951811689}

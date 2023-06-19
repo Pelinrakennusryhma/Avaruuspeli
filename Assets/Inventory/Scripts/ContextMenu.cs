@@ -7,7 +7,7 @@ public class ContextMenu : MonoBehaviour
 {
     [SerializeField] private GameObject buttonUse;
     [SerializeField] private GameObject buttonEquip;
-    [SerializeField] private GameObject buttonEquipShipItem;
+    [SerializeField] private Button buttonEquipShipItem;
     [SerializeField] private GameObject buttonUnequip1;
     [SerializeField] private GameObject buttonUnequip2;
     [SerializeField] private GameObject buttonEquip1;
@@ -337,11 +337,11 @@ public class ContextMenu : MonoBehaviour
     }
     public void ShowEquipShipItem()
     {
-        buttonEquipShipItem.SetActive(true);
+        buttonEquipShipItem.gameObject.SetActive(true);
     }
     public void HideEquipShipItem()
     {
-        buttonEquipShipItem.SetActive(false);
+        buttonEquipShipItem.gameObject.SetActive(false);
     }
     public void HideEquip()
     {

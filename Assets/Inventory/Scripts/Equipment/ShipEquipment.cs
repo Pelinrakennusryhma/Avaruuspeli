@@ -63,22 +63,61 @@ public class ShipEquipment : MonoBehaviour
 
     private void FillSlots()
     {
-        Equip(playerShipData.shipModel);
-        Equip(playerShipData.hull);
-        Equip(playerShipData.primaryWeapon);
-        Equip(playerShipData.secondaryWeapon);
-        Equip(playerShipData.utilities[0]);
-        Equip(playerShipData.utilities[1]);
+        Equip(playerShipData.shipModel, false);
+        Equip(playerShipData.hull, false);
+        Equip(playerShipData.primaryWeapon, false);
+        Equip(playerShipData.secondaryWeapon, false);
+        Equip(playerShipData.utilities[0], false);
+        Equip(playerShipData.utilities[1], false);
     }
 
-    public void Equip(ItemSO item)
+    public void Equip(ItemSO item, bool saveToShipData=true)
     {
         Debug.Log("Equipping ship item: " + item.itemName + "type: " + item.GetType());
         ShipItemSlot slot = GetItemSlot(item);
         slot.Equip(item);
 
+        if (saveToShipData)
+        {
+            SaveToShipData(item, slot);
+        }
+
         // TODO: Add to PlayerShipData
         // Save to disk application quit
+    }
+
+    void SaveToShipData(ItemSO item, ShipItemSlot slot)
+    {
+        if (slot.equippedItem is ShipModel)
+        {
+            playerShipData.shipModel = (ShipModel)slot.equippedItem;
+        }
+        else if (slot.equippedItem is ShipHull)
+        {
+            playerShipData.hull = (ShipHull)slot.equippedItem;
+        }
+        else if (slot.equippedItem is ShipWeaponItemPrimary)
+        {
+            playerShipData.primaryWeapon = (ShipWeaponItemPrimary)slot.equippedItem;
+        }
+        else if (slot.equippedItem is ShipWeaponItemSecondary)
+        {
+            playerShipData.secondaryWeapon = (ShipWeaponItemSecondary)slot.equippedItem;
+        }
+        else if (slot.equippedItem is ShipUtility)
+        {
+            if(slot.Type == ShipItemSlotType.Utility1)
+            {
+                playerShipData.utilities[0] = (ShipUtility)slot.equippedItem;
+            } else
+            {
+                playerShipData.utilities[1] = (ShipUtility)slot.equippedItem;
+            }
+        }
+        else
+        {
+            throw new Exception("unknown ship item type, can't save to SpaceshipData");
+        }
     }
 
     ShipItemSlot GetItemSlot(ItemSO item)
