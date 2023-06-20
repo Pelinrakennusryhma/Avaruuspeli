@@ -9,6 +9,7 @@ public class ContextMenu : MonoBehaviour
     [SerializeField] private GameObject buttonUse;
     [SerializeField] private GameObject buttonEquip;
     [SerializeField] private Button buttonEquipShipItem;
+    [SerializeField] private Button buttonUnEquipShipItem;
     [SerializeField] private GameObject buttonUnequip1;
     [SerializeField] private GameObject buttonUnequip2;
     [SerializeField] private GameObject buttonEquip1;
@@ -336,6 +337,10 @@ public class ContextMenu : MonoBehaviour
     {
         buttonEquip.SetActive(true);
     }
+    public void HideEquip()
+    {
+        buttonEquip.SetActive(false);
+    }
     public void ShowEquipShipItem()
     {
         buttonEquipShipItem.gameObject.SetActive(true);
@@ -351,9 +356,22 @@ public class ContextMenu : MonoBehaviour
     {
         buttonEquipShipItem.gameObject.SetActive(false);
     }
-    public void HideEquip()
+    public void ShowUnEquipShipItem()
     {
-        buttonEquip.SetActive(false);
+        buttonUnEquipShipItem.gameObject.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            buttonUnEquipShipItem.interactable = false;
+        }
+        else
+        {
+            buttonUnEquipShipItem.interactable = true;
+        }
+    }
+
+    public void HideUnEquipShipItem()
+    {
+        buttonUnEquipShipItem.gameObject.SetActive(false);
     }
     public void ShowEquip1()
     {
@@ -417,6 +435,7 @@ public class ContextMenu : MonoBehaviour
         ShowUse();
         ShowEquip();
         ShowEquipShipItem();
+        ShowUnEquipShipItem();
         ShowEquip1();
         ShowEquip2();
         ShowUnequip();
@@ -431,6 +450,7 @@ public class ContextMenu : MonoBehaviour
         HideUse();
         HideEquip();
         HideEquipShipItem();
+        HideUnEquipShipItem();
         HideEquip1();
         HideEquip2();
         HideUnequip();

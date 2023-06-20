@@ -14,17 +14,7 @@ public class ShipItemSlot : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] public ItemSO equippedItem { get; private set; }
     [SerializeField] ShipEquipment shipEquipment;
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (CanUnEquip())
-            {
-                Unequip();
-            }
-        }
-    }
+    [SerializeField] ContextMenu contextMenu;
 
     public void Equip(ItemSO item)
     {
@@ -35,11 +25,10 @@ public class ShipItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void Unequip()
     {
-        shipEquipment.UnEquip(equippedItem, this);
-
         equippedItem = null;
         itemName.text = "";
         icon.sprite = null;
+        contextMenu.HideAll();
     }
 
     bool CanUnEquip()
@@ -56,6 +45,44 @@ public class ShipItemSlot : MonoBehaviour, IPointerClickHandler
                 return true;
             default:
                 return false;
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        shipEquipment.clickedSlot = this;
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            contextMenu.HideAll();
+
+            if(equippedItem != null)
+            {
+                if (CanUnEquip())
+                {
+                    contextMenu.ShowUnEquipShipItem();
+
+                    contextMenu.SetPositionToMouse();
+                    contextMenu.itemID = equippedItem.id;
+                }
+            } 
+        }
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            contextMenu.HideMenu();
+            //if (eventData.button == PointerEventData.InputButton.Left)
+            //{
+            //    GameObject[] gos = GameObject.FindGameObjectsWithTag("InfoPanel");
+            //    foreach (GameObject go in gos)
+            //    {
+            //        Destroy(go);
+            //    }
+            //    FindObjectOfType<CanvasScript>().InfoAboutItem(itemToAdd);
+            //    Object prefab = Resources.Load("Prefabs/ItemInfoPanel");
+            //    GameObject newItem = Instantiate(prefab, CanvasScript.transform) as GameObject;
+            //    newItem.name = itemToAdd.id.ToString();
+            //    Vector3 mouseLocation = Input.mousePosition;
+            //    newItem.transform.position = mouseLocation;
+            //}
         }
     }
 }

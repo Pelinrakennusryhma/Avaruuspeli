@@ -24,7 +24,10 @@ public class ShipEquipment : MonoBehaviour
     public Dictionary<ShipItemSlotType, ShipItemSlot> itemSlots 
     { get; private set; } = new Dictionary<ShipItemSlotType, ShipItemSlot>();
 
+    // toggled between 0 and 1 when equipping utils
     int utilSlotId = 0;
+
+    public ShipItemSlot clickedSlot;
 
     private void OnEnable()
     {
@@ -89,9 +92,11 @@ public class ShipEquipment : MonoBehaviour
         }
     }
 
-    public void UnEquip(ItemSO item, ShipItemSlot slot)
+    public void UnEquip()
     {
-        SaveToShipData(null, slot);
+        clickedSlot.Unequip();
+        SaveToShipData(null, clickedSlot);
+        
     }
 
     void SaveToShipData(ItemSO item, ShipItemSlot slot)
@@ -143,19 +148,30 @@ public class ShipEquipment : MonoBehaviour
         }
         else if (item is ShipUtility)
         {
-            if(utilSlotId == 0)
+            if(itemSlots[ShipItemSlotType.Utility1].equippedItem == null)
             {
                 slot = itemSlots[ShipItemSlotType.Utility1];
-            } else
+            } else if(itemSlots[ShipItemSlotType.Utility2].equippedItem == null)
             {
                 slot = itemSlots[ShipItemSlotType.Utility2];
+            } else
+            {
+                if (utilSlotId == 0)
+                {
+                    slot = itemSlots[ShipItemSlotType.Utility1];
+                }
+                else
+                {
+                    slot = itemSlots[ShipItemSlotType.Utility2];
+                }
+
+                utilSlotId++;
+                if (utilSlotId > 1)
+                {
+                    utilSlotId = 0;
+                }
             }
 
-            utilSlotId++;
-            if(utilSlotId > 1)
-            {
-                utilSlotId = 0;
-            }
         }
         else
         {
