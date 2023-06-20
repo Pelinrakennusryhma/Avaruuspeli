@@ -22,8 +22,8 @@ public class ShipLifeSupportSystem : MonoBehaviour
     private float WaterAndCarbonConsumptionRatePerMinute = 0.01f;    
     private float OxygenStorageConsumptionRatePerMinute = 0.1f;
 
-    // private float WaterAndCarbonConsumptionRatePerMinute = 60.0f;
-    // private float OxygenStorageConsumptionRatePerMinute = 30.0f;
+    //private float WaterAndCarbonConsumptionRatePerMinute = 60.0f;
+    //private float OxygenStorageConsumptionRatePerMinute = 30.0f;
 
 
     public GameObject NoOxygenPromptParent;
@@ -47,7 +47,7 @@ public class ShipLifeSupportSystem : MonoBehaviour
     private bool RanOutOfOxygenOnHydroponicsBay;
     private bool RanOutOfOxygenInTanks;
 
-    private float TimeThatHydroponicsBayHasBeenOutOfResources;
+    public float TimeThatHydroponicsBayHasBeenOutOfResources;
 
     public bool WaitingToShowRunningOutOfOxygenPrompt;
 
@@ -59,6 +59,30 @@ public class ShipLifeSupportSystem : MonoBehaviour
         AmountOfCarbonInLastUnit = 1.0f;
         AmountOfWaterInLastBottle = 1.0f;
         AmountOfOxygenInLastStorage = 1.0f;
+        //Debug.LogError("Init called on ship life support system");
+    }
+
+    private void Start()
+    {
+        UpdateWaterBottlesAndCarbon();
+        UpdateOxygenStorages();
+
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.LoadedGame)
+        {
+            AmountOfCarbonInLastUnit = GameManager.Instance.SaverLoader.LoadAmountOfCarbonInLastUnit();
+            AmountOfWaterInLastBottle = GameManager.Instance.SaverLoader.LoadAmountOfWaterInLastBottle();
+            AmountOfOxygenInLastStorage = GameManager.Instance.SaverLoader.LoadAmountOfOxygenInLastStorage();
+            TimeThatHydroponicsBayHasBeenOutOfResources = GameManager.Instance.SaverLoader.LoadTimeInMinutesForHydroponicsBay();
+
+            if (TimeThatHydroponicsBayHasBeenOutOfResources < 0)
+            {
+                TimeThatHydroponicsBayHasBeenOutOfResources = 0;
+            }
+
+            //Debug.Log("We fetched amounts from saver loader. Amount of carbon is " + AmountOfCarbonInLastUnit + " amount of water is " + AmountOfWaterInLastBottle);
+        }
+
+        //Debug.LogError("Start called on ship life support system");
     }
 
     public bool CheckIfWeCanEnterShip()
@@ -80,10 +104,21 @@ public class ShipLifeSupportSystem : MonoBehaviour
         }
     }
 
-
+    public void OnShipDeath()
+    {
+        DoOxygenThings = false;
+        HUDParent.SetActive(false);
+        HUDParent.transform.SetParent(gameObject.transform);
+    }
 
     public void OnEnterShip()
     {
+        if (GameEvents.Instance != null)
+        {
+            GameEvents.Instance.EventPlayerSpaceshipDied.AddListener(OnShipDeath);
+            //Debug.LogWarning("We found game events. Subscribe");
+        }
+
         UpdateWaterBottlesAndCarbon();
         UpdateOxygenStorages();
 
@@ -108,7 +143,7 @@ public class ShipLifeSupportSystem : MonoBehaviour
     public void OnExitShip()
     {
         DoOxygenThings = false;
-        HUDParent.transform.SetParent(GameManager.Instance.gameObject.transform);
+        HUDParent.transform.SetParent(gameObject.transform);
         HUDParent.SetActive(false);
         //Debug.Log("Exited ship");
     }
@@ -144,8 +179,16 @@ public class ShipLifeSupportSystem : MonoBehaviour
     public void OnOxygenProductionStarted()
     {        
         UpdateWaterBottlesAndCarbon();
-        AmountOfWaterInLastBottle = 1.0f;
-        AmountOfCarbonInLastUnit = 1.0f;
+
+        if (AmountOfWaterInLastBottle <= 0)
+        {
+            AmountOfWaterInLastBottle = 1.0f;
+        }
+
+        if (AmountOfCarbonInLastUnit <= 0) 
+        {
+            AmountOfCarbonInLastUnit = 1.0f;
+        }
 
         if (DoOxygenThings)
         {
@@ -190,12 +233,14 @@ public class ShipLifeSupportSystem : MonoBehaviour
             && AmountOfCarbon > 0)
         {
             AmountOfCarbonInLastUnit = 1.0f;
+            //Debug.Log("Set amount of carbon in last unit to one");
         }
 
         if (previousAmountOfWaterBottles <= 0
             && AmountOfWaterBottles > 0)
         {
             AmountOfWaterInLastBottle = 1.0f;
+            //Debug.Log("Set amount of water in last bottle to one");
         }
 
         if (AmountOfCarbon <= 0)
@@ -570,9 +615,20 @@ public class ShipLifeSupportSystem : MonoBehaviour
     public void SaveRelevantData()
     {
         GameManager.Instance.SaverLoader.SaveAmountOfOxygenInLastStorage(AmountOfOxygenInLastStorage);
-        GameManager.Instance.SaverLoader.SaveTimeInMinutesForHydroPonicsBay(TimeThatHydroponicsBayHasBeenOutOfResources);
+        GameManager.Instance.SaverLoader.SaveTimeInMinutesForHydroponicsBay(TimeThatHydroponicsBayHasBeenOutOfResources);
         GameManager.Instance.SaverLoader.SaveAmountOfCarbonInLastUnit(AmountOfCarbonInLastUnit);
         GameManager.Instance.SaverLoader.SaveAmountOfWaterInLastBottle(AmountOfWaterInLastBottle);
-        Debug.Log("Saving data");
+        Debug.Log("Saving data. We could probably do a bit more sensible saving with grouped data and just one save call. But that's refactoring and maybe unneeded optimizing.");
+    }
+
+    public void GetRelevantSaveData(out float amountOfOxygenInLastStorage, 
+                                    out float timeThatHydroponicsHasBeenOutOfResources,
+                                    out float amountOfCarbonInLastUnit,
+                                    out float amountOfWaterInLastBottle)
+    {
+        amountOfOxygenInLastStorage = AmountOfOxygenInLastStorage;
+        timeThatHydroponicsHasBeenOutOfResources = TimeThatHydroponicsBayHasBeenOutOfResources;
+        amountOfCarbonInLastUnit = AmountOfCarbonInLastUnit;
+        amountOfWaterInLastBottle = AmountOfWaterInLastBottle;
     }
 }

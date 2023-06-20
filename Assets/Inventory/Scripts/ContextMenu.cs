@@ -266,7 +266,7 @@ public class ContextMenu : MonoBehaviour
         {
             if (itemID == 13)
             {
-                GameManager.Instance.LifeSupportSystem.UpdateOxygenTanks(0);
+                GameManager.Instance.LifeSupportSystem.UpdateOxygenBottles(0);
             }
 
             else if (itemID == 16)

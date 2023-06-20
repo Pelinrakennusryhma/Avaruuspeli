@@ -69,6 +69,11 @@ public class FirstPersonPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
         if (GameManager.Instance.IsPaused
             || Time.timeScale <= 0)
         {

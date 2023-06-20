@@ -33,6 +33,11 @@ public class CharacterEnergy : UITrackable
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
         currentEnergy = Mathf.RoundToInt(GameManager.Instance.HungerTracker.CurrentFullness);
         //currentEnergy = Random.Range(0.0f, maxEnergy);
         //Debug.Log("Current energy is " + currentEnergy);

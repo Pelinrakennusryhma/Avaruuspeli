@@ -181,7 +181,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
                 // Check if we have spacesuit equipped and some oxygen
 
                 if (!GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped
-                    && GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks <= 0)
+                    && GameManager.Instance.LifeSupportSystem.AmountOfOxygenBottles <= 0)
                 {
                     currentText = noSpacesuitNoOxygenBottlesText;
                     HadSpaceSuitOnFirstTriggerEnterAttempt = false;
@@ -194,7 +194,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
                     //Debug.Log("Setting the current text to " + currentText);
                 }
 
-                else if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks <= 0)
+                else if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenBottles <= 0)
                 {
                     currentText = noOxygenBottlesText;
                     HadSpaceSuitOnFirstTriggerEnterAttempt = true;
@@ -276,7 +276,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
             && !HadSpaceSuitOnFirstTriggerEnterAttempt
             && GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped)
         {
-            if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks > 0) 
+            if (GameManager.Instance.LifeSupportSystem.AmountOfOxygenBottles > 0) 
             {
                 if (_actorManager.SceneCleared)
                 {
@@ -303,7 +303,7 @@ public class MineableAsteroidTrigger : MonoBehaviour
         if (playerInTriggerArea          
             && !playerHasLanded 
             &&  GameManager.Instance.LifeSupportSystem.HasSpaceSuitEquipped
-            && GameManager.Instance.LifeSupportSystem.AmountOfOxygenTanks > 0
+            && GameManager.Instance.LifeSupportSystem.AmountOfOxygenBottles > 0
             && _actorManager.SceneCleared)
         {
             currentText = successText;

@@ -19,8 +19,12 @@ public class HungerTracker : MonoBehaviour
 
     public void Awake()
     {
-        GameManager.Instance.OnEnterWorldMap -= OnEnterWorldMap;
-        GameManager.Instance.OnEnterWorldMap += OnEnterWorldMap;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnEnterWorldMap -= OnEnterWorldMap;
+            GameManager.Instance.OnEnterWorldMap += OnEnterWorldMap;
+        }
+
         WaitingForADelayedMessagePrompt = false;
     }
 

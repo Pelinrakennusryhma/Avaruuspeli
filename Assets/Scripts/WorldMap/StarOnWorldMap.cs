@@ -39,7 +39,8 @@ public class StarOnWorldMap : MonoBehaviour
         WorldMapMouseController.Instance.ZoomIn(transform.position,
                                                 WorldMapMouseController.ZoomLevel.StarSystem,
                                                 WorldMapMouseController.Instance.CurrentGalaxy,
-                                                this);
+                                                this,
+                                                true);
 
         StarSystemMesh.enabled = false;
         StarSystemCollider.enabled = false;

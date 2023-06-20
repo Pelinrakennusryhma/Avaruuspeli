@@ -8,6 +8,8 @@ public class HydroponicsBay : MonoBehaviour
 {
     public float TimeInMinutesThatHydroponicsBayWillRemainSetupAfterRunningOutOfPrecursors = 15;
 
+
+
     public TextMeshProUGUI Status1Text;
     public TextMeshProUGUI Status2Text;
 
@@ -82,12 +84,29 @@ public class HydroponicsBay : MonoBehaviour
 
     public void Init()
     {
-
+        TimeInMinutesThatHydroponicsBayWillRemainSetupAfterRunningOutOfPrecursors = 15;
         HasBeenSetup = false;
         Status1Text.text = UnfunctionalRequiresSetupString;
         Status2Text.text = "";
 
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.LoadedGame)
+        {
+            bool isRunning = GameManager.Instance.SaverLoader.LoadHydroponicsBayIsRunningStatus();
+            bool isProducingOxygen = GameManager.Instance.SaverLoader.LoadHydroponicsBayIsProducingOxygenStatus();
 
+            if (isRunning)
+            {
+                HasBeenSetup = true;
+                OnSetupComplete();
+
+                if (isProducingOxygen)
+                {
+                    OnOxygenProcutionSetupComplete();
+                }
+            }
+
+
+        }
 
         //Debug.Log("Initialize hydroponics bay. Maybe we have to implement a save system here about the statuses?");
     }
@@ -766,7 +785,7 @@ public class HydroponicsBay : MonoBehaviour
         Status1Text.text = UnfunctionalRequiresSetupString;
         Status2Text.text = "";
         GameManager.Instance.SaverLoader.SaveHydroponicsBayIsRunningStatus(false);
-        //Debug.Log("On ran out of setup");
+        Debug.Log("On ran out of setup");
         CheckWhichButtonsShouldBeGrayedOut();
     }
 

@@ -19,7 +19,7 @@ MonoBehaviour:
   description: Various fillings between two slices of bread.
   itemPrefab: {fileID: 0}
   itemPrefabVariants: []
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 368a42124be4d6f4d90e95178cdd6a17, type: 3}
   isStackable: 1
   weight: 0.2
   itemType: 1

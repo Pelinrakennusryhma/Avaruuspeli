@@ -29,12 +29,14 @@ public class WorldMapCamera : MonoBehaviour
     {
         Vector3 originPos2D = new Vector3(originPos.x, 0, originPos.z);
         transform.position = originPos2D + new Vector3(0, transform.position.y, -333.0f);
+        //Debug.Log("Universe offset is x: " + transform.position.x + " z: " + transform.position.z);
     }
 
     public void SetToGalaxyOffset(Vector3 originPos)
     {
         Vector3 originPos2D = new Vector3(originPos.x, 0, originPos.z);
         transform.position = originPos2D + new Vector3(0, transform.position.y, -6.66f);
+        //Debug.Log("Galaxy offset is x: " + transform.position.x + " z: " + transform.position.z);
     }
 
     public void SetToStarSystemOffset(Vector3 originPos)

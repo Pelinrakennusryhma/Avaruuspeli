@@ -16,19 +16,30 @@ public class SaverLoader : MonoBehaviour
 
     public void OnInitialStartUp()
     {
-        bool successfulRead = ReadFromGeneralSaveDataFile();
-
-        if (successfulRead)
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.LoadedGame) 
         {
-            Debug.LogWarning("We fetched general save data successfully");
+            bool successfulRead = ReadFromGeneralSaveDataFile();
+
+            if (successfulRead)
+            {
+                //Debug.LogWarning("We fetched general save data successfully");
+            }
+
+            else
+            {
+                //Debug.LogError("We failed to read general save data");
+            }
+
+            //Debug.LogWarning("Saver loader initial startup is called. Loading initial data about general saved things. Universe and vendors are not loaded yet at this point.");
         }
 
         else
-        {
-            Debug.LogError("We failed to read general save data");
+        {        
+            GeneralSaveData = new GeneralSaveData(true);
+
+           // Debug.Log("Created a new general save data object. equipped item in hands is " + GeneralSaveData.EquippedItemInHands);
         }
 
-        Debug.Log("Saver loader initial startup is called. This has no functionality yet, but this is probably the place to load initial data?");
     }
 
     public bool LoadUniverse()
@@ -93,12 +104,12 @@ public class SaverLoader : MonoBehaviour
 
         if (found) 
         {
-            Debug.Log("Found a galaxy");
+            //Debug.Log("Found a galaxy");
         }
 
         else
         {
-            Debug.Log("Didn't find a galaxy");
+            //Debug.Log("Didn't find a galaxy");
         }
         //Debug.Log("Trying to SAVE galaxy");
 
@@ -283,19 +294,19 @@ public class SaverLoader : MonoBehaviour
     {
         string universeDataString = JsonUtility.ToJson(UniverseSaveData);
         System.IO.File.WriteAllText(Application.persistentDataPath + UniverseSaveDataPath, universeDataString);
-        Debug.LogWarning("WRITING TO SAVE FILE");
+        //Debug.LogWarning("WRITING TO SAVE FILE");
     }
 
     public bool ReadFromUniverseFile()
     {
-        Debug.LogWarning("READING FROM SAVE FILE");
+        //Debug.LogWarning("READING FROM SAVE FILE");
         bool succesfullRead = false;
 
         string saveFile = Application.persistentDataPath + UniverseSaveDataPath;
 
         if (System.IO.File.Exists(saveFile))
         {
-            Debug.Log("WE have a save file that exists");
+            //Debug.Log("WE have a save file that exists");
 
             string savedUniverse = System.IO.File.ReadAllText(saveFile);
             UniverseSaveData = JsonUtility.FromJson<UniverseSaveData>(savedUniverse);
@@ -303,7 +314,7 @@ public class SaverLoader : MonoBehaviour
             if (UniverseSaveData != null)
             {
                 succesfullRead = true;
-                Debug.Log("We had a valid save data object");
+                //Debug.Log("We had a valid save data object");
             }
 
             else
@@ -320,19 +331,19 @@ public class SaverLoader : MonoBehaviour
     {
         string vendorDataString = JsonUtility.ToJson(VendorSaveData);
         System.IO.File.WriteAllText(Application.persistentDataPath + VendorSaveDataPath, vendorDataString);
-        Debug.LogWarning("Writing to vendor save data file");
+        //Debug.LogWarning("Writing to vendor save data file");
     }
 
     public bool ReadFromVendorFile()
     {
-        Debug.LogWarning("READING FROM vendor SAVE FILE");
+        //Debug.LogWarning("READING FROM vendor SAVE FILE");
         bool succesfullRead = false;
 
         string saveFile = Application.persistentDataPath + VendorSaveDataPath;
 
         if (System.IO.File.Exists(saveFile))
         {
-            Debug.Log("WE have a vendor save file that exists");
+            //Debug.Log("WE have a vendor save file that exists");
 
             string savedVendors = System.IO.File.ReadAllText(saveFile);
             VendorSaveData = JsonUtility.FromJson<VendorSaveData>(savedVendors);
@@ -340,7 +351,7 @@ public class SaverLoader : MonoBehaviour
             if (VendorSaveData != null)
             {
                 succesfullRead = true;
-                Debug.Log("We had a valid VENDOR save data object");
+                //Debug.Log("We had a valid VENDOR save data object");
             }
 
             else
@@ -460,19 +471,19 @@ public class SaverLoader : MonoBehaviour
     {
         string generalSaveDataString = JsonUtility.ToJson(GeneralSaveData);
         System.IO.File.WriteAllText(Application.persistentDataPath + GeneralSaveDataPath, generalSaveDataString);
-        Debug.LogWarning("Writing to general save data file");
+        //Debug.LogWarning("Writing to general save data file");
     }
 
     public bool ReadFromGeneralSaveDataFile()
     {
-        Debug.LogWarning("READING FROM general SAVE FILE");
+        //Debug.LogWarning("READING FROM general SAVE FILE");
         bool succesfullRead = false;
 
         string saveFile = Application.persistentDataPath + GeneralSaveDataPath;
 
         if (System.IO.File.Exists(saveFile))
         {
-            Debug.Log("WE have a general save file that exists");
+            //Debug.Log("WE have a general save file that exists");
 
             string savedGeneralData = System.IO.File.ReadAllText(saveFile);
             GeneralSaveData = JsonUtility.FromJson<GeneralSaveData>(savedGeneralData);
@@ -480,13 +491,13 @@ public class SaverLoader : MonoBehaviour
             if (GeneralSaveData != null)
             {
                 succesfullRead = true;
-                Debug.Log("We had a valid GENERAL save data object");
+                //Debug.Log("We had a valid GENERAL save data object");
             }
 
             else
             {
                 succesfullRead = false;
-                GeneralSaveData = new GeneralSaveData();
+                GeneralSaveData = new GeneralSaveData(true);
             }
         }
 
@@ -494,36 +505,53 @@ public class SaverLoader : MonoBehaviour
     }
 
     // This won't work on WebGL. So, we shouldn't rely on it if we decide a browser version will be supported.
-    public void OnApplicationQuit()
-    {
-        Debug.Log("Quitting, so we start fetching things to save");
-        WriteToGeneralSaveDataFile();
-    }
+    //public void OnApplicationQuit()
+    //{
+    //    Debug.Log("Quitting, so we start fetching things to save");
+    //    WriteToGeneralSaveDataFile();
+    //}
 
     #region MiscellaneousSaving
 
-    // DONE
+
     public void SaveCurrentUniversePos(Vector3 pos)
     {
         GeneralSaveData.CurrentUniversePos = pos;
         WriteToGeneralSaveDataFile();
+        //Debug.LogError("Saving universe pos. x " + pos.x + " z " + pos.z);
     }
 
-    // DONE
+
     public void SaveCurrentGalaxyPos(Vector3 pos)
     {
         GeneralSaveData.CurrentGalaxyPos = pos;
         WriteToGeneralSaveDataFile();
+        //Debug.LogError("Saving galaxy pos. x " + pos.x + " z " + pos.z);
     }
 
-    // DONE
+
     public void SaveCurrentStarSystemPos(Vector3 pos)
     {
         GeneralSaveData.CurrentStarSystemPos = pos;
         WriteToGeneralSaveDataFile();
+        //Debug.LogError("Saving star system pos. x " + pos.x + " z " + pos.z);
     }
 
-    // DONE
+    public void SaveGalaxyID(int id)
+    {
+        GeneralSaveData.CurrentGalaxyID = id;
+        WriteToGeneralSaveDataFile();
+        //Debug.LogWarning("Save galaxy id " + id);
+    }
+
+    public void SaveStarSystemID(int id)
+    {
+        GeneralSaveData.CurrentStarSystemID = id;
+        WriteToGeneralSaveDataFile();
+        //Debug.LogWarning("Save star system id " + id);
+    }
+
+
     public void SaveWorldMapZoomLevel(WorldMapMouseController.ZoomLevel zoomLevel)
     {
         GeneralSaveData.ZoomLevel = zoomLevel;
@@ -531,51 +559,52 @@ public class SaverLoader : MonoBehaviour
     }
 
     // Save equipped items
-    // DONE
+
     public void SaveEquippedItemInHands(int itemID)
     {
         GeneralSaveData.EquippedItemInHands = itemID;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
+
     public void SaveEquippedSpaceSuit(int itemID)
     {
         GeneralSaveData.EquippedSpaceSuit = itemID;
+        Debug.Log("Saving equipped spacesuit. Item id is " + itemID);
         WriteToGeneralSaveDataFile();
     }
 
     // Hydroponics Bay
-    // DONE
+
     public void SaveHydroponicsBayIsRunningStatus(bool isRunning)
     {
         GeneralSaveData.HydroponicsBayIsRunning = isRunning;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
+
     public void SaveHydroponicsBayIsProducingOxygenStatus(bool isProducingOxygen)
     {
         GeneralSaveData.HydroponicsBayIsProducingOxygen = isProducingOxygen;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
+
     public void SaveAmountOfCarbonInLastUnit(float amountOfCarbonInLastUnit)
     {
         GeneralSaveData.AmountOfCarbonInLastUnit = amountOfCarbonInLastUnit;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
+
     public void SaveAmountOfWaterInLastBottle(float amountOfWaterInLastBottle)
     {
         GeneralSaveData.AmountOfWaterInLastBottle = amountOfWaterInLastBottle;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
-    public void SaveTimeInMinutesForHydroPonicsBay(float time)
+
+    public void SaveTimeInMinutesForHydroponicsBay(float time)
     {
         GeneralSaveData.TimeInMinutesHydroponicsBayHasBeenOutOfOxygenProduction = time;
         WriteToGeneralSaveDataFile();
@@ -583,14 +612,13 @@ public class SaverLoader : MonoBehaviour
 
     // Fuel system
 
-    // DONE
     public void SaveAmountOfRocketFuelInLastTank(float amountOfFuel)
     {
         GeneralSaveData.AmountOfRocketFuelInLastTank = amountOfFuel;
         WriteToGeneralSaveDataFile();
     }
 
-    //DONE
+
     public void SaveAmountOfWarpDriveFuelInLastTank(float amountOfFuel)
     {
         GeneralSaveData.AmountOfWarpDriveFuelInLastTank = amountOfFuel;
@@ -598,28 +626,29 @@ public class SaverLoader : MonoBehaviour
     }
 
     // Life support systems
-    // DONE
+
     public void SaveAmountOfOxygenInLastBottle(float amount)
     {
         GeneralSaveData.AmountOfOxygenInLastBottle = amount;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
+  
     public void SaveAmountOfOxygenInLastStorage(float amount)
     {
         GeneralSaveData.AmountOfOxygenInLastStorage = amount;
         WriteToGeneralSaveDataFile();
+        Debug.Log("Saved amount of oxygen in last storage " + amount);
     }
 
-    // DONE
+
     public void SaveMoney(float money)
     {
         GeneralSaveData.AmountOfMoney = money;
         WriteToGeneralSaveDataFile();
     }
 
-    // DONE
+
     // Inventory
     public void SaveInventory(List<ItemScript> inventoryItems)
     {
@@ -633,6 +662,150 @@ public class SaverLoader : MonoBehaviour
             toAdd.Amount = inventoryItems[i].currentItemAmount;
             GeneralSaveData.InventoryItems.Add(toAdd);
         }
+
+        WriteToGeneralSaveDataFile();
+    }
+
+    // Combo saving. We probably want to call write to file only when necessary? Not at every saved item?
+    public void SaveFuelDataAndInventory(float rocketAmount,
+                                         float warpAmount,
+                                         List<ItemScript> inventoryItems)
+    {
+        GeneralSaveData.AmountOfRocketFuelInLastTank = rocketAmount;
+        GeneralSaveData.AmountOfWarpDriveFuelInLastTank = warpAmount;
+        SaveInventory(inventoryItems); // Note write to file is called at the end of this method!
+    }
+
+    public void SaveLifeSupportData(float amountOfOxygenInLastStorage,
+                                    float timeThatHydroponicsHasBeenOutOfResources,
+                                    float amountOfCarbonInLastUnit,
+                                    float amountOfWaterInLastBottle)
+    {
+        GeneralSaveData.AmountOfOxygenInLastStorage = amountOfOxygenInLastStorage;
+        GeneralSaveData.AmountOfCarbonInLastUnit = amountOfCarbonInLastUnit;
+        GeneralSaveData.AmountOfWaterInLastBottle = amountOfWaterInLastBottle;
+        GeneralSaveData.TimeInMinutesHydroponicsBayHasBeenOutOfOxygenProduction = timeThatHydroponicsHasBeenOutOfResources;
+        WriteToGeneralSaveDataFile();
+    }
+
+    #endregion
+
+    #region MiscellaneousLoading
+
+    public Vector3 LoadCurrentUniversePos()
+    {
+        return GeneralSaveData.CurrentUniversePos;
+    }
+
+    public Vector3 LoadCurrentGalaxyPos()
+    {
+        return GeneralSaveData.CurrentGalaxyPos;
+    }
+
+    public Vector3 LoadCurrentStarSystemPos()
+    {
+        return GeneralSaveData.CurrentStarSystemPos;
+    }
+
+    public WorldMapMouseController.ZoomLevel LoadWorldMapZoomLevel()
+    {
+        return GeneralSaveData.ZoomLevel;
+    }
+
+    public int LoadGalaxyID()
+    {
+        return GeneralSaveData.CurrentGalaxyID;
+    }
+
+    public int LoadStarSystemID()
+    {
+        return GeneralSaveData.CurrentStarSystemID;
+
+    }
+
+    // Load equipped items
+    //DONE
+    public int LoadEquippedItemInHands()
+    {
+        return GeneralSaveData.EquippedItemInHands;
+    }
+
+    // DONE
+    public int LoadEquippedSpaceSuit()
+    {
+        return GeneralSaveData.EquippedSpaceSuit;
+    }
+
+    // Hydroponics Bay
+    // DONE
+    public bool LoadHydroponicsBayIsRunningStatus()
+    {
+        return GeneralSaveData.HydroponicsBayIsRunning;
+    }
+
+    // DONE
+    public bool LoadHydroponicsBayIsProducingOxygenStatus()
+    {
+        return GeneralSaveData.HydroponicsBayIsProducingOxygen;
+    }
+
+    // Ship life support system
+    // Not done, buggy
+    public float LoadAmountOfCarbonInLastUnit()
+    {
+        return GeneralSaveData.AmountOfCarbonInLastUnit;
+    }
+
+    // Not done, buggy
+    public float LoadAmountOfWaterInLastBottle()
+    {
+        return GeneralSaveData.AmountOfWaterInLastBottle;
+    }
+
+    // DONE
+    public float LoadTimeInMinutesForHydroponicsBay()
+    {
+        return GeneralSaveData.TimeInMinutesHydroponicsBayHasBeenOutOfOxygenProduction;
+    }
+
+    // Fuel system
+    // DONE
+    public float LoadAmountOfRocketFuelInLastTank()
+    {
+        return GeneralSaveData.AmountOfRocketFuelInLastTank;
+    }
+
+    // DONE
+    public float LoadAmountOfWarpDriveFuelInLastTank()
+    {
+        return GeneralSaveData.AmountOfWarpDriveFuelInLastTank;
+    }
+
+    // Life support systems
+    // DONE
+    public float LoadAmountOfOxygenInLastBottle()
+    {
+        return GeneralSaveData.AmountOfOxygenInLastBottle;
+    }
+
+    // DONE
+    public float LoadAmountOfOxygenInLastStorage()
+    {
+        return GeneralSaveData.AmountOfOxygenInLastStorage;
+    }
+
+    // DONE
+    public float LoadMoney()
+    {
+        return GeneralSaveData.AmountOfMoney;
+    }
+
+    // Inventory
+    // DONE
+    public List<GeneralSaveData.InventoryItem> LoadInventory()
+    {
+        // Just overwrite anything already existing
+        return GeneralSaveData.InventoryItems;
     }
 
     #endregion

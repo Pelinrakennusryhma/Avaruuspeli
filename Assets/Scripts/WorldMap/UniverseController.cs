@@ -35,17 +35,13 @@ public class UniverseController : MonoBehaviour
 
     public void Init()
     {
-        if (Instance == null)
-        {
+
             Instance = this;
-        }
 
-        else
-        {
-            Destroy(gameObject);
-        }
 
-        if (!TryLoadUniverse())
+        if (GameManager.LaunchType == GameManager.TypeOfLaunch.NewGame
+            || GameManager.LaunchType == GameManager.TypeOfLaunch.DevGame
+            || !TryLoadUniverse())
         {
             if (!HasBeenGenerated) 
             {
@@ -69,17 +65,17 @@ public class UniverseController : MonoBehaviour
     {
         bool success = GameManager.Instance.SaverLoader.LoadUniverse();
 
-        Debug.Log("Trying to load universe");
+        //Debug.Log("Trying to load universe");
 
         if (success)
         {
-            Debug.Log("Universe load succesful");
+            //Debug.Log("Universe load succesful");
             return true;
         }
 
         else
         {
-            Debug.Log("Universe load failed");
+            //Debug.Log("Universe load failed");
             return false;
         }
     }
@@ -178,7 +174,7 @@ public class UniverseController : MonoBehaviour
             AllGalaxies[i].Init(galaxyData);
         }
 
-        Debug.Log("DECIDE HERE HOW WORMHOLES SHOULD BE SPAWNED?");
+        //Debug.Log("DECIDE HERE HOW WORMHOLES SHOULD BE SPAWNED?");
 
         int maximumAmountOfWormholePairs = amountOfGalaxies / 2;
 
@@ -263,7 +259,7 @@ public class UniverseController : MonoBehaviour
 
         HasBeenGenerated = true;
 
-        Debug.Log("Generating new universe");
+        //Debug.Log("Generating new universe");
     }
 
     public void GenerateUniverseFromSaveFile()

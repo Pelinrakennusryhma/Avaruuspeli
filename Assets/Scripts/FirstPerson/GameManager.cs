@@ -57,8 +57,18 @@ public class GameManager : MonoBehaviour
 
     public WorldMapMessagePrompt WorldMapMessagePrompt;
 
+
+    public enum TypeOfLaunch
+    {
+        None = 0,
+        NewGame = 1,
+        LoadedGame = 2,
+        DevGame = 3
+    }
+
     [field: SerializeField]
     public ShipEquipment ShipEquipment { get; private set; }
+
 
     public enum TypeOfScene
     {
@@ -71,24 +81,38 @@ public class GameManager : MonoBehaviour
 
     public TypeOfScene IncomingSceneType;
 
+    public static TypeOfLaunch LaunchType;
+
     public void Awake()
     {
+        //LaunchType = TypeOfLaunch.LoadedGame; // Set this at the start screen
+
+        DevCheck devCheck = FindObjectOfType<DevCheck>();
+        DevListener devListener = FindObjectOfType<DevListener>();
+
+        if (!devCheck
+            && devListener)
+        {
+            return;
+        }
+
         IncomingSceneType = TypeOfScene.None;
         if (Instance == null)
         {
             Instance = this;
             Helpers = GetComponentInChildren<Helpers>(true);
-
             SaverLoader = GetComponentInChildren<SaverLoader>(true);
-            SaverLoader.OnInitialStartUp();
-            //Cursor.visible = false;
-            //Cursor.lockState = CursorLockMode.Locked;
             InventoryController = GetComponentInChildren<InventoryController>(true);
-            InventoryController.Init();
-
             HungerTracker = GetComponentInChildren<HungerTracker>(true);
             WorldMapMessagePrompt = GetComponentInChildren<WorldMapMessagePrompt>(true);
+            LifeSupportSystem = GetComponentInChildren<LifeSupportSystem>(true);
+            ShipLifeSupportSystem = GetComponentInChildren<ShipLifeSupportSystem>(true);
+
+            SaverLoader.OnInitialStartUp();
+            InventoryController.Init();
             WorldMapMessagePrompt.Init();
+            LifeSupportSystem.Init();
+            ShipLifeSupportSystem.Init();
 
 
             transform.parent = null;
@@ -108,11 +132,6 @@ public class GameManager : MonoBehaviour
             TransitionalCamera.gameObject.SetActive(false);
 
 
-            LifeSupportSystem = GetComponentInChildren<LifeSupportSystem>(true);
-            LifeSupportSystem.Init();
-
-            ShipLifeSupportSystem = GetComponentInChildren<ShipLifeSupportSystem>(true);
-            ShipLifeSupportSystem.Init();
 
             if(CurrentSceneType == TypeOfScene.None)
             {
@@ -126,13 +145,13 @@ public class GameManager : MonoBehaviour
         else
         {
             DestroyImmediate(gameObject);
-            Debug.LogWarning("Destroyed game manager");
+            //Debug.LogWarning("Destroyed game manager");
         }
     }
 
     public void Start()
     {
-        OnEnterWorldMapCall();
+        OnEnterWorldMapCall(false);
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -204,7 +223,7 @@ public class GameManager : MonoBehaviour
                     && IsOnWorldMap)
             {
                 GameManager.Instance.TransitionalCamera.gameObject.SetActive(false);
-                OnEnterWorldMapCall();
+                OnEnterWorldMapCall(true);
                 //Debug.LogError("We are on world map");
             }
         }
@@ -220,7 +239,7 @@ public class GameManager : MonoBehaviour
                     inventoryToggleQueued = false;
                     if (InventoryController.ShowingInventory) 
                     {
-                        InventoryController.OnInventoryHide();
+                        InventoryController.OnInventoryHide(true);
                     }
 
                     else
@@ -392,11 +411,11 @@ public class GameManager : MonoBehaviour
 
     public void EnterAsteroidField()
     {
-        SaveData();
+        SaveLifeSupportData(true);
         Debug.LogWarning("ENTER ASTEROID FIELD");
 
         IncomingSceneType = TypeOfScene.AsteroidField;
-        StackAndLoadAndLaunchScene("MineableAsteroidScene", 1);
+        StackAndLoadAndLaunchScene("MineableAsteroidScene", 2);
     }
 
     public void EnterPOI(PointOfInterest pointOfInterest)
@@ -408,7 +427,7 @@ public class GameManager : MonoBehaviour
 
     public void EnterPOI()
     {        
-        SaveData();
+        SaveLifeSupportData(true);
         IncomingSceneType = TypeOfScene.POI;
         Debug.Log("currentPOI: " + currentPOI);
         Debug.Log("Data: " + currentPOI.Data);
@@ -418,16 +437,16 @@ public class GameManager : MonoBehaviour
 
     public void EnterPlanet()
     {
-        SaveData();
+        SaveLifeSupportData(true);
         ShipLifeSupportSystem.OnExitShip();
         HungerTracker.OnEnterFirstPersonScene();
 
-        Debug.LogWarning("ENTER PLANET");
+        //Debug.LogWarning("ENTER PLANET");
 
         PlanetData.PlanetGraphicsType planetType = CurrentPlanetData.PlanetGraphics;
         IncomingSceneType = TypeOfScene.Planet;
 
-        Debug.Log("Current planet type is " + planetType.ToString());
+        //Debug.Log("Current planet type is " + planetType.ToString());
 
         //int rando = Random.Range(0, 6);
         //rando = 0;
@@ -462,6 +481,21 @@ public class GameManager : MonoBehaviour
         //    StackAndLoadAndLaunchScene("PuuMaa", 8);
         //}
 
+        int maaPalloIndex = 4;
+        int marssiIndex = 5;
+        int kuuIndex = 6; // We are not using this scene yet. Why not?
+        int lumiMaaIndex = 7;
+        int plutoIndex = 8;
+        int puuMaaIndex = 9;
+
+
+        string maaPalloName = "Maapallo";
+        string marssiName = "Marssi";
+        string kuuName = "Kuu";
+        string lumiMaaName = "LumiMaa";
+        string plutoName = "Pluto";
+        string puuMaaName = "PuuMaa";
+
         switch (planetType) 
         {
             case PlanetData.PlanetGraphicsType.None:
@@ -469,123 +503,123 @@ public class GameManager : MonoBehaviour
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder1:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(maaPalloName, maaPalloIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder2:
-                StackAndLoadAndLaunchScene("Marssi", 4);
+                StackAndLoadAndLaunchScene(marssiName, marssiIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder3:
-                StackAndLoadAndLaunchScene("Pluto", 7);
+                StackAndLoadAndLaunchScene(plutoName, plutoIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder4:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(puuMaaName, puuMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder5:
-                StackAndLoadAndLaunchScene("Pluto", 7);
+                StackAndLoadAndLaunchScene(plutoName, plutoIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder6:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(puuMaaName, puuMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder7:
-                StackAndLoadAndLaunchScene("Pluto", 7);
+                StackAndLoadAndLaunchScene(kuuName, kuuIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder8:
-                StackAndLoadAndLaunchScene("Marssi", 4);
+                StackAndLoadAndLaunchScene(marssiName, marssiIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder9:
-                StackAndLoadAndLaunchScene("Marssi", 4);
+                StackAndLoadAndLaunchScene(marssiName, marssiIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder10:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(kuuName, kuuIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder11:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(puuMaaName, puuMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder12:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(kuuName, kuuIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder13:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(puuMaaName, puuMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder14:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(kuuName, kuuIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder15:
-                StackAndLoadAndLaunchScene("PuuMaa", 8);
+                StackAndLoadAndLaunchScene(puuMaaName, puuMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder16:
-                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                StackAndLoadAndLaunchScene(lumiMaaName, lumiMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder17:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(maaPalloName, maaPalloIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder18:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(kuuName, kuuIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder19:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(maaPalloName, maaPalloIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder20:
-                StackAndLoadAndLaunchScene("Pluto", 7);
+                StackAndLoadAndLaunchScene(plutoName, plutoIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder21:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(maaPalloName, maaPalloIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder22:
-                StackAndLoadAndLaunchScene("Marssi", 4);
+                StackAndLoadAndLaunchScene(marssiName, marssiIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder23:
-                StackAndLoadAndLaunchScene("Pluto", 7);
+                StackAndLoadAndLaunchScene(plutoName, plutoIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder24:
-                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                StackAndLoadAndLaunchScene(lumiMaaName, lumiMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder25:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(maaPalloName, maaPalloIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder26:
-                StackAndLoadAndLaunchScene("Marssi", 4);
+                StackAndLoadAndLaunchScene(marssiName, marssiIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder27:
-                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                StackAndLoadAndLaunchScene(lumiMaaName, lumiMaaIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder28:
-                StackAndLoadAndLaunchScene("Maapallo", 3);
+                StackAndLoadAndLaunchScene(maaPalloName, maaPalloIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder29:
-                StackAndLoadAndLaunchScene("Pluto", 7);
+                StackAndLoadAndLaunchScene(plutoName, plutoIndex);
                 break;
 
             case PlanetData.PlanetGraphicsType.Placeholder30:
-                StackAndLoadAndLaunchScene("LumiMaa", 6);
+                StackAndLoadAndLaunchScene(lumiMaaName, lumiMaaIndex);
                 break;
 
             default:
@@ -648,7 +682,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateStackedScene()
     {
-        Debug.Log("We are activating incoming scene of type " + IncomingSceneType.ToString());
+        //Debug.Log("We are activating incoming scene of type " + IncomingSceneType.ToString());
         WaitingForSceneLoad = false;
         FramesPassedTillLoadScenes = -1;
 
@@ -662,7 +696,7 @@ public class GameManager : MonoBehaviour
 
         if (IncomingSceneType == TypeOfScene.Planet)
         {
-            Debug.Log("Here should be logic for launching a certain planet type");
+            //Debug.Log("Here should be logic for launching a certain planet type");
             //PlanetLauncher planetLauncher = FindObjectOfType<PlanetLauncher>();
             //planetLauncher.LaunchPlanet(CurrentGalaxy.GalaxyData,
             //                            CurrentStarSystem.StarSystemData,
@@ -671,12 +705,12 @@ public class GameManager : MonoBehaviour
 
         else if (IncomingSceneType == TypeOfScene.AsteroidField)
         {
-            Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
+            //Debug.LogWarning("This would be a good time and place to pass data from world map to an asteroid field. If needed...");
         }
 
         else if (IncomingSceneType == TypeOfScene.POI)
         {
-            Debug.LogWarning("Incoming scene is of type POI");
+            //Debug.LogWarning("Incoming scene is of type POI");
         }
 
         CurrentSceneType = IncomingSceneType;
@@ -684,7 +718,7 @@ public class GameManager : MonoBehaviour
 
         if (CurrentSceneType == TypeOfScene.WorldMap)
         {
-            OnEnterWorldMapCall();
+            OnEnterWorldMapCall(true);
         }
     }
 
@@ -695,13 +729,16 @@ public class GameManager : MonoBehaviour
 
     // WIP ENDED
 
-    public void OnEnterWorldMapCall()
+    public void OnEnterWorldMapCall(bool saveLifeSupportData)
     {
         WaitingForSceneLoad = false;
         IsOnWorldMap = true;
         IncomingSceneType = TypeOfScene.None;
 
-        SaveData();
+        if (saveLifeSupportData) 
+        {
+            SaveLifeSupportData(true);
+        }
 
         if (ShipLifeSupportSystem.WaitingToShowRunningOutOfOxygenPrompt)
         {
@@ -726,16 +763,36 @@ public class GameManager : MonoBehaviour
 
     public void OnEnterAsteroidSurface()
     {
-        SaveData();
+        SaveLifeSupportData(true);
         HungerTracker.OnEnterFirstPersonScene();
         //Debug.Log("Gamemanager knows we entered asteroid surface");
     }
 
-    private void SaveData()
+    public void SaveLifeSupportData(bool saveInventoryToo)
     {
-        InventoryController.HydroponicsBay.SaveRelevantData();
-        LifeSupportSystem.SaveRelevantData();
-        ShipLifeSupportSystem.SaveRelevantData();
+        //InventoryController.HydroponicsBay.SaveRelevantData();
+        //LifeSupportSystem.SaveRelevantData();
+        //ShipLifeSupportSystem.SaveRelevantData();
+
+        float amountOfOxygenInLastBottle = LifeSupportSystem.GetAmountOfOxygenInLastBottle();
+
+        ShipLifeSupportSystem.GetRelevantSaveData(out float amountOfOxygenInLastStorage,
+                                                  out float timeThatHydroponicsHasBeenOutOfResources,
+                                                  out float amountOfCarbonInLastUnit,
+                                                  out float amountOfWaterInLastBottle);
+
+
+        GameManager.Instance.SaverLoader.SaveLifeSupportData(amountOfOxygenInLastStorage,
+                                                             timeThatHydroponicsHasBeenOutOfResources,
+                                                             amountOfCarbonInLastUnit,
+                                                             amountOfWaterInLastBottle);
+
+        //Debug.LogError("Here has been some refactoring. Check that everything still works as intended!");
+
+        if (saveInventoryToo) 
+        {
+            InventoryController.SaveInventory();
+        }
     }
 
 }

@@ -813,6 +813,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: eeb56751-443d-4a72-bdc7-d006fca8023a
     m_ActionName: FirstPersonControls/LeaveScene[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d4fcccf-c07a-414d-a1b6-24f4565aa9c1
+    m_ActionName: ShipControls/Utility2[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonControls
@@ -852,6 +856,7 @@ MonoBehaviour:
   Alpha8Down: 0
   Alpha9Down: 0
   Alpha0Down: 0
+  leavePlanetScene: {fileID: 0}
 --- !u!114 &8258911447371213847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +884,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StandingCapsule: {fileID: 3942892928164607873}
+  OverlayCamera: {fileID: 0}
+  OverlayLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3942892927911336746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,7 +1366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4609879615366353884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1857,8 +1866,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "WASD - MOVE,  LMB - DRILL, ESC - OPTIONS\nLEFT SHIFT - RUN, LEFT CTRL
-    - CROUCH, SPACE - JUMP, \n1 -CHOOSE DRILL 1, 2 -CHOOSE DRILL 2"
+  m_text: 'WASD - MOVE , LMB - DRILL, ESC - OPTIONS
+
+    LEFT SHIFT - RUN, LEFT CTRL
+    - CROUCH, SPACE - JUMP'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
