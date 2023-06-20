@@ -35,15 +35,9 @@ public class UniverseController : MonoBehaviour
 
     public void Init()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
 
-        else
-        {
-            Destroy(gameObject);
-        }
+            Instance = this;
+
 
         if (GameManager.LaunchType == GameManager.TypeOfLaunch.NewGame
             || GameManager.LaunchType == GameManager.TypeOfLaunch.DevGame

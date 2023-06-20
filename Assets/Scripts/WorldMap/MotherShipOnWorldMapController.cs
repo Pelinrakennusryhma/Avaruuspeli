@@ -584,6 +584,7 @@ public class MotherShipOnWorldMapController : MonoBehaviour
                 {
                     galaxy = UniverseController.Instance.AllGalaxies[i];
                     eye = i;
+                    //Debug.Log("Iterating through the galaxies " + UniverseController.Instance.AllGalaxies[i].GalaxyData.ID);
                     break;
                 }
             }
