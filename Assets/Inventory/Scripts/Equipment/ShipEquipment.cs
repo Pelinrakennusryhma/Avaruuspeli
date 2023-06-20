@@ -73,50 +73,51 @@ public class ShipEquipment : MonoBehaviour
 
     public void Equip(ItemSO item, bool saveToShipData=true)
     {
-        Debug.Log("Equipping ship item: " + item.itemName + "type: " + item.GetType());
-        ShipItemSlot slot = GetItemSlot(item);
-        slot.Equip(item);
-
-        if (saveToShipData)
+        if(item != null)
         {
-            SaveToShipData(item, slot);
-        }
+            Debug.Log("Equipping ship item: " + item.itemName + "type: " + item.GetType());
+            ShipItemSlot slot = GetItemSlot(item);
+            slot.Equip(item);
 
-        // TODO: Add to PlayerShipData
-        // Save to disk application quit
+            if (saveToShipData)
+            {
+                SaveToShipData(item, slot);
+            }
+
+            // TODO: Add to PlayerShipData
+            // Save to disk application quit
+        }
+    }
+
+    public void UnEquip(ItemSO item, ShipItemSlot slot)
+    {
+        SaveToShipData(null, slot);
     }
 
     void SaveToShipData(ItemSO item, ShipItemSlot slot)
     {
-        if (slot.equippedItem is ShipModel)
+        switch (slot.Type)
         {
-            playerShipData.shipModel = (ShipModel)slot.equippedItem;
-        }
-        else if (slot.equippedItem is ShipHull)
-        {
-            playerShipData.hull = (ShipHull)slot.equippedItem;
-        }
-        else if (slot.equippedItem is ShipWeaponItemPrimary)
-        {
-            playerShipData.primaryWeapon = (ShipWeaponItemPrimary)slot.equippedItem;
-        }
-        else if (slot.equippedItem is ShipWeaponItemSecondary)
-        {
-            playerShipData.secondaryWeapon = (ShipWeaponItemSecondary)slot.equippedItem;
-        }
-        else if (slot.equippedItem is ShipUtility)
-        {
-            if(slot.Type == ShipItemSlotType.Utility1)
-            {
-                playerShipData.utilities[0] = (ShipUtility)slot.equippedItem;
-            } else
-            {
-                playerShipData.utilities[1] = (ShipUtility)slot.equippedItem;
-            }
-        }
-        else
-        {
-            throw new Exception("unknown ship item type, can't save to SpaceshipData");
+            case ShipItemSlotType.Model:
+                playerShipData.shipModel = (ShipModel)item;
+                break;
+            case ShipItemSlotType.Hull:
+                playerShipData.hull = (ShipHull)item;
+                break;
+            case ShipItemSlotType.PrimaryWeapon:
+                playerShipData.primaryWeapon = (ShipWeaponItemPrimary)item;
+                break;
+            case ShipItemSlotType.SecondaryWeapon:
+                playerShipData.secondaryWeapon = (ShipWeaponItemSecondary)item;
+                break;
+            case ShipItemSlotType.Utility1:
+                playerShipData.utilities[0] = (ShipUtility)item;
+                break;
+            case ShipItemSlotType.Utility2:
+                playerShipData.utilities[1] = (ShipUtility)item;
+                break;
+            default:
+                throw new Exception("unknown ship item type, can't save to SpaceshipData");
         }
     }
 
