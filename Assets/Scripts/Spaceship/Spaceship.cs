@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Spaceship : MonoBehaviour, IDamageable
 {
+    [field: SerializeField] 
+    public Transform BehindCamera { get; private set; }
+    [field: SerializeField] 
+    public Transform CockpitCamera { get; private set; }
     SpaceshipEvents spaceshipEvents;
     SpaceshipHealth spaceshipHealth;
     ActorSpaceship actor;

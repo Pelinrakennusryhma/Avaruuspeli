@@ -8,7 +8,7 @@ namespace BehaviorTree
     {
         private Node _root = null;
 
-        protected void Start()
+        protected virtual void OnEnable()
         {
             _root = SetupTree();
         }

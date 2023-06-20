@@ -21,6 +21,12 @@ public class GUI_Spaceship : MonoBehaviour
     TMP_Text promptText;
     [SerializeField]
     GameObject spaceshipHUD;
+    [SerializeField]
+    StatusBar healthBar;
+    [SerializeField]
+    StatusBar boostBar;
+    [SerializeField]
+    StatusBar missileBar;
 
     private bool prompTextWasActiveBeforeInventoryShow;
     private bool spaceshipHUDWasActiveBeforeInventoryShow;
@@ -35,6 +41,7 @@ public class GUI_Spaceship : MonoBehaviour
         GameEvents.Instance.EventPlayerLeftAsteroid.AddListener(OnPlayerLeftAsteroid);
         GameEvents.Instance.EventInventoryClosed.AddListener(OnInventoryClosed);
         GameEvents.Instance.EventInventoryOpened.AddListener(OnInventoryOpened);
+        GameEvents.Instance.EventSpaceshipSpawned.AddListener(OnSpaceshipSpawned);
         //Debug.Log("Listener added to on leftasteroid" + Time.time);
     }
 
@@ -93,6 +100,21 @@ public class GUI_Spaceship : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         restartButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
+    }
+
+    void OnSpaceshipSpawned(ActorSpaceship actor)
+    {
+        if(actor.faction.factionName == "Player")
+        {
+            InitShipHUD(actor);
+        }
+    }
+
+    void InitShipHUD(ActorSpaceship actor)
+    {
+        healthBar.SetTrackable(actor.spaceshipHealth);
+        boostBar.SetTrackable(actor.spaceshipBoost);
+        missileBar.SetTrackable(actor.spaceshipMissile);
     }
 
     public void OnRestartClicked()

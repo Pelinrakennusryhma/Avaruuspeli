@@ -28,11 +28,14 @@ public class Missile : MonoBehaviour
         ChaseTarget();
     }
 
-    public void Init(ActorSpaceship target, SpaceshipMissile shooter)
+    public void Init(ActorSpaceship target, SpaceshipMissile shooter, float moveSpeed, float explosionRadius, float explosionDamage)
     {
         _target = target;
         _shooter = shooter;
         shooterShip = shooter.gameObject;
+        this.moveSpeed = moveSpeed;
+        this.explosionRadius = explosionRadius;
+        this.explosionDamage = explosionDamage;
     }
 
     void ChaseTarget()

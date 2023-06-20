@@ -128,8 +128,6 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(7, 1);
         Inventory.AddItem(8, 1);
         Inventory.AddItem(9, 1);
-        Inventory.AddItem(10, 1);
-        Inventory.AddItem(11, 1);
         Inventory.AddItem(12, 1);
 
         Inventory.AddItem(13, 21); // Oxygen bottle
@@ -148,7 +146,24 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(30, 100);
         Inventory.AddItem(31, 100);
 
+#if UNITY_EDITOR
+        AddShipItems();
+#endif
+
         GameManager.Instance.SaverLoader.SaveMoney(Money);
+    }
+
+    void AddShipItems()
+    {
+        foreach (ItemSO item in ItemDataBaseWithScriptables.ItemDataBaseSO.ShipItems)
+        {
+            Inventory.AddItem(item.id, 1);
+        }
+
+        foreach (ItemSO item in ItemDataBaseWithScriptables.ItemDataBaseSO.ShipWeaponItems)
+        {
+            Inventory.AddItem(item.id, 1);
+        }
     }
 
     public void OnInventoryShow(bool cacheCursor)

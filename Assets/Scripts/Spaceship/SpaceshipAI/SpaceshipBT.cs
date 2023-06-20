@@ -33,13 +33,13 @@ public class SpaceshipBT : BTree
     SpaceshipShoot spaceshipShoot;
     SpaceshipEvents spaceshipEvents;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         enemyControls = GetComponent<EnemyControls>();
         shipTransform = transform.GetChild(0);
         spaceshipShoot = shipTransform.GetComponent<SpaceshipShoot>();
         spaceshipEvents = shipTransform.GetComponent<SpaceshipEvents>();
-
+        base.OnEnable();
     }
     protected override Node SetupTree()
     {

@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     public WorldMapMessagePrompt WorldMapMessagePrompt;
 
+
     public enum TypeOfLaunch
     {
         None = 0,
@@ -64,6 +65,10 @@ public class GameManager : MonoBehaviour
         LoadedGame = 2,
         DevGame = 3
     }
+
+    [field: SerializeField]
+    public ShipEquipment ShipEquipment { get; private set; }
+
 
     public enum TypeOfScene
     {
@@ -134,6 +139,7 @@ public class GameManager : MonoBehaviour
             }
 
             //Debug.Log("Don't destroy game manager");
+            ShipEquipment.Init();
         }
 
         else

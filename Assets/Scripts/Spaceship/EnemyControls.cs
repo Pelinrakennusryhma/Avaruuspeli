@@ -20,6 +20,9 @@ public class EnemyControls : ActorSpaceship
         base.Start();
         shipTransform = ship.transform;
         rb = shipTransform.GetComponent<Rigidbody>();
+        // enable behaviour tree once ship has been initialized in the base
+        SpaceshipBT spaceshipBT = GetComponent<SpaceshipBT>();
+        spaceshipBT.enabled = true;
     }
 
     protected override void OnDeath()

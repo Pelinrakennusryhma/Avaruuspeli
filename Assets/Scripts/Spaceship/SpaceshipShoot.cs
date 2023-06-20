@@ -17,17 +17,19 @@ public class SpaceshipShoot : MonoBehaviour
     [SerializeField]
     private Transform[] laserOrigins;
     [SerializeField]
-    float shootInterval = 3f;
+    float rateOfFire = 600;
     [SerializeField]
     Transform laserParent;
 
     public bool shooting = false;
     float cooldown;
+    float timer;
     Material coloredMaterial;
 
     void Start()
     {
-        cooldown = shootInterval;
+        cooldown = 60 / rateOfFire;
+        timer = cooldown;
 
         ColorMaterial();
 
@@ -39,19 +41,29 @@ public class SpaceshipShoot : MonoBehaviour
 
     private void Update()
     {
-        cooldown -= Time.deltaTime;
+        timer -= Time.deltaTime;
     }
 
     void FixedUpdate()
     {
         if (shooting)
         {
-            if(cooldown <= 0)
+            if(timer <= 0)
             {
-                cooldown = shootInterval;
+                timer = cooldown;
                 Shoot();
             }
         }
+    }
+
+    public void Init(float damage, float velocity, float rateOfFire)
+    {
+        laserDamage = damage;
+        laserSpeed = velocity;
+        this.rateOfFire = rateOfFire;
+
+        cooldown = 60 / rateOfFire;
+        timer = cooldown;
     }
 
     void ColorMaterial()

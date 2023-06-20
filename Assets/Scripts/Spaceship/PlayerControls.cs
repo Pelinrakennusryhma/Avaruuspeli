@@ -16,6 +16,7 @@ public class PlayerControls : ActorSpaceship
     {
         base.Start();
         alarmSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Alarm);
+        ship.tag = "PlayerShip";
     }
 
     private void Update()

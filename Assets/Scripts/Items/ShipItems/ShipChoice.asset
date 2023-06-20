@@ -17,7 +17,10 @@ MonoBehaviour:
   plural: Ship Choices
   value: 1
   description: Choice for a ship.
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1134921867126456992, guid: 1ae6be1c296fe214daef5e7a4f3ad938,
+    type: 3}
   itemPrefabVariants: []
   itemIcon: {fileID: 0}
+  isStackable: 0
+  weight: 0
   itemType: 6

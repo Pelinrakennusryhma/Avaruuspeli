@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8a0311a2be5324da48df3f29774ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BehindCamera>k__BackingField: {fileID: 1134921867884066000}
+  <CockpitCamera>k__BackingField: {fileID: 1134921865962600679}
 --- !u!114 &1134921867126457020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,15 +295,8 @@ MonoBehaviour:
     type: 3}
   laserOrigins:
   - {fileID: 1134921867257646773}
-  shootInterval: 0.25
+  rateOfFire: 240
   laserParent: {fileID: 0}
-  laserShootSound:
-    Guid:
-      Data1: 259541080
-      Data2: 1091639919
-      Data3: -1263206784
-      Data4: -1782933795
-    Path: event:/ShootLaser
   shooting: 0
 --- !u!114 &4775760650964221550
 MonoBehaviour:

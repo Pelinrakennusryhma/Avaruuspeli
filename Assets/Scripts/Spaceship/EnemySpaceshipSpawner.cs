@@ -8,8 +8,6 @@ public class EnemySpaceshipSpawner : MonoBehaviour
     BoxCollider enemySpawnArea;
     [SerializeField]
     GameObject enemyPrefab;
-    [SerializeField]
-    GameObject shipPrefab;
     public void SpawnEnemies(int amount)
     {
         //Get amount from POISceneData
@@ -18,13 +16,9 @@ public class EnemySpaceshipSpawner : MonoBehaviour
         {
             Vector3 pos = GetPositionInSpawnArea(enemySpawnArea.bounds);
             GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity, enemySpawnArea.transform);
-            GameObject ship = Instantiate(shipPrefab, pos, Random.rotation, enemy.transform);
 
             EnemyControls enemyControls = enemy.GetComponent<EnemyControls>();
             enemyControls.enabled = true;
-            SpaceshipBT spaceshipBT = enemy.GetComponent<SpaceshipBT>();
-            spaceshipBT.enabled = true;
-
         }
     }
 
