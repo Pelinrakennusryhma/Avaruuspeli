@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 enum MusicArea
 {
-    WORLD_MAP = 0,
-    SPACESHIP_SCENE = 1,
-    PLANET = 2
+    MENU = 0,
+    WORLD_MAP = 1,
+    SPACESHIP_SCENE = 2,
+    PLANET = 3
 }
 
 public enum FMODBus 
@@ -165,7 +166,7 @@ public class AudioManager : MonoBehaviour
     
     public void SetMusicAreaBySceneIndex(int index)
     {
-        MusicArea musicArea = index <= 1 ? (MusicArea)index : MusicArea.PLANET;
+        MusicArea musicArea = index <= 2 ? (MusicArea)index : MusicArea.PLANET;
         SetMusicArea(musicArea);
     }
 
