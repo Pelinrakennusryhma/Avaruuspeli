@@ -344,7 +344,7 @@ public class ContextMenu : MonoBehaviour
     public void ShowEquipShipItem()
     {
         buttonEquipShipItem.gameObject.SetActive(true);
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if(Globals.Instance.IsSpaceshipScene())
         {
             buttonEquipShipItem.interactable = false;
         } else
@@ -359,7 +359,7 @@ public class ContextMenu : MonoBehaviour
     public void ShowUnEquipShipItem()
     {
         buttonUnEquipShipItem.gameObject.SetActive(true);
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (Globals.Instance.IsSpaceshipScene())
         {
             buttonUnEquipShipItem.interactable = false;
         }

@@ -31,9 +31,7 @@ public class ShipEquipment : MonoBehaviour
 
     private void OnEnable()
     {
-        // only enable if NOT in SpaceshipScene
-        // TODO: disable actually equipping stuff somehow
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if(Globals.Instance != null && Globals.Instance.IsSpaceshipScene())
         {
             blockerPanel.SetActive(true);
         } else

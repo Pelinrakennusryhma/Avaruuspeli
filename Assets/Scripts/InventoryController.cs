@@ -146,9 +146,7 @@ public class InventoryController : MonoBehaviour
         Inventory.AddItem(30, 100);
         Inventory.AddItem(31, 100);
 
-#if UNITY_EDITOR
         AddShipItems();
-#endif
 
         GameManager.Instance.SaverLoader.SaveMoney(Money);
     }
