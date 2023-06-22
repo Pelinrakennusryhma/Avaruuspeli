@@ -159,7 +159,7 @@ MonoBehaviour:
   - {fileID: 688270757908266836}
   StringsBanks:
   - {fileID: -286429430098339160}
-  cacheTime: 638230430020840274
+  cacheTime: 638230510808883227
   cacheVersion: 131603
 --- !u!114 &371905620781687472
 MonoBehaviour:
@@ -176,10 +176,10 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638230430015209887
+  lastModified: 638230510808883227
   FileSizes:
   - Name: Desktop
-    Value: 6647488
+    Value: 8749216
   Exists: 1
 --- !u!114 &646619835282600595
 MonoBehaviour:
@@ -319,7 +319,7 @@ MonoBehaviour:
   StudioPath: 
   Min: 0
   Max: 3
-  Default: 1
+  Default: 0
   ID:
     data1: 211323842
     data2: 772364740

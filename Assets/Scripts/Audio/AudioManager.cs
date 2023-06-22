@@ -55,13 +55,15 @@ public class AudioManager : MonoBehaviour
     {
         if(Instance != null)
         {
-            Instance.CleanUp();
-            Debug.LogWarning("More than one AudioManager around!");
+            //Instance.CleanUp();
+            //Debug.LogWarning("More than one AudioManager around!");
             //SetMusicArea(GetMusicArea());
+            Destroy(gameObject);
         }
         else
         {
-            Instance = this;        
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         masterBus = RuntimeManager.GetBus("bus:/");
@@ -71,6 +73,8 @@ public class AudioManager : MonoBehaviour
 
         LoadData();
         SetInitialVolumes();
+        SetMusicAreaBySceneIndex(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Index: " + SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Start()
