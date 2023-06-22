@@ -24,7 +24,10 @@ public class ShipEquipment : MonoBehaviour
     public Dictionary<ShipItemSlotType, ShipItemSlot> itemSlots 
     { get; private set; } = new Dictionary<ShipItemSlotType, ShipItemSlot>();
 
+    // toggled between 0 and 1 when equipping utils
     int utilSlotId = 0;
+
+    public ShipItemSlot clickedSlot;
 
     private void OnEnable()
     {
@@ -63,22 +66,64 @@ public class ShipEquipment : MonoBehaviour
 
     private void FillSlots()
     {
-        Equip(playerShipData.shipModel);
-        Equip(playerShipData.hull);
-        Equip(playerShipData.primaryWeapon);
-        Equip(playerShipData.secondaryWeapon);
-        Equip(playerShipData.utilities[0]);
-        Equip(playerShipData.utilities[1]);
+        Equip(playerShipData.shipModel, false);
+        Equip(playerShipData.hull, false);
+        Equip(playerShipData.primaryWeapon, false);
+        Equip(playerShipData.secondaryWeapon, false);
+        Equip(playerShipData.utilities[0], false);
+        Equip(playerShipData.utilities[1], false);
     }
 
-    public void Equip(ItemSO item)
+    public void Equip(ItemSO item, bool saveToShipData=true)
     {
-        Debug.Log("Equipping ship item: " + item.itemName + "type: " + item.GetType());
-        ShipItemSlot slot = GetItemSlot(item);
-        slot.Equip(item);
+        if(item != null)
+        {
+            Debug.Log("Equipping ship item: " + item.itemName + "type: " + item.GetType());
+            ShipItemSlot slot = GetItemSlot(item);
+            slot.Equip(item);
 
-        // TODO: Add to PlayerShipData
-        // Save to disk application quit
+            if (saveToShipData)
+            {
+                SaveToShipData(item, slot);
+            }
+
+            // TODO: Add to PlayerShipData
+            // Save to disk application quit
+        }
+    }
+
+    public void UnEquip()
+    {
+        clickedSlot.Unequip();
+        SaveToShipData(null, clickedSlot);
+        
+    }
+
+    void SaveToShipData(ItemSO item, ShipItemSlot slot)
+    {
+        switch (slot.Type)
+        {
+            case ShipItemSlotType.Model:
+                playerShipData.shipModel = (ShipModel)item;
+                break;
+            case ShipItemSlotType.Hull:
+                playerShipData.hull = (ShipHull)item;
+                break;
+            case ShipItemSlotType.PrimaryWeapon:
+                playerShipData.primaryWeapon = (ShipWeaponItemPrimary)item;
+                break;
+            case ShipItemSlotType.SecondaryWeapon:
+                playerShipData.secondaryWeapon = (ShipWeaponItemSecondary)item;
+                break;
+            case ShipItemSlotType.Utility1:
+                playerShipData.utilities[0] = (ShipUtility)item;
+                break;
+            case ShipItemSlotType.Utility2:
+                playerShipData.utilities[1] = (ShipUtility)item;
+                break;
+            default:
+                throw new Exception("unknown ship item type, can't save to SpaceshipData");
+        }
     }
 
     ShipItemSlot GetItemSlot(ItemSO item)
@@ -103,19 +148,30 @@ public class ShipEquipment : MonoBehaviour
         }
         else if (item is ShipUtility)
         {
-            if(utilSlotId == 0)
+            if(itemSlots[ShipItemSlotType.Utility1].equippedItem == null)
             {
                 slot = itemSlots[ShipItemSlotType.Utility1];
-            } else
+            } else if(itemSlots[ShipItemSlotType.Utility2].equippedItem == null)
             {
                 slot = itemSlots[ShipItemSlotType.Utility2];
+            } else
+            {
+                if (utilSlotId == 0)
+                {
+                    slot = itemSlots[ShipItemSlotType.Utility1];
+                }
+                else
+                {
+                    slot = itemSlots[ShipItemSlotType.Utility2];
+                }
+
+                utilSlotId++;
+                if (utilSlotId > 1)
+                {
+                    utilSlotId = 0;
+                }
             }
 
-            utilSlotId++;
-            if(utilSlotId > 1)
-            {
-                utilSlotId = 0;
-            }
         }
         else
         {

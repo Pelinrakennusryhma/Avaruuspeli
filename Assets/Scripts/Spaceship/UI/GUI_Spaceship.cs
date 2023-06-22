@@ -115,6 +115,7 @@ public class GUI_Spaceship : MonoBehaviour
         healthBar.SetTrackable(actor.spaceshipHealth);
         boostBar.SetTrackable(actor.spaceshipBoost);
         missileBar.SetTrackable(actor.spaceshipMissile);
+        missileBar.gameObject.SetActive(actor.spaceshipMissile.enabled);
     }
 
     public void OnRestartClicked()
@@ -161,7 +162,7 @@ public class GUI_Spaceship : MonoBehaviour
         {
             // NOTE: WE don't want to show first person controls right now.
             // A more robust solution would be fine here.
-            if (i < 15)
+            if (i < 16)
             {
                 textToShow += $"{bindData.Key}{bindData.Value}\n";
             }
