@@ -191,11 +191,19 @@ public class ResourceGatherer : MonoBehaviour
                     hitRock.ReduceHealth(Time.deltaTime * 1.5f, Tool);
                     UpdateSound(true);
                 }
-                
+
+                Hands.OnHittingRock();             
             }
+
             else
             {
                 UpdateSound(false);
+            }
+
+            if(Controls.Fire1Down
+                && !hittingRock)
+            {
+                Hands.OnNotHittingRockButDrilling();
             }
         }
     }

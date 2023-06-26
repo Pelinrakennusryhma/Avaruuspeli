@@ -9,9 +9,11 @@ public class PlayerHands : MonoBehaviour
 
     public static PlayerHands Instance;
 
-    public GameObject DiamondDrill;
-    public GameObject AdvancedDrill;
-    public GameObject BasicDrill;
+
+
+    public Drill BasicDrill;
+    public Drill AdvancedDrill;
+    public Drill DiamondDrill;
 
     public LaserGun LaserGun;
     public MeleeWeapon MeleeWeapon;
@@ -51,9 +53,11 @@ public class PlayerHands : MonoBehaviour
     {
         //SetWeapon(Weapon.WeaponType.None);
 
-        AdvancedDrill.SetActive(false);
-        BasicDrill.SetActive(false);
-        DiamondDrill.SetActive(false);
+        CurrentTool = tool;
+
+        AdvancedDrill.gameObject.SetActive(false);
+        BasicDrill.gameObject.SetActive(false);
+        DiamondDrill.gameObject.SetActive(false);
 
         if (ResourceGatherer.Instance != null)
         {
@@ -73,16 +77,16 @@ public class PlayerHands : MonoBehaviour
 
             case ResourceGatherer.ToolType.BasicDrill:
                 //Debug.Log("We are here 1");
-                BasicDrill.SetActive(true);
+                BasicDrill.gameObject.SetActive(true);
                 break;
 
             case ResourceGatherer.ToolType.AdvancedDrill:
                 //Debug.Log("We are here 2");
-                AdvancedDrill.SetActive(true);
+                AdvancedDrill.gameObject.SetActive(true);
                 break;
 
              case ResourceGatherer.ToolType.DiamondDrill:
-                DiamondDrill.SetActive(true);
+                DiamondDrill.gameObject.SetActive(true);
                 break;
 
             default:
@@ -152,6 +156,79 @@ public class PlayerHands : MonoBehaviour
             {
                 MeleeWeapon.OnFire1Down();
             }
+
+            else if (CurrentTool == ResourceGatherer.ToolType.BasicDrill)
+            {
+                BasicDrill.OnDrill();
+            }
+
+            else if (CurrentTool == ResourceGatherer.ToolType.AdvancedDrill)
+            {
+                AdvancedDrill.OnDrill();
+            }
+
+            else if (CurrentTool == ResourceGatherer.ToolType.DiamondDrill)
+            {
+                DiamondDrill.OnDrill();
+            }
         }
+
+        else
+        {
+            if (CurrentTool == ResourceGatherer.ToolType.BasicDrill)
+            {
+                BasicDrill.OnNotDrill();
+            }
+
+            else if (CurrentTool == ResourceGatherer.ToolType.AdvancedDrill)
+            {
+                AdvancedDrill.OnNotDrill();
+            }
+
+            else if (CurrentTool == ResourceGatherer.ToolType.DiamondDrill)
+            {
+                DiamondDrill.OnNotDrill();
+            }
+        }
+    }
+
+    public void OnHittingRock()
+    {
+        if (CurrentTool == ResourceGatherer.ToolType.BasicDrill)
+        {
+            BasicDrill.OnHittingRock();
+        }
+
+        else if (CurrentTool == ResourceGatherer.ToolType.AdvancedDrill)
+        {
+            AdvancedDrill.OnHittingRock();
+        }
+
+        else if (CurrentTool == ResourceGatherer.ToolType.DiamondDrill)
+        {
+            DiamondDrill.OnHittingRock();
+        }
+
+        //Debug.Log("Hitting rock " + Time.time);
+    }
+
+    public void OnNotHittingRockButDrilling()
+    {
+        if (CurrentTool == ResourceGatherer.ToolType.BasicDrill)
+        {
+            BasicDrill.OnNotHittingRock();
+        }
+
+        else if (CurrentTool == ResourceGatherer.ToolType.AdvancedDrill)
+        {
+            AdvancedDrill.OnNotHittingRock();
+        }
+
+        else if (CurrentTool == ResourceGatherer.ToolType.DiamondDrill)
+        {
+            DiamondDrill.OnNotHittingRock();
+        }
+
+        //Debug.Log("Not Hitting rock " + Time.time);
     }
 }
