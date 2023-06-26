@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ContextMenu : MonoBehaviour
 {
     [SerializeField] private GameObject buttonUse;
     [SerializeField] private GameObject buttonEquip;
-    [SerializeField] private GameObject buttonEquipShipItem;
+    [SerializeField] private Button buttonEquipShipItem;
+    [SerializeField] private Button buttonUnEquipShipItem;
     [SerializeField] private GameObject buttonUnequip1;
     [SerializeField] private GameObject buttonUnequip2;
     [SerializeField] private GameObject buttonEquip1;
@@ -335,17 +337,41 @@ public class ContextMenu : MonoBehaviour
     {
         buttonEquip.SetActive(true);
     }
-    public void ShowEquipShipItem()
-    {
-        buttonEquipShipItem.SetActive(true);
-    }
-    public void HideEquipShipItem()
-    {
-        buttonEquipShipItem.SetActive(false);
-    }
     public void HideEquip()
     {
         buttonEquip.SetActive(false);
+    }
+    public void ShowEquipShipItem()
+    {
+        buttonEquipShipItem.gameObject.SetActive(true);
+        if(Globals.Instance.IsSpaceshipScene())
+        {
+            buttonEquipShipItem.interactable = false;
+        } else
+        {
+            buttonEquipShipItem.interactable = true;
+        }
+    }
+    public void HideEquipShipItem()
+    {
+        buttonEquipShipItem.gameObject.SetActive(false);
+    }
+    public void ShowUnEquipShipItem()
+    {
+        buttonUnEquipShipItem.gameObject.SetActive(true);
+        if (Globals.Instance.IsSpaceshipScene())
+        {
+            buttonUnEquipShipItem.interactable = false;
+        }
+        else
+        {
+            buttonUnEquipShipItem.interactable = true;
+        }
+    }
+
+    public void HideUnEquipShipItem()
+    {
+        buttonUnEquipShipItem.gameObject.SetActive(false);
     }
     public void ShowEquip1()
     {
@@ -409,6 +435,7 @@ public class ContextMenu : MonoBehaviour
         ShowUse();
         ShowEquip();
         ShowEquipShipItem();
+        ShowUnEquipShipItem();
         ShowEquip1();
         ShowEquip2();
         ShowUnequip();
@@ -423,6 +450,7 @@ public class ContextMenu : MonoBehaviour
         HideUse();
         HideEquip();
         HideEquipShipItem();
+        HideUnEquipShipItem();
         HideEquip1();
         HideEquip2();
         HideUnequip();

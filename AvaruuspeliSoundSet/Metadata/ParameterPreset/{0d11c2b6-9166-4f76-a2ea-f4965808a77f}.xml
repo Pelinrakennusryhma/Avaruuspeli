@@ -16,9 +16,10 @@
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>3</value>
+			<value>4</value>
 		</property>
 		<property name="enumerationLabels">
+			<value>Menu</value>
 			<value>WorldMap</value>
 			<value>SpaceshipScene</value>
 			<value>Planet</value>

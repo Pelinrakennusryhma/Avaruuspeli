@@ -109,6 +109,9 @@ public abstract class ActorSpaceship : MonoBehaviour
                 int amount = missileBattery.missileCapacity;
                 spaceshipMissile.Init(damage, radius, speed, cooldown, amount);
             }
+        } else
+        {
+            spaceshipMissile.enabled = false;
         }
     }
 

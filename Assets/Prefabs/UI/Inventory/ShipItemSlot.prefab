@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c137ba5843dac0c4c94a7ced3e6e861a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -248,6 +248,7 @@ MonoBehaviour:
   <Type>k__BackingField: 0
   icon: {fileID: 1216560839814280042}
   itemName: {fileID: 6054907557139969604}
+  shipEquipment: {fileID: 0}
 --- !u!1 &4801199068168543248
 GameObject:
   m_ObjectHideFlags: 0

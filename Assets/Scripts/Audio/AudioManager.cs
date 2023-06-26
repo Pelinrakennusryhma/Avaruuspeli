@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 enum MusicArea
 {
-    WORLD_MAP = 0,
-    SPACESHIP_SCENE = 1,
-    PLANET = 2
+    MENU = 0,
+    WORLD_MAP = 1,
+    SPACESHIP_SCENE = 2,
+    PLANET = 3
 }
 
 public enum FMODBus 
@@ -54,13 +55,15 @@ public class AudioManager : MonoBehaviour
     {
         if(Instance != null)
         {
-            Instance.CleanUp();
-            Debug.LogWarning("More than one AudioManager around!");
+            //Instance.CleanUp();
+            //Debug.LogWarning("More than one AudioManager around!");
             //SetMusicArea(GetMusicArea());
+            Destroy(gameObject);
         }
         else
         {
-            Instance = this;        
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         masterBus = RuntimeManager.GetBus("bus:/");
@@ -70,6 +73,8 @@ public class AudioManager : MonoBehaviour
 
         LoadData();
         SetInitialVolumes();
+        SetMusicAreaBySceneIndex(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Index: " + SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Start()
@@ -165,7 +170,7 @@ public class AudioManager : MonoBehaviour
     
     public void SetMusicAreaBySceneIndex(int index)
     {
-        MusicArea musicArea = index <= 1 ? (MusicArea)index : MusicArea.PLANET;
+        MusicArea musicArea = index <= 2 ? (MusicArea)index : MusicArea.PLANET;
         SetMusicArea(musicArea);
     }
 

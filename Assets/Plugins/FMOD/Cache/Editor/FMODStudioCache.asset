@@ -96,7 +96,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638213099778104225
+  lastModified: 638230429957373100
   FileSizes:
   - Name: Desktop
     Value: 1376
@@ -159,7 +159,7 @@ MonoBehaviour:
   - {fileID: 688270757908266836}
   StringsBanks:
   - {fileID: -286429430098339160}
-  cacheTime: 638213099778579141
+  cacheTime: 638230510808883227
   cacheVersion: 131603
 --- !u!114 &371905620781687472
 MonoBehaviour:
@@ -176,10 +176,10 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638213099778559196
+  lastModified: 638230510808883227
   FileSizes:
   - Name: Desktop
-    Value: 6647488
+    Value: 8749216
   Exists: 1
 --- !u!114 &646619835282600595
 MonoBehaviour:
@@ -223,7 +223,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638213099778094250
+  lastModified: 638230429957333265
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -298,7 +298,7 @@ MonoBehaviour:
   Path: AvaruuspeliSoundSet/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638213099778579141
+  lastModified: 638230430020840274
   FileSizes:
   - Name: Desktop
     Value: 512224
@@ -318,7 +318,7 @@ MonoBehaviour:
   Name: MusicArea
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 3
   Default: 0
   ID:
     data1: 211323842
@@ -326,6 +326,7 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
+  - Menu
   - WorldMap
   - SpaceshipScene
   - Planet

@@ -404,7 +404,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Going back to world map");
 
-        AudioManager.Instance.SetMusicAreaBySceneIndex(0);
+        AudioManager.Instance.SetMusicAreaBySceneIndex(1);
 
     }
 

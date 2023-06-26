@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Globals : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class Globals : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public bool IsSpaceshipScene()
+    {
+        return SceneManager.GetActiveScene().buildIndex == 2;
     }
 
 }
