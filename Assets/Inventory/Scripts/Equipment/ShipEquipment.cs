@@ -17,7 +17,9 @@ public enum ShipItemSlotType
 
 public class ShipEquipment : MonoBehaviour
 {
-    [SerializeField] SpaceshipData playerShipData;
+    [SerializeField] SpaceshipData playerShipData; // used for storing data during runtime
+    [SerializeField] SpaceshipData newGameShipData;
+    [SerializeField] SpaceshipData devGameShipData;
     [SerializeField] Transform itemSlotsParent;
     [SerializeField] GameObject blockerPanel;
     [field: SerializeField]
@@ -43,7 +45,7 @@ public class ShipEquipment : MonoBehaviour
     public void Init()
     {
         InitSlots();
-        LoadData();
+        FillPlayerShipData();
         FillSlots();
     }
 
@@ -57,9 +59,41 @@ public class ShipEquipment : MonoBehaviour
         }
     }
 
-    private void LoadData()
+    private SpaceshipData LoadData()
     {
+        return newGameShipData;
         // TODO: Load from disk to PlayerShipData
+    }
+
+    private SpaceshipData PickShipData()
+    {
+        SpaceshipData data = null;
+        switch (GameManager.LaunchType)
+        {
+            case GameManager.TypeOfLaunch.None:
+                data = devGameShipData;
+                break;
+            case GameManager.TypeOfLaunch.NewGame:
+                data = newGameShipData;
+                break;
+            case GameManager.TypeOfLaunch.LoadedGame:
+                data = LoadData();
+                break;
+            case GameManager.TypeOfLaunch.DevGame:
+                data = devGameShipData;
+                break;
+            default:
+                data = devGameShipData;
+                break;
+        }
+
+        return data;
+    }
+
+    private void FillPlayerShipData()
+    {
+        SpaceshipData data = PickShipData();
+        playerShipData = Instantiate(data);
     }
 
     private void FillSlots()
@@ -76,7 +110,6 @@ public class ShipEquipment : MonoBehaviour
     {
         if(item != null)
         {
-            Debug.Log("Equipping ship item: " + item.itemName + "type: " + item.GetType());
             ShipItemSlot slot = GetItemSlot(item);
             slot.Equip(item);
 
@@ -84,9 +117,6 @@ public class ShipEquipment : MonoBehaviour
             {
                 SaveToShipData(item, slot);
             }
-
-            // TODO: Add to PlayerShipData
-            // Save to disk application quit
         }
     }
 
@@ -122,6 +152,10 @@ public class ShipEquipment : MonoBehaviour
             default:
                 throw new Exception("unknown ship item type, can't save to SpaceshipData");
         }
+
+        int itemID = item == null ? -1 : item.id;
+
+        GameManager.Instance.SaverLoader.SaveEquippedShipItem(itemID, (int)slot.Type);
     }
 
     ShipItemSlot GetItemSlot(ItemSO item)
