@@ -52,7 +52,7 @@ public class TargetProjectionIcon : MonoBehaviour
 
     private void Update()
     {
-        if(targetterShoot != null)
+        if(targetProjection != null && targetterShoot != null)
         {
             transform.position = targetProjection.GetPosition(targetterShoot.laserSpeed, targetterShoot.transform.position);
         }
