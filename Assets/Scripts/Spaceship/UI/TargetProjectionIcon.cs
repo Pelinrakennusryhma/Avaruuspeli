@@ -52,8 +52,10 @@ public class TargetProjectionIcon : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(targetterShoot);
-        transform.position = targetProjection.GetPosition(targetterShoot.laserSpeed, targetterShoot.transform.position);
+        if(targetterShoot != null)
+        {
+            transform.position = targetProjection.GetPosition(targetterShoot.laserSpeed, targetterShoot.transform.position);
+        }
 
         if (pulsing)
         {

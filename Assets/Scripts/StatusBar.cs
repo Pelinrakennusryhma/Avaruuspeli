@@ -21,12 +21,19 @@ public class StatusBar : MonoBehaviour
     [SerializeField]
     bool lerpedBar = true;
 
-    float currentValue;
-    float maxValue;
-    bool inited = false; 
+    float currentValue = 0f;
+    float maxValue = 0f;
 
     void Update()
     {
+        if(maxValue <= 0f)
+        {
+            if(trackedScript != null)
+            {
+                maxValue = trackedScript.MaxValue;
+            }
+        }
+
         UpdateText();
         UpdateBar();
     }
