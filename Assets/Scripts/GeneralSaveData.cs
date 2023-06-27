@@ -35,6 +35,7 @@ public class GeneralSaveData
     // Save equipped items
     public int EquippedItemInHands;
     public int EquippedSpaceSuit;
+    public int[] EquippedShipItems;
 
     // Hydroponics Bay
     public bool HydroponicsBayIsRunning;
@@ -70,6 +71,7 @@ public class GeneralSaveData
 
         EquippedItemInHands = -1;
         EquippedSpaceSuit = -1;
+        EquippedShipItems = new int[6];
         HydroponicsBayIsRunning = false;
         HydroponicsBayIsProducingOxygen = false;
         AmountOfCarbonInLastUnit = -1;

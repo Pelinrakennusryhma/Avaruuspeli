@@ -9,9 +9,10 @@ public class LeaveSpaceshipScene : ButtonHeldAction
     [SerializeField]
     MothershipHangar mothershipHangar;
 
-    private void Start()
+    protected override void Awake()
     {
         delay = Globals.Instance.leaveSpaceshipSceneDelay;
+        base.Awake();
     }
     protected override bool CanTrigger()
     {

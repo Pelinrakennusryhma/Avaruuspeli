@@ -23322,8 +23322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShipData: {fileID: 11400000, guid: a32c94732171d5946b2dc594a64dddc7, type: 2}
+  newGameShipData: {fileID: 11400000, guid: 4974b6f5cc9778e4cb2c04b9739431cc, type: 2}
+  devGameShipData: {fileID: 11400000, guid: 7d4107c6f4ef7b444ac685c85cc07c08, type: 2}
+  inventory: {fileID: 1228472341630199683}
   itemSlotsParent: {fileID: 5783156311484750120}
-  blockerPanel: {fileID: 4109257447850150997}
+  blockerPanel: {fileID: 7028785678409766894}
   clickedSlot: {fileID: 0}
 --- !u!1 &6746546713094284824
 GameObject:

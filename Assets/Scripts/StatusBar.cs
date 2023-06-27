@@ -21,29 +21,32 @@ public class StatusBar : MonoBehaviour
     [SerializeField]
     bool lerpedBar = true;
 
+    float currentValue;
+    float maxValue;
+    bool inited = false; 
 
     void Update()
     {
-        if(trackedScript != null)
-        {
-            UpdateText();
-            UpdateBar();
-        }
+        UpdateText();
+        UpdateBar();
     }
 
     public void SetTrackable(UITrackable tracked)
     {
         trackedScript = tracked;
+        currentValue = trackedScript.CurrentValue;
+        maxValue = trackedScript.MaxValue;
     }
 
     void UpdateText()
     {
-        text.text = $"{trackedScript.CurrentValue} / {trackedScript.MaxValue}";
+        text.text = $"{currentValue} / {maxValue}";
     }
 
     void UpdateBar()
     {
-        float ratio = (float)trackedScript.CurrentValue / (float)trackedScript.MaxValue;
+        currentValue = trackedScript != null ? trackedScript.CurrentValue : currentValue;
+        float ratio = currentValue / maxValue;
         float lerpedAmount = Mathf.Lerp(bar.fillAmount, ratio, Time.deltaTime * lerpSpeed);
         bar.fillAmount = lerpedBar ? lerpedAmount: ratio;
         bar.color = Color.Lerp(emptyColor, fullColor, ratio);

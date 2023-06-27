@@ -25,7 +25,9 @@ public class FMODEvents : MonoBehaviour
         if (Instance != null)
         {
             Debug.LogWarning("More than one FMODEvents around!");
+        } else
+        {
+            Instance = this;
         }
-        Instance = this;
     }
 }

@@ -170,6 +170,7 @@ MonoBehaviour:
     CurrentPOIID: 0
     EquippedItemInHands: 0
     EquippedSpaceSuit: 0
+    EquippedShipItems: 
     HydroponicsBayIsRunning: 0
     HydroponicsBayIsProducingOxygen: 0
     AmountOfCarbonInLastUnit: 0
@@ -2532,11 +2533,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.00012207031
       objectReference: {fileID: 0}
-    - target: {fileID: 1907517390002806871, guid: 44d101c09d62ac8458504377ce36e535,
-        type: 3}
-      propertyPath: blockerPanel
-      value: 
-      objectReference: {fileID: 343925219151544004}
     - target: {fileID: 2014313057191028126, guid: 44d101c09d62ac8458504377ce36e535,
         type: 3}
       propertyPath: m_Value
@@ -2879,12 +2875,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d101c09d62ac8458504377ce36e535, type: 3}
---- !u!1 &343925219151544004 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7028785678409766894, guid: 44d101c09d62ac8458504377ce36e535,
-    type: 3}
-  m_PrefabInstance: {fileID: 7299945218007427370}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3283055277106580731 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5242572729161098705, guid: 44d101c09d62ac8458504377ce36e535,
