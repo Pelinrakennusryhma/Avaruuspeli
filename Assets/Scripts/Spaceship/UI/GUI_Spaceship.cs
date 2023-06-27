@@ -14,9 +14,7 @@ public class GUI_Spaceship : MonoBehaviour
     [SerializeField]
     private TMP_Text helpText;
     [SerializeField]
-    Button restartButton;
-    [SerializeField]
-    Button quitButton;
+    Button leaveButton;
     [SerializeField]
     TMP_Text promptText;
     [SerializeField]
@@ -98,8 +96,7 @@ public class GUI_Spaceship : MonoBehaviour
     void OnPlayerSpaceshipDeath()
     {
         Cursor.lockState = CursorLockMode.None;
-        restartButton.gameObject.SetActive(true);
-        quitButton.gameObject.SetActive(true);
+        leaveButton.gameObject.SetActive(true);
     }
 
     void OnSpaceshipSpawned(ActorSpaceship actor)
@@ -118,15 +115,11 @@ public class GUI_Spaceship : MonoBehaviour
         missileBar.gameObject.SetActive(actor.spaceshipMissile.enabled);
     }
 
-    public void OnRestartClicked()
+    public void OnLeaveClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.GoBackToWorldMap();
     }
 
-    public void OnQuitClicked()
-    {
-        Application.Quit();
-    }
 
     void ShowControls()
     {
