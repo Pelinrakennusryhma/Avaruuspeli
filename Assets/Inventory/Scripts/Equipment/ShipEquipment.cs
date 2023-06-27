@@ -17,6 +17,7 @@ public class ShipEquipment : MonoBehaviour
     [SerializeField] SpaceshipData playerShipData; // used for storing data during runtime
     [SerializeField] SpaceshipData newGameShipData;
     [SerializeField] SpaceshipData devGameShipData;
+    [SerializeField] Inventory inventory;
     [SerializeField] Transform itemSlotsParent;
     [SerializeField] GameObject blockerPanel;
     [field: SerializeField]
@@ -102,7 +103,12 @@ public class ShipEquipment : MonoBehaviour
     private void FillPlayerShipData()
     {
         SpaceshipData data = PickShipData();
-        playerShipData = Instantiate(data);
+        playerShipData.shipModel = data.shipModel;
+        playerShipData.hull = data.hull;
+        playerShipData.primaryWeapon = data.primaryWeapon;
+        playerShipData.secondaryWeapon = data.secondaryWeapon;
+        playerShipData.utilities[0] = data.utilities[0];
+        playerShipData.utilities[1] = data.utilities[1];
     }
 
     private void FillSlots()
@@ -122,6 +128,11 @@ public class ShipEquipment : MonoBehaviour
             ShipItemSlot slot = GetItemSlot(item);
             slot.Equip(item);
 
+            if (inventory.CheckForItem(item.id))
+            {
+                inventory.RemoveItem(item.id, 1);
+            }
+
             SaveToShipData(item, slot);
             SaveToDisk(item, slot);
         }
@@ -129,7 +140,9 @@ public class ShipEquipment : MonoBehaviour
 
     public void UnEquip()
     {
+        inventory.AddItem(clickedSlot.equippedItem.id, 1);
         clickedSlot.Unequip();
+
         SaveToShipData(null, clickedSlot);
         SaveToDisk(null, clickedSlot);
     }
@@ -165,6 +178,7 @@ public class ShipEquipment : MonoBehaviour
         int itemID = item == null ? -1 : item.id;
 
         GameManager.Instance.SaverLoader.SaveEquippedShipItem(itemID, (int)slot.Type);
+        GameManager.Instance.SaverLoader.SaveInventory(inventory.InventoryItemScripts);
     }
 
     ShipItemSlot GetItemSlot(ItemSO item)

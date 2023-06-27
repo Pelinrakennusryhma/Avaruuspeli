@@ -170,6 +170,7 @@ MonoBehaviour:
     CurrentPOIID: 0
     EquippedItemInHands: 0
     EquippedSpaceSuit: 0
+    EquippedShipItems: 
     HydroponicsBayIsRunning: 0
     HydroponicsBayIsProducingOxygen: 0
     AmountOfCarbonInLastUnit: 0

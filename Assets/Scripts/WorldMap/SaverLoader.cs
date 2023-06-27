@@ -578,7 +578,7 @@ public class SaverLoader : MonoBehaviour
     {
         GeneralSaveData.EquippedShipItems[slot] = itemID;
         //Debug.Log($"Saving ship item. ID: {itemID}, SLOT: {slot}");
-        WriteToGeneralSaveDataFile();
+        //WriteToGeneralSaveDataFile();
     }
 
     // Hydroponics Bay
