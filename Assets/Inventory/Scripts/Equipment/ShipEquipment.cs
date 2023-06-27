@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum ShipItemSlotType
 {
@@ -61,8 +58,20 @@ public class ShipEquipment : MonoBehaviour
 
     private SpaceshipData LoadData()
     {
-        return newGameShipData;
-        // TODO: Load from disk to PlayerShipData
+        int[] savedData = GameManager.Instance.SaverLoader.LoadEquippedShipItems();
+        SpaceshipData data = Instantiate(playerShipData);
+
+        ItemDataBaseSO db = GameManager.Instance.InventoryController.ItemDataBaseWithScriptables.ItemDataBaseSO;
+
+        // -1 is used for null purposes when saving to disk
+        data.shipModel       = savedData[0] > 0 ? db.GetItem(savedData[0]) as ShipModel : null;
+        data.hull            = savedData[1] > 0 ? db.GetItem(savedData[1]) as ShipHull : null;
+        data.primaryWeapon   = savedData[2] > 0 ? db.GetItem(savedData[2]) as ShipWeaponItemPrimary : null;
+        data.secondaryWeapon = savedData[3] > 0 ? db.GetItem(savedData[3]) as ShipWeaponItemSecondary : null;
+        data.utilities[0]    = savedData[4] > 0 ? db.GetItem(savedData[4]) as ShipUtility : null;
+        data.utilities[1]    = savedData[5] > 0 ? db.GetItem(savedData[5]) as ShipUtility : null;
+
+        return data;
     }
 
     private SpaceshipData PickShipData()
@@ -98,25 +107,23 @@ public class ShipEquipment : MonoBehaviour
 
     private void FillSlots()
     {
-        Equip(playerShipData.shipModel, false);
-        Equip(playerShipData.hull, false);
-        Equip(playerShipData.primaryWeapon, false);
-        Equip(playerShipData.secondaryWeapon, false);
-        Equip(playerShipData.utilities[0], false);
-        Equip(playerShipData.utilities[1], false);
+        Equip(playerShipData.shipModel);
+        Equip(playerShipData.hull);
+        Equip(playerShipData.primaryWeapon);
+        Equip(playerShipData.secondaryWeapon);
+        Equip(playerShipData.utilities[0]);
+        Equip(playerShipData.utilities[1]);
     }
 
-    public void Equip(ItemSO item, bool saveToShipData=true)
+    public void Equip(ItemSO item)
     {
         if(item != null)
         {
             ShipItemSlot slot = GetItemSlot(item);
             slot.Equip(item);
 
-            if (saveToShipData)
-            {
-                SaveToShipData(item, slot);
-            }
+            SaveToShipData(item, slot);
+            SaveToDisk(item, slot);
         }
     }
 
@@ -124,7 +131,7 @@ public class ShipEquipment : MonoBehaviour
     {
         clickedSlot.Unequip();
         SaveToShipData(null, clickedSlot);
-        
+        SaveToDisk(null, clickedSlot);
     }
 
     void SaveToShipData(ItemSO item, ShipItemSlot slot)
@@ -152,7 +159,9 @@ public class ShipEquipment : MonoBehaviour
             default:
                 throw new Exception("unknown ship item type, can't save to SpaceshipData");
         }
-
+    }
+    private void SaveToDisk(ItemSO item, ShipItemSlot slot)
+    {
         int itemID = item == null ? -1 : item.id;
 
         GameManager.Instance.SaverLoader.SaveEquippedShipItem(itemID, (int)slot.Type);
