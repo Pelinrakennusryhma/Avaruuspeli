@@ -9,6 +9,8 @@ public class PlayerControls : ActorSpaceship
     [SerializeField]
     ButtonHeldAction leaveSpaceshipSceneHandler;
 
+    bool dead = false;
+
     // Audio
     private EventInstance alarmSFX;
 
@@ -22,6 +24,15 @@ public class PlayerControls : ActorSpaceship
     private void Update()
     {
         UpdateSounds();
+    }
+
+    private void LateUpdate()
+    {
+        if (dead)
+        {
+            alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            Destroy(gameObject);
+        }
     }
 
     void UpdateSounds()
@@ -44,9 +55,8 @@ public class PlayerControls : ActorSpaceship
     protected override void OnDeath()
     {
         base.OnDeath();
-        Destroy(gameObject);
         Cursor.visible = true;
-        alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        dead = true;   
     }
 
     public void OnThrust(InputAction.CallbackContext context)

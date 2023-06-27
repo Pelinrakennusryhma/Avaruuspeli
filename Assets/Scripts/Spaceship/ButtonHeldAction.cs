@@ -15,6 +15,9 @@ public abstract class ButtonHeldAction : UITrackable
     protected virtual void Awake()
     {
         successObject.SetActive(false);
+
+        StatusBar statusBar = successObject.GetComponent<StatusBar>();
+        statusBar.SetTrackable(this);
     }
 
     protected abstract bool CanTrigger();

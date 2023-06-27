@@ -42,6 +42,8 @@ public class SpaceshipMovement : MonoBehaviour
     public float roll1D;
     public Vector2 pitchYaw;
 
+    private SpaceshipEvents spaceshipEvents;
+
     // Audio
     private EventInstance engineSFX;
 
@@ -49,7 +51,9 @@ public class SpaceshipMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mass = rb.mass;
-        //rb.inertiaTensor = rb.inertiaTensor;
+
+        spaceshipEvents = GetComponent<SpaceshipEvents>();
+        spaceshipEvents.EventSpaceshipDied.AddListener(OnSpaceshipDied);
         engineSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ShipEngine);
         RuntimeManager.AttachInstanceToGameObject(engineSFX, transform, rb);
     }
@@ -58,6 +62,11 @@ public class SpaceshipMovement : MonoBehaviour
     {
         HandleMovement();
         UpdateSound();
+    }
+
+    void OnSpaceshipDied()
+    {
+        engineSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     void HandleMovement()
