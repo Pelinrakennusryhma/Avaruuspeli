@@ -16,6 +16,8 @@ public class TaskUseUtil : Node
     float reactionTimer;
     bool reacting = false;
 
+    Useable usedUseable;
+
     public TaskUseUtil(EnemyControls enemyControls, float minCooldown, float maxCooldown, float minReactionTime, float maxReactionTime)
     {
         _enemyControls = enemyControls;
@@ -52,14 +54,19 @@ public class TaskUseUtil : Node
             if (reacting && reactionTimer < 0f)
             {
                 reacting = false;
-                _enemyControls.OnRandomUtility();
+                usedUseable = _enemyControls.UseRandomUtility();
                 GetNewCooldown();
                 //Debug.Log("Acting!");
             }
         }
         else
         {
-            _enemyControls.OnCancelAllUtilities();
+            if(usedUseable != null)
+            {
+                _enemyControls.CancelUseable(usedUseable);
+                usedUseable = null;
+            }
+
         }
 
         state = NodeState.RUNNING;

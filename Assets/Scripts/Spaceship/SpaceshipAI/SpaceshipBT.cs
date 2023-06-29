@@ -31,6 +31,8 @@ public class SpaceshipBT : BTree
     float minUtilReactionTime = 0.5f;
     [SerializeField]
     float maxUtilReactionTime = 2f;
+    [SerializeField]
+    float shieldChanceOnEvasion = 0.5f;
 
     EnemyControls enemyControls;
     Transform shipTransform;
@@ -68,7 +70,7 @@ public class SpaceshipBT : BTree
                     new Sequence(new List<Node>
                     {
                         new CheckForHit(spaceshipEvents),
-                        new TaskEvadeAttacker(enemyControls, shipTransform)
+                        new TaskEvadeAttacker(enemyControls, shipTransform, shieldChanceOnEvasion)
                     }),
                     new Sequence(new List<Node>
                     {

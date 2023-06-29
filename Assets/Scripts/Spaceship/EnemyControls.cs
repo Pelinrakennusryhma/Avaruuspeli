@@ -248,17 +248,40 @@ public class EnemyControls : ActorSpaceship
         spaceshipMissile.shooting = shooting;
     }
 
-    public void OnRandomUtility()
+    public Useable UseRandomUtility()
     {
         int utilIndex = Random.Range(0, shipUtilityScripts.Count);
-        shipUtilityScripts[utilIndex].TryingToActivate = true;
+        Useable randomUseable = shipUtilityScripts[utilIndex];
+        randomUseable.TryingToActivate = true;
+        return randomUseable;
     }
 
-    public void OnCancelAllUtilities()
+    public void CancelUseable(Useable useable)
+    {
+        if(useable != null)
+        {
+            useable.TryingToActivate = false;
+        }
+    }
+
+    public void CancelAllUtilities()
     {
         foreach (Useable useable in shipUtilityScripts)
         {
             useable.TryingToActivate = false;
         }
+    }
+
+    public Useable UseShield()
+    {
+        foreach (Useable useable in shipUtilityScripts)
+        {
+            if (useable.Data.itemName.Contains("Shield"))
+            {
+                useable.TryingToActivate = true;
+                return useable;
+            }
+        }
+        return null;
     }
 }
