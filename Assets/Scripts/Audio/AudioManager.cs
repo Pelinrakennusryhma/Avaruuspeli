@@ -70,12 +70,12 @@ public class AudioManager : MonoBehaviour
 
         LoadData();
         SetInitialVolumes();
-        SetMusicAreaBySceneIndex(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Start()
     {
         InitializeMusic(FMODEvents.Instance.Music);
+        SetMusicAreaBySceneIndex(SceneManager.GetActiveScene().buildIndex);
     }
 
     void LoadData()

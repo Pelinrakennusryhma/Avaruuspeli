@@ -10,11 +10,19 @@ public class TaskUseUtil : Node
     float _minCooldown;
     float _maxCooldown;
     float cooldown;
-    public TaskUseUtil(EnemyControls enemyControls, float minCooldown, float maxCooldown)
+
+    float _minReactionTime;
+    float _maxReactionTime;
+    float reactionTimer;
+    bool reacting = false;
+
+    public TaskUseUtil(EnemyControls enemyControls, float minCooldown, float maxCooldown, float minReactionTime, float maxReactionTime)
     {
         _enemyControls = enemyControls;
         _minCooldown = minCooldown;
         _maxCooldown = maxCooldown;
+        _minReactionTime = minReactionTime;
+        _maxReactionTime = maxReactionTime;
     }
 
     void GetNewCooldown()
@@ -22,17 +30,31 @@ public class TaskUseUtil : Node
         cooldown = Random.Range(_minCooldown, _maxCooldown);
     }
 
+    void GetNewReactionTime()
+    {
+        reactionTimer = Random.Range(_minReactionTime, _maxReactionTime);
+    }
+
     public override NodeState Evaluate()
     {
         cooldown -= Time.deltaTime;
+        reactionTimer -= Time.deltaTime;
 
         if (cooldown < 0f)
         {
-            // Under missile lock and no utility currently active
-            if (_enemyControls.InDanger && _enemyControls.ActiveUtils.Count <= 0)
+            if (_enemyControls.InDanger && _enemyControls.ActiveUtils.Count <= 0 && !reacting)
             {
+                reacting = true;
+                GetNewReactionTime();
+                //Debug.Log("New Reaction: " + reactionTimer);
+            }
+
+            if (reacting && reactionTimer < 0f)
+            {
+                reacting = false;
                 _enemyControls.OnRandomUtility();
                 GetNewCooldown();
+                //Debug.Log("Acting!");
             }
         }
         else

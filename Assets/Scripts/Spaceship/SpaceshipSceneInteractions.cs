@@ -17,7 +17,7 @@ public class SpaceshipSceneInteractions : MonoBehaviour
     [SerializeField]
     AsteroidPOISceneData fallbackSceneData;
 
-    private void Awake()
+    private void Start()
     {
 
         AsteroidPOISceneData data = null;
