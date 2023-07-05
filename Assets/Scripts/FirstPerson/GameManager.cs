@@ -405,7 +405,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Going back to world map");
 
         AudioManager.Instance.SetMusicAreaBySceneIndex(1);
-
+        LoadingScreen.Instance.EnableCanvas();
     }
 
 
@@ -678,6 +678,8 @@ public class GameManager : MonoBehaviour
         FramesPassedTillLoadScenes = 0;
         WaitingForSceneLoad = true;
         IsOnWorldMap = false;
+
+        LoadingScreen.Instance.EnableCanvas();
     }
 
     public void ActivateStackedScene()

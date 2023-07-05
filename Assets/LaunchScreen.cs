@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LaunchScreen : MonoBehaviour
 {
-    [SerializeField]
-    GameObject loadingScreen;
     public void OnNewGameButtonPressed()
     {
         EnableLoadingScreen();
@@ -39,6 +37,6 @@ public class LaunchScreen : MonoBehaviour
 
     void EnableLoadingScreen()
     {
-        loadingScreen.SetActive(true);
+        LoadingScreen.Instance.EnableCanvas();
     }
 }

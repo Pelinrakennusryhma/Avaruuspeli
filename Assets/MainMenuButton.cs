@@ -9,6 +9,7 @@ public class MainMenuButton : MonoBehaviour
         GameManager gameManager = FindObjectOfType<GameManager>();
         DevListener devListener = FindObjectOfType<DevListener>();
         DevCheck devCheck = FindObjectOfType<DevCheck>();
+        LoadingScreen loadingScreen = FindObjectOfType<LoadingScreen>();
 
         if (gameManager != null)
         {
@@ -25,7 +26,14 @@ public class MainMenuButton : MonoBehaviour
         {
             Destroy(devCheck.gameObject);
         }
+        
+        if(loadingScreen != null)
+        {
+            Destroy(loadingScreen.gameObject);
+            LoadingScreen.Instance = null;
+        }
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("LaunchScreen");
+
     }
 }
