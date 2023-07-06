@@ -16,14 +16,14 @@ public class BackGroundImageController : MonoBehaviour
         {
             Image1.gameObject.SetActive(true);
             Image2.gameObject.SetActive(false);
-            Buttons.transform.localPosition = Vector3.zero;
+            Buttons.transform.localPosition = new Vector3(0, -250, 0);
         }
 
         else
         {
             Image1.gameObject.SetActive(false);
             Image2.gameObject.SetActive(true);
-            Buttons.transform.localPosition = new Vector3(120, 0, 0);
+            Buttons.transform.localPosition = new Vector3(175, -250, 0);
         }
     }
 
