@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LaunchScreen : MonoBehaviour
 {
+    [SerializeField] GameObject creditsPanel;
     public void OnNewGameButtonPressed()
     {
         EnableLoadingScreen();
@@ -29,6 +30,11 @@ public class LaunchScreen : MonoBehaviour
         //Debug.Log("Pressed load game");
     }
 
+    public void OnCreditsButtonPressed()
+    {
+        creditsPanel.SetActive(true);
+    }
+
     public void OnQuitButtonPressed()
     {
         //Debug.Log("Pressed quit");
@@ -38,5 +44,10 @@ public class LaunchScreen : MonoBehaviour
     void EnableLoadingScreen()
     {
         LoadingScreen.Instance.EnableCanvas();
+    }
+
+    public void OnCloseCreditsPressed()
+    {
+        creditsPanel.SetActive(false);
     }
 }
