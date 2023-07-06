@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
 
     private List<EventInstance> eventInstances = new List<EventInstance>();
     private EventInstance musicEventInstance;
-    public static AudioManager Instance { get; private set; }
+    public static AudioManager Instance;
 
     private void Awake()
     {

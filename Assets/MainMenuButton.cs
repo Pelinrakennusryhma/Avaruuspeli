@@ -10,6 +10,7 @@ public class MainMenuButton : MonoBehaviour
         DevListener devListener = FindObjectOfType<DevListener>();
         DevCheck devCheck = FindObjectOfType<DevCheck>();
         LoadingScreen loadingScreen = FindObjectOfType<LoadingScreen>();
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
 
         if (gameManager != null)
         {

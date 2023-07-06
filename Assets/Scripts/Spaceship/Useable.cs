@@ -81,4 +81,9 @@ public abstract class Useable : MonoBehaviour
             soundEffect.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
+
+    private void OnDisable()
+    {
+        soundEffect.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
 }

@@ -148,4 +148,9 @@ public class SpaceshipMovement : MonoBehaviour
             engineSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
+
+    private void OnDisable()
+    {
+        engineSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
 }
