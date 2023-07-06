@@ -165,7 +165,7 @@ public class PlayerControls : ActorSpaceship
 
     public void OnUtility1(InputAction.CallbackContext context)
     {
-        if(shipUtilityScripts[0] != null)
+        if(shipUtilityScripts.Count > 0 &&  shipUtilityScripts[0] != null)
         {
             shipUtilityScripts[0].TryingToActivate = context.performed;
         }

@@ -76,3 +76,5 @@ MonoBehaviour:
   maxMissileCooldown: 10
   minUtilCooldown: 10
   maxUtilCooldown: 30
+  minUtilReactionTime: 0.75
+  maxUtilReactionTime: 3

@@ -1676,6 +1676,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8409124369436779583, guid: b6532e5f3ef758248be7977319ae08b2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2364396098859745193}
+    - target: {fileID: 8409124369436779583, guid: b6532e5f3ef758248be7977319ae08b2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseCredits
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409124369436779583, guid: b6532e5f3ef758248be7977319ae08b2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Options, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6532e5f3ef758248be7977319ae08b2, type: 3}
 --- !u!4 &2364396098859745190 stripped
@@ -2082,6 +2097,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228472341983593213, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -33.200012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228472341983593213, guid: 44d101c09d62ac8458504377ce36e535,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 1228472342089114942, guid: 44d101c09d62ac8458504377ce36e535,
         type: 3}

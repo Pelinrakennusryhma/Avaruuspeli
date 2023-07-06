@@ -11,6 +11,8 @@ public class Options : MonoBehaviour
     public Toggle InvertToggle;
     public Scrollbar SensitivityScrollbar;
 
+    [SerializeField] GameObject creditsPanel;
+
     public static void OnLaunch()
     {
         //Debug.Log("On launch called in options");
@@ -137,6 +139,8 @@ public class Options : MonoBehaviour
         PlayerPrefs.Save();
 
         // Save to player prefs
+
+        CloseCredits();
     }
 
     public void OnInvertValueChanged(bool newValue)
@@ -162,5 +166,15 @@ public class Options : MonoBehaviour
     public float ConvertSensitivityValueFromZeroToOne(float fromZeroToOne)
     {
         return Mathf.Lerp(0.5f, 20.0f, fromZeroToOne);
+    }
+
+    public void OpenCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
     }
 }

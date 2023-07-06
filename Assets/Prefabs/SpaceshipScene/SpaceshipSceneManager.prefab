@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 7003948107814007263}
   - component: {fileID: 7003948107814007249}
   - component: {fileID: 754047037}
+  - component: {fileID: 6546483418529390980}
+  - component: {fileID: 2264551044229034921}
   m_Layer: 0
   m_Name: SpaceshipSceneManager
   m_TagString: Untagged
@@ -183,8 +185,6 @@ MonoBehaviour:
   asteroidParent: {fileID: 1328904159}
   asteroidArea: {fileID: 1544180115931524592}
   reachableArea: {fileID: 5449011305847483504}
-  amountOfAsteroids: 1000
-  amountOfMineables: 15
   sizeCurve:
     serializedVersion: 2
     m_Curve:
@@ -227,42 +227,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  mineableCurve:
+  mineableSizeCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.5
-      inSlope: 0.7166942
-      outSlope: 0.7166942
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.88249856
-      value: 2.1324816
-      inSlope: 2.0994244
-      outSlope: 2.0994244
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.7844734
-    - serializedVersion: 3
-      time: 1
-      value: 3
-      inSlope: 7.383045
-      outSlope: 7.383045
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mineableDistanceCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   actorManager: {fileID: 7003948107814007249}
   mineableRockDensity: 2
-  resourceType: {fileID: 11400000, guid: 3ac461d66d5d07343917e0c735f5ad2b, type: 2}
 --- !u!114 &7003948107814007249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,3 +272,35 @@ MonoBehaviour:
   playerControls: {fileID: 0}
   firstPersonControls: {fileID: 0}
   fpGravity: {fileID: 0}
+--- !u!114 &6546483418529390980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7003948107814007262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3d3412c7398fb408216f5b60af499a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpaceshipSpawner: {fileID: 2264551044229034921}
+  asteroidSpawner: {fileID: 7003948107814007263}
+  actorManager: {fileID: 7003948107814007249}
+  mothershipHangar: {fileID: 0}
+  fallbackSceneData: {fileID: 11400000, guid: dcd11acbbdec5f54ebaeaed7c32f6bb6, type: 2}
+--- !u!114 &2264551044229034921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7003948107814007262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f409a015ea6fd49ae5aeeb7a0e5304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawnArea: {fileID: 0}
+  enemyPrefab: {fileID: 577270566353154302, guid: 8c6f722c77e9af741a343976d0c24553,
+    type: 3}

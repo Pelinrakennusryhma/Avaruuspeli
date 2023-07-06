@@ -11,10 +11,13 @@ public class TaskEvadeAttacker : Node
     float fleeDuration = 3f;
     float fleeTimer = 0f;
     Vector3 fleePosition = Vector3.zero;
-    public TaskEvadeAttacker(EnemyControls enemyControls, Transform shipTransform)
+    float _shieldChance;
+    Useable usedUseable;
+    public TaskEvadeAttacker(EnemyControls enemyControls, Transform shipTransform, float shieldChance)
     {
         _enemyControls = enemyControls;
         _shipTransform = shipTransform;
+        _shieldChance = shieldChance;
     }
 
     public override NodeState Evaluate()
@@ -37,6 +40,7 @@ public class TaskEvadeAttacker : Node
             parent.SetData("evading", false);
             fleeTimer = 0f;
             fleePosition = Vector3.zero;
+            _enemyControls.CancelUseable(usedUseable);
             return NodeState.FAILURE;
         }
 
@@ -45,6 +49,10 @@ public class TaskEvadeAttacker : Node
         {
             GetRandomPosition();
             Debug.Log("new fleePosition: " + fleePosition);
+            if(Random.value > _shieldChance)
+            {
+                usedUseable = _enemyControls.UseShield();
+            }
         }
         Debug.Log("evading: " + fleePosition);
         fleeTimer += Time.deltaTime;
