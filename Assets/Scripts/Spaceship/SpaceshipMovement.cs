@@ -68,6 +68,11 @@ public class SpaceshipMovement : MonoBehaviour
     {
         engineSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
+    
+    public void SetThrust(float amount)
+    {
+        thrust = amount;
+    }
 
     void HandleMovement()
     {

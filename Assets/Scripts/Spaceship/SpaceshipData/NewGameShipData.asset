@@ -19,3 +19,4 @@ MonoBehaviour:
   hull: {fileID: 11400000, guid: ef60f24b1293a7f4b9c304ed1e4be818, type: 2}
   primaryWeapon: {fileID: 11400000, guid: a6c3c4a70aaaeee4fbc75a359b5563ab, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: d28ee744f8579934fa960a7d9f60897b, type: 2}
+  thrusters: {fileID: 11400000, guid: 5e675edf3365794408f3e48a35dc269c, type: 2}
