@@ -40,9 +40,10 @@ public class ResourceHUD : MonoBehaviour
     void Scan()
     {
         //Debug.Log("scanning..");
-        // Ignore pickup trigger and character collider layers
+        // Ignore pickup trigger, character collider layers and pickuppables
         int layerMask = 1 << 3;
         layerMask |= (1 << 2);
+        layerMask |= (1 << 6);
         layerMask = ~layerMask;
 
         RaycastHit hit;

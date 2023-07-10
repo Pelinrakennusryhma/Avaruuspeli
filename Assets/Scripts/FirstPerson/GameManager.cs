@@ -85,7 +85,10 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        //LaunchType = TypeOfLaunch.LoadedGame; // Set this at the start screen
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            LaunchType = TypeOfLaunch.DevGame; // Set to dev for easier testing of spaceship scene
+        }    
 
         DevCheck devCheck = FindObjectOfType<DevCheck>();
         DevListener devListener = FindObjectOfType<DevListener>();

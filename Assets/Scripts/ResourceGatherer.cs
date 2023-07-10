@@ -3,6 +3,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ResourceGatherer : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class ResourceGatherer : MonoBehaviour
     // Start is called before the first frame update
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6) 
+        if ((PickUppableLayerMask & (1 << other.gameObject.layer)) != 0)
         {
             //Debug.Log("Collect " + Time.time);
             GatherableObject gatherable = other.GetComponent<GatherableObject>();
@@ -154,14 +155,10 @@ public class ResourceGatherer : MonoBehaviour
                                                4.0f,
                                                PickUppableLayerMask);
 
-            //Debug.Log("hitinfo " + hitInfo.collider);
-
-
             if (hitInfo.collider != null && RockColliders.Contains(hitInfo.collider))
             //&& hitInfo.collider.gameObject == Rock.gameObject)
             {
                 hittingRock = true;
-                //Debug.Log("Hitting rock " + Time.time);
             }
 
             else
