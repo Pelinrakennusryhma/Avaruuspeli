@@ -10,4 +10,5 @@ public class SpaceshipData : ScriptableObject
     public ShipHull hull;
     public ShipWeaponItemPrimary primaryWeapon;
     public ShipWeaponItemSecondary secondaryWeapon;
+    public ShipThrusters thrusters;
 }

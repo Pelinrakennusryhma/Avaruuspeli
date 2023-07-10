@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 67710571915580780}
   - component: {fileID: 6904654304720712116}
   - component: {fileID: 9059170034043118475}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RockDestroyedParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

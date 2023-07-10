@@ -53,7 +53,7 @@ MonoBehaviour:
   Camera: {fileID: 0}
   PickUppableLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   Hands: {fileID: 0}
 --- !u!136 &7249086005198895627
 CapsuleCollider:

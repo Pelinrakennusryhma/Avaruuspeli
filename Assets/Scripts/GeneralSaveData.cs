@@ -71,7 +71,7 @@ public class GeneralSaveData
 
         EquippedItemInHands = -1;
         EquippedSpaceSuit = -1;
-        EquippedShipItems = new int[6];
+        EquippedShipItems = new int[7];
         HydroponicsBayIsRunning = false;
         HydroponicsBayIsProducingOxygen = false;
         AmountOfCarbonInLastUnit = -1;

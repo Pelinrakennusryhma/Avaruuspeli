@@ -38,6 +38,7 @@ public class ShipItemSlot : MonoBehaviour, IPointerClickHandler
             case ShipItemSlotType.Model:
             case ShipItemSlotType.Hull:
             case ShipItemSlotType.PrimaryWeapon:
+            case ShipItemSlotType.Thrusters:
                 return false;
             case ShipItemSlotType.SecondaryWeapon:
             case ShipItemSlotType.Utility1:

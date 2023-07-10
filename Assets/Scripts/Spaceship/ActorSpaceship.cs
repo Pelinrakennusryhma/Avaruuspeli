@@ -69,6 +69,7 @@ public abstract class ActorSpaceship : MonoBehaviour
             InitShipHealth();
             InitShipWeapons();
             InitUtilities();
+            InitThrusters();
         }
     }
 
@@ -131,6 +132,14 @@ public abstract class ActorSpaceship : MonoBehaviour
                     useable.Init(utility, this);
                 }
             }
+        }
+    }
+
+    void InitThrusters()
+    {
+        if(spaceshipData.thrusters != null)
+        {
+            spaceshipMovement.SetThrust(spaceshipData.thrusters.speed);
         }
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 669303064}
   - component: {fileID: 669303063}
   - component: {fileID: 669303062}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfa9d7dc67183f4eb86e7719eeb0ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlwaysSpawn: 0
   ResourceType: {fileID: 11400000, guid: 6c6df3b5d647b0e4791aaecb43b5a52a, type: 2}
   SpawnableResources:
   - {fileID: 11400000, guid: bc92ff50e4fc9e84cb72a0a38f9c694f, type: 2}

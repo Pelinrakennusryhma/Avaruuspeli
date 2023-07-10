@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5872755971548701943, guid: 7b5f8a2f1fe43fe4caca86f942977cc0,
         type: 3}
       propertyPath: m_Name
-      value: Iron_DestroyableRock1 (4)
+      value: Iron_DestroyableRock1 (4) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6542578917323488845, guid: 7b5f8a2f1fe43fe4caca86f942977cc0,
         type: 3}

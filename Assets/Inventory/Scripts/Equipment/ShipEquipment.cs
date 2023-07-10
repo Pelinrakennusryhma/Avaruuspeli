@@ -6,10 +6,11 @@ public enum ShipItemSlotType
 {
     Model = 0,
     Hull = 1,
-    PrimaryWeapon = 2,
-    SecondaryWeapon = 3,
-    Utility1 = 4,
-    Utility2 = 5,
+    Thrusters = 2,
+    PrimaryWeapon = 3,
+    SecondaryWeapon = 4,
+    Utility1 = 5,
+    Utility2 = 6
 }
 
 public class ShipEquipment : MonoBehaviour
@@ -67,10 +68,11 @@ public class ShipEquipment : MonoBehaviour
         // -1 is used for null purposes when saving to disk
         data.shipModel       = savedData[0] > 0 ? db.GetItem(savedData[0]) as ShipModel : null;
         data.hull            = savedData[1] > 0 ? db.GetItem(savedData[1]) as ShipHull : null;
-        data.primaryWeapon   = savedData[2] > 0 ? db.GetItem(savedData[2]) as ShipWeaponItemPrimary : null;
-        data.secondaryWeapon = savedData[3] > 0 ? db.GetItem(savedData[3]) as ShipWeaponItemSecondary : null;
-        data.utilities[0]    = savedData[4] > 0 ? db.GetItem(savedData[4]) as ShipUtility : null;
-        data.utilities[1]    = savedData[5] > 0 ? db.GetItem(savedData[5]) as ShipUtility : null;
+        data.thrusters       = savedData[2] > 0 ? db.GetItem(savedData[2]) as ShipThrusters : null;
+        data.primaryWeapon   = savedData[3] > 0 ? db.GetItem(savedData[3]) as ShipWeaponItemPrimary : null;
+        data.secondaryWeapon = savedData[4] > 0 ? db.GetItem(savedData[4]) as ShipWeaponItemSecondary : null;
+        data.utilities[0]    = savedData[5] > 0 ? db.GetItem(savedData[5]) as ShipUtility : null;
+        data.utilities[1]    = savedData[6] > 0 ? db.GetItem(savedData[6]) as ShipUtility : null;
 
         return data;
     }
@@ -105,6 +107,7 @@ public class ShipEquipment : MonoBehaviour
         SpaceshipData data = PickShipData();
         playerShipData.shipModel = data.shipModel;
         playerShipData.hull = data.hull;
+        playerShipData.thrusters = data.thrusters;
         playerShipData.primaryWeapon = data.primaryWeapon;
         playerShipData.secondaryWeapon = data.secondaryWeapon;
         playerShipData.utilities[0] = data.utilities[0];
@@ -115,6 +118,7 @@ public class ShipEquipment : MonoBehaviour
     {
         Equip(playerShipData.shipModel);
         Equip(playerShipData.hull);
+        Equip(playerShipData.thrusters);
         Equip(playerShipData.primaryWeapon);
         Equip(playerShipData.secondaryWeapon);
         Equip(playerShipData.utilities[0]);
@@ -157,6 +161,9 @@ public class ShipEquipment : MonoBehaviour
             case ShipItemSlotType.Hull:
                 playerShipData.hull = (ShipHull)item;
                 break;
+            case ShipItemSlotType.Thrusters:
+                playerShipData.thrusters = (ShipThrusters)item;
+                break;
             case ShipItemSlotType.PrimaryWeapon:
                 playerShipData.primaryWeapon = (ShipWeaponItemPrimary)item;
                 break;
@@ -169,6 +176,7 @@ public class ShipEquipment : MonoBehaviour
             case ShipItemSlotType.Utility2:
                 playerShipData.utilities[1] = (ShipUtility)item;
                 break;
+
             default:
                 throw new Exception("unknown ship item type, can't save to SpaceshipData");
         }
@@ -192,7 +200,11 @@ public class ShipEquipment : MonoBehaviour
         else if (item is ShipHull) 
         {
             slot = itemSlots[ShipItemSlotType.Hull];
-        } 
+        }
+        else if (item is ShipThrusters)
+        {
+            slot = itemSlots[ShipItemSlotType.Thrusters];
+        }
         else if (item is ShipWeaponItemPrimary)
         {
             slot = itemSlots[ShipItemSlotType.PrimaryWeapon];
