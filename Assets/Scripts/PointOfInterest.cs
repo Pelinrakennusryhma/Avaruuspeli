@@ -104,8 +104,9 @@ public class PointOfInterest : MonoBehaviour
 
     public void Init(PlanetOnWorldMap planet)
     {
-        description.text = "Get some interesting data from planet.PlanetData";
-        title.text = planet.PlanetData.Name;
+        // Just some random text since nobody seems to care enough
+        description.text = "A planet with minerals and a shop.";
+        title.text = "Habitable planet";
 
         enterButton.onClick.AddListener(() =>
         {

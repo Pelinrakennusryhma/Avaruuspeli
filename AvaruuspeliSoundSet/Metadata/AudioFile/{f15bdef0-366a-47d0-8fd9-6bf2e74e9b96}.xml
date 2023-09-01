@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f15bdef0-366a-47d0-8fd9-6bf2e74e9b96}">
+		<property name="assetPath">
+			<value>Music/avaruusjokumusa.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>152.03265306122449</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{95f099aa-d65e-4a12-9f3a-5e46638d4f71}</destination>
+		</relationship>
+	</object>
+</objects>
