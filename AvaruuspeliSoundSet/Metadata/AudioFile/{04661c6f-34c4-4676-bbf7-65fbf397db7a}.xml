@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{04661c6f-34c4-4676-bbf7-65fbf397db7a}">
+		<property name="assetPath">
+			<value>Sounds/Steps01/pussikävely - Track 6.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.9182766439909298</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{95f099aa-d65e-4a12-9f3a-5e46638d4f71}</destination>
+		</relationship>
+	</object>
+</objects>

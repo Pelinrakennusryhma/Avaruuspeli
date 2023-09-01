@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
+public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour, IFPController
 {
     //public GameObject CentreOfGravity;
     public CenterOfGravity CenterOfGravity;
@@ -58,6 +58,9 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
     private float originalTimeStep;
 
     private FirstPersonPlayerControls Controls;
+
+    [SerializeField] public bool IsGrounded { get; private set; }
+
     void Awake()
     {
 
@@ -285,7 +288,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         groundedExtraTime -= Time.deltaTime;
 
-        bool isGrounded = false;
+        IsGrounded = false;
         bool hits = false;
         RaycastHit hit;
 
@@ -301,13 +304,13 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         if (hits && hit.distance <= 1.001f)
         {
-            isGrounded = true;
+            IsGrounded = true;
             groundedExtraTime = 0.4f;
         }
 
         else
         {
-            isGrounded = false;
+            IsGrounded = false;
         }
 
 
@@ -334,12 +337,12 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         if (groundedExtraTime >= 0.0f)
         {
-            isGrounded = true;
+            IsGrounded = true;
         }
 
         if (isOnASlope)
         {
-            isGrounded = true;
+            IsGrounded = true;
             Rigidbody.useGravity = false;
         }
 
@@ -358,7 +361,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         bool tryingToStandUp = false;
 
         if (isCrouchingButtonDown
-            && isGrounded
+            && IsGrounded
             && CurrentRelativeYVelo <= 0)
         {
             isCrouching = true;
@@ -397,18 +400,18 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         if (jumpTimer >= 0
             || CurrentRelativeYVelo > 0)
         {
-            isGrounded = false;
+            IsGrounded = false;
         }
 
 
-        if (isGrounded && !SpaceWasPressedDuringLastUpdate)
+        if (IsGrounded && !SpaceWasPressedDuringLastUpdate)
         {
             Rigidbody.velocity = towardsCenterOfGravity.normalized * 200.0f * Time.deltaTime;
         }
 
         Vector3 forward = Rigidbody.transform.forward;
 
-        if (isGrounded
+        if (IsGrounded
             && SpaceWasPressedDuringLastUpdate
             && jumpTimer <= 0)
         {
@@ -430,7 +433,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
 
         else
         {
-            if (!isGrounded
+            if (!IsGrounded
                 && !UseRealGravity)
             {
                 if (CurrentRelativeYVelo >= 0)
@@ -457,7 +460,7 @@ public class FirstPersonPlayerControllerWithCentreOfGravity : MonoBehaviour
         }
 
         Vector3 clampedVelo = DoHorizontalMovements(movement, 
-                                                    isGrounded,
+                                                    IsGrounded,
                                                     isOnASlope,
                                                     towardsCenterOfGravity,
                                                     slopeNormal);

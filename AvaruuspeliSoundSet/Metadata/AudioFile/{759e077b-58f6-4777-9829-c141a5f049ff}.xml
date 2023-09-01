@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{759e077b-58f6-4777-9829-c141a5f049ff}">
+		<property name="assetPath">
+			<value>Sounds/boost.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>13.688163265306123</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{95f099aa-d65e-4a12-9f3a-5e46638d4f71}</destination>
+		</relationship>
+	</object>
+</objects>

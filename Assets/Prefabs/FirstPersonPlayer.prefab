@@ -357,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InvertToggle: {fileID: 1140772433}
   SensitivityScrollbar: {fileID: 1076140761}
+  creditsPanel: {fileID: 0}
 --- !u!1 &505609834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,6 +1998,7 @@ GameObject:
   - component: {fileID: 972932737}
   - component: {fileID: 2865674597268817195}
   - component: {fileID: 4892981637633448491}
+  - component: {fileID: 1088829299617503176}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Player
@@ -2596,6 +2598,43 @@ MonoBehaviour:
   OverlayLayerMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1088829299617503176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670593431869252677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee567fbe68d62da4abbaa6e0b60b82d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSoundTriggerVelocity: 0.075
+  intervalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: -0.0035714286
+      outSlope: -0.0035714286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 70
+      value: 0.25
+      inSlope: -0.0035714286
+      outSlope: -0.0035714286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3867493804087331114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,6 +3010,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398639131957280855, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: PickUppableLayerMask.m_Bits
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 3931941726690552612, guid: 4c694e4e0e45d07409f13b04372558d9,
         type: 3}

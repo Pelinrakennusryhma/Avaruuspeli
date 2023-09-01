@@ -54,13 +54,17 @@ public class ResourceGatherer : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(drillSFX, transform, rb);
     }
 
-    // Start is called before the first frame update
     public void OnTriggerEnter(Collider other)
     {
         if ((PickUppableLayerMask & (1 << other.gameObject.layer)) != 0)
         {
-            //Debug.Log("Collect " + Time.time);
+            Debug.Log("other: " + other.gameObject.name);
             GatherableObject gatherable = other.GetComponent<GatherableObject>();
+            if (gatherable)
+            {
+                Debug.Log("gatherable?!" + gatherable.name);
+            }
+
 
             if (gatherable != null && gatherable.enabled)
             {
@@ -207,7 +211,6 @@ public class ResourceGatherer : MonoBehaviour
 
     void UpdateSound(bool shouldPlay)
     {
-        // play engine sound when 'forward' is held down.. or something else?
         if (shouldPlay)
         {
             PLAYBACK_STATE playbackState;

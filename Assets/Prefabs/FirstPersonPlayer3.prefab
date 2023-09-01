@@ -992,6 +992,7 @@ GameObject:
   - component: {fileID: 2842094115721040441}
   - component: {fileID: 4160795830551820671}
   - component: {fileID: 8048096091338248557}
+  - component: {fileID: 6818920570880363244}
   m_Layer: 0
   m_Name: FirstPersonPlayer3
   m_TagString: Player
@@ -1591,6 +1592,43 @@ MonoBehaviour:
   OverlayLayerMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &6818920570880363244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048973882144678372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee567fbe68d62da4abbaa6e0b60b82d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSoundTriggerVelocity: 1
+  intervalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: -0.0035714286
+      outSlope: -0.0035714286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 70
+      value: 0.25
+      inSlope: -0.0035714286
+      outSlope: -0.0035714286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3721163903059515302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1657,6 +1695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398639131957280855, guid: 4c694e4e0e45d07409f13b04372558d9,
+        type: 3}
+      propertyPath: PickUppableLayerMask.m_Bits
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 3931941726690552612, guid: 4c694e4e0e45d07409f13b04372558d9,
         type: 3}

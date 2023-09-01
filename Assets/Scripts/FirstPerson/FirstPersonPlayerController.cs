@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstPersonPlayerController : MonoBehaviour
+public class FirstPersonPlayerController : MonoBehaviour, IFPController
 {
     public bool UseRealGravity;
     public float RealisticGravityJumpForce = 5.0f;
@@ -30,8 +30,6 @@ public class FirstPersonPlayerController : MonoBehaviour
     private float yRot;
     private Vector3 movement;
 
-    private bool IsOnAir;
-
     private bool SpaceWasPressedDuringLastUpdate;
 
     // Start is called before the first frame update
@@ -47,6 +45,8 @@ public class FirstPersonPlayerController : MonoBehaviour
     private Vector3 cameraOriginalLocalPosition;
 
     private FirstPersonPlayerControls Controls;
+
+    [SerializeField] public bool IsGrounded{ get; private set; }
 
     void Awake()
     {
@@ -215,7 +215,7 @@ public class FirstPersonPlayerController : MonoBehaviour
         //Debug.Log("Movement is x " + movement.x + " z " + movement.z);
         groundedExtraTime -= Time.deltaTime;
 
-        bool isGrounded = false;
+        IsGrounded = false;
         bool hits = false;
         RaycastHit hit;
 
@@ -237,13 +237,13 @@ public class FirstPersonPlayerController : MonoBehaviour
 
         if (hits && hit.distance <= 1.001f)
         {
-            isGrounded = true;
+            IsGrounded = true;
             groundedExtraTime = 0.2f;
         }
 
         else
         {
-            isGrounded = false;
+            IsGrounded = false;
         }
 
 
@@ -271,12 +271,12 @@ public class FirstPersonPlayerController : MonoBehaviour
 
         if (groundedExtraTime >= 0.0f)
         {
-            isGrounded = true;
+            IsGrounded = true;
         }
 
         if (isOnASlope)
         {
-            isGrounded = true;
+            IsGrounded = true;
             Rigidbody.useGravity = false;
             // Snap to slope
 
@@ -296,7 +296,7 @@ public class FirstPersonPlayerController : MonoBehaviour
         bool tryingToStandUp = false;
 
         if (isCrouchingButtonDown
-            && isGrounded)
+            && IsGrounded)
         {
             isCrouching = true;
             CrouchingCapsuleCollider.enabled = true;
@@ -333,7 +333,7 @@ public class FirstPersonPlayerController : MonoBehaviour
             //Debug.Log("Trying to stand up ");
         }
 
-        if (isGrounded 
+        if (IsGrounded 
             && SpaceWasPressedDuringLastUpdate
             && jumpTimer <= 0)
         {
@@ -354,7 +354,7 @@ public class FirstPersonPlayerController : MonoBehaviour
 
         else
         {
-            if (!isGrounded
+            if (!IsGrounded
                 && !UseRealGravity)
             {
                 if (Rigidbody.velocity.y >= 0)
@@ -402,7 +402,7 @@ public class FirstPersonPlayerController : MonoBehaviour
         Vector3 moveSideWays = transform.right * movement.x;
         Vector3 move = moveForward + moveSideWays;
 
-        if (isGrounded) 
+        if (IsGrounded) 
         {
             if (!isRunning) 
             {
@@ -447,7 +447,7 @@ public class FirstPersonPlayerController : MonoBehaviour
 
         float yVelo;
 
-        if ((isGrounded 
+        if ((IsGrounded 
             || isOnASlope)
             && !SpaceWasPressedDuringLastUpdate
             && jumpTimer <= 0)

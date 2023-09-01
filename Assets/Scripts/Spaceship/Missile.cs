@@ -16,13 +16,6 @@ public class Missile : MonoBehaviour
     float explosionRadius = 20f;
     [SerializeField]
     float explosionDamage = 90f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         ChaseTarget();
@@ -89,7 +82,7 @@ public class Missile : MonoBehaviour
         }
 
         Destroy(gameObject);
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.Explosion, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.HullDamage, transform.position);
     }
 
     public void ClearTarget()

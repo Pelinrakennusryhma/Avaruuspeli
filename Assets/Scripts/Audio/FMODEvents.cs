@@ -9,14 +9,17 @@ public class FMODEvents : MonoBehaviour
     [field:SerializeField] public EventReference Music { get; private set; }
     [field: Header("Ship SFX")]
     [field: SerializeField] public EventReference ShipEngine { get; private set; }
+    [field: SerializeField] public EventReference ShipBoost { get; private set; }
     [field: SerializeField] public EventReference Shield { get; private set; }
     [field: SerializeField] public EventReference LaserShoot { get; private set; }
     [field: SerializeField] public EventReference Explosion { get; private set; }
     [field: SerializeField] public EventReference MissileLaunch { get; private set; }
+    [field: SerializeField] public EventReference HullDamage { get; private set; }
     [field: Header("Player Ship SFX")]
-    [field: SerializeField] public EventReference Alarm { get; private set; }
+    [field: SerializeField] public EventReference MissileLockAlarm { get; private set; }
     [field: Header("First Person SFX")]
     [field: SerializeField] public EventReference Drill { get; private set; }
+    [field: SerializeField] public EventReference Footsteps { get; private set; }
 
     public static FMODEvents Instance { get; private set; }
 

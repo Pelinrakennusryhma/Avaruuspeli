@@ -17,7 +17,7 @@ public class PlayerControls : ActorSpaceship
     protected override void Start()
     {
         base.Start();
-        alarmSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.Alarm);
+        alarmSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.MissileLockAlarm);
         ship.tag = "PlayerShip";
     }
 
@@ -30,7 +30,7 @@ public class PlayerControls : ActorSpaceship
     {
         if (dead)
         {
-            alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            alarmSFX.stop(STOP_MODE.ALLOWFADEOUT);
             Destroy(gameObject);
         }
     }
@@ -45,11 +45,28 @@ public class PlayerControls : ActorSpaceship
             {
                 alarmSFX.start();
             }
+
+            float closestDistance = float.PositiveInfinity;
+            foreach (Missile lockedMissile in lockedMissiles)
+            {
+                float distance = Vector3.Distance(ship.transform.position, lockedMissile.transform.position);
+                if(distance < closestDistance)
+                {
+                    closestDistance = distance;
+                }
+            }
+            Debug.Log("closestDistance " + closestDistance);
+            SetMissileDistanceForFMOD(closestDistance);
         }
         else
         {
-            alarmSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            alarmSFX.stop(STOP_MODE.ALLOWFADEOUT);
         }
+    }
+
+    void SetMissileDistanceForFMOD(float distance)
+    {
+        alarmSFX.setParameterByName("MissileDistance", distance);
     }
 
     protected override void OnDeath()

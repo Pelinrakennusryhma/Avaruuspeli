@@ -777,6 +777,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <HullDamage>k__BackingField.Path
+      value: event:/SFX/HullDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <HullDamage>k__BackingField.Guid.Data1
+      value: 528363829
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <HullDamage>k__BackingField.Guid.Data2
+      value: 1148296961
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <HullDamage>k__BackingField.Guid.Data3
+      value: -585356415
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <HullDamage>k__BackingField.Guid.Data4
+      value: -1389703168
+      objectReference: {fileID: 0}
     - target: {fileID: 8819676285665916687, guid: 00d90268626466948961d1217189579f,
         type: 3}
       propertyPath: m_Name

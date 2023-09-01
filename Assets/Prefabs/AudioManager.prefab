@@ -58,6 +58,13 @@ MonoBehaviour:
       Data3: 1471658369
       Data4: 360164921
     Path: event:/SFX/Spaceship/ShipEngine
+  <ShipBoost>k__BackingField:
+    Guid:
+      Data1: -749404950
+      Data2: 1141212643
+      Data3: -483664237
+      Data4: 1158616288
+    Path: event:/SFX/Spaceship/Boost
   <Shield>k__BackingField:
     Guid:
       Data1: -38676065
@@ -86,13 +93,20 @@ MonoBehaviour:
       Data3: 534954640
       Data4: -462625261
     Path: event:/SFX/Spaceship/MissileLaunch
-  <Alarm>k__BackingField:
+  <HullDamage>k__BackingField:
     Guid:
-      Data1: -98325060
-      Data2: 1216499493
-      Data3: -541598791
-      Data4: 382260047
-    Path: event:/SFX/Spaceship/MissileAlarm
+      Data1: 528363829
+      Data2: 1148296961
+      Data3: -585356415
+      Data4: -1389703168
+    Path: event:/SFX/HullDamage
+  <MissileLockAlarm>k__BackingField:
+    Guid:
+      Data1: -82886901
+      Data2: 1183040238
+      Data3: -1222170493
+      Data4: -348229020
+    Path: event:/SFX/Spaceship/MissileLockAlarm
   <Drill>k__BackingField:
     Guid:
       Data1: -1191775359
@@ -100,6 +114,13 @@ MonoBehaviour:
       Data3: 1884335750
       Data4: 625294970
     Path: event:/SFX/FirstPerson/Drill
+  <Footsteps>k__BackingField:
+    Guid:
+      Data1: -1666439263
+      Data2: 1333828323
+      Data3: 548396691
+      Data4: 1843484228
+    Path: event:/SFX/FirstPerson/Footsteps
 --- !u!1 &8819676285665916687
 GameObject:
   m_ObjectHideFlags: 0

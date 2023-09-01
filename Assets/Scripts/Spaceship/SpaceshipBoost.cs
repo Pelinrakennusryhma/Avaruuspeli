@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +23,13 @@ public class SpaceshipBoost : UITrackable
     public bool boosting = false;
     private float currentBoostAmount;
 
+    private SpaceshipEvents spaceshipEvents;
+
+    Rigidbody rb;
+
+    // Audio
+    private EventInstance boostSFX;
+
     public override float MaxValue
     {
         get
@@ -41,11 +50,23 @@ public class SpaceshipBoost : UITrackable
     {
         spaceshipMovement = GetComponent<SpaceshipMovement>();
         currentBoostAmount = maxBoostAmount;
+
+        rb = GetComponent<Rigidbody>();
+        spaceshipEvents = GetComponent<SpaceshipEvents>();
+        spaceshipEvents.EventSpaceshipDied.AddListener(OnSpaceshipDied);
+        boostSFX = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ShipBoost);
+        RuntimeManager.AttachInstanceToGameObject(boostSFX, transform, rb);
     }
 
     void FixedUpdate()
     {
         HandleBoosting();
+        UpdateSound();
+    }
+
+    void OnSpaceshipDied()
+    {
+        boostSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     void HandleBoosting()
@@ -82,6 +103,24 @@ public class SpaceshipBoost : UITrackable
         foreach (GameObject boostEffect in boostEffects)
         {
             boostEffect.SetActive(active);
+        }
+    }
+
+    void UpdateSound()
+    {
+        if (boosting)
+        {
+            PLAYBACK_STATE playbackState;
+            boostSFX.getPlaybackState(out playbackState);
+            RuntimeManager.AttachInstanceToGameObject(boostSFX, transform, rb);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                boostSFX.start();
+            }
+        }
+        else
+        {
+            boostSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

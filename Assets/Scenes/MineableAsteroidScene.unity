@@ -240,6 +240,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <MissileLockAlarm>k__BackingField.Path
+      value: event:/SFX/Spaceship/MissileLockAlarm
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <MissileLockAlarm>k__BackingField.Guid.Data1
+      value: -82886901
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <MissileLockAlarm>k__BackingField.Guid.Data2
+      value: 1183040238
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <MissileLockAlarm>k__BackingField.Guid.Data3
+      value: -1222170493
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378790973432469540, guid: 00d90268626466948961d1217189579f,
+        type: 3}
+      propertyPath: <MissileLockAlarm>k__BackingField.Guid.Data4
+      value: -348229020
+      objectReference: {fileID: 0}
     - target: {fileID: 8819676285665916687, guid: 00d90268626466948961d1217189579f,
         type: 3}
       propertyPath: m_Name
@@ -5909,7 +5934,7 @@ PrefabInstance:
     - target: {fileID: 1363912624709048305, guid: 2860f7e6817cf4c42a835d6ae1c84c90,
         type: 3}
       propertyPath: PickUppableLayerMask.m_Bits
-      value: 128
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 9048973882144678372, guid: 2860f7e6817cf4c42a835d6ae1c84c90,
         type: 3}
@@ -6054,7 +6079,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fallbackSceneData
       value: 
-      objectReference: {fileID: 11400000, guid: d43806cce0906724495d4711c4843df4,
+      objectReference: {fileID: 11400000, guid: e17d5789441a53d47a7d931c1e0e0d34,
         type: 2}
     - target: {fileID: 7003948107814007248, guid: dac59e95555769b4ab675d8977c8e94d,
         type: 3}
